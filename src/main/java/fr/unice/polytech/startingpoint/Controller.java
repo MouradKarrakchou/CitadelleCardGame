@@ -15,14 +15,12 @@ public class Controller {
 
     
     Controller(){
-        game=new Game(new Player("robot1"),new Player("robot2"));
+        listOfPlayer=new ArrayList<>();
+        listOfPlayer.add(new Player("robot1"));
+        listOfPlayer.add(new Player("robot2"));
+        deckCharacter=new DeckCharacter();
+        game=new Game(listOfPlayer,deckCharacter);
         printC=new PrintCitadels();
-    }
-    void lauchGame(){
-        game.startRoundV2();
-        printC.chooseRole(game.getRobot1());
-        printC.chooseRole(game.getRobot2());
-        printC.win(game.getWinner());
     }
     
     //---------new
@@ -33,7 +31,7 @@ public class Controller {
     }
     
     public void initGame() {
-        listOfPlayer = new ArrayList<Player>();  
+        listOfPlayer = new ArrayList<>();
         deckCharacter = new DeckCharacter();
     	for(int i =0; i < nbrJoueur ; i++)
     		listOfPlayer.add(new Player("robot"+i));
