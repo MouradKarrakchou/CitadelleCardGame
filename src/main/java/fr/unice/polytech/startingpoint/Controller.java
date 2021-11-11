@@ -9,7 +9,6 @@ public class Controller {
     
     //---------new
     int nbrJoueur = 2;
-
     ArrayList<Player> listOfPlayer;  
     DeckCharacter deckCharacter;
     //---------new
