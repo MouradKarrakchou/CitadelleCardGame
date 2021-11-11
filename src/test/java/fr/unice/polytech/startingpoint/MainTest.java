@@ -15,7 +15,5 @@ class MainTest {
     }
 
     @Test
-    void helloTest() {
-        assertEquals(varToBeInitInSetup, Main.hello());
+    void helloTest() {};
     }
-}
