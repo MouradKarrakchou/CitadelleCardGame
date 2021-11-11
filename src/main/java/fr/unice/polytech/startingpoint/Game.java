@@ -6,21 +6,17 @@ import java.util.Random;
 public class Game {
     Player robot1;
     Player robot2;
-    ArrayList<Character> deckCharacter;
+    Deck deck;
 
     public Game(Player robot1,Player robot2){
         this.robot1=robot1;
         this.robot2=robot2;
-    }
-    private void createDeck(){
-        deckCharacter=new ArrayList<>();
-        for (int k=1;k<9;k++){
-            deckCharacter.add(new Character("villager",k));
-        }
+        deck=new Deck();
+        deck.initialise();
     }
     void chooseCharacter(Player player){
         Random random=new Random();
-        player.setRole(deckCharacter.remove(random.nextInt(deckCharacter.size())));
+        player.setRole(deck.deckCharacter.remove(random.nextInt(deck.getSize())));
     }
     public Player getWinner(){
         int valuePlayer1=robot1.getCharacter().getValue();
@@ -32,7 +28,6 @@ public class Game {
             return (robot2);
     }
     public void startRound(){
-        createDeck();
         chooseCharacter(robot1);
         chooseCharacter(robot2);
     }
