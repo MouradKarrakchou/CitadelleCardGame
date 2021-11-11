@@ -1,7 +1,7 @@
 package fr.unice.polytech.startingpoint;
 
-public class PrintCitadelles {
-    public PrintCitadelles(){}
+public class PrintCitadels {
+    public PrintCitadels(){}
     public void win(Player winner){
         Character winnerCharacter=winner.getCharacter();
         System.out.println("The robot " +winner.getName()+" won because his role "+winnerCharacter.getName()+" had a value of "+winnerCharacter.getValue()+" which is the highest value.");

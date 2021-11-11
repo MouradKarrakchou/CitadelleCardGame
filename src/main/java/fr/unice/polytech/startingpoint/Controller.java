@@ -2,10 +2,10 @@ package fr.unice.polytech.startingpoint;
 
 public class Controller {
     Game game;
-    PrintCitadelles printC;
+    PrintCitadels printC;
     Controller(){
         game=new Game(new Player("robot1"),new Player("robot2"));
-        printC=new PrintCitadelles();
+        printC=new PrintCitadels();
     }
     void lauchGame(){
         game.startRound();

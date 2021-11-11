@@ -2,10 +2,10 @@ package fr.unice.polytech.startingpoint;
 
 import java.util.ArrayList;
 
-public class Deck {
+public class DeckCharacter {
     ArrayList<Character> deckCharacter;
     int size;
-    public Deck(){
+    public DeckCharacter(){
         size=8;
         deckCharacter=new ArrayList<>();
     }

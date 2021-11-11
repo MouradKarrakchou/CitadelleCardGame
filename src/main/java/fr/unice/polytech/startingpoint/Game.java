@@ -1,17 +1,16 @@
 package fr.unice.polytech.startingpoint;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
     Player robot1;
     Player robot2;
-    Deck deck;
+    DeckCharacter deck;
 
     public Game(Player robot1,Player robot2){
         this.robot1=robot1;
         this.robot2=robot2;
-        deck=new Deck();
+        deck=new DeckCharacter();
         deck.initialise();
     }
     void chooseCharacter(Player player){
