@@ -2,8 +2,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Team_K</groupId> <!-- CHANGE ME -->
-    <artifactId>Citadelle_K</artifactId> <!-- CHANGE ME -->
+    <groupId>TeamName</groupId> <!-- CHANGE ME -->
+    <artifactId>JarName</artifactId> <!-- CHANGE ME -->
     <version>0.3-SNAPSHOT</version> <!-- CHANGE ME -->
 
     <properties>
@@ -53,15 +53,7 @@
 -->
         </configuration>
       </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>16</source>
-                <target>16</target>
-            </configuration>
-        </plugin>
-
+      
     </plugins>
   </build>
 

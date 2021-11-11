@@ -8,8 +8,9 @@ public class DeckCharacter {
     public DeckCharacter(){
         size=8;
         deckCharacter=new ArrayList<>();
+        this.initialise();
     }
-    void initialise(){
+    private void initialise(){
         for (int k=1;k<9;k++){
             deckCharacter.add(new Character("villager",k));
         }
