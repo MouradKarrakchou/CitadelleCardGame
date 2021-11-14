@@ -6,6 +6,7 @@ import java.util.Random;
 public class Game {
     DeckCharacter deckCharacter;
     ArrayList<Player> listOfPlayer;
+	ArrayList<Player> listOfPlayerSorted = new ArrayList<>();
 	DeckDistrict deckDistrict;
 
     
@@ -20,24 +21,23 @@ public class Game {
 		});
 	}
 	//Maintenant pour tous les joueurs (Avant : Pour 2 joueurs seulement)
-	public ArrayList<Player> setWinnerByScore(){
+	public ArrayList<Player> getWinnerByScore(){
 		int max;
-		Player rankOfPlayer;
-		ArrayList<Player> listOfPlayerSorted = new ArrayList<>();
+		Player playerToRank;
 
 		listOfPlayer.forEach(player -> calculateScoreOfPlayer(player));
 
 		while (listOfPlayerSorted.size() < 4){
 			max = listOfPlayer.get(0).getScore();
-			rankOfPlayer = listOfPlayer.get(0);
+			playerToRank = listOfPlayer.get(0);
 			for (int i = 1; i < listOfPlayer.size(); i++){
 				if (listOfPlayer.get(i).getScore() > max){
 					max = listOfPlayer.get(i).getScore();
-					rankOfPlayer = listOfPlayer.get(i);
+					playerToRank = listOfPlayer.get(i);
 				}
 			}
-			listOfPlayerSorted.add(rankOfPlayer);
-			listOfPlayer.remove(rankOfPlayer);
+			listOfPlayerSorted.add(playerToRank);
+			listOfPlayer.remove(playerToRank);
 		}
 
 		for(int i = 0; i < listOfPlayerSorted.size(); i++) listOfPlayerSorted.get(i).setRank(i+1);
@@ -45,15 +45,57 @@ public class Game {
 		return listOfPlayerSorted;
 	}
 
-    public Player getWinnerByRole(){
-    	int maxValue = 0;
-    	Player winner = null;
-    	for(int i = 0 ; i < this.listOfPlayer.size() ;i++) {
-    		if(listOfPlayer.get(i).getCharacter().getValue()>maxValue) {
-    			maxValue=listOfPlayer.get(i).getCharacter().getValue();
-    			winner=listOfPlayer.get(i);
-    		}
-    	}
-    	return winner;
-    }
+	public ArrayList<Player> getWinnerByRole(ArrayList<Player> playersToCompare){
+		int size = playersToCompare.size();
+		ArrayList<Player> listOfPlayerSorted = new ArrayList<>();
+
+		while (listOfPlayerSorted.size() < size) {
+			int max = playersToCompare.get(0).getCharacter().getValue();
+			Player playerWithHighestRole = playersToCompare.get(0);
+			for (int i = 1; i < playersToCompare.size(); i++) {
+				if (playersToCompare.get(i).getCharacter().getValue() > max) {
+					max = playersToCompare.get(i).getCharacter().getValue();
+					playerWithHighestRole = playersToCompare.get(i);
+				}
+			}
+			listOfPlayerSorted.add(playerWithHighestRole);
+			playersToCompare.remove(playerWithHighestRole);
+		}
+
+		for(int i = 0; i < listOfPlayerSorted.size(); i++) listOfPlayerSorted.get(i).setRank(i+1);
+
+		return listOfPlayerSorted;
+	}
+
+
+
+	public ArrayList<Player> equality(ArrayList<Player> listOfPlayerSorted){
+		int compteur = 0;
+		int firstValue;
+
+		ArrayList<Player> playersRanked = new ArrayList<>();
+		ArrayList<Player> playersToCompare = new ArrayList<>();
+		ArrayList<Player> playersCompared;
+
+		//Pour 4 joueurs triés
+		while (playersRanked.size() < 4) {
+			firstValue = listOfPlayerSorted.get(compteur).getScore();
+			playersToCompare.add(listOfPlayerSorted.get(0));
+
+			while (listOfPlayerSorted.size() > 1 && compteur < listOfPlayerSorted.size()-1 && listOfPlayerSorted.get(compteur + 1).getScore() == firstValue) {
+				playersToCompare.add(listOfPlayerSorted.get(compteur + 1));
+				compteur++;
+			}
+
+			playersCompared = getWinnerByRole(playersToCompare);
+			playersRanked.addAll(playersCompared);
+			listOfPlayerSorted.removeAll(playersCompared);
+			playersToCompare.removeAll(playersCompared);
+			compteur = 0;
+		}
+
+		for(int i = 0; i < playersRanked.size(); i++) playersRanked.get(i).setRank(i+1);
+
+		return playersRanked;
+	}
 }

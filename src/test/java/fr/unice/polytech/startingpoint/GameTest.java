@@ -27,7 +27,7 @@ public class GameTest {
     void getWinnerTest(){
         robot1.addDistrict(new District("house",1));
         robot2.addDistrict(new District("house",2));
-        game.setWinnerByScore();
+        game.getWinnerByScore();
         assertEquals(robot1.getRank(),2);
         assertEquals(robot2.getRank(),1);
     }

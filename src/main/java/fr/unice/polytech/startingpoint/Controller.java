@@ -34,7 +34,8 @@ public class Controller {
         System.out.println("");
         startRoundPart2();
         System.out.println("");
-        listOfPlayerSorted = game.setWinnerByScore();
+        listOfPlayerSorted = game.getWinnerByScore();
+        listOfPlayerSorted = game.equality(listOfPlayerSorted);
         printC.printRanking(listOfPlayerSorted);
     }
 
