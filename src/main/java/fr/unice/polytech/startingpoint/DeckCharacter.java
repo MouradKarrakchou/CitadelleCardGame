@@ -1,6 +1,7 @@
 package fr.unice.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class DeckCharacter {
     ArrayList<Character> deckCharacter;
@@ -20,5 +21,9 @@ public class DeckCharacter {
     }
     public int getSize() {
         return size;
+    }
+    void chooseCharacter(Player player){
+        Random random=new Random();
+        player.setRole(deckCharacter.remove(random.nextInt(deckCharacter.size())));
     }
 }

@@ -5,21 +5,33 @@ import java.util.Random;
 
 public class Game {
     DeckCharacter deckCharacter;
-    //------------------new
     ArrayList<Player> listOfPlayer;
+	DeckDistrict deckDistrict;
 
     
-    public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter) {
+    public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter,DeckDistrict deckDistrict) {
     	this.listOfPlayer = listOfPlayer;
     	this.deckCharacter = deckCharacter;
+		this.deckDistrict= deckDistrict;
 	}
-
-	void chooseCharacter(Player player){
-        Random random=new Random();
-        player.setRole(deckCharacter.deckCharacter.remove(random.nextInt(deckCharacter.getSize())));
-    }
-
-    public Player getWinnerV2(){
+	public void calculateScoreOfPlayer(Player player){
+		player.getDistrictCards().forEach(district ->
+		{player.updateValue(district.getValue());
+		});
+	}
+	// Pour 2 joueurs seulement
+	public void setWinnerByScore(){
+		listOfPlayer.forEach(player->calculateScoreOfPlayer(player));
+		if (listOfPlayer.get(0).getScore()>listOfPlayer.get(1).getScore()){
+			listOfPlayer.get(0).setRank(1);
+			listOfPlayer.get(1).setRank(2);
+		}
+		else{
+			listOfPlayer.get(1).setRank(1);
+			listOfPlayer.get(0).setRank(2);
+		}
+	}
+    public Player getWinnerByRole(){
     	int maxValue = 0;
     	Player winner = null;
     	for(int i = 0 ; i < this.listOfPlayer.size() ;i++) {
@@ -29,9 +41,5 @@ public class Game {
     		}
     	}
     	return winner;
-    }
-    
-    public void startRoundV2(){
-    	this.listOfPlayer.forEach(player -> this.chooseCharacter(player));
     }
 }

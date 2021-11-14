@@ -8,7 +8,7 @@ public class Main {
         
         //----new
         controller.initGame();
-        controller.lauchGameV2();
+        controller.lauchGame();
         //----new
 
 

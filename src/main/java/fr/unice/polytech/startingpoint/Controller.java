@@ -6,38 +6,50 @@ import java.util.Random;
 public class Controller {
     Game game;
     PrintCitadels printC;
-    
-    //---------new
     int nbrJoueur = 2;
     ArrayList<Player> listOfPlayer;  
     DeckCharacter deckCharacter;
-    //---------new
+    DeckDistrict deckDistrict;
 
     
-    Controller(){
+    public Controller(){
         listOfPlayer=new ArrayList<>();
         listOfPlayer.add(new Player("robot1"));
         listOfPlayer.add(new Player("robot2"));
         deckCharacter=new DeckCharacter();
-        game=new Game(listOfPlayer,deckCharacter);
+        deckDistrict=new DeckDistrict();
+        game=new Game(listOfPlayer,deckCharacter,deckDistrict);
         printC=new PrintCitadels();
     }
-    
-    //---------new
-    void lauchGameV2(){
-        game.startRoundV2();
-        printC.printStartInformation(listOfPlayer);
-        printC.win(game.getWinnerV2());
+    void lauchGame(){
+        startRoundPart1();
+        startRoundPart2();
+        game.setWinnerByScore();
+        printC.printRanking(listOfPlayer);
     }
-    
     public void initGame() {
         listOfPlayer = new ArrayList<>();
         deckCharacter = new DeckCharacter();
-    	for(int i =0; i < nbrJoueur ; i++)
-    		listOfPlayer.add(new Player("robot"+i));
-    	this.game = new Game(listOfPlayer, deckCharacter); // créer un jeu avec tout les éléments nécessaires
+        deckDistrict = new DeckDistrict();
+        for(int i =0; i < nbrJoueur ; i++)
+            listOfPlayer.add(new Player("robot"+i));
+        this.game = new Game(listOfPlayer, deckCharacter,deckDistrict); // créer un jeu avec tout les éléments nécessaires
     }
-    //---------new
 
-
+    public void startRoundPart1(){
+        this.listOfPlayer.forEach(player ->
+        {
+            this.deckCharacter.chooseCharacter(player);
+            printC.chooseRole(player, player.getCharacter());
+        });
+    }
+    public void startRoundPart2(){
+        this.listOfPlayer.forEach(player ->
+        {
+            this.deckDistrict.chooseDistrict(player);
+            //car pour l'instant un seul district
+            printC.chooseDistrict(player,player.getDistrictCards().get(0));
+            player.buildDistrict(0);
+        });
+    }
 }
