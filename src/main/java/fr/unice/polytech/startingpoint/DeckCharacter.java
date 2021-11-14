@@ -16,9 +16,7 @@ public class DeckCharacter {
             deckCharacter.add(new Character("villager",k));
         }
     }
-    public ArrayList<Character> getDeckCharacter() {
-        return deckCharacter;
-    }
+    public ArrayList<Character> getDeckCharacter() {return deckCharacter;}
     public int getSize() {
         return size;
     }

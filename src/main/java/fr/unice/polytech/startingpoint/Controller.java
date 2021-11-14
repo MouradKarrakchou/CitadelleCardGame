@@ -8,19 +8,12 @@ public class Controller {
     Game game;
     PrintCitadels printC;
     ArrayList<Player> listOfPlayer;
-    ArrayList<Player> listOfPlayerSorted;
     DeckCharacter deckCharacter;
     DeckDistrict deckDistrict;
 
     
     public Controller(){
         listOfPlayer=new ArrayList<>();
-        listOfPlayer.add(new Player("robot1"));
-        listOfPlayer.add(new Player("robot2"));
-        listOfPlayer.add(new Player("robot3"));
-        listOfPlayer.add(new Player("robot4"));
-
-        listOfPlayerSorted = new ArrayList<>();
 
         deckCharacter=new DeckCharacter();
         deckDistrict=new DeckDistrict();
@@ -30,13 +23,13 @@ public class Controller {
     }
 
     void lauchGame(){
+        initGame();
         startRoundPart1();
         System.out.println("");
         startRoundPart2();
         System.out.println("");
-        listOfPlayerSorted = game.getWinnerByScore();
-        listOfPlayerSorted = game.equality(listOfPlayerSorted);
-        printC.printRanking(listOfPlayerSorted);
+        game.getWinner();
+        printC.printRanking(listOfPlayer);
     }
 
     public void initGame() {

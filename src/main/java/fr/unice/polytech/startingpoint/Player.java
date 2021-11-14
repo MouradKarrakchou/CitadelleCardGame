@@ -77,12 +77,13 @@ public class Player implements Comparable<Player> {
 		return "name="+this.name + " score="+this.score+ " role="+this.getCharacterValue();
 	}
 
+	@Override
 	public int compareTo(Player p){
-	    return Comparator.comparing(Player::getScore).reversed()
-	              .thenComparing(Player::getCharacterValue)
-	              .compare(this, p);
+		if (p.getScore()>this.score) return(-1);
+		if (p.getScore()<this.score) return(1);
+
+		else
+		{if(p.getCharacterValue()>this.getCharacterValue()) return(-1);
+		else return(1);}
 	}
-
-	
-
 }
