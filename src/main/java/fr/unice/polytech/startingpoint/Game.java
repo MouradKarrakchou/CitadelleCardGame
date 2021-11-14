@@ -1,7 +1,14 @@
 package fr.unice.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Game {
     DeckCharacter deckCharacter;
@@ -17,9 +24,20 @@ public class Game {
 	}
 	public void calculateScoreOfPlayer(Player player){
 		player.getDistrictCards().forEach(district ->
-		{player.updateValue(district.getValue());
+		{player.updateScore(district.getValue());
 		});
 	}
+	
+
+	
+	public ArrayList<Player> sortByScoreAndCharacter_v666(ArrayList<Player> list){
+		Collections.sort(list, Comparator.comparing(Player::getScore).reversed()
+	            .thenComparing(Player::getCharacterValue));
+		return list;
+	}
+	 	
+	
+	
 	//Maintenant pour tous les joueurs (Avant : Pour 2 joueurs seulement)
 	public ArrayList<Player> getWinnerByScore(){
 		int max;
