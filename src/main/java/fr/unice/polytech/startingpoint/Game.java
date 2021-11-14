@@ -28,8 +28,6 @@ public class Game {
 	}
 
 	public void getWinner(){
-		int max;
-		Player playerToRank;
 		listOfPlayer.forEach(player -> calculateScoreOfPlayer(player));
 		Collections.sort(listOfPlayer);
 		Collections.reverse(listOfPlayer);
