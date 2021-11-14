@@ -6,14 +6,14 @@ public class PrintCitadels {
     public PrintCitadels(){}
     
     public void chooseRole(Player player,Character role){
-        System.out.println("The robot "+player.getName()+" choose the character "+role.getName()+" "+role.getValue());
+        System.out.println("The robot " + player.getName() + " choose the character " + role.getName() + " " + role.getValue());
     }
     public void chooseDistrict(Player player,District district){
-        System.out.println("The robot "+player.getName()+" choose the character "+district.getName()+" "+district.getValue());
+        System.out.println("The robot " + player.getName() + " choose the district " + district.getName() + " " + district.getValue());
     }
 
 	public void printRanking(ArrayList<Player> listOfPlayer) {
-		listOfPlayer.forEach(player -> System.out.println(player.getName()+" rank :"+player.getRank()+" with a score of "+ player.getScore()));
+		listOfPlayer.forEach(player -> System.out.println(player.getName() + " rank : " + player.getRank() + " with a score of " + player.getScore()));
 	}
 
     /*

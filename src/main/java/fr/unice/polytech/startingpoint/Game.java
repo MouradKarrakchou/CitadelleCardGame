@@ -19,18 +19,32 @@ public class Game {
 		{player.updateValue(district.getValue());
 		});
 	}
-	// Pour 2 joueurs seulement
-	public void setWinnerByScore(){
-		listOfPlayer.forEach(player->calculateScoreOfPlayer(player));
-		if (listOfPlayer.get(0).getScore()>listOfPlayer.get(1).getScore()){
-			listOfPlayer.get(0).setRank(1);
-			listOfPlayer.get(1).setRank(2);
+	//Maintenant pour tous les joueurs (Avant : Pour 2 joueurs seulement)
+	public ArrayList<Player> setWinnerByScore(){
+		int max;
+		Player rankOfPlayer;
+		ArrayList<Player> listOfPlayerSorted = new ArrayList<>();
+
+		listOfPlayer.forEach(player -> calculateScoreOfPlayer(player));
+
+		while (listOfPlayerSorted.size() < 4){
+			max = listOfPlayer.get(0).getScore();
+			rankOfPlayer = listOfPlayer.get(0);
+			for (int i = 1; i < listOfPlayer.size(); i++){
+				if (listOfPlayer.get(i).getScore() > max){
+					max = listOfPlayer.get(i).getScore();
+					rankOfPlayer = listOfPlayer.get(i);
+				}
+			}
+			listOfPlayerSorted.add(rankOfPlayer);
+			listOfPlayer.remove(rankOfPlayer);
 		}
-		else{
-			listOfPlayer.get(1).setRank(1);
-			listOfPlayer.get(0).setRank(2);
-		}
+
+		for(int i = 0; i < listOfPlayerSorted.size(); i++) listOfPlayerSorted.get(i).setRank(i+1);
+
+		return listOfPlayerSorted;
 	}
+
     public Player getWinnerByRole(){
     	int maxValue = 0;
     	Player winner = null;
