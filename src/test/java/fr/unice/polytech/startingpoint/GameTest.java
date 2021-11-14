@@ -32,8 +32,8 @@ public class GameTest {
         game = new Game(players, deckCharacter, deckDistrict);
     }
 
+    //Test of getWinner
     @Test
-    //Test of GameWinner
     void getWinner4One(){
         robot1.addDistrict(new District("house",1));
         robot2.addDistrict(new District("house",1));
