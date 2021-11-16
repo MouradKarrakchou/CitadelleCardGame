@@ -10,4 +10,9 @@ public class City {
     public void buildDistrict(District district){
         builtDistrict.add(district);
     }
+	public boolean isComplete() {
+		if(builtDistrict.size() == 8)
+			return true;
+		return false;
+	}
 }

@@ -20,18 +20,29 @@ public class Player implements Comparable<Player> {
 		this.score = 0;
 		this.golds = 2;
 	}
-
-	public int getGolds() {
-		return golds;
+	
+	public void chooseDistictCard(District card) {
+		districtCards.add(card);
+	}
+	
+	public void chooseCharacterCard(Character card) {
+		character = card;
+	}
+	
+	
+	public boolean play() {
+		return buildDistrict(0);		
 	}
 
-	public void decreaseGoldsBy(int amount) {
-		this.golds -= amount;
-	}
-
-	public void buildDistrict(int numberDistrict) {
+	public boolean buildDistrict(int numberDistrict) {
 		city.buildDistrict(districtCards.get(numberDistrict));
+		golds -= districtCards.get(numberDistrict).value;
+		if(city.isComplete())
+			return true ; 
+		else 
+			return false;
 	}
+	
 
 	public ArrayList<District> getDistrictCards() {
 		return districtCards;
@@ -40,6 +51,16 @@ public class Player implements Comparable<Player> {
 	public void addDistrict(District district) {
 		this.districtCards.add(district);
 	}
+	
+	public int getGolds() {
+		return golds;
+	}
+
+	public void decreaseGoldsBy(int amount) {
+		this.golds -= amount;
+	}
+	
+	
 	
 	public void updateScore(int number) {
 		score += number;
@@ -90,4 +111,8 @@ public class Player implements Comparable<Player> {
 		{if(p.getCharacterValue()>this.getCharacterValue()) return(-1);
 		else return(1);}
 	}
+
+
+
+
 }

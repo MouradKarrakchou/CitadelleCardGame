@@ -11,7 +11,7 @@ public class DeckCharacter {
         deckCharacter=new ArrayList<>();
         this.initialise();
     }
-    private void initialise(){
+    public void initialise(){
         for (int k=1;k<9;k++){
             deckCharacter.add(new Character("villager",k));
         }
@@ -20,8 +20,8 @@ public class DeckCharacter {
     public int getSize() {
         return size;
     }
-    void chooseCharacter(Player player){
+    Character chooseCharacter(){
         Random random=new Random();
-        player.setRole(deckCharacter.remove(random.nextInt(deckCharacter.size())));
+        return deckCharacter.remove(random.nextInt(deckCharacter.size()));
     }
 }

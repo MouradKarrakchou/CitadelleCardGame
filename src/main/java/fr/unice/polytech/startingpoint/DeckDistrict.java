@@ -25,17 +25,14 @@ public class DeckDistrict {
     public int getSize() {
         return size;
     }
-    void chooseDistrict(Player player){
+    
+    District chooseDistrict(){
         // Select a random district from the deck
         Random random=new Random();
-        District removedDistrict = deckDistrict.remove(random.nextInt(deckDistrict.size()));
+        int randomValue = random.nextInt(deckDistrict.size());
+        District choosenDistrict = deckDistrict.remove(randomValue);
 
-        // Check the cost of the selected district
-        int districtCost = removedDistrict.getValue();
-
-        // Decreasing player golds & giving the district.
-        player.decreaseGoldsBy(districtCost);
-        player.addDistrict(removedDistrict);
+        return choosenDistrict;
 
     }
 }

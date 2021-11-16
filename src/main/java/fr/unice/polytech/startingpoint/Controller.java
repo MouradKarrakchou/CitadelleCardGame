@@ -1,6 +1,7 @@
 package fr.unice.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 
 public class Controller {
@@ -10,6 +11,7 @@ public class Controller {
     private ArrayList<Player> listOfPlayer;
     private DeckCharacter deckCharacter;
     private DeckDistrict deckDistrict;
+    
 
     public Controller(){
         listOfPlayer = new ArrayList<>();
@@ -20,17 +22,28 @@ public class Controller {
         game = new Game(listOfPlayer, deckCharacter, deckDistrict);
         printC = new PrintCitadels();
     }
-
-    void lauchGame(){
-        initGame();
-        startRoundPart1();
-        System.out.println("");
-        startRoundPart2();
-        System.out.println("");
-        game.getWinner();
-        printC.printRanking(listOfPlayer);
+    
+    public void runGame() { 
+    	boolean res = false;
+    	while(res == false) {
+    		res = runRound();
+    		printC.printLayer();
+    	}
+    	end();
     }
 
+    public boolean runRound(){
+        startRoundPart1();
+        Optional<Player> firstWinner = startRoundPart2();
+        if(!firstWinner.isEmpty()) return true;
+        return false;
+    }
+    
+    public void end(){
+    	game.getWinner();
+        printC.printRanking(listOfPlayer);
+    }
+    
     public void initGame() {
         listOfPlayer = new ArrayList<>();
         deckCharacter = new DeckCharacter();
@@ -41,20 +54,33 @@ public class Controller {
     }
 
     public void startRoundPart1(){
+    	deckCharacter.initialise();
         listOfPlayer.forEach(player ->
         {
-            deckCharacter.chooseCharacter(player);
+    		player.chooseCharacterCard(deckCharacter.chooseCharacter());
             printC.chooseRole(player, player.getCharacter());
         });
+        printC.dropALine();
     }
 
-    public void startRoundPart2(){
-        listOfPlayer.forEach(player ->
-        {
-            deckDistrict.chooseDistrict(player);
+    public Optional<Player> startRoundPart2(){
+    	boolean lastRound = false;
+    	Optional<Player> firstPlayerToComplete =  Optional.empty();
+
+    	for(Player player : listOfPlayer) {
+    		player.chooseDistictCard(deckDistrict.chooseDistrict());
             //car pour l'instant un seul district
             printC.chooseDistrict(player, player.getDistrictCards().get(0));
-            player.buildDistrict(0);
-        });
+            boolean res = player.play();
+            if(res == true) printC.printPlayerToCompleteCity(player);
+            if(lastRound == false) {
+            	lastRound = true;
+            	firstPlayerToComplete = Optional.of(player);
+            	printC.printFirstPlayerToComplete(player);
+            }
+            
+    	}
+        printC.dropALine();
+        return firstPlayerToComplete;
     }
 }

@@ -12,7 +12,7 @@ public class Main {
         controller.initGame();
         
         
-        controller.lauchGame();
+        controller.runGame(); 
         //----new
         
       
