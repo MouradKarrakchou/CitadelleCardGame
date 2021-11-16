@@ -7,15 +7,15 @@ public class DeckDistrict {
     ArrayList<District> deckDistrict;
     int size;
     public DeckDistrict(){
-        size=12;
+        size=69;
         deckDistrict=new ArrayList<>();
         this.initialise();
     }
     private void initialise(){
-        for (int k=0;k<6;k++){
+        for (int k=0;k<size/2;k++){
             deckDistrict.add(new District("house",1));
         }
-        for (int k=0;k<6;k++){
+        for (int k=0;k<size/2;k++){
             deckDistrict.add(new District("house",2));
         }
     }

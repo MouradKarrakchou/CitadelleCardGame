@@ -12,6 +12,11 @@ public class Controller {
     private DeckCharacter deckCharacter;
     private DeckDistrict deckDistrict;
     
+    
+    private int Bonus1st = 4;
+    private int BonusEnd = 2;
+
+    
 
     public Controller(){
         listOfPlayer = new ArrayList<>();
@@ -72,13 +77,18 @@ public class Controller {
             //car pour l'instant un seul district
             printC.chooseDistrict(player, player.getDistrictCards().get(0));
             boolean res = player.play();
-            if(res == true) printC.printPlayerToCompleteCity(player);
-            if(lastRound == false) {
-            	lastRound = true;
-            	firstPlayerToComplete = Optional.of(player);
-            	printC.printFirstPlayerToComplete(player);
+            if(res == true) {
+            	printC.printPlayerToCompleteCity(player);
+            	if(lastRound == false) {
+                	lastRound = true;
+                	firstPlayerToComplete = Optional.of(player);
+                	printC.printFirstPlayerToComplete(player);
+                	player.updateScore(Bonus1st);
+                }
+            	else {
+                	player.updateScore(BonusEnd);
+            	}
             }
-            
     	}
         printC.dropALine();
         return firstPlayerToComplete;

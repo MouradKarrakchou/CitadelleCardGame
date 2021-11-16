@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class City {
     ArrayList<District> builtDistrict;
+    int cityComplete = 8;
     public City(){
         builtDistrict=new ArrayList<>();
     }
@@ -11,7 +12,7 @@ public class City {
         builtDistrict.add(district);
     }
 	public boolean isComplete() {
-		if(builtDistrict.size() == 8)
+		if(builtDistrict.size() == cityComplete)
 			return true;
 		return false;
 	}
