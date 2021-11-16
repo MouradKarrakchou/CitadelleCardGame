@@ -11,15 +11,24 @@ public class Player implements Comparable<Player> {
 	private City city;
 	private int score;
 	private int rank;
+	private int golds;
 
 	public Player(String name) {
-		city = new City();
+		this.city = new City();
+		this.districtCards = new ArrayList<>();
 		this.name = name;
 		this.score = 0;
-		districtCards = new ArrayList<>();
+		this.golds = 2;
 	}
 
-	
+	public int getGolds() {
+		return golds;
+	}
+
+	public void decreaseGoldsBy(int amount) {
+		this.golds -= amount;
+	}
+
 	public void buildDistrict(int numberDistrict) {
 		city.buildDistrict(districtCards.get(numberDistrict));
 	}
@@ -35,8 +44,6 @@ public class Player implements Comparable<Player> {
 	public void updateScore(int number) {
 		score += number;
 	}
-	
-
 
 	public Character getCharacter() {
 		return character;
@@ -50,11 +57,9 @@ public class Player implements Comparable<Player> {
 		return name;
 	}
 
-
 	public int getScore() {
 		return score;
 	}
-
 
 	public int getRank() {
 		return rank;
@@ -68,7 +73,6 @@ public class Player implements Comparable<Player> {
 		this.character = role;
 	}
 
-	
 	public void setScore(int score) {
 		this.score = score;
 	}

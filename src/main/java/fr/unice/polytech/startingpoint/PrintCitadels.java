@@ -13,7 +13,7 @@ public class PrintCitadels {
     }
 
 	public void printRanking(ArrayList<Player> listOfPlayer) {
-		listOfPlayer.forEach(player -> System.out.println(player.getName() + " rank : " + player.getRank() + " with a score of " + player.getScore()));
+		listOfPlayer.forEach(player -> System.out.println("[" + player.getRank() + "] " + player.getName() + " with a score of " + player.getScore() + " (" + player.getGolds() + " golds)"));
 	}
 
     /*
