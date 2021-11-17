@@ -11,26 +11,28 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Game {
-    DeckCharacter deckCharacter;
-    ArrayList<Player> listOfPlayer;
-	DeckDistrict deckDistrict;
+    private final ArrayList<Player> listOfPlayer;
+    private DeckCharacter deckCharacter;
+    private DeckDistrict deckDistrict;
 
-    
-    public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter,DeckDistrict deckDistrict) {
-    	this.listOfPlayer = listOfPlayer;
-    	this.deckCharacter = deckCharacter;
-		this.deckDistrict= deckDistrict;
-	}
-	public void calculateScoreOfPlayer(Player player){
-		player.getDistrictCards().forEach(district ->
-		{player.updateScore(district.getValue());
-		});
-	}
 
-	public void getWinner(){
-		listOfPlayer.forEach(player -> calculateScoreOfPlayer(player));
-		Collections.sort(listOfPlayer);
-		Collections.reverse(listOfPlayer);
-		for(int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i+1);
-	}
+    public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
+        this.listOfPlayer = listOfPlayer;
+        this.deckCharacter = deckCharacter;
+        this.deckDistrict = deckDistrict;
+    }
+
+    public void calculateScoreOfPlayer(Player player) {
+        player.getDistrictCards().forEach(district ->
+        {
+            player.updateScore(district.getValue());
+        });
+    }
+
+    public void getWinner() {
+        listOfPlayer.forEach(player -> calculateScoreOfPlayer(player));
+        Collections.sort(listOfPlayer);
+        Collections.reverse(listOfPlayer);
+        for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
+    }
 }
