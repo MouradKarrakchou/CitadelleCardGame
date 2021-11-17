@@ -60,8 +60,6 @@ public class Player implements Comparable<Player> {
 		this.golds -= amount;
 	}
 	
-	
-	
 	public void updateScore(int number) {
 		score += number;
 	}
@@ -111,8 +109,5 @@ public class Player implements Comparable<Player> {
 		{if(p.getCharacterValue()>this.getCharacterValue()) return(-1);
 		else return(1);}
 	}
-
-
-
 
 }
