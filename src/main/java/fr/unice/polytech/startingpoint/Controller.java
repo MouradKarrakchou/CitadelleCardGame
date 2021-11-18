@@ -62,7 +62,7 @@ public class Controller {
             printC.chooseRole(player, player.getCharacter());
         });
         printC.dropALine();
-    }
+    } 
 
     public Optional<Player> startRoundPart2() {
         boolean lastRound = false;
