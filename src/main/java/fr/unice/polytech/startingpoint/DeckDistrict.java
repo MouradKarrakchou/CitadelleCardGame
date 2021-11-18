@@ -36,7 +36,7 @@ public class DeckDistrict {
         districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 6)));
 
 
-        districtsWithSameValue = new ArrayList<>();
+        districtsWithSameValue = new ArrayList<>(); 
         Collections.addAll(districtsWithSameValue, "Cathedral", "Palace", "Town Hall", "Fortress");
         for (int i = 0; i < 2; i++){
             deckDistrict.add(new District("Keep", 3));
