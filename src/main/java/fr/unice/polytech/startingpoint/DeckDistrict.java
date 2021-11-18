@@ -11,8 +11,6 @@ public class DeckDistrict {
     public DeckDistrict() {
         deckDistrict = new ArrayList<>();
         this.initializer();
-        deckDistrict.stream().forEach(element -> {System.out.println(element.getName() + " " + element.getValue() + "\n");});
-        System.out.println(deckDistrict.size());
     }
 
     /*
