@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Controller {
-    private int numberOfPlayer = 4;
+    public final static int NUMBER_OF_PLAYER = 4;
     private Game game;
     private PrintCitadels printC;
     private ArrayList<Player> listOfPlayer;
@@ -36,8 +36,7 @@ public class Controller {
 
     public boolean runRound() {
         startRoundPart1();
-        Optional<Player> firstWinner = startRoundPart2();
-        return (firstWinner.isPresent());
+        return(startRoundPart2(game.getListOfPlayer()));
     }
 
     public void end() {
@@ -49,10 +48,10 @@ public class Controller {
         listOfPlayer = new ArrayList<>();
         deckCharacter = new DeckCharacter();
         deckDistrict = new DeckDistrict();
-        for (int i = 1; i <= numberOfPlayer; i++)
+        for (int i = 1; i <= NUMBER_OF_PLAYER; i++)
             listOfPlayer.add(new Player("robot" + i));
         game = new Game(listOfPlayer, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
-    }
+    } 
 
     public void startRoundPart1() {
         deckCharacter.initialise();
@@ -64,8 +63,8 @@ public class Controller {
         printC.dropALine();
     } 
 
-    public Optional<Player> startRoundPart2() {
-        boolean lastRound = false;
+    public boolean startRoundPart2(ArrayList<Player> listOfPlayer) {
+        boolean isLastRound = false;
         Optional<Player> firstPlayerToComplete = Optional.empty();
 
         for (Player player : listOfPlayer) {
@@ -75,9 +74,8 @@ public class Controller {
             boolean res = player.play();
             if (res) {
                 printC.printPlayerToCompleteCity(player);
-                if (!lastRound) {
-                    lastRound = true;
-                    firstPlayerToComplete = Optional.of(player);
+                if (!isLastRound) {
+                	isLastRound = true;
                     printC.printFirstPlayerToComplete(player);
                     player.updateScore(Bonus1st);
                 } else {
@@ -86,6 +84,11 @@ public class Controller {
             }
         }
         printC.dropALine();
-        return firstPlayerToComplete;
+        return isLastRound;
     }
+    
+    public Game getGame(){
+    	return game;
+    } 
+    
 }

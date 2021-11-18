@@ -35,4 +35,8 @@ public class Game {
         Collections.reverse(listOfPlayer);
         for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
     }
+    
+    public ArrayList<Player> getListOfPlayer(){
+    	return listOfPlayer;
+    }
 }
