@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 
 public class Player implements Comparable<Player> {
-    private String name;
+	private String name;
     private Character character;
     private ArrayList<District> districtCards;
     private City city;
@@ -38,7 +38,7 @@ public class Player implements Comparable<Player> {
     public boolean buildDistrict(int numberDistrict) {
         city.buildDistrict(districtCards.get(numberDistrict));
         golds -= districtCards.get(numberDistrict).getValue();
-        return (city.isComplete());
+        return (city.isComplete()); 
     }
 
     public void addDistrict(District district) {

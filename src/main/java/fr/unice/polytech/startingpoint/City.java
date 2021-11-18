@@ -15,6 +15,6 @@ public class City {
     }
 
     public boolean isComplete() {
-        return (builtDistrict.size() == cityComplete);
+        return (builtDistrict.size() > cityComplete);
     }
 }
