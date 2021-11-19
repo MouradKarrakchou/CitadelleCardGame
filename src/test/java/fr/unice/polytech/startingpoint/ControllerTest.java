@@ -18,7 +18,6 @@ public class ControllerTest {
 	Player p1;
     private final int BonusEnd = 2;
 
-/*
 	@BeforeEach
 	public void init() {
 		controller = new Controller();
@@ -26,13 +25,13 @@ public class ControllerTest {
 		listOfPlayerMocket = new ArrayList<Player>();
 		p1 = spy(new Player("testPlayer"));
 	}
-*/
+
 	/*
 	 * critères d'acception: Contexte: un joueur complète sa ville, return ce joueur
 	 * là Contexte: Aucun joueur ne complète sa ville, renvoie Optional.empty()
 	 */
 
-/*
+
 	@Test
 	public void startRoundPart2FirstWinnerTest() {
 		boolean expected = true;
@@ -42,7 +41,7 @@ public class ControllerTest {
 		boolean cityComplete = false;
 		while(!cityComplete) {
 			winner.chooseDistictCard(new District("testCardDistrict", 0));
-			cityComplete = winner.buildDistrict(0);
+			cityComplete = winner.play();
 		}
 		listOfPlayer.set(0, winner);
 		boolean result = controller.startRoundPart2(listOfPlayer);
@@ -71,7 +70,7 @@ public class ControllerTest {
 		boolean cityComplete = false;
 		while(!cityComplete) {
 			winner.chooseDistictCard(new District("testCardDistrict", 0));
-			cityComplete = winner.buildDistrict(0);
+			cityComplete = winner.play();
 		}
 		listOfPlayer.set(0, winner);
 		
@@ -80,7 +79,7 @@ public class ControllerTest {
 		cityComplete = false;
 		while(!cityComplete) {
 			secondPlayer.chooseDistictCard(new District("testCardDistrict", 0));
-			cityComplete = secondPlayer.buildDistrict(0);
+			cityComplete = secondPlayer.play();
 		}
 		
 		listOfPlayer.set(1	, secondPlayer);
@@ -96,5 +95,5 @@ public class ControllerTest {
 		assertEquals(result, expected);
 
 	}
-*/
+
 }
