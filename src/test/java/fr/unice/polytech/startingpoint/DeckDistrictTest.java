@@ -55,7 +55,6 @@ public class DeckDistrictTest {
     void initializerTestName(){
 
         for (District districtReal : deckDistrictReal) {
-            System.out.println(districtReal.getName());
             deckDistrictToTest.stream()
                     .filter(district -> district.getName().equals(districtReal.getName()))
                     .forEach(district -> assertTrue(district.getName().equals(districtReal.getName())));
