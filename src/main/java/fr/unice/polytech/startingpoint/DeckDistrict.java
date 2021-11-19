@@ -24,7 +24,7 @@ public class DeckDistrict {
 
         Collections.addAll(districtsWithSameValue, "Library", "University", "School of Magic", "Dragon Gate");
         districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 6)));
-        districtsWithSameValue.clear();
+        districtsWithSameValue.clear(); 
 
         Collections.addAll(districtsWithSameValue, "Cathedral", "Palace", "Town Hall", "Fortress");
         for (int i = 0; i < 2; i++){
