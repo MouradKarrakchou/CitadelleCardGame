@@ -41,4 +41,12 @@ public class PrintCitadels {
         Character winnerCharacter=winner.getCharacter();
         System.out.println("The robot " +winner.getName()+" won because his role "+winnerCharacter.getName()+" had a value of "+winnerCharacter.getValue()+" which is the highest value.");
     }*/
+
+    public void printTakeGold(Player player){
+        System.out.println(player.getName() + " takes two golds.");
+    }
+
+    public void printTakeDistrictCard(Player player){
+        System.out.println(player.getName() + " takes a district card.");
+    }
 }

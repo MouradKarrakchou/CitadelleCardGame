@@ -59,18 +59,19 @@ public class DeckDistrict {
     }
 
     public int getSize() {
-        return numberOfDistricts;
+        return deckDistrict.size();
     }
 
     District chooseDistrict() {
         // Select a random district from the deck
         Random random = new Random();
         int randomValue = random.nextInt(deckDistrict.size());
-        District choosenDistrict = deckDistrict.remove(randomValue);
-
-        return choosenDistrict;
-
+        return deckDistrict.remove(randomValue);
     }
 
     ArrayList<District> getDeckDistrict(){ return deckDistrict; }
+
+    public void addDistrict(District district){
+        deckDistrict.add(district);
+    }
 }

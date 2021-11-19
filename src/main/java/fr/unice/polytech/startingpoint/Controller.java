@@ -66,7 +66,11 @@ public class Controller {
     public boolean startRoundPart2(ArrayList<Player> listOfPlayer) {
         boolean isLastRound = false;
         for (Player player : listOfPlayer) {
-            player.chooseDistictCard(deckDistrict.chooseDistrict());
+
+            // Instantiates a bot that will make decisions for the player.
+            Bot bot = new Bot(player);
+            bot.botStartRoundPart2(deckDistrict);
+
             boolean res = player.play();
             if (res) {
                 printC.printPlayerToCompleteCity(player);

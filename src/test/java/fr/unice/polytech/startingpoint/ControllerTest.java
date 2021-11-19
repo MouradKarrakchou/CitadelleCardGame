@@ -39,7 +39,7 @@ public class ControllerTest {
 		winner = listOfPlayer.get(0);
 
 		while (!cityComplete) {
-			winner.chooseDistictCard(new District("testCardDistrict" + numberOfDistrict++, 0));
+			winner.addDistrict(new District("testCardDistrict" + numberOfDistrict++, 0));
 			cityComplete = winner.play();
 		}
 
@@ -80,7 +80,7 @@ public class ControllerTest {
 
 		winner = listOfPlayer.get(0);
 		while (!cityComplete) {
-			winner.chooseDistictCard(new District("testCardDistrict" + numberOfDistrict++, 0));
+			winner.addDistrict(new District("testCardDistrict" + numberOfDistrict++, 0));
 			cityComplete = winner.play();
 		}
 		listOfPlayer.set(0, winner);
@@ -91,7 +91,7 @@ public class ControllerTest {
 		numberOfDistrict = 0;
 
 		while (!cityComplete) {
-			secondPlayer.chooseDistictCard(new District("testCardDistrict" + numberOfDistrict++, 0));
+			secondPlayer.addDistrict(new District("testCardDistrict" + numberOfDistrict++, 0));
 			cityComplete = secondPlayer.play();
 		}
 		

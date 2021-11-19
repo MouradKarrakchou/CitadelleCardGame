@@ -20,30 +20,31 @@ public class Player implements Comparable<Player> {
         this.golds = 2;
     }
 
-    public void chooseDistictCard(District card) {
-        districtCards.add(card);
+    public void addDistrict(District district) {
+        this.districtCards.add(district);
+    }
+
+    public int getDistrictCardsSize(){
+        return districtCards.size();
     }
 
     public void chooseCharacterCard(Character card) {
         character = card;
     }
 
-
     public boolean play() {
-        addGold();
         ArrayList<District> districtWeCanBuild = districtWeCanBuild(districtWeHaveEnoughMoneyToBuild());
         if (!districtWeCanBuild.isEmpty()) buildDistrict(districtWeCanBuild.get(0));
         return (city.isComplete());
     }
 
-    public void buildDistrict(District districToBuild) {
-        city.buildDistrict(districToBuild);
-        golds -= districToBuild.getValue();
+    public void buildDistrict(District districtToBuild) {
+        city.buildDistrict(districtToBuild);
+        districtCards.remove(districtToBuild);
+        golds -= districtToBuild.getValue();
+        score += districtToBuild.getValue();
     }
 
-    public void addDistrict(District district) {
-        this.districtCards.add(district);
-    }
 
     public void updateScore(int number) {
         score += number;
@@ -58,6 +59,24 @@ public class Player implements Comparable<Player> {
         if (districtIsBuilt.size() != 1) return false;
 
         return true;
+    }
+
+    public boolean hasDistrict(District district) {
+        for (District districtCard : districtCards) {
+            if (districtCard.equals(district)) return true;
+        }
+        return false;
+    }
+
+    public boolean cityHasDistrict(District district){
+        return city.hasDistrict(district);
+    }
+
+    public boolean canPlaceADistrictInTheCity(){
+        for (District district : districtCards){
+            if (!city.hasDistrictValue(district)) return true;
+        }
+        return false;
     }
 
     private ArrayList<District> districtWeHaveEnoughMoneyToBuild(){

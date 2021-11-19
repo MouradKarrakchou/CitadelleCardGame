@@ -16,4 +16,11 @@ public class District {
     public int getValue() {
         return value;
     }
+
+    public boolean equals(Object o) {
+        if (o instanceof District) {
+            return (((District) o).name.equals(name));
+        }
+        return false;
+    }
 }
