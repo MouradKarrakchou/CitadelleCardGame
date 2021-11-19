@@ -13,39 +13,28 @@ public class DeckDistrict {
         this.initializer();
     }
 
-    /*
-    private void initialise() {
-        for (int k = 0; k < numberOfDistricts / 8; k++) {
-            deckDistrict.add(new District("house", 1));
-        }
-        for (int k = 0; k < numberOfDistricts / 2; k++) {
-            deckDistrict.add(new District("house", 2));
-        }
-    }
-    */
+    public void initializer(){
+        ArrayList<String> districtsWithSameValue = new ArrayList<>();
 
-    private void initializer(){
         deckDistrict.add(new District("Haunted City", 2));
 
-        ArrayList<String> districtsWithSameValue = new ArrayList<>();
         Collections.addAll(districtsWithSameValue, "Laboratory", "Smithy", "Observatory", "Graveyard");
         districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 5)));
+        districtsWithSameValue.clear();
 
-        districtsWithSameValue = new ArrayList<>();
         Collections.addAll(districtsWithSameValue, "Library", "University", "School of Magic", "Dragon Gate");
         districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 6)));
+        districtsWithSameValue.clear();
 
-
-        districtsWithSameValue = new ArrayList<>(); 
         Collections.addAll(districtsWithSameValue, "Cathedral", "Palace", "Town Hall", "Fortress");
         for (int i = 0; i < 2; i++){
             deckDistrict.add(new District("Keep", 3));
             districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 5)));
         }
+        districtsWithSameValue.clear();
 
         ArrayList<String> districtsWithSameValue2 = new ArrayList<>();
         ArrayList<String> districtsWithSameValue3 = new ArrayList<>();
-        districtsWithSameValue = new ArrayList<>();
         Collections.addAll(districtsWithSameValue, "Temple", "Watchtower");
         Collections.addAll(districtsWithSameValue2, "Trading Post", "Prison");
         Collections.addAll(districtsWithSameValue3, "Monastery", "Docks", "Battlefield");
@@ -55,24 +44,18 @@ public class DeckDistrict {
             districtsWithSameValue3.stream().forEach(district -> deckDistrict.add(new District(district, 3)));
             deckDistrict.add(new District("Harbor", 4));
         }
+        districtsWithSameValue.clear();
 
-        districtsWithSameValue = new ArrayList<>();
         Collections.addAll(districtsWithSameValue,"Church", "Market");
         for (int i = 0; i < 4; i++){
             districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 2)));
             deckDistrict.add(new District("Castle", 4));
         }
 
-        districtsWithSameValue = new ArrayList<>();
-        Collections.addAll(districtsWithSameValue,"Tavern", "Manor");
         for (int i = 0; i < 5; i++){
-            districtsWithSameValue.stream().forEach(district -> deckDistrict.add(new District(district, 2)));
+            deckDistrict.add(new District("Tavern", 1));
+            deckDistrict.add(new District("Manor", 3));
         }
-    }
-
-
-    public ArrayList<District> getDeckCharacter() {
-        return deckDistrict;
     }
 
     public int getSize() {
@@ -88,4 +71,6 @@ public class DeckDistrict {
         return choosenDistrict;
 
     }
+
+    ArrayList<District> getDeckDistrict(){ return deckDistrict; }
 }
