@@ -1,11 +1,10 @@
 package fr.unice.polytech.startingpoint;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-
+import java.util.stream.Collectors;
 
 public class Player implements Comparable<Player> {
-	private String name;
+	private final String name;
     private Character character;
     private ArrayList<District> districtCards;
     private City city;
@@ -32,13 +31,14 @@ public class Player implements Comparable<Player> {
 
     public boolean play() {
         addGold();
-        return buildDistrict(0);
+        ArrayList<District> districtWeCanBuild = districtWeCanBuild(districtWeHaveEnoughMoneyToBuild());
+        if (!districtWeCanBuild.isEmpty()) buildDistrict(districtWeCanBuild.get(0));
+        return (city.isComplete());
     }
 
-    public boolean buildDistrict(int numberDistrict) {
-        city.buildDistrict(districtCards.get(numberDistrict));
-        golds -= districtCards.get(numberDistrict).getValue();
-        return (city.isComplete()); 
+    public void buildDistrict(District districToBuild) {
+        city.buildDistrict(districToBuild);
+        golds -= districToBuild.getValue();
     }
 
     public void addDistrict(District district) {
@@ -49,13 +49,34 @@ public class Player implements Comparable<Player> {
         score += number;
     }
 
+    private boolean isAlreadyBuilt(String nameOfDistrict){
+        ArrayList<District> districtIsBuilt;
+        districtIsBuilt = city.getBuiltDistrict()
+                              .stream()
+                              .filter(builtDistrict -> builtDistrict.getName().equals(nameOfDistrict))
+                              .collect(Collectors.toCollection(ArrayList::new));
+        if (districtIsBuilt.size() != 1) return false;
+
+        return true;
+    }
+
+    private ArrayList<District> districtWeHaveEnoughMoneyToBuild(){
+        return districtCards.stream()
+                            .filter(district  -> district.getValue() <= getGolds())
+                            .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private ArrayList<District> districtWeCanBuild(ArrayList<District> districtCheapEnough){
+        return districtCheapEnough.stream()
+                                  .filter(district -> !(isAlreadyBuilt(district.getName())))
+                                  .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     //getter
 
     public int getGolds() {
         return golds;
     }
-
-
 
     public ArrayList<District> getDistrictCards() {
         return districtCards;

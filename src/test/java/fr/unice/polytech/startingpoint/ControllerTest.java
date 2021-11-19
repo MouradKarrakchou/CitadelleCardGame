@@ -25,6 +25,8 @@ public class ControllerTest {
 	 * critères d'acception: Contexte: un joueur complète sa ville, return ce joueur
 	 * là Contexte: Aucun joueur ne complète sa ville, renvoie Optional.empty()
 	 */
+
+/*
 	@Test
 	public void startRoundPart2NormalUtilisationTest() {
 		boolean expected = true;
@@ -40,5 +42,5 @@ public class ControllerTest {
 		boolean result = controller.startRoundPart2(listOfPlayer);
 		assertEquals(result, expected);
 	}
-
+*/
 }

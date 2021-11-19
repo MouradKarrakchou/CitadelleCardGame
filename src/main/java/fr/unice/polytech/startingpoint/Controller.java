@@ -65,12 +65,8 @@ public class Controller {
 
     public boolean startRoundPart2(ArrayList<Player> listOfPlayer) {
         boolean isLastRound = false;
-        Optional<Player> firstPlayerToComplete = Optional.empty();
-
         for (Player player : listOfPlayer) {
             player.chooseDistictCard(deckDistrict.chooseDistrict());
-            //car pour l'instant un seul district
-            printC.chooseDistrict(player, player.getDistrictCards().get(0));
             boolean res = player.play();
             if (res) {
                 printC.printPlayerToCompleteCity(player);

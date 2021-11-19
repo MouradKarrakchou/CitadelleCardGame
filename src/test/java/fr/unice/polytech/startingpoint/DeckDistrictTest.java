@@ -53,30 +53,27 @@ public class DeckDistrictTest {
 
     @Test
     void initializerTestName(){
-
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
-                    .filter(district -> district.getName().equals(districtReal.getName()))
-                    .forEach(district -> assertTrue(district.getName().equals(districtReal.getName())));
+                              .filter(district -> district.getName().equals(districtReal.getName()))
+                              .forEach(district -> assertTrue(district.getName().equals(districtReal.getName())));
         }
     }
 
     @Test
     void initializerTestQuantity(){
-
         for (int i = 0; i < deckDistrictReal.size(); i++) {
             int j = i;
             int number = deckDistrictToTest.stream()
-                    .filter(districtToTest -> districtToTest.getName().equals(deckDistrictReal.get(j).getName()))
-                    .map(districtToTest -> 1)
-                    .reduce(0, (total, count) -> total + count);
+                                           .filter(districtToTest -> districtToTest.getName().equals(deckDistrictReal.get(j).getName()))
+                                           .map(districtToTest -> 1)
+                                           .reduce(0, (total, count) -> total + count);
             assertEquals(numberOfCards.get(i), number);
         }
     }
 
     @Test
      void initializerTestValue(){
-
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
                               .filter(districtToTest -> districtToTest.getName().equals(districtReal.getName()))

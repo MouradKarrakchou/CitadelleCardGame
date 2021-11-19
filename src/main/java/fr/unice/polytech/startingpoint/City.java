@@ -17,4 +17,8 @@ public class City {
     public boolean isComplete() {
         return (builtDistrict.size() > cityComplete);
     }
+
+    //getter
+
+    ArrayList<District> getBuiltDistrict() { return builtDistrict; }
 }
