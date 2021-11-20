@@ -9,6 +9,10 @@ public class City {
     public City() {
         builtDistrict = new ArrayList<>();
     }
+    
+    public int getSizeOfCity() {
+    	return builtDistrict.size();
+    }
 
     public void buildDistrict(District district) {
         builtDistrict.add(district);
@@ -17,8 +21,6 @@ public class City {
     public boolean isComplete() {
         return (builtDistrict.size() >= cityComplete);
     }
-
-    public
 
     //getter
 

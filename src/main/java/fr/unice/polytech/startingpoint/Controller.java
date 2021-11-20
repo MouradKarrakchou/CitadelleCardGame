@@ -1,13 +1,17 @@
 package fr.unice.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Controller {
     public final static int NUMBER_OF_PLAYER = 4;
     private Game game;
     private PrintCitadels printC;
+    private PhaseManager phaseManager;
     private ArrayList<Player> listOfPlayer;
     private DeckCharacter deckCharacter;
     private DeckDistrict deckDistrict;
@@ -17,12 +21,12 @@ public class Controller {
 
     public Controller() {
         listOfPlayer = new ArrayList<>();
-
         deckCharacter = new DeckCharacter();
         deckDistrict = new DeckDistrict();
 
         game = new Game(listOfPlayer, deckCharacter, deckDistrict);
         printC = new PrintCitadels();
+        phaseManager = new PhaseManager();
     }
 
     public void runGame() {
@@ -65,13 +69,17 @@ public class Controller {
 
     public boolean startRoundPart2(ArrayList<Player> listOfPlayer) {
         boolean isLastRound = false;
+        ArrayList<City> listOfCity = listOfPlayer.stream().
+        										  map(p -> p.getCity()).
+        										  collect(Collectors.toCollection(ArrayList::new));
+        String currentPhase = phaseManager.analyseGame(listOfCity);
         for (Player player : listOfPlayer) {
 
             // Instantiates a bot that will make decisions for the player.
             Bot bot = new Bot(player);
-            bot.botStartRoundPart2(deckDistrict);
+            bot.botStartRoundPart2(deckDistrict, currentPhase);
 
-            boolean res = player.play();
+            boolean res = bot.play();
             if (res) {
                 printC.printPlayerToCompleteCity(player);
                 if (!isLastRound) {

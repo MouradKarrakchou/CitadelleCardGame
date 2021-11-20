@@ -32,12 +32,6 @@ public class Player implements Comparable<Player> {
         character = card;
     }
 
-    public boolean play() {
-        ArrayList<District> districtWeCanBuild = districtWeCanBuild(districtWeHaveEnoughMoneyToBuild());
-        if (!districtWeCanBuild.isEmpty()) buildDistrict(districtWeCanBuild.get(0));
-        return (city.isComplete());
-    }
-
     public void buildDistrict(District districtToBuild) {
         city.buildDistrict(districtToBuild);
         districtCards.remove(districtToBuild);
@@ -60,6 +54,10 @@ public class Player implements Comparable<Player> {
 
         return true;
     }
+    
+    public ArrayList<District> listOfDistrictBuildable() {
+    	return districtWeCanBuild(districtWeHaveEnoughMoneyToBuild());
+    }
 
     public boolean hasDistrict(District district) {
         for (District districtCard : districtCards) {
@@ -72,12 +70,6 @@ public class Player implements Comparable<Player> {
         return city.hasDistrict(district);
     }
 
-    public boolean canPlaceADistrictInTheCity(){
-        for (District district : districtCards){
-            if (!city.hasDistrictValue(district)) return true;
-        }
-        return false;
-    }
 
     private ArrayList<District> districtWeHaveEnoughMoneyToBuild(){
         return districtCards.stream()
@@ -89,9 +81,8 @@ public class Player implements Comparable<Player> {
         return districtCheapEnough.stream()
                                   .filter(district -> !(isAlreadyBuilt(district.getName())))
                                   .collect(Collectors.toCollection(ArrayList::new));
-    }
 
-    //getter
+    }
 
     public int getGolds() {
         return golds;
@@ -147,5 +138,9 @@ public class Player implements Comparable<Player> {
             else return (1);
         }
     }
+
+	public City getCity() {
+		return city;
+	}
 
 }

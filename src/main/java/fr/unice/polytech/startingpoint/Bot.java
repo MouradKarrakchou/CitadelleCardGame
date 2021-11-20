@@ -11,6 +11,12 @@ public class Bot {
         this.player = player;
     }
 
+    public boolean play() {
+        ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
+        if (!districtWeCanBuild.isEmpty()) player.buildDistrict(districtWeCanBuild.get(0));
+        return (player.getCity().isComplete());
+    }
+    
     /**
      * @param pickedDistricts The two picked cards.
      * @return The district having the higher value.
@@ -68,8 +74,14 @@ public class Bot {
         }
     }
 
-    public void botStartRoundPart2(DeckDistrict deckDistrict){
-        if (player.getDistrictCardsSize() == 0 || !player.canPlaceADistrictInTheCity()){
+    public void botStartRoundPart2(DeckDistrict deckDistrict, String currentPhase){
+        if(currentPhase == PhaseManager.END_GAME_PHASE)endGameBehaviour(deckDistrict);
+        else 
+        	normalBehaviour(deckDistrict);        
+    }
+    
+    private void normalBehaviour(DeckDistrict deckDistrict) {
+    	if (player.getDistrictCardsSize() == 0 || !(player.listOfDistrictBuildable().size() == 0)){
             // Pick two district cards and add it to an ArrayList.
             ArrayList<District> pickedDistricts = new ArrayList<District>();
             pickedDistricts.add(deckDistrict.chooseDistrict());
@@ -89,4 +101,18 @@ public class Bot {
             player.addGold();
         }
     }
+    
+    private void endGameBehaviour(DeckDistrict deckDistrict) {
+    	 ArrayList<District> pickedDistricts = new ArrayList<District>();
+         pickedDistricts.add(deckDistrict.chooseDistrict());
+         pickedDistricts.add(deckDistrict.chooseDistrict());
+
+         // Allow player to take or not one of the 2 picked district cards
+         boolean playerTakeADistrictCard = districtCardIsSelected(deckDistrict, pickedDistricts);
+         if (!playerTakeADistrictCard) {
+             printC.printTakeGold(player);
+             player.addGold();
+         }
+    }
+
 }
