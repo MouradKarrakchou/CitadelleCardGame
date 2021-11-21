@@ -37,10 +37,10 @@ public class ControllerTest {
 		controller.startRoundPart1();
 		listOfPlayer = controller.getGame().getListOfPlayer();
 		winner = listOfPlayer.get(0);
-
+        Bot bot = new Bot(winner);
 		while (!cityComplete) {
 			winner.addDistrict(new District("testCardDistrict" + numberOfDistrict++, 0));
-			cityComplete = winner.play();
+			cityComplete = bot.play();
 		}
 
 		listOfPlayer.set(0, winner);
@@ -79,20 +79,24 @@ public class ControllerTest {
 		listOfPlayer = controller.getGame().getListOfPlayer();
 
 		winner = listOfPlayer.get(0);
+        Bot bot = new Bot(winner);
+
 		while (!cityComplete) {
 			winner.addDistrict(new District("testCardDistrict" + numberOfDistrict++, 0));
-			cityComplete = winner.play();
+			cityComplete = bot.play();
 		}
 		listOfPlayer.set(0, winner);
 		
 		
 		secondPlayer = listOfPlayer.get(1);
+        Bot botTwo = new Bot(secondPlayer);
+
 		cityComplete = false;
 		numberOfDistrict = 0;
 
 		while (!cityComplete) {
 			secondPlayer.addDistrict(new District("testCardDistrict" + numberOfDistrict++, 0));
-			cityComplete = secondPlayer.play();
+			cityComplete = botTwo.play();
 		}
 		
 		listOfPlayer.set(1, secondPlayer);
