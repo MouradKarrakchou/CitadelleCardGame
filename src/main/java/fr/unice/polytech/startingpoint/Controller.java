@@ -49,6 +49,8 @@ public class Controller {
 	public static final int MERCHANT_INDEX = 5;
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
+	private Bot lastKing;
+
 
 
 	//------
@@ -242,13 +244,29 @@ public class Controller {
 	
 	private void setupCharacters() {
 		deckCharacter.initialise(listOfAllCharacters);
-		listOfBot.forEach(bot -> {
-			Player playerOfBot = bot.getPlayer();
-			playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
-			fillHashOfCharacter(playerOfBot.getCharacter(), bot);
-			printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
-		});
+		if(lastKing != null) {
+			chooseACharacterCard(lastKing);
+			listOfBot.forEach(bot -> {
+				if(bot != lastKing)
+					chooseACharacterCard(bot);
+			});
+		}
+		else {
+			listOfBot.forEach(bot -> {
+				chooseACharacterCard(bot);
+			});
+		}
+		
 		printC.dropALine();
+	}
+	
+	private void chooseACharacterCard(Bot bot) {
+		Player playerOfBot = bot.getPlayer();
+		playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
+		fillHashOfCharacter(playerOfBot.getCharacter(), bot);
+		if(playerOfBot.getCharacter() == listOfAllCharacters.get(KING_INDEX))
+			lastKing = bot;
+		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}
 	
 	private void askEachCharacterToPlay() {
