@@ -21,7 +21,6 @@ import fr.unice.polytech.startingpoint.characters_class.Merchant;
 import fr.unice.polytech.startingpoint.characters_class.Thief;
 import fr.unice.polytech.startingpoint.characters_class.Warlord;
 
-
 public class Controller {
 	public final static int NUMBER_OF_PLAYER = 4;
 	private static final int BONUS_FIRST = 4;
@@ -33,11 +32,9 @@ public class Controller {
 	private DeckCharacter deckCharacter;
 	private DeckDistrict deckDistrict;
 	private int roundNumber = 1;
-	
-	//------
-	private ArrayList<Character> listOfAllCharacters;
-	//private ArrayList<Character> listOfCharactersOfTheGame;
 
+	// ------
+	private ArrayList<Character> listOfAllCharacters;
 	private LinkedHashMap<Character, Bot> hashOfCharacters;
 	private ArrayList<Bot> listOfBot;
 	private String currentPhase = "none";
@@ -50,16 +47,12 @@ public class Controller {
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
 	private Bot lastKing;
-
-
-
-	//------
-
+	// ------
 
 	public Controller() {
 		listOfPlayer = new ArrayList<>();
 		listOfAllCharacters = new ArrayList<>();
-		//listOfCharactersOfTheGame = new ArrayList<>();
+		// listOfCharactersOfTheGame = new ArrayList<>();
 		listOfBot = new ArrayList<>();
 		hashOfCharacters = new LinkedHashMap<>();
 		deckCharacter = new DeckCharacter();
@@ -69,106 +62,10 @@ public class Controller {
 		printC = new PrintCitadels();
 		phaseManager = new PhaseManager();
 	}
-	
+
 	public void initGame() {
 		initListOfAllCharacter();
-		deckCharacter.initialise(listOfAllCharacters);;
-		initHashOfCharacter();
-		for (int i = 1; i <= NUMBER_OF_PLAYER; i++)
-			listOfPlayer.add(new Player("robot" + i));
-		game = new Game(listOfPlayer, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
-	}
-
-
-
-	public void runGame() {
-		boolean res = false;
-		while (!res) {
-			printC.printNumberRound(roundNumber);
-			printC.printBoard(game);
-			res = runRound();
-			printC.printLayer();
-		}
-		end();
-	}
-
-	public boolean runRound() {
-		if (roundNumber != 1)
-			game.updateListOfPlayer();
-		startRoundPart1();
-		return (startRoundPart2(game.getListOfPlayer()));
-	}
-
-	public void end() {
-		game.getWinner();
-		printC.printRanking(listOfPlayer);
-	}
-
-	
-
-	public void startRoundPart1() {
-		deckCharacter.initialise(listOfAllCharacters);
-		listOfPlayer.forEach(player -> {
-			player.chooseCharacterCard(deckCharacter.chooseCharacter());
-			printC.chooseRole(player, player.getCharacter());
-		});
-		printC.dropALine();
-	}
-
-	public boolean startRoundPart2(ArrayList<Player> listOfPlayer) {
-		boolean isLastRound = false;
-		ArrayList<City> listOfCity = getTheListOfCity();
-		String currentPhase = phaseManager.analyseGame(listOfCity);
-		spellOfCharacters();
-		
-		
-		for (Player player : listOfPlayer) {
-
-			 // Instantiates a bot that will make decisions for the player.
-			Bot bot = new Bot(player);
-			bot.botStartRoundPart2(deckDistrict, currentPhase);
-
-			boolean res = bot.play();
-			if (res) {
-				isLastRound = addBonusForPlayers(player, res);
-				currentPhase = PhaseManager.LAST_TURN_PHASE;
-			}
-		}
-		printC.dropALine();
-		roundNumber++;
-		return isLastRound;
-	}
-
-	public void spellOfCharacters() {
-		listOfPlayer.forEach(player -> {
-			player.getCharacter().spellOfBeginningOfRound(player, game);
-		});
-	}
-
-	public ArrayList<City> getTheListOfCity() {
-		return listOfPlayer.stream().map(p -> p.getCity()).collect(Collectors.toCollection(ArrayList::new));
-	}
-	
-	public boolean addBonusForPlayers(Player player, boolean isLastRound) {
-		if (!isLastRound) {
-			isLastRound = true;
-			printC.printFirstPlayerToComplete(player);
-			player.updateScore(BONUS_FIRST);
-		} else 
-			player.updateScore(BONUS_END);
-		printC.printPlayerToCompleteCity(player);
-		return isLastRound;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	
-	//-----------------
-	public void initGameV2() {
-		initListOfAllCharacter();
-		//initListOfCharacterOfTheGame();
+		// initListOfCharacterOfTheGame();
 		initHashOfCharacter();
 		for (int i = 1; i <= NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("robot" + i);
@@ -178,16 +75,19 @@ public class Controller {
 		game = new Game(listOfPlayer, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
 	}
 
-	
-	/*private void initListOfCharacterOfTheGame() {
-	        Random random = new Random();
-	        for(int i = 0 ; i < NUMBER_OF_PLAYER ; i ++) {
-	        	Character randomCharacter = listOfAllCharacters.get(random.nextInt(listOfAllCharacters.size()));
-	        	listOfCharactersOfTheGame.add(randomCharacter);
-	        }
-		
-	}*/
-	
+	public void runGame() {
+		while ((currentPhase = phaseManager.analyseGame(getTheListOfCity())) != PhaseManager.LAST_TURN_PHASE) {
+			printC.printNumberRound(roundNumber);
+
+			setupCharacters();
+			askEachCharacterToPlay();
+
+			printC.printBoard(game);
+			printC.printLayer();
+		}
+		end();
+	}
+
 	private void initListOfAllCharacter() {
 		Assassin theAssassin = new Assassin();
 		Thief theThief = new Thief();
@@ -197,7 +97,7 @@ public class Controller {
 		Merchant theMerchant = new Merchant();
 		Architect theArchitect = new Architect();
 		Warlord theWarlord = new Warlord();
-		
+
 		listOfAllCharacters.add(theAssassin);
 		listOfAllCharacters.add(theThief);
 		listOfAllCharacters.add(theMagician);
@@ -207,13 +107,11 @@ public class Controller {
 		listOfAllCharacters.add(theArchitect);
 		listOfAllCharacters.add(theWarlord);
 
-
 	}
 
-	
 	private void initHashOfCharacter() {
 		Bot fillBot = new Bot(new Player("fillPlayer"));
-		
+
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), fillBot);
 		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), fillBot);
 		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), fillBot);
@@ -228,73 +126,85 @@ public class Controller {
 		hashOfCharacters.put(character, bot);
 	}
 
-	public void runGameV2() {
-		while ((currentPhase= phaseManager.analyseGame(getTheListOfCity())) != PhaseManager.LAST_TURN_PHASE) {
-			printC.printNumberRound(roundNumber);
-			
-			setupCharacters();
-			askEachCharacterToPlay();
-			
-			printC.printBoard(game);
-			printC.printLayer();
-		}
-		end();
-	}
-	
-	
 	private void setupCharacters() {
 		deckCharacter.initialise(listOfAllCharacters);
-		if(lastKing != null) {
+		if (lastKing != null) {
 			chooseACharacterCard(lastKing);
 			listOfBot.forEach(bot -> {
-				if(bot != lastKing)
+				if (bot != lastKing)
 					chooseACharacterCard(bot);
 			});
-		}
-		else {
+		} else {
 			listOfBot.forEach(bot -> {
 				chooseACharacterCard(bot);
 			});
 		}
-		
+
 		printC.dropALine();
 	}
-	
+
 	private void chooseACharacterCard(Bot bot) {
 		Player playerOfBot = bot.getPlayer();
 		playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
 		fillHashOfCharacter(playerOfBot.getCharacter(), bot);
-		if(playerOfBot.getCharacter() == listOfAllCharacters.get(KING_INDEX))
+		if (playerOfBot.getCharacter() == listOfAllCharacters.get(KING_INDEX))
 			lastKing = bot;
 		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}
-	
+
 	private void askEachCharacterToPlay() {
-		boolean aBotCompleteHisCity = false ; 
+		boolean aBotCompleteHisCity = false;
 		ArrayList<City> listOfCity = getTheListOfCity();
 		currentPhase = phaseManager.analyseGame(listOfCity);
-		
-		for(Entry<Character, Bot> entry : hashOfCharacters.entrySet()) {
-		    Character character = entry.getKey();
-		    Bot bot = entry.getValue();
-		    if(bot.getPlayer().getName() != "fillPlayer") {
-		    	aBotCompleteHisCity = actionsOfTheBot(character, bot, aBotCompleteHisCity);
-		    }   
+
+		for (Entry<Character, Bot> entry : hashOfCharacters.entrySet()) {
+			Character character = entry.getKey();
+			Bot bot = entry.getValue();
+			if (bot.getPlayer().getName() != "fillPlayer") {
+				aBotCompleteHisCity = actionsOfTheBot(character, bot, aBotCompleteHisCity);
+			}
 		}
 		roundNumber++;
 	}
-	
-	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity){
-		character.spellOfBeginningOfRound(bot.getPlayer(), game);
-	    aBotCompleteHisCity = bot.play(deckDistrict, currentPhase);
-	    if(aBotCompleteHisCity) {
-	    	addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
-	    	currentPhase = PhaseManager.LAST_TURN_PHASE;
-	    }
-	    return aBotCompleteHisCity;
-	}
-	
-	
-}
-	//-----------------
 
+	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity) {
+		character.spellOfBeginningOfRound(bot.getPlayer(), game);
+		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase);
+		if (aBotCompleteHisCity) {
+			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
+			currentPhase = PhaseManager.LAST_TURN_PHASE;
+		}
+		return aBotCompleteHisCity;
+	}
+
+	public void end() {
+		game.getWinner();
+		printC.printRanking(listOfPlayer);
+	}
+
+	public void spellOfCharacters() {
+		listOfPlayer.forEach(player -> {
+			player.getCharacter().spellOfBeginningOfRound(player, game);
+		});
+	}
+
+	public ArrayList<City> getTheListOfCity() {
+		return listOfPlayer.stream().map(p -> p.getCity()).collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public boolean addBonusForPlayers(Player player, boolean isLastRound) {
+		if (!isLastRound) {
+			isLastRound = true;
+			printC.printFirstPlayerToComplete(player);
+			player.updateScore(BONUS_FIRST);
+		} else
+			player.updateScore(BONUS_END);
+		printC.printPlayerToCompleteCity(player);
+		return isLastRound;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+}
