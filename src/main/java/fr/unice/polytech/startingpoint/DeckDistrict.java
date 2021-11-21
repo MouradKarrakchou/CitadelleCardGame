@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class DeckDistrict {
     private ArrayList<District> deckDistrict;
-    private final int numberOfDistricts = 65;
 
     public DeckDistrict() {
         deckDistrict = new ArrayList<>();

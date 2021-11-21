@@ -11,16 +11,6 @@ public class Bot {
 		this.player = player;
 	}
 
-	public boolean play() {
-		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
-		player.getCharacter().printOfBeginningOfTurn(player,printC);
-		if (!districtWeCanBuild.isEmpty())
-			{player.buildDistrict(districtWeCanBuild.get(0));
-			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
-			printC.printBoardOfPlayer(player);}
-		return (player.getCity().isComplete());
-	}
-
 	/**
 	 * @param pickedDistricts The two picked cards.
 	 * @return The district having the higher value.
@@ -80,13 +70,19 @@ public class Bot {
 		}
 	}
 
-	public void botStartRoundPart2(DeckDistrict deckDistrict, String currentPhase) {		
+	
+	
+	public boolean play(DeckDistrict deckDistrict, String currentPhase) {		
 		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
 			endGameBehaviour(deckDistrict);
 		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
 			lastTurnBehaviour(deckDistrict);
 		else
 			normalBehaviour(deckDistrict);
+		
+		ifPossibleBuildADistrict();
+		return (player.getCity().isComplete());
+
 	}
 
 	private void normalBehaviour(DeckDistrict deckDistrict) {
@@ -106,6 +102,15 @@ public class Bot {
 	private void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		System.out.println("***"+player.getName() + " is in LAST TURN mode***");
 		takeCard(deckDistrict);
+	}
+	
+	public void ifPossibleBuildADistrict() {
+		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
+		player.getCharacter().printOfBeginningOfTurn(player,printC); //wtf is that
+		if (!districtWeCanBuild.isEmpty())
+			{player.buildDistrict(districtWeCanBuild.get(0));
+			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
+			printC.printBoardOfPlayer(player);}
 	}
 
 
@@ -129,4 +134,34 @@ public class Bot {
 		player.addDistrict(districtCard);
 		pickedDistricts.remove(districtCard);
 	}
+
+	public Player getPlayer() {
+		return player;
+	}
+	
+	
+	//------
+	public void botStartRoundPart2(DeckDistrict deckDistrict, String currentPhase){
+		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
+			endGameBehaviour(deckDistrict);
+		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
+			lastTurnBehaviour(deckDistrict);
+		else
+			normalBehaviour(deckDistrict);
+		
+	}
+	
+	public boolean play() {
+		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
+		player.getCharacter().printOfBeginningOfTurn(player,printC); //wtf is that
+		if (!districtWeCanBuild.isEmpty()){
+			player.buildDistrict(districtWeCanBuild.get(0));
+			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
+			printC.printBoardOfPlayer(player);
+			}
+		return (player.getCity().isComplete());
+	}
+	//------
+	
+	
 }

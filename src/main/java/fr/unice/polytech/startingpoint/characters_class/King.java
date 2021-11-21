@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 public class King extends Character {
     public King(){
-        this.name="King";
-        this.value=4;
+        super("King", 4 );
     }
     private void orderListOfPlayer(ArrayList<Player> listOfPlayer,ArrayList<Player> listOfPlayerNextRound,int positionOfKingHolder){
         int positionToChange=positionOfKingHolder;
