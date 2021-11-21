@@ -86,6 +86,7 @@ public class Controller {
                 	isLastRound = true;
                     printC.printFirstPlayerToComplete(player);
                     player.updateScore(Bonus1st);
+                    currentPhase = PhaseManager.LAST_TURN_PHASE;
                 } else {
                     player.updateScore(BonusEnd);
                 }

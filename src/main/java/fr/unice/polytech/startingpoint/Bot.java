@@ -3,116 +3,127 @@ package fr.unice.polytech.startingpoint;
 import java.util.ArrayList;
 
 public class Bot {
-    // The player controlled by the bot.
-    private final Player player;
-    private final PrintCitadels printC = new PrintCitadels();
+	// The player controlled by the bot.
+	private final Player player;
+	private final PrintCitadels printC = new PrintCitadels();
 
-    public Bot(Player player) {
-        this.player = player;
-    }
+	public Bot(Player player) {
+		this.player = player;
+	}
 
-    public boolean play() {
-        ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
-        if (!districtWeCanBuild.isEmpty()) player.buildDistrict(districtWeCanBuild.get(0));
-        return (player.getCity().isComplete());
-    }
-    
-    /**
-     * @param pickedDistricts The two picked cards.
-     * @return The district having the higher value.
-     */
-    public District selectTheHigherDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts){
-        int cardOneValue = pickedDistricts.get(0).getValue();
-        int cardTwoValue = pickedDistricts.get(1).getValue();
+	public boolean play() {
+		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
+		if (!districtWeCanBuild.isEmpty())
+			player.buildDistrict(districtWeCanBuild.get(0));
+		return (player.getCity().isComplete());
+	}
 
-        if (cardOneValue >= cardTwoValue){
-            deckDistrict.addDistrict(pickedDistricts.get(1));
-            return pickedDistricts.get(0);
-        }
-        deckDistrict.addDistrict(pickedDistricts.get(0));
-        return pickedDistricts.get(1);
-    }
+	/**
+	 * @param pickedDistricts The two picked cards.
+	 * @return The district having the higher value.
+	 */
+	public District selectTheHigherDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
+		int cardOneValue = pickedDistricts.get(0).getValue();
+		int cardTwoValue = pickedDistricts.get(1).getValue();
 
-    /**
-     * @param deckDistrict The global game deck of districts
-     * @param pickedDistricts The two picked cards.
-     * @return Whether a card has been picked and the other burned or not.
-     *
-     * Criteria :
-     * 1 - The card must not already be in the player's city or in the player's hand
-     * 2 - If there are still 2 cards after applying the criteria (1), the card with the higher value is selected.
-     */
-    public boolean districtCardIsSelected(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts){
+		if (cardOneValue >= cardTwoValue) {
+			deckDistrict.addDistrict(pickedDistricts.get(1));
+			return pickedDistricts.get(0);
+		}
+		deckDistrict.addDistrict(pickedDistricts.get(0));
+		return pickedDistricts.get(1);
+	}
 
-        // Player will not pick cards it already have on its city or its hand.
-        for (int i = 0; i < pickedDistricts.size(); i++) {
-            if (player.cityHasDistrict(pickedDistricts.get(i)) || player.hasDistrict(pickedDistricts.get(i))) {
-                deckDistrict.addDistrict(pickedDistricts.get(i));
-                pickedDistricts.remove(pickedDistricts.get(i));
-            }
-        }
+	/**
+	 * @param deckDistrict    The global game deck of districts
+	 * @param pickedDistricts The two picked cards.
+	 * @return Whether a card has been picked and the other burned or not.
+	 *
+	 *         Criteria : 1 - The card must not already be in the player's city or
+	 *         in the player's hand 2 - If there are still 2 cards after applying
+	 *         the criteria (1), the card with the higher value is selected.
+	 */
+	public boolean districtCardIsSelected(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
 
-        switch (pickedDistricts.size()) {
-            // One district card have been selected, player will take this card.
-            case 1 -> {
-                printC.printTakeDistrictCard(player);
-                player.addDistrict(pickedDistricts.get(0));
-                return true;
-            }
+		// Player will not pick cards it already have on its city or its hand.
+		for (int i = 0; i < pickedDistricts.size(); i++) {
+			District currentDistrictCard = pickedDistricts.get(i);
+			if (player.cityHasDistrict(currentDistrictCard) || player.hasDistrict(currentDistrictCard)) {
+				putCardBackInDeck(pickedDistricts, currentDistrictCard);
+				;
+			}
+		}
 
-            // Two district cards have been selected, player will take the higher one.
-            case 2 -> {
-                printC.printTakeDistrictCard(player);
-                District higherDistrict = selectTheHigherDistrict(deckDistrict, pickedDistricts);
-                player.addDistrict(higherDistrict);
-                return true;
-            }
+		switch (pickedDistricts.size()) {
+		// One district card have been selected, player will take this card.
+		case 1 -> {
+			printC.printTakeDistrictCard(player);// pas d'accord, le controller demande au printer de print les infos du
+													// bot
+			player.addDistrict(pickedDistricts.get(0));
+			return true;
+		}
 
-            default -> {
-                return false;
-            }
-        }
-    }
+		// Two district cards have been selected, player will take the higher one.
+		case 2 -> {
+			printC.printTakeDistrictCard(player);
+			District higherDistrict = selectTheHigherDistrict(deckDistrict, pickedDistricts);
+			player.addDistrict(higherDistrict);
+			return true;
+		}
 
-    public void botStartRoundPart2(DeckDistrict deckDistrict, String currentPhase){
-        if(currentPhase == PhaseManager.END_GAME_PHASE)endGameBehaviour(deckDistrict);
-        else 
-        	normalBehaviour(deckDistrict);        
-    }
-    
-    private void normalBehaviour(DeckDistrict deckDistrict) {
-    	if (player.getDistrictCardsSize() == 0 || !(player.listOfDistrictBuildable().size() == 0)){
-            // Pick two district cards and add it to an ArrayList.
-            ArrayList<District> pickedDistricts = new ArrayList<District>();
-            pickedDistricts.add(deckDistrict.chooseDistrict());
-            pickedDistricts.add(deckDistrict.chooseDistrict());
+		default -> {
+			return false;
+		}
+		}
+	}
 
-            // Allow player to take or not one of the 2 picked district cards
-            boolean playerTakeADistrictCard = districtCardIsSelected(deckDistrict, pickedDistricts);
+	public void botStartRoundPart2(DeckDistrict deckDistrict, String currentPhase) {		
+		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
+			endGameBehaviour(deckDistrict);
+		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
+			lastTurnBehaviour(deckDistrict);
+		else
+			normalBehaviour(deckDistrict);
+	}
 
-            // If player don't take any district cards
-            if (!playerTakeADistrictCard) {
-                printC.printTakeGold(player);
-                player.addGold();
-            }
-        }
-        else {
-            printC.printTakeGold(player);
-            player.addGold();
-        }
-    }
-    
-    private void endGameBehaviour(DeckDistrict deckDistrict) {
-    	 ArrayList<District> pickedDistricts = new ArrayList<District>();
-         pickedDistricts.add(deckDistrict.chooseDistrict());
-         pickedDistricts.add(deckDistrict.chooseDistrict());
+	private void normalBehaviour(DeckDistrict deckDistrict) {
+		if (player.getDistrictCardsSize() == 0 || player.districtWeCanBuild(player.getDistrictCards()).size() == 0)
+			takeCard(deckDistrict);
+		else {
+			printC.printTakeGold(player);
+			player.addGold();
+		}
+	}
 
-         // Allow player to take or not one of the 2 picked district cards
-         boolean playerTakeADistrictCard = districtCardIsSelected(deckDistrict, pickedDistricts);
-         if (!playerTakeADistrictCard) {
-             printC.printTakeGold(player);
-             player.addGold();
-         }
-    }
+	private void endGameBehaviour(DeckDistrict deckDistrict) {
+		System.out.println("***"+player.getName() + " is in EndGame mode***");
+		takeCard(deckDistrict);
+	}
+	
+	private void lastTurnBehaviour(DeckDistrict deckDistrict) {
+		System.out.println("***"+player.getName() + " is in LAST TURN mode***");
+		takeCard(deckDistrict);
+	}
 
+
+	private void takeCard(DeckDistrict deckDistrict) {
+		// Pick two district cards and add it to an ArrayList.
+		ArrayList<District> pickedDistricts = new ArrayList<District>();
+		pickedDistricts.add(deckDistrict.chooseDistrict());
+		pickedDistricts.add(deckDistrict.chooseDistrict());
+
+		// Allow player to take or not one of the 2 picked district cards
+		boolean playerTakeADistrictCard = districtCardIsSelected(deckDistrict, pickedDistricts);
+
+		// If player don't take any district cards
+		if (!playerTakeADistrictCard) {
+			printC.printTakeGold(player);
+			player.addGold();
+		}
+	}
+	
+	private void putCardBackInDeck(ArrayList<District> pickedDistricts, District districtCard) {
+		player.addDistrict(districtCard);
+		pickedDistricts.remove(districtCard);
+	}
 }

@@ -10,7 +10,7 @@ public class PhaseManager {
 	
 	public PhaseManager() {}	
 	
-	public String analyseGame(ArrayList<City> listCityOfPlayers) {
+	public String analyseGame(ArrayList<City> listCityOfPlayers) {		
 		if(isLastTurnPhase(listCityOfPlayers)) return LAST_TURN_PHASE;
 		if(isEndGamePhase(listCityOfPlayers)) return END_GAME_PHASE;
 		
