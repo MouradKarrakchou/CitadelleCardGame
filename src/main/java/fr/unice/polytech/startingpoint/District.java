@@ -23,4 +23,8 @@ public class District {
         }
         return false;
     }
+    @Override
+    public String toString(){
+        return("District "+name+" ("+value+")");
+    }
 }

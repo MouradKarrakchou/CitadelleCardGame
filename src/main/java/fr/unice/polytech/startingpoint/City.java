@@ -41,4 +41,10 @@ public class City {
         }
         return false;
     }
+    @Override
+    public String toString(){
+        if (builtDistrict.size()==0) return("is empty.");
+        return(builtDistrict.stream().map(district->district.getName()+"("+district.getValue()+")")
+                .reduce("|",(string, district)-> string+" "+district+" | "));
+    }
 }

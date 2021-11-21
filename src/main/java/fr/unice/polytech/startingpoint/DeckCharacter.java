@@ -1,5 +1,8 @@
 package fr.unice.polytech.startingpoint;
 
+import fr.unice.polytech.startingpoint.characters_class.*;
+import fr.unice.polytech.startingpoint.characters_class.Character;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,9 +17,15 @@ public class DeckCharacter {
     }
 
     public void initialise() {
-        for (int k = 1; k <= numberOfCharacters; k++) {
-            deckCharacter.add(new Character("villager", k));
-        }
+        deckCharacter.clear();
+        deckCharacter.add(new Architect());
+        deckCharacter.add(new Assassin());
+        deckCharacter.add(new Bishop());
+        deckCharacter.add(new King());
+        deckCharacter.add(new Magician());
+        deckCharacter.add(new Merchant());
+        deckCharacter.add(new Thief());
+        deckCharacter.add(new Warlord());
     }
 
     Character chooseCharacter() {

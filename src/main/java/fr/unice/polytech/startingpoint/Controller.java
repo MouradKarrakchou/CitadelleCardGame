@@ -17,6 +17,7 @@ public class Controller {
     private DeckDistrict deckDistrict;
     private final int Bonus1st = 4;
     private final int BonusEnd = 2;
+    private int roundNumber=1;
 
 
     public Controller() {
@@ -32,6 +33,8 @@ public class Controller {
     public void runGame() {
         boolean res = false;
         while (!res) {
+            printC.printNumberRound(roundNumber);
+            printC.printBoard(game);
             res = runRound();
             printC.printLayer();
         }
@@ -39,6 +42,7 @@ public class Controller {
     }
 
     public boolean runRound() {
+        if (roundNumber!=1) game.updateListOfPlayer();
         startRoundPart1();
         return(startRoundPart2(game.getListOfPlayer()));
     }
@@ -69,6 +73,12 @@ public class Controller {
 
     public boolean startRoundPart2(ArrayList<Player> listOfPlayer) {
         boolean isLastRound = false;
+
+        listOfPlayer.forEach(player->
+        {
+            player.getCharacter().spellOfBeginningOfRound(player,game);
+        });
+
         ArrayList<City> listOfCity = listOfPlayer.stream().
         										  map(p -> p.getCity()).
         										  collect(Collectors.toCollection(ArrayList::new));
@@ -93,11 +103,11 @@ public class Controller {
             }
         }
         printC.dropALine();
+        roundNumber++;
         return isLastRound;
     }
-    
     public Game getGame(){
     	return game;
     } 
-    
+
 }

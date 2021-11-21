@@ -11,15 +11,17 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final ArrayList<Player> listOfPlayer;
+    private ArrayList<Player> listOfPlayer;
     private DeckCharacter deckCharacter;
     private DeckDistrict deckDistrict;
+    private ArrayList<Player> listOfPlayerOfNextRound;
 
 
     public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
         this.listOfPlayer = listOfPlayer;
         this.deckCharacter = deckCharacter;
         this.deckDistrict = deckDistrict;
+        this.listOfPlayerOfNextRound= new ArrayList<>();
     }
 
     public void calculateScoreOfPlayer(Player player) {
@@ -35,8 +37,18 @@ public class Game {
         Collections.reverse(listOfPlayer);
         for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
     }
-    
+
+    public ArrayList<Player> getListOfPlayerOfNextRound() {
+        return listOfPlayerOfNextRound;
+    }
+
     public ArrayList<Player> getListOfPlayer(){
     	return listOfPlayer;
+    }
+
+    public void updateListOfPlayer() {
+        if (listOfPlayerOfNextRound.size()!=0)
+        {listOfPlayer.clear();
+        listOfPlayer.addAll(listOfPlayerOfNextRound);}
     }
 }

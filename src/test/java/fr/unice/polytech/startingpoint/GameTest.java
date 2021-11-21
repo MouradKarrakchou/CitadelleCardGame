@@ -1,5 +1,6 @@
-package fr.unice.polytech.startingpoint;
+/**package fr.unice.polytech.startingpoint;
 
+import fr.unice.polytech.startingpoint.characters_class.Character;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -129,3 +130,4 @@ public class GameTest {
     }
 
 }
+*/

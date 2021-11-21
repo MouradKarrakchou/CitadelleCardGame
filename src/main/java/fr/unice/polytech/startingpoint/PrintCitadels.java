@@ -1,7 +1,8 @@
 package fr.unice.polytech.startingpoint;
 
+import fr.unice.polytech.startingpoint.characters_class.Character;
+
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class PrintCitadels {
     public PrintCitadels() {
@@ -34,7 +35,9 @@ public class PrintCitadels {
     public void printLayer() {
         System.out.println("======================");
     }
-
+    public void printKingSpell(Player player){
+        System.out.println("The robot "+player.getName()+" has the king, he will play first next round.");
+    }
 
     /*
     public void winByCharacter(Player winner){
@@ -43,10 +46,30 @@ public class PrintCitadels {
     }*/
 
     public void printTakeGold(Player player){
+        System.out.println();
         System.out.println(player.getName() + " takes two golds.");
     }
 
     public void printTakeDistrictCard(Player player){
+        System.out.println();
         System.out.println(player.getName() + " takes a district card.");
+    }
+
+    public void printBuildDistrict(Player player, District district) {
+        System.out.println(player.getName()+" builds "+district);
+    }
+    public void printBoard(Game game){
+        System.out.println("City of all the Players:");
+        game.getListOfPlayer().forEach(player -> {
+            System.out.println("-City of "+player.getName()+": "+player.getCity());});
+        System.out.println("");
+    }
+    public void printBoardOfPlayer(Player player){
+        System.out.println("City of "+player.getName()+": "+player.getCity());
+        System.out.println("");
+    }
+
+    public void printNumberRound(int roundNumber) {
+        System.out.println("Round number "+roundNumber+".");
     }
 }

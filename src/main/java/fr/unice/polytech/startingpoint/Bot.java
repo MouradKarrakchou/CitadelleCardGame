@@ -13,8 +13,11 @@ public class Bot {
 
 	public boolean play() {
 		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
+		player.getCharacter().printOfBeginningOfTurn(player,printC);
 		if (!districtWeCanBuild.isEmpty())
-			player.buildDistrict(districtWeCanBuild.get(0));
+			{player.buildDistrict(districtWeCanBuild.get(0));
+			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
+			printC.printBoardOfPlayer(player);}
 		return (player.getCity().isComplete());
 	}
 
