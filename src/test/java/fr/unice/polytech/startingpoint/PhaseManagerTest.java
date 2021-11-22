@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import fr.unice.polytech.citadelle.game.City;
+import fr.unice.polytech.citadelle.game_engine.PhaseManager;
+
 public class PhaseManagerTest {
 	private ArrayList<City> listCity;
 	private PhaseManager phaseMananager;

@@ -1,6 +1,4 @@
-package fr.unice.polytech.startingpoint;
-
-import fr.unice.polytech.startingpoint.characters_class.Character;
+package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

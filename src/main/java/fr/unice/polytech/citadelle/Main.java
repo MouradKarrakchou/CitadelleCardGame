@@ -1,4 +1,6 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.citadelle;
+
+import fr.unice.polytech.citadelle.game_engine.Controller;
 
 public class Main {
 

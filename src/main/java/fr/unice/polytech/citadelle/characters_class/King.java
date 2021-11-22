@@ -1,10 +1,11 @@
-package fr.unice.polytech.startingpoint.characters_class;
-
-import fr.unice.polytech.startingpoint.Game;
-import fr.unice.polytech.startingpoint.Player;
-import fr.unice.polytech.startingpoint.PrintCitadels;
+package fr.unice.polytech.citadelle.characters_class;
 
 import java.util.ArrayList;
+
+import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class King extends Character {
     public King(){

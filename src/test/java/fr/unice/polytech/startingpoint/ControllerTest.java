@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.unice.polytech.citadelle.bot.Bot;
+import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_engine.Controller;
+
 public class ControllerTest {
 	Controller controller;
 	ArrayList<Player> listOfPlayerMocket;

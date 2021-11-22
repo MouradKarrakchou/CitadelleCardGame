@@ -1,7 +1,8 @@
-package fr.unice.polytech.startingpoint.characters_class;
+package fr.unice.polytech.citadelle.characters_class;
 
-import fr.unice.polytech.startingpoint.Game;
-import fr.unice.polytech.startingpoint.Player;
+import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Player;
 
 public class Assassin extends Character{
 	Player target;

@@ -1,8 +1,11 @@
-package fr.unice.polytech.startingpoint;
-
-import fr.unice.polytech.startingpoint.characters_class.Character;
+package fr.unice.polytech.citadelle.output;
 
 import java.util.ArrayList;
+
+import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Player;
 
 public class PrintCitadels {
     public PrintCitadels() {

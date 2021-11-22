@@ -1,4 +1,4 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
 import java.util.Collection;

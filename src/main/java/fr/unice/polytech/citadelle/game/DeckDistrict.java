@@ -1,4 +1,4 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,7 +61,7 @@ public class DeckDistrict {
         return deckDistrict.size();
     }
 
-    District chooseDistrict() {
+    public District chooseDistrict() {
         // Select a random district from the deck
         Random random = new Random();
         int randomValue = random.nextInt(deckDistrict.size());

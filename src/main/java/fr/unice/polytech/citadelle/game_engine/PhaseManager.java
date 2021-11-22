@@ -1,6 +1,8 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.citadelle.game_engine;
 
 import java.util.ArrayList;
+
+import fr.unice.polytech.citadelle.game.City;
 
 public class PhaseManager {
 	public final static String MID_GAME_PHASE = "MID_GAME_PHASE";

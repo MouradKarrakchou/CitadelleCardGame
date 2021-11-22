@@ -3,6 +3,9 @@ package fr.unice.polytech.startingpoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.unice.polytech.citadelle.game.DeckDistrict;
+import fr.unice.polytech.citadelle.game.District;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;

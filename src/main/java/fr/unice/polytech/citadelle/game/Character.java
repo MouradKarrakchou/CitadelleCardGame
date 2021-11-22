@@ -1,10 +1,8 @@
-package fr.unice.polytech.startingpoint.characters_class;
+package fr.unice.polytech.citadelle.game;
 
 import java.util.Objects;
 
-import fr.unice.polytech.startingpoint.Game;
-import fr.unice.polytech.startingpoint.Player;
-import fr.unice.polytech.startingpoint.PrintCitadels;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public abstract class Character {
     String name;

@@ -1,6 +1,12 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.citadelle.bot;
 
 import java.util.ArrayList;
+
+import fr.unice.polytech.citadelle.game.DeckDistrict;
+import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_engine.PhaseManager;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class Bot {
 	// The player controlled by the bot.

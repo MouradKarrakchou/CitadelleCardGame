@@ -1,4 +1,4 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.citadelle.game;
 
 public class District {
     private final String name;
