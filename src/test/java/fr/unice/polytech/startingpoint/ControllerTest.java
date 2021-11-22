@@ -30,7 +30,7 @@ public class ControllerTest {
 	 * là Contexte: Aucun joueur ne complète sa ville, renvoie Optional.empty()
 	 */
 
-	@Test
+	/*@Test
 	public void startRoundPart2FirstWinnerTest() {
 		boolean expected = true;
 		boolean cityComplete = false;
@@ -118,5 +118,5 @@ public class ControllerTest {
 		assertEquals(result, expected);
 
 	}
-
+*/
 }

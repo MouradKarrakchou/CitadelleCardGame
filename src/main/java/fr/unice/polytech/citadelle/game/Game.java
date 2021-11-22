@@ -10,6 +10,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * A Game represent a instance of the game Citadelle with all the cards and players that go with.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Game {
     private ArrayList<Player> listOfPlayer;
     private DeckCharacter deckCharacter;

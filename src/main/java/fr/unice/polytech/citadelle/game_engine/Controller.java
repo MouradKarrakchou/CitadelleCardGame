@@ -11,6 +11,12 @@ import fr.unice.polytech.citadelle.game.Game;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+
+/**
+ * The controller coordinates all classes in the project
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ *
+ */
 public class Controller {
 
 	private PrintCitadels printC;

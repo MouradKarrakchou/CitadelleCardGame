@@ -8,6 +8,10 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+/**
+ * A Bot realize all the action of a player.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Bot {
 	// The player controlled by the bot.
 	private final Player player;

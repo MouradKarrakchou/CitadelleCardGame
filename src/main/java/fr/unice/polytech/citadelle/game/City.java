@@ -2,6 +2,10 @@ package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
 
+/**
+ *A city is composed of all the districts that the player has chosen to build.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class City {
     private ArrayList<District> builtDistrict;
     private final int cityComplete = 8;

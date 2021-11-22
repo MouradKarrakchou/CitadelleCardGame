@@ -3,6 +3,10 @@ package fr.unice.polytech.citadelle.game;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * A Player represent a person in the citadelle, with his name, city and gold.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Player implements Comparable<Player> {
 	private final String name;
 	private Character character;

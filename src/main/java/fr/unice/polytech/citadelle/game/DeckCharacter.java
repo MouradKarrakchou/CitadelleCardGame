@@ -5,6 +5,10 @@ import java.util.Random;
 
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 
+/**
+ * A DeckCharacter is composed of all the character cards in the game.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class DeckCharacter {
     private final ArrayList<Character> deckCharacter;
 

@@ -1,5 +1,9 @@
 package fr.unice.polytech.citadelle.game;
 
+/**
+ * A District is a card that represent a plan for building a district.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class District {
     private final String name;
     private final int value;

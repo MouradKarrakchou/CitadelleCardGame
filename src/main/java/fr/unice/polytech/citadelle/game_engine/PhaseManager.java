@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import fr.unice.polytech.citadelle.game.City;
 
+/**
+ * The PhaseManager analyze the Game to deduct a particular phase
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class PhaseManager {
 	public final static String MID_GAME_PHASE = "MID_GAME_PHASE";
 	public final static String END_GAME_PHASE = "END_GAME_PHASE";

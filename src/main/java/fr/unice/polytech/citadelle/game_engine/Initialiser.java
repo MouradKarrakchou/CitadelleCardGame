@@ -16,6 +16,10 @@ import fr.unice.polytech.citadelle.characters_class.Warlord;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
 
+/**
+ * The Initialiser initialize all objects needed for a game
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Initialiser {
 	
 	//créer un enum
