@@ -30,8 +30,8 @@ public class RoundManager {
 	String currentPhase;
 	Bot lastKing;
 
-	private static final int BONUS_FIRST = 4;
-	private static final int BONUS_END = 2;
+	public static final int BONUS_FIRST = 4;
+	public static final int BONUS_END = 2;
 	int roundNumber = 0;
 
 	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,

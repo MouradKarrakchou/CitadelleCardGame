@@ -43,7 +43,8 @@ public class Initialiser {
 		initListOfBot(listOfBot, listOfPlayer);
 	}
 	
-	public void initHashOfCharacter(LinkedHashMap<Character, Bot> hashOfCharacters, ArrayList<Character> listOfAllCharacters) {
+	public void initHashOfCharacter(LinkedHashMap<Character, Bot> hashOfCharacters,
+			ArrayList<Character> listOfAllCharacters) {
 		Bot fillBot = new Bot(new Player("fillPlayer"));
 
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), fillBot);

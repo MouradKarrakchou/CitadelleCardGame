@@ -1,3 +1,4 @@
+package fr.unice.polytech.citadelle;
 /**package fr.unice.polytech.startingpoint;
 
 import fr.unice.polytech.startingpoint.characters_class.Character;

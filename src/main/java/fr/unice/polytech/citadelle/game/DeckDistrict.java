@@ -73,7 +73,7 @@ public class DeckDistrict {
         return deckDistrict.remove(randomValue);
     }
 
-    ArrayList<District> getDeckDistrict(){ return deckDistrict; }
+    public ArrayList<District> getDeckDistrict(){ return deckDistrict; }
 
     public void addDistrict(District district){
         deckDistrict.add(district);

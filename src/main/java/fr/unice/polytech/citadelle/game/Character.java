@@ -8,7 +8,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  *A character is a class that gives the player special abilities.
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
-public abstract class Character {
+public class Character {
     String name;
     int value;
     Player player;
