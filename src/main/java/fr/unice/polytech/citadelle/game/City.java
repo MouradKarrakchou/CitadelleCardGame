@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class City {
-    private ArrayList<District> builtDistrict;
+    public ArrayList<District> builtDistrict;
     private final int cityComplete = 8;
 
     public City() {
@@ -32,19 +32,6 @@ public class City {
         return builtDistrict;
     }
 
-    public boolean hasDistrict(District district) {
-        for (District cityDistrict : builtDistrict) {
-            if (cityDistrict.equals(district)) return true;
-        }
-        return false;
-    }
-
-    public boolean hasDistrictValue(District district) {
-        for (District cityDistrict : builtDistrict) {
-            if (cityDistrict.getValue() == district.getValue()) return true;
-        }
-        return false;
-    }
     @Override
     public String toString(){
         if (builtDistrict.size()==0) return("is empty.");

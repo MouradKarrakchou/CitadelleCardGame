@@ -57,9 +57,9 @@ public class Bot {
 		// Fonction modifié après les tests unitaire du 23.11.2021, il fautrai trouver une facon plus jolie de l'ecrire
 		District districtOne = pickedDistricts.get(0);
 		District districtTwo = pickedDistricts.get(1);
-		if (player.cityHasDistrict(districtOne) || player.hasDistrict(districtOne))
+		if (player.isAlreadyBuilt(districtOne.getName()) || player.hasDistrict(districtOne))
 			putCardBackInDeck(deckDistrict, pickedDistricts, districtOne);
-		if (player.cityHasDistrict(districtTwo) || player.hasDistrict(districtTwo))
+		if (player.isAlreadyBuilt(districtTwo.getName()) || player.hasDistrict(districtTwo))
 			putCardBackInDeck(deckDistrict, pickedDistricts, districtTwo);
 
 		switch (pickedDistricts.size()) {

@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class Player implements Comparable<Player> {
 	private final String name;
 	private Character character;
-	private ArrayList<District> districtCards;
+	public ArrayList<District> districtCards;
 	private City city;
 	private int score;
 	private int rank;
-	private int golds;
+	public int golds;
 
 	public Player(String name) {
 		this.city = new City();
@@ -57,14 +57,12 @@ public class Player implements Comparable<Player> {
 
 	}
 	
-	private ArrayList<District> districtWeHaveEnoughMoneyToBuild() {
+	public ArrayList<District> districtWeHaveEnoughMoneyToBuild() {
 		return districtCards.stream().filter(district -> district.getValue() <= getGolds())
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	//Laquelle on garde et pourquoi ?
-	//------------------------------------------------------------
-	private boolean isAlreadyBuilt(String nameOfDistrict) {
+	public boolean isAlreadyBuilt(String nameOfDistrict) {
 		ArrayList<District> districtIsBuilt;
 		districtIsBuilt = city.getBuiltDistrict().stream()
 				.filter(builtDistrict -> builtDistrict.getName().equals(nameOfDistrict))
@@ -74,11 +72,16 @@ public class Player implements Comparable<Player> {
 
 		return true;
 	}
-	
-	public boolean cityHasDistrict(District district) {
-		return city.hasDistrict(district);
-	}
-	//------------------------------------------------------------
+
+	/*
+		ArrayList<District> districtIsBuilt;
+		districtIsBuilt = city.getBuiltDistrict();
+		for ( District district : districtIsBuilt) {
+			if (district.getName().equals(nameOfDistrict)) return true;
+		}
+
+		return false;
+	 */
 
 	public boolean hasDistrict(District district) {
 		for (District districtCard : districtCards) {
