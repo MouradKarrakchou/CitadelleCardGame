@@ -26,6 +26,7 @@ public class Controller {
 	
 	private ArrayList<Player> listOfPlayer;
 	private ArrayList<Character> listOfAllCharacters;
+	private ArrayList<Character> listOfCharactersInGame;
 	private LinkedHashMap<Character, Bot> hashOfCharacters;
 	private ArrayList<Bot> listOfBot;
 
@@ -37,22 +38,23 @@ public class Controller {
 	public Controller() {
 		listOfPlayer = new ArrayList<>();
 		listOfAllCharacters = new ArrayList<>();
+		listOfCharactersInGame=new ArrayList<>();
 		listOfBot = new ArrayList<>();
 		hashOfCharacters = new LinkedHashMap<>();
 		deckCharacter = new DeckCharacter();
 		deckDistrict = new DeckDistrict();
 
-		game = new Game(listOfPlayer, deckCharacter, deckDistrict);
+		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfCharactersInGame, deckCharacter, deckDistrict);
 		printC = new PrintCitadels();
 		initialiser = new Initialiser();
 		phaseManager = new PhaseManager();
-		roundManager = new RoundManager(listOfPlayer, listOfBot, listOfAllCharacters, hashOfCharacters, printC, game);
+		roundManager = new RoundManager(listOfPlayer, listOfBot, listOfAllCharacters, listOfCharactersInGame,hashOfCharacters, printC, game);
 
 	}
 
 	public void initGame() {
 		initialiser.initAll(hashOfCharacters, listOfAllCharacters, listOfBot, listOfPlayer);
-		game = new Game(listOfPlayer, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
+		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfCharactersInGame, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
 	}
 
 	public void runGame() {

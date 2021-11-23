@@ -75,4 +75,12 @@ public class PrintCitadels {
     public void printNumberRound(int roundNumber) {
         System.out.println("Round number "+roundNumber+".");
     }
+
+    public void botIsDead(Player player) {
+        System.out.println(player.getName()+" was the "+player.getCharacter()+". He has been killed he will not play this turn");
+    }
+
+    public void killCharacter(Character characterToDie) {
+        System.out.println("The Assassin chooses to kill "+characterToDie);
+    }
 }

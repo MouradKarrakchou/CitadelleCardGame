@@ -1,14 +1,10 @@
 package fr.unice.polytech.citadelle.game;
 
+import fr.unice.polytech.citadelle.bot.Bot;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * A Game represent a instance of the game Citadelle with all the cards and players that go with.
@@ -19,8 +15,23 @@ public class Game {
     private DeckCharacter deckCharacter;
     private DeckDistrict deckDistrict;
     private ArrayList<Player> listOfPlayerOfNextRound;
+    private ArrayList<Bot> listOfBot;
+    private ArrayList<Bot> listOfBotOfNextRound;
+    private ArrayList<Character> listOfCharactersInGame;
+    private LinkedHashMap<Character, Bot> hashOfCharacters;
 
 
+    public Game(LinkedHashMap<Character, Bot> hashOfCharacters,ArrayList<Player> listOfPlayer,ArrayList<Bot> listOfBot,ArrayList<Character> listOfAllCharactersInGame, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
+        this.listOfPlayer = listOfPlayer;
+        this.listOfBot = listOfBot;
+        this.deckCharacter = deckCharacter;
+        this.deckDistrict = deckDistrict;
+        this.listOfBotOfNextRound= new ArrayList<>();
+        this.listOfCharactersInGame=listOfAllCharactersInGame;
+        this.hashOfCharacters=hashOfCharacters;
+    }
+
+    //Ancien
     public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
         this.listOfPlayer = listOfPlayer;
         this.deckCharacter = deckCharacter;
@@ -42,17 +53,28 @@ public class Game {
         for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
     }
 
-    public ArrayList<Player> getListOfPlayerOfNextRound() {
-        return listOfPlayerOfNextRound;
+    public ArrayList<Bot> getListOfBotOfNextRound() {
+        return listOfBotOfNextRound;
     }
 
     public ArrayList<Player> getListOfPlayer(){
-    	return listOfPlayer;
+        return listOfPlayer;
     }
 
-    public void updateListOfPlayer() {
-        if (listOfPlayerOfNextRound.size()!=0)
-        {listOfPlayer.clear();
-        listOfPlayer.addAll(listOfPlayerOfNextRound);}
+    public ArrayList<Bot> getListOfBot() {
+        return listOfBot;
     }
-}
+
+    public void updateListOfBot() {
+        if (listOfBotOfNextRound.size()!=0)
+        {listOfBot.clear();
+            listOfBot.addAll(listOfBotOfNextRound);}
+    }
+
+    public ArrayList<Character> getListOfCharactersInGame() {
+        return listOfCharactersInGame;
+    }
+
+    public LinkedHashMap<Character, Bot> getHashOfCharacters() {
+        return hashOfCharacters;
+    }}

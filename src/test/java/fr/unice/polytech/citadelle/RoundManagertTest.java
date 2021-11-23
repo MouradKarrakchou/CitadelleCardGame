@@ -108,7 +108,6 @@ public class RoundManagertTest {
 		ArrayList<Player> aListOfPlayerSpy = spy(aListOfPlayer);
 		
 		roundMan = new RoundManager(aListOfPlayerSpy, listOfBot, listOfAllCharacters, hashOfCharacters, printer, game);
-		roundMan.spellOfCharacters();
 		
 		verify(p1, times(1)).getCharacter();
 		verify(p2, times(1)).getCharacter();

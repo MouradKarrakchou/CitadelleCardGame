@@ -23,6 +23,7 @@ public class RoundManager {
 	ArrayList<Player> listOfPlayer;
 	ArrayList<Bot> listOfBot;
 	ArrayList<Character> listOfAllCharacters;
+	ArrayList<Character> listOfCharactersInGame;
 	LinkedHashMap<Character, Bot> hashOfCharacters;
 	PrintCitadels printC;
 	Game game;
@@ -33,10 +34,10 @@ public class RoundManager {
 	public static final int BONUS_FIRST = 4;
 	public static final int BONUS_END = 2;
 	int roundNumber = 0;
-
+	//Ancien
 	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
-			ArrayList<Character> listOfAllCharacters, LinkedHashMap<Character, Bot> hashOfCharacters,
-			PrintCitadels printC, Game game) {
+						ArrayList<Character> listOfAllCharacters, LinkedHashMap<Character, Bot> hashOfCharacters,
+						PrintCitadels printC, Game game) {
 		this.listOfPlayer = listOfPlayer;
 		this.listOfBot = listOfBot;
 		this.listOfAllCharacters = listOfAllCharacters;
@@ -45,12 +46,26 @@ public class RoundManager {
 		this.game = game;
 	}
 
+	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
+			ArrayList<Character> listOfAllCharacters,ArrayList<Character> listOfCharactersInGame,LinkedHashMap<Character, Bot> hashOfCharacters,
+			PrintCitadels printC, Game game) {
+		this.listOfPlayer = listOfPlayer;
+		this.listOfBot = listOfBot;
+		this.listOfAllCharacters = listOfAllCharacters;
+		this.hashOfCharacters = hashOfCharacters;
+		this.printC = printC;
+		this.game = game;
+		this.listOfCharactersInGame=listOfCharactersInGame;
+	}
+
 	public void runRounds(PhaseManager phaseManager, DeckCharacter deckCharacter, Initialiser initialiser,
 			DeckDistrict deckDistrict) {
 		while ((currentPhase = phaseManager
 				.analyseGame(getTheListOfCity(listOfPlayer))) != PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(roundNumber);
+			game.updateListOfBot();
+			listOfCharactersInGame.clear();
 
 			setupCharacters(deckCharacter, initialiser);
 			askEachCharacterToPlay(phaseManager, deckDistrict, initialiser);
@@ -66,27 +81,15 @@ public class RoundManager {
 
 	private void setupCharacters(DeckCharacter deckCharacter, Initialiser initialiser) {
 		deckCharacter.initialise(listOfAllCharacters);
-		if (lastKing != null) {
-			chooseACharacterCard(lastKing, initialiser, deckCharacter);
-			listOfBot.forEach(bot -> {
-				if (bot != lastKing)
-					chooseACharacterCard(bot, initialiser, deckCharacter);
-			});
-		} else {
-			listOfBot.forEach(bot -> {
-				chooseACharacterCard(bot, initialiser, deckCharacter);
-			});
-		}
-
+		listOfBot.forEach(bot -> chooseACharacterCard(bot, initialiser, deckCharacter));
 		printC.dropALine();
 	}
 
 	private void chooseACharacterCard(Bot bot, Initialiser initialiser, DeckCharacter deckCharacter) {
 		Player playerOfBot = bot.getPlayer();
 		playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
+		listOfCharactersInGame.add(playerOfBot.getCharacter());
 		initialiser.fillHashOfCharacter(hashOfCharacters, playerOfBot.getCharacter(), bot);
-		if (playerOfBot.getCharacter() == listOfAllCharacters.get(Initialiser.KING_INDEX))
-			lastKing = bot;
 		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}
 
@@ -106,21 +109,15 @@ public class RoundManager {
 		initialiser.initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 	}
 
-	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity,
-			DeckDistrict deckDistrict) {
-		character.spellOfBeginningOfRound(bot.getPlayer(), game);
-		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase);
+	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict)
+	{
+		character.spellOfTurn(bot, game,printC);
+		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,game);
 		if (aBotCompleteHisCity) {
 			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
 			currentPhase = PhaseManager.LAST_TURN_PHASE;
 		}
 		return aBotCompleteHisCity;
-	}
-
-	public void spellOfCharacters() {
-		listOfPlayer.forEach(player -> {
-			player.getCharacter().spellOfBeginningOfRound(player, game);
-		});
 	}
 
 	public boolean addBonusForPlayers(Player player, boolean isLastRound) {

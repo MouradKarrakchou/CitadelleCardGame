@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle.game;
 
 import java.util.Objects;
 
+import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
@@ -34,15 +35,18 @@ public class Character {
         this.player = player;
     }
 
-    
-	@Override
-	public boolean equals(Object obj) {
-		Character other = (Character) obj;
-		if(name.equals(other.getName())) return true;
-		return  false;
-	}
 
-	public void spellOfBeginningOfRound(Player player, Game game){}
+    public void spellOfTurn(Bot bot, Game game, PrintCitadels printC){}
 
-    public void printOfBeginningOfTurn(Player player, PrintCitadels printC){}
+    @Override
+    public boolean equals(Object obj) {
+        Character other = (Character) obj;
+        if(name.equals(other.getName())) return true;
+        return  false;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

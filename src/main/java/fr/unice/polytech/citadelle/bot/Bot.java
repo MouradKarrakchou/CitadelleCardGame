@@ -1,12 +1,15 @@
 package fr.unice.polytech.citadelle.bot;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Game;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
+import fr.unice.polytech.citadelle.game.Character;
 
 /**
  * A Bot realize all the action of a player.
@@ -16,6 +19,8 @@ public class Bot {
 	// The player controlled by the bot.
 	private final Player player;
 	private final PrintCitadels printC = new PrintCitadels();
+	private Boolean botIsAlive=true;
+	int numberOfCharacter=4;
 
 	public Bot(Player player) {
 		this.player = player;
@@ -80,19 +85,26 @@ public class Bot {
 		}
 	}
 
-	
-	
-	public boolean play(DeckDistrict deckDistrict, String currentPhase) {		
-		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-			endGameBehaviour(deckDistrict);
-		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-			lastTurnBehaviour(deckDistrict);
-		else
-			normalBehaviour(deckDistrict);
-		
-		ifPossibleBuildADistrict();
-		return (player.getCity().isComplete());
 
+
+	public boolean play(DeckDistrict deckDistrict, String currentPhase, Game game) {
+		printC.dropALine();
+		if (botIsAlive){
+			this.getPlayer().getCharacter().spellOfTurn(this,game,printC);
+			if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
+				endGameBehaviour(deckDistrict);
+			if (currentPhase == PhaseManager.LAST_TURN_PHASE)
+				lastTurnBehaviour(deckDistrict);
+			else
+				normalBehaviour(deckDistrict);
+
+			ifPossibleBuildADistrict();
+			return (player.getCity().isComplete());}
+		else{
+			printC.botIsDead(player);
+			botIsAlive=true;
+			return(false);
+		}
 	}
 
 	private void normalBehaviour(DeckDistrict deckDistrict) {
@@ -108,15 +120,14 @@ public class Bot {
 		System.out.println("***"+player.getName() + " is in EndGame mode***");
 		takeCard(deckDistrict);
 	}
-	
+
 	private void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		System.out.println("***"+player.getName() + " is in LAST TURN mode***");
 		takeCard(deckDistrict);
 	}
-	
+
 	public void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
-		player.getCharacter().printOfBeginningOfTurn(player,printC); //wtf is that
 		if (!districtWeCanBuild.isEmpty())
 			{player.buildDistrict(districtWeCanBuild.get(0));
 			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
@@ -139,7 +150,7 @@ public class Bot {
 			player.addGold();
 		}
 	}
-	
+
 	private void putCardBackInDeck(ArrayList<District> pickedDistricts, District districtCard) {
 		player.addDistrict(districtCard);
 		pickedDistricts.remove(districtCard);
@@ -148,30 +159,18 @@ public class Bot {
 	public Player getPlayer() {
 		return player;
 	}
-	
-	
-	//------
-	public void botStartRoundPart2(DeckDistrict deckDistrict, String currentPhase){
-		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-			endGameBehaviour(deckDistrict);
-		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-			lastTurnBehaviour(deckDistrict);
-		else
-			normalBehaviour(deckDistrict);
-		
+
+	public Character selectCharacterForAssassin(ArrayList<Character> listOfCharactersInGame){
+		Random random=new Random();
+		Character character=listOfCharactersInGame.get(random.nextInt(numberOfCharacter-1));
+		while (character.getName().equals("Assassin"))
+		character=listOfCharactersInGame.get(random.nextInt(numberOfCharacter-1));
+		return (character);
 	}
-	
-	public boolean play() {
-		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
-		player.getCharacter().printOfBeginningOfTurn(player,printC); //wtf is that
-		if (!districtWeCanBuild.isEmpty()){
-			player.buildDistrict(districtWeCanBuild.get(0));
-			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
-			printC.printBoardOfPlayer(player);
-			}
-		return (player.getCity().isComplete());
+
+	public void setBotIsAlive(Boolean botIsAlive) {
+		this.botIsAlive = botIsAlive;
 	}
-	//------
-	
-	
+
+
 }

@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle.characters_class;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Game;
 import fr.unice.polytech.citadelle.game.Player;
@@ -11,25 +12,24 @@ public class King extends Character {
     public King(){
         super("King", 4 );
     }
-    private void orderListOfPlayer(ArrayList<Player> listOfPlayer,ArrayList<Player> listOfPlayerNextRound,int positionOfKingHolder){
+    private void orderListOfPlayer(ArrayList<Bot> listOfBot,ArrayList<Bot> listOfBotNextRound,int positionOfKingHolder){
         int positionToChange=positionOfKingHolder;
-        int sizeListOfPlayer=listOfPlayer.size();
-        listOfPlayerNextRound.clear();
+        int sizeListOfPlayer=listOfBot.size();
+        listOfBotNextRound.clear();
         for (int i=0;i<sizeListOfPlayer;i++){
             if (positionToChange>=sizeListOfPlayer) positionToChange=0;
-            listOfPlayerNextRound.add(listOfPlayer.get(positionToChange));
+            listOfBotNextRound.add(listOfBot.get(positionToChange));
             positionToChange++;
         }
     }
+
     @Override
-    public void spellOfBeginningOfRound(Player robot, Game game){
-        ArrayList<Player> listOfPlayer=game.getListOfPlayer();
-        for (int i=0;i<listOfPlayer.size();i++){
-            if (robot.equals(listOfPlayer.get(i)))
-                orderListOfPlayer(listOfPlayer, game.getListOfPlayerOfNextRound(),i);
+    public void spellOfTurn(Bot bot, Game game, PrintCitadels printC){
+        ArrayList<Bot> listOfBot=game.getListOfBot();
+        for (int i=0;i<listOfBot.size();i++){
+            if (bot.equals(listOfBot.get(i)))
+                orderListOfPlayer(listOfBot, game.getListOfBotOfNextRound(),i);
         }
-    }
-    public void printOfBeginningOfTurn(Player player, PrintCitadels printC){
-        printC.printKingSpell(player);
+        printC.printKingSpell(bot.getPlayer());
     }
 }
