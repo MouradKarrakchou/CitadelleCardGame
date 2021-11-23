@@ -54,34 +54,34 @@ public class Bot {
 	public boolean districtCardIsSelected(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
 
 		// Player will not pick cards it already have on its city or its hand.
-		for (int i = 0; i < pickedDistricts.size(); i++) {
-			District currentDistrictCard = pickedDistricts.get(i);
-			if (player.cityHasDistrict(currentDistrictCard) || player.hasDistrict(currentDistrictCard)) {
-				putCardBackInDeck(pickedDistricts, currentDistrictCard);
-				;
-			}
-		}
+		// Fonction modifié après les tests unitaire du 23.11.2021, il fautrai trouver une facon plus jolie de l'ecrire
+		District districtOne = pickedDistricts.get(0);
+		District districtTwo = pickedDistricts.get(1);
+		if (player.cityHasDistrict(districtOne) || player.hasDistrict(districtOne))
+			putCardBackInDeck(deckDistrict, pickedDistricts, districtOne);
+		if (player.cityHasDistrict(districtTwo) || player.hasDistrict(districtTwo))
+			putCardBackInDeck(deckDistrict, pickedDistricts, districtTwo);
 
 		switch (pickedDistricts.size()) {
-		// One district card have been selected, player will take this card.
-		case 1 -> {
-			printC.printTakeDistrictCard(player);// pas d'accord, le controller demande au printer de print les infos du
-													// bot
-			player.addDistrict(pickedDistricts.get(0));
-			return true;
-		}
+			// One district card have been selected, player will take this card.
+			case 1 -> {
+				printC.printTakeDistrictCard(player);// pas d'accord, le controller demande au printer de print les infos du
+														// bot
+				player.addDistrict(pickedDistricts.get(0));
+				return true;
+			}
 
-		// Two district cards have been selected, player will take the higher one.
-		case 2 -> {
-			printC.printTakeDistrictCard(player);
-			District higherDistrict = selectTheHigherDistrict(deckDistrict, pickedDistricts);
-			player.addDistrict(higherDistrict);
-			return true;
-		}
+			// Two district cards have been selected, player will take the higher one.
+			case 2 -> {
+				printC.printTakeDistrictCard(player);
+				District higherDistrict = selectTheHigherDistrict(deckDistrict, pickedDistricts);
+				player.addDistrict(higherDistrict);
+				return true;
+			}
 
-		default -> {
-			return false;
-		}
+			default -> {
+				return false;
+			}
 		}
 	}
 
@@ -107,7 +107,7 @@ public class Bot {
 		}
 	}
 
-	private void normalBehaviour(DeckDistrict deckDistrict) {
+	public void normalBehaviour(DeckDistrict deckDistrict) {
 		if (player.getDistrictCardsSize() == 0 || player.districtWeCanBuild(player.getDistrictCards()).size() == 0)
 			takeCard(deckDistrict);
 		else {
@@ -135,7 +135,7 @@ public class Bot {
 	}
 
 
-	private void takeCard(DeckDistrict deckDistrict) {
+	public void takeCard(DeckDistrict deckDistrict) {
 		// Pick two district cards and add it to an ArrayList.
 		ArrayList<District> pickedDistricts = new ArrayList<District>();
 		pickedDistricts.add(deckDistrict.chooseDistrict());
@@ -151,9 +151,9 @@ public class Bot {
 		}
 	}
 
-	private void putCardBackInDeck(ArrayList<District> pickedDistricts, District districtCard) {
-		player.addDistrict(districtCard);
+	private void putCardBackInDeck(DeckDistrict deckDistrict, ArrayList <District> pickedDistricts, District districtCard) {
 		pickedDistricts.remove(districtCard);
+		deckDistrict.addDistrict(districtCard);
 	}
 
 	public Player getPlayer() {
