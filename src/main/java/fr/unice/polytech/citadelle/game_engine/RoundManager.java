@@ -111,7 +111,6 @@ public class RoundManager {
 
 	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict)
 	{
-		character.spellOfTurn(bot, game,printC);
 		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,game);
 		if (aBotCompleteHisCity) {
 			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
