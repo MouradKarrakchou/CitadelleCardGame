@@ -236,4 +236,47 @@ public class BotTest {
         assertEquals(1, player01.getDistrictCardsSize());
         assertEquals(4, player01.getGolds());
     }
+
+    /**
+     * Selected cards are different
+     * Player can place a card on in hand in the city
+     */
+    @Test
+    void normalBehaviourCanPlaceADistrict(){
+        District districtOfValue6 = new District("DistrictOfValue6", 6);
+        District districtOfValue2 = new District("DistrictOfValue2", 2);
+
+        DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
+        when(mockedDeckDistrict.chooseDistrict()).
+                thenReturn(districtOfValue6)
+                .thenReturn(districtOfValue2);
+
+        player01.addDistrict(districtOfValue6);
+
+        assertEquals(2, player01.getGolds());
+        verify(mockedDeckDistrict, times(0)).addDistrict(any());
+        botOfPlayer01.normalBehaviour(mockedDeckDistrict);
+        assertEquals(4, player01.getGolds());
+    }
+
+    /**
+     * Selected cards are different
+     * Player's hand is empty.
+     */
+    @Test
+    void normalBehaviourNoDistrictInHand(){
+        District districtOfValue6 = new District("DistrictOfValue6", 6);
+        District districtOfValue2 = new District("DistrictOfValue2", 2);
+
+        DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
+        when(mockedDeckDistrict.chooseDistrict()).
+                thenReturn(districtOfValue6)
+                .thenReturn(districtOfValue2);
+
+        assertEquals(2, player01.getGolds());
+        botOfPlayer01.normalBehaviour(mockedDeckDistrict);
+        verify(mockedDeckDistrict, times(2)).chooseDistrict();
+        verify(mockedDeckDistrict, times(1)).addDistrict(any());
+        assertEquals(2, player01.getGolds());
+    }
 }
