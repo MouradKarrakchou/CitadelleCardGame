@@ -53,7 +53,7 @@ public class RoundManager {
 			printC.printNumberRound(roundNumber);
 
 			setupCharacters(deckCharacter, initialiser);
-			askEachCharacterToPlay(phaseManager, deckDistrict);
+			askEachCharacterToPlay(phaseManager, deckDistrict, initialiser);
 
 			printC.printBoard(game);
 			printC.printLayer();
@@ -90,7 +90,7 @@ public class RoundManager {
 		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}
 
-	private void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict) {
+	private void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
 		boolean aBotCompleteHisCity = false;
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
 		currentPhase = phaseManager.analyseGame(listOfCity);
@@ -103,6 +103,7 @@ public class RoundManager {
 			}
 		}
 		roundNumber++;
+		initialiser.initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 	}
 
 	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity,
