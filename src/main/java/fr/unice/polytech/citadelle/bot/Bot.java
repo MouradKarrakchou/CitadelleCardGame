@@ -172,5 +172,7 @@ public class Bot {
 		this.botIsAlive = botIsAlive;
 	}
 
-
+	public Boolean getBotIsAlive() {
+		return botIsAlive;
+	}
 }
