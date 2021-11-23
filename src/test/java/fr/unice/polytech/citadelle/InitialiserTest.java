@@ -63,7 +63,7 @@ public class InitialiserTest {
 	@Test
 	public void initListOfBotTest() {
 		ArrayList<Bot> listOfBotSpy = spy(listOfBot);
-		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer);
+		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer); 
 		
 		init.initListOfBot(listOfBotSpy, listOfPlayerSpy);
 		verify(listOfBotSpy, times(Initialiser.NUMBER_OF_PLAYER)).add(Mockito.any(Bot.class));
