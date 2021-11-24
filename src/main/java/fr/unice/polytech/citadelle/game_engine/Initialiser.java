@@ -3,6 +3,7 @@ package fr.unice.polytech.citadelle.game_engine;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.characters_class.Architect;
@@ -37,24 +38,23 @@ public class Initialiser {
 	public Initialiser() {}
 
 	
-	public void initAll(LinkedHashMap<Character, Bot> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Bot> listOfBot, ArrayList<Player> listOfPlayer){
+	public void initAll(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Bot> listOfBot, ArrayList<Player> listOfPlayer){
 		initListOfAllCharacter(listOfAllCharacters);
 		initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 		initListOfBot(listOfBot, listOfPlayer);
 	}
 	
-	public void initHashOfCharacter(LinkedHashMap<Character, Bot> hashOfCharacters,
+	public void initHashOfCharacter(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters,
 			ArrayList<Character> listOfAllCharacters) {
-		Bot fillBot = new Bot(new Player("fillPlayer"));
 
-		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(KING_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(BISHOP_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(MERCHANT_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(ARCHITECT_INDEX), fillBot);
-		hashOfCharacters.put(listOfAllCharacters.get(WARLORD_INDEX), fillBot);
+		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(KING_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(BISHOP_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(MERCHANT_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(ARCHITECT_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(WARLORD_INDEX), Optional.empty());
 	}
 	
 	public void initListOfAllCharacter(ArrayList<Character> listOfAllCharacters) {
@@ -85,7 +85,7 @@ public class Initialiser {
 		}
 	}
 	
-	public void fillHashOfCharacter(HashMap<Character, Bot> hashOfCharacters, Character character, Bot bot) {
-		hashOfCharacters.put(character, bot);
+	public void fillHashOfCharacter(HashMap<Character, Optional<Bot>> hashOfCharacters, Character character, Bot bot) {
+		hashOfCharacters.put(character, Optional.of(bot));
 	}
 }

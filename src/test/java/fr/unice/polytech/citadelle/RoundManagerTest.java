@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import fr.unice.polytech.citadelle.characters_class.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +33,7 @@ public class RoundManagerTest {
 	DeckCharacter deckChar;
 	DeckDistrict deckDistrict;
 	ArrayList<Player> listOfPlayerSpy;
-	LinkedHashMap<Character, Bot> hashOfCharacters ;
+	LinkedHashMap<Character, Optional<Bot>> hashOfCharacters ;
 	ArrayList<Character> listOfAllCharacters;
 	ArrayList<Bot> listOfBot;
 	ArrayList<Player> listOfPlayer;
@@ -43,7 +44,7 @@ public class RoundManagerTest {
 	Initialiser init;
 	@BeforeEach
 	public void init() {
-		hashOfCharacters = new LinkedHashMap<Character, Bot>();
+		hashOfCharacters = new LinkedHashMap<Character, Optional<Bot>>();
 		listOfAllCharacters= new ArrayList<Character>();
 		listOfBot= spy(new ArrayList<Bot>());
 		listOfPlayer= new ArrayList<Player>();
@@ -145,8 +146,8 @@ public class RoundManagerTest {
 		Bot bot = spy(new Bot(new Player("testPlayer")));
 		bot.getPlayer().setRole(c);
 		
-		LinkedHashMap<Character, Bot> hashOfCharactersTwo = new LinkedHashMap<Character, Bot>();
-		hashOfCharactersTwo.put(c, bot);
+		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersTwo = new LinkedHashMap<Character, Optional<Bot>>();
+		hashOfCharactersTwo.put(c, Optional.of(bot));
 		int numberOfUniqueCharacter = 1;
 
 
@@ -180,10 +181,10 @@ public class RoundManagerTest {
 		botKing.getPlayer().setRole(king);
 
 		//creation of the hashOfCharacter
-		hashOfCharacters.put(architect, botArchitecte);
-		hashOfCharacters.put(bishop, botBishop);
-		hashOfCharacters.put(magician, botMagician);
-		hashOfCharacters.put(king,botKing);
+		hashOfCharacters.put(architect, Optional.of(botArchitecte));
+		hashOfCharacters.put(bishop, Optional.of(botBishop));
+		hashOfCharacters.put(magician, Optional.of(botMagician));
+		hashOfCharacters.put(king,Optional.of(botKing));
 
 		//Verify that he finds the right spot for the king
 		botKing.setBotIsKing(true);

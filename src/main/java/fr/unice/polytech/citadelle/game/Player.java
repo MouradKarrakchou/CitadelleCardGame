@@ -155,7 +155,18 @@ public class Player implements Comparable<Player> {
 		}
 	}
 
+	public void setGolds(int golds) {
+		this.golds = golds;
+	}
+
 	public City getCity() {
 		return city;
+	}
+
+    public int stealGoldOfThePlayer(Player player) {
+		int goldStolen=this.golds;
+		player.setGolds(player.getGolds()+this.golds);
+		this.golds=0;
+		return(goldStolen);
 	}
 }

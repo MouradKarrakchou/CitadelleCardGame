@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle.bot;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 import java.util.Random;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
@@ -89,7 +90,7 @@ public class Bot {
 
 
 
-	public boolean play(DeckDistrict deckDistrict, String currentPhase, LinkedHashMap<Character, Bot> hashOfCharacters) {
+	public boolean play(DeckDistrict deckDistrict, String currentPhase, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters) {
 		printC.dropALine();
 		if (botIsAlive){
 			this.getPlayer().getCharacter().spellOfTurn(this,hashOfCharacters,printC);
@@ -162,13 +163,13 @@ public class Bot {
 		return player;
 	}
 
-	public Character selectCharacterForAssassin(LinkedHashMap<Character, Bot> hashOfCharacters){
+	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters){
 		Random random=new Random();
 		int i=random.nextInt(numberOfCharacter-1);
 
 		Character character= (Character) hashOfCharacters.keySet().toArray()[i];
 
-		while (hashOfCharacters.keySet().stream().toList().get(i).getName().equals("Assassin")) {
+		while (hashOfCharacters.keySet().stream().toList().get(i).getName().equals(this.player.getCharacter().getName())) {
 			i=numberOfCharacter-1;
 			character= (Character) hashOfCharacters.keySet().toArray()[i];}
 

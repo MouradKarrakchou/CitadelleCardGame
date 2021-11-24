@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle.game_engine;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
@@ -24,7 +25,7 @@ public class Controller {
 	private ArrayList<Player> listOfPlayer;
 
 	private ArrayList<Character> listOfAllCharacters;
-	private LinkedHashMap<Character, Bot> hashOfCharacters;
+	private LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
 	private ArrayList<Bot> listOfBot;
 	private Referee referee;
 

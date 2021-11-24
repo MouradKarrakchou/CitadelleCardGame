@@ -10,13 +10,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CharacterTest {
-    private LinkedHashMap<Character, Bot> hashOfCharacters;
+    private LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
     public static final int ASSASIN_INDEX = 0;
     public static final int THIEF_INDEX = 1;
     public static final int MAGICIAN_INDEX = 2;
@@ -63,9 +64,9 @@ public class CharacterTest {
         botKing.getPlayer().setRole(king);
 
         //creation of the hashOfCharacter
-        hashOfCharacters.put(architect, botArchitecte);
-        hashOfCharacters.put(bishop, botBishop);
-        hashOfCharacters.put(magician, botMagician);
+        hashOfCharacters.put(architect, Optional.of(botArchitecte));
+        hashOfCharacters.put(bishop, Optional.of(botBishop));
+        hashOfCharacters.put(magician, Optional.of(botMagician));
 
         //creation of the bot List
         listOfBot=new ArrayList<>();
@@ -77,11 +78,11 @@ public class CharacterTest {
     @Test
     void assassinatePlayer(){
         //initialize
-        hashOfCharacters.put(assassin, botAssassin);
+        hashOfCharacters.put(assassin, Optional.of(botAssassin));
         listOfBot.add(botAssassin);
 
         //Creation of a mock for bot and the magician becomes the target
-        when(botAssassin.selectCharacterForAssassin(hashOfCharacters)).thenReturn(magician);
+        when(botAssassin.selectCharacterForSpell(hashOfCharacters)).thenReturn(magician);
         assassin.spellOfTurn(botAssassin,hashOfCharacters,printC);
 
         //We verify that the Magician is dead
@@ -93,7 +94,7 @@ public class CharacterTest {
     @Test
     void testKingPlayFirst(){
         //initialize
-        hashOfCharacters.put(king, botKing);
+        hashOfCharacters.put(king, Optional.of(botKing));
         listOfBot.add(botKing);
 
         //The king plays and the players after him plays

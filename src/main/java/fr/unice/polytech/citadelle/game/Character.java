@@ -4,6 +4,7 @@ import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 /**
  *A character is a class that gives the player special abilities.
@@ -36,7 +37,7 @@ public class Character {
     }
 
 
-    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Bot> hashOfCharacters, PrintCitadels printC){}
+    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){}
 
     @Override
     public boolean equals(Object obj) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.bot.Bot;
@@ -27,7 +28,7 @@ public class RoundManager {
 	ArrayList<Player> listOfPlayer;
 	ArrayList<Bot> listOfBot;
 	ArrayList<Character> listOfAllCharacters;
-	LinkedHashMap<Character, Bot> hashOfCharacters;
+	LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
 	PrintCitadels printC;
 	Board board;
 
@@ -40,7 +41,7 @@ public class RoundManager {
 	int roundNumber = 0;
 
 	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
-			ArrayList<Character> listOfAllCharacters,LinkedHashMap<Character, Bot> hashOfCharacters,
+			ArrayList<Character> listOfAllCharacters,LinkedHashMap<Character, Optional<Bot>> hashOfCharacters,
 			PrintCitadels printC, Board board) {
 		this.listOfPlayer = listOfPlayer;
 		this.listOfBot = listOfBot;
@@ -90,11 +91,11 @@ public class RoundManager {
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
 		currentPhase = phaseManager.analyseGame(listOfCity);
 
-		for (Entry<Character, Bot> entry : hashOfCharacters.entrySet()) {
+		for (Entry<Character, Optional<Bot>> entry : hashOfCharacters.entrySet()) {
 			Character character = entry.getKey();
-			Bot bot = entry.getValue();
-			if (bot.getPlayer().getName() != "fillPlayer") {
-				aBotCompleteHisCity = actionsOfTheBot(character, bot, aBotCompleteHisCity, deckDistrict);
+			Optional<Bot> bot = entry.getValue();
+			if (bot.isPresent()) {
+				aBotCompleteHisCity = actionsOfTheBot(character, bot.get(), aBotCompleteHisCity, deckDistrict);
 			}
 		}
 		roundNumber++;

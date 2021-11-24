@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import fr.unice.polytech.citadelle.game_engine.Initialiser;
 
 public class InitialiserTest {
 	Initialiser init;
-	LinkedHashMap<Character, Bot> hashOfCharacters;
+	LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
 	ArrayList<Character> listOfAllCharacters;
 	ArrayList<Bot> listOfBot; 
 	ArrayList<Player> listOfPlayer;
@@ -28,7 +29,7 @@ public class InitialiserTest {
 	@BeforeEach
 	public void init() {
 		init = new Initialiser();
-		hashOfCharacters= new LinkedHashMap<Character, Bot>();
+		hashOfCharacters= new LinkedHashMap<Character, Optional<Bot>>();
 		listOfAllCharacters= new ArrayList<Character>();
 		listOfBot = new ArrayList<Bot>();
 		listOfPlayer = new ArrayList<Player>();
@@ -48,9 +49,9 @@ public class InitialiserTest {
 		listOfAllCharacters.add(new Character("test7", 7));
 
 		
-		LinkedHashMap<Character, Bot> hashOfCharactersSpy = spy(hashOfCharacters);
+		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersSpy = spy(hashOfCharacters);
 		init.initHashOfCharacter(hashOfCharactersSpy, listOfAllCharacters);
-		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Mockito.any(Bot.class));
+		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Optional.of(new Bot(new Player("player"))));
 	}
 	
 	@Test
@@ -73,8 +74,8 @@ public class InitialiserTest {
 	
 	@Test
 	public void fillHashOfCharacterTest() {
-		LinkedHashMap<Character, Bot> hashOfCharactersSpy = spy(hashOfCharacters);
+		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersSpy = spy(hashOfCharacters);
 		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Bot(new Player("testPlayer")));
-		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Bot.class));
+		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Optional.of(new Bot(new Player("player"))));
 	}
 }

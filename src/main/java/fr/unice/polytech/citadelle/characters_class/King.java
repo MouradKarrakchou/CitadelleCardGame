@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
@@ -16,10 +17,10 @@ public class King extends Character {
     }
 
     @Override
-    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Bot> hashOfCharacters, PrintCitadels printC){
-        List<Bot> listOfBot=hashOfCharacters.values().stream().toList();
+    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){
+        List<Optional<Bot>> listOfBot=hashOfCharacters.values().stream().toList();
         for (int i=0;i<listOfBot.size();i++){
-            if (bot.equals(listOfBot.get(i)))
+            if (listOfBot.get(i).isPresent()&&bot.equals(listOfBot.get(i).get()))
                 bot.setBotIsKing(true);
         }
         printC.printKingSpell(bot.getPlayer());

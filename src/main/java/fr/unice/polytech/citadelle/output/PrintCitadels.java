@@ -49,12 +49,10 @@ public class PrintCitadels {
     }*/
 
     public void printTakeGold(Player player){
-        System.out.println();
         System.out.println(player.getName() + " takes two golds.");
     }
 
     public void printTakeDistrictCard(Player player){
-        System.out.println();
         System.out.println(player.getName() + " takes a district card.");
     }
 
@@ -86,5 +84,13 @@ public class PrintCitadels {
 
     public void printPhase(String last_turn, Player player) {
         System.out.println("***"+player.getName() + " is in "+last_turn+" mode***");
+    }
+
+    public void stealCharacter(Character characterToSteal, int golds) {
+        System.out.println("The Thief chooses to steal from "+characterToSteal+"(+"+golds+").");
+    }
+
+    public void failedToStealCharacter(Character characterToSteal) {
+        System.out.println("The Thief chooses to steal from "+characterToSteal+" but no one has choosen this character.");
     }
 }
