@@ -5,6 +5,8 @@
     <groupId>Team_K</groupId> <!-- CHANGE ME -->
     <artifactId>Citadelle_K</artifactId> <!-- CHANGE ME -->
     <version>0.3-SNAPSHOT</version> <!-- CHANGE ME -->
+    <packaging>jar</packaging>
+    
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- CHANGE ME IF NEEDED, other : ISO-8859-1 -->
@@ -41,7 +43,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>fr.unice.polytech.startingpoint.Main</mainClass> <!-- CHANGE ME -->
+          <mainClass>fr.unice.polytech.citadelle.Main</mainClass> <!-- CHANGE ME -->
 <!--          <arguments>
             <argument>argument1</argument>
           </arguments>
