@@ -6,6 +6,8 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+import java.util.LinkedHashMap;
+
 public class Assassin extends Character{
 	Player target;
 	
@@ -14,9 +16,9 @@ public class Assassin extends Character{
     }
 
     @Override
-    public void spellOfTurn(Bot bot, Board board, PrintCitadels printC){
-        Character characterToDie= bot.selectCharacterForAssassin(board.getHashOfCharacters());
-        board.getHashOfCharacters().get(characterToDie).setBotIsAlive(false);
+    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Bot> hashOfCharacters, PrintCitadels printC){
+        Character characterToDie= bot.selectCharacterForAssassin(hashOfCharacters);
+        hashOfCharacters.get(characterToDie).setBotIsAlive(false);
         printC.killCharacter(characterToDie);
     }
 }

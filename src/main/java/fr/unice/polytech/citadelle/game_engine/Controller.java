@@ -37,7 +37,7 @@ public class Controller {
 		printC = new PrintCitadels();
 		initialiser = new Initialiser();
 		phaseManager = new PhaseManager();
-		Board board = new Board(hashOfCharacters,listOfPlayer,listOfBot,listOfAllCharacters);
+		Board board = new Board(listOfPlayer,listOfBot);
 		roundManager = new RoundManager(listOfPlayer, listOfBot, listOfAllCharacters,hashOfCharacters, printC, board);
 		referee=new Referee(listOfPlayer);
 	}

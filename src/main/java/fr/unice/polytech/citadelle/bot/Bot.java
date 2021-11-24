@@ -21,6 +21,7 @@ public class Bot {
 	private final Player player;
 	private final PrintCitadels printC = new PrintCitadels();
 	private Boolean botIsAlive=true;
+	private Boolean botIsKing=false;
 	int numberOfCharacter=4;
 
 	public Bot(Player player) {
@@ -88,10 +89,10 @@ public class Bot {
 
 
 
-	public boolean play(DeckDistrict deckDistrict, String currentPhase, Board game) {
+	public boolean play(DeckDistrict deckDistrict, String currentPhase, LinkedHashMap<Character, Bot> hashOfCharacters) {
 		printC.dropALine();
 		if (botIsAlive){
-			this.getPlayer().getCharacter().spellOfTurn(this,game,printC);
+			this.getPlayer().getCharacter().spellOfTurn(this,hashOfCharacters,printC);
 			if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
 				endGameBehaviour(deckDistrict);
 			if (currentPhase == PhaseManager.LAST_TURN_PHASE)
@@ -174,7 +175,9 @@ public class Bot {
 		return(character);
 	}
 
-
+	public void setBotIsKing(Boolean botIsKing) {
+		this.botIsKing = botIsKing;
+	}
 
 	public void setBotIsAlive(Boolean botIsAlive) {
 		this.botIsAlive = botIsAlive;
@@ -182,5 +185,9 @@ public class Bot {
 
 	public Boolean getBotIsAlive() {
 		return botIsAlive;
+	}
+
+	public Boolean getBotIsKing() {
+		return botIsKing;
 	}
 }

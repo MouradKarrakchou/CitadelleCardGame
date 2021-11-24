@@ -1,7 +1,9 @@
 package fr.unice.polytech.citadelle.game_engine;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -56,7 +58,7 @@ public class RoundManager {
 				.analyseGame(getTheListOfCity(listOfPlayer))) != PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(roundNumber);
-			board.updateListOfBot();
+			updateListOfBot();
 
 			setupCharacters(deckCharacter, initialiser);
 			askEachCharacterToPlay(phaseManager, deckDistrict, initialiser);
@@ -100,7 +102,7 @@ public class RoundManager {
 	}
 
 	public boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict){
-		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,board);
+		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,hashOfCharacters);
 		if (aBotCompleteHisCity) {
 			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
 			currentPhase = PhaseManager.LAST_TURN_PHASE;
@@ -117,6 +119,32 @@ public class RoundManager {
 			player.updateScore(BONUS_END);
 		printC.printPlayerToCompleteCity(player);
 		return isLastRound;
+	}
+
+	public void updateListOfBot() {
+			int indexOfKing=findKing(listOfBot);
+			if (indexOfKing!=-1){
+				ArrayList<Bot> listOfBotCopy=listOfBot;
+				listOfBot=new ArrayList<>();
+				listOfBot.addAll(orderListOfPlayer(listOfBotCopy,indexOfKing));}
+	}
+	public int findKing(ArrayList<Bot> listOfBot){
+		for (int k=0;k<listOfBot.size();k++){
+			if (listOfBot.get(k).getBotIsKing()) {
+				listOfBot.get(k).setBotIsKing(false);
+				return(k);}}
+		return(-1);
+	}
+	public ArrayList<Bot> orderListOfPlayer(ArrayList<Bot> listOfBot, int positionOfKingHolder){
+		int positionToChange=positionOfKingHolder;
+		int sizeListOfPlayer=listOfBot.size();
+		ArrayList<Bot> listOfBotNextRound=new ArrayList<>();
+		for (int i=0;i<sizeListOfPlayer;i++){
+			if (positionToChange>=sizeListOfPlayer) positionToChange=0;
+			listOfBotNextRound.add(listOfBot.get(positionToChange));
+			positionToChange++;
+		}
+		return (listOfBotNextRound);
 	}
 
 	public void setupCharacters(PhaseManager phaseMan, DeckDistrict deckDistrict, Initialiser init) {

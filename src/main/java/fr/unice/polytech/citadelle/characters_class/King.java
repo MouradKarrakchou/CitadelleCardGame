@@ -1,6 +1,9 @@
 package fr.unice.polytech.citadelle.characters_class;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
@@ -11,23 +14,13 @@ public class King extends Character {
     public King(){
         super("King", 4 );
     }
-    private void orderListOfPlayer(ArrayList<Bot> listOfBot,ArrayList<Bot> listOfBotNextRound,int positionOfKingHolder){
-        int positionToChange=positionOfKingHolder;
-        int sizeListOfPlayer=listOfBot.size();
-        listOfBotNextRound.clear();
-        for (int i=0;i<sizeListOfPlayer;i++){
-            if (positionToChange>=sizeListOfPlayer) positionToChange=0;
-            listOfBotNextRound.add(listOfBot.get(positionToChange));
-            positionToChange++;
-        }
-    }
 
     @Override
-    public void spellOfTurn(Bot bot, Board board, PrintCitadels printC){
-        ArrayList<Bot> listOfBot=board.getListOfBot();
+    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Bot> hashOfCharacters, PrintCitadels printC){
+        List<Bot> listOfBot=hashOfCharacters.values().stream().toList();
         for (int i=0;i<listOfBot.size();i++){
             if (bot.equals(listOfBot.get(i)))
-                orderListOfPlayer(listOfBot, board.getListOfBotOfNextRound(),i);
+                bot.setBotIsKing(true);
         }
         printC.printKingSpell(bot.getPlayer());
     }

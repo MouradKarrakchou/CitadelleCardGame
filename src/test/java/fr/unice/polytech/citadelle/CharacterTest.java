@@ -72,30 +72,17 @@ public class CharacterTest {
         listOfBot.add(botArchitecte);
         listOfBot.add(botBishop);
         listOfBot.add(botMagician);
-
-        //creaction of characterInGame
-        characterInGame=new ArrayList<>();
-        characterInGame.add(architect);
-        characterInGame.add(magician);
-        characterInGame.add(bishop);
-
-        //We create the game
-        ArrayList<Player> listOfPlayer=new ArrayList<>();
-        DeckDistrict deckDistrict=new DeckDistrict();
-        DeckCharacter deckCharacter=new DeckCharacter();
-        game=new Board(hashOfCharacters,listOfPlayer,listOfBot,characterInGame);
     }
 
     @Test
     void assassinatePlayer(){
         //initialize
         hashOfCharacters.put(assassin, botAssassin);
-        characterInGame.add(assassin);
         listOfBot.add(botAssassin);
 
         //Creation of a mock for bot and the magician becomes the target
         when(botAssassin.selectCharacterForAssassin(hashOfCharacters)).thenReturn(magician);
-        assassin.spellOfTurn(botAssassin,game,printC);
+        assassin.spellOfTurn(botAssassin,hashOfCharacters,printC);
 
         //We verify that the Magician is dead
         assertEquals(false,botMagician.getBotIsAlive());
@@ -107,15 +94,11 @@ public class CharacterTest {
     void testKingPlayFirst(){
         //initialize
         hashOfCharacters.put(king, botKing);
-        characterInGame.add(king);
         listOfBot.add(botKing);
 
         //The king plays and the players after him plays
-        king.spellOfTurn(botKing,game,printC);
-        assertEquals(botKing,game.getListOfBotOfNextRound().get(0));
-        assertEquals(botArchitecte,game.getListOfBotOfNextRound().get(1));
-        assertEquals(botBishop,game.getListOfBotOfNextRound().get(2));
-        assertEquals(botMagician,game.getListOfBotOfNextRound().get(3));
+        king.spellOfTurn(botKing,hashOfCharacters,printC);
+        assertEquals(botKing.getBotIsKing(),true);
     }
 
 }

@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import fr.unice.polytech.citadelle.characters_class.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -52,7 +53,7 @@ public class RoundManagerTest {
 		deckChar = new DeckCharacter();
 		deckDistrict = new DeckDistrict();
 		
-		game = new Board(hashOfCharacters, listOfPlayer, listOfBot, listOfAllCharacters);
+		game = new Board(listOfPlayer, listOfBot);
 		printer = new PrintCitadels();
 
 		
@@ -154,5 +155,46 @@ public class RoundManagerTest {
 		
 		roundManTwo.askEachCharacterToPlay(phase, deckDistrict, init);
 		verify(roundManTwo, times(numberOfUniqueCharacter)).actionsOfTheBot(Mockito.any(), Mockito.any(), Mockito.anyBoolean(),Mockito.any());
+	}
+	@Test
+	public void orderTurnByKing(){
+		//creation of Bot
+		Bot botArchitecte = new Bot(new Player("architectePlayer"));
+		Bot botBishop =new Bot(new Player("bishopPlayer"));
+		Bot botMagician = new Bot(new Player("magicianPlayer"));
+		Bot botKing=new Bot(new Player("kingPlayer"));
+
+		//creation of the list of bot
+		listOfBot.clear();
+		listOfBot.add(botArchitecte);
+		listOfBot.add(botBishop);
+		listOfBot.add(botMagician);
+		listOfBot.add(botKing);
+		//creation of the characters in game
+		Architect architect = new Architect();
+		Bishop bishop = new Bishop();
+		Magician magician = new Magician();
+		King king = new King();
+
+		//we set the character of our bot
+		botKing.getPlayer().setRole(king);
+
+		//creation of the hashOfCharacter
+		hashOfCharacters.put(architect, botArchitecte);
+		hashOfCharacters.put(bishop, botBishop);
+		hashOfCharacters.put(magician, botMagician);
+		hashOfCharacters.put(king,botKing);
+
+		//Verify that he finds the right spot for the king
+		botKing.setBotIsKing(true);
+		assertEquals(3,roundMan.findKing(listOfBot));
+
+		//Verify that they are well ordered
+		ArrayList<Bot> botOrdered=roundMan.orderListOfPlayer(listOfBot,3);
+		assertEquals(botKing,botOrdered.get(0));
+		assertEquals(botArchitecte,botOrdered.get(1));
+		assertEquals(botBishop,botOrdered.get(2));
+		assertEquals(botMagician,botOrdered.get(3));
+
 	}
 }

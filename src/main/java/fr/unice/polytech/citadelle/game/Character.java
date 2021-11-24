@@ -3,6 +3,8 @@ package fr.unice.polytech.citadelle.game;
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+import java.util.LinkedHashMap;
+
 /**
  *A character is a class that gives the player special abilities.
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
@@ -34,7 +36,7 @@ public class Character {
     }
 
 
-    public void spellOfTurn(Bot bot, Board board, PrintCitadels printC){}
+    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Bot> hashOfCharacters, PrintCitadels printC){}
 
     @Override
     public boolean equals(Object obj) {
