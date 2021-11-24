@@ -52,7 +52,7 @@ public class RoundManagerTest {
 		deckChar = new DeckCharacter();
 		deckDistrict = new DeckDistrict();
 		
-		game = new Game(listOfPlayer, deckChar, deckDistrict);
+		game = new Game(hashOfCharacters, listOfPlayer, listOfBot, listOfAllCharacters, deckChar, deckDistrict);
 		printer = new PrintCitadels();
 
 		
