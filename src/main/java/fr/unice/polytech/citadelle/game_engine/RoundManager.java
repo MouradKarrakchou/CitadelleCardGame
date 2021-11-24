@@ -10,7 +10,7 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.City;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -27,7 +27,7 @@ public class RoundManager {
 	ArrayList<Character> listOfAllCharacters;
 	LinkedHashMap<Character, Bot> hashOfCharacters;
 	PrintCitadels printC;
-	Game game;
+	Board board;
 
 
 
@@ -39,13 +39,13 @@ public class RoundManager {
 
 	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
 			ArrayList<Character> listOfAllCharacters,LinkedHashMap<Character, Bot> hashOfCharacters,
-			PrintCitadels printC, Game game) {
+			PrintCitadels printC, Board board) {
 		this.listOfPlayer = listOfPlayer;
 		this.listOfBot = listOfBot;
 		this.listOfAllCharacters = listOfAllCharacters;
 		this.hashOfCharacters = hashOfCharacters;
 		this.printC = printC;
-		this.game = game;
+		this.board = board;
 		this.deckCharacter = new DeckCharacter();
 		this.deckDistrict = new DeckDistrict();
 
@@ -56,12 +56,12 @@ public class RoundManager {
 				.analyseGame(getTheListOfCity(listOfPlayer))) != PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(roundNumber);
-			game.updateListOfBot();
+			board.updateListOfBot();
 
 			setupCharacters(deckCharacter, initialiser);
 			askEachCharacterToPlay(phaseManager, deckDistrict, initialiser);
 
-			printC.printBoard(game);
+			printC.printBoard(board);
 			printC.printLayer();
 		}
 	}
@@ -100,7 +100,7 @@ public class RoundManager {
 	}
 
 	public boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict){
-		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,game);
+		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,board);
 		if (aBotCompleteHisCity) {
 			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
 			currentPhase = PhaseManager.LAST_TURN_PHASE;

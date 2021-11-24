@@ -6,7 +6,7 @@ import java.util.Random;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
@@ -88,7 +88,7 @@ public class Bot {
 
 
 
-	public boolean play(DeckDistrict deckDistrict, String currentPhase, Game game) {
+	public boolean play(DeckDistrict deckDistrict, String currentPhase, Board game) {
 		printC.dropALine();
 		if (botIsAlive){
 			this.getPlayer().getCharacter().spellOfTurn(this,game,printC);

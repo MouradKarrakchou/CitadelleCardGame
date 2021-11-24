@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 
 public class PrintCitadels {
@@ -61,7 +61,7 @@ public class PrintCitadels {
     public void printBuildDistrict(Player player, District district) {
         System.out.println(player.getName()+" builds "+district);
     }
-    public void printBoard(Game game){
+    public void printBoard(Board game){
         System.out.println("City of all the Players:");
         game.getListOfPlayer().forEach(player -> {
             System.out.println("-City of "+player.getName()+": "+player.getCity());});

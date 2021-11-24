@@ -19,7 +19,7 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.City;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
@@ -35,7 +35,7 @@ public class RoundManagerTest {
 	ArrayList<Character> listOfAllCharacters;
 	ArrayList<Bot> listOfBot;
 	ArrayList<Player> listOfPlayer;
-	Game game;
+	Board game;
 	PrintCitadels printer;
 	
 
@@ -52,7 +52,7 @@ public class RoundManagerTest {
 		deckChar = new DeckCharacter();
 		deckDistrict = new DeckDistrict();
 		
-		game = new Game(hashOfCharacters, listOfPlayer, listOfBot, listOfAllCharacters);
+		game = new Board(hashOfCharacters, listOfPlayer, listOfBot, listOfAllCharacters);
 		printer = new PrintCitadels();
 
 		

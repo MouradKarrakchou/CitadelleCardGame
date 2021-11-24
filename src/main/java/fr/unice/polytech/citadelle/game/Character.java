@@ -1,7 +1,5 @@
 package fr.unice.polytech.citadelle.game;
 
-import java.util.Objects;
-
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -36,7 +34,7 @@ public class Character {
     }
 
 
-    public void spellOfTurn(Bot bot, Game game, PrintCitadels printC){}
+    public void spellOfTurn(Bot bot, Board board, PrintCitadels printC){}
 
     @Override
     public boolean equals(Object obj) {

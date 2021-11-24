@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +26,7 @@ public class CharacterTest {
     public static final int ARCHITECT_INDEX = 6;
     public static final int WARLORD_INDEX = 7;
     ArrayList<Character> characterInGame;
-    Game game;
+    Board game;
     Bot botArchitecte;
     Bot botBishop;
     Bot botMagician;
@@ -84,7 +83,7 @@ public class CharacterTest {
         ArrayList<Player> listOfPlayer=new ArrayList<>();
         DeckDistrict deckDistrict=new DeckDistrict();
         DeckCharacter deckCharacter=new DeckCharacter();
-        game=new Game(hashOfCharacters,listOfPlayer,listOfBot,characterInGame);
+        game=new Board(hashOfCharacters,listOfPlayer,listOfBot,characterInGame);
     }
 
     @Test

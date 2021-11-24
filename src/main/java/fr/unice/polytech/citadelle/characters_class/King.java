@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.Game;
-import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class King extends Character {
@@ -24,11 +23,11 @@ public class King extends Character {
     }
 
     @Override
-    public void spellOfTurn(Bot bot, Game game, PrintCitadels printC){
-        ArrayList<Bot> listOfBot=game.getListOfBot();
+    public void spellOfTurn(Bot bot, Board board, PrintCitadels printC){
+        ArrayList<Bot> listOfBot=board.getListOfBot();
         for (int i=0;i<listOfBot.size();i++){
             if (bot.equals(listOfBot.get(i)))
-                orderListOfPlayer(listOfBot, game.getListOfBotOfNextRound(),i);
+                orderListOfPlayer(listOfBot, board.getListOfBotOfNextRound(),i);
         }
         printC.printKingSpell(bot.getPlayer());
     }

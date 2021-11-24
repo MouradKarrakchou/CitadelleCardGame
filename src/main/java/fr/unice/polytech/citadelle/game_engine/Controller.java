@@ -5,9 +5,7 @@ import java.util.LinkedHashMap;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Game;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -28,7 +26,7 @@ public class Controller {
 	private ArrayList<Character> listOfAllCharacters;
 	private LinkedHashMap<Character, Bot> hashOfCharacters;
 	private ArrayList<Bot> listOfBot;
-	private Game game;
+	private Referee referee;
 
 	
 	public Controller() {
@@ -39,8 +37,9 @@ public class Controller {
 		printC = new PrintCitadels();
 		initialiser = new Initialiser();
 		phaseManager = new PhaseManager();
-		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfAllCharacters);
-		roundManager = new RoundManager(listOfPlayer, listOfBot, listOfAllCharacters,hashOfCharacters, printC, game);
+		Board board = new Board(hashOfCharacters,listOfPlayer,listOfBot,listOfAllCharacters);
+		roundManager = new RoundManager(listOfPlayer, listOfBot, listOfAllCharacters,hashOfCharacters, printC, board);
+		referee=new Referee(listOfPlayer);
 	}
 
 	public void initGame() {
@@ -53,12 +52,8 @@ public class Controller {
 	}
 
 	public void end() {
-		game.getWinner();
+		referee.getWinner();
 		printC.printRanking(listOfPlayer);
-	}
-
-	public Game getGame() {
-		return game;
 	}
 
 }
