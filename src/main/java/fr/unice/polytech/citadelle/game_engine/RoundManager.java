@@ -20,34 +20,25 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  */
 public class RoundManager {
 
+	DeckDistrict deckDistrict;
+	DeckCharacter deckCharacter;
 	ArrayList<Player> listOfPlayer;
 	ArrayList<Bot> listOfBot;
 	ArrayList<Character> listOfAllCharacters;
-	ArrayList<Character> listOfCharactersInGame;
 	LinkedHashMap<Character, Bot> hashOfCharacters;
 	PrintCitadels printC;
 	Game game;
 
+
+
 	String currentPhase;
-	Bot lastKing;
 
 	public static final int BONUS_FIRST = 4;
 	public static final int BONUS_END = 2;
 	int roundNumber = 0;
-	//Ancien
-	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
-						ArrayList<Character> listOfAllCharacters, LinkedHashMap<Character, Bot> hashOfCharacters,
-						PrintCitadels printC, Game game) {
-		this.listOfPlayer = listOfPlayer;
-		this.listOfBot = listOfBot;
-		this.listOfAllCharacters = listOfAllCharacters;
-		this.hashOfCharacters = hashOfCharacters;
-		this.printC = printC;
-		this.game = game;
-	}
 
 	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
-			ArrayList<Character> listOfAllCharacters,ArrayList<Character> listOfCharactersInGame,LinkedHashMap<Character, Bot> hashOfCharacters,
+			ArrayList<Character> listOfAllCharacters,LinkedHashMap<Character, Bot> hashOfCharacters,
 			PrintCitadels printC, Game game) {
 		this.listOfPlayer = listOfPlayer;
 		this.listOfBot = listOfBot;
@@ -55,17 +46,17 @@ public class RoundManager {
 		this.hashOfCharacters = hashOfCharacters;
 		this.printC = printC;
 		this.game = game;
-		this.listOfCharactersInGame=listOfCharactersInGame;
+		this.deckCharacter = new DeckCharacter();
+		this.deckDistrict = new DeckDistrict();
+
 	}
 
-	public void runRounds(PhaseManager phaseManager, DeckCharacter deckCharacter, Initialiser initialiser,
-			DeckDistrict deckDistrict) {
+	public void runRounds(PhaseManager phaseManager, Initialiser initialiser) {
 		while ((currentPhase = phaseManager
 				.analyseGame(getTheListOfCity(listOfPlayer))) != PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(roundNumber);
 			game.updateListOfBot();
-			listOfCharactersInGame.clear();
 
 			setupCharacters(deckCharacter, initialiser);
 			askEachCharacterToPlay(phaseManager, deckDistrict, initialiser);
@@ -88,7 +79,6 @@ public class RoundManager {
 	public void chooseACharacterCard(Bot bot, Initialiser initialiser, DeckCharacter deckCharacter) {
 		Player playerOfBot = bot.getPlayer();
 		playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
-		listOfCharactersInGame.add(playerOfBot.getCharacter());
 		initialiser.fillHashOfCharacter(hashOfCharacters, playerOfBot.getCharacter(), bot);
 		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}

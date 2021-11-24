@@ -84,7 +84,7 @@ public class CharacterTest {
         ArrayList<Player> listOfPlayer=new ArrayList<>();
         DeckDistrict deckDistrict=new DeckDistrict();
         DeckCharacter deckCharacter=new DeckCharacter();
-        game=new Game(hashOfCharacters,listOfPlayer,listOfBot,characterInGame,deckCharacter,deckDistrict);
+        game=new Game(hashOfCharacters,listOfPlayer,listOfBot,characterInGame);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class CharacterTest {
         listOfBot.add(botAssassin);
 
         //Creation of a mock for bot and the magician becomes the target
-        when(botAssassin.selectCharacterForAssassin(characterInGame)).thenReturn(magician);
+        when(botAssassin.selectCharacterForAssassin(hashOfCharacters)).thenReturn(magician);
         assassin.spellOfTurn(botAssassin,game,printC);
 
         //We verify that the Magician is dead

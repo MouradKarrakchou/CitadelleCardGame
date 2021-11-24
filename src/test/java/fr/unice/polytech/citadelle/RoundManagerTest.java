@@ -52,7 +52,7 @@ public class RoundManagerTest {
 		deckChar = new DeckCharacter();
 		deckDistrict = new DeckDistrict();
 		
-		game = new Game(hashOfCharacters, listOfPlayer, listOfBot, listOfAllCharacters, deckChar, deckDistrict);
+		game = new Game(hashOfCharacters, listOfPlayer, listOfBot, listOfAllCharacters);
 		printer = new PrintCitadels();
 
 		
@@ -68,7 +68,7 @@ public class RoundManagerTest {
 	public void runRoundsOnceTest() {
 		PhaseManager phaseMan=Mockito.mock(PhaseManager.class);
 		when(phaseMan.analyseGame(Mockito.any())).thenReturn(PhaseManager.LAST_TURN_PHASE);
-		roundMan.runRounds(phaseMan, deckChar, init, deckDistrict);
+		roundMan.runRounds(phaseMan,init);
 		verify(phaseMan, times(1)).analyseGame(Mockito.any());
 	}
 	
@@ -126,7 +126,7 @@ public class RoundManagerTest {
 		listOfCharactersInGame.add(new Character("testCharacter", 0));
 
 		
-		RoundManager roundManTwo = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters,listOfCharactersInGame, hashOfCharacters, printer, game));
+		RoundManager roundManTwo = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters, hashOfCharacters, printer, game));
 		roundManTwo.setupCharacters(deckChar, init);
 		verify(roundManTwo, times(4)).chooseACharacterCard(Mockito.any(), Mockito.any(), Mockito.any());
 	}
@@ -150,7 +150,7 @@ public class RoundManagerTest {
 
 
 		
-		RoundManager roundManTwo = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters,listOfCharactersInGame, hashOfCharactersTwo, printer, game));
+		RoundManager roundManTwo = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters, hashOfCharactersTwo, printer, game));
 		
 		roundManTwo.askEachCharacterToPlay(phase, deckDistrict, init);
 		verify(roundManTwo, times(numberOfUniqueCharacter)).actionsOfTheBot(Mockito.any(), Mockito.any(), Mockito.anyBoolean(),Mockito.any());

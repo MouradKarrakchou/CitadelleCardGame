@@ -12,20 +12,15 @@ import java.util.LinkedHashMap;
  */
 public class Game {
     private ArrayList<Player> listOfPlayer;
-    private DeckCharacter deckCharacter;
-    private DeckDistrict deckDistrict;
-    private ArrayList<Player> listOfPlayerOfNextRound;
     private ArrayList<Bot> listOfBot;
     private ArrayList<Bot> listOfBotOfNextRound;
     private ArrayList<Character> listOfCharacters;
     private LinkedHashMap<Character, Bot> hashOfCharacters;
 
 
-    public Game(LinkedHashMap<Character, Bot> hashOfCharacters,ArrayList<Player> listOfPlayer,ArrayList<Bot> listOfBot,ArrayList<Character> listOfAllCharacters, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
+    public Game(LinkedHashMap<Character, Bot> hashOfCharacters,ArrayList<Player> listOfPlayer,ArrayList<Bot> listOfBot,ArrayList<Character> listOfAllCharacters) {
         this.listOfPlayer = listOfPlayer;
         this.listOfBot = listOfBot;
-        this.deckCharacter = deckCharacter;
-        this.deckDistrict = deckDistrict;
         this.listOfBotOfNextRound= new ArrayList<>();
         this.listOfCharacters=listOfAllCharacters;
         this.hashOfCharacters=hashOfCharacters;

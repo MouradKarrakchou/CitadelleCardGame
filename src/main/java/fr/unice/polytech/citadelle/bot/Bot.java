@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle.bot;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
@@ -160,13 +161,20 @@ public class Bot {
 		return player;
 	}
 
-	public Character selectCharacterForAssassin(ArrayList<Character> listOfCharacters){
+	public Character selectCharacterForAssassin(LinkedHashMap<Character, Bot> hashOfCharacters){
 		Random random=new Random();
-		Character character=listOfCharacters.get(random.nextInt(numberOfCharacter-1));
-		while (character.getName().equals("Assassin"))
-		character=listOfCharacters.get(random.nextInt(numberOfCharacter-1));
-		return (character);
+		int i=random.nextInt(numberOfCharacter-1);
+
+		Character character= (Character) hashOfCharacters.keySet().toArray()[i];
+
+		while (hashOfCharacters.keySet().stream().toList().get(i).getName().equals("Assassin")) {
+			i=numberOfCharacter-1;
+			character= (Character) hashOfCharacters.keySet().toArray()[i];}
+
+		return(character);
 	}
+
+
 
 	public void setBotIsAlive(Boolean botIsAlive) {
 		this.botIsAlive = botIsAlive;
