@@ -79,13 +79,13 @@ public class RoundManager {
 		return listOfPlayer.stream().map(p -> p.getCity()).collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	private void setupCharacters(DeckCharacter deckCharacter, Initialiser initialiser) {
+	public void setupCharacters(DeckCharacter deckCharacter, Initialiser initialiser) {
 		deckCharacter.initialise(listOfAllCharacters);
 		listOfBot.forEach(bot -> chooseACharacterCard(bot, initialiser, deckCharacter));
 		printC.dropALine();
 	}
 
-	private void chooseACharacterCard(Bot bot, Initialiser initialiser, DeckCharacter deckCharacter) {
+	public void chooseACharacterCard(Bot bot, Initialiser initialiser, DeckCharacter deckCharacter) {
 		Player playerOfBot = bot.getPlayer();
 		playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
 		listOfCharactersInGame.add(playerOfBot.getCharacter());
@@ -93,7 +93,7 @@ public class RoundManager {
 		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}
 
-	private void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
+	public void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
 		boolean aBotCompleteHisCity = false;
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
 		currentPhase = phaseManager.analyseGame(listOfCity);
@@ -109,8 +109,7 @@ public class RoundManager {
 		initialiser.initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 	}
 
-	private boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict)
-	{
+	public boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict){
 		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,game);
 		if (aBotCompleteHisCity) {
 			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
@@ -128,5 +127,10 @@ public class RoundManager {
 			player.updateScore(BONUS_END);
 		printC.printPlayerToCompleteCity(player);
 		return isLastRound;
+	}
+
+	public void setupCharacters(PhaseManager phaseMan, DeckDistrict deckDistrict, Initialiser init) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,7 +26,7 @@ import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
-public class RoundManagertTest {
+public class RoundManagerTest {
 	RoundManager roundMan;
 	DeckCharacter deckChar;
 	DeckDistrict deckDistrict;
@@ -43,7 +44,7 @@ public class RoundManagertTest {
 	public void init() {
 		hashOfCharacters = new LinkedHashMap<Character, Bot>();
 		listOfAllCharacters= new ArrayList<Character>();
-		listOfBot= new ArrayList<Bot>();
+		listOfBot= spy(new ArrayList<Bot>());
 		listOfPlayer= new ArrayList<Player>();
 		listOfPlayerSpy = spy(listOfPlayer);
 
@@ -59,7 +60,7 @@ public class RoundManagertTest {
 		deckChar.initialise(listOfAllCharacters);
 		deckDistrict.initializer();
 
-		roundMan = new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters, hashOfCharacters, printer, game);
+		roundMan = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters, hashOfCharacters, printer, game));
 	
 	}
 	
@@ -91,30 +92,6 @@ public class RoundManagertTest {
 	}
 	
 	@Test
-	public void spellOfCharactersTest() {
-		Player p1 = spy(new Player("p1"));
-		Player p2 = spy(new Player("p2"));
-		Player p3 = spy(new Player("p3"));
-		ArrayList<Player> aListOfPlayer = new ArrayList<Player>();
-
-		p1.setRole(new Character("testCharacter", 0));
-		p2.setRole(new Character("testCharacter", 0));
-		p3.setRole(new Character("testCharacter", 0));
-
-		aListOfPlayer.add(p1);
-		aListOfPlayer.add(p2);
-		aListOfPlayer.add(p3);
-		
-		ArrayList<Player> aListOfPlayerSpy = spy(aListOfPlayer);
-		
-		roundMan = new RoundManager(aListOfPlayerSpy, listOfBot, listOfAllCharacters, hashOfCharacters, printer, game);
-		
-		verify(p1, times(1)).getCharacter();
-		verify(p2, times(1)).getCharacter();
-		verify(p3, times(1)).getCharacter();
-
-	}
-	@Test
 	public void addBonusForPlayersFirstTest() {
 		Player player = new Player("test");
 		assertEquals(player.getScore(), 0);
@@ -127,5 +104,55 @@ public class RoundManagertTest {
 		assertEquals(player.getScore(), 0);
 		roundMan.addBonusForPlayers(player, true);
 		assertEquals(player.getScore(), RoundManager.BONUS_END);
+	}
+	
+	@Test
+	public void actionsOfTheBotTest() {
+		Character c = new Character("testCharacter", 0);
+		Bot bot = spy(new Bot(new Player("testPlayer")));
+		bot.getPlayer().setRole(c);
+		boolean aBotCompleteHisCity = false;
+		roundMan.actionsOfTheBot(c, bot, aBotCompleteHisCity, deckDistrict);
+		verify(bot, times(1)).play(Mockito.any(), Mockito.any(), Mockito.any());
+	}
+	
+	
+	@Test
+	public void setupCharactersTest() {
+		ArrayList<Character> listOfCharactersInGame = new ArrayList<Character>();
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+
+		
+		RoundManager roundManTwo = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters,listOfCharactersInGame, hashOfCharacters, printer, game));
+		roundManTwo.setupCharacters(deckChar, init);
+		verify(roundManTwo, times(4)).chooseACharacterCard(Mockito.any(), Mockito.any(), Mockito.any());
+	}
+	
+	@Test
+	public void askEachCharacterToPlayTest() {
+		PhaseManager phase = new PhaseManager();
+		ArrayList<Character> listOfCharactersInGame = new ArrayList<Character>();
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		listOfCharactersInGame.add(new Character("testCharacter", 0));
+		
+		Character c = new Character("testCharacter", 0);
+		Bot bot = spy(new Bot(new Player("testPlayer")));
+		bot.getPlayer().setRole(c);
+		
+		LinkedHashMap<Character, Bot> hashOfCharactersTwo = new LinkedHashMap<Character, Bot>();
+		hashOfCharactersTwo.put(c, bot);
+		int numberOfUniqueCharacter = 1;
+
+
+		
+		RoundManager roundManTwo = spy(new RoundManager(listOfPlayerSpy, listOfBot, listOfAllCharacters,listOfCharactersInGame, hashOfCharactersTwo, printer, game));
+		
+		roundManTwo.askEachCharacterToPlay(phase, deckDistrict, init);
+		verify(roundManTwo, times(numberOfUniqueCharacter)).actionsOfTheBot(Mockito.any(), Mockito.any(), Mockito.anyBoolean(),Mockito.any());
 	}
 }
