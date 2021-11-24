@@ -106,7 +106,7 @@ public class CharacterTest {
         king.spellOfTurn(botKing,hashOfCharacters,printC);
         assertEquals(botKing.getBotIsKing(),true);
     }
-    @Test
+    /*@Test
     void testThiefStealsGolds(){
         //initialize
         hashOfCharacters.put(thief, Optional.of(botThief));
@@ -122,6 +122,6 @@ public class CharacterTest {
         assertEquals(0,botMagician.getPlayer().getGolds());
         assertEquals(7,botThief.getPlayer().getGolds());
 
-    }
+    }*/
 
 }

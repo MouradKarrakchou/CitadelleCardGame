@@ -51,7 +51,7 @@ public class InitialiserTest {
 		
 		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersSpy = spy(hashOfCharacters);
 		init.initHashOfCharacter(hashOfCharactersSpy, listOfAllCharacters);
-		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Optional.of(new Bot(new Player("player"))));
+		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 	
 	@Test
@@ -76,6 +76,6 @@ public class InitialiserTest {
 	public void fillHashOfCharacterTest() {
 		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersSpy = spy(hashOfCharacters);
 		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Bot(new Player("testPlayer")));
-		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Optional.of(new Bot(new Player("player"))));
+		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 }
