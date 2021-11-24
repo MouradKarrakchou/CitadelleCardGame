@@ -33,11 +33,14 @@ public class CharacterTest {
     Bot botMagician;
     Bot botAssassin;
     Bot botKing;
+    Bot botThief;
     Architect architect;
     Bishop bishop;
     Magician magician;
     Assassin assassin;
     King king;
+    Thief thief;
+
     PrintCitadels printC;
     ArrayList<Bot> listOfBot;
 
@@ -52,6 +55,7 @@ public class CharacterTest {
         botMagician = new Bot(new Player("magicianPlayer"));
         botAssassin = mock(Bot.class);
         botKing=new Bot(new Player("kingPlayer"));
+        botThief=mock(Bot.class);
 
         //creation of the characters in game
         architect=new Architect();
@@ -59,6 +63,7 @@ public class CharacterTest {
         magician=new Magician();
         assassin=new Assassin();
         king=new King();
+        thief=new Thief();
 
         //we set the character of our bot
         botKing.getPlayer().setRole(king);
@@ -100,6 +105,23 @@ public class CharacterTest {
         //The king plays and the players after him plays
         king.spellOfTurn(botKing,hashOfCharacters,printC);
         assertEquals(botKing.getBotIsKing(),true);
+    }
+    @Test
+    void testThiefStealsGolds(){
+        //initialize
+        hashOfCharacters.put(thief, Optional.of(botThief));
+        listOfBot.add(botThief);
+        //Setting the golds of our thief and magician
+        botThief.getPlayer().setGolds(3);
+        botMagician.getPlayer().setGolds(4);
+        //Creation of a mock for bot and the magician becomes the target
+        when(botThief.selectCharacterForSpell(hashOfCharacters)).thenReturn(magician);
+        thief.spellOfTurn(botThief,hashOfCharacters,printC);
+
+        //We verify that the Magician has been stolen
+        assertEquals(0,botMagician.getPlayer().getGolds());
+        assertEquals(7,botThief.getPlayer().getGolds());
+
     }
 
 }

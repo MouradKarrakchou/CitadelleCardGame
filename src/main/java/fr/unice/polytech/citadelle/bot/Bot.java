@@ -164,16 +164,19 @@ public class Bot {
 	}
 
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters){
-		Random random=new Random();
-		int i=random.nextInt(numberOfCharacter-1);
-
+		int i=randomInt(numberOfCharacter-1);
 		Character character= (Character) hashOfCharacters.keySet().toArray()[i];
 
 		while (hashOfCharacters.keySet().stream().toList().get(i).getName().equals(this.player.getCharacter().getName())) {
-			i=numberOfCharacter-1;
+			i=randomInt(numberOfCharacter-1);
 			character= (Character) hashOfCharacters.keySet().toArray()[i];}
 
 		return(character);
+	}
+
+	public int randomInt(int scope){
+		Random random=new Random();
+		return(random.nextInt(scope));
 	}
 
 	public void setBotIsKing(Boolean botIsKing) {
