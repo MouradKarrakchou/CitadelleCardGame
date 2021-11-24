@@ -31,14 +31,6 @@ public class Game {
         this.hashOfCharacters=hashOfCharacters;
     }
 
-    //Ancien
-    public Game(ArrayList<Player> listOfPlayer, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
-        this.listOfPlayer = listOfPlayer;
-        this.deckCharacter = deckCharacter;
-        this.deckDistrict = deckDistrict;
-        this.listOfPlayerOfNextRound= new ArrayList<>();
-    }
-
     public void calculateScoreOfPlayer(Player player) {
         player.getDistrictCards().forEach(district ->
         {
@@ -53,6 +45,12 @@ public class Game {
         for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
     }
 
+    public void updateListOfBot() {
+        if (listOfBotOfNextRound.size()!=0)
+        {listOfBot.clear();
+            listOfBot.addAll(listOfBotOfNextRound);}
+    }
+
     public ArrayList<Bot> getListOfBotOfNextRound() {
         return listOfBotOfNextRound;
     }
@@ -63,12 +61,6 @@ public class Game {
 
     public ArrayList<Bot> getListOfBot() {
         return listOfBot;
-    }
-
-    public void updateListOfBot() {
-        if (listOfBotOfNextRound.size()!=0)
-        {listOfBot.clear();
-            listOfBot.addAll(listOfBotOfNextRound);}
     }
 
     public ArrayList<Character> getListOfCharacters() {
