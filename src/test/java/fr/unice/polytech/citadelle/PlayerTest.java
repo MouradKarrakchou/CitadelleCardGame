@@ -29,13 +29,10 @@ public class PlayerTest {
         player.districtCards.add(new District("University", 6));
     }
 
-    @Test
-    void test(){
-
+   //TESTS TO DO :
         //public ArrayList<District> districtWeCanBuild(ArrayList<District> districtCheapEnough)
 
         //public void buildDistrict(District districtToBuild)
-    }
 
     @Test
     //With 2 golds
