@@ -83,4 +83,8 @@ public class PrintCitadels {
     public void killCharacter(Character characterToDie) {
         System.out.println("The Assassin chooses to kill "+characterToDie);
     }
+
+    public void printPhase(String last_turn, Player player) {
+        System.out.println("***"+player.getName() + " is in "+last_turn+" mode***");
+    }
 }

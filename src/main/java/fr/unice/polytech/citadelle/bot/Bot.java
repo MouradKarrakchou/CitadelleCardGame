@@ -118,12 +118,12 @@ public class Bot {
 	}
 
 	private void endGameBehaviour(DeckDistrict deckDistrict) {
-		System.out.println("***"+player.getName() + " is in EndGame mode***");
+		printC.printPhase("Endgame",player);
 		takeCard(deckDistrict);
 	}
 
 	private void lastTurnBehaviour(DeckDistrict deckDistrict) {
-		System.out.println("***"+player.getName() + " is in LAST TURN mode***");
+		printC.printPhase("LAST TURN",player);
 		takeCard(deckDistrict);
 	}
 
