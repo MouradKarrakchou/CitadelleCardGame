@@ -160,11 +160,11 @@ public class Bot {
 		return player;
 	}
 
-	public Character selectCharacterForAssassin(ArrayList<Character> listOfCharactersInGame){
+	public Character selectCharacterForAssassin(ArrayList<Character> listOfCharacters){
 		Random random=new Random();
-		Character character=listOfCharactersInGame.get(random.nextInt(numberOfCharacter-1));
+		Character character=listOfCharacters.get(random.nextInt(numberOfCharacter-1));
 		while (character.getName().equals("Assassin"))
-		character=listOfCharactersInGame.get(random.nextInt(numberOfCharacter-1));
+		character=listOfCharacters.get(random.nextInt(numberOfCharacter-1));
 		return (character);
 	}
 

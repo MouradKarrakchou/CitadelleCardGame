@@ -17,17 +17,17 @@ public class Game {
     private ArrayList<Player> listOfPlayerOfNextRound;
     private ArrayList<Bot> listOfBot;
     private ArrayList<Bot> listOfBotOfNextRound;
-    private ArrayList<Character> listOfCharactersInGame;
+    private ArrayList<Character> listOfCharacters;
     private LinkedHashMap<Character, Bot> hashOfCharacters;
 
 
-    public Game(LinkedHashMap<Character, Bot> hashOfCharacters,ArrayList<Player> listOfPlayer,ArrayList<Bot> listOfBot,ArrayList<Character> listOfAllCharactersInGame, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
+    public Game(LinkedHashMap<Character, Bot> hashOfCharacters,ArrayList<Player> listOfPlayer,ArrayList<Bot> listOfBot,ArrayList<Character> listOfAllCharacters, DeckCharacter deckCharacter, DeckDistrict deckDistrict) {
         this.listOfPlayer = listOfPlayer;
         this.listOfBot = listOfBot;
         this.deckCharacter = deckCharacter;
         this.deckDistrict = deckDistrict;
         this.listOfBotOfNextRound= new ArrayList<>();
-        this.listOfCharactersInGame=listOfAllCharactersInGame;
+        this.listOfCharacters=listOfAllCharacters;
         this.hashOfCharacters=hashOfCharacters;
     }
 
@@ -71,8 +71,8 @@ public class Game {
             listOfBot.addAll(listOfBotOfNextRound);}
     }
 
-    public ArrayList<Character> getListOfCharactersInGame() {
-        return listOfCharactersInGame;
+    public ArrayList<Character> getListOfCharacters() {
+        return listOfCharacters;
     }
 
     public LinkedHashMap<Character, Bot> getHashOfCharacters() {

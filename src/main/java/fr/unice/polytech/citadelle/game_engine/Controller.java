@@ -44,7 +44,7 @@ public class Controller {
 		deckCharacter = new DeckCharacter();
 		deckDistrict = new DeckDistrict();
 
-		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfCharactersInGame, deckCharacter, deckDistrict);
+		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfAllCharacters, deckCharacter, deckDistrict);
 		printC = new PrintCitadels();
 		initialiser = new Initialiser();
 		phaseManager = new PhaseManager();
@@ -54,7 +54,7 @@ public class Controller {
 
 	public void initGame() {
 		initialiser.initAll(hashOfCharacters, listOfAllCharacters, listOfBot, listOfPlayer);
-		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfCharactersInGame, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
+		game = new Game(hashOfCharacters,listOfPlayer,listOfBot,listOfAllCharacters, deckCharacter, deckDistrict); // créer un jeu avec tout les éléments nécessaires
 	}
 
 	public void runGame() {

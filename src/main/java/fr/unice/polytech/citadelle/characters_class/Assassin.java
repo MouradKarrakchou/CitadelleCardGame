@@ -15,7 +15,7 @@ public class Assassin extends Character{
 
     @Override
     public void spellOfTurn(Bot bot, Game game, PrintCitadels printC){
-        Character characterToDie= bot.selectCharacterForAssassin(game.getListOfCharactersInGame());
+        Character characterToDie= bot.selectCharacterForAssassin(game.getListOfCharacters());
         game.getHashOfCharacters().get(characterToDie).setBotIsAlive(false);
         printC.killCharacter(characterToDie);
     }
