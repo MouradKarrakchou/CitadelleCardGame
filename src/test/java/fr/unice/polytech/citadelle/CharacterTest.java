@@ -13,21 +13,10 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CharacterTest {
     private LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
-    public static final int ASSASIN_INDEX = 0;
-    public static final int THIEF_INDEX = 1;
-    public static final int MAGICIAN_INDEX = 2;
-    public static final int KING_INDEX = 3;
-    public static final int BISHOP_INDEX = 4;
-    public static final int MERCHANT_INDEX = 5;
-    public static final int ARCHITECT_INDEX = 6;
-    public static final int WARLORD_INDEX = 7;
-    ArrayList<Character> characterInGame;
-    Board game;
     Bot botArchitecte;
     Bot botBishop;
     Bot botMagician;
@@ -55,7 +44,7 @@ public class CharacterTest {
         botMagician = new Bot(new Player("magicianPlayer"));
         botAssassin = mock(Bot.class);
         botKing=new Bot(new Player("kingPlayer"));
-        botThief=mock(Bot.class);
+        botThief=spy(new Bot(new Player("thiefPlayer")));
 
         //creation of the characters in game
         architect=new Architect();
@@ -106,7 +95,7 @@ public class CharacterTest {
         king.spellOfTurn(botKing,hashOfCharacters,printC);
         assertEquals(botKing.getBotIsKing(),true);
     }
-    /*@Test
+    @Test
     void testThiefStealsGolds(){
         //initialize
         hashOfCharacters.put(thief, Optional.of(botThief));
@@ -114,6 +103,8 @@ public class CharacterTest {
         //Setting the golds of our thief and magician
         botThief.getPlayer().setGolds(3);
         botMagician.getPlayer().setGolds(4);
+        botMagician.getPlayer().setRole(magician);
+        botThief.getPlayer().setRole(thief);
         //Creation of a mock for bot and the magician becomes the target
         when(botThief.selectCharacterForSpell(hashOfCharacters)).thenReturn(magician);
         thief.spellOfTurn(botThief,hashOfCharacters,printC);
@@ -121,7 +112,5 @@ public class CharacterTest {
         //We verify that the Magician has been stolen
         assertEquals(0,botMagician.getPlayer().getGolds());
         assertEquals(7,botThief.getPlayer().getGolds());
-
-    }*/
-
+    }
 }
