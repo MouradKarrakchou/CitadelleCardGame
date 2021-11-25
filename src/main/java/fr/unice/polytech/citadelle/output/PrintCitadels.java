@@ -97,4 +97,8 @@ public class PrintCitadels {
     public void printKingEarnedMoney(int collectGold) {
         System.out.println("The king has "+collectGold+" noble district.(+"+collectGold+" golds)." );
     }
+
+    public void printMerchantEarnedMoney(int collectGold) {
+        System.out.println("The merchant has "+collectGold+" trade and handicrafts district.(+"+collectGold+" golds)." );
+    }
 }

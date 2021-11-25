@@ -23,12 +23,14 @@ public class CharacterTest {
     Bot botAssassin;
     Bot botKing;
     Bot botThief;
+    Bot botMerchant;
     Architect architect;
     Bishop bishop;
     Magician magician;
     Assassin assassin;
     King king;
     Thief thief;
+    Merchant merchant;
 
     PrintCitadels printC;
     ArrayList<Bot> listOfBot;
@@ -45,6 +47,7 @@ public class CharacterTest {
         botAssassin = mock(Bot.class);
         botKing=new Bot(new Player("kingPlayer"));
         botThief=spy(new Bot(new Player("thiefPlayer")));
+        botMerchant=new Bot(new Player("merchantPlayer"));
 
         //creation of the characters in game
         architect=new Architect();
@@ -53,9 +56,12 @@ public class CharacterTest {
         assassin=new Assassin();
         king=new King();
         thief=new Thief();
+        merchant=new Merchant();
 
         //we set the character of our bot
         botKing.getPlayer().setRole(king);
+        botMerchant.getPlayer().setRole(merchant);
+
 
         //creation of the hashOfCharacter
         hashOfCharacters.put(architect, Optional.of(botArchitecte));
@@ -127,5 +133,17 @@ public class CharacterTest {
         //We verify that the Magician has been stolen
         assertEquals(0,botMagician.getPlayer().getGolds());
         assertEquals(7,botThief.getPlayer().getGolds());
+    }
+    @Test
+    void testMerchantEarnsMoney(){
+
+        //The merchant win 4 gold with his district and 1 gold at the start of his turn
+        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
+        botMerchant.getPlayer().setGolds(0);
+        merchant.spellOfTurn(botMerchant,hashOfCharacters,printC);
+        assertEquals(5,botMerchant.getPlayer().getGolds());
     }
 }
