@@ -16,6 +16,14 @@ public class King extends Character {
         super("King", 4 );
     }
 
+    private int collectGold(Bot bot){
+        int goldEarned=bot.getPlayer().getCity().getBuiltDistrict().stream()
+                .filter(district -> district.getNameOfFamily().equals("Nobility"))
+                .map(district ->1)
+                .reduce(0, (total, count) -> total + count);
+        bot.getPlayer().setGolds(goldEarned);
+        return(goldEarned);
+    }
     @Override
     public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){
         List<Optional<Bot>> listOfBot=hashOfCharacters.values().stream().toList();
@@ -24,5 +32,6 @@ public class King extends Character {
                 bot.setBotIsKing(true);
         }
         printC.printKingSpell(bot.getPlayer());
+        printC.printKingEarnedMoney(collectGold(bot));
     }
 }

@@ -32,8 +32,8 @@ public class BotTest {
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
 
         // In this test, player has picked a district of value 5 and a district of value 2
-        District districtOfValue5 = new District("DistrictOfValue5", 5);
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue5 = new District("DistrictOfValue5", 5,"r","r");
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         ArrayList<District> pickedDistricts = new ArrayList<>();
         pickedDistricts.add(districtOfValue5);
@@ -51,8 +51,8 @@ public class BotTest {
     void selectTheHigherDistrictSelectSameValues() {
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
 
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
-        District otherDistrictOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
+        District otherDistrictOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         ArrayList<District> pickedDistricts = new ArrayList<>();
         pickedDistricts.add(districtOfValue2);
@@ -75,8 +75,8 @@ public class BotTest {
     void districtCardIsSelectedHandEmptyCityEmptySelectedDistrictDifferent(){
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
 
-        District districtOfValue1 = new District("DistrictOfValue1", 1);
-        District districtOfValue7 = new District("DistrictOfValue7", 7);
+        District districtOfValue1 = new District("DistrictOfValue1", 1,"r","r");
+        District districtOfValue7 = new District("DistrictOfValue7", 7,"r","r");
 
         ArrayList<District> pickedDistricts = new ArrayList<>();
         pickedDistricts.add(districtOfValue1);
@@ -97,11 +97,11 @@ public class BotTest {
     void districtCardIsSelectedHandAlreadyHaveItCityEmptySelectedDistrictDifferent(){
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
 
-        District districtOfValue4 = new District("DistrictOfValue4", 4);
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue4 = new District("DistrictOfValue4", 4,"r","r");
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         // Player already have a district in its hand
-        player01.addDistrict(new District("DistrictOfValue4", 4));
+        player01.addDistrict(new District("DistrictOfValue4", 4,"r","r"));
 
         ArrayList<District> pickedDistricts = new ArrayList<>();
         pickedDistricts.add(districtOfValue4);
@@ -125,12 +125,12 @@ public class BotTest {
     void districtCardIsSelectedHandAlreadyHaveItCityAlreadyHaveItSelectedDistrictDifferent(){
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
 
-        District districtOfValue4 = new District("DistrictOfValue4", 4);
-        District districtOfValue7 = new District("DistrictOfValue7", 7);
+        District districtOfValue4 = new District("DistrictOfValue4", 4,"r","r");
+        District districtOfValue7 = new District("DistrictOfValue7", 7,"r","r");
 
 
-        player01.addDistrict(new District("DistrictOfValue7", 7));
-        player01.getCity().buildDistrict(new District("DistrictOfValue4", 4));
+        player01.addDistrict(new District("DistrictOfValue7", 7,"r","r"));
+        player01.getCity().buildDistrict(new District("DistrictOfValue4", 4,"r","r"));
 
         ArrayList<District> pickedDistricts = new ArrayList<>();
         pickedDistricts.add(districtOfValue4);
@@ -154,11 +154,11 @@ public class BotTest {
     void districtCardIsSelectedCityAlreadyHaveItSelectedDistrictDifferent(){
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
 
-        District districtOfValue8 = new District("DistrictOfValue8", 8);
-        District districtOfValue7 = new District("DistrictOfValue7", 7);
+        District districtOfValue8 = new District("DistrictOfValue8", 8,"r","r");
+        District districtOfValue7 = new District("DistrictOfValue7", 7,"r","r");
 
 
-        player01.getCity().buildDistrict(new District("DistrictOfValue8", 8));
+        player01.getCity().buildDistrict(new District("DistrictOfValue8", 8,"r","r"));
 
         ArrayList<District> pickedDistricts = new ArrayList<>();
         pickedDistricts.add(districtOfValue8);
@@ -175,8 +175,8 @@ public class BotTest {
      */
     @Test
     void takeCardTest(){
-        District districtOfValue4 = new District("DistrictOfValue4", 4);
-        District districtOfValue3 = new District("DistrictOfValue3", 3);
+        District districtOfValue4 = new District("DistrictOfValue4", 4,"r","r");
+        District districtOfValue3 = new District("DistrictOfValue3", 3,"r","r");
 
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
         when(mockedDeckDistrict.chooseDistrict()).
@@ -196,8 +196,8 @@ public class BotTest {
      */
     @Test
     void takeCardHasCardInHand(){
-        District districtOfValue6 = new District("DistrictOfValue6", 6);
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue6 = new District("DistrictOfValue6", 6,"r","r");
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
         when(mockedDeckDistrict.chooseDistrict()).
@@ -219,8 +219,8 @@ public class BotTest {
      */
     @Test
     void takeCardHasCardInHandHasCardInCity(){
-        District districtOfValue6 = new District("DistrictOfValue6", 6);
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue6 = new District("DistrictOfValue6", 6,"r","r");
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
         when(mockedDeckDistrict.chooseDistrict()).
@@ -243,8 +243,8 @@ public class BotTest {
      */
     @Test
     void normalBehaviourCanPlaceADistrict(){
-        District districtOfValue6 = new District("DistrictOfValue6", 6);
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue6 = new District("DistrictOfValue6", 6,"r","r");
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
         when(mockedDeckDistrict.chooseDistrict()).
@@ -265,8 +265,8 @@ public class BotTest {
      */
     @Test
     void normalBehaviourNoDistrictInHand(){
-        District districtOfValue6 = new District("DistrictOfValue6", 6);
-        District districtOfValue2 = new District("DistrictOfValue2", 2);
+        District districtOfValue6 = new District("DistrictOfValue6", 6,"r","r");
+        District districtOfValue2 = new District("DistrictOfValue2", 2,"r","r");
 
         DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
         when(mockedDeckDistrict.chooseDistrict()).

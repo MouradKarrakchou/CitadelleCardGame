@@ -28,9 +28,10 @@ public class City {
 
     //getter
 
-    ArrayList<District> getBuiltDistrict() {
+    public ArrayList<District> getBuiltDistrict() {
         return builtDistrict;
     }
+
 
     @Override
     public String toString(){

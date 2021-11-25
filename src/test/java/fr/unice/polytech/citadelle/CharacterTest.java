@@ -93,7 +93,22 @@ public class CharacterTest {
 
         //The king plays and the players after him plays
         king.spellOfTurn(botKing,hashOfCharacters,printC);
-        assertEquals(botKing.getBotIsKing(),true);
+        assertEquals(true,botKing.getBotIsKing());
+    }
+    @Test
+    void testKingEarnsMoney(){
+        //initialize
+        hashOfCharacters.put(king, Optional.of(botKing));
+        listOfBot.add(botKing);
+
+        //The king plays and the players after him plays
+        botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
+        botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
+        botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
+        botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
+        botKing.getPlayer().setGolds(0);
+        king.spellOfTurn(botKing,hashOfCharacters,printC);
+        assertEquals(4,botKing.getPlayer().getGolds());
     }
     @Test
     void testThiefStealsGolds(){

@@ -13,6 +13,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
 
 public class DeckDistrictTest {
 
@@ -28,27 +29,27 @@ public class DeckDistrictTest {
         Collections.addAll(numberOfCards,3, 5, 3, 4, 3, 4, 3, 1, 3, 5, 3, 3, 2, 4, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1);
 
         Collections.addAll(nameOfDistrict,"Temple", "Tavern", "Watchtower");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 1)));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 1,anyString(),anyString())));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Church", "Trading Post", "Market", "Prison", "Haunted City");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 2)));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 2,anyString(),anyString())));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Monastery", "Manor", "Docks", "Battlefield", "Keep");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 3)));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 3,anyString(),anyString())));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Castle", "Harbor");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 4)));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 4,anyString(),anyString())));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict, "Cathedral", "Palace", "Town Hall", "Fortress", "Laboratory", "Smithy", "Observatory", "Graveyard");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 5)));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 5,anyString(),anyString())));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Library", "School of Magic", "University", "Dragon Gate");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 6)));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 6,anyString(),anyString())));
         nameOfDistrict.clear();
 
         deckDistrictToTest = deck.getDeckDistrict();

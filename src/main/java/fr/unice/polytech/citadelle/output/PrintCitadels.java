@@ -93,4 +93,8 @@ public class PrintCitadels {
     public void failedToStealCharacter(Character characterToSteal) {
         System.out.println("The Thief chooses to steal from "+characterToSteal+" but no one has choosen this character.");
     }
+
+    public void printKingEarnedMoney(int collectGold) {
+        System.out.println("The king has "+collectGold+" noble district.(+"+collectGold+" golds)." );
+    }
 }

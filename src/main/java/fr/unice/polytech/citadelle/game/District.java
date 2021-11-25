@@ -7,10 +7,15 @@ package fr.unice.polytech.citadelle.game;
 public class District {
     private final String name;
     private final int value;
+    private String color;
+    private String nameOfFamily;
 
-    public District(String name, int value) {
+
+    public District(String name, int value,String color,String nameOfFamily) {
         this.name = name;
         this.value = value;
+        this.color=color;
+        this.nameOfFamily=nameOfFamily;
     }
 
     public String getName() {
@@ -27,6 +32,15 @@ public class District {
         }
         return false;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getNameOfFamily() {
+        return nameOfFamily;
+    }
+
     @Override
     public String toString(){
         return("District "+name+" ("+value+")");
