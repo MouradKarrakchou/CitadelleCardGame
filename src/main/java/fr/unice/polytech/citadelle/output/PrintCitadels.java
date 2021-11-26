@@ -2,17 +2,21 @@ package fr.unice.polytech.citadelle.output;
 
 import java.util.ArrayList;
 
+import com.diogonunes.jcolor.Attribute;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
+
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.*;
 
 public class PrintCitadels {
     public PrintCitadels() {
     }
 
     public void chooseRole(Player player, Character role) {
-        System.out.println("The robot " + player.getName() + " choose the character " + role.getName() + " " + role.getValue());
+        System.out.println("    - The robot " + player.getName() + " choose the character " + role.getName() + " " + role.getValue());
     }
 
     public void chooseDistrict(Player player, District district) {
@@ -28,11 +32,13 @@ public class PrintCitadels {
     }
 
     public void printFirstPlayerToComplete(Player firstPlayerToComplete) {
-        System.out.println("The player " + firstPlayerToComplete.getName() + " is the first player to complete his city !");
+        String output = "*** The player " + firstPlayerToComplete.getName() + " is the first player to complete his city ! ***";
+        System.out.println(colorize(output, YELLOW_BACK(), BLACK_TEXT()));
     }
 
     public void printPlayerToCompleteCity(Player player) {
-        System.out.println(player.getName() + " complete his city !");
+        String output = player.getName() + " has completed his city !";
+        System.out.println(colorize(output, YELLOW_BACK(), BLACK_TEXT()));
     }
 
     public void printLayer() {
@@ -49,29 +55,35 @@ public class PrintCitadels {
     }*/
 
     public void printTakeGold(Player player){
-        System.out.println(player.getName() + " takes two golds.");
+        String coloredOutput = colorize("    [+] ", GREEN_TEXT());
+        System.out.println(coloredOutput + player.getName() + " takes two golds.");
     }
 
     public void printTakeDistrictCard(Player player){
-        System.out.println(player.getName() + " takes a district card.");
+        String coloredOutput = colorize("    [+] ", GREEN_TEXT());
+        System.out.println(coloredOutput + player.getName() + " takes a district card.");
     }
 
     public void printBuildDistrict(Player player, District district) {
-        System.out.println(player.getName()+" builds "+district);
+        String coloredOutput = colorize("    [+] ", GREEN_TEXT());
+        System.out.println(coloredOutput + player.getName() + " built " + district);
     }
+
     public void printBoard(Board game){
         System.out.println("City of all the Players:");
         game.getListOfPlayer().forEach(player -> {
             System.out.println("-City of "+player.getName()+": "+player.getCity());});
         System.out.println("");
     }
+
     public void printBoardOfPlayer(Player player){
-        System.out.println("City of "+player.getName()+": "+player.getCity());
-        System.out.println("");
+        System.out.println("[?] City of " + player.getName() + ": " + player.getCity());
+        System.out.println();
     }
 
     public void printNumberRound(int roundNumber) {
-        System.out.println("Round number "+roundNumber+".");
+        String output = colorize("Round number " + roundNumber + ".", BRIGHT_BLUE_TEXT());
+        System.out.println(output);
     }
 
     public void botIsDead(Player player) {
@@ -79,19 +91,23 @@ public class PrintCitadels {
     }
 
     public void killCharacter(Character characterToDie) {
-        System.out.println("The Assassin chooses to kill "+characterToDie);
+        String output = "[!] The Assassin chooses to kill " + characterToDie;
+        System.out.println(colorize(output, RED_TEXT()));
     }
 
-    public void printPhase(String last_turn, Player player) {
-        System.out.println("***"+player.getName() + " is in "+last_turn+" mode***");
+    public void printPhase(String phase, Player player) {
+        String output = "*** " + player.getName() + " is in " + phase + " mode ***";
+        System.out.println(colorize(output, MAGENTA_BACK(), BLACK_TEXT()));
     }
 
     public void stealCharacter(Character characterToSteal, int golds) {
-        System.out.println("The Thief chooses to steal from "+characterToSteal+"(+"+golds+").");
+        String output = "[!] The Thief chooses to steal from " + characterToSteal + " (+" + golds + " golds).";
+        System.out.println(colorize(output, BLUE_TEXT()));
     }
 
     public void failedToStealCharacter(Character characterToSteal) {
-        System.out.println("The Thief chooses to steal from "+characterToSteal+" but no one has choosen this character.");
+        String output = "[?] The Thief chooses to steal from "+characterToSteal+" but no one has chosen this character.";
+        System.out.println(colorize(output, BLUE_TEXT()));
     }
 
     public void printKingEarnedMoney(int collectGold) {
