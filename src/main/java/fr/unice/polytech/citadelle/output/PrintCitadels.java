@@ -24,7 +24,14 @@ public class PrintCitadels {
     }
 
     public void printRanking(ArrayList<Player> listOfPlayer) {
-        listOfPlayer.forEach(player -> System.out.println("[" + player.getRank() + "] " + player.getName() + " with a score of " + player.getScore() + " (" + player.getGolds() + " golds)"));
+        System.out.println("- Game Results -");
+        System.out.println("================");
+        listOfPlayer.forEach(player ->
+                System.out.println("["
+                        + player.getRank() + "] "
+                        + player.getName() + " with a score of "
+                        + player.getScore() + " (" + player.getGolds()
+                        + " golds)"));
     }
 
     public void dropALine() {
@@ -42,7 +49,7 @@ public class PrintCitadels {
     }
 
     public void printLayer() {
-        System.out.println("======================");
+        System.out.println("=============================================================================================================================");
     }
     public void printKingSpell(Player player){
         System.out.println("The robot "+player.getName()+" has the king, he will play first next round.");
@@ -70,9 +77,9 @@ public class PrintCitadels {
     }
 
     public void printBoard(Board game){
-        System.out.println("City of all the Players:");
+        System.out.println("[?] City of all the Players:");
         game.getListOfPlayer().forEach(player -> {
-            System.out.println("-City of "+player.getName()+": "+player.getCity());});
+            System.out.println("    City of "+player.getName()+": "+player.getCity());});
         System.out.println("");
     }
 
