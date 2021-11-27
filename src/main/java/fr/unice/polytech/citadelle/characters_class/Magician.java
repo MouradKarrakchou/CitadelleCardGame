@@ -6,4 +6,5 @@ public class Magician extends Character {
     public Magician(){
         super("Magician", 3);
     }
+
 }

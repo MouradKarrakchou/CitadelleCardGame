@@ -1,9 +1,6 @@
 package fr.unice.polytech.citadelle.bot;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -21,9 +18,8 @@ public class Bot {
 	// The player controlled by the bot.
 	private final Player player;
 	private final PrintCitadels printC = new PrintCitadels();
-	private Boolean botIsAlive=true;
 	private Boolean botIsKing=false;
-	int numberOfCharacter=4;
+	int numberOfCharacter=8;
 
 	public Bot(Player player) {
 		this.player = player;
@@ -92,7 +88,7 @@ public class Bot {
 
 	public boolean play(DeckDistrict deckDistrict, String currentPhase, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters) {
 		printC.dropALine();
-		if (botIsAlive){
+		if (player.getCharacter().isCharacterIsAlive()){
 			this.getPlayer().getCharacter().spellOfTurn(this,hashOfCharacters,printC);
 			if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
 				endGameBehaviour(deckDistrict);
@@ -105,7 +101,7 @@ public class Bot {
 			return (player.getCity().isComplete());}
 		else{
 			printC.botIsDead(player);
-			botIsAlive=true;
+			player.getCharacter().setCharacterIsAlive(true);
 			return(false);
 		}
 	}
@@ -166,6 +162,13 @@ public class Bot {
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters){
 		int i=randomInt(numberOfCharacter-1);
 		Character character= (Character) hashOfCharacters.keySet().toArray()[i];
+		List<Character> list=hashOfCharacters.keySet().stream().toList();
+		if (this.player.getCharacter().getName().equals("Thief"))
+		{
+			while (list.get(i).getName().equals(this.player.getCharacter().getName()) || list.get(i).getName().equals("Assassin") || character.isCharacterIsAlive()==false) {
+				i=randomInt(numberOfCharacter-1);
+				character= (Character) hashOfCharacters.keySet().toArray()[i];}
+		}
 
 		while (hashOfCharacters.keySet().stream().toList().get(i).getName().equals(this.player.getCharacter().getName())) {
 			i=randomInt(numberOfCharacter-1);
@@ -183,13 +186,10 @@ public class Bot {
 		this.botIsKing = botIsKing;
 	}
 
-	public void setBotIsAlive(Boolean botIsAlive) {
-		this.botIsAlive = botIsAlive;
+	public void setCharacterIsAlive(Boolean characterIsAlive) {
+		player.getCharacter().setCharacterIsAlive(characterIsAlive);
 	}
 
-	public Boolean getBotIsAlive() {
-		return botIsAlive;
-	}
 
 	public Boolean getBotIsKing() {
 		return botIsKing;

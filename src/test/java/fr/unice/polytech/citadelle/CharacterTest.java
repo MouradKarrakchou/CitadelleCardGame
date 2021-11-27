@@ -61,6 +61,8 @@ public class CharacterTest {
         //we set the character of our bot
         botKing.getPlayer().setRole(king);
         botMerchant.getPlayer().setRole(merchant);
+        botMagician.getPlayer().setRole(magician);
+        botArchitecte.getPlayer().setRole(architect);
 
 
         //creation of the hashOfCharacter
@@ -86,10 +88,10 @@ public class CharacterTest {
         assassin.spellOfTurn(botAssassin,hashOfCharacters,printC);
 
         //We verify that the Magician is dead
-        assertEquals(false,botMagician.getBotIsAlive());
+        assertEquals(false,botMagician.getPlayer().getCharacter().isCharacterIsAlive());
 
         //We verify that some other character is alive
-        assertEquals(true,botArchitecte.getBotIsAlive());
+        assertEquals(true,botArchitecte.getPlayer().getCharacter().isCharacterIsAlive());
     }
     @Test
     void testKingPlayFirst(){
