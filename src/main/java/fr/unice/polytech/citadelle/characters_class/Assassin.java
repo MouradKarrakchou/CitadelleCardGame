@@ -18,7 +18,7 @@ public class Assassin extends Character{
     @Override
     public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){
         Character characterToDie= bot.selectCharacterForSpell(hashOfCharacters);
-        if (hashOfCharacters.get(characterToDie).isPresent()) hashOfCharacters.get(characterToDie).get().setBotIsAlive(false);
+        if (hashOfCharacters.get(characterToDie).isPresent()) hashOfCharacters.get(characterToDie).get().setCharacterIsAlive(false);
         printC.killCharacter(characterToDie);
     }
 }

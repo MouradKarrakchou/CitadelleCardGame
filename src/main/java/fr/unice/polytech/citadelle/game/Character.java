@@ -14,6 +14,7 @@ public class Character {
     String name;
     int value;
     Player player;
+    boolean characterIsAlive=true;
 
     public Character(String name, int value) {
     	this.name = name;    	
@@ -39,6 +40,14 @@ public class Character {
 
     public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){}
 
+    public  void setCharacterIsAlive(boolean characterIsAlive) {
+        this.characterIsAlive=characterIsAlive;
+    }
+
+    public boolean isCharacterIsAlive() {
+        return characterIsAlive;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Character other = (Character) obj;
@@ -50,4 +59,6 @@ public class Character {
     public String toString() {
         return name;
     }
+
+
 }
