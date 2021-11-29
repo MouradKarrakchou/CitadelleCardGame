@@ -24,6 +24,7 @@ public class CharacterTest {
     Bot botKing;
     Bot botThief;
     Bot botMerchant;
+    Bot botWarlord;
     Architect architect;
     Bishop bishop;
     Magician magician;
@@ -31,6 +32,7 @@ public class CharacterTest {
     King king;
     Thief thief;
     Merchant merchant;
+    Warlord warlord;
 
     PrintCitadels printC;
     ArrayList<Bot> listOfBot;
@@ -44,10 +46,11 @@ public class CharacterTest {
         botArchitecte = new Bot(new Player("architectePlayer"));
         botBishop =new Bot(new Player("bishopPlayer"));
         botMagician = new Bot(new Player("magicianPlayer"));
-        botAssassin = mock(Bot.class);
+        botAssassin = new Bot(new Player("assassinPlayer"));
         botKing=new Bot(new Player("kingPlayer"));
         botThief=spy(new Bot(new Player("thiefPlayer")));
         botMerchant=new Bot(new Player("merchantPlayer"));
+        botWarlord=new Bot(new Player("warlordPlayer"));
 
         //creation of the characters in game
         architect=new Architect();
@@ -57,18 +60,29 @@ public class CharacterTest {
         king=new King();
         thief=new Thief();
         merchant=new Merchant();
+        warlord=new Warlord();
 
         //we set the character of our bot
         botKing.getPlayer().setRole(king);
         botMerchant.getPlayer().setRole(merchant);
         botMagician.getPlayer().setRole(magician);
         botArchitecte.getPlayer().setRole(architect);
+        botWarlord.getPlayer().setRole(warlord);
+        botThief.getPlayer().setRole(thief);
+        botAssassin.getPlayer().setRole(assassin);
+        botBishop.getPlayer().setRole(bishop);
 
 
         //creation of the hashOfCharacter
-        hashOfCharacters.put(architect, Optional.of(botArchitecte));
-        hashOfCharacters.put(bishop, Optional.of(botBishop));
+        hashOfCharacters.put(assassin, Optional.of(botAssassin));
+        hashOfCharacters.put(thief, Optional.of(botThief));
         hashOfCharacters.put(magician, Optional.of(botMagician));
+        hashOfCharacters.put(king, Optional.of(botKing));
+        hashOfCharacters.put(bishop, Optional.of(botBishop));
+        hashOfCharacters.put(merchant, Optional.of(botMerchant));
+        hashOfCharacters.put(architect, Optional.of(botArchitecte));
+        hashOfCharacters.put(warlord, Optional.of(botWarlord));
+
 
         //creation of the bot List
         listOfBot=new ArrayList<>();
@@ -80,7 +94,8 @@ public class CharacterTest {
     @Test
     void assassinatePlayer(){
         //initialize
-        hashOfCharacters.put(assassin, Optional.of(botAssassin));
+        botAssassin = mock(Bot.class);
+
         listOfBot.add(botAssassin);
 
         //Creation of a mock for bot and the magician becomes the target
@@ -96,7 +111,6 @@ public class CharacterTest {
     @Test
     void testKingPlayFirst(){
         //initialize
-        hashOfCharacters.put(king, Optional.of(botKing));
         listOfBot.add(botKing);
 
         //The king plays and the players after him plays
@@ -106,7 +120,6 @@ public class CharacterTest {
     @Test
     void testKingEarnsMoney(){
         //initialize
-        hashOfCharacters.put(king, Optional.of(botKing));
         listOfBot.add(botKing);
 
         //The king plays and the players after him plays
@@ -121,7 +134,6 @@ public class CharacterTest {
     @Test
     void testThiefStealsGolds(){
         //initialize
-        hashOfCharacters.put(thief, Optional.of(botThief));
         listOfBot.add(botThief);
         //Setting the golds of our thief and magician
         botThief.getPlayer().setGolds(3);
