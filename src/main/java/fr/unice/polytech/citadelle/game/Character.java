@@ -37,7 +37,6 @@ public class Character {
         this.player = player;
     }
 
-
     public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){}
 
     public  void setCharacterIsAlive(boolean characterIsAlive) {

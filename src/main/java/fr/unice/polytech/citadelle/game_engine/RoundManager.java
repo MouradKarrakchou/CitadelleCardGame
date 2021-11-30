@@ -1,20 +1,13 @@
 package fr.unice.polytech.citadelle.game_engine;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.bot.Bot;
+import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.City;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
@@ -81,10 +74,29 @@ public class RoundManager {
 
 	public void chooseACharacterCard(Bot bot, Initialiser initialiser, DeckCharacter deckCharacter) {
 		Player playerOfBot = bot.getPlayer();
-		playerOfBot.chooseCharacterCard(deckCharacter.chooseCharacter());
+		if (roundNumber == 0) playerOfBot.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
+		else playerOfBot.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
 		initialiser.fillHashOfCharacter(hashOfCharacters, playerOfBot.getCharacter(), bot);
 		printC.chooseRole(playerOfBot, playerOfBot.getCharacter());
 	}
+
+
+	//  !!! NE PAS EFFACER CES COMMENTAIREs !!!
+	//assassin : s'il y a un joueur proche de la fin (préférable de tuer l'architecte)
+	//voleur : s'il y a un joueur avec beaucoup de golds
+	//roi : si 3 quartiers noble construits
+	//marchand : si 3 quartier commerce construits
+	public Character chooseCharacter(Bot bot, DeckCharacter deckCharacter) {
+		Random random = new Random();
+		Player playerOfBot = bot.getPlayer();
+		ArrayList<District> districtsInACity = playerOfBot.getCity().getBuiltDistrict();
+
+		districtsInACity.stream().filter(district -> district.getNameOfFamily().equals("Nobility")).count();
+		if (districtsInACity.size() >= 3) return deckCharacter.getDeckCharacter().remove(Initialiser.KING_INDEX);
+
+		return deckCharacter.getDeckCharacter().remove(random.nextInt(deckCharacter.getDeckCharacter().size()));
+	}
+
 
 	public void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
 		boolean aBotCompleteHisCity = false;
@@ -146,6 +158,10 @@ public class RoundManager {
 			positionToChange++;
 		}
 		return (listOfBotNextRound);
+	}
+
+	public int getRoundNumber() {
+		return roundNumber;
 	}
 
 	public void setupCharacters(PhaseManager phaseMan, DeckDistrict deckDistrict, Initialiser init) {

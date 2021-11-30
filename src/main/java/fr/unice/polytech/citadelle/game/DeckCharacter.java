@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
+import fr.unice.polytech.citadelle.game_engine.RoundManager;
 
 /**
  * A DeckCharacter is composed of all the character cards in the game.
@@ -28,7 +29,7 @@ public class DeckCharacter {
         deckCharacter.add(listOfCharacters.get(Initialiser.WARLORD_INDEX));
     }
 
-    public Character chooseCharacter() {
+    public Character chooseRandomCharacter() {
         Random random = new Random();
         return deckCharacter.remove(random.nextInt(deckCharacter.size()));
     }
@@ -36,6 +37,5 @@ public class DeckCharacter {
 	public ArrayList<Character> getDeckCharacter() {
 		return deckCharacter;
 	}
-    
-    
+
 }
