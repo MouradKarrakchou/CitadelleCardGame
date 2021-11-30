@@ -3,10 +3,8 @@ package fr.unice.polytech.citadelle.output;
 import java.util.ArrayList;
 
 import com.diogonunes.jcolor.Attribute;
+import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.Player;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
@@ -81,7 +79,9 @@ public class PrintCitadels {
     public void printBoard(Board game){
         System.out.println("[?] City of all the Players:");
         game.getListOfPlayer().forEach(player -> {
-            System.out.println("    City of "+player.getName()+": "+player.getCity());});
+            System.out.print("    City of "+player.getName()+": ");
+            printDistrictWithColor(player);
+        });
         System.out.println("");
     }
 
@@ -136,5 +136,15 @@ public class PrintCitadels {
             case "purple" -> BRIGHT_MAGENTA_TEXT();
             default -> WHITE_TEXT();
         };
+    }
+
+    public void printDistrictWithColor(Player player){
+        City playerCity = player.getCity();
+        for (District district : playerCity.getBuiltDistrict()){
+            System.out.print("| ");
+            System.out.print(colorize(district.toString(), getDistrictColor(district)));
+            System.out.print(" | ");
+        }
+        System.out.println();
     }
 }
