@@ -19,14 +19,14 @@ public class PlayerTest {
 
     @BeforeEach
     void beforeEach(){
-        player.districtCards.clear();
-        player.districtCards.add(new District("Haunted City", 2,"empty","empty"));
-        player.districtCards.add(new District("Prison", 2,"empty","empty"));
-        player.districtCards.add(new District("Manor", 3,"empty","empty"));
-        player.districtCards.add(new District("Castle", 4,"empty","empty"));
-        player.districtCards.add(new District("Laboratory", 5,"empty","empty"));
-        player.districtCards.add(new District("Observatory", 5,"empty","empty"));
-        player.districtCards.add(new District("University", 6,"empty","empty"));
+        player.getDistrictCards().clear();
+        player.getDistrictCards().add(new District("Haunted City", 2,"empty","empty"));
+        player.getDistrictCards().add(new District("Prison", 2,"empty","empty"));
+        player.getDistrictCards().add(new District("Manor", 3,"empty","empty"));
+        player.getDistrictCards().add(new District("Castle", 4,"empty","empty"));
+        player.getDistrictCards().add(new District("Laboratory", 5,"empty","empty"));
+        player.getDistrictCards().add(new District("Observatory", 5,"empty","empty"));
+        player.getDistrictCards().add(new District("University", 6,"empty","empty"));
 
         player.getCity().builtDistrict.clear();
     }

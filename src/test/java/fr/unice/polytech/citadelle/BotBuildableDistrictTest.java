@@ -23,14 +23,14 @@ public class BotBuildableDistrictTest {
     	player01 = new Player("Player01");
         botOfPlayer01 = new Bot(player01);
         
-        player01.districtCards.clear();
-        player01.districtCards.add(new District("Haunted City", 2,"empty","empty"));
-        player01.districtCards.add(new District("Prison", 2,"empty","empty"));
-        player01.districtCards.add(new District("Manor", 3,"empty","empty"));
-        player01.districtCards.add(new District("Castle", 4,"empty","empty"));
-        player01.districtCards.add(new District("Laboratory", 5,"empty","empty"));
-        player01.districtCards.add(new District("Observatory", 5,"empty","empty"));
-        player01.districtCards.add(new District("University", 6,"empty","empty"));
+        player01.getDistrictCards().clear();
+        player01.getDistrictCards().add(new District("Haunted City", 2,"empty","empty"));
+        player01.getDistrictCards().add(new District("Prison", 2,"empty","empty"));
+        player01.getDistrictCards().add(new District("Manor", 3,"empty","empty"));
+        player01.getDistrictCards().add(new District("Castle", 4,"empty","empty"));
+        player01.getDistrictCards().add(new District("Laboratory", 5,"empty","empty"));
+        player01.getDistrictCards().add(new District("Observatory", 5,"empty","empty"));
+        player01.getDistrictCards().add(new District("University", 6,"empty","empty"));
         player01.getCity().builtDistrict.clear();   
     }
 

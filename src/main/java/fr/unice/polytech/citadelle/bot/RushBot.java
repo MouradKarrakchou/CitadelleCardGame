@@ -15,7 +15,7 @@ public class RushBot extends Bot {
 
 	public RushBot(Player player) {
 		super(player);
-	} 
+	}
 
 	public void normalBehaviour(DeckDistrict deckDistrict) {
 		ArrayList<District> buidableDistrict = districtWeCanBuild(player.getDistrictCards());
@@ -29,19 +29,19 @@ public class RushBot extends Bot {
 		ifPossibleBuildACheapDistrict();
 	}
 
-	protected void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame", player);
 		
 		ArrayList<District> futurBuildableDistrict = getBuildableDistrictWithTwoMoreGold();
 		if(futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
 			takeGold();
-		else 
+		else  
 			takeCard(deckDistrict);
 	
 		ifPossibleBuildADistrict();
 	}
 
-	protected void lastTurnBehaviour(DeckDistrict deckDistrict) {
+	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		endGameBehaviour(deckDistrict);
 	}
 

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Player implements Comparable<Player> {
 	private final String name;
 	private Character character;
-	public ArrayList<District> districtCards;
+	private ArrayList<District> districtCards;
 	private City city;
 	private int score;
 	private int rank;

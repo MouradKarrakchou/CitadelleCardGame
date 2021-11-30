@@ -85,7 +85,7 @@ public class Bot {
 		}
 	}
 
-	protected void takeGold() {
+	public void takeGold() {
 		printC.printTakeGold(player);
 		player.addGold();
 	}
@@ -126,13 +126,13 @@ public class Bot {
 		ifPossibleBuildADistrict();
 	}
 
-	protected void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame",player);
 		takeCard(deckDistrict);
 		ifPossibleBuildADistrict();
 	}
 
-	protected void lastTurnBehaviour(DeckDistrict deckDistrict) {
+	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("LAST TURN",player);
 		takeCard(deckDistrict);
 		ifPossibleBuildADistrict();
@@ -223,7 +223,7 @@ public class Bot {
 	}
 	
 	public ArrayList<District> districtWeHaveEnoughMoneyToBuild(int gold) {
-		return player.districtCards.stream().filter(district -> district.getValue() <= gold)
+		return player.getDistrictCards().stream().filter(district -> district.getValue() <= gold)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
