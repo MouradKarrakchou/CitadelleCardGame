@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.bot.Bot;
+import fr.unice.polytech.citadelle.bot.RushBot;
 import fr.unice.polytech.citadelle.characters_class.Architect;
 import fr.unice.polytech.citadelle.characters_class.Assassin;
 import fr.unice.polytech.citadelle.characters_class.Bishop;
@@ -78,11 +79,14 @@ public class Initialiser {
 	}
 	
 	public void initListOfBot(ArrayList<Bot> listOfBot, ArrayList<Player> listOfPlayer){
-		for (int i = 1; i <= NUMBER_OF_PLAYER; i++) {
+		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("robot" + i);
 			listOfBot.add(new Bot(newPlayer));
 			listOfPlayer.add(newPlayer);
 		}
+		Player newPlayer = new Player("robot_Rusher");
+		listOfBot.add(new RushBot(newPlayer));
+		listOfPlayer.add(newPlayer);
 	}
 	
 	public void fillHashOfCharacter(HashMap<Character, Optional<Bot>> hashOfCharacters, Character character, Bot bot) {
