@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle.bot;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -56,9 +57,9 @@ public class Bot {
 		// Fonction modifié après les tests unitaire du 23.11.2021, il fautrai trouver une facon plus jolie de l'ecrire
 		District districtOne = pickedDistricts.get(0);
 		District districtTwo = pickedDistricts.get(1);
-		if (player.isAlreadyBuilt(districtOne.getName()) || player.hasDistrict(districtOne))
+		if (isAlreadyBuilt(districtOne.getName()) || player.hasDistrict(districtOne))
 			putCardBackInDeck(deckDistrict, pickedDistricts, districtOne);
-		if (player.isAlreadyBuilt(districtTwo.getName()) || player.hasDistrict(districtTwo))
+		if (isAlreadyBuilt(districtTwo.getName()) || player.hasDistrict(districtTwo))
 			putCardBackInDeck(deckDistrict, pickedDistricts, districtTwo);
 
 		switch (pickedDistricts.size()) {
@@ -84,6 +85,16 @@ public class Bot {
 		}
 	}
 
+	public void takeGold() {
+		printC.printTakeGold(player);
+		player.addGold();
+	}
+	
+	protected void buildDistrict(District district){
+		player.buildDistrict(district);
+		printC.printBuildDistrict(player, district);
+		printC.printBoardOfPlayer(player);
+	}
 
 
 	public boolean play(DeckDistrict deckDistrict, String currentPhase, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters) {
@@ -107,33 +118,31 @@ public class Bot {
 	}
 
 	public void normalBehaviour(DeckDistrict deckDistrict) {
-		if (player.getDistrictCardsSize() == 0 || player.districtWeCanBuild(player.getDistrictCards()).size() == 0)
+		if (player.getDistrictCardsSize() == 0 || districtWeCanBuild(player.getDistrictCards()).size() == 0)
 			takeCard(deckDistrict);
 		else {
-			printC.printTakeGold(player);
-			player.addGold();
+			takeGold();
 		}
 		ifPossibleBuildADistrict();
 	}
 
-	private void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame",player);
 		takeCard(deckDistrict);
 		ifPossibleBuildADistrict();
 	}
 
-	private void lastTurnBehaviour(DeckDistrict deckDistrict) {
+	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("LAST TURN",player);
 		takeCard(deckDistrict);
 		ifPossibleBuildADistrict();
 	}
 
-	public void ifPossibleBuildADistrict() {
-		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
+	protected void ifPossibleBuildADistrict() {
+		ArrayList<District> districtWeCanBuild = listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()){
-			player.buildDistrict(districtWeCanBuild.get(0));
-			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
-			printC.printBoardOfPlayer(player);
+			District district = districtWeCanBuild.get(0);
+			buildDistrict(district);
 		}
 	}
 
@@ -149,8 +158,7 @@ public class Bot {
 
 		// If player don't take any district cards
 		if (!playerTakeADistrictCard) {
-			printC.printTakeGold(player);
-			player.addGold();
+			takeGold();
 		}
 	}
 
@@ -197,5 +205,36 @@ public class Bot {
 
 	public Boolean getBotIsKing() {
 		return botIsKing;
+	}
+	
+	
+	protected ArrayList<District> getBuildableDistrictWithTwoMoreGold(){
+		return districtWeCanBuild(districtWeHaveEnoughMoneyToBuild(player.getGolds() + 2));
+	}
+	
+	public ArrayList<District> listOfDistrictBuildable() {
+		return districtWeCanBuild(districtWeHaveEnoughMoneyToBuild(player.getGolds()));
+	}
+	
+	public ArrayList<District> districtWeCanBuild(ArrayList<District> districtCheapEnough) {
+		return districtCheapEnough.stream().filter(district -> !(isAlreadyBuilt(district.getName())))
+				.collect(Collectors.toCollection(ArrayList::new));
+
+	}
+	
+	public ArrayList<District> districtWeHaveEnoughMoneyToBuild(int gold) {
+		return player.getDistrictCards().stream().filter(district -> district.getValue() <= gold)
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public boolean isAlreadyBuilt(String nameOfDistrict) {
+		ArrayList<District> districtIsBuilt;
+		districtIsBuilt = player.getCity().getBuiltDistrict().stream()
+				.filter(builtDistrict -> builtDistrict.getName().equals(nameOfDistrict))
+				.collect(Collectors.toCollection(ArrayList::new));
+		if (districtIsBuilt.size() != 1)
+			return false;
+
+		return true;
 	}
 }

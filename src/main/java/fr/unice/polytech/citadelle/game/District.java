@@ -4,7 +4,7 @@ package fr.unice.polytech.citadelle.game;
  * A District is a card that represent a plan for building a district.
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
-public class District {
+public class District implements Comparable<District>{
     private final String name;
     private final int value;
     private String color;
@@ -45,4 +45,9 @@ public class District {
     public String toString(){
         return("District "+name+" ("+value+")");
     }
+
+	@Override
+	public int compareTo(District d) {
+        return this.value - d.value;
+	}
 }
