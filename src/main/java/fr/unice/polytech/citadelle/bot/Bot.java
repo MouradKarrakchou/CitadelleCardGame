@@ -16,10 +16,10 @@ import fr.unice.polytech.citadelle.game.Character;
  */
 public class Bot {
 	// The player controlled by the bot.
-	private final Player player;
-	private final PrintCitadels printC = new PrintCitadels();
-	private Boolean botIsKing=false;
-	int numberOfCharacter=8;
+	protected final Player player;
+	protected final PrintCitadels printC = new PrintCitadels();
+	protected Boolean botIsKing=false;
+	protected int numberOfCharacter=8;
 
 	public Bot(Player player) {
 		this.player = player;
@@ -97,12 +97,12 @@ public class Bot {
 			else
 				normalBehaviour(deckDistrict);
 
-			ifPossibleBuildADistrict();
-			return (player.getCity().isComplete());}
+			return (player.getCity().isComplete());
+		}
 		else{
 			printC.botIsDead(player);
-			player.getCharacter().setCharacterIsAlive(true);
-			return(false);
+			player.getCharacter().setCharacterIsAlive(true); // c'est le game engine qui doit le faire, peut-être à la fin de chaque tour chaque joueur mort est réanimé
+			return false;
 		}
 	}
 
@@ -113,24 +113,28 @@ public class Bot {
 			printC.printTakeGold(player);
 			player.addGold();
 		}
+		ifPossibleBuildADistrict();
 	}
 
 	private void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame",player);
 		takeCard(deckDistrict);
+		ifPossibleBuildADistrict();
 	}
 
 	private void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("LAST TURN",player);
 		takeCard(deckDistrict);
+		ifPossibleBuildADistrict();
 	}
 
 	public void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = player.listOfDistrictBuildable();
-		if (!districtWeCanBuild.isEmpty())
-			{player.buildDistrict(districtWeCanBuild.get(0));
+		if (!districtWeCanBuild.isEmpty()){
+			player.buildDistrict(districtWeCanBuild.get(0));
 			printC.printBuildDistrict(player,districtWeCanBuild.get(0));
-			printC.printBoardOfPlayer(player);}
+			printC.printBoardOfPlayer(player);
+		}
 	}
 
 
