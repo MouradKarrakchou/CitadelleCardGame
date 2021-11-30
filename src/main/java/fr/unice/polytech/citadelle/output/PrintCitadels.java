@@ -73,7 +73,9 @@ public class PrintCitadels {
 
     public void printBuildDistrict(Player player, District district) {
         String coloredOutput = colorize("    [+] ", GREEN_TEXT());
-        System.out.println(coloredOutput + player.getName() + " built " + district);
+        System.out.print(coloredOutput + player.getName() + " built ");
+        coloredOutput = colorize(district.toString(), getDistrictColor(district));
+        System.out.println(coloredOutput);
     }
 
     public void printBoard(Board game){
@@ -123,5 +125,16 @@ public class PrintCitadels {
 
     public void printMerchantEarnedMoney(int collectGold) {
         System.out.println("The merchant has "+collectGold+" trade and handicrafts district.(+"+collectGold+" golds)." );
+    }
+
+    public Attribute getDistrictColor(District district){
+        return switch (district.getColor()) {
+            case "blue" -> BLUE_TEXT();
+            case "red" -> RED_TEXT();
+            case "yellow" -> YELLOW_TEXT();
+            case "green" -> GREEN_TEXT();
+            case "purple" -> BRIGHT_MAGENTA_TEXT();
+            default -> WHITE_TEXT();
+        };
     }
 }
