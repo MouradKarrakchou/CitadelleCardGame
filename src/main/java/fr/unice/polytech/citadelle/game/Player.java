@@ -36,7 +36,6 @@ public class Player implements Comparable<Player> {
 		city.buildDistrict(districtToBuild);
 		districtCards.remove(districtToBuild);
 		golds -= districtToBuild.getValue();
-		score += districtToBuild.getValue();
 	}
 
 	public void updateScore(int number) {

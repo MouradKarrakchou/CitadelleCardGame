@@ -52,7 +52,6 @@ public class PlayerTest {
         assertEquals(districts, player.getCity().builtDistrict);
         assertEquals(districts1, player.getDistrictCards());
         assertEquals(1, player.getGolds());
-        assertEquals(3, player.getScore());
     }
 
 }

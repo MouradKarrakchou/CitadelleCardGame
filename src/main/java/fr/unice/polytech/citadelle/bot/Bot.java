@@ -68,7 +68,7 @@ public class Bot {
 				printC.printTakeDistrictCard(player);// pas d'accord, le controller demande au printer de print les infos du
 														// bot
 				player.addDistrict(pickedDistricts.get(0));
-				return true;
+				return true; 
 			}
 
 			// Two district cards have been selected, player will take the higher one.
@@ -107,14 +107,12 @@ public class Bot {
 				lastTurnBehaviour(deckDistrict);
 			else
 				normalBehaviour(deckDistrict);
-
-			return (player.getCity().isComplete());
 		}
 		else{
 			printC.botIsDead(player);
-			player.getCharacter().setCharacterIsAlive(true); // c'est le game engine qui doit le faire, peut-être à la fin de chaque tour chaque joueur mort est réanimé
-			return false;
 		}
+		return (player.getCity().isComplete());
+
 	}
 
 	public void normalBehaviour(DeckDistrict deckDistrict) {

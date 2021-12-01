@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle.game_engine;
 
+import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ public class Referee {
         this.listOfPlayer=listOfPlayer;
     }
     public void calculateScoreOfPlayer(Player player) {
-        player.getDistrictCards().forEach(district ->
+    	ArrayList<District> city = player.getCity().getBuiltDistrict();
+    	city.forEach(district ->
         {
             player.updateScore(district.getValue());
         });
