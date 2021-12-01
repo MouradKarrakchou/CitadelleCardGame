@@ -31,7 +31,7 @@ public class DeckDistrict {
         deckDistrict.add(new District("Haunted City", 2,"Purple","Prestige"));
 
         Collections.addAll(districtsNamesWithSameNumberOfCards, "Laboratory", "Smithy", "Observatory", "Graveyard");
-        districtsNamesWithSameNumberOfCards.stream().forEach(district -> deckDistrict.add(new District(district, 5,"purple","prestige")));
+        districtsNamesWithSameNumberOfCards.stream().forEach(district -> deckDistrict.add(new District(district, 5,"Purple","prestige")));
         districtsNamesWithSameNumberOfCards.clear();
 
         Collections.addAll(districtsNamesWithSameNumberOfCards, "Library", "University", "School of Magic", "Dragon Gate");

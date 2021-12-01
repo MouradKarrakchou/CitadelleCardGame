@@ -129,11 +129,11 @@ public class PrintCitadels {
 
     public Attribute getDistrictColor(District district){
         return switch (district.getColor()) {
-            case "blue" -> BLUE_TEXT();
-            case "red" -> RED_TEXT();
-            case "yellow" -> YELLOW_TEXT();
-            case "green" -> GREEN_TEXT();
-            case "purple" -> BRIGHT_MAGENTA_TEXT();
+            case "Blue" -> BLUE_TEXT();
+            case "Red" -> RED_TEXT();
+            case "Yellow" -> YELLOW_TEXT();
+            case "Green" -> GREEN_TEXT();
+            case "Purple" -> BRIGHT_MAGENTA_TEXT();
             default -> WHITE_TEXT();
         };
     }

@@ -87,14 +87,34 @@ public class RoundManager {
 	//roi : si 3 quartiers noble construits
 	//marchand : si 3 quartier commerce construits
 	public Character chooseCharacter(Bot bot, DeckCharacter deckCharacter) {
+		int counter = 0;
+		String nameOfCharacterChosen = listOfAllCharacters.get(isThereAFamily(bot)).getName();
+		for (Character character : deckCharacter.getDeckCharacter()) {
+			if (character.getName().equals(nameOfCharacterChosen))
+				return deckCharacter.getDeckCharacter().remove(counter);
+			counter++;
+		}
+		return deckCharacter.getDeckCharacter().remove(0);
+	}
+
+	int isThereAFamily(Bot bot) {
 		Random random = new Random();
 		Player playerOfBot = bot.getPlayer();
-		ArrayList<District> districtsInACity = playerOfBot.getCity().getBuiltDistrict();
+		ArrayList<District> districtsInACity;
+		ArrayList<String> nameOfFamilies = new ArrayList<>();
 
-		districtsInACity.stream().filter(district -> district.getNameOfFamily().equals("Nobility")).count();
-		if (districtsInACity.size() >= 3) return deckCharacter.getDeckCharacter().remove(Initialiser.KING_INDEX);
+		nameOfFamilies.add("Nobility");
+		nameOfFamilies.add("Trade and Handicrafts");
 
-		return deckCharacter.getDeckCharacter().remove(random.nextInt(deckCharacter.getDeckCharacter().size()));
+		for (String familyName : nameOfFamilies) {
+			districtsInACity = playerOfBot.getCity().getBuiltDistrict();
+			districtsInACity.stream().filter(district -> district.getNameOfFamily().equals(familyName));
+			if (familyName.equals("Nobility") && districtsInACity.size() == 3) return Initialiser.KING_INDEX;
+			else if (familyName.equals("Trade and Handicrafts") && districtsInACity.size() >= 3)
+			return Initialiser.MERCHANT_INDEX;
+		}
+
+		return random.nextInt(deckCharacter.getDeckCharacter().size());
 	}
 
 
