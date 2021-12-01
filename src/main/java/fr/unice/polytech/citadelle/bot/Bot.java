@@ -116,29 +116,30 @@ public class Bot {
 	}
 
 	public void normalBehaviour(DeckDistrict deckDistrict) {
-		if (player.getDistrictCardsSize() == 0 || districtWeCanBuild(player.getDistrictCards()).size() == 0)
-			takeCard(deckDistrict);
-		else {
+		int goldOfPlayer = player.getGolds();
+		if ( goldOfPlayer == 0 || districtWeHaveEnoughMoneyToBuild(goldOfPlayer+2).size() > 0)
 			takeGold();
+		else {
+			takeCard(deckDistrict);
 		}
 		ifPossibleBuildADistrict();
 	}
 
 	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame",player);
-		takeCard(deckDistrict);
-		ifPossibleBuildADistrict();
+		normalBehaviour(deckDistrict);
 	}
 
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("LAST TURN",player);
-		takeCard(deckDistrict);
-		ifPossibleBuildADistrict();
+		normalBehaviour(deckDistrict);
 	}
 
 	protected void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()){
+			Collections.sort(districtWeCanBuild);
+			Collections.reverse(districtWeCanBuild);
 			District district = districtWeCanBuild.get(0);
 			buildDistrict(district);
 		}
