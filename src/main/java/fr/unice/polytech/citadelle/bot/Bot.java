@@ -68,7 +68,7 @@ public class Bot {
 				printC.printTakeDistrictCard(player);// pas d'accord, le controller demande au printer de print les infos du
 														// bot
 				player.addDistrict(pickedDistricts.get(0));
-				return true;
+				return true; 
 			}
 
 			// Two district cards have been selected, player will take the higher one.
@@ -107,40 +107,39 @@ public class Bot {
 				lastTurnBehaviour(deckDistrict);
 			else
 				normalBehaviour(deckDistrict);
-
-			return (player.getCity().isComplete());
 		}
 		else{
 			printC.botIsDead(player);
-			player.getCharacter().setCharacterIsAlive(true); // c'est le game engine qui doit le faire, peut-être à la fin de chaque tour chaque joueur mort est réanimé
-			return false;
 		}
+		return (player.getCity().isComplete());
+
 	}
 
 	public void normalBehaviour(DeckDistrict deckDistrict) {
-		if (player.getDistrictCardsSize() == 0 || districtWeCanBuild(player.getDistrictCards()).size() == 0)
-			takeCard(deckDistrict);
-		else {
+		int goldOfPlayer = player.getGolds();
+		if ( goldOfPlayer == 0 || districtWeHaveEnoughMoneyToBuild(goldOfPlayer+2).size() > 0)
 			takeGold();
+		else {
+			takeCard(deckDistrict);
 		}
 		ifPossibleBuildADistrict();
 	}
 
 	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame",player);
-		takeCard(deckDistrict);
-		ifPossibleBuildADistrict();
+		normalBehaviour(deckDistrict);
 	}
 
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("LAST TURN",player);
-		takeCard(deckDistrict);
-		ifPossibleBuildADistrict();
+		normalBehaviour(deckDistrict);
 	}
 
 	protected void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()){
+			Collections.sort(districtWeCanBuild);
+			Collections.reverse(districtWeCanBuild);
 			District district = districtWeCanBuild.get(0);
 			buildDistrict(district);
 		}

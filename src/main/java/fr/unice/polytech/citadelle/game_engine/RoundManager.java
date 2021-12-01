@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.*;
@@ -18,7 +19,6 @@ public class RoundManager {
 
 	DeckDistrict deckDistrict;
 	DeckCharacter deckCharacter;
-	ArrayList<Player> listOfPlayer;
 	ArrayList<Bot> listOfBot;
 	ArrayList<Character> listOfAllCharacters;
 	LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
@@ -36,7 +36,6 @@ public class RoundManager {
 	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot,
 			ArrayList<Character> listOfAllCharacters,LinkedHashMap<Character, Optional<Bot>> hashOfCharacters,
 			PrintCitadels printC, Board board) {
-		this.listOfPlayer = listOfPlayer;
 		this.listOfBot = listOfBot;
 		this.listOfAllCharacters = listOfAllCharacters;
 		this.hashOfCharacters = hashOfCharacters;
@@ -48,8 +47,9 @@ public class RoundManager {
 	}
 
 	public void runRounds(PhaseManager phaseManager, Initialiser initialiser) {
+		
 		while ((currentPhase = phaseManager
-				.analyseGame(getTheListOfCity(listOfPlayer))) != PhaseManager.LAST_TURN_PHASE) {
+				.analyseGame(getTheListOfCity(getListOfPlayers()))) != PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(roundNumber);
 			updateListOfBot();
@@ -59,6 +59,7 @@ public class RoundManager {
 
 			printC.printBoard(board);
 			printC.printLayer();
+			reviveAll();
 		}
 	}
 
@@ -120,6 +121,7 @@ public class RoundManager {
 
 	public void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
 		boolean aBotCompleteHisCity = false;
+		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
 		currentPhase = phaseManager.analyseGame(listOfCity);
 
@@ -137,7 +139,7 @@ public class RoundManager {
 	public boolean actionsOfTheBot(Character character, Bot bot, boolean aBotCompleteHisCity, DeckDistrict deckDistrict){
 		aBotCompleteHisCity = bot.play(deckDistrict, currentPhase,hashOfCharacters);
 		if (aBotCompleteHisCity) {
-			addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
+			//addBonusForPlayers(bot.getPlayer(), aBotCompleteHisCity);
 			currentPhase = PhaseManager.LAST_TURN_PHASE;
 		}
 		return aBotCompleteHisCity;
@@ -184,8 +186,13 @@ public class RoundManager {
 		return roundNumber;
 	}
 
-	public void setupCharacters(PhaseManager phaseMan, DeckDistrict deckDistrict, Initialiser init) {
-		// TODO Auto-generated method stub
-		
+	public void reviveAll() {
+		listOfBot.forEach(bot -> bot.getPlayer().getCharacter().setCharacterIsAlive(true));	
+	}
+	
+	public ArrayList<Player> getListOfPlayers() {
+		return (ArrayList<Player>) listOfBot.stream().
+				map(bot -> bot.getPlayer()).
+				collect(Collectors.toCollection(ArrayList::new));
 	}
 }
