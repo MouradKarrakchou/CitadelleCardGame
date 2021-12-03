@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.unice.polytech.citadelle.bot.RushBot;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 public class RushBotTest {
 	Player player1;

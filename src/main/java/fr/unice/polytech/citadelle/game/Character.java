@@ -1,6 +1,6 @@
 package fr.unice.polytech.citadelle.game;
 
-import fr.unice.polytech.citadelle.bot.Bot;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.LinkedHashMap;
@@ -37,7 +37,7 @@ public class Character {
         this.player = player;
     }
 
-    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){}
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){}
 
     public  void setCharacterIsAlive(boolean characterIsAlive) {
         this.characterIsAlive=characterIsAlive;

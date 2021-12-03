@@ -1,9 +1,9 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_interactor.Bot;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-import fr.unice.polytech.citadelle.bot.Bot;
-import fr.unice.polytech.citadelle.bot.RushBot;
 import fr.unice.polytech.citadelle.characters_class.Architect;
 import fr.unice.polytech.citadelle.characters_class.Assassin;
 import fr.unice.polytech.citadelle.characters_class.Bishop;
@@ -17,6 +15,9 @@ import fr.unice.polytech.citadelle.characters_class.Thief;
 import fr.unice.polytech.citadelle.characters_class.Warlord;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.NormalBot;
+import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 /**
  * The Initialiser initialize all objects needed for a game
@@ -39,13 +40,13 @@ public class Initialiser {
 	public Initialiser() {}
 
 	
-	public void initAll(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Bot> listOfBot, ArrayList<Player> listOfPlayer){
+	public void initAll(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Behaviour> listOfBehaviour, ArrayList<Player> listOfPlayer){
 		initListOfAllCharacter(listOfAllCharacters);
 		initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
-		initListOfBot(listOfBot, listOfPlayer);
+		initListOfBehaviour(listOfBehaviour, listOfPlayer);
 	}
 	
-	public void initHashOfCharacter(LinkedHashMap<Character, Optional<Bot>> hashOfCharacters,
+	public void initHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
 			ArrayList<Character> listOfAllCharacters) {
 
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
@@ -78,18 +79,18 @@ public class Initialiser {
 		listOfAllCharacters.add(theWarlord);
 	}
 	
-	public void initListOfBot(ArrayList<Bot> listOfBot, ArrayList<Player> listOfPlayer){
+	public void initListOfBehaviour(ArrayList<Behaviour> listOfBehaviour, ArrayList<Player> listOfPlayer){
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
-			Player newPlayer = new Player("robot" + i);
-			listOfBot.add(new Bot(newPlayer));
+			Player newPlayer = new Player("roBehaviour" + i);
+			listOfBehaviour.add(new NormalBot(newPlayer));
 			listOfPlayer.add(newPlayer);
 		}
-		Player newPlayer = new Player("robot_Rusher");
-		listOfBot.add(new RushBot(newPlayer));
+		Player newPlayer = new Player("roBehaviour_Rusher");
+		listOfBehaviour.add(new RushBot(newPlayer));
 		listOfPlayer.add(newPlayer);
 	}
 	
-	public void fillHashOfCharacter(HashMap<Character, Optional<Bot>> hashOfCharacters, Character character, Bot bot) {
-		hashOfCharacters.put(character, Optional.of(bot));
+	public void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
+		hashOfCharacters.put(character, Optional.of(Behaviour));
 	}
 }

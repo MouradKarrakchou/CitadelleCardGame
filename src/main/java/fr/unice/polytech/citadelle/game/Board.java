@@ -1,10 +1,9 @@
 package fr.unice.polytech.citadelle.game;
 
-import fr.unice.polytech.citadelle.bot.Bot;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
+
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+
 
 /**
  * A Game represent a instance of the game Citadelle with all the cards and players that go with.
@@ -12,19 +11,19 @@ import java.util.LinkedHashMap;
  */
 public class Board {
     private ArrayList<Player> listOfPlayer;
-    private ArrayList<Bot> listOfBot;
+    private ArrayList<Behaviour> listOfBehaviour;
 
 
-    public Board( ArrayList<Player> listOfPlayer, ArrayList<Bot> listOfBot) {
+    public Board( ArrayList<Player> listOfPlayer, ArrayList<Behaviour> listOfBehaviour) {
         this.listOfPlayer = listOfPlayer;
-        this.listOfBot = listOfBot;
+        this.listOfBehaviour = listOfBehaviour;
     }
 
     public ArrayList<Player> getListOfPlayer(){
         return listOfPlayer;
     }
 
-    public ArrayList<Bot> getListOfBot() {
-        return listOfBot;
+    public ArrayList<Behaviour> getListOfBehaviour() {
+        return listOfBehaviour;
     }}
 

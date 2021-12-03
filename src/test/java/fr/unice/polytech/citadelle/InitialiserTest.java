@@ -11,12 +11,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Any;
 
-import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
+import fr.unice.polytech.citadelle.game_interactor.Bot;
 
 public class InitialiserTest {
 	Initialiser init;

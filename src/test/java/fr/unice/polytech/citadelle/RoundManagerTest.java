@@ -16,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.City;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
@@ -26,6 +25,7 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
+import fr.unice.polytech.citadelle.game_interactor.Bot;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class RoundManagerTest {

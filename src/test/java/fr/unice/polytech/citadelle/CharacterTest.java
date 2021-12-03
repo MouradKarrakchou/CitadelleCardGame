@@ -1,9 +1,9 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game_interactor.Bot;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

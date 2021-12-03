@@ -96,7 +96,7 @@ public class DeckDistrict {
         return deckDistrict.size();
     }
 
-    public District chooseDistrict() {
+    public District pickBlindDistrict() {
         // Select a random district from the deck
         Random random = new Random();
         int randomValue = random.nextInt(deckDistrict.size());
@@ -108,6 +108,10 @@ public class DeckDistrict {
     public void addDistrict(District district){
         deckDistrict.add(district);
     }
+
+	public void removeDistrict(District district) {
+        deckDistrict.remove(district);
+	}
     
     
 }

@@ -1,8 +1,8 @@
 package fr.unice.polytech.citadelle.characters_class;
 
-import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.LinkedHashMap;
@@ -16,7 +16,7 @@ public class Assassin extends Character{
     }
 
     @Override
-    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
         Character characterToDie= bot.selectCharacterForSpell(hashOfCharacters);
         if (hashOfCharacters.get(characterToDie).isPresent()) hashOfCharacters.get(characterToDie).get().setCharacterIsAlive(false);
         printC.killCharacter(characterToDie);

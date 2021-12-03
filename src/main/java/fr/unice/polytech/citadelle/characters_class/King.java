@@ -6,8 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
-import fr.unice.polytech.citadelle.bot.Bot;
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -16,7 +16,7 @@ public class King extends Character {
         super("King", 4 );
     }
 
-    private int collectGold(Bot bot){
+    private int collectGold(Behaviour bot){
         int goldEarned=bot.getPlayer().getCity().getBuiltDistrict().stream()
                 .filter(district -> district.getNameOfFamily().equals("Nobility"))
                 .map(district ->1)
@@ -25,8 +25,8 @@ public class King extends Character {
         return(goldEarned);
     }
     @Override
-    public void spellOfTurn(Bot bot, LinkedHashMap<Character, Optional<Bot>> hashOfCharacters, PrintCitadels printC){
-        List<Optional<Bot>> listOfBot=hashOfCharacters.values().stream().toList();
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
+        List<Optional<Behaviour>> listOfBot=hashOfCharacters.values().stream().toList();
         for (int i=0;i<listOfBot.size();i++){
             if (listOfBot.get(i).isPresent()&&bot.equals(listOfBot.get(i).get()))
                 bot.setBotIsKing(true);
