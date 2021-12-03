@@ -137,7 +137,7 @@ public class Behaviour {
 	/*
 	 * For the two cards chosen look if they are present in the city or the hand, if yes we discard the card
 	 * */
-	private ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards, DeckDistrict deckDistrict) {
+	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards, DeckDistrict deckDistrict) {
 		ArrayList<District> removeDistrictCards = new ArrayList<District>();
 		for(int i = 0 ; i < 2 ; i++) {
 			District currentDistrictCard = pickedDistrictCards.get(i);
@@ -155,7 +155,7 @@ public class Behaviour {
 		return (random.nextInt(scope));
 	}
 
-	public void setBotIsKing(Boolean BehaviourIsKing) {
+	public void setBehaviourIsKing(Boolean BehaviourIsKing) {
 		this.botIsKing = BehaviourIsKing;
 	}
 
@@ -163,8 +163,16 @@ public class Behaviour {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
 	}
 
-	public Boolean getBotIsKing() {
+	public Boolean getBehaviourIsKing() {
 		return botIsKing;
+	}
+
+	public CityManagement getCityManager() {
+		return cityMan;
+	}
+	
+	public Executor getExecutor() {
+		return executor;
 	}
 
 }

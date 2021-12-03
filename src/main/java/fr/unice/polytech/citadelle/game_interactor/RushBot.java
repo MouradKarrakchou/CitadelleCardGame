@@ -26,9 +26,9 @@ public class RushBot extends Behaviour {
 		if (player.getDistrictCardsSize() == 0 || cheapersDistrictsBuildable.size() == 0) {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
-				executor.takeCard(districtCardChoosen.get(), deckDistrict);
+				takeCard(districtCardChoosen.get(), deckDistrict);
 			else
-				executor.takeGold();
+				takeGold();
 		}
 		else {
 			executor.takeGold();
@@ -45,9 +45,9 @@ public class RushBot extends Behaviour {
 		else {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
-				executor.takeCard(districtCardChoosen.get(), deckDistrict);
+				takeCard(districtCardChoosen.get(), deckDistrict);
 			else
-				executor.takeGold();
+				takeGold();
 		}
 	
 		ifPossibleBuildADistrict();
@@ -80,6 +80,16 @@ public class RushBot extends Behaviour {
 		return listOfDistrictsOfPlayer.stream().filter(district -> district.getValue() <= MAX_VALUES_OF_CARDS)
 				.collect(Collectors.toCollection(ArrayList::new));
 
+	}
+
+
+	public void takeCard(Object any, DeckDistrict deckDistrict) {
+		executor.takeCard(null, deckDistrict);
+	}
+
+
+	public void takeGold() {
+		executor.takeGold();		
 	}
 
 	

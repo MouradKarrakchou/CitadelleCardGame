@@ -48,7 +48,7 @@ public class RoundManager {
 			printC.printNumberRound(roundNumber);
 			updateListOfBehaviour();
 
-			setupCharacters(board.getDeckCharacter(), initialiser);
+			setupCharacters(initialiser);
 			askEachCharacterToPlay(phaseManager, board.getDeckDistrict(), initialiser);
 
 			printC.printBoard(board);
@@ -61,7 +61,13 @@ public class RoundManager {
 		return listOfPlayer.stream().map(p -> p.getCity()).collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	public void setupCharacters(DeckCharacter deckCharacter, Initialiser initialiser) {
+	/**
+	 * Initialise the deck of character then for each behaviour, choose a characterCard
+	 * @param deckCharacter
+	 * @param initialiser
+	 */
+	public void setupCharacters(Initialiser initialiser) {
+		DeckCharacter deckCharacter = board.getDeckCharacter();
 		deckCharacter.initialise(listOfAllCharacters);
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, initialiser, deckCharacter));
 		printC.dropALine();
@@ -111,8 +117,6 @@ public class RoundManager {
 
 		return random.nextInt(board.getDeckCharacter().getSize());
 	}
-
-
 	public void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
 		boolean aBehaviourCompleteHisCity = false;
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
@@ -122,6 +126,7 @@ public class RoundManager {
 		for (Entry<Character, Optional<Behaviour>> entry : hashOfCharacters.entrySet()) {
 			Character character = entry.getKey();
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
+			
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
 				if(currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive())
@@ -163,8 +168,8 @@ public class RoundManager {
 	}
 	public int findKing(ArrayList<Behaviour> listOfBehaviour){
 		for (int k=0;k<listOfBehaviour.size();k++){
-			if (listOfBehaviour.get(k).getBotIsKing()) {
-				listOfBehaviour.get(k).setBotIsKing(false);
+			if (listOfBehaviour.get(k).getBehaviourIsKing()) {
+				listOfBehaviour.get(k).setBehaviourIsKing(false);
 				return(k);}}
 		return(-1);
 	}

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -25,7 +26,7 @@ public class RushBotTest {
 		 player1 = new Player("Player1");
 		 rushBot = spy(new RushBot(player1));
 		 deckDistrict = new DeckDistrict();
-		 deckDistrict.initializer();
+		 deckDistrict.initialise();
 	}
 
 	@Test
@@ -33,7 +34,7 @@ public class RushBotTest {
 		ArrayList<District> districtsCards = player1.getDistrictCards();
 		districtsCards.clear();
 		rushBot.normalBehaviour(deckDistrict);
-        verify(rushBot, times(1)).takeCard(any());
+        verify(rushBot, times(1)).takeCard(any(), deckDistrict);
         verify(rushBot, times(0)).takeGold();
 	}
 	
@@ -44,7 +45,7 @@ public class RushBotTest {
 		districtsCards.clear();
 		districtsCards.add(new District("testDistrict", tooExpansiveValue, "testColor", "testFamily"));
 		rushBot.normalBehaviour(deckDistrict);
-        verify(rushBot, times(1)).takeCard(any());
+        verify(rushBot, times(1)).takeCard(any(), deckDistrict);
         verify(rushBot, times(0)).takeGold();
 	}
 	
@@ -55,7 +56,7 @@ public class RushBotTest {
 		districtsCards.clear();
 		districtsCards.add(new District("testDistrict", cheapValue, "testColor", "testFamily"));
 		rushBot.normalBehaviour(deckDistrict);
-        verify(rushBot, times(0)).takeCard(any());
+        verify(rushBot, times(0)).takeCard(any(), deckDistrict);
         verify(rushBot, times(1)).takeGold();
 	}
 	
@@ -66,7 +67,7 @@ public class RushBotTest {
 		ArrayList<District> districtsCards = player1.getDistrictCards();
 		districtsCards.clear();
 		rushBot.endGameBehaviour(deckDistrict);
-        verify(rushBot, times(1)).takeCard(any());
+        verify(rushBot, times(1)).takeCard(any(), deckDistrict);
         verify(rushBot, times(0)).takeGold();
 	}
 	
@@ -78,7 +79,6 @@ public class RushBotTest {
 		districtsCards.add(new District("testDistrict", tooExpansiveValue, "testColor", "testFamily"));
 		rushBot.getPlayer().setGolds(1);
 		rushBot.endGameBehaviour(deckDistrict);
-        verify(rushBot, times(0)).takeCard(any());
         verify(rushBot, times(1)).takeGold();
 	}
 	

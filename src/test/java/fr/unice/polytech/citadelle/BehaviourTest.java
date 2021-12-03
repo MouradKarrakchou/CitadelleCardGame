@@ -3,7 +3,7 @@ package fr.unice.polytech.citadelle;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.Bot;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,17 +14,17 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 
-public class BotTest {
+public class BehaviourTest {
 	private Player player01;
-	private Bot botOfPlayer01;
+	private Behaviour botOfPlayer01;
 	DeckDistrict deckDistrict;
 
 	@BeforeEach
 	public void init() {
 		player01 = new Player("Player01");
-		botOfPlayer01 = spy(new Bot(player01));
+		botOfPlayer01 = spy(new Behaviour(player01));
 		deckDistrict = new DeckDistrict();
-		deckDistrict.initializer();
+		deckDistrict.initialise();
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class BotTest {
 		pickedDistricts.add(districtOfValue1);
 		pickedDistricts.add(districtOfValue7);
 
-		assertTrue(botOfPlayer01.districtCardIsSelected(mockedDeckDistrict, pickedDistricts));
+		assertTrue(botOfPlayer01.chooseToKeepOrNotPickedCards(pickedDistricts, mockedDeckDistrict));
 		assertTrue(player01.getDistrictCards().contains(districtOfValue7));
 		verify(mockedDeckDistrict, times(1)).addDistrict(any());
 		verifyNoMoreInteractions(mockedDeckDistrict);
@@ -105,7 +105,7 @@ public class BotTest {
 		pickedDistricts.add(districtOfValue4);
 		pickedDistricts.add(districtOfValue2);
 
-		assertTrue(botOfPlayer01.districtCardIsSelected(mockedDeckDistrict, pickedDistricts));
+		assertTrue(botOfPlayer01.chooseToKeepOrNotPickedCards(pickedDistricts, mockedDeckDistrict));
 		assertTrue(player01.getDistrictCards().contains(districtOfValue2));
 
 		verify(mockedDeckDistrict, times(1)).addDistrict(any());
@@ -133,7 +133,7 @@ public class BotTest {
 		pickedDistricts.add(districtOfValue4);
 		pickedDistricts.add(districtOfValue7);
 
-		assertFalse(botOfPlayer01.districtCardIsSelected(mockedDeckDistrict, pickedDistricts));
+		assertFalse(botOfPlayer01.chooseToKeepOrNotPickedCards(mockedDeckDistrict, pickedDistricts));
 		assertFalse(player01.getDistrictCards().contains(districtOfValue4));
 
 		verify(mockedDeckDistrict, times(2)).addDistrict(any());
@@ -266,8 +266,8 @@ public class BotTest {
 	 * int cheapValue = 3; ArrayList<District> districtsCards =
 	 * player1.getDistrictCards(); districtsCards.clear(); districtsCards.add(new
 	 * District("testDistrict", cheapValue, "testColor", "testFamily"));
-	 * rushBot.normalBehaviour(deckDistrict); verify(rushBot,
-	 * times(0)).takeCard(any()); verify(rushBot, times(1)).takeGold();
+	 * rushBehaviour.normalBehaviour(deckDistrict); verify(rushBehaviour,
+	 * times(0)).takeCard(any()); verify(rushBehaviour, times(1)).takeGold();
 	 */
 
 	/**

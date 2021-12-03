@@ -3,7 +3,7 @@ package fr.unice.polytech.citadelle;
 import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game_interactor.Bot;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class CharacterTest {
-    private LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
-    Bot botArchitecte;
-    Bot botBishop;
-    Bot botMagician;
-    Bot botAssassin;
-    Bot botKing;
-    Bot botThief;
-    Bot botMerchant;
-    Bot botWarlord;
+    private LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
+    Behaviour botArchitecte;
+    Behaviour botBishop;
+    Behaviour botMagician;
+    Behaviour botAssassin;
+    Behaviour botKing;
+    Behaviour botThief;
+    Behaviour botMerchant;
+    Behaviour botWarlord;
     Architect architect;
     Bishop bishop;
     Magician magician;
@@ -35,22 +35,22 @@ public class CharacterTest {
     Warlord warlord;
 
     PrintCitadels printC;
-    ArrayList<Bot> listOfBot;
+    ArrayList<Behaviour> listOfBehaviour;
 
     @BeforeEach
     public void init(){
         hashOfCharacters = new LinkedHashMap<>();
         printC=new PrintCitadels();
 
-        //creation of Bot
-        botArchitecte = new Bot(new Player("architectePlayer"));
-        botBishop =new Bot(new Player("bishopPlayer"));
-        botMagician = new Bot(new Player("magicianPlayer"));
-        botAssassin = new Bot(new Player("assassinPlayer"));
-        botKing=new Bot(new Player("kingPlayer"));
-        botThief=spy(new Bot(new Player("thiefPlayer")));
-        botMerchant=new Bot(new Player("merchantPlayer"));
-        botWarlord=new Bot(new Player("warlordPlayer"));
+        //creation of Behaviour
+        botArchitecte = new Behaviour(new Player("architectePlayer"));
+        botBishop =new Behaviour(new Player("bishopPlayer"));
+        botMagician = new Behaviour(new Player("magicianPlayer"));
+        botAssassin = new Behaviour(new Player("assassinPlayer"));
+        botKing=new Behaviour(new Player("kingPlayer"));
+        botThief=spy(new Behaviour(new Player("thiefPlayer")));
+        botMerchant=new Behaviour(new Player("merchantPlayer"));
+        botWarlord=new Behaviour(new Player("warlordPlayer"));
 
         //creation of the characters in game
         architect=new Architect();
@@ -85,18 +85,18 @@ public class CharacterTest {
 
 
         //creation of the bot List
-        listOfBot=new ArrayList<>();
-        listOfBot.add(botArchitecte);
-        listOfBot.add(botBishop);
-        listOfBot.add(botMagician);
+        listOfBehaviour=new ArrayList<>();
+        listOfBehaviour.add(botArchitecte);
+        listOfBehaviour.add(botBishop);
+        listOfBehaviour.add(botMagician);
     }
 
     @Test
     void assassinatePlayer(){
         //initialize
-        botAssassin = mock(Bot.class);
+        botAssassin = mock(Behaviour.class);
 
-        listOfBot.add(botAssassin);
+        listOfBehaviour.add(botAssassin);
 
         //Creation of a mock for bot and the magician becomes the target
         when(botAssassin.selectCharacterForSpell(hashOfCharacters)).thenReturn(magician);
@@ -111,16 +111,16 @@ public class CharacterTest {
     @Test
     void testKingPlayFirst(){
         //initialize
-        listOfBot.add(botKing);
+        listOfBehaviour.add(botKing);
 
         //The king plays and the players after him plays
         king.spellOfTurn(botKing,hashOfCharacters,printC);
-        assertEquals(true,botKing.getBotIsKing());
+        assertEquals(true,botKing.getBehaviourIsKing());
     }
     @Test
     void testKingEarnsMoney(){
         //initialize
-        listOfBot.add(botKing);
+        listOfBehaviour.add(botKing);
 
         //The king plays and the players after him plays
         botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
@@ -134,7 +134,7 @@ public class CharacterTest {
     @Test
     void testThiefStealsGolds(){
         //initialize
-        listOfBot.add(botThief);
+        listOfBehaviour.add(botThief);
         //Setting the golds of our thief and magician
         botThief.getPlayer().setGolds(3);
         botMagician.getPlayer().setGolds(4);

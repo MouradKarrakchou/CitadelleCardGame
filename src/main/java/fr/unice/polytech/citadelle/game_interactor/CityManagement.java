@@ -21,12 +21,12 @@ public class CityManagement {
 		return districtWeCanBuild(districtWeHaveEnoughMoneyToBuild(player.getGolds()));
 	}
 	
-	ArrayList<District> districtWeCanBuild(ArrayList<District> districtCheapEnough) {
+	public ArrayList<District> districtWeCanBuild(ArrayList<District> districtCheapEnough) {
 		return districtCheapEnough.stream().filter(district -> !(isAlreadyBuilt(district.getName())))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	ArrayList<District> districtWeHaveEnoughMoneyToBuild(int gold) {
+	public ArrayList<District> districtWeHaveEnoughMoneyToBuild(int gold) {
 		return player.getDistrictCards().stream().filter(district -> district.getValue() <= gold)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
