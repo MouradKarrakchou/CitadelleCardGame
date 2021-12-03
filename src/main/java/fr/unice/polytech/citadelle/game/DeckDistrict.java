@@ -14,10 +14,9 @@ public class DeckDistrict {
 
     public DeckDistrict() {
         deckDistrict = new ArrayList<>();
-        this.initializer();
     }
 
-    public void initializer(){
+    public void initialise(){
         oneCard();
         doubleCards();
         tripleCards();

@@ -13,7 +13,10 @@ import fr.unice.polytech.citadelle.characters_class.Magician;
 import fr.unice.polytech.citadelle.characters_class.Merchant;
 import fr.unice.polytech.citadelle.characters_class.Thief;
 import fr.unice.polytech.citadelle.characters_class.Warlord;
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.DeckCharacter;
+import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.NormalBot;
@@ -40,15 +43,14 @@ public class Initialiser {
 	public Initialiser() {}
 
 	
-	public void initAll(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Behaviour> listOfBehaviour, ArrayList<Player> listOfPlayer){
-		initListOfAllCharacter(listOfAllCharacters);
-		initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
-		initListOfBehaviour(listOfBehaviour, listOfPlayer);
+	public void initAll(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Player> listOfPlayer, ArrayList<Behaviour> listOfBehaviour){
+		createListOfAllCharacter(listOfAllCharacters);
+		resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
+		createListOfBehaviour(listOfBehaviour, listOfPlayer);
 	}
 	
-	public void initHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
+	public LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
 			ArrayList<Character> listOfAllCharacters) {
-
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), Optional.empty());
@@ -57,9 +59,11 @@ public class Initialiser {
 		hashOfCharacters.put(listOfAllCharacters.get(MERCHANT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(ARCHITECT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(WARLORD_INDEX), Optional.empty());
+		
+		return hashOfCharacters;
 	}
 	
-	public void initListOfAllCharacter(ArrayList<Character> listOfAllCharacters) {
+	public ArrayList<Character> createListOfAllCharacter(ArrayList<Character> listOfAllCharacters) {
 		Assassin theAssassin = new Assassin();
 		Thief theThief = new Thief();
 		Magician theMagician = new Magician();
@@ -77,20 +81,40 @@ public class Initialiser {
 		listOfAllCharacters.add(theMerchant);
 		listOfAllCharacters.add(theArchitect);
 		listOfAllCharacters.add(theWarlord);
+		
+		return listOfAllCharacters;
 	}
 	
-	public void initListOfBehaviour(ArrayList<Behaviour> listOfBehaviour, ArrayList<Player> listOfPlayer){
+	public ArrayList<Behaviour> createListOfBehaviour(ArrayList<Behaviour> listOfBehaviour, ArrayList<Player> listOfPlayer){
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("roBehaviour" + i);
 			listOfBehaviour.add(new NormalBot(newPlayer));
-			listOfPlayer.add(newPlayer);
+			listOfPlayer .add(newPlayer);
 		}
 		Player newPlayer = new Player("roBehaviour_Rusher");
 		listOfBehaviour.add(new RushBot(newPlayer));
 		listOfPlayer.add(newPlayer);
+		
+		return listOfBehaviour;
+
 	}
 	
 	public void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
 		hashOfCharacters.put(character, Optional.of(Behaviour));
+	}
+	
+	public Board createBoard(ArrayList<Character> listOfCharacter){
+		Board board = new Board(new ArrayList<Player>(), new DeckDistrict(), new DeckCharacter(listOfCharacter));
+		return board;
+	}
+	
+	public DeckDistrict initDeckDistrict(DeckDistrict deck) {
+		deck.initialise();
+		return deck;
+	}
+	
+	public DeckCharacter initDeckCharacter(DeckCharacter deck, ArrayList<Character> listOfCharacter) {
+		deck.initialise(listOfCharacter);
+		return deck;
 	}
 }

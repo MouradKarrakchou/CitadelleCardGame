@@ -13,7 +13,7 @@ import fr.unice.polytech.citadelle.game_engine.RoundManager;
 public class DeckCharacter {
     private final ArrayList<Character> deckCharacter;
 
-    public DeckCharacter() {
+    public DeckCharacter(ArrayList<Character> listOfCharacters) {
         deckCharacter = new ArrayList<>();
     }
 
@@ -38,4 +38,7 @@ public class DeckCharacter {
 		return deckCharacter;
 	}
 
+	public int getSize(){
+		return deckCharacter.size();
+	}
 }

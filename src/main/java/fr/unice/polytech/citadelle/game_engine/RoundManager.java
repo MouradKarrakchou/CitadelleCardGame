@@ -17,33 +17,27 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  */
 public class RoundManager {
 
-	DeckDistrict deckDistrict;
-	DeckCharacter deckCharacter;
-	ArrayList<Behaviour> listOfBehaviour;
-	ArrayList<Character> listOfAllCharacters;
-	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
-	PrintCitadels printC;
-	Board board;
+	private ArrayList<Behaviour> listOfBehaviour;
+	private ArrayList<Character> listOfAllCharacters;
+	private LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
+	private Board board;
+	
+	private PrintCitadels printC;
 
 
+	private String currentPhase;
+	private int roundNumber = 0;
 
-	String currentPhase;
 
 	public static final int BONUS_FIRST = 4;
 	public static final int BONUS_END = 2;
-	int roundNumber = 0;
-
-	public RoundManager(ArrayList<Player> listOfPlayer, ArrayList<Behaviour> listOfBehaviour,
-			ArrayList<Character> listOfAllCharacters,LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
-			PrintCitadels printC, Board board) {
-		this.listOfBehaviour = listOfBehaviour;
-		this.listOfAllCharacters = listOfAllCharacters;
-		this.hashOfCharacters = hashOfCharacters;
-		this.printC = printC;
-		this.board = board;
-		this.deckCharacter = new DeckCharacter();
-		this.deckDistrict = new DeckDistrict();
-
+	
+	public RoundManager() {
+		this.listOfAllCharacters = new ArrayList<Character>();
+		this.listOfBehaviour = new ArrayList<Behaviour>();
+		this.hashOfCharacters = new LinkedHashMap<Character, Optional<Behaviour>>();
+		this.board = new Board(getListOfPlayers(), new DeckDistrict(), new DeckCharacter(listOfAllCharacters));
+		this.printC = new PrintCitadels();
 	}
 
 	public void runRounds(PhaseManager phaseManager, Initialiser initialiser) {
@@ -54,8 +48,8 @@ public class RoundManager {
 			printC.printNumberRound(roundNumber);
 			updateListOfBehaviour();
 
-			setupCharacters(deckCharacter, initialiser);
-			askEachCharacterToPlay(phaseManager, deckDistrict, initialiser);
+			setupCharacters(board.getDeckCharacter(), initialiser);
+			askEachCharacterToPlay(phaseManager, board.getDeckDistrict(), initialiser);
 
 			printC.printBoard(board);
 			printC.printLayer();
@@ -115,7 +109,7 @@ public class RoundManager {
 			return Initialiser.MERCHANT_INDEX;
 		}
 
-		return random.nextInt(deckCharacter.getDeckCharacter().size());
+		return random.nextInt(board.getDeckCharacter().getSize());
 	}
 
 
@@ -127,13 +121,17 @@ public class RoundManager {
 
 		for (Entry<Character, Optional<Behaviour>> entry : hashOfCharacters.entrySet()) {
 			Character character = entry.getKey();
-			Optional<Behaviour> bot = entry.getValue();
-			if (bot.isPresent()) {
-				aBehaviourCompleteHisCity = actionsOfTheBehaviour(character, bot.get(), aBehaviourCompleteHisCity, deckDistrict);
+			Optional<Behaviour> optionalBehaviour = entry.getValue();
+			if (optionalBehaviour.isPresent()) {
+				Behaviour currentBehaviour = optionalBehaviour.get();
+				if(currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive())
+					aBehaviourCompleteHisCity = actionsOfTheBehaviour(character, currentBehaviour, aBehaviourCompleteHisCity, deckDistrict);
+				else
+					printC.botIsDead(currentBehaviour.getPlayer());
 			}
 		}
+		initialiser.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 		roundNumber++;
-		initialiser.initHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 	}
 
 	public boolean actionsOfTheBehaviour(Character character, Behaviour bot, boolean aBehaviourCompleteHisCity, DeckDistrict deckDistrict){
@@ -195,4 +193,23 @@ public class RoundManager {
 				map(bot -> bot.getPlayer()).
 				collect(Collectors.toCollection(ArrayList::new));
 	}
+
+	public ArrayList<Behaviour> getListOfBehaviour() {
+		return listOfBehaviour;
+	}
+
+	public ArrayList<Character> getListOfAllCharacters() {
+		return listOfAllCharacters;
+	}
+
+	public LinkedHashMap<Character, Optional<Behaviour>> getHashOfCharacters() {
+		return hashOfCharacters;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	
+	
 }

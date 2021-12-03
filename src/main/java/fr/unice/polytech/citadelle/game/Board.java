@@ -11,19 +11,33 @@ import fr.unice.polytech.citadelle.game_interactor.Behaviour;
  */
 public class Board {
     private ArrayList<Player> listOfPlayer;
-    private ArrayList<Behaviour> listOfBehaviour;
+    private DeckDistrict deckDistrict;
+    private DeckCharacter deckCharacter;
 
 
-    public Board( ArrayList<Player> listOfPlayer, ArrayList<Behaviour> listOfBehaviour) {
+
+    public Board( ArrayList<Player> listOfPlayer, DeckDistrict deckDistrict,DeckCharacter deckCharacter) {
         this.listOfPlayer = listOfPlayer;
-        this.listOfBehaviour = listOfBehaviour;
+        this.deckDistrict = deckDistrict;
+        this.deckCharacter = deckCharacter;
     }
 
-    public ArrayList<Player> getListOfPlayer(){
+    public Board() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ArrayList<Player> getListOfPlayer(){
         return listOfPlayer;
     }
 
-    public ArrayList<Behaviour> getListOfBehaviour() {
-        return listOfBehaviour;
-    }}
+
+	public DeckDistrict getDeckDistrict() {
+		return deckDistrict;
+	}
+
+	public DeckCharacter getDeckCharacter() {
+		return deckCharacter;
+	}
+    
+}
 

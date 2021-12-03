@@ -22,29 +22,26 @@ public class Controller {
 	private Initialiser initialiser;
 	private RoundManager roundManager;
 	private PhaseManager phaseManager;
-	private ArrayList<Player> listOfPlayer;
-
-	private ArrayList<Character> listOfAllCharacters;
-	private LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
-	private ArrayList<Behaviour> listOfBehaviour;
 	private Referee referee;
 
 	
 	public Controller() {
-		listOfPlayer = new ArrayList<>();
-		listOfAllCharacters = new ArrayList<>();
-		listOfBehaviour = new ArrayList<>();
-		hashOfCharacters = new LinkedHashMap<>();
 		printC = new PrintCitadels();
 		initialiser = new Initialiser();
 		phaseManager = new PhaseManager();
-		Board board = new Board(listOfPlayer,listOfBehaviour);
-		roundManager = new RoundManager(listOfPlayer, listOfBehaviour, listOfAllCharacters,hashOfCharacters, printC, board);
-		referee=new Referee(listOfPlayer);
+		roundManager = new RoundManager();
+		referee = new Referee(roundManager.getBoard());
 	}
 
 	public void initGame() {
-		initialiser.initAll(hashOfCharacters, listOfAllCharacters, listOfBehaviour, listOfPlayer);
+		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = roundManager.getHashOfCharacters();
+		ArrayList<Behaviour> listOfBehaviour = roundManager.getListOfBehaviour();
+		ArrayList<Player> listOfPlayer = roundManager.getBoard().getListOfPlayer();
+		ArrayList<Character> listOfAllCharacters = roundManager.getListOfAllCharacters();
+
+		initialiser.initAll(hashOfCharacter, listOfAllCharacters, listOfPlayer, listOfBehaviour);
+		initialiser.initDeckCharacter(roundManager.getBoard().getDeckCharacter(), listOfAllCharacters);
+		initialiser.initDeckDistrict(roundManager.getBoard().getDeckDistrict());
 	}
 
 	public void runGame() {
@@ -54,7 +51,7 @@ public class Controller {
 
 	public void end() {
 		referee.getWinner();
-		printC.printRanking(listOfPlayer);
+		printC.printRanking(roundManager.getBoard().getListOfPlayer());
 	}
 
 }
