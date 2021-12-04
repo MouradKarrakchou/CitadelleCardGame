@@ -24,7 +24,7 @@ public class RushBot extends Behaviour {
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
-		if (player.getDistrictCardsSize() == 0 || cheapersDistrictsBuildable.size() == 0) {
+		if (cheapersDistrictsBuildable.size() == 0) {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
 				takeCard(districtCardChoosen.get(), deckDistrict);
@@ -32,8 +32,8 @@ public class RushBot extends Behaviour {
 				takeGold();
 		}
 		else {
-			executor.takeGold();
-		}
+			takeGold();
+		} 
 		ifPossibleBuildACheapDistrict();
 	}
 
@@ -43,7 +43,7 @@ public class RushBot extends Behaviour {
 		
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
 		if(futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
-			executor.takeGold();
+			takeGold();
 		else {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
@@ -60,12 +60,12 @@ public class RushBot extends Behaviour {
 		endGameBehaviour(deckDistrict);
 	}
 
-	protected void ifPossibleBuildACheapDistrict() {
+	public void ifPossibleBuildACheapDistrict() {
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
 			District cheaperDistrict = getCheaperDistrict(districtWeCanBuild);
 			if (cheaperDistrict.getValue() <= MAX_VALUES_OF_CARDS) {
-				executor.buildDistrict(cheaperDistrict);
+				buildDistrict(cheaperDistrict);
 			}
 		}
 	}

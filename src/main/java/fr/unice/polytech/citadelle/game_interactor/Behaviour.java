@@ -157,7 +157,11 @@ public class Behaviour {
 
 
 	public void takeGold() {
-		executor.takeGold();		
+		executor.takeGold();		 
+	}
+	
+	public void buildDistrict(District district) {
+		executor.buildDistrict(district);
 	}
 
 	public int randomInt(int scope) {
@@ -188,5 +192,7 @@ public class Behaviour {
 	public Executor getExecutor() {
 		return executor;
 	}
+
+	
 
 }
