@@ -18,16 +18,20 @@ public class CityManagement {
 	}
 	
 	public ArrayList<District> listOfDistrictBuildable() {
+		System.out.println("listOfDistrictBuildable, district =" + player.getDistrictCards());
 		return districtWeCanBuild(districtWeHaveEnoughMoneyToBuild(player.getGolds()));
 	}
 	
-	ArrayList<District> districtWeCanBuild(ArrayList<District> districtCheapEnough) {
-		return districtCheapEnough.stream().filter(district -> !(isAlreadyBuilt(district.getName())))
+	public ArrayList<District> districtWeCanBuild(ArrayList<District> districtCards) {
+		System.out.println("districtWeCanBuild, district =" + player.getDistrictCards());
+		return districtCards.stream().filter(district -> !(isAlreadyBuilt(district.getName())))
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	ArrayList<District> districtWeHaveEnoughMoneyToBuild(int gold) {
-		return player.getDistrictCards().stream().filter(district -> district.getValue() <= gold)
+	public ArrayList<District> districtWeHaveEnoughMoneyToBuild(int gold) {
+		System.out.println("districtWeHaveEnoughMoneyToBuild, district =" + player.getDistrictCards());
+		return player.getDistrictCards().stream().filter(district -> 
+		district.getValue() <= gold)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 	

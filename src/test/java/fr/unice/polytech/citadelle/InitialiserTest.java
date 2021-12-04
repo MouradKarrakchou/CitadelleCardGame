@@ -15,22 +15,22 @@ import org.mockito.Mockito;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
-import fr.unice.polytech.citadelle.game_interactor.Bot;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 public class InitialiserTest {
 	Initialiser init;
-	LinkedHashMap<Character, Optional<Bot>> hashOfCharacters;
+	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
 	ArrayList<Character> listOfAllCharacters;
-	ArrayList<Bot> listOfBot; 
+	ArrayList<Behaviour> listOfBehaviour; 
 	ArrayList<Player> listOfPlayer;
 
 	
 	@BeforeEach
 	public void init() {
 		init = new Initialiser();
-		hashOfCharacters= new LinkedHashMap<Character, Optional<Bot>>();
+		hashOfCharacters= new LinkedHashMap<Character, Optional<Behaviour>>();
 		listOfAllCharacters= new ArrayList<Character>();
-		listOfBot = new ArrayList<Bot>();
+		listOfBehaviour = new ArrayList<Behaviour>();
 		listOfPlayer = new ArrayList<Player>();
 
 
@@ -48,33 +48,33 @@ public class InitialiserTest {
 		listOfAllCharacters.add(new Character("test7", 7));
 
 		
-		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersSpy = spy(hashOfCharacters);
-		init.initHashOfCharacter(hashOfCharactersSpy, listOfAllCharacters);
+		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharactersSpy = spy(hashOfCharacters);
+		init.resetHashOfCharacter(hashOfCharactersSpy, listOfAllCharacters);
 		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 	
 	@Test
 	public void initListOfAllCharacterTest() {
 		ArrayList<Character> listOfAllCharactersSpy = spy(listOfAllCharacters);
-		init.initListOfAllCharacter(listOfAllCharactersSpy);
+		init.createListOfAllCharacter(listOfAllCharactersSpy);
 		verify(listOfAllCharactersSpy, times(8)).add(Mockito.any(Character.class));
 	}
 	
 	@Test
-	public void initListOfBotTest() {
-		ArrayList<Bot> listOfBotSpy = spy(listOfBot);
+	public void initListOfBehaviourTest() {
+		ArrayList<Behaviour> listOfBehaviourSpy = spy(listOfBehaviour);
 		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer); 
 		
-		init.initListOfBot(listOfBotSpy, listOfPlayerSpy);
-		verify(listOfBotSpy, times(Initialiser.NUMBER_OF_PLAYER)).add(Mockito.any(Bot.class));
+		init.createListOfBehaviour(listOfBehaviourSpy, listOfPlayerSpy);
+		verify(listOfBehaviourSpy, times(Initialiser.NUMBER_OF_PLAYER)).add(Mockito.any(Behaviour.class));
 		verify(listOfPlayerSpy, times(Initialiser.NUMBER_OF_PLAYER)).add(Mockito.any(Player.class));
 
 	}
 	
 	@Test
 	public void fillHashOfCharacterTest() {
-		LinkedHashMap<Character, Optional<Bot>> hashOfCharactersSpy = spy(hashOfCharacters);
-		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Bot(new Player("testPlayer")));
+		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharactersSpy = spy(hashOfCharacters);
+		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Behaviour(new Player("testPlayer")));
 		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 }

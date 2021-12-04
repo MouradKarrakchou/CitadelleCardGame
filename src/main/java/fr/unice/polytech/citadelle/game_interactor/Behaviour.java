@@ -80,20 +80,13 @@ public class Behaviour {
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 	};
 
-	protected void ifPossibleBuildADistrict() {
-		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
-		if (!districtWeCanBuild.isEmpty()) {
-			Collections.sort(districtWeCanBuild);
-			Collections.reverse(districtWeCanBuild);
-			District district = districtWeCanBuild.get(0);
-			executor.buildDistrict(district);
-		}
-	}
+	
 
-	public Player getPlayer() {
-		return player;
-	}
-
+	
+	/**
+	 * 
+	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on retourne pas le character assasin direct ???
+	 */
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
@@ -114,8 +107,16 @@ public class Behaviour {
 
 		return (character);
 	}
-	
-
+	 
+	public void ifPossibleBuildADistrict() {
+		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
+		if (!districtWeCanBuild.isEmpty()) {
+			Collections.sort(districtWeCanBuild);
+			Collections.reverse(districtWeCanBuild);
+			District district = districtWeCanBuild.get(0);
+			executor.buildDistrict(district);
+		}
+	}
 	
 	public Optional<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
 		ArrayList<District> pickedCards = executor.pickCards(deckDistrict);
@@ -128,17 +129,17 @@ public class Behaviour {
 		return choosenDistrictCard;
 	}
 	
-	private District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
+	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
 		return selectTheHigherDistrict(deckDistrict, pickedCards);
 	}
-
+ 
 	/*
 	 * For the two cards chosen look if they are present in the city or the hand, if yes we discard the card
 	 * */
-	private ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards, DeckDistrict deckDistrict) {
+	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards, DeckDistrict deckDistrict) {
 		ArrayList<District> removeDistrictCards = new ArrayList<District>();
 		for(int i = 0 ; i < 2 ; i++) {
 			District currentDistrictCard = pickedDistrictCards.get(i);
@@ -150,6 +151,19 @@ public class Behaviour {
 		pickedDistrictCards.removeAll(removeDistrictCards);
 		return pickedDistrictCards;
 	}
+	
+	public void takeCard(District districtCard, DeckDistrict deckDistrict) {
+		executor.takeCard(districtCard, deckDistrict);
+	}
+
+
+	public void takeGold() {
+		executor.takeGold();		 
+	}
+	
+	public void buildDistrict(District district) {
+		executor.buildDistrict(district);
+	}
 
 	
 
@@ -158,16 +172,30 @@ public class Behaviour {
 		return (random.nextInt(scope));
 	}
 
-	public void setBotIsKing(Boolean BehaviourIsKing) {
+	public void setBehaviourIsKing(Boolean BehaviourIsKing) {
 		this.botIsKing = BehaviourIsKing;
 	}
 
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
 
-	public Boolean getBotIsKing() {
+	public Boolean getBehaviourIsKing() {
 		return botIsKing;
 	}
+
+	public CityManagement getCityManager() {
+		return cityMan;
+	}
+	
+	public Executor getExecutor() {
+		return executor;
+	}
+
+	
 
 }

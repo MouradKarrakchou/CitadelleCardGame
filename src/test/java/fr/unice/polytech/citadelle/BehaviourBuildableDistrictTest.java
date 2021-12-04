@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.Bot;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
-public class BotBuildableDistrictTest {
+public class BehaviourBuildableDistrictTest {
     
 	private Player player01;
-    private Bot botOfPlayer01;
+    private Behaviour behaviourOfPlayer01;
 	
     @BeforeEach
     void beforeEach(){
     	player01 = new Player("Player01");
-        botOfPlayer01 = new Bot(player01);
+        behaviourOfPlayer01 = new Behaviour(player01);
         
         player01.getDistrictCards().clear();
         player01.getDistrictCards().add(new District("Haunted City", 2,"empty","empty"));
@@ -41,7 +41,7 @@ public class BotBuildableDistrictTest {
         districts.add(new District("Haunted City", 2,"empty","empty"));
         districts.add(new District("Prison", 2,"empty","empty"));
 
-        assertEquals(districts, botOfPlayer01.districtWeHaveEnoughMoneyToBuild(botOfPlayer01.getPlayer().getGolds()));
+        assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class BotBuildableDistrictTest {
         districts.add(new District("Laboratory", 5,"empty","empty"));
         districts.add(new District("Observatory", 5,"empty","empty"));
 
-        assertEquals(districts, botOfPlayer01.districtWeHaveEnoughMoneyToBuild(botOfPlayer01.getPlayer().getGolds()));
+        assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
     @Test
@@ -74,21 +74,21 @@ public class BotBuildableDistrictTest {
         districts.add(new District("Observatory", 5,"empty","empty"));
         districts.add(new District("University", 6,"empty","empty"));
 
-        assertEquals(districts, botOfPlayer01.districtWeHaveEnoughMoneyToBuild(botOfPlayer01.getPlayer().getGolds()));
+        assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
 
     @Test
     void isAlreadyBuiltTest(){
         player01.getCity().builtDistrict.add(new District("Haunted City", 2,"empty","empty"));
-        assertTrue(botOfPlayer01.isAlreadyBuilt("Haunted City"));
-        assertFalse(botOfPlayer01.isAlreadyBuilt("Prison"));
+        assertTrue(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Haunted City"));
+        assertFalse(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Prison"));
 
     }
 
     @Test
     void isAlreadyBuiltEmptyTest(){
-        assertFalse(botOfPlayer01.isAlreadyBuilt("Prison"));
+        assertFalse(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Prison"));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class BotBuildableDistrictTest {
         districts.add(new District("Prison", 2,"empty","empty"));
         districts.add(new District("Castle", 4,"empty","empty"));
 
-        assertEquals(districts, botOfPlayer01.districtWeCanBuild(districtCheapEnough));
+        assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeCanBuild(districtCheapEnough));
     }
 
     @Test
@@ -124,6 +124,6 @@ public class BotBuildableDistrictTest {
 
         ArrayList<District> districts = new ArrayList<>();
 
-        assertEquals(districts, botOfPlayer01.districtWeCanBuild(districtCheapEnough));
+        assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeCanBuild(districtCheapEnough));
     }
 }

@@ -15,54 +15,57 @@ public class RushBot extends Behaviour {
 	private static final int MAX_VALUES_OF_CARDS = 3;
 
 	public RushBot(Player player) {
-		super(player);
+		super(player); 
 	}
 
 
+	@Override
 	public void normalBehaviour(DeckDistrict deckDistrict) {
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
-		if (player.getDistrictCardsSize() == 0 || cheapersDistrictsBuildable.size() == 0) {
+		if (cheapersDistrictsBuildable.size() == 0) {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
-				executor.takeCard(districtCardChoosen.get(), deckDistrict);
+				takeCard(districtCardChoosen.get(), deckDistrict);
 			else
-				executor.takeGold();
+				takeGold();
 		}
 		else {
-			executor.takeGold();
-		}
+			takeGold();
+		} 
 		ifPossibleBuildACheapDistrict();
 	}
 
+	@Override
 	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame", player);
 		
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
 		if(futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
-			executor.takeGold();
+			takeGold();
 		else {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
-				executor.takeCard(districtCardChoosen.get(), deckDistrict);
+				takeCard(districtCardChoosen.get(), deckDistrict);
 			else
-				executor.takeGold();
+				takeGold();
 		}
 	
 		ifPossibleBuildADistrict();
 	}
 
+	@Override
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		endGameBehaviour(deckDistrict);
 	}
 
-	protected void ifPossibleBuildACheapDistrict() {
+	public void ifPossibleBuildACheapDistrict() {
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
 			District cheaperDistrict = getCheaperDistrict(districtWeCanBuild);
 			if (cheaperDistrict.getValue() <= MAX_VALUES_OF_CARDS) {
-				executor.buildDistrict(cheaperDistrict);
+				buildDistrict(cheaperDistrict);
 			}
 		}
 	}
@@ -81,6 +84,9 @@ public class RushBot extends Behaviour {
 				.collect(Collectors.toCollection(ArrayList::new));
 
 	}
+
+
+
 
 	
 

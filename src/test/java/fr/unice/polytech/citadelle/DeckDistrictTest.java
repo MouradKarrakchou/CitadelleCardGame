@@ -50,6 +50,7 @@ public class DeckDistrictTest {
         nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 6,anyString(),anyString())));
         nameOfDistrict.clear();
 
+        deck.initialise();
         deckDistrictToTest = deck.getDeckDistrict();
     }
 
@@ -74,7 +75,7 @@ public class DeckDistrictTest {
         }
     }
 
-    @Test
+    @Test 
      void initializerTestValue(){
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
