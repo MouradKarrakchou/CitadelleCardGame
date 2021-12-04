@@ -1,6 +1,5 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
@@ -19,18 +18,16 @@ public class NormalBot extends Behaviour {
 	public void normalBehaviour(DeckDistrict deckDistrict) {
 		int goldOfPlayer = player.getGolds();
 		if ( goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer+2).size() > 0)
-			executor.takeGold();
+			takeGold();
 		else {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
-				executor.takeCard(districtCardChoosen.get(), deckDistrict);
+				takeCard(districtCardChoosen.get(), deckDistrict);
 			else
-				executor.takeGold();
+				takeGold();
 		}
 		ifPossibleBuildADistrict();
 	}
-
-	
 		
 	
 	@Override
@@ -46,5 +43,5 @@ public class NormalBot extends Behaviour {
 	}
 	
 	
-
+	
 }

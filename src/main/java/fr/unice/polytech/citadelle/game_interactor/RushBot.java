@@ -15,7 +15,7 @@ public class RushBot extends Behaviour {
 	private static final int MAX_VALUES_OF_CARDS = 3;
 
 	public RushBot(Player player) {
-		super(player);
+		super(player); 
 	}
 
 

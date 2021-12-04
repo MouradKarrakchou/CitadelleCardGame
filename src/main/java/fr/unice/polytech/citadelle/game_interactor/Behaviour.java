@@ -79,15 +79,7 @@ public class Behaviour {
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 	};
 
-	public void ifPossibleBuildADistrict() {
-		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
-		if (!districtWeCanBuild.isEmpty()) {
-			Collections.sort(districtWeCanBuild);
-			Collections.reverse(districtWeCanBuild);
-			District district = districtWeCanBuild.get(0);
-			executor.buildDistrict(district);
-		}
-	}
+	
 
 	
 	/**
@@ -115,7 +107,15 @@ public class Behaviour {
 		return (character);
 	}
 	 
-
+	public void ifPossibleBuildADistrict() {
+		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
+		if (!districtWeCanBuild.isEmpty()) {
+			Collections.sort(districtWeCanBuild);
+			Collections.reverse(districtWeCanBuild);
+			District district = districtWeCanBuild.get(0);
+			executor.buildDistrict(district);
+		}
+	}
 	
 	public Optional<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
 		ArrayList<District> pickedCards = executor.pickCards(deckDistrict);
@@ -134,7 +134,7 @@ public class Behaviour {
 		pickedCards.add(secondDistrict);
 		return selectTheHigherDistrict(deckDistrict, pickedCards);
 	}
-
+ 
 	/*
 	 * For the two cards chosen look if they are present in the city or the hand, if yes we discard the card
 	 * */
