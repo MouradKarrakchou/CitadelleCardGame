@@ -24,7 +24,7 @@ public class NormalBotTest {
 	public void init() {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
-		player = new Player("Player1");
+		player = new Player("Player");
 		investor = spy(new NormalBot(player));
 	}
 
