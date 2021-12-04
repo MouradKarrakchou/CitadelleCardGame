@@ -19,6 +19,7 @@ public class RushBot extends Behaviour {
 	}
 
 
+	@Override
 	public void normalBehaviour(DeckDistrict deckDistrict) {
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
@@ -36,6 +37,7 @@ public class RushBot extends Behaviour {
 		ifPossibleBuildACheapDistrict();
 	}
 
+	@Override
 	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame", player);
 		
@@ -53,6 +55,7 @@ public class RushBot extends Behaviour {
 		ifPossibleBuildADistrict();
 	}
 
+	@Override
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		endGameBehaviour(deckDistrict);
 	}
@@ -83,14 +86,7 @@ public class RushBot extends Behaviour {
 	}
 
 
-	public void takeCard(Object any, DeckDistrict deckDistrict) {
-		executor.takeCard(null, deckDistrict);
-	}
 
-
-	public void takeGold() {
-		executor.takeGold();		
-	}
 
 	
 

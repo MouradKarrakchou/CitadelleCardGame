@@ -15,6 +15,7 @@ public class NormalBot extends Behaviour {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
 	public void normalBehaviour(DeckDistrict deckDistrict) {
 		int goldOfPlayer = player.getGolds();
 		if ( goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer+2).size() > 0)
@@ -32,12 +33,13 @@ public class NormalBot extends Behaviour {
 	
 		
 	
-
+	@Override
 	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame",player);
 		normalBehaviour(deckDistrict);
 	}
 
+	@Override
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("LAST TURN",player);
 		normalBehaviour(deckDistrict);

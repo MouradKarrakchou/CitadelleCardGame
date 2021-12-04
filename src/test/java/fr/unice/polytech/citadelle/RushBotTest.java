@@ -23,12 +23,25 @@ public class RushBotTest {
 	
 	@BeforeEach
 	public void init() {
-		 player1 = new Player("Player1");
-		 rushBot = spy(new RushBot(player1));
 		 deckDistrict = new DeckDistrict();
 		 deckDistrict.initialise();
 	}
 
+	
+	@Test
+	public void normalBehaviourNoCardButGoldTest() {
+		Player player = new Player("Player1");
+		RushBot rusher = spy(new RushBot(player));
+		
+		player.getDistrictCards().clear();
+		
+		player.setGolds(15);
+		
+		rusher.normalBehaviour(deckDistrict);
+		verify(rusher, times(1)).takeCard(any(), any());
+	}
+	
+	/*
 	@Test
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player1.getDistrictCards();
@@ -80,6 +93,6 @@ public class RushBotTest {
 		rushBot.getPlayer().setGolds(1);
 		rushBot.endGameBehaviour(deckDistrict);
         verify(rushBot, times(1)).takeGold();
-	}
+	}*/
 	
 }

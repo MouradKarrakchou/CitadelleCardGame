@@ -79,7 +79,7 @@ public class Behaviour {
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 	};
 
-	protected void ifPossibleBuildADistrict() {
+	public void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
 			Collections.sort(districtWeCanBuild);
@@ -89,10 +89,11 @@ public class Behaviour {
 		}
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-
+	
+	/**
+	 * 
+	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on retourne pas le character assasin direct ???
+	 */
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
@@ -113,7 +114,7 @@ public class Behaviour {
 
 		return (character);
 	}
-	
+	 
 
 	
 	public Optional<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
@@ -127,7 +128,7 @@ public class Behaviour {
 		return choosenDistrictCard;
 	}
 	
-	private District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
+	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
@@ -149,6 +150,15 @@ public class Behaviour {
 		pickedDistrictCards.removeAll(removeDistrictCards);
 		return pickedDistrictCards;
 	}
+	
+	public void takeCard(District districtCard, DeckDistrict deckDistrict) {
+		executor.takeCard(districtCard, deckDistrict);
+	}
+
+
+	public void takeGold() {
+		executor.takeGold();		
+	}
 
 	public int randomInt(int scope) {
 		Random random = new Random();
@@ -161,6 +171,10 @@ public class Behaviour {
 
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	public Boolean getBehaviourIsKing() {

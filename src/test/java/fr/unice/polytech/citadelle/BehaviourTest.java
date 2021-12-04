@@ -1,293 +1,197 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import fr.unice.polytech.citadelle.game.DeckDistrict;
+import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_engine.Initialiser;
+import fr.unice.polytech.citadelle.game_engine.RoundManager;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+
 public class BehaviourTest {
-	private Player player01;
-	private Behaviour botOfPlayer01;
+	Player playerTest;
+	Behaviour bea;
 	DeckDistrict deckDistrict;
 
 	@BeforeEach
 	public void init() {
-		player01 = new Player("Player01");
-		botOfPlayer01 = spy(new Behaviour(player01));
+		playerTest = new Player("playerTest");
+		bea = new Behaviour(playerTest);
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 	}
 
 	@Test
-	void selectTheHigherDistrictSelectDifferentValues() {
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
+	public void selectTheHigherDistrictTest() {
+		ArrayList<District> pickedDistricts = new ArrayList<District>();
 
-		// In this test, player has picked a district of value 5 and a district of value
-		// 2
-		District districtOfValue5 = new District("DistrictOfValue5", 5, "r", "r");
-		District districtOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
+		District highterDistrict = new District("HighterDistrictTest", 10, "colorTest", "familyTest");
+		District cheaperDistrict = new District("cheaperDistrictTest", 5, "colorTest", "familyTest");
 
-		ArrayList<District> pickedDistricts = new ArrayList<>();
-		pickedDistricts.add(districtOfValue5);
-		pickedDistricts.add(districtOfValue2);
-
-		District selectedDistrict = botOfPlayer01.selectTheHigherDistrict(mockedDeckDistrict, pickedDistricts);
-
-		assertEquals(districtOfValue5, selectedDistrict);
-
-		verify(mockedDeckDistrict, times(1)).addDistrict(any());
-		verifyNoMoreInteractions(mockedDeckDistrict);
+		pickedDistricts.add(highterDistrict);
+		pickedDistricts.add(cheaperDistrict);
+		District choosenDistrict = bea.selectTheHigherDistrict(deckDistrict, pickedDistricts);
+		assertEquals(choosenDistrict, highterDistrict);
 	}
 
 	@Test
-	void selectTheHigherDistrictSelectSameValues() {
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
+	public void ifPossibleBuildADistrictCouldBuildTest() {
+		District aDistrict = new District("districtTest", 2, "colorTest", "familyTest");
 
-		District districtOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
-		District otherDistrictOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
+		playerTest.setGolds(10);
+		playerTest.getDistrictCards().clear();
+		playerTest.addDistrict(aDistrict);
 
-		ArrayList<District> pickedDistricts = new ArrayList<>();
-		pickedDistricts.add(districtOfValue2);
-		pickedDistricts.add(otherDistrictOfValue2);
-
-		District selectedDistrict = botOfPlayer01.selectTheHigherDistrict(mockedDeckDistrict, pickedDistricts);
-
-		assertEquals(districtOfValue2, selectedDistrict);
-
-		verify(mockedDeckDistrict, times(1)).addDistrict(any());
-		verifyNoMoreInteractions(mockedDeckDistrict);
-	}
-
-	/**
-	 * Selected cards are different Player's city is empty Player's hand is empty
-	 */
-	@Test
-	void districtCardIsSelectedHandEmptyCityEmptySelectedDistrictDifferent() {
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-
-		District districtOfValue1 = new District("DistrictOfValue1", 1, "r", "r");
-		District districtOfValue7 = new District("DistrictOfValue7", 7, "r", "r");
-
-		ArrayList<District> pickedDistricts = new ArrayList<>();
-		pickedDistricts.add(districtOfValue1);
-		pickedDistricts.add(districtOfValue7);
-
-		assertTrue(botOfPlayer01.chooseToKeepOrNotPickedCards(pickedDistricts, mockedDeckDistrict));
-		assertTrue(player01.getDistrictCards().contains(districtOfValue7));
-		verify(mockedDeckDistrict, times(1)).addDistrict(any());
-		verifyNoMoreInteractions(mockedDeckDistrict);
-	}
-
-	/**
-	 * Selected cards are different Player's city is empty Player's hand already has
-	 * the higher card of the selected cards
-	 */
-	@Test
-	void districtCardIsSelectedHandAlreadyHaveItCityEmptySelectedDistrictDifferent() {
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-
-		District districtOfValue4 = new District("DistrictOfValue4", 4, "r", "r");
-		District districtOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
-
-		// Player already have a district in its hand
-		player01.addDistrict(new District("DistrictOfValue4", 4, "r", "r"));
-
-		ArrayList<District> pickedDistricts = new ArrayList<>();
-		pickedDistricts.add(districtOfValue4);
-		pickedDistricts.add(districtOfValue2);
-
-		assertTrue(botOfPlayer01.chooseToKeepOrNotPickedCards(pickedDistricts, mockedDeckDistrict));
-		assertTrue(player01.getDistrictCards().contains(districtOfValue2));
-
-		verify(mockedDeckDistrict, times(1)).addDistrict(any());
-
-		assertEquals(2, player01.getDistrictCardsSize());
-		assertEquals(0, player01.getCity().getSizeOfCity());
-	}
-
-	/**
-	 * Selected cards are different Player's city already has the lower card of the
-	 * selected cards Player's hand already has the higher card of the selected
-	 * cards
-	 */
-	@Test
-	void districtCardIsSelectedHandAlreadyHaveItCityAlreadyHaveItSelectedDistrictDifferent() {
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-
-		District districtOfValue4 = new District("DistrictOfValue4", 4, "r", "r");
-		District districtOfValue7 = new District("DistrictOfValue7", 7, "r", "r");
-
-		player01.addDistrict(new District("DistrictOfValue7", 7, "r", "r"));
-		player01.getCity().buildDistrict(new District("DistrictOfValue4", 4, "r", "r"));
-
-		ArrayList<District> pickedDistricts = new ArrayList<>();
-		pickedDistricts.add(districtOfValue4);
-		pickedDistricts.add(districtOfValue7);
-
-		assertFalse(botOfPlayer01.chooseToKeepOrNotPickedCards(mockedDeckDistrict, pickedDistricts));
-		assertFalse(player01.getDistrictCards().contains(districtOfValue4));
-
-		verify(mockedDeckDistrict, times(2)).addDistrict(any());
-
-		assertEquals(1, player01.getDistrictCardsSize());
-		assertEquals(1, player01.getCity().getSizeOfCity());
-	}
-
-	/**
-	 * Selected cards are different Player's city already has the lower card of the
-	 * selected cards Player's hand is empty
-	 */
-	@Test
-	void districtCardIsSelectedCityAlreadyHaveItSelectedDistrictDifferent() {
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-
-		District districtOfValue8 = new District("DistrictOfValue8", 8, "r", "r");
-		District districtOfValue7 = new District("DistrictOfValue7", 7, "r", "r");
-
-		player01.getCity().buildDistrict(new District("DistrictOfValue8", 8, "r", "r"));
-
-		ArrayList<District> pickedDistricts = new ArrayList<>();
-		pickedDistricts.add(districtOfValue8);
-		pickedDistricts.add(districtOfValue7);
-
-		assertTrue(botOfPlayer01.districtCardIsSelected(mockedDeckDistrict, pickedDistricts));
-		assertTrue(player01.getDistrictCards().contains(districtOfValue7));
-	}
-
-	/**
-	 * Testing if bot take a card or take two golds Player's hand is empty Player's
-	 * city is empty
-	 */
-	@Test
-	void takeCardTest() {
-		District districtOfValue4 = new District("DistrictOfValue4", 4, "r", "r");
-		District districtOfValue3 = new District("DistrictOfValue3", 3, "r", "r");
-
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-		when(mockedDeckDistrict.chooseDistrict()).thenReturn(districtOfValue4).thenReturn(districtOfValue3);
-
-		assertEquals(0, player01.getDistrictCardsSize());
-		botOfPlayer01.takeCard(mockedDeckDistrict);
-		assertTrue(player01.getDistrictCards().contains(districtOfValue4));
-		assertEquals(1, player01.getDistrictCardsSize());
-	}
-
-	/**
-	 * Selected cards are different Player's city is empty Player's hand already has
-	 * the higher card of the selected cards
-	 */
-	@Test
-	void takeCardHasCardInHand() {
-		District districtOfValue6 = new District("DistrictOfValue6", 6, "r", "r");
-		District districtOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
-
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-		when(mockedDeckDistrict.chooseDistrict()).thenReturn(districtOfValue6).thenReturn(districtOfValue2);
-
-		player01.addDistrict(districtOfValue6);
-
-		botOfPlayer01.takeCard(mockedDeckDistrict);
-		assertTrue(player01.getDistrictCards().contains(districtOfValue2));
-		assertTrue(player01.getDistrictCards().contains(districtOfValue6));
-		assertEquals(2, player01.getDistrictCardsSize());
-	}
-
-	/**
-	 * Selected cards are different Player's city already has the lower card of the
-	 * selected cards Player's hand already has the higher card of the selected
-	 * cards
-	 */
-	@Test
-	void takeCardHasCardInHandHasCardInCity() {
-		District districtOfValue6 = new District("DistrictOfValue6", 6, "r", "r");
-		District districtOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
-
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-		when(mockedDeckDistrict.chooseDistrict()).thenReturn(districtOfValue6).thenReturn(districtOfValue2);
-
-		player01.addDistrict(districtOfValue6);
-		player01.getCity().buildDistrict(districtOfValue2);
-
-		botOfPlayer01.takeCard(mockedDeckDistrict);
-		assertFalse(player01.getDistrictCards().contains(districtOfValue2));
-		assertTrue(player01.getDistrictCards().contains(districtOfValue6));
-		assertEquals(1, player01.getDistrictCardsSize());
-		assertEquals(4, player01.getGolds());
-	}
-
-	/**
-	 */
-	@Test
-	void normalBehaviourCanPlaceADistrictWith2MoreGold() {
-		int goldOfPlayerWithNewGold = player01.getGolds()+2;
-
-		ArrayList<District> districtsCards = player01.getDistrictCards();
-		districtsCards.clear();
-		districtsCards.add(new District("testDistrict", goldOfPlayerWithNewGold, "testColor", "testFamily"));
-		botOfPlayer01.normalBehaviour(deckDistrict);
-		verify(botOfPlayer01, times(0)).takeCard(any());
-		verify(botOfPlayer01, times(1)).takeGold();
+		assertEquals(playerTest.getCity().getSizeOfCity(), 0);
+		bea.ifPossibleBuildADistrict();
+		assertEquals(playerTest.getCity().getSizeOfCity(), 1);
+		assertEquals(playerTest.getCity().getBuiltDistrict().get(0), aDistrict);
 	}
 	
-	/**
-	 */
-	@Test
-	void normalBehaviourCantPlaceADistrictWith2MoreGold() {
-		int tooExpansiveValue = player01.getGolds()+3;
-		ArrayList<District> districtsCards = player01.getDistrictCards();
-		districtsCards.clear();
-		districtsCards.add(new District("testDistrict",tooExpansiveValue , "testColor", "testFamily"));
-		botOfPlayer01.normalBehaviour(deckDistrict);
-		verify(botOfPlayer01, times(1)).takeCard(any());
-		verify(botOfPlayer01, times(0)).takeGold();
-	}
-	
-	/**
-	 */
-	@Test
-	void normalBehaviourNoGold() {
-		player01.setGolds(0);
-		botOfPlayer01.normalBehaviour(deckDistrict);
-		verify(botOfPlayer01, times(0)).takeCard(any());
-		verify(botOfPlayer01, times(1)).takeGold();
-	}
-
-
 	/*
-	 * int cheapValue = 3; ArrayList<District> districtsCards =
-	 * player1.getDistrictCards(); districtsCards.clear(); districtsCards.add(new
-	 * District("testDistrict", cheapValue, "testColor", "testFamily"));
-	 * rushBehaviour.normalBehaviour(deckDistrict); verify(rushBehaviour,
-	 * times(0)).takeCard(any()); verify(rushBehaviour, times(1)).takeGold();
-	 */
-
-	/**
-	 * Selected cards are different Player's hand is empty.
-	 */
 	@Test
-	void normalBehaviourNoDistrictInHand() {
-		District districtOfValue6 = new District("DistrictOfValue6", 6, "r", "r");
-		District districtOfValue2 = new District("DistrictOfValue2", 2, "r", "r");
+	public void pick2CardsIntoTheDeckTwoCardTest() {
+		Player playerOfMockTest = new Player("playerOfMockTest");
+		Behaviour spyBea = spy(new Behaviour(playerOfMockTest));
+		
+		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
+		District aDistrict = new District("aDistrict", 10, "colorTest", "familyTest");
+		District aOtherDistrict = new District("aOtherDistrict", 5, "colorTest", "familyTest");
 
-		DeckDistrict mockedDeckDistrict = mock(DeckDistrict.class);
-		when(mockedDeckDistrict.chooseDistrict()).thenReturn(districtOfValue6).thenReturn(districtOfValue2);
+		pickedDistrictCards.add(aDistrict);
+		pickedDistrictCards.add(aOtherDistrict);
+		
+		when(spyBea.chooseToKeepOrNotPickedCards(Mockito.any(), Mockito.any())).thenReturn(pickedDistrictCards);
+		when(spyBea.chooseBetweenTwoCards(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(aDistrict);
 
-		assertEquals(2, player01.getGolds());
-		botOfPlayer01.normalBehaviour(mockedDeckDistrict);
-		verify(mockedDeckDistrict, times(2)).chooseDistrict();
-		verify(mockedDeckDistrict, times(1)).addDistrict(any());
-		assertEquals(2, player01.getGolds());
+		assertEquals(spyBea.pick2CardsIntoTheDeck(deckDistrict), aDistrict);
+	}*/
+
+	@Test
+	public void chooseToKeepOrNotPickedCardskeepAllTest() {
+		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
+		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
+
+		District aDistrict = new District("aDistrict", 10, "colorTest", "familyTest");
+		District aOtherDistrict = new District("aOtherDistrict", 5, "colorTest", "familyTest");
+
+		pickedDistrictCards.add(aDistrict);
+		pickedDistrictCards.add(aOtherDistrict);
+
+		playerTest.getDistrictCards().clear();
+		playerTest.getCity().getBuiltDistrict().clear();
+
+		assertEquals(playerTest.getDistrictCards().size(), 0);
+		assertEquals(playerTest.getCity().getSizeOfCity(), 0);
+
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+
+		assertEquals(keepedDistrictCards.size(), 2);
 	}
 
-	// ------------------
+	@Test
+	public void chooseToKeepOrNotPickedCardsKeepFirstBecause2ndInHandCardTest() {
+		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
+		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
 
+		District futurKeepDistrict = new District("futurKeepDistrict", 10, "colorTest", "familyTest");
+		District futurBurnDistrict = new District("futurBurnDistrict", 5, "colorTest", "familyTest");
+
+		pickedDistrictCards.add(futurKeepDistrict);
+		pickedDistrictCards.add(futurBurnDistrict);
+
+		playerTest.getDistrictCards().clear();
+		playerTest.getCity().getBuiltDistrict().clear();
+
+		playerTest.getDistrictCards().add(futurBurnDistrict);
+
+		assertEquals(playerTest.getDistrictCards().size(), 1);
+		assertEquals(playerTest.getCity().getSizeOfCity(), 0);
+
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+
+		assertEquals(keepedDistrictCards.size(), 1);
+		assertEquals(keepedDistrictCards.get(0), futurKeepDistrict);
+
+	}
+
+	@Test
+	public void chooseToKeepOrNotPickedCardsKeepFirstBecause2ndInCityCardTest() {
+		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
+		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
+
+		District futurKeepDistrict = new District("futurKeepDistrict", 10, "colorTest", "familyTest");
+		District futurBurnDistrict = new District("futurBurnDistrict", 5, "colorTest", "familyTest");
+
+		pickedDistrictCards.add(futurKeepDistrict);
+		pickedDistrictCards.add(futurBurnDistrict);
+
+		playerTest.getDistrictCards().clear();
+		playerTest.getCity().getBuiltDistrict().clear();
+
+		playerTest.getCity().getBuiltDistrict().add(futurBurnDistrict);
+
+		assertEquals(playerTest.getDistrictCards().size(), 0);
+		assertEquals(playerTest.getCity().getSizeOfCity(), 1);
+
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+
+		assertEquals(keepedDistrictCards.size(), 1);
+		assertEquals(keepedDistrictCards.get(0), futurKeepDistrict);
+
+	}
+
+	@Test
+	public void chooseToKeepOrNotPickedCardsNoKeepTest() {
+		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
+		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
+
+		District otherFuturBurnDistrict = new District("futurKeepDistrict", 10, "colorTest", "familyTest");
+		District futurBurnDistrict = new District("futurBurnDistrict", 5, "colorTest", "familyTest");
+
+		pickedDistrictCards.add(otherFuturBurnDistrict);
+		pickedDistrictCards.add(futurBurnDistrict);
+
+		playerTest.getDistrictCards().clear();
+		playerTest.getCity().getBuiltDistrict().clear();
+
+		playerTest.getCity().getBuiltDistrict().add(futurBurnDistrict);
+		playerTest.getCity().getBuiltDistrict().add(otherFuturBurnDistrict);
+
+		assertEquals(playerTest.getDistrictCards().size(), 0);
+		assertEquals(playerTest.getCity().getSizeOfCity(), 2);
+
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+
+		assertEquals(keepedDistrictCards.size(), 0);
+
+	} 
+	
+	@Test
+	public void takeGoldTest() {
+		playerTest.setGolds(0);
+		assertEquals(playerTest.getGolds(), 0);
+		bea.takeGold();
+		assertEquals(playerTest.getGolds(), 2);
+	}
+	
+	@Test
+	public void takeCardTest() {
+		District choosenCard = deckDistrict.getDeckDistrict().get(0);
+		playerTest.getDistrictCards().clear();;
+		assertEquals(playerTest.getDistrictCards().size(), 0);
+		bea.takeCard(choosenCard, deckDistrict);
+		assertEquals(playerTest.getDistrictCards().size(), 1);
+		assertEquals(playerTest.getDistrictCards().get(0), choosenCard);
+	}
 }
