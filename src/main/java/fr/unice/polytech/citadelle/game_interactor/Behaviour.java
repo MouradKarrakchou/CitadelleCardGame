@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
+import java.nio.file.DirectoryStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -149,6 +150,8 @@ public class Behaviour {
 		pickedDistrictCards.removeAll(removeDistrictCards);
 		return pickedDistrictCards;
 	}
+
+	
 
 	public int randomInt(int scope) {
 		Random random = new Random();
