@@ -27,27 +27,27 @@ public class DeckDistrictTest {
         Collections.addAll(numberOfCards,3, 5, 3, 4, 3, 4, 3, 1, 3, 5, 3, 3, 2, 4, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1);
 
         Collections.addAll(nameOfDistrict,"Temple", "Tavern", "Watchtower");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 1,anyString(),anyString())));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 1, "TestColor", "testFamily")));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Church", "Trading Post", "Market", "Prison", "Haunted City");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 2,anyString(),anyString())));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 2, "TestColor", "testFamily")));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Monastery", "Manor", "Docks", "Battlefield", "Keep");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 3,anyString(),anyString())));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 3,"TestColor", "testFamily")));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Castle", "Harbor");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 4,anyString(),anyString())));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 4, "TestColor", "testFamily")));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict, "Cathedral", "Palace", "Town Hall", "Fortress", "Laboratory", "Smithy", "Observatory", "Graveyard");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 5,anyString(),anyString())));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 5, "TestColor", "testFamily")));
         nameOfDistrict.clear();
 
         Collections.addAll(nameOfDistrict,"Library", "School of Magic", "University", "Dragon Gate");
-        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 6,anyString(),anyString())));
+        nameOfDistrict.stream().forEach(name -> deckDistrictReal.add(new District(name, 6, "TestColor", "testFamily")));
         nameOfDistrict.clear();
 
         deck.initialise();

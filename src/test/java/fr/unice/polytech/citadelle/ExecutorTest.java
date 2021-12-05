@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -74,11 +75,12 @@ public class ExecutorTest {
 		District aDistrict = new District("aDistrict", 2, "colorTest", "familyTest");
 		District aOtherDistrict = new District("aOtherDistrict", 2, "colorTest", "familyTest");
 		pickedCards.add(aDistrict);
-		pickedCards.add(aOtherDistrict);
+		pickedCards.add(aDistrict);
 
 		
-		DeckDistrict mockDeckDistrict = Mockito.mock(DeckDistrict.class);
-		when(mockDeckDistrict.pickBlindDistrict()).thenReturn(aDistrict).thenReturn(aOtherDistrict);
+		DeckDistrict mockDeckDistrict = spy(new DeckDistrict());
+		mockDeckDistrict.initialise();
+		when(mockDeckDistrict.pickBlindDistrict()).thenReturn(aDistrict);
 		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards);
 	}
 }
