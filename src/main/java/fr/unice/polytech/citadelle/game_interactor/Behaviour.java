@@ -79,8 +79,6 @@ public class Behaviour {
 	};
 
 	
-
-	
 	/**
 	 * 
 	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on retourne pas le character assasin direct ???

@@ -28,8 +28,6 @@ public class RushBot extends Behaviour {
 			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
 			if(districtCardChoosen.isPresent())
 				takeCard(districtCardChoosen.get(), deckDistrict);
-			else
-				takeGold();
 		}
 		else {
 			takeGold();
