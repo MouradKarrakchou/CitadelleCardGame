@@ -13,6 +13,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
  * The RoundManager manage the rounds inside a Game
+ * 
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class RoundManager {
@@ -21,27 +22,28 @@ public class RoundManager {
 	private ArrayList<Character> listOfAllCharacters;
 	private LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
 	private Board board;
-	
-	private PrintCitadels printC;
 
+	private PrintCitadels printC;
+	private Initialiser initialiser;
+	private Referee referee;
 
 	private String currentPhase;
 	private int roundNumber = 0;
 
-
-	public static final int BONUS_FIRST = 4;
-	public static final int BONUS_END = 2;
-	
-	public RoundManager() {
-		this.listOfAllCharacters = new ArrayList<Character>();
-		this.listOfBehaviour = new ArrayList<Behaviour>();
-		this.hashOfCharacters = new LinkedHashMap<Character, Optional<Behaviour>>();
-		this.board = new Board(getListOfPlayers(), new DeckDistrict(), new DeckCharacter(listOfAllCharacters));
+	public RoundManager(ArrayList<Character> listOfAllCharacter, ArrayList<Behaviour> listOfAllBehaviour,
+			LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter, Board board) {
+		this.hashOfCharacters = hashOfCharacter;
+		this.listOfAllCharacters = listOfAllCharacter;
+		this.listOfBehaviour = listOfAllBehaviour;
+		this.board = board;
 		this.printC = new PrintCitadels();
+		this.initialiser = new Initialiser();
+		this.referee = new Referee(board);
 	}
 
-	public void runRounds(PhaseManager phaseManager, Initialiser initialiser) {
-		
+	public ArrayList<Behaviour> runRounds(PhaseManager phaseManager, Initialiser initialiser) {
+		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
+
 		while ((currentPhase = phaseManager
 				.analyseGame(getTheListOfCity(getListOfPlayers()))) != PhaseManager.LAST_TURN_PHASE) {
 
@@ -49,12 +51,13 @@ public class RoundManager {
 			updateListOfBehaviour();
 
 			setupCharacters(initialiser);
-			askEachCharacterToPlay(phaseManager, board.getDeckDistrict(), initialiser);
+			leaderBoard = askEachCharacterToPlay(phaseManager, board.getDeckDistrict(), initialiser);
 
 			printC.printBoard(board);
 			printC.printLayer();
 			reviveAll();
 		}
+		return leaderBoard;
 	}
 
 	public ArrayList<City> getTheListOfCity(ArrayList<Player> listOfPlayer) {
@@ -62,30 +65,34 @@ public class RoundManager {
 	}
 
 	/**
-	 * Initialise the deck of character then for each behaviour, choose a characterCard
+	 * Initialise the deck of character then for each behaviour, choose a
+	 * characterCard
+	 * 
 	 * @param initialiser
 	 */
 	public void setupCharacters(Initialiser initialiser) {
 		DeckCharacter deckCharacter = board.getDeckCharacter();
-		deckCharacter.initialise(listOfAllCharacters);
+		initialiser.initDeckCharacter(deckCharacter, listOfAllCharacters);
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, initialiser, deckCharacter));
 		printC.dropALine();
 	}
 
 	public void chooseACharacterCard(Behaviour bot, Initialiser initialiser, DeckCharacter deckCharacter) {
 		Player playerOfBehaviour = bot.getPlayer();
-		if (roundNumber == 0) playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
-		else playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
+		if (roundNumber == 0)
+			playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
+		else
+			playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
 		initialiser.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
 		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-
-	//  !!! NE PAS EFFACER CES COMMENTAIREs !!!
-	//assassin : s'il y a un joueur proche de la fin (préférable de tuer l'architecte)
-	//voleur : s'il y a un joueur avec beaucoup de golds
-	//roi : si 3 quartiers noble construits
-	//marchand : si 3 quartier commerce construits
+	// !!! NE PAS EFFACER CES COMMENTAIREs !!!
+	// assassin : s'il y a un joueur proche de la fin (préférable de tuer
+	// l'architecte)
+	// voleur : s'il y a un joueur avec beaucoup de golds
+	// roi : si 3 quartiers noble construits
+	// marchand : si 3 quartier commerce construits
 	public Character chooseCharacter(Behaviour bot, DeckCharacter deckCharacter) {
 		int counter = 0;
 		String nameOfCharacterChosen = listOfAllCharacters.get(isThereAFamily(bot)).getName();
@@ -109,75 +116,87 @@ public class RoundManager {
 		for (String familyName : nameOfFamilies) {
 			districtsInACity = playerOfBehaviour.getCity().getBuiltDistrict();
 			districtsInACity.stream().filter(district -> district.getNameOfFamily().equals(familyName));
-			if (familyName.equals("Nobility") && districtsInACity.size() == 3) return Initialiser.KING_INDEX;
+			if (familyName.equals("Nobility") && districtsInACity.size() == 3)
+				return Initialiser.KING_INDEX;
 			else if (familyName.equals("Trade and Handicrafts") && districtsInACity.size() >= 3)
-			return Initialiser.MERCHANT_INDEX;
+				return Initialiser.MERCHANT_INDEX;
 		}
 
 		return random.nextInt(board.getDeckCharacter().getSize());
 	}
-	public void askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict, Initialiser initialiser) {
-		boolean aBehaviourCompleteHisCity = false;
+
+	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict,
+			Initialiser initialiser) {
+		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
 		currentPhase = phaseManager.analyseGame(listOfCity);
 
 		for (Entry<Character, Optional<Behaviour>> entry : hashOfCharacters.entrySet()) {
-			Character character = entry.getKey();
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
-			
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				if(currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive())
-					aBehaviourCompleteHisCity = actionsOfTheBehaviour(character, currentBehaviour, aBehaviourCompleteHisCity, deckDistrict);
-				else
-					printC.botIsDead(currentBehaviour.getPlayer());
+				actionOfBehaviour(currentBehaviour, deckDistrict);
+				cityVerification(currentBehaviour, leaderBoard);		
 			}
 		}
+		
 		initialiser.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 		roundNumber++;
+		return leaderBoard;
 	}
 
-	public boolean actionsOfTheBehaviour(Character character, Behaviour bot, boolean aBehaviourCompleteHisCity, DeckDistrict deckDistrict){
-		aBehaviourCompleteHisCity = bot.play(deckDistrict, currentPhase,hashOfCharacters);
-		if (aBehaviourCompleteHisCity) {
-			//addBonusForPlayers(bot.getPlayer(), aBehaviourCompleteHisCity);
-			currentPhase = PhaseManager.LAST_TURN_PHASE;
+	public void actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
+		
+		if (currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive())
+			currentBehaviour.play(deckDistrict, currentPhase, hashOfCharacters);
+		else
+			printC.botIsDead(currentBehaviour.getPlayer());
+	}
+
+	private void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
+		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
+		if (aPlayerCompleteCity) {
+			if(leaderBoard.size() ==0)
+				printC.printFirstPlayerToComplete(currentBehaviour.getPlayer());
+			else 
+				printC.printPlayerToCompleteCity(currentBehaviour.getPlayer());
+			updateLeaderboard(currentBehaviour, leaderBoard);
 		}
-		return aBehaviourCompleteHisCity;
 	}
 
-	public boolean addBonusForPlayers(Player player, boolean isLastRound) {
-		if (!isLastRound) {
-			isLastRound = true;
-			printC.printFirstPlayerToComplete(player);
-			player.updateScore(BONUS_FIRST);
-		} else
-			player.updateScore(BONUS_END);
-		printC.printPlayerToCompleteCity(player);
-		return isLastRound;
+	public  ArrayList<Behaviour> updateLeaderboard(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
+		leaderBoard.add(currentBehaviour);
+		currentPhase = PhaseManager.LAST_TURN_PHASE;
+		return leaderBoard;
 	}
 
 	public void updateListOfBehaviour() {
-			int indexOfKing=findKing(listOfBehaviour);
-			if (indexOfKing!=-1){
-				ArrayList<Behaviour> listOfBehaviourCopy=listOfBehaviour;
-				listOfBehaviour=new ArrayList<>();
-				listOfBehaviour.addAll(orderListOfPlayer(listOfBehaviourCopy,indexOfKing));}
+		int indexOfKing = findKing(listOfBehaviour);
+		if (indexOfKing != -1) {
+			ArrayList<Behaviour> listOfBehaviourCopy = listOfBehaviour;
+			listOfBehaviour = new ArrayList<>();
+			listOfBehaviour.addAll(orderListOfPlayer(listOfBehaviourCopy, indexOfKing));
+		}
 	}
-	public int findKing(ArrayList<Behaviour> listOfBehaviour){
-		for (int k=0;k<listOfBehaviour.size();k++){
+
+	public int findKing(ArrayList<Behaviour> listOfBehaviour) {
+		for (int k = 0; k < listOfBehaviour.size(); k++) {
 			if (listOfBehaviour.get(k).getBehaviourIsKing()) {
 				listOfBehaviour.get(k).setBehaviourIsKing(false);
-				return(k);}}
-		return(-1);
+				return (k);
+			}
+		}
+		return (-1);
 	}
-	public ArrayList<Behaviour> orderListOfPlayer(ArrayList<Behaviour> listOfBehaviour, int positionOfKingHolder){
-		int positionToChange=positionOfKingHolder;
-		int sizeListOfPlayer=listOfBehaviour.size();
-		ArrayList<Behaviour> listOfBehaviourNextRound=new ArrayList<>();
-		for (int i=0;i<sizeListOfPlayer;i++){
-			if (positionToChange>=sizeListOfPlayer) positionToChange=0;
+
+	public ArrayList<Behaviour> orderListOfPlayer(ArrayList<Behaviour> listOfBehaviour, int positionOfKingHolder) {
+		int positionToChange = positionOfKingHolder;
+		int sizeListOfPlayer = listOfBehaviour.size();
+		ArrayList<Behaviour> listOfBehaviourNextRound = new ArrayList<>();
+		for (int i = 0; i < sizeListOfPlayer; i++) {
+			if (positionToChange >= sizeListOfPlayer)
+				positionToChange = 0;
 			listOfBehaviourNextRound.add(listOfBehaviour.get(positionToChange));
 			positionToChange++;
 		}
@@ -189,13 +208,12 @@ public class RoundManager {
 	}
 
 	public void reviveAll() {
-		listOfBehaviour.forEach(bot -> bot.getPlayer().getCharacter().setCharacterIsAlive(true));	
+		listOfBehaviour.forEach(bot -> bot.getPlayer().getCharacter().setCharacterIsAlive(true));
 	}
-	
+
 	public ArrayList<Player> getListOfPlayers() {
-		return (ArrayList<Player>) listOfBehaviour.stream().
-				map(bot -> bot.getPlayer()).
-				collect(Collectors.toCollection(ArrayList::new));
+		return (ArrayList<Player>) listOfBehaviour.stream().map(bot -> bot.getPlayer())
+				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public ArrayList<Behaviour> getListOfBehaviour() {
@@ -214,6 +232,4 @@ public class RoundManager {
 		return board;
 	}
 
-	
-	
 }

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -28,28 +29,43 @@ public class Controller {
 	public Controller() {
 		printC = new PrintCitadels();
 		initialiser = new Initialiser();
-		phaseManager = new PhaseManager();
-		roundManager = new RoundManager();
-		referee = new Referee(roundManager.getBoard());
+		phaseManager = new PhaseManager();			
+	}
+	public void initGame() {
+		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
+		ArrayList<Character> listOfAllCharacter = initialiser.createListOfAllCharacter();
+		ArrayList<Behaviour> listOfAllBehaviour = initialiser.createListOfBehaviour();
+		Board board = initialiser.createBoard(listOfAllCharacter);
+		initialiser.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
+		hashOfCharacter = initialiser.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
+		roundManager = new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board);
+		referee = new Referee(board);
+		
+		initialiser.initDeckCharacter(roundManager.getBoard().getDeckCharacter(), listOfAllCharacter);
+		initialiser.initDeckDistrict(roundManager.getBoard().getDeckDistrict());
+		
+		board.setListOfPlayer(roundManager.getListOfPlayers());
+
 	}
 
-	public void initGame() {
+	public void init() {
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = roundManager.getHashOfCharacters();
 		ArrayList<Behaviour> listOfBehaviour = roundManager.getListOfBehaviour();
 		ArrayList<Player> listOfPlayer = roundManager.getBoard().getListOfPlayer();
 		ArrayList<Character> listOfAllCharacters = roundManager.getListOfAllCharacters();
 
-		initialiser.initAll(hashOfCharacter, listOfAllCharacters, listOfPlayer, listOfBehaviour);
 		initialiser.initDeckCharacter(roundManager.getBoard().getDeckCharacter(), listOfAllCharacters);
 		initialiser.initDeckDistrict(roundManager.getBoard().getDeckDistrict());
 	}
 
 	public void runGame() {
-		roundManager.runRounds(phaseManager, initialiser);
-		end();
+		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
+		leaderBoard = roundManager.runRounds(phaseManager, initialiser);
+		end(leaderBoard);
 	}
 
-	public void end() {
+	public void end(ArrayList<Behaviour> leaderBoard) {
+		referee.addBonusForPlayers(leaderBoard);
 		referee.getWinner();
 		printC.printRanking(roundManager.getBoard().getListOfPlayer());
 	}

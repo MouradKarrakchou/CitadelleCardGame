@@ -38,6 +38,11 @@ public class Board {
 	public DeckCharacter getDeckCharacter() {
 		return deckCharacter;
 	}
+
+	public void setListOfPlayer(ArrayList<Player> listOfPlayer) {
+		this.listOfPlayer = listOfPlayer;
+	}
+	
     
 }
 

@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -56,8 +57,8 @@ public class InitialiserTest {
 	@Test
 	public void initListOfAllCharacterTest() {
 		ArrayList<Character> listOfAllCharactersSpy = spy(listOfAllCharacters);
-		init.createListOfAllCharacter(listOfAllCharactersSpy);
-		verify(listOfAllCharactersSpy, times(8)).add(Mockito.any(Character.class));
+		listOfAllCharactersSpy = init.createListOfAllCharacter();
+		assertEquals(listOfAllCharactersSpy.size(), 8);
 	}
 	
 	@Test
@@ -65,9 +66,8 @@ public class InitialiserTest {
 		ArrayList<Behaviour> listOfBehaviourSpy = spy(listOfBehaviour);
 		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer); 
 		
-		init.createListOfBehaviour(listOfBehaviourSpy, listOfPlayerSpy);
-		verify(listOfBehaviourSpy, times(Initialiser.NUMBER_OF_PLAYER)).add(Mockito.any(Behaviour.class));
-		verify(listOfPlayerSpy, times(Initialiser.NUMBER_OF_PLAYER)).add(Mockito.any(Player.class));
+		listOfBehaviourSpy = init.createListOfBehaviour();
+		assertEquals(listOfBehaviourSpy.size(), Initialiser.NUMBER_OF_PLAYER);
 
 	}
 	

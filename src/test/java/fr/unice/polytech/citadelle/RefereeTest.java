@@ -1,19 +1,21 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Player;
-
-import fr.unice.polytech.citadelle.game_engine.Referee;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_engine.Referee;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 
 public class RefereeTest {
@@ -102,4 +104,28 @@ public class RefereeTest {
 
         assertFalse(referee.hasFiveDistrictColors(bob));
     }
+    
+    @Test
+	public void addBonusForPlayersTest() {
+    	ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
+		Player player1 = new Player("player1Test");
+		Player player2 = new Player("player2Test");
+		Player player3= new Player("player3Test");
+		
+		Behaviour behaviour1 = new Behaviour(player1);
+		Behaviour behaviour2 = new Behaviour(player2);
+		Behaviour behaviour3= new Behaviour(player3);
+		
+		leaderBoard.add(behaviour1);
+		leaderBoard.add(behaviour2);
+		leaderBoard.add(behaviour3);
+
+		referee.addBonusForPlayers(leaderBoard);
+		assertEquals(player1.getScore(), Referee.BONUS_FIRST);
+		assertEquals(player2.getScore(), Referee.BONUS_END);
+		assertEquals(player2.getScore(), Referee.BONUS_END);
+
+	}
+	
+
 }

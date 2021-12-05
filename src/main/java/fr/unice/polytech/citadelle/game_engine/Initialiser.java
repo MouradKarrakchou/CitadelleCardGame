@@ -42,12 +42,12 @@ public class Initialiser {
 	
 	public Initialiser() {}
 
-	
+	/*
 	public void initAll(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Player> listOfPlayer, ArrayList<Behaviour> listOfBehaviour){
 		createListOfAllCharacter(listOfAllCharacters);
 		resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 		createListOfBehaviour(listOfBehaviour, listOfPlayer);
-	}
+	}*/
 	
 	public LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
 			ArrayList<Character> listOfAllCharacters) {
@@ -63,7 +63,8 @@ public class Initialiser {
 		return hashOfCharacters;
 	}
 	
-	public ArrayList<Character> createListOfAllCharacter(ArrayList<Character> listOfAllCharacters) {
+	public ArrayList<Character> createListOfAllCharacter() {
+		ArrayList<Character> listOfAllCharacters = new ArrayList<Character>();
 		Assassin theAssassin = new Assassin();
 		Thief theThief = new Thief();
 		Magician theMagician = new Magician();
@@ -85,36 +86,46 @@ public class Initialiser {
 		return listOfAllCharacters;
 	}
 	
-	public ArrayList<Behaviour> createListOfBehaviour(ArrayList<Behaviour> listOfBehaviour, ArrayList<Player> listOfPlayer){
+	public ArrayList<Behaviour> createListOfBehaviour(){
+		ArrayList<Behaviour> listOfBehaviour = new ArrayList<Behaviour>();
+		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("roBehaviour" + i);
 			listOfBehaviour.add(new NormalBot(newPlayer));
-			listOfPlayer .add(newPlayer);
 		}
 		Player newPlayer = new Player("roBehaviour_Rusher");
 		listOfBehaviour.add(new RushBot(newPlayer));
-		listOfPlayer.add(newPlayer);
 		
 		return listOfBehaviour;
 
+	}
+	
+	public Board createBoard(ArrayList<Character> listOfCharacter){
+		Board board = new Board(new ArrayList<Player>(), new DeckDistrict(), new DeckCharacter());
+		return board;
 	}
 	
 	public void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
 		hashOfCharacters.put(character, Optional.of(Behaviour));
 	}
 	
-	public Board createBoard(ArrayList<Character> listOfCharacter){
-		Board board = new Board(new ArrayList<Player>(), new DeckDistrict(), new DeckCharacter(listOfCharacter));
-		return board;
-	}
 	
 	public DeckDistrict initDeckDistrict(DeckDistrict deck) {
 		deck.initialise();
 		return deck;
 	}
 	
-	public DeckCharacter initDeckCharacter(DeckCharacter deck, ArrayList<Character> listOfCharacter) {
-		deck.initialise(listOfCharacter);
-		return deck;
+	public DeckCharacter initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
+			ArrayList<Character> listOfCharacterCards = deckCharacter.getDeckCharacter();
+			listOfCharacterCards.clear();
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ASSASIN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.THIEF_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MAGICIAN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.KING_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.BISHOP_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MERCHANT_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ARCHITECT_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initialiser.WARLORD_INDEX));
+			return deckCharacter;
 	}
 }

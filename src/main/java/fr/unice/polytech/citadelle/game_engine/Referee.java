@@ -5,14 +5,20 @@ import fr.unice.polytech.citadelle.game.BonusDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Referee {
 
+	public static final int BONUS_FIRST = 4;
+	public static final int BONUS_END = 2;
 	Board board;
 
+	
+	
     public Referee(Board board){
         this.board=board;
     }
@@ -27,6 +33,16 @@ public class Referee {
 
         if (isThereBonusDistrictInCity(player)) activateBonus(player);
     }
+    
+	public void addBonusForPlayers(ArrayList<Behaviour> leaderBoard) {
+		Player firstToEndCity = leaderBoard.get(0).getPlayer();
+		firstToEndCity.updateScore(BONUS_FIRST);
+		for(int i = 1; i < leaderBoard.size() ; i++) {
+			Player firstWhoEndCity = leaderBoard.get(i).getPlayer();
+			firstWhoEndCity.updateScore(BONUS_END);
+		}
+	}
+
 
     /**
      * @param player The player to process.
@@ -89,4 +105,9 @@ public class Referee {
         BonusDistrict dragonGate = new DragonGate("Dragon Gate", 6,"Purple","Prestige");
         dragonGate.bonus(player);
     }
+	public boolean CityIsComplete(Player player) {
+		if(player.getCity().getSizeOfCity() >= 8) return true;
+		return false;
+	}
+
 }

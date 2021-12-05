@@ -24,45 +24,53 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
+import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class RoundManagerTest {
 	RoundManager roundMan;
-	DeckCharacter deckChar;
 	DeckDistrict deckDistrict;
 	ArrayList<Player> listOfPlayerSpy;
-	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters ;
-	ArrayList<Character> listOfAllCharacters;
-	ArrayList<Behaviour> listOfBehaviour;
-	ArrayList<Player> listOfPlayer;
 	Board game;
 	PrintCitadels printer;
+	Referee referee;
+	
+	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter;
+	ArrayList<Character> listOfAllCharacter;
+	ArrayList<Behaviour> listOfAllBehaviour;
+	Board board;
 	
 
 	Initialiser init;
 	@BeforeEach
 	public void init() {
-		hashOfCharacters = new LinkedHashMap<Character, Optional<Behaviour>>();
-		listOfAllCharacters= new ArrayList<Character>();
-		listOfBehaviour= spy(new ArrayList<Behaviour>());
-		listOfPlayer= new ArrayList<Player>();
-		listOfPlayerSpy = spy(listOfPlayer);
 
 		init = new Initialiser();
-		deckChar = new DeckCharacter(listOfAllCharacters);
 		deckDistrict = new DeckDistrict();
-		
-		game = new Board();
 		printer = new PrintCitadels();
 
 		
-		init.initAll(hashOfCharacters, listOfAllCharacters, listOfPlayerSpy, listOfBehaviour);
-		deckChar.initialise(listOfAllCharacters);
 		deckDistrict.initialise();
 
-		roundMan = spy(new RoundManager());
+		hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
+		listOfAllCharacter = init.createListOfAllCharacter();
+		listOfAllBehaviour = init.createListOfBehaviour();
+		board = init.createBoard(listOfAllCharacter);
+		init.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
+		hashOfCharacter = init.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
+		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board));
+		referee = new Referee(board);
+		
+		init.initDeckCharacter(roundMan.getBoard().getDeckCharacter(), listOfAllCharacter);
+		init.initDeckDistrict(roundMan.getBoard().getDeckDistrict());
+		
+		board.setListOfPlayer(roundMan.getListOfPlayers());
+
+		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour, hashOfCharacter, board));
+		//listOfPlayerSpy = spy(roundMan.getListOfPlayers());
+
 	
 	}
 	
@@ -93,54 +101,27 @@ public class RoundManagerTest {
 		assertEquals(roundMan.getTheListOfCity(listOfPlayer), listOfCity);
 	}
 	
-	@Test
-	public void addBonusForPlayersFirstTest() {
-		Player player = new Player("test");
-		assertEquals(player.getScore(), 0);
-		roundMan.addBonusForPlayers(player, false);
-		assertEquals(player.getScore(), RoundManager.BONUS_FIRST);
-	}
-	
-	public void addBonusForPlayersNotFirstTest() {
-		Player player = new Player("test");
-		assertEquals(player.getScore(), 0);
-		roundMan.addBonusForPlayers(player, true);
-		assertEquals(player.getScore(), RoundManager.BONUS_END);
-	}
-	
+		
 	@Test
 	public void actionsOfTheBehaviourTest() {
 		Character c = new Character("testCharacter", 0);
 		Behaviour bot = spy(new Behaviour(new Player("testPlayer")));
 		bot.getPlayer().setRole(c);
-		boolean aBehaviourCompleteHisCity = false;
-		roundMan.actionsOfTheBehaviour(c, bot, aBehaviourCompleteHisCity, deckDistrict);
+		roundMan.actionOfBehaviour(bot, deckDistrict);
 		verify(bot, times(1)).play(Mockito.any(), Mockito.any(), Mockito.any());
 	}
 	
 	
 	@Test
 	public void setupCharactersTest() {
-		RoundManager roundMan = spy(new RoundManager());
-		Initialiser initialiser = new Initialiser();
-		initialiser.initAll(roundMan.getHashOfCharacters(), roundMan.getListOfAllCharacters(), roundMan.getBoard().getListOfPlayer(), roundMan.getListOfBehaviour());
-		initialiser.initDeckCharacter(roundMan.getBoard().getDeckCharacter(), listOfAllCharacters);
-		initialiser.initDeckDistrict(roundMan.getBoard().getDeckDistrict());
-		
-		roundMan.setupCharacters(initialiser);
+		roundMan.setupCharacters(init);
 		verify(roundMan, times(Initialiser.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any(), Mockito.any());
 	}
 	
 	@Test
 	public void askEachCharacterToPlayTest() {
-		RoundManager roundMan = spy(new RoundManager());
-		Initialiser initialiser = new Initialiser();
 		PhaseManager phaseMan = new PhaseManager();
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
-		
-		initialiser.initAll(roundMan.getHashOfCharacters(), roundMan.getListOfAllCharacters(), roundMan.getBoard().getListOfPlayer(), roundMan.getListOfBehaviour());
-		initialiser.initDeckCharacter(roundMan.getBoard().getDeckCharacter(), listOfAllCharacters);
-		initialiser.initDeckDistrict(roundMan.getBoard().getDeckDistrict());
 		hashCharacter = roundMan.getHashOfCharacters();
 		
 		Character assasin = roundMan.getListOfAllCharacters().get(Initialiser.ASSASIN_INDEX);
@@ -163,10 +144,11 @@ public class RoundManagerTest {
 		hashCharacter.put(thief, behaviour2);		
 		hashCharacter.put(architect, behaviour3);		
 		
-		roundMan.askEachCharacterToPlay(phaseMan, roundMan.getBoard().getDeckDistrict(), initialiser);
-		verify(roundMan, times(3)).actionsOfTheBehaviour(Mockito.any(), Mockito.any(), Mockito.anyBoolean(), Mockito.any());
+		roundMan.askEachCharacterToPlay(phaseMan, roundMan.getBoard().getDeckDistrict(), init);
+		verify(roundMan, times(3)).actionOfBehaviour(Mockito.any(), Mockito.any());
 	
 	}
+	
 	@Test
 	public void orderTurnByKing(){
 		//creation of Behaviour
@@ -176,11 +158,11 @@ public class RoundManagerTest {
 		Behaviour botKing=new Behaviour(new Player("kingPlayer"));
 
 		//creation of the list of bot
-		listOfBehaviour.clear();
-		listOfBehaviour.add(botArchitecte);
-		listOfBehaviour.add(botBishop);
-		listOfBehaviour.add(botMagician);
-		listOfBehaviour.add(botKing);
+		listOfAllBehaviour.clear();
+		listOfAllBehaviour.add(botArchitecte);
+		listOfAllBehaviour.add(botBishop);
+		listOfAllBehaviour.add(botMagician);
+		listOfAllBehaviour.add(botKing);
 		//creation of the characters in game
 		Architect architect = new Architect();
 		Bishop bishop = new Bishop();
@@ -191,21 +173,32 @@ public class RoundManagerTest {
 		botKing.getPlayer().setRole(king);
 
 		//creation of the hashOfCharacter
-		hashOfCharacters.put(architect, Optional.of(botArchitecte));
-		hashOfCharacters.put(bishop, Optional.of(botBishop));
-		hashOfCharacters.put(magician, Optional.of(botMagician));
-		hashOfCharacters.put(king,Optional.of(botKing));
+		hashOfCharacter.put(architect, Optional.of(botArchitecte));
+		hashOfCharacter.put(bishop, Optional.of(botBishop));
+		hashOfCharacter.put(magician, Optional.of(botMagician));
+		hashOfCharacter.put(king,Optional.of(botKing));
 
 		//Verify that he finds the right spot for the king
 		botKing.setBehaviourIsKing(true);
-		assertEquals(3,roundMan.findKing(listOfBehaviour));
+		assertEquals(3,roundMan.findKing(listOfAllBehaviour));
 
 		//Verify that they are well ordered
-		ArrayList<Behaviour> botOrdered=roundMan.orderListOfPlayer(listOfBehaviour,3);
+		ArrayList<Behaviour> botOrdered=roundMan.orderListOfPlayer(listOfAllBehaviour,3);
 		assertEquals(botKing,botOrdered.get(0));
 		assertEquals(botArchitecte,botOrdered.get(1));
 		assertEquals(botBishop,botOrdered.get(2));
 		assertEquals(botMagician,botOrdered.get(3));
+	}
+	
+	@Test
+	public void updateLeaderboardTest() {
+		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"));
+		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
+		assertEquals(leaderBoard.size(), 0);
+		roundMan.updateLeaderboard(aBehaviour, leaderBoard);
+		assertEquals(leaderBoard.size(), 1);
+		assertEquals(leaderBoard.get(0), aBehaviour);
 
 	}
+
 }
