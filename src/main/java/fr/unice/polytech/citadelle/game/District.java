@@ -41,13 +41,9 @@ public class District implements Comparable<District>{
         return nameOfFamily;
     }
 
-    public void spell(Player player) {}
-
-    public void joker(Player player) {}
-
     @Override
     public String toString(){
-        return("District "+name+" ("+value+")");
+        return(name + " (" + value + ")");
     }
 
 	@Override

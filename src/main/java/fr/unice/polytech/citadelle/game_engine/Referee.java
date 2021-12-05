@@ -1,8 +1,10 @@
 package fr.unice.polytech.citadelle.game_engine;
 
 import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.BonusDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +24,8 @@ public class Referee {
 
         // Update Player score
         player.updateScore(scoreToAdd);
+
+        if (isThereBonusDistrictInCity(player)) activateBonus(player);
     }
 
     /**
@@ -69,5 +73,20 @@ public class Referee {
         Collections.sort(listOfPlayer);
         Collections.reverse(listOfPlayer);
         for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
+    }
+
+    private boolean isThereBonusDistrictInCity(Player player) {
+        ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
+        builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
+
+        for (District district : builtDistrict) {
+            if (district.getName().equals("Dragon Gate")) return true;
+        }
+        return false;
+    }
+
+    private void activateBonus(Player player) {
+        BonusDistrict dragonGate = new DragonGate("Dragon Gate", 6,"Purple","Prestige");
+        dragonGate.bonus(player);
     }
 }

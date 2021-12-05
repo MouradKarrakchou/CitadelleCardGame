@@ -63,7 +63,6 @@ public class RoundManager {
 
 	/**
 	 * Initialise the deck of character then for each behaviour, choose a characterCard
-	 * @param deckCharacter
 	 * @param initialiser
 	 */
 	public void setupCharacters(Initialiser initialiser) {

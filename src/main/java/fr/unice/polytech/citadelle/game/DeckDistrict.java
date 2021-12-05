@@ -1,7 +1,8 @@
 package fr.unice.polytech.citadelle.game;
 
+import fr.unice.polytech.citadelle.game.purple_districts.*;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 
@@ -27,15 +28,17 @@ public class DeckDistrict {
     private void oneCard() {
         ArrayList<String> districtsNamesWithSameNumberOfCards = new ArrayList<>();
 
-        deckDistrict.add(new District("Haunted City", 2,"Purple","Prestige"));
+        deckDistrict.add(new HauntedCity("Haunted City", 2,"Purple","Prestige"));
 
-        Collections.addAll(districtsNamesWithSameNumberOfCards, "Laboratory", "Smithy", "Observatory", "Graveyard");
-        districtsNamesWithSameNumberOfCards.stream().forEach(district -> deckDistrict.add(new District(district, 5,"Purple","prestige")));
-        districtsNamesWithSameNumberOfCards.clear();
+        deckDistrict.add(new Laboratory("Laboratory", 5,"Purple","Prestige"));
+        deckDistrict.add(new Smithy("Smithy", 5,"Purple","Prestige"));
+        deckDistrict.add(new Observatory("Observatory", 5,"Purple","Prestige"));
+        deckDistrict.add(new Graveyard("Graveyard", 5,"Purple","Prestige"));
 
-        Collections.addAll(districtsNamesWithSameNumberOfCards, "Library", "University", "School of Magic", "Dragon Gate");
-        districtsNamesWithSameNumberOfCards.stream().forEach(district -> deckDistrict.add(new District(district, 6,"Purple","Prestige")));
-        districtsNamesWithSameNumberOfCards.clear();
+        deckDistrict.add(new Library("Library", 6,"Purple","Prestige"));
+        deckDistrict.add(new University("University", 6,"Purple","Prestige"));
+        deckDistrict.add(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
+        deckDistrict.add(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
 
     }
 
@@ -46,7 +49,7 @@ public class DeckDistrict {
         districtsWithSameValue.add(new District("Fortress",5,"Red","Soldiery"));
         districtsWithSameValue.add(new District("Town Hall",5,"Green","Trade and Handicrafts"));
         districtsWithSameValue.add(new District("Palace",5,"Yellow","Nobility"));
-        districtsWithSameValue.add(new District("Keep",3,"Purple","Prestige"));
+        districtsWithSameValue.add(new Keep("Keep",3,"Purple","Prestige"));
 
         for (int i = 0; i < 2; i++){
             districtsWithSameValue.stream().forEach(district -> deckDistrict.add(district));

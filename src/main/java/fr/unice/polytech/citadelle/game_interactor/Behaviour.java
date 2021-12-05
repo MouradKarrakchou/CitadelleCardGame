@@ -4,13 +4,11 @@ import java.nio.file.DirectoryStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.*;
+import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
-import fr.unice.polytech.citadelle.game.Character;
 
 /**
  * A Behaviour realize all the action of a player.
@@ -54,7 +52,7 @@ public class Behaviour {
 
 	
 	public boolean play(DeckDistrict deckDistrict, String currentPhase,
-			LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+						LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		printC.dropALine();
 		if (player.getCharacter().isCharacterIsAlive()) {
 			this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
@@ -165,7 +163,23 @@ public class Behaviour {
 		executor.buildDistrict(district);
 	}
 
-	
+
+
+
+	private void spellOrColor(Player player) {
+		ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
+		builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
+
+		for (District district : builtDistrict) {
+			if (district.getName().equals("Keep")) continue;
+
+			else if (district.getName().equals("School of Magic"));
+				//district.joker(player);
+
+			else if (!district.getName().equals("Dragon Gate") || !district.getName().equals("Haunted City"));
+				//district.spell(player);
+		}
+	}
 
 	public int randomInt(int scope) {
 		Random random = new Random();
