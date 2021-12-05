@@ -172,4 +172,15 @@ public class RushBotTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aCheaperBuildableDistrict);
 	}
 
+	
+	@Test
+	public void chooseBetweenTwoCardsTest() {
+		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
+		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
+
+		
+		District choosenDistrict = rusher.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap, deckDistrict);
+	
+		assertEquals(choosenDistrict, aDistrictCheap);
+	}
 }

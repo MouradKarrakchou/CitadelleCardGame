@@ -25,8 +25,12 @@ public class Behaviour {
 	// ---
 	CityManagement cityMan;
 	Executor executor;
-	private static final int ONE_CARD = 1;
-	private static final int TWO_CARD = 2;
+	
+	protected static final int ZERO_CARD = 0;
+	protected static final int ONE_CARD = 1;
+	protected static final int TWO_CARD = 2;
+	
+	
 
 	public Behaviour(Player player) {
 		this.player = player;
@@ -49,6 +53,23 @@ public class Behaviour {
 		deckDistrict.addDistrict(pickedDistricts.get(0));
 		return pickedDistricts.get(1);
 	}
+
+	/** 
+	 * @param pickedDistricts The two picked cards.
+	 * @return The district having the lower value.
+	 */
+	public District selectTheLowerDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
+		int cardOneValue = pickedDistricts.get(0).getValue();
+		int cardTwoValue = pickedDistricts.get(1).getValue();
+
+		if (cardOneValue < cardTwoValue) {
+			deckDistrict.addDistrict(pickedDistricts.get(1));
+			return pickedDistricts.get(0);
+		}
+		deckDistrict.addDistrict(pickedDistricts.get(0));
+		return pickedDistricts.get(1);
+	}
+
 
 	
 	public boolean play(DeckDistrict deckDistrict, String currentPhase,
@@ -77,6 +98,8 @@ public class Behaviour {
 
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 	};
+
+	
 
 	
 	/**
@@ -114,23 +137,12 @@ public class Behaviour {
 		}
 	}
 	
-	public Optional<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
+	public ArrayList<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
 		ArrayList<District> pickedCards = executor.pickCards(deckDistrict);
-		ArrayList<District> possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
-		Optional<District> choosenDistrictCard = Optional.empty();
-		if(possibleCards.size() == ONE_CARD)
-			choosenDistrictCard = Optional.of(possibleCards.get(0));
-		else if(possibleCards.size() == TWO_CARD)
-			choosenDistrictCard = Optional.of(chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict));
-		return choosenDistrictCard;
+		return pickedCards;
 	}
 	
-	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
-		ArrayList<District> pickedCards = new ArrayList<>();
-		pickedCards.add(firstDistrict);
-		pickedCards.add(secondDistrict);
-		return selectTheHigherDistrict(deckDistrict, pickedCards);
-	}
+	
  
 	/*
 	 * For the two cards chosen look if they are present in the city or the hand, if yes we discard the card

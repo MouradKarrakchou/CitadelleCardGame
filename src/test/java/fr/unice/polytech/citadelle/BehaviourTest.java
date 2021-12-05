@@ -60,51 +60,6 @@ public class BehaviourTest {
 	}
 	
 	
-	@Test
-	public void pick2CardsIntoTheDeckTwoCardTest() {
-		Player playerOfMockTest = new Player("playerOfMockTest");
-		Behaviour spyBea = spy(new Behaviour(playerOfMockTest));
-		
-		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
-		District aDistrict = new District("aDistrict", 10, "colorTest", "familyTest");
-		District aOtherDistrict = new District("aOtherDistrict", 5, "colorTest", "familyTest");
-
-		pickedDistrictCards.add(aDistrict);
-		pickedDistrictCards.add(aOtherDistrict);
-
-		Mockito.doReturn(pickedDistrictCards).when(spyBea).chooseToKeepOrNotPickedCards(Mockito.any(), Mockito.any());
-		Mockito.doReturn(aDistrict).when(spyBea).chooseBetweenTwoCards(Mockito.any(), Mockito.any(),Mockito.any());
-
-		
-		assertEquals(spyBea.pick2CardsIntoTheDeck(deckDistrict), Optional.of(aDistrict));
-	}
-	
-	@Test
-	public void pick2CardsIntoTheDeckOneCardTest() {
-		Player playerOfMockTest = new Player("playerOfMockTest");
-		Behaviour spyBea = spy(new Behaviour(playerOfMockTest));
-		
-		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
-		District aDistrict = new District("aDistrict", 10, "colorTest", "familyTest");
-
-		pickedDistrictCards.add(aDistrict);
-
-		Mockito.doReturn(pickedDistrictCards).when(spyBea).chooseToKeepOrNotPickedCards(Mockito.any(), Mockito.any());
-		
-		assertEquals(spyBea.pick2CardsIntoTheDeck(deckDistrict), Optional.of(aDistrict));
-	}
-	
-	@Test
-	public void pick2CardsIntoTheDeckZeroCardTest() {
-		Player playerOfMockTest = new Player("playerOfMockTest");
-		Behaviour spyBea = spy(new Behaviour(playerOfMockTest));
-		
-		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
-
-		Mockito.doReturn(pickedDistrictCards).when(spyBea).chooseToKeepOrNotPickedCards(Mockito.any(), Mockito.any());
-		
-		assertEquals(spyBea.pick2CardsIntoTheDeck(deckDistrict), Optional.empty());
-	}
 
 
 	@Test

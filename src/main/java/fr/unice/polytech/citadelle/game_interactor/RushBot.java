@@ -25,9 +25,8 @@ public class RushBot extends Behaviour {
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
 		if (cheapersDistrictsBuildable.size() == 0) {
-			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
-			if(districtCardChoosen.isPresent())
-				takeCard(districtCardChoosen.get(), deckDistrict);
+			District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+			takeCard(choosenDistrictCard, deckDistrict);
 		}
 		else {
 			takeGold();
@@ -43,11 +42,8 @@ public class RushBot extends Behaviour {
 		if(futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
 			takeGold();
 		else {
-			Optional<District> districtCardChoosen = pick2CardsIntoTheDeck(deckDistrict);
-			if(districtCardChoosen.isPresent())
-				takeCard(districtCardChoosen.get(), deckDistrict);
-			else
-				takeGold();
+			District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+			takeCard(choosenDistrictCard, deckDistrict);
 		}
 	
 		ifPossibleBuildADistrict();
@@ -83,8 +79,34 @@ public class RushBot extends Behaviour {
 
 	}
 
+	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
+		ArrayList<District> pickedCards = new ArrayList<>();
+		pickedCards.add(firstDistrict);
+		pickedCards.add(secondDistrict);
+		return selectTheLowerDistrict(deckDistrict, pickedCards);
+	}
 
+	private District pickCardsInDeck(DeckDistrict deckDistrict) {
+		ArrayList<District> pickedCards = new ArrayList<>();
+		ArrayList<District> possibleCards = new ArrayList<>();
+		District choosenDistrictCard = null; // bof
 
+		pickedCards = pick2CardsIntoTheDeck(deckDistrict);
+		possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
+
+		switch (possibleCards.size()) {
+		case ONE_CARD:
+			choosenDistrictCard = possibleCards.get(0);
+			break;
+		case TWO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
+			break;
+		case ZERO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
+			break;
+		}
+		return choosenDistrictCard;
+	}
 
 	
 
