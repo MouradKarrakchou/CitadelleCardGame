@@ -164,23 +164,6 @@ public class Behaviour {
 	}
 
 
-
-
-	private void spellOrColor(Player player) {
-		ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
-		builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
-
-		for (District district : builtDistrict) {
-			if (district.getName().equals("Keep")) continue;
-
-			else if (district.getName().equals("School of Magic"));
-				//district.joker(player);
-
-			else if (!district.getName().equals("Dragon Gate") || !district.getName().equals("Haunted City"));
-				//district.spell(player);
-		}
-	}
-
 	public int randomInt(int scope) {
 		Random random = new Random();
 		return (random.nextInt(scope));

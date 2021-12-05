@@ -6,7 +6,7 @@ import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
-import fr.unice.polytech.citadelle.output.PrintCitadels;
+import fr.unice.polytech.citadelle.game.purple_districts.University;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +31,7 @@ public class Referee {
         // Update Player score
         player.updateScore(scoreToAdd);
 
-        if (isThereBonusDistrictInCity(player)) activateBonus(player);
+        if (isThereBonusDistrictInCity(player).size() != 0) activateBonus(player, isThereBonusDistrictInCity(player));
     }
     
 	public void addBonusForPlayers(ArrayList<Behaviour> leaderBoard) {
@@ -91,19 +91,27 @@ public class Referee {
         for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
     }
 
-    private boolean isThereBonusDistrictInCity(Player player) {
+    private ArrayList<BonusDistrict> isThereBonusDistrictInCity(Player player) {
         ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
         builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
 
+        ArrayList<BonusDistrict> bonusDistrictList = new ArrayList<>();
+
         for (District district : builtDistrict) {
-            if (district.getName().equals("Dragon Gate")) return true;
+            if (district.getName().equals("Dragon Gate"))
+                bonusDistrictList.add(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
+            if (district.getName().equals("University"))
+                bonusDistrictList.add(new University("University", 6,"Purple","Prestige"));
         }
-        return false;
+
+        return bonusDistrictList;
     }
 
-    private void activateBonus(Player player) {
-        BonusDistrict dragonGate = new DragonGate("Dragon Gate", 6,"Purple","Prestige");
-        dragonGate.bonus(player);
+    private void activateBonus(Player player, ArrayList<BonusDistrict> bonusDistrictList) {
+
+        for (BonusDistrict bonusDistrict : bonusDistrictList) {
+            bonusDistrict.bonusDistrict(player);
+        }
     }
 	public boolean CityIsComplete(Player player) {
 		if(player.getCity().getSizeOfCity() >= 8) return true;

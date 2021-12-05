@@ -5,7 +5,7 @@ public class BonusDistrict extends District {
         super(name, value, color, nameOfFamily);
     }
 
-    public void bonus(Player player) {
+    public void bonusDistrict(Player player) {
         player.updateScore(2);
     }
 
