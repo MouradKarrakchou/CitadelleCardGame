@@ -18,5 +18,6 @@ public class Architect extends Character {
         bot.addDistrict(bot.pickCard());
         bot.addDistrict(bot.pickCard());
         bot.setBotIsArchitect(true);
+
     }
 }

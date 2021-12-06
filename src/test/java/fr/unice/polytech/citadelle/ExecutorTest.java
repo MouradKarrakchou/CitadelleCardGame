@@ -25,7 +25,7 @@ public class ExecutorTest {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");
-		executor = new Executor(player);
+		executor = spy(new Executor(player));
 	}
 
 	@Test
