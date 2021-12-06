@@ -19,8 +19,7 @@ public class Behaviour {
 	// The player controlled by the Behaviour.
 	protected final Player player;
 	protected final PrintCitadels printC = new PrintCitadels();
-	protected boolean botIsKing = false;
-	private boolean botIsArchitect;
+	protected Boolean botIsKing = false;
 	protected int numberOfCharacter = 8;
 
 	// ---
@@ -79,15 +78,8 @@ public class Behaviour {
 			lastTurnBehaviour();
 		else
 			normalBehaviour();
-		if (botIsArchitect)
-			architectMove();
 		return (player.getCity().isComplete());
 
-	}
-
-	private void architectMove() {
-		ifPossibleBuildADistrict();
-		ifPossibleBuildADistrict();
 	}
 
 	public void normalBehaviour() {
@@ -99,7 +91,11 @@ public class Behaviour {
 	public void lastTurnBehaviour() {
 	};
 
-
+	/**
+	 * 
+	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on
+	 * retourne pas le character assasin direct ???
+	 */
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
@@ -164,9 +160,6 @@ public class Behaviour {
 	public void buildDistrict(District district) {
 		executor.buildDistrict(district);
 	}
-	public District pickCard() {
-		executor.pickCard(board.getDeckDistrict());
-	}
 
 	public District pickCardsInDeck() {
 		ArrayList<District> pickedCards = new ArrayList<>();
@@ -205,10 +198,6 @@ public class Behaviour {
 
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
-	}
-
-	public void setBotIsArchitect(boolean botIsArchitect) {
-		this.botIsArchitect = botIsArchitect;
 	}
 
 	public Player getPlayer() {

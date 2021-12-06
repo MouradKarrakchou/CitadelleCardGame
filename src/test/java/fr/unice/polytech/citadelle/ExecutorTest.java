@@ -25,7 +25,7 @@ public class ExecutorTest {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");
-		executor = new Executor(player);
+		executor = spy(new Executor(player));
 	}
 
 	@Test
@@ -83,6 +83,5 @@ public class ExecutorTest {
 		when(executor.pickBlindDistrict(mockDeckDistrict)).thenReturn(aDistrict);
 		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(0));
 		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(1));
-
 	}
 }
