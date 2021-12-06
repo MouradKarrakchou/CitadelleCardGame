@@ -38,7 +38,10 @@ public class Executor {
     	System.out.println(player.getName()+" putBack 1 cards "+districtCard.getName());
 		deckDistrict.addDistrict(districtCard);
 	}
-	
+	public District pickCard(DeckDistrict deckDistrict) {
+		return pickBlindDistrict(deckDistrict);
+	}
+
 	public ArrayList<District> pickCards(DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = new ArrayList<District>();
 				pickedCards.add(pickBlindDistrict(deckDistrict));
