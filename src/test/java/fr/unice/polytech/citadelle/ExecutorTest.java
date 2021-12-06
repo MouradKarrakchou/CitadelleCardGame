@@ -83,6 +83,5 @@ public class ExecutorTest {
 		when(executor.pickBlindDistrict(mockDeckDistrict)).thenReturn(aDistrict);
 		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(0));
 		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(1));
-
 	}
 }
