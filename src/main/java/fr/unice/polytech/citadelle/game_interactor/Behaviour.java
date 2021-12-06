@@ -195,8 +195,6 @@ public class Behaviour {
 
 	public District chooseBetweenTwoCards(District district, District district1, DeckDistrict deckDistrict) { return null; }
 
-	//library
-
 
 	public int randomInt(int scope) {
 		Random random = new Random();

@@ -22,7 +22,7 @@ public class NormalBot extends Behaviour {
 			takeGold();
 		else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
-			for (District district : player.getDistrictCards()) {
+			for (District district : player.getCity().getBuiltDistrict()) {
 				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
 			}
 			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);

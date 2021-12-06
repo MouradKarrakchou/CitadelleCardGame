@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.SpellDistrict;
 
 public class RushBot extends Behaviour {
 
@@ -25,9 +26,15 @@ public class RushBot extends Behaviour {
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
 		if (cheapersDistrictsBuildable.size() == 0) {
-			//library
-			District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-			takeCard(choosenDistrictCard, deckDistrict);
+			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
+			for (District district : player.getCity().getBuiltDistrict()) {
+				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
+			}
+			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
+			else {
+				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+				takeCard(choosenDistrictCard, deckDistrict);
+			}
 		}
 		else {
 			takeGold();
@@ -43,8 +50,15 @@ public class RushBot extends Behaviour {
 		if(futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
 			takeGold();
 		else {
-			District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-			takeCard(choosenDistrictCard, deckDistrict);
+			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
+			for (District district : player.getCity().getBuiltDistrict()) {
+				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
+			}
+			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
+			else {
+				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+				takeCard(choosenDistrictCard, deckDistrict);
+			}
 		}
 	
 		ifPossibleBuildADistrict();
