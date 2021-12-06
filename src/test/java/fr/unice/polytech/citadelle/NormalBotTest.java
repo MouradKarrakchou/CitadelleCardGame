@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
@@ -24,26 +25,28 @@ public class NormalBotTest {
 	Player player;
 	NormalBot investor;
 	DeckDistrict deckDistrict;
+	Board board;
 
 	@BeforeEach
 	public void init() {
-		deckDistrict = new DeckDistrict();
+		deckDistrict  = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");
-		investor = spy(new NormalBot(player));
+    	board = new Board(null,deckDistrict , null);
+		investor = spy(new NormalBot(player, board));
 	}
 
 	@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
-		investor = spy(new NormalBot(player));
+		investor = spy(new NormalBot(player, board));
 
 		player.getDistrictCards().clear();
 
 		player.setGolds(15);
 
-		investor.normalBehaviour(deckDistrict);
-		verify(investor, times(1)).takeCard(any(), any());
+		investor.normalBehaviour();
+		verify(investor, times(1)).takeCard(any());
 		verify(investor, times(0)).takeGold();
 	}
 
@@ -51,8 +54,8 @@ public class NormalBotTest {
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
-		investor.normalBehaviour(deckDistrict);
-		verify(investor, times(1)).takeCard(any(), any());
+		investor.normalBehaviour();
+		verify(investor, times(1)).takeCard(any());
 		verify(investor, times(0)).takeGold();
 	}
 
@@ -65,8 +68,8 @@ public class NormalBotTest {
 		District aDistrict = new District("aDistrict", 4, "testColor", "testFamily");
 		districtsCards.add(aDistrict);
 
-		investor.normalBehaviour(deckDistrict);
-		verify(investor, times(0)).takeCard(any(), any());
+		investor.normalBehaviour();
+		verify(investor, times(0)).takeCard(any());
 		verify(investor, times(1)).takeGold();
 	}
 
@@ -82,7 +85,7 @@ public class NormalBotTest {
 		District newCheapDistrict = new District("testDistrict", cheapValue, "testColor", "testFamily");
 		districtsCards.add(newCheapDistrict);
 
-		investor.normalBehaviour(deckDistrict);
+		investor.normalBehaviour();
 		verify(investor, times(1)).takeGold();
 	}
 
@@ -92,8 +95,8 @@ public class NormalBotTest {
 	public void endGameBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
-		investor.endGameBehaviour(deckDistrict);
-		verify(investor, times(1)).takeCard(any(), any());
+		investor.endGameBehaviour();
+		verify(investor, times(1)).takeCard(any());
 		verify(investor, times(0)).takeGold();
 	}
 
@@ -108,7 +111,7 @@ public class NormalBotTest {
 
 		districtsCards.add(new District("testDistrict", tooExpansiveValueForNow, "testColor", "testFamily"));
 
-		investor.endGameBehaviour(deckDistrict);
+		investor.endGameBehaviour();
 		verify(investor, times(1)).takeGold();
 	}
 
@@ -118,7 +121,7 @@ public class NormalBotTest {
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
 
 		
-		District choosenDistrict = investor.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap, deckDistrict);
+		District choosenDistrict = investor.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap);
 	
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
@@ -131,10 +134,11 @@ public class NormalBotTest {
 		districtsCards.add(aDistrictCheap);
 		districtsCards.add(aDistrictExpansive);		
 
-		when(investor.pick2CardsIntoTheDeck(deckDistrict)).thenReturn(districtsCards);		when(investor.pick2CardsIntoTheDeck(deckDistrict)).thenReturn(districtsCards);
-		when(investor.chooseToKeepOrNotPickedCards(districtsCards, deckDistrict)).thenReturn(districtsCards);
+		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);		
+		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
+		when(investor.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(districtsCards);
 
-		District choosenDistrict = investor.pickCardsInDeck(deckDistrict);
+		District choosenDistrict = investor.pickCardsInDeck();
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
 	
@@ -151,10 +155,10 @@ public class NormalBotTest {
 		afterPickDistrictsCards.add(aDistrictCheap);
 		
 
-		when(investor.pick2CardsIntoTheDeck(deckDistrict)).thenReturn(districtsCards);		
-		when(investor.chooseToKeepOrNotPickedCards(districtsCards, deckDistrict)).thenReturn(afterPickDistrictsCards);
+		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);		
+		when(investor.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(afterPickDistrictsCards);
 
-		District choosenDistrict = investor.pickCardsInDeck(deckDistrict);
+		District choosenDistrict = investor.pickCardsInDeck();
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
 	
@@ -168,10 +172,10 @@ public class NormalBotTest {
 		districtsCards.add(aDistrictCheap);
 		districtsCards.add(aDistrictExpansive);			
 
-		when(investor.pick2CardsIntoTheDeck(deckDistrict)).thenReturn(districtsCards);		
-		when(investor.chooseToKeepOrNotPickedCards(districtsCards, deckDistrict)).thenReturn(afterPickDistrictsCards);
+		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);		
+		when(investor.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(afterPickDistrictsCards);
 
-		District choosenDistrict = investor.pickCardsInDeck(deckDistrict);
+		District choosenDistrict = investor.pickCardsInDeck();
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
 }

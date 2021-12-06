@@ -80,7 +80,9 @@ public class ExecutorTest {
 		
 		DeckDistrict mockDeckDistrict = spy(new DeckDistrict());
 		mockDeckDistrict.initialise();
-		when(mockDeckDistrict.pickBlindDistrict()).thenReturn(aDistrict);
-		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards);
+		when(executor.pickBlindDistrict(mockDeckDistrict)).thenReturn(aDistrict);
+		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(0));
+		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(1));
+
 	}
 }

@@ -22,10 +22,10 @@ public class SpellDistrictTest {
     private ArrayList<Player> listOfPlayer = new ArrayList<>();
     private DeckDistrict deckDistrict = new DeckDistrict();
     private Initialiser initialiser = new Initialiser();
-
     Player player = new Player("Player");
     Executor executor = new Executor(player);
-    NormalBot normalBot = new NormalBot(player);
+    Board board = new Board(null,deckDistrict , null);
+    NormalBot normalBot = new NormalBot(player, board);
 
     @Test
     void librarySpellNormalBotTest() {
@@ -33,7 +33,7 @@ public class SpellDistrictTest {
         initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
-        normalBot.normalBehaviour(deckDistrict);
+        normalBot.normalBehaviour();
         assertEquals(2, player.getDistrictCards().size());
     }
 
@@ -42,7 +42,7 @@ public class SpellDistrictTest {
         player.getDistrictCards().clear();
         initialiser.initDeckDistrict(deckDistrict);
 
-        normalBot.normalBehaviour(deckDistrict);
+        normalBot.normalBehaviour();
         assertEquals(1, player.getDistrictCards().size());
     }
 

@@ -41,16 +41,18 @@ public class CharacterTest {
     public void init(){
         hashOfCharacters = new LinkedHashMap<>();
         printC=new PrintCitadels();
+    	Board board = new Board();
 
+        
         //creation of Behaviour
-        botArchitecte = new Behaviour(new Player("architectePlayer"));
-        botBishop =new Behaviour(new Player("bishopPlayer"));
-        botMagician = new Behaviour(new Player("magicianPlayer"));
-        botAssassin = new Behaviour(new Player("assassinPlayer"));
-        botKing=new Behaviour(new Player("kingPlayer"));
-        botThief=spy(new Behaviour(new Player("thiefPlayer")));
-        botMerchant=new Behaviour(new Player("merchantPlayer"));
-        botWarlord=new Behaviour(new Player("warlordPlayer"));
+        botArchitecte = new Behaviour(new Player("architectePlayer"), board);
+        botBishop =new Behaviour(new Player("bishopPlayer"), board);
+        botMagician = new Behaviour(new Player("magicianPlayer"), board);
+        botAssassin = new Behaviour(new Player("assassinPlayer"), board);
+        botKing=new Behaviour(new Player("kingPlayer"), board);
+        botThief=spy(new Behaviour(new Player("thiefPlayer"), board));
+        botMerchant=new Behaviour(new Player("merchantPlayer"), board);
+        botWarlord=new Behaviour(new Player("warlordPlayer"), board);
 
         //creation of the characters in game
         architect=new Architect();

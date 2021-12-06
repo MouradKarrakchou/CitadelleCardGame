@@ -56,7 +56,7 @@ public class RoundManagerTest {
 
 		hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
 		listOfAllCharacter = init.createListOfAllCharacter();
-		listOfAllBehaviour = init.createListOfBehaviour();
+		listOfAllBehaviour = init.createListOfBehaviour(board);
 		board = init.createBoard(listOfAllCharacter);
 		init.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
 		hashOfCharacter = init.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
@@ -105,10 +105,10 @@ public class RoundManagerTest {
 	@Test
 	public void actionsOfTheBehaviourTest() {
 		Character c = new Character("testCharacter", 0);
-		Behaviour bot = spy(new Behaviour(new Player("testPlayer")));
+		Behaviour bot = spy(new Behaviour(new Player("testPlayer"), board));
 		bot.getPlayer().setRole(c);
 		roundMan.actionOfBehaviour(bot, deckDistrict);
-		verify(bot, times(1)).play(Mockito.any(), Mockito.any(), Mockito.any());
+		verify(bot, times(1)).play(Mockito.any(), Mockito.any());
 	}
 	
 	
@@ -136,9 +136,9 @@ public class RoundManagerTest {
 		p2.setRole(architect);
 		p3.setRole(architect);
 
-		Optional<Behaviour> behaviour1 = Optional.of(new Behaviour(p1));
-		Optional<Behaviour> behaviour2 = Optional.of(new Behaviour(p2));
-		Optional<Behaviour> behaviour3 = Optional.of(new Behaviour(p3));
+		Optional<Behaviour> behaviour1 = Optional.of(new Behaviour(p1, board));
+		Optional<Behaviour> behaviour2 = Optional.of(new Behaviour(p2, board));
+		Optional<Behaviour> behaviour3 = Optional.of(new Behaviour(p3, board));
 
 		hashCharacter.put(assasin, behaviour1);	
 		hashCharacter.put(thief, behaviour2);		
@@ -152,10 +152,10 @@ public class RoundManagerTest {
 	@Test
 	public void orderTurnByKing(){
 		//creation of Behaviour
-		Behaviour botArchitecte = new Behaviour(new Player("architectePlayer"));
-		Behaviour botBishop =new Behaviour(new Player("bishopPlayer"));
-		Behaviour botMagician = new Behaviour(new Player("magicianPlayer"));
-		Behaviour botKing=new Behaviour(new Player("kingPlayer"));
+		Behaviour botArchitecte = new Behaviour(new Player("architectePlayer"), board);
+		Behaviour botBishop =new Behaviour(new Player("bishopPlayer"), board);
+		Behaviour botMagician = new Behaviour(new Player("magicianPlayer"), board);
+		Behaviour botKing=new Behaviour(new Player("kingPlayer"), board);
 
 		//creation of the list of bot
 		listOfAllBehaviour.clear();
@@ -192,7 +192,7 @@ public class RoundManagerTest {
 	
 	@Test
 	public void updateLeaderboardTest() {
-		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"));
+		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
 		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
 		assertEquals(leaderBoard.size(), 0);
 		roundMan.updateLeaderboard(aBehaviour, leaderBoard);

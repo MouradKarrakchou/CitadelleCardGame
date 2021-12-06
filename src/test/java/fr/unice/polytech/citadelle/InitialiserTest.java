@@ -13,7 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -63,18 +65,20 @@ public class InitialiserTest {
 	
 	@Test
 	public void initListOfBehaviourTest() {
+    	Board board = new Board();
 		ArrayList<Behaviour> listOfBehaviourSpy = spy(listOfBehaviour);
 		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer); 
 		
-		listOfBehaviourSpy = init.createListOfBehaviour();
+		listOfBehaviourSpy = init.createListOfBehaviour(board);
 		assertEquals(listOfBehaviourSpy.size(), Initialiser.NUMBER_OF_PLAYER);
 
 	}
 	
 	@Test
 	public void fillHashOfCharacterTest() {
+    	Board board = new Board();
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharactersSpy = spy(hashOfCharacters);
-		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Behaviour(new Player("testPlayer")));
+		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Behaviour(new Player("testPlayer"), board));
 		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 }

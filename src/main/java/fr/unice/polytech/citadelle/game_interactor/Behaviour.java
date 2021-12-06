@@ -161,7 +161,7 @@ public class Behaviour {
 		executor.buildDistrict(district);
 	}
 
-	public District pickCardsInDeck(DeckDistrict deckDistrict) {
+	public District pickCardsInDeck() {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		ArrayList<District> possibleCards = new ArrayList<>();
 		District choosenDistrictCard = null; // bof
