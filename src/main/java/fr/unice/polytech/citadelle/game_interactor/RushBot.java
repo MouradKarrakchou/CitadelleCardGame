@@ -35,7 +35,7 @@ public class RushBot extends Behaviour {
 			if (spellDistrict.size() != 0)
 				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
-				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+				District choosenDistrictCard = pickCardsInDeck();
 				takeCard(choosenDistrictCard);
 			}
 		} else {
@@ -60,7 +60,7 @@ public class RushBot extends Behaviour {
 			if (spellDistrict.size() != 0)
 				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
-				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+				District choosenDistrictCard = pickCardsInDeck();
 				takeCard(choosenDistrictCard);
 			}
 		}

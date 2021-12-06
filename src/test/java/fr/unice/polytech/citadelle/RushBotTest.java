@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
@@ -20,34 +21,36 @@ public class RushBotTest {
 	Player player;
 	RushBot rusher;
 	DeckDistrict deckDistrict;
+	Board board;
 
 	@BeforeEach
 	public void init() {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player1");
-		rusher = spy(new RushBot(player));
+		board = new Board(null,deckDistrict , null);
+		rusher = spy(new RushBot(player, board));
 	}
 
 	@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
-		rusher = spy(new RushBot(player));
+		rusher = spy(new RushBot(player, board));
 
 		player.getDistrictCards().clear();
 
 		player.setGolds(15);
 
-		rusher.normalBehaviour(deckDistrict);
-		verify(rusher, times(1)).takeCard(any(), any());
+		rusher.normalBehaviour();
+		verify(rusher, times(1)).takeCard(any());
 	}
 
 	@Test
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
-		rusher.normalBehaviour(deckDistrict);
-		verify(rusher, times(1)).takeCard(any(), any());
+		rusher.normalBehaviour();
+		verify(rusher, times(1)).takeCard(any());
 		verify(rusher, times(0)).takeGold();
 	}
 
@@ -57,8 +60,8 @@ public class RushBotTest {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
 		districtsCards.add(new District("testDistrict", tooExpansiveValue, "testColor", "testFamily"));
-		rusher.normalBehaviour(deckDistrict);
-		verify(rusher, times(1)).takeCard(any(), any());
+		rusher.normalBehaviour();
+		verify(rusher, times(1)).takeCard(any());
 		verify(rusher, times(0)).takeGold();
 	}
 
@@ -74,7 +77,7 @@ public class RushBotTest {
 		District newCheapDistrict = new District("testDistrict", cheapValue, "testColor", "testFamily");
 		districtsCards.add(newCheapDistrict);
 
-		rusher.normalBehaviour(deckDistrict);
+		rusher.normalBehaviour();
 		verify(rusher, times(1)).takeGold();
 	}
 
@@ -84,8 +87,8 @@ public class RushBotTest {
 	public void endGameBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
-		rusher.endGameBehaviour(deckDistrict);
-		verify(rusher, times(1)).takeCard(any(), any());
+		rusher.endGameBehaviour();
+		verify(rusher, times(1)).takeCard(any());
 		verify(rusher, times(0)).takeGold();
 	}
 
@@ -100,7 +103,7 @@ public class RushBotTest {
 
 		districtsCards.add(new District("testDistrict", tooExpansiveValueForNow, "testColor", "testFamily"));
 
-		rusher.endGameBehaviour(deckDistrict);
+		rusher.endGameBehaviour();
 		verify(rusher, times(1)).takeGold();
 	}
 	
@@ -178,7 +181,7 @@ public class RushBotTest {
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
 
 		
-		District choosenDistrict = rusher.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap, deckDistrict);
+		District choosenDistrict = rusher.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap);
 	
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -20,8 +21,9 @@ public class BehaviourBuildableDistrictTest {
 	
     @BeforeEach
     void beforeEach(){
+    	Board board = new Board();
     	player01 = new Player("Player01");
-        behaviourOfPlayer01 = new Behaviour(player01);
+        behaviourOfPlayer01 = new Behaviour(player01, board);
         
         player01.getDistrictCards().clear();
         player01.getDistrictCards().add(new District("Haunted City", 2,"empty","empty"));

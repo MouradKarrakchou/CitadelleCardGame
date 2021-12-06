@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
@@ -26,10 +28,12 @@ public class BehaviourTest {
 
 	@BeforeEach
 	public void init() {
-		playerTest = new Player("playerTest");
-		bea = new Behaviour(playerTest);
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
+    	Board board = new Board(new ArrayList<Player>(), deckDistrict, new DeckCharacter());
+		playerTest = new Player("playerTest");
+		bea = new Behaviour(playerTest, board);
+		
 	}
 
 	@Test
@@ -41,7 +45,7 @@ public class BehaviourTest {
 
 		pickedDistricts.add(highterDistrict);
 		pickedDistricts.add(cheaperDistrict);
-		District choosenDistrict = bea.selectTheHigherDistrict(deckDistrict, pickedDistricts);
+		District choosenDistrict = bea.selectTheHigherDistrict(pickedDistricts);
 		assertEquals(choosenDistrict, highterDistrict);
 	}
 
@@ -79,7 +83,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getDistrictCards().size(), 0);
 		assertEquals(playerTest.getCity().getSizeOfCity(), 0);
 
-		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards);
 
 		assertEquals(keepedDistrictCards.size(), 2);
 	}
@@ -103,7 +107,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getDistrictCards().size(), 1);
 		assertEquals(playerTest.getCity().getSizeOfCity(), 0);
 
-		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards);
 
 		assertEquals(keepedDistrictCards.size(), 1);
 		assertEquals(keepedDistrictCards.get(0), futurKeepDistrict);
@@ -129,7 +133,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getDistrictCards().size(), 0);
 		assertEquals(playerTest.getCity().getSizeOfCity(), 1);
 
-		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards);
 
 		assertEquals(keepedDistrictCards.size(), 1);
 		assertEquals(keepedDistrictCards.get(0), futurKeepDistrict);
@@ -156,7 +160,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getDistrictCards().size(), 0);
 		assertEquals(playerTest.getCity().getSizeOfCity(), 2);
 
-		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards, deckDistrict);
+		keepedDistrictCards = bea.chooseToKeepOrNotPickedCards(pickedDistrictCards);
 
 		assertEquals(keepedDistrictCards.size(), 0);
 
@@ -175,7 +179,7 @@ public class BehaviourTest {
 		District choosenCard = deckDistrict.getDeckDistrict().get(0);
 		playerTest.getDistrictCards().clear();;
 		assertEquals(playerTest.getDistrictCards().size(), 0);
-		bea.takeCard(choosenCard, deckDistrict);
+		bea.takeCard(choosenCard);
 		assertEquals(playerTest.getDistrictCards().size(), 1);
 		assertEquals(playerTest.getDistrictCards().get(0), choosenCard);
 	}
