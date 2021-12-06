@@ -25,22 +25,24 @@ public class Behaviour {
 	// ---
 	CityManagement cityMan;
 	Executor executor;
+	Board board;
 
 	protected static final int ZERO_CARD = 0;
 	protected static final int ONE_CARD = 1;
 	protected static final int TWO_CARD = 2;
 
-	public Behaviour(Player player) {
+	public Behaviour(Player player, Board board) {
 		this.player = player;
 		cityMan = new CityManagement(player);
 		executor = new Executor(player);
+		this.board = board;
 	}
 
 	/**
 	 * @param pickedDistricts The two picked cards.
 	 * @return The district having the higher value.
 	 */
-	public District selectTheHigherDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
+	public District selectTheHigherDistrict(ArrayList<District> pickedDistricts) {
 		District cardOne = pickedDistricts.get(0);
 		District cardTwo = pickedDistricts.get(1);
 
@@ -54,7 +56,8 @@ public class Behaviour {
 	 * @param pickedDistricts The two picked cards.
 	 * @return The district having the lower value.
 	 */
-	public District selectTheLowerDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
+	public District selectTheLowerDistrict(ArrayList<District> pickedDistricts) {
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		int cardOneValue = pickedDistricts.get(0).getValue();
 		int cardTwoValue = pickedDistricts.get(1).getValue();
 
@@ -66,27 +69,26 @@ public class Behaviour {
 		return pickedDistricts.get(1);
 	}
 
-	public boolean play(DeckDistrict deckDistrict, String currentPhase,
-			LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public boolean play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		printC.dropALine();
 		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
 		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-			endGameBehaviour(deckDistrict);
+			endGameBehaviour();
 		else if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-			lastTurnBehaviour(deckDistrict);
+			lastTurnBehaviour();
 		else
-			normalBehaviour(deckDistrict);
+			normalBehaviour();
 		return (player.getCity().isComplete());
 
 	}
 
-	public void normalBehaviour(DeckDistrict deckDistrict) {
+	public void normalBehaviour() {
 	};
 
-	public void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour() {
 	};
 
-	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
+	public void lastTurnBehaviour() {
 	};
 
 	/**
@@ -125,8 +127,8 @@ public class Behaviour {
 		}
 	}
 
-	public ArrayList<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict) {
-		ArrayList<District> pickedCards = executor.pickCards(deckDistrict);
+	public ArrayList<District> pick2CardsIntoTheDeck() {
+		ArrayList<District> pickedCards = executor.pickCards(board.getDeckDistrict());
 		return pickedCards;
 	}
 
@@ -134,13 +136,12 @@ public class Behaviour {
 	 * For the two cards chosen look if they are present in the city or the hand, if
 	 * yes we discard the card
 	 */
-	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards,
-			DeckDistrict deckDistrict) {
+	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards) {
 		ArrayList<District> removeDistrictCards = new ArrayList<District>();
 		for (int i = 0; i < 2; i++) {
 			District currentDistrictCard = pickedDistrictCards.get(i);
 			if (cityMan.isAlreadyBuilt(currentDistrictCard.getName()) || player.hasDistrict(currentDistrictCard)) {
-				executor.putCardBackInDeck(deckDistrict, currentDistrictCard);
+				executor.putCardBackInDeck(board.getDeckDistrict(), currentDistrictCard);
 				removeDistrictCards.add(pickedDistrictCards.get(i));
 			}
 		}
@@ -148,8 +149,8 @@ public class Behaviour {
 		return pickedDistrictCards;
 	}
 
-	public void takeCard(District districtCard, DeckDistrict deckDistrict) {
-		executor.takeCard(districtCard, deckDistrict);
+	public void takeCard(District districtCard) {
+		executor.takeCard(districtCard, board.getDeckDistrict());
 	}
 
 	public void takeGold() {
@@ -165,24 +166,24 @@ public class Behaviour {
 		ArrayList<District> possibleCards = new ArrayList<>();
 		District choosenDistrictCard = null; // bof
 
-		pickedCards = pick2CardsIntoTheDeck(deckDistrict);
-		possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
+		pickedCards = pick2CardsIntoTheDeck();
+		possibleCards = chooseToKeepOrNotPickedCards(pickedCards);
 
 		switch (possibleCards.size()) {
 		case ONE_CARD:
 			choosenDistrictCard = possibleCards.get(0);
 			break;
 		case TWO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
+			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
 			break;
 		case ZERO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
+			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
 			break;
 		}
 		return choosenDistrictCard;
 	}
 
-	public District chooseBetweenTwoCards(District district, District district1, DeckDistrict deckDistrict) {
+	public District chooseBetweenTwoCards(District district, District district1) {
 		return null;
 	}
 

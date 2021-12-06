@@ -32,14 +32,15 @@ public class Controller {
 		phaseManager = new PhaseManager();			
 	}
 	public void initGame() {
-		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
+		ArrayList<Behaviour> listOfAllBehaviour = new ArrayList<>();
+		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = new LinkedHashMap<>();
 		ArrayList<Character> listOfAllCharacter = initialiser.createListOfAllCharacter();
-		ArrayList<Behaviour> listOfAllBehaviour = initialiser.createListOfBehaviour();
 		Board board = initialiser.createBoard(listOfAllCharacter);
+		referee = new Referee(board);
+		listOfAllBehaviour = initialiser.createListOfBehaviour(board);
 		initialiser.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
 		hashOfCharacter = initialiser.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
 		roundManager = new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board);
-		referee = new Referee(board);
 		
 		initialiser.initDeckCharacter(roundManager.getBoard().getDeckCharacter(), listOfAllCharacter);
 		initialiser.initDeckDistrict(roundManager.getBoard().getDeckDistrict());

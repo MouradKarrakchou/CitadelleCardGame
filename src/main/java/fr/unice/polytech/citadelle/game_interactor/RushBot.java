@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
@@ -15,12 +16,13 @@ public class RushBot extends Behaviour {
 
 	private static final int MAX_VALUES_OF_CARDS = 3;
 
-	public RushBot(Player player) {
-		super(player);
+	public RushBot(Player player, Board board) {
+		super(player, board);
 	}
 
 	@Override
-	public void normalBehaviour(DeckDistrict deckDistrict) {
+	public void normalBehaviour() {
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
@@ -34,7 +36,7 @@ public class RushBot extends Behaviour {
 				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-				takeCard(choosenDistrictCard, deckDistrict);
+				takeCard(choosenDistrictCard);
 			}
 		} else {
 			takeGold();
@@ -43,9 +45,9 @@ public class RushBot extends Behaviour {
 	}
 
 	@Override
-	public void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour() {
 		printC.printPhase("Endgame", player);
-
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
 		if (futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
 			takeGold();
@@ -59,7 +61,7 @@ public class RushBot extends Behaviour {
 				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-				takeCard(choosenDistrictCard, deckDistrict);
+				takeCard(choosenDistrictCard);
 			}
 		}
 
@@ -67,8 +69,8 @@ public class RushBot extends Behaviour {
 	}
 
 	@Override
-	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
-		endGameBehaviour(deckDistrict);
+	public void lastTurnBehaviour() {
+		endGameBehaviour();
 	}
 
 	public void ifPossibleBuildACheapDistrict() {
@@ -97,11 +99,12 @@ public class RushBot extends Behaviour {
 	}
 
 	@Override
-	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
+	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict) {
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
-		District chosenCard = selectTheLowerDistrict(deckDistrict, pickedCards);
+		District chosenCard = selectTheLowerDistrict(pickedCards);
 		if(chosenCard.equals(firstDistrict))
 			executor.putCardBackInDeck(deckDistrict, secondDistrict);
 		else

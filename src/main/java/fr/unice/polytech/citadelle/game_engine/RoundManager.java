@@ -149,7 +149,7 @@ public class RoundManager {
 	public void actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
 		
 		if (currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive())
-			currentBehaviour.play(deckDistrict, currentPhase, hashOfCharacters);
+			currentBehaviour.play(currentPhase, hashOfCharacters);
 		else
 			printC.botIsDead(currentBehaviour.getPlayer());
 	}
