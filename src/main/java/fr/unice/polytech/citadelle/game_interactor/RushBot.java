@@ -25,6 +25,7 @@ public class RushBot extends Behaviour {
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
 		if (cheapersDistrictsBuildable.size() == 0) {
+			//library
 			District choosenDistrictCard = pickCardsInDeck(deckDistrict);
 			takeCard(choosenDistrictCard, deckDistrict);
 		}
@@ -79,35 +80,12 @@ public class RushBot extends Behaviour {
 
 	}
 
+	@Override
 	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
 		return selectTheLowerDistrict(deckDistrict, pickedCards);
 	}
-
-	private District pickCardsInDeck(DeckDistrict deckDistrict) {
-		ArrayList<District> pickedCards = new ArrayList<>();
-		ArrayList<District> possibleCards = new ArrayList<>();
-		District choosenDistrictCard = null; // bof
-
-		pickedCards = pick2CardsIntoTheDeck(deckDistrict);
-		possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
-
-		switch (possibleCards.size()) {
-		case ONE_CARD:
-			choosenDistrictCard = possibleCards.get(0);
-			break;
-		case TWO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
-			break;
-		case ZERO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
-			break;
-		}
-		return choosenDistrictCard;
-	}
-
-	
 
 }

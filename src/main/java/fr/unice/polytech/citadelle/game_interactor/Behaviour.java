@@ -99,9 +99,7 @@ public class Behaviour {
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 	};
 
-	
 
-	
 	/**
 	 * 
 	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on retourne pas le character assasin direct ???
@@ -173,6 +171,32 @@ public class Behaviour {
 		executor.buildDistrict(district);
 	}
 
+	public District pickCardsInDeck(DeckDistrict deckDistrict) {
+		ArrayList<District> pickedCards = new ArrayList<>();
+		ArrayList<District> possibleCards = new ArrayList<>();
+		District choosenDistrictCard = null; // bof
+
+		pickedCards = pick2CardsIntoTheDeck(deckDistrict);
+		possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
+
+		switch (possibleCards.size()) {
+			case ONE_CARD:
+				choosenDistrictCard = possibleCards.get(0);
+				break;
+			case TWO_CARD:
+				choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
+				break;
+			case ZERO_CARD:
+				choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
+				break;
+		}
+		return choosenDistrictCard;
+	}
+
+	public District chooseBetweenTwoCards(District district, District district1, DeckDistrict deckDistrict) { return null; }
+
+	//library
+
 
 	public int randomInt(int scope) {
 		Random random = new Random();
@@ -202,7 +226,5 @@ public class Behaviour {
 	public Executor getExecutor() {
 		return executor;
 	}
-
-	
 
 }
