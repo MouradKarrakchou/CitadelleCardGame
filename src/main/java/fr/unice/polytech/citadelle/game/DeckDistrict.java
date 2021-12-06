@@ -98,12 +98,6 @@ public class DeckDistrict {
         return deckDistrict.size();
     }
 
-    public District pickBlindDistrict() {
-        // Select a random district from the deck
-        Random random = new Random();
-        int randomValue = random.nextInt(deckDistrict.size());
-        return deckDistrict.remove(randomValue);
-    }
 
     public ArrayList<District> getDeckDistrict(){ return deckDistrict; }
 

@@ -34,7 +34,7 @@ public class RushBot extends Behaviour {
 				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-				//takeCard(choosenDistrictCard, deckDistrict);
+				takeCard(choosenDistrictCard, deckDistrict);
 			}
 		} else {
 			takeGold();
@@ -101,7 +101,12 @@ public class RushBot extends Behaviour {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
-		return selectTheLowerDistrict(deckDistrict, pickedCards);
+		District chosenCard = selectTheLowerDistrict(deckDistrict, pickedCards);
+		if(chosenCard.equals(firstDistrict))
+			executor.putCardBackInDeck(deckDistrict, secondDistrict);
+		else
+			executor.putCardBackInDeck(deckDistrict, firstDistrict);
+		return chosenCard;
 	}
 
 }

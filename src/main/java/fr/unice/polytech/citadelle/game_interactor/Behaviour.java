@@ -25,12 +25,10 @@ public class Behaviour {
 	// ---
 	CityManagement cityMan;
 	Executor executor;
-	
+
 	protected static final int ZERO_CARD = 0;
 	protected static final int ONE_CARD = 1;
 	protected static final int TWO_CARD = 2;
-	
-	
 
 	public Behaviour(Player player) {
 		this.player = player;
@@ -43,18 +41,16 @@ public class Behaviour {
 	 * @return The district having the higher value.
 	 */
 	public District selectTheHigherDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
-		int cardOneValue = pickedDistricts.get(0).getValue();
-		int cardTwoValue = pickedDistricts.get(1).getValue();
+		District cardOne = pickedDistricts.get(0);
+		District cardTwo = pickedDistricts.get(1);
 
-		if (cardOneValue >= cardTwoValue) {
-			deckDistrict.addDistrict(pickedDistricts.get(1));
-			return pickedDistricts.get(0);
+		if (cardOne.getValue() >= cardTwo.getValue()) {
+			return cardOne;
 		}
-		deckDistrict.addDistrict(pickedDistricts.get(0));
-		return pickedDistricts.get(1);
+		return cardTwo;
 	}
 
-	/** 
+	/**
 	 * @param pickedDistricts The two picked cards.
 	 * @return The district having the lower value.
 	 */
@@ -70,22 +66,16 @@ public class Behaviour {
 		return pickedDistricts.get(1);
 	}
 
-
-	
 	public boolean play(DeckDistrict deckDistrict, String currentPhase,
-						LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+			LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		printC.dropALine();
-		if (player.getCharacter().isCharacterIsAlive()) {
-			this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
-			if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-				endGameBehaviour(deckDistrict);
-			if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-				lastTurnBehaviour(deckDistrict);
-			else
-				normalBehaviour(deckDistrict);
-		} else {
-			printC.botIsDead(player);
-		}
+		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
+		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
+			endGameBehaviour(deckDistrict);
+		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
+			lastTurnBehaviour(deckDistrict);
+		else
+			normalBehaviour(deckDistrict);
 		return (player.getCity().isComplete());
 
 	}
@@ -99,10 +89,10 @@ public class Behaviour {
 	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
 	};
 
-
 	/**
 	 * 
-	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on retourne pas le character assasin direct ???
+	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on
+	 * retourne pas le character assasin direct ???
 	 */
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
@@ -124,7 +114,7 @@ public class Behaviour {
 
 		return (character);
 	}
-	 
+
 	public void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
@@ -134,20 +124,20 @@ public class Behaviour {
 			executor.buildDistrict(district);
 		}
 	}
-	
-	public ArrayList<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
+
+	public ArrayList<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = executor.pickCards(deckDistrict);
 		return pickedCards;
 	}
-	
-	
- 
+
 	/*
-	 * For the two cards chosen look if they are present in the city or the hand, if yes we discard the card
-	 * */
-	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards, DeckDistrict deckDistrict) {
+	 * For the two cards chosen look if they are present in the city or the hand, if
+	 * yes we discard the card
+	 */
+	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards,
+			DeckDistrict deckDistrict) {
 		ArrayList<District> removeDistrictCards = new ArrayList<District>();
-		for(int i = 0 ; i < 2 ; i++) {
+		for (int i = 0; i < 2; i++) {
 			District currentDistrictCard = pickedDistrictCards.get(i);
 			if (cityMan.isAlreadyBuilt(currentDistrictCard.getName()) || player.hasDistrict(currentDistrictCard)) {
 				executor.putCardBackInDeck(deckDistrict, currentDistrictCard);
@@ -157,16 +147,15 @@ public class Behaviour {
 		pickedDistrictCards.removeAll(removeDistrictCards);
 		return pickedDistrictCards;
 	}
-	
+
 	public void takeCard(District districtCard, DeckDistrict deckDistrict) {
 		executor.takeCard(districtCard, deckDistrict);
 	}
 
-
 	public void takeGold() {
-		executor.takeGold();		 
+		executor.takeGold();
 	}
-	
+
 	public void buildDistrict(District district) {
 		executor.buildDistrict(district);
 	}
@@ -180,21 +169,22 @@ public class Behaviour {
 		possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
 
 		switch (possibleCards.size()) {
-			case ONE_CARD:
-				choosenDistrictCard = possibleCards.get(0);
-				break;
-			case TWO_CARD:
-				choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
-				break;
-			case ZERO_CARD:
-				choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
-				break;
+		case ONE_CARD:
+			choosenDistrictCard = possibleCards.get(0);
+			break;
+		case TWO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
+			break;
+		case ZERO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
+			break;
 		}
 		return choosenDistrictCard;
 	}
 
-	public District chooseBetweenTwoCards(District district, District district1, DeckDistrict deckDistrict) { return null; }
-
+	public District chooseBetweenTwoCards(District district, District district1, DeckDistrict deckDistrict) {
+		return null;
+	}
 
 	public int randomInt(int scope) {
 		Random random = new Random();
@@ -208,7 +198,7 @@ public class Behaviour {
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
@@ -220,7 +210,7 @@ public class Behaviour {
 	public CityManagement getCityManager() {
 		return cityMan;
 	}
-	
+
 	public Executor getExecutor() {
 		return executor;
 	}
