@@ -72,7 +72,7 @@ public class Behaviour {
 		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
 		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
 			endGameBehaviour(deckDistrict);
-		if (currentPhase == PhaseManager.LAST_TURN_PHASE)
+		else if (currentPhase == PhaseManager.LAST_TURN_PHASE)
 			lastTurnBehaviour(deckDistrict);
 		else
 			normalBehaviour(deckDistrict);
