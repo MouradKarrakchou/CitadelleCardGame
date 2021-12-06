@@ -16,9 +16,8 @@ public class RushBot extends Behaviour {
 	private static final int MAX_VALUES_OF_CARDS = 3;
 
 	public RushBot(Player player) {
-		super(player); 
+		super(player);
 	}
-
 
 	@Override
 	public void normalBehaviour(DeckDistrict deckDistrict) {
@@ -28,39 +27,42 @@ public class RushBot extends Behaviour {
 		if (cheapersDistrictsBuildable.size() == 0) {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
-				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
+				if (district.getName().equals("Library"))
+					spellDistrict.add((SpellDistrict) district);
 			}
-			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
+			if (spellDistrict.size() != 0)
+				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
 				takeCard(choosenDistrictCard, deckDistrict);
 			}
-		}
-		else {
+		} else {
 			takeGold();
-		} 
+		}
 		ifPossibleBuildACheapDistrict();
 	}
 
 	@Override
 	public void endGameBehaviour(DeckDistrict deckDistrict) {
 		printC.printPhase("Endgame", player);
-		
+
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
-		if(futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
+		if (futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
 			takeGold();
 		else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
-				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
+				if (district.getName().equals("Library"))
+					spellDistrict.add((SpellDistrict) district);
 			}
-			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
+			if (spellDistrict.size() != 0)
+				spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
 				takeCard(choosenDistrictCard, deckDistrict);
 			}
 		}
-	
+
 		ifPossibleBuildADistrict();
 	}
 
@@ -99,7 +101,12 @@ public class RushBot extends Behaviour {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
-		return selectTheLowerDistrict(deckDistrict, pickedCards);
+		District choosenCard = selectTheLowerDistrict(deckDistrict, pickedCards);
+		if (choosenCard.equals(firstDistrict))
+			executor.putCardBackInDeck(deckDistrict, secondDistrict);
+		else
+			executor.putCardBackInDeck(deckDistrict, firstDistrict);
+		return choosenCard;
 	}
 
 }

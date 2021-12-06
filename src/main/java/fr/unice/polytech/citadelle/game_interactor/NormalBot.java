@@ -51,7 +51,13 @@ public class NormalBot extends Behaviour {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
-		return selectTheHigherDistrict(deckDistrict, pickedCards);
+		 District choosenCard = selectTheHigherDistrict(deckDistrict, pickedCards);
+		 if(choosenCard.equals(firstDistrict))
+				executor.putCardBackInDeck(deckDistrict, secondDistrict);
+		 else
+			executor.putCardBackInDeck(deckDistrict, firstDistrict);
+		 return choosenCard;
+
 	}
 
 
