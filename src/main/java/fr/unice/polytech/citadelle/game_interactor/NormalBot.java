@@ -1,11 +1,11 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.SpellDistrict;
 
 public class NormalBot extends Behaviour {
 
@@ -21,9 +21,15 @@ public class NormalBot extends Behaviour {
 		if (goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer + 2).size() > 0)
 			takeGold();
 		else {
-			//library
-			District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-			takeCard(choosenDistrictCard, deckDistrict);
+			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
+			for (District district : player.getDistrictCards()) {
+				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
+			}
+			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
+			else {
+				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
+				takeCard(choosenDistrictCard, deckDistrict);
+			}
 		}
 		ifPossibleBuildADistrict();
 	}
