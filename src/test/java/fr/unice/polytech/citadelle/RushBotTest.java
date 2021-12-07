@@ -194,5 +194,5 @@ public class RushBotTest {
 
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
-	
+
 }
