@@ -167,7 +167,7 @@ public class Behaviour {
 		District choosenDistrictCard = null; // bof
 
 		pickedCards = pick2CardsIntoTheDeck();
-		possibleCards = chooseToKeepOrNotPickedCards(pickedCards);
+		possibleCards = chooseToKeepOrNotPickedCards((ArrayList<District>) pickedCards.clone());
 
 		switch (possibleCards.size()) {
 		case ONE_CARD:
