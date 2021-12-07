@@ -147,4 +147,18 @@ public class PrintCitadels {
         }
         System.out.println();
     }
+
+    public void printArchitectSpell() {
+        System.out.println("The Architect can take 2 more Districts and build 3 Districts");
+    }
+    public void printMagicianSpellSwapHands(Character character){
+        System.out.println("The Magician swaps hand with "+character);
+    }
+    public void printMagicianSpellSwapCards(ArrayList<District> districts){
+        System.out.println("The Magician swaps "+districts.size()+" with the deck: "+districts);
+    }
+
+    public void printMagicianSpellFailed(Character characterToSwapWith) {
+        System.out.println("The Magician tried to swap with "+characterToSwapWith+" but no Player has this Character.");
+    }
 }

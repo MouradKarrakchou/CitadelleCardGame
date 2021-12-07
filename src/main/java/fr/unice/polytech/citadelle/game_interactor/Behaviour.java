@@ -224,10 +224,21 @@ public class Behaviour {
 	}
 
 
-	public void chooseMagicianAction() {
-		//return an empty array if we want to swap Cards with another Character
-		//return the position of the Cards that he want to swap
+	public ArrayList<Integer> chooseMagicianAction() {
+		//return an empty array if he wants to swap Cards with another Character
+		//return the position of the Cards that he wants to swap
+		ArrayList listOfInteger = new ArrayList();
+		return(listOfInteger);
+		//(for now he always chooses to steal from another Character)
 	}
+	public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
+		List<Character> list = hashOfCharacters.keySet().stream().toList();
+		Character randomCharacter=list.get(randomInt(8));
+		while (randomCharacter.getName()=="Magician")
+			randomCharacter=list.get(randomInt(8));
+		return randomCharacter;
+	}
+
 
 	public void setBotIsArchitect(boolean botIsArchitect) {
 		this.botIsArchitect=botIsArchitect;

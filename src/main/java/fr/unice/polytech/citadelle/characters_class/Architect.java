@@ -15,6 +15,7 @@ public class Architect extends Character {
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
         //Giving 2 Cards to the Player with Architect character
+        printC.printArchitectSpell();
         bot.addDistrict(bot.pickCard());
         bot.addDistrict(bot.pickCard());
         bot.setBotIsArchitect(true);

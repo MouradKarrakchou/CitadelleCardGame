@@ -16,8 +16,9 @@ public class Executor {
 	public Executor(Player player){
 		this.player = player;
 	}
-	
-	public void takeCard(District district, DeckDistrict deckDistrict) {
+
+
+    public void takeCard(District district, DeckDistrict deckDistrict) {
     	System.out.println(player.getName()+" add 1 cards "+district.getName());
 		player.addDistrict(district);
 		//deckDistrict.removeDistrict(district);
