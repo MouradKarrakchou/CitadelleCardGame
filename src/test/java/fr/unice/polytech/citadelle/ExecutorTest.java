@@ -68,7 +68,7 @@ public class ExecutorTest {
 		executor.putCardBackInDeck(deckDistrict, aDistrict);
 		assertEquals(deckDistrict.getSize(), sizeBefore+1);
 	}
-	
+
 	@Test
 	public void pickCardsTest() {
 		ArrayList<District> pickedCards = new ArrayList<District>();
@@ -77,11 +77,10 @@ public class ExecutorTest {
 		pickedCards.add(aDistrict);
 		pickedCards.add(aDistrict);
 
-		
-		DeckDistrict mockDeckDistrict = spy(new DeckDistrict());
+
+		DeckDistrict mockDeckDistrict = new DeckDistrict();
 		mockDeckDistrict.initialise();
 		when(executor.pickBlindDistrict(mockDeckDistrict)).thenReturn(aDistrict);
-		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(0));
-		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards.get(1));
+		assertEquals(executor.pickCards(mockDeckDistrict), pickedCards);
 	}
 }

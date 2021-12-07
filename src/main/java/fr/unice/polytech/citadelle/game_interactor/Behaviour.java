@@ -227,7 +227,6 @@ public class Behaviour {
 	public void chooseMagicianAction() {
 		//return an empty array if we want to swap Cards with another Character
 		//return the position of the Cards that he want to swap
-
 	}
 
 	public void setBotIsArchitect(boolean botIsArchitect) {
