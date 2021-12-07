@@ -87,7 +87,8 @@ public class Behaviour {
 	public void buildArchitect() {
 		if (botIsArchitect)
 			{ifPossibleBuildADistrict();
-			ifPossibleBuildADistrict();}
+			ifPossibleBuildADistrict();
+			botIsArchitect=false;}
 	}
 
 	public void normalBehaviour() {
