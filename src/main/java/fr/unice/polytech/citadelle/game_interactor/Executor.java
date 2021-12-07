@@ -50,13 +50,16 @@ public class Executor {
 				pickedCards.add(pickBlindDistrict(deckDistrict));
 				return pickedCards;
 	}
-	
+
+	/**
+	 * Return the random card picked and display it in the console.
+	 * @param deckDistrict - The district card deck of the game.
+	 * @return The picked District.
+	 */
     public District pickBlindDistrict(DeckDistrict deckDistrict) {
-        // Select a random district from the deck
-        Random random = new Random();
-        int randomValue = random.nextInt(deckDistrict.getDeckDistrict().size());
-    	printC.printTakeDistrictCard(player,deckDistrict.getDeckDistrict().get(randomValue));
-        return deckDistrict.getDeckDistrict().remove(randomValue);
+		District selectedDistrict = deckDistrict.blindPick();
+		printC.printTakeDistrictCard(player, selectedDistrict);
+        return selectedDistrict;
     }
 
 	public void addDistrict(District district) {

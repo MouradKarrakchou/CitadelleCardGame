@@ -169,6 +169,7 @@ public class PrintCitadels {
         System.out.println(colorize(output, CYAN_TEXT()));
     }
 
+
     public void printAddCardToTheDeck(Player player, District district) {
         String coloredOutput = colorize("    [+] ", GREEN_TEXT());
         String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
@@ -177,5 +178,4 @@ public class PrintCitadels {
     public void printPutCardBackToTheDeck(Player player, District district) {
         String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
         System.out.println(player.getName()+" putBack the card "+coloredOutput2);
-    }
-}
+}}

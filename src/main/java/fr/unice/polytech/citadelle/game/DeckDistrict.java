@@ -108,6 +108,15 @@ public class DeckDistrict {
 	public void removeDistrict(District district) {
         deckDistrict.remove(district);
 	}
-    
-    
+
+
+    /**
+     * Select a random district from the deck
+     * @return The selected District removed from the deck.
+     */
+    public District blindPick() {
+        Random random = new Random();
+        int randomValue = random.nextInt(deckDistrict.size());
+        return deckDistrict.remove(randomValue);
+    }
 }
