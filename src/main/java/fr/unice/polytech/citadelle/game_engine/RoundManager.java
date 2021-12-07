@@ -125,7 +125,7 @@ public class RoundManager {
 				return Initialiser.MERCHANT_INDEX;
 		}
 
-		return random.nextInt(board.getDeckCharacter().getSize());
+		return random.nextInt(1, board.getDeckCharacter().getSize() + 1);
 	}
 
 	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict,

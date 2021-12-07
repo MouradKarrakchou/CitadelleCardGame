@@ -11,6 +11,7 @@ import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class SpellDistrictTest {
         normalBot.normalBehaviour();
         verify(normalBot, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
-
+    
     @Test
     void noLibrarySpellNormalBotTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
@@ -54,7 +55,7 @@ public class SpellDistrictTest {
         normalBot.normalBehaviour();
         verify(normalBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
-
+    
     @Test
     void librarySpellRushBotNormalBehaviorTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
