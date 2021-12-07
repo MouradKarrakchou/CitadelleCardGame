@@ -79,8 +79,15 @@ public class Behaviour {
 			lastTurnBehaviour();
 		else
 			normalBehaviour();
-		return (player.getCity().isComplete());
+		buildArchitect();
 
+		return (player.getCity().isComplete());
+	}
+
+	public void buildArchitect() {
+		if (botIsArchitect)
+			{ifPossibleBuildADistrict();
+			ifPossibleBuildADistrict();}
 	}
 
 	public void normalBehaviour() {
@@ -242,5 +249,9 @@ public class Behaviour {
 
 	public void setBotIsArchitect(boolean botIsArchitect) {
 		this.botIsArchitect=botIsArchitect;
+	}
+
+	public boolean getBehaviourIsArchitect() {
+		return botIsArchitect;
 	}
 }

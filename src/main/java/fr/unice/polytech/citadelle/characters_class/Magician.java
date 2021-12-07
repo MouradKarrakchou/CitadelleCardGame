@@ -30,7 +30,7 @@ public class Magician extends Character {
         for(int k=0;k<positionOfCardsToBeSwaped.size();k++){
             ArrayList<District> districtCards=bot.getPlayer().getDistrictCards();
             districtDeleted.add(districtCards.get(positionOfCardsToBeSwaped.get(k)));
-            districtCards.remove(positionOfCardsToBeSwaped.get(k));
+            bot.getPlayer().getDistrictCards().remove(positionOfCardsToBeSwaped.get(k).intValue());
         }
         return districtDeleted;
     }
@@ -50,6 +50,6 @@ public class Magician extends Character {
         else
             printC.printMagicianSpellSwapCards(swapCardsWithDeck(bot,magicianAction));
             for(int k=0;k<magicianAction.size();k++)
-                bot.pickCard();
+                bot.takeCard(bot.pickCard());
     }
 }
