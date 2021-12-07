@@ -98,12 +98,12 @@ public class PrintCitadels {
 
     public void botIsDead(Player player) {
         System.out.println();
-        String output = "[!] "+player.getName()+" was the "+player.getCharacter()+". He has been killed he will not play this turn";
+        String output = "[\uD83D\uDC80] "+player.getName()+" was the "+player.getCharacter()+". He has been killed he will not play this turn";
         System.out.println(colorize(output, RED_TEXT()));
     }
 
     public void killCharacter(Character characterToDie) {
-        String output = "[!] The Assassin chooses to kill " + characterToDie;
+        String output = "[\uD83D\uDD2A] The Assassin chooses to kill " + characterToDie;
         System.out.println(colorize(output, RED_TEXT()));
     }
 
