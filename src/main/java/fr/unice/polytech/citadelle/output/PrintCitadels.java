@@ -50,7 +50,8 @@ public class PrintCitadels {
         System.out.println("=============================================================================================================================");
     }
     public void printKingSpell(Player player){
-        System.out.println("The robot "+player.getName()+" has the king, he will play first next round.");
+        String output = "[!] The robot "+player.getName()+" has the king, he will play first next round.";
+        System.out.println(colorize(output, YELLOW_TEXT()));
     }
 
     /*
@@ -64,14 +65,15 @@ public class PrintCitadels {
         System.out.println(coloredOutput + player.getName() + " takes two golds.");
     }
 
-    public void printTakeDistrictCard(Player player){
+    public void printTakeDistrictCard(Player player,District district){
         String coloredOutput = colorize("    [+] ", GREEN_TEXT());
-        System.out.println(coloredOutput + player.getName() + " takes a district card.");
+        String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
+        System.out.println(coloredOutput + player.getName() + " takes a district card: "+coloredOutput2);
     }
 
     public void printBuildDistrict(Player player, District district) {
-        String coloredOutput = colorize("    [+] ", GREEN_TEXT());
-        System.out.print(coloredOutput + player.getName() + " build ");
+        String coloredOutput = colorize("    [⛏] ", GREEN_TEXT());
+        System.out.print(coloredOutput + player.getName() + " builds ");
         coloredOutput = colorize(district.toString(), getDistrictColor(district));
         System.out.println(coloredOutput);
     }
@@ -96,7 +98,9 @@ public class PrintCitadels {
     }
 
     public void botIsDead(Player player) {
-        System.out.println(player.getName()+" was the "+player.getCharacter()+". He has been killed he will not play this turn");
+        System.out.println();
+        String output = "[!] "+player.getName()+" was the "+player.getCharacter()+". He has been killed he will not play this turn";
+        System.out.println(colorize(output, RED_TEXT()));
     }
 
     public void killCharacter(Character characterToDie) {
@@ -149,17 +153,21 @@ public class PrintCitadels {
     }
 
     public void printArchitectSpell() {
-        System.out.println("The Architect can take 2 more Districts and build 3 Districts");
+        String output = "[!] The Architect can take 2 more Districts and build 3 Districts";
+        System.out.println(colorize(output, GREEN_TEXT()));
     }
     public void printMagicianSpellSwapHands(Character character){
-        System.out.println("The Magician swaps hand with "+character);
+        String output = "[!] The Magician swaps hand with "+character;
+        System.out.println(colorize(output, CYAN_TEXT()));
     }
     public void printMagicianSpellSwapCards(ArrayList<District> districts){
-        System.out.println("The Magician swaps "+districts.size()+" with the deck: "+districts);
+        String output = "[!] The Magician swaps "+districts.size()+" with the deck: "+districts;
+        System.out.println(colorize(output, CYAN_TEXT()));
     }
 
     public void printMagicianSpellFailed(Character characterToSwapWith) {
-        System.out.println("The Magician tried to swap with "+characterToSwapWith+" but no Player has this Character.");
+        String output = "[!] The Magician tried to swap with "+characterToSwapWith+" but no Player has this Character.";
+        System.out.println(colorize(output, CYAN_TEXT()));
     }
 
     public void printTakeCard(Player player, District selectedDistrict) {
