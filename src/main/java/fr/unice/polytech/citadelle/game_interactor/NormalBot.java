@@ -14,6 +14,11 @@ public class NormalBot extends Behaviour {
 		super(player, board);
 	}
 
+	public void executeSpell(ArrayList<SpellDistrict> spellDistrict, DeckDistrict deckDistrict) {
+		spellDistrict.get(0).librarySpell(player, deckDistrict);
+	}
+
+
 	@Override
 	public void normalBehaviour() {
 		DeckDistrict deckDistrict = board.getDeckDistrict();
@@ -25,7 +30,7 @@ public class NormalBot extends Behaviour {
 			for (District district : player.getCity().getBuiltDistrict()) {
 				if (district.getName().equals("Library")) spellDistrict.add((SpellDistrict) district);
 			}
-			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
+			if (spellDistrict.size() != 0) executeSpell(spellDistrict, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck();
 				takeCard(choosenDistrictCard);
