@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -12,7 +13,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.Character;
@@ -262,18 +265,53 @@ public class RoundManagerTest {
 	}
 
 	@Test
-	public void isThereAFamilyTest(){
+	public void isThereAFamilyTestNobility(){
 		Player bob = new Player("bob");
 		Behaviour bobBehaviour = new Behaviour(bob, board);
 		bob.buildDistrict(new District("Nobility district 01", 3, "notImportant", "Nobility"));
 		bob.buildDistrict(new District("Nobility district 02", 1, "notImportant", "Nobility"));
 		bob.buildDistrict(new District("Nobility district 03", 6, "notImportant", "Nobility"));
 		bob.buildDistrict(new District("Other district 01", 1, "notImportant", "otherFamily"));
-		bob.buildDistrict(new District("Other district 01", 2, "notImportant", "otherFamily"));
-		bob.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 02", 2, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 03", 4, "notImportant", "otherFamily"));
 
 		assertEquals(6, bob.getCity().getSizeOfCity());
 		assertEquals(Initialiser.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
+	}
+
+	@Test
+	public void isThereAFamilyTestTradeAndHandicrafts(){
+		Player alice = new Player("alice");
+		Behaviour aliceBehaviour = new Behaviour(alice, board);
+		alice.buildDistrict(new District("Trade and Handicrafts district 01", 3, "notImportant", "Trade and Handicrafts"));
+		alice.buildDistrict(new District("Trade and Handicrafts district 02", 1, "notImportant", "Trade and Handicrafts"));
+		alice.buildDistrict(new District("Trade and Handicrafts district 03", 6, "notImportant", "Trade and Handicrafts"));
+		alice.buildDistrict(new District("Nobility district 01", 1, "notImportant", "Nobility"));
+		alice.buildDistrict(new District("Nobility district 02", 2, "notImportant", "Nobility"));
+		alice.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+
+		assertEquals(6, alice.getCity().getSizeOfCity());
+		assertEquals(Initialiser.MERCHANT_INDEX, roundMan.isThereAFamily(aliceBehaviour));
+	}
+
+	@Test
+	public void isThereAFamilyTestNothing(){
+		ArrayList<Character> listOfAllCharacter = init.createListOfAllCharacter();
+		ArrayList<Integer> listOfCharacterValues = listOfAllCharacter.stream()
+				.map(Character::getValue)
+				.collect(Collectors.toCollection(ArrayList::new));
+
+		Player fred = new Player("fred");
+		Behaviour fredBehaviour = new Behaviour(fred, board);
+		fred.buildDistrict(new District("Trade and Handicrafts district 01", 3, "notImportant", "Trade and Handicrafts"));
+		fred.buildDistrict(new District("Trade and Handicrafts district 02", 1, "notImportant", "Trade and Handicrafts"));
+		fred.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+		fred.buildDistrict(new District("Nobility district 01", 1, "notImportant", "Nobility"));
+		fred.buildDistrict(new District("Nobility district 02", 2, "notImportant", "Nobility"));
+		fred.buildDistrict(new District("Other district 02", 2, "notImportant", "otherFamily"));
+
+		assertEquals(6, fred.getCity().getSizeOfCity());
+		assertTrue(listOfCharacterValues.contains(roundMan.isThereAFamily(fredBehaviour)));
 	}
 
 	@Test
