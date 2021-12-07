@@ -161,4 +161,8 @@ public class PrintCitadels {
     public void printMagicianSpellFailed(Character characterToSwapWith) {
         System.out.println("The Magician tried to swap with "+characterToSwapWith+" but no Player has this Character.");
     }
+
+    public void printTakeCard(Player player, District selectedDistrict) {
+        System.out.println(player.getName()+" take one cards "+ selectedDistrict.getName());
+    }
 }

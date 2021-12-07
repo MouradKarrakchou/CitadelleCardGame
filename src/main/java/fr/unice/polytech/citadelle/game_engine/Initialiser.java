@@ -13,18 +13,15 @@ import fr.unice.polytech.citadelle.characters_class.Magician;
 import fr.unice.polytech.citadelle.characters_class.Merchant;
 import fr.unice.polytech.citadelle.characters_class.Thief;
 import fr.unice.polytech.citadelle.characters_class.Warlord;
-import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 /**
  * The Initialiser initialize all objects needed for a game
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Initialiser {
 	
@@ -57,7 +54,7 @@ public class Initialiser {
 	}
 	
 	public ArrayList<Character> createListOfAllCharacter() {
-		ArrayList<Character> listOfAllCharacters = new ArrayList<Character>();
+		ArrayList<Character> listOfAllCharacters = new ArrayList<>();
 		Assassin theAssassin = new Assassin();
 		Thief theThief = new Thief();
 		Magician theMagician = new Magician();
@@ -120,5 +117,20 @@ public class Initialiser {
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ARCHITECT_INDEX));
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.WARLORD_INDEX));
 			return deckCharacter;
+	}
+
+	/**
+	 * Method used to give to each player the 4 firsts cards at the beginning of the game.
+	 * @param board - The game board allows us to take player and district deck information.
+	 */
+	public void initPlayerCards(Board board) {
+		ArrayList<Player> players = board.getListOfPlayer();
+		DeckDistrict boardDistrictDeck = board.getDeckDistrict();
+
+		for (Player player : players)
+			for (int i=0; i<4; i++) {
+				District selectedDistrict = boardDistrictDeck.blindPick();
+				player.addDistrict(selectedDistrict);
+			}
 	}
 }

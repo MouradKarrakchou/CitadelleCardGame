@@ -47,8 +47,13 @@ public class Controller {
 		
 		board.setListOfPlayer(roundManager.getListOfPlayers());
 
+		initialiser.initPlayerCards(roundManager.getBoard());
+
 	}
 
+	/**
+	 * Code Legacy mais on n'ose pas y toucher.
+	 */
 	public void init() {
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = roundManager.getHashOfCharacters();
 		ArrayList<Behaviour> listOfBehaviour = roundManager.getListOfBehaviour();
@@ -60,7 +65,7 @@ public class Controller {
 	}
 
 	public void runGame() {
-		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
+		ArrayList<Behaviour> leaderBoard;
 		leaderBoard = roundManager.runRounds(phaseManager, initialiser);
 		end(leaderBoard);
 	}
