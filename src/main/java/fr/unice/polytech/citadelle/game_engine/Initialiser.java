@@ -42,13 +42,6 @@ public class Initialiser {
 	
 	public Initialiser() {}
 
-	/*
-	public void initAll(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, ArrayList<Character> listOfAllCharacters, ArrayList<Player> listOfPlayer, ArrayList<Behaviour> listOfBehaviour){
-		createListOfAllCharacter(listOfAllCharacters);
-		resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
-		createListOfBehaviour(listOfBehaviour, listOfPlayer);
-	}*/
-	
 	public LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
 			ArrayList<Character> listOfAllCharacters) {
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
@@ -90,10 +83,10 @@ public class Initialiser {
 		ArrayList<Behaviour> listOfBehaviour = new ArrayList<Behaviour>();
 		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
-			Player newPlayer = new Player("roBehaviour" + i);
+			Player newPlayer = new Player("Robot " + i);
 			listOfBehaviour.add(new NormalBot(newPlayer, board));
 		}
-		Player newPlayer = new Player("roBehaviour_Rusher");
+		Player newPlayer = new Player("RobotRusher");
 		listOfBehaviour.add(new RushBot(newPlayer, board));
 		
 		return listOfBehaviour;

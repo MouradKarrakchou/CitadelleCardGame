@@ -71,7 +71,7 @@ public class PrintCitadels {
 
     public void printBuildDistrict(Player player, District district) {
         String coloredOutput = colorize("    [+] ", GREEN_TEXT());
-        System.out.print(coloredOutput + player.getName() + " built ");
+        System.out.print(coloredOutput + player.getName() + " build ");
         coloredOutput = colorize(district.toString(), getDistrictColor(district));
         System.out.println(coloredOutput);
     }
