@@ -12,16 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.characters_class.*;
+import fr.unice.polytech.citadelle.game.*;
+import fr.unice.polytech.citadelle.game.Character;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.City;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.Referee;
@@ -198,6 +194,22 @@ public class RoundManagerTest {
 		roundMan.updateLeaderboard(aBehaviour, leaderBoard);
 		assertEquals(leaderBoard.size(), 1);
 		assertEquals(leaderBoard.get(0), aBehaviour);
+
+	}
+
+	@Test
+	public void isThereAFamilyTest(){
+		Player bob = new Player("bob");
+		Behaviour bobBehaviour = new Behaviour(bob, board);
+		bob.buildDistrict(new District("Nobility district 01", 3, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Nobility district 02", 1, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Nobility district 03", 6, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Other district 01", 1, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 01", 2, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+
+		assertEquals(6, bob.getCity().getSizeOfCity());
+		assertEquals(Initialiser.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
 
 	}
 
