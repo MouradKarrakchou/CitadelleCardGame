@@ -105,7 +105,7 @@ public class Initialiser {
 		return deck;
 	}
 	
-	public DeckCharacter initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
+	public static DeckCharacter initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
 			ArrayList<Character> listOfCharacterCards = deckCharacter.getDeckCharacter();
 			listOfCharacterCards.clear();
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ASSASIN_INDEX));

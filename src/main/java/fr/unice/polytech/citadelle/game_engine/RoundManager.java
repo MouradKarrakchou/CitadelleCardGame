@@ -87,9 +87,8 @@ public class RoundManager {
 		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-	// !!! NE PAS EFFACER CES COMMENTAIREs !!!
-	// assassin : s'il y a un joueur proche de la fin (préférable de tuer
-	// l'architecte)
+	// !!! NE PAS EFFACER CES COMMENTAIRES !!!
+	// assassin : s'il y a un joueur proche de la fin (préférable de tuer l'architecte)
 	// voleur : s'il y a un joueur avec beaucoup de golds
 	// roi : si 3 quartiers noble construits
 	// marchand : si 3 quartier commerce construits
@@ -104,7 +103,7 @@ public class RoundManager {
 		return deckCharacter.getDeckCharacter().remove(0);
 	}
 
-	int isThereAFamily(Behaviour bot) {
+	public int isThereAFamily(Behaviour bot) {
 		Random random = new Random();
 		Player playerOfBehaviour = bot.getPlayer();
 		ArrayList<District> districtsInACity;
@@ -115,10 +114,14 @@ public class RoundManager {
 
 		for (String familyName : nameOfFamilies) {
 			districtsInACity = playerOfBehaviour.getCity().getBuiltDistrict();
-			districtsInACity.stream().filter(district -> district.getNameOfFamily().equals(familyName));
-			if (familyName.equals("Nobility") && districtsInACity.size() == 3)
+
+			ArrayList<District> districtFilter = districtsInACity.stream()
+					.filter(district -> district.getNameOfFamily().equals(familyName))
+					.collect(Collectors.toCollection(ArrayList::new));
+
+			if (familyName.equals("Nobility") && districtFilter.size() == 3)
 				return Initialiser.KING_INDEX;
-			else if (familyName.equals("Trade and Handicrafts") && districtsInACity.size() >= 3)
+			else if (familyName.equals("Trade and Handicrafts") && districtFilter.size() >= 3)
 				return Initialiser.MERCHANT_INDEX;
 		}
 
@@ -154,7 +157,7 @@ public class RoundManager {
 			printC.botIsDead(currentBehaviour.getPlayer());
 	}
 
-	private void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
+	public void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
 		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
 		if (aPlayerCompleteCity) {
 			if(leaderBoard.size() ==0)

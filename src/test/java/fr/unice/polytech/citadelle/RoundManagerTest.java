@@ -1,7 +1,10 @@
 package fr.unice.polytech.citadelle;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -12,14 +15,14 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.characters_class.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import fr.unice.polytech.citadelle.game.Character;
+
 import org.mockito.Mockito;
 
-import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.City;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
+import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
@@ -199,6 +202,78 @@ public class RoundManagerTest {
 		assertEquals(leaderBoard.size(), 1);
 		assertEquals(leaderBoard.get(0), aBehaviour);
 
+	}
+
+	@Test
+	public void chooseCharacterKingTest() {
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Initialiser.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Player player = new Player("Player");
+		Behaviour aBehaviour = new Behaviour(player, board);
+
+		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
+		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
+
+		Character king = new Character("King", Initialiser.KING_INDEX);
+
+		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
+	}
+
+	@Test
+	public void chooseCharacterMerchantTest() {
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Initialiser.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Player player = new Player("Player");
+		Behaviour aBehaviour = new Behaviour(player, board);
+
+		player.buildDistrict(new District("Trading Post", 2, "Green", "Trade and Handicrafts"));
+		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+		player.buildDistrict(new District("Harbor", 4, "Green", "Trade and Handicrafts"));
+
+		Character merchant = new Character("Merchant", Initialiser.MERCHANT_INDEX);
+
+		assertEquals(merchant, roundMan.chooseCharacter(aBehaviour, deckCharacter));
+	}
+
+	@Test
+	public void cityVerificationNoCompleteCityTest() {
+		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
+		aBehaviour.getPlayer().getCity().getBuiltDistrict().clear();
+
+		ArrayList<Behaviour> leaderboard = new 	ArrayList<Behaviour>();
+		assertEquals(leaderboard.size(), 0);
+		roundMan.cityVerification(aBehaviour, leaderboard );
+		assertEquals(leaderboard.size(), 0);
+	}
+
+	@Test
+	public void cityVerificationHeCompleteCityTest() {
+		ArrayList<Behaviour> leaderboard = new 	ArrayList<>();
+		ArrayList<District> city = new 	ArrayList<>();
+		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
+		aBehaviour.getPlayer().getCity().getBuiltDistrict().clear();
+		for(int i = 0 ; i < 8 ; i ++) {
+			aBehaviour.getPlayer().getCity().buildDistrict(new District("aDistrict"+i, i, "testColor", "testFamily"));
+		}
+		assertEquals(leaderboard.size(), 0);
+		roundMan.cityVerification(aBehaviour, leaderboard );
+		assertEquals(leaderboard.size(), 1);
+	}
+
+	@Test
+	public void isThereAFamilyTest(){
+		Player bob = new Player("bob");
+		Behaviour bobBehaviour = new Behaviour(bob, board);
+		bob.buildDistrict(new District("Nobility district 01", 3, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Nobility district 02", 1, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Nobility district 03", 6, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Other district 01", 1, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 01", 2, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+
+		assertEquals(6, bob.getCity().getSizeOfCity());
+		assertEquals(Initialiser.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
 	}
 
 	@Test
