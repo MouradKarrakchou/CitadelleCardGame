@@ -77,7 +77,7 @@ public class ExecutorTest {
 		pickedCards.add(aDistrict);
 		pickedCards.add(aDistrict);
 
-
+		
 		DeckDistrict mockDeckDistrict = new DeckDistrict();
 		mockDeckDistrict.initialise();
 		when(executor.pickBlindDistrict(mockDeckDistrict)).thenReturn(aDistrict);
