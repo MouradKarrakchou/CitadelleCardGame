@@ -15,14 +15,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 
 public class SpellDistrictTest {
 
-    private final DeckDistrict deckDistrict = new DeckDistrict(); //new spyDeckDistrict
+    private final DeckDistrict deckDistrict = new DeckDistrict();
     private final Initialiser initialiser = new Initialiser();
 
     Player player = new Player("Player");
@@ -31,12 +30,16 @@ public class SpellDistrictTest {
     NormalBot normalBot = spy(new NormalBot(player, board));
     RushBot rushBot = spy(new RushBot(player, board));
 
+    @BeforeEach
+    void beforeEach() {
+        initialiser.initDeckDistrict(deckDistrict);
+    }
+
     @Test
     void librarySpellNormalBotTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
         normalBot.normalBehaviour();
@@ -48,8 +51,6 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        initialiser.initDeckDistrict(deckDistrict);
-
         normalBot.normalBehaviour();
         verify(normalBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
@@ -59,7 +60,6 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
         rushBot.normalBehaviour();
@@ -71,8 +71,6 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        initialiser.initDeckDistrict(deckDistrict);
-
         rushBot.normalBehaviour();
         verify(rushBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
@@ -82,7 +80,6 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
         rushBot.endGameBehaviour();
@@ -94,9 +91,7 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        initialiser.initDeckDistrict(deckDistrict);
-
-        rushBot.normalBehaviour();
+        rushBot.endGameBehaviour();
         verify(rushBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
 
