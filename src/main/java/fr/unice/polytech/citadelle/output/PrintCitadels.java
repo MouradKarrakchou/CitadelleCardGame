@@ -66,9 +66,8 @@ public class PrintCitadels {
     }
 
     public void printTakeDistrictCard(Player player,District district){
-        String coloredOutput = colorize("    [+] ", GREEN_TEXT());
         String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
-        System.out.println(coloredOutput + player.getName() + " takes a district card: "+coloredOutput2);
+        System.out.println(player.getName() + " takes a district card: "+coloredOutput2);
     }
 
     public void printBuildDistrict(Player player, District district) {
@@ -170,7 +169,13 @@ public class PrintCitadels {
         System.out.println(colorize(output, CYAN_TEXT()));
     }
 
-    public void printTakeCard(Player player, District selectedDistrict) {
-        System.out.println(player.getName()+" take one cards "+ selectedDistrict.getName());
+
+    public void printAddCardToTheDeck(Player player, District district) {
+        String coloredOutput = colorize("    [+] ", GREEN_TEXT());
+        String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
+        System.out.println(coloredOutput+player.getName()+" add the card to his hand "+coloredOutput2);
     }
-}
+    public void printPutCardBackToTheDeck(Player player, District district) {
+        String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
+        System.out.println(player.getName()+" putBack the card "+coloredOutput2);
+}}
