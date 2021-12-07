@@ -78,6 +78,7 @@ public class PrintCitadels {
     }
 
     public void printBoard(Board game){
+        System.out.println();
         System.out.println("[?] City of all the Players:");
         game.getListOfPlayer().forEach(player -> {
             System.out.print("    City of "+player.getName()+": ");
