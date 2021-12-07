@@ -185,4 +185,11 @@ public class RushBotTest {
 	
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
+	@Test
+	public void testGetCheaperDistrict(){
+		ArrayList<District> districtWeCanBuild=new ArrayList<>();
+		districtWeCanBuild.add(new District("expensiveDistrict",2," "," "));
+		districtWeCanBuild.add(new District("cheapestDistrict",1," "," "));
+		assertEquals("cheapestDistrict",rusher.getCheaperDistrict(districtWeCanBuild).getName());
+	}
 }
