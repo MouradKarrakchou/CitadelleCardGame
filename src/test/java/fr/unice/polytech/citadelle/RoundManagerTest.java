@@ -201,4 +201,9 @@ public class RoundManagerTest {
 
 	}
 
+	@Test
+	public void chooseCharacterTest() {
+		
+	}
+
 }
