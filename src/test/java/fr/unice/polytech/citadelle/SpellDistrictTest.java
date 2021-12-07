@@ -48,7 +48,6 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        player.getDistrictCards().clear();
         initialiser.initDeckDistrict(deckDistrict);
 
         normalBot.normalBehaviour();
@@ -57,45 +56,48 @@ public class SpellDistrictTest {
 
     @Test
     void librarySpellRushBotNormalBehaviorTest() {
-        player.getDistrictCards().clear();
+        ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
+        spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
+
         initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
         rushBot.normalBehaviour();
-        assertEquals(2, player.getDistrictCards().size());
+        verify(rushBot, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
 
     @Test
     void noLibrarySpellRushBotNormalBehaviorTest() {
-        player.setGolds(1);
-        player.getDistrictCards().clear();
+        ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
+        spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
+
         initialiser.initDeckDistrict(deckDistrict);
 
         rushBot.normalBehaviour();
-        assertEquals(1, player.getDistrictCards().size());
+        verify(rushBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
 
     @Test
     void librarySpellRushBotEndGameBehaviorTest() {
-        player.getDistrictCards().clear();
+        ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
+        spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
+
         initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
         rushBot.endGameBehaviour();
-        assertEquals(2, player.getDistrictCards().size());
+        verify(rushBot, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
 
     @Test
     void noLibrarySpellRushBotEndGameBehaviorTest() {
-        System.out.println(player.getGolds());
-        player.getDistrictCards().clear();
+        ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
+        spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
+
         initialiser.initDeckDistrict(deckDistrict);
 
-        rushBot.endGameBehaviour();
-        System.out.println(player.getGolds());
-        assertEquals(1, player.getDistrictCards().size());
+        rushBot.normalBehaviour();
+        verify(rushBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
-
-
 
 }
