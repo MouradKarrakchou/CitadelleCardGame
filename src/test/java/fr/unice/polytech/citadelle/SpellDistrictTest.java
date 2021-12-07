@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.purple_districts.Library;
@@ -8,8 +9,6 @@ import fr.unice.polytech.citadelle.game_interactor.Executor;
 import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpellDistrictTest {
 
-    private ArrayList<Player> listOfPlayer = new ArrayList<>();
-    private DeckDistrict deckDistrict = new DeckDistrict(); //new spyDeckDistrict
-    private Initialiser initialiser = new Initialiser();
+    private final DeckDistrict deckDistrict = new DeckDistrict(); //new spyDeckDistrict
+    private final Initialiser initialiser = new Initialiser();
 
     Player player = new Player("Player");
     Executor executor = new Executor(player);
-    NormalBot normalBot = new NormalBot(player);
-    RushBot rushBot = new RushBot(player);
+    Board board = new Board(null,deckDistrict , null);
+    NormalBot normalBot = new NormalBot(player, board);
+    RushBot rushBot = new RushBot(player, board);
 
     @Test
     void librarySpellNormalBotTest() {
@@ -32,7 +31,7 @@ public class SpellDistrictTest {
         initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
-        normalBot.normalBehaviour(deckDistrict);
+        normalBot.normalBehaviour();
         assertEquals(2, player.getDistrictCards().size());
     }
 
@@ -41,7 +40,7 @@ public class SpellDistrictTest {
         player.getDistrictCards().clear();
         initialiser.initDeckDistrict(deckDistrict);
 
-        normalBot.normalBehaviour(deckDistrict);
+        normalBot.normalBehaviour();
         assertEquals(1, player.getDistrictCards().size());
     }
 
@@ -51,7 +50,7 @@ public class SpellDistrictTest {
         initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
-        rushBot.normalBehaviour(deckDistrict);
+        rushBot.normalBehaviour();
         assertEquals(2, player.getDistrictCards().size());
     }
 
@@ -60,7 +59,7 @@ public class SpellDistrictTest {
         player.getDistrictCards().clear();
         initialiser.initDeckDistrict(deckDistrict);
 
-        rushBot.normalBehaviour(deckDistrict);
+        rushBot.normalBehaviour();
         assertEquals(1, player.getDistrictCards().size());
     }
 
@@ -70,7 +69,7 @@ public class SpellDistrictTest {
         initialiser.initDeckDistrict(deckDistrict);
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
-        rushBot.endGameBehaviour(deckDistrict);
+        rushBot.endGameBehaviour();
         assertEquals(2, player.getDistrictCards().size());
     }
 
@@ -79,7 +78,7 @@ public class SpellDistrictTest {
         player.getDistrictCards().clear();
         initialiser.initDeckDistrict(deckDistrict);
 
-        rushBot.endGameBehaviour(deckDistrict);
+        rushBot.endGameBehaviour();
         assertEquals(1, player.getDistrictCards().size());
     }
 

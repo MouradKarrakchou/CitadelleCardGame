@@ -20,45 +20,45 @@ public class Behaviour {
 	protected final Player player;
 	protected final PrintCitadels printC = new PrintCitadels();
 	protected Boolean botIsKing = false;
+	protected Boolean botIsArchitect = false;
 	protected int numberOfCharacter = 8;
 
 	// ---
 	CityManagement cityMan;
 	Executor executor;
-	
+	Board board;
+
 	protected static final int ZERO_CARD = 0;
 	protected static final int ONE_CARD = 1;
 	protected static final int TWO_CARD = 2;
-	
-	
 
-	public Behaviour(Player player) {
+	public Behaviour(Player player, Board board) {
 		this.player = player;
 		cityMan = new CityManagement(player);
 		executor = new Executor(player);
+		this.board = board;
 	}
 
 	/**
 	 * @param pickedDistricts The two picked cards.
 	 * @return The district having the higher value.
 	 */
-	public District selectTheHigherDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
-		int cardOneValue = pickedDistricts.get(0).getValue();
-		int cardTwoValue = pickedDistricts.get(1).getValue();
+	public District selectTheHigherDistrict(ArrayList<District> pickedDistricts) {
+		District cardOne = pickedDistricts.get(0);
+		District cardTwo = pickedDistricts.get(1);
 
-		if (cardOneValue >= cardTwoValue) {
-			deckDistrict.addDistrict(pickedDistricts.get(1));
-			return pickedDistricts.get(0);
+		if (cardOne.getValue() >= cardTwo.getValue()) {
+			return cardOne;
 		}
-		deckDistrict.addDistrict(pickedDistricts.get(0));
-		return pickedDistricts.get(1);
+		return cardTwo;
 	}
 
-	/** 
+	/**
 	 * @param pickedDistricts The two picked cards.
 	 * @return The district having the lower value.
 	 */
-	public District selectTheLowerDistrict(DeckDistrict deckDistrict, ArrayList<District> pickedDistricts) {
+	public District selectTheLowerDistrict(ArrayList<District> pickedDistricts) {
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		int cardOneValue = pickedDistricts.get(0).getValue();
 		int cardTwoValue = pickedDistricts.get(1).getValue();
 
@@ -70,39 +70,32 @@ public class Behaviour {
 		return pickedDistricts.get(1);
 	}
 
-
-	
-	public boolean play(DeckDistrict deckDistrict, String currentPhase,
-						LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public boolean play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		printC.dropALine();
-		if (player.getCharacter().isCharacterIsAlive()) {
-			this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
-			if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-				endGameBehaviour(deckDistrict);
-			if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-				lastTurnBehaviour(deckDistrict);
-			else
-				normalBehaviour(deckDistrict);
-		} else {
-			printC.botIsDead(player);
-		}
+		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
+		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
+			endGameBehaviour();
+		else if (currentPhase == PhaseManager.LAST_TURN_PHASE)
+			lastTurnBehaviour();
+		else
+			normalBehaviour();
 		return (player.getCity().isComplete());
 
 	}
 
-	public void normalBehaviour(DeckDistrict deckDistrict) {
+	public void normalBehaviour() {
 	};
 
-	public void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour() {
 	};
 
-	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
+	public void lastTurnBehaviour() {
 	};
-
 
 	/**
 	 * 
-	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on retourne pas le character assasin direct ???
+	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on
+	 * retourne pas le character assasin direct ???
 	 */
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
@@ -124,7 +117,7 @@ public class Behaviour {
 
 		return (character);
 	}
-	 
+
 	public void ifPossibleBuildADistrict() {
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
@@ -134,67 +127,72 @@ public class Behaviour {
 			executor.buildDistrict(district);
 		}
 	}
-	
-	public ArrayList<District> pick2CardsIntoTheDeck(DeckDistrict deckDistrict){
-		ArrayList<District> pickedCards = executor.pickCards(deckDistrict);
+
+	public ArrayList<District> pick2CardsIntoTheDeck() {
+		ArrayList<District> pickedCards = executor.pickCards(board.getDeckDistrict());
 		return pickedCards;
 	}
-	
-	
- 
+
 	/*
-	 * For the two cards chosen look if they are present in the city or the hand, if yes we discard the card
-	 * */
-	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards, DeckDistrict deckDistrict) {
+	 * For the two cards chosen look if they are present in the city or the hand, if
+	 * yes we discard the card
+	 */
+	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards) {
 		ArrayList<District> removeDistrictCards = new ArrayList<District>();
-		for(int i = 0 ; i < 2 ; i++) {
+		for (int i = 0; i < 2; i++) {
 			District currentDistrictCard = pickedDistrictCards.get(i);
 			if (cityMan.isAlreadyBuilt(currentDistrictCard.getName()) || player.hasDistrict(currentDistrictCard)) {
-				executor.putCardBackInDeck(deckDistrict, currentDistrictCard);
+				executor.putCardBackInDeck(board.getDeckDistrict(), currentDistrictCard);
 				removeDistrictCards.add(pickedDistrictCards.get(i));
 			}
 		}
 		pickedDistrictCards.removeAll(removeDistrictCards);
 		return pickedDistrictCards;
 	}
-	
-	public void takeCard(District districtCard, DeckDistrict deckDistrict) {
-		executor.takeCard(districtCard, deckDistrict);
-	}
 
+	public void takeCard(District districtCard) {
+		executor.takeCard(districtCard, board.getDeckDistrict());
+	}
 
 	public void takeGold() {
-		executor.takeGold();		 
+		executor.takeGold();
 	}
-	
+	public void addDistrict(District district){
+		executor.addDistrict(district);
+	}
+
 	public void buildDistrict(District district) {
 		executor.buildDistrict(district);
 	}
+	public District pickCard() {
+		return(executor.pickCard(board.getDeckDistrict()));
+	}
 
-	public District pickCardsInDeck(DeckDistrict deckDistrict) {
+	public District pickCardsInDeck() {
 		ArrayList<District> pickedCards = new ArrayList<>();
 		ArrayList<District> possibleCards = new ArrayList<>();
 		District choosenDistrictCard = null; // bof
 
-		pickedCards = pick2CardsIntoTheDeck(deckDistrict);
-		possibleCards = chooseToKeepOrNotPickedCards(pickedCards, deckDistrict);
+		pickedCards = pick2CardsIntoTheDeck();
+		possibleCards = chooseToKeepOrNotPickedCards(pickedCards);
 
 		switch (possibleCards.size()) {
-			case ONE_CARD:
-				choosenDistrictCard = possibleCards.get(0);
-				break;
-			case TWO_CARD:
-				choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1), deckDistrict);
-				break;
-			case ZERO_CARD:
-				choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1), deckDistrict);
-				break;
+		case ONE_CARD:
+			choosenDistrictCard = possibleCards.get(0);
+			break;
+		case TWO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
+			break;
+		case ZERO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
+			break;
 		}
 		return choosenDistrictCard;
 	}
 
-	public District chooseBetweenTwoCards(District district, District district1, DeckDistrict deckDistrict) { return null; }
-
+	public District chooseBetweenTwoCards(District district, District district1) {
+		return null;
+	}
 
 	public int randomInt(int scope) {
 		Random random = new Random();
@@ -208,7 +206,7 @@ public class Behaviour {
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
@@ -220,9 +218,19 @@ public class Behaviour {
 	public CityManagement getCityManager() {
 		return cityMan;
 	}
-	
+
 	public Executor getExecutor() {
 		return executor;
 	}
 
+
+	public void chooseMagicianAction() {
+		//return an empty array if we want to swap Cards with another Character
+		//return the position of the Cards that he want to swap
+
+	}
+
+	public void setBotIsArchitect(boolean botIsArchitect) {
+		this.botIsArchitect=botIsArchitect;
+	}
 }

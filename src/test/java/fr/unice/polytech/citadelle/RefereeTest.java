@@ -107,14 +107,16 @@ public class RefereeTest {
     
     @Test
 	public void addBonusForPlayersTest() {
+    	Board board = new Board();
+
     	ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
 		Player player1 = new Player("player1Test");
 		Player player2 = new Player("player2Test");
 		Player player3= new Player("player3Test");
 		
-		Behaviour behaviour1 = new Behaviour(player1);
-		Behaviour behaviour2 = new Behaviour(player2);
-		Behaviour behaviour3= new Behaviour(player3);
+		Behaviour behaviour1 = new Behaviour(player1, board);
+		Behaviour behaviour2 = new Behaviour(player2, board);
+		Behaviour behaviour3= new Behaviour(player3, board);
 		
 		leaderBoard.add(behaviour1);
 		leaderBoard.add(behaviour2);

@@ -86,15 +86,15 @@ public class Initialiser {
 		return listOfAllCharacters;
 	}
 	
-	public ArrayList<Behaviour> createListOfBehaviour(){
+	public ArrayList<Behaviour> createListOfBehaviour(Board board){
 		ArrayList<Behaviour> listOfBehaviour = new ArrayList<Behaviour>();
 		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("roBehaviour" + i);
-			listOfBehaviour.add(new NormalBot(newPlayer));
+			listOfBehaviour.add(new NormalBot(newPlayer, board));
 		}
 		Player newPlayer = new Player("roBehaviour_Rusher");
-		listOfBehaviour.add(new RushBot(newPlayer));
+		listOfBehaviour.add(new RushBot(newPlayer, board));
 		
 		return listOfBehaviour;
 

@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle.game_interactor;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
@@ -9,14 +10,13 @@ import fr.unice.polytech.citadelle.game.SpellDistrict;
 
 public class NormalBot extends Behaviour {
 
-	public NormalBot(Player player) {
-		super(player);
-		// TODO Auto-generated constructor stub
+	public NormalBot(Player player, Board board) {
+		super(player, board);
 	}
 
 	@Override
-	public void normalBehaviour(DeckDistrict deckDistrict) {
-
+	public void normalBehaviour() {
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		int goldOfPlayer = player.getGolds();
 		if (goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer + 2).size() > 0)
 			takeGold();
@@ -27,31 +27,38 @@ public class NormalBot extends Behaviour {
 			}
 			if (spellDistrict.size() != 0) spellDistrict.get(0).librarySpell(player, deckDistrict);
 			else {
-				District choosenDistrictCard = pickCardsInDeck(deckDistrict);
-				takeCard(choosenDistrictCard, deckDistrict);
+				District choosenDistrictCard = pickCardsInDeck();
+				takeCard(choosenDistrictCard);
 			}
 		}
 		ifPossibleBuildADistrict();
 	}
 
 	@Override
-	public void endGameBehaviour(DeckDistrict deckDistrict) {
+	public void endGameBehaviour() {
 		printC.printPhase("Endgame", player);
-		normalBehaviour(deckDistrict);
+		normalBehaviour();
 	}
 
 	@Override
-	public void lastTurnBehaviour(DeckDistrict deckDistrict) {
+	public void lastTurnBehaviour() {
 		printC.printPhase("LAST TURN", player);
-		normalBehaviour(deckDistrict);
+		normalBehaviour();
 	}
 
 	@Override
-	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict, DeckDistrict deckDistrict) {
+	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict) {
+		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> pickedCards = new ArrayList<>();
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
-		return selectTheHigherDistrict(deckDistrict, pickedCards);
+		District chosenCard = selectTheHigherDistrict(pickedCards);
+		if(chosenCard.equals(firstDistrict))
+			executor.putCardBackInDeck(deckDistrict, secondDistrict);
+		else
+			executor.putCardBackInDeck(deckDistrict, firstDistrict);
+		return chosenCard;
+
 	}
 
 
