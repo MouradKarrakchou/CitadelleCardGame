@@ -201,4 +201,25 @@ public class RoundManagerTest {
 
 	}
 
+	@Test
+	public void testFindKing(){
+		assertEquals(-1,roundMan.findKing(listOfAllBehaviour));
+		listOfAllBehaviour.get(2).setBehaviourIsKing(true);
+		assertEquals(2,roundMan.findKing(listOfAllBehaviour));
+	}
+
+	@Test
+	public void testUpdateListOfBehaviour(){
+		roundMan=new RoundManager(listOfAllCharacter,listOfAllBehaviour,hashOfCharacter,board);
+		ArrayList<Behaviour> listOfAllBehaviourCopy=new ArrayList<>();
+		listOfAllBehaviourCopy.addAll(listOfAllBehaviour);
+
+		listOfAllBehaviour.get(2).setBehaviourIsKing(true);
+		roundMan.updateListOfBehaviour();
+		assertEquals(roundMan.getListOfBehaviour().get(2),listOfAllBehaviour.get(0));
+		assertEquals(roundMan.getListOfBehaviour().get(3),listOfAllBehaviour.get(1));
+		assertEquals(roundMan.getListOfBehaviour().get(0),listOfAllBehaviour.get(2));
+		assertEquals(roundMan.getListOfBehaviour().get(1),listOfAllBehaviour.get(3));
+	}
+
 }
