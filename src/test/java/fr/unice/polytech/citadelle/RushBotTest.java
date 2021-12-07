@@ -176,15 +176,25 @@ public class RushBotTest {
 
 	
 	@Test
-	public void chooseBetweenTwoCardsTest() {
+	public void chooseBetweenTwoCardsSecondCardChosenTest() {
 		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
 
-		
 		District choosenDistrict = rusher.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap);
 	
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
+
+	@Test
+	public void chooseBetweenTwoCardsFirstChosenTest() {
+		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
+		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
+
+		District choosenDistrict = rusher.chooseBetweenTwoCards(aDistrictCheap, aDistrictExpansive);
+
+		assertEquals(choosenDistrict, aDistrictCheap);
+	}
+
 	@Test
 	public void testGetCheaperDistrict(){
 		ArrayList<District> districtWeCanBuild=new ArrayList<>();
