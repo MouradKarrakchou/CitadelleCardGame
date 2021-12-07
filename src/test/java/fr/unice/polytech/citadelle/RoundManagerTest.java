@@ -18,6 +18,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.City;
+import fr.unice.polytech.citadelle.game.DeckCharacter;
+import fr.unice.polytech.citadelle.game.DeckDistrict;
+import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.Referee;
@@ -194,6 +201,36 @@ public class RoundManagerTest {
 		roundMan.updateLeaderboard(aBehaviour, leaderBoard);
 		assertEquals(leaderBoard.size(), 1);
 		assertEquals(leaderBoard.get(0), aBehaviour);
+
+	}
+
+	@Test
+	public void cityVerificationNoCompleteCityTest() {
+		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
+		aBehaviour.getPlayer().getCity().getBuiltDistrict().clear();
+
+		ArrayList<Behaviour> leaderboard = new 	ArrayList<Behaviour>();
+		assertEquals(leaderboard.size(), 0);
+		roundMan.cityVerification(aBehaviour, leaderboard );
+		assertEquals(leaderboard.size(), 0);
+	}
+
+	@Test
+	public void cityVerificationHeCompleteCityTest() {
+		ArrayList<Behaviour> leaderboard = new 	ArrayList<>();
+		ArrayList<District> city = new 	ArrayList<>();
+		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
+		aBehaviour.getPlayer().getCity().getBuiltDistrict().clear();
+		for(int i = 0 ; i < 8 ; i ++) {
+			aBehaviour.getPlayer().getCity().buildDistrict(new District("aDistrict"+i, i, "testColor", "testFamily"));
+		}
+		assertEquals(leaderboard.size(), 0);
+		roundMan.cityVerification(aBehaviour, leaderboard );
+		assertEquals(leaderboard.size(), 1);
+	}
+
+	@Test
+	public void chooseCharacterTest() {
 
 	}
 

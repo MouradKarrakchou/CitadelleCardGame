@@ -87,9 +87,8 @@ public class RoundManager {
 		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-	// !!! NE PAS EFFACER CES COMMENTAIREs !!!
-	// assassin : s'il y a un joueur proche de la fin (préférable de tuer
-	// l'architecte)
+	// !!! NE PAS EFFACER CES COMMENTAIRES !!!
+	// assassin : s'il y a un joueur proche de la fin (préférable de tuer l'architecte)
 	// voleur : s'il y a un joueur avec beaucoup de golds
 	// roi : si 3 quartiers noble construits
 	// marchand : si 3 quartier commerce construits
@@ -158,7 +157,7 @@ public class RoundManager {
 			printC.botIsDead(currentBehaviour.getPlayer());
 	}
 
-	private void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
+	public void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
 		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
 		if (aPlayerCompleteCity) {
 			if(leaderBoard.size() ==0)
