@@ -54,7 +54,7 @@ public class Executor {
         // Select a random district from the deck
         Random random = new Random();
         int randomValue = random.nextInt(deckDistrict.getDeckDistrict().size());
-    	System.out.println(player.getName()+" take one cards "+ deckDistrict.getDeckDistrict().get(randomValue).getName());
+    	printC.printTakeDistrictCard(player,deckDistrict.getDeckDistrict().get(randomValue));
         return deckDistrict.getDeckDistrict().remove(randomValue);
     }
 

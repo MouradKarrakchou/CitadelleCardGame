@@ -33,7 +33,6 @@ public class NormalBot extends Behaviour {
 		}
 		ifPossibleBuildADistrict();
 	}
-
 	@Override
 	public void endGameBehaviour() {
 		printC.printPhase("Endgame", player);
