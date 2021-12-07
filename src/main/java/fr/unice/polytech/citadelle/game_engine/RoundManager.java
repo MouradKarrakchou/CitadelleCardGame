@@ -154,7 +154,7 @@ public class RoundManager {
 			printC.botIsDead(currentBehaviour.getPlayer());
 	}
 
-	private void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
+	public void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
 		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
 		if (aPlayerCompleteCity) {
 			if(leaderBoard.size() ==0)
