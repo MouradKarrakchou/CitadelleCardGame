@@ -12,16 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.characters_class.*;
+import fr.unice.polytech.citadelle.game.*;
+import fr.unice.polytech.citadelle.game.Character;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.City;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initialiser;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.Referee;
@@ -202,8 +198,35 @@ public class RoundManagerTest {
 	}
 
 	@Test
-	public void chooseCharacterTest() {
-		
+	public void chooseCharacterKingTest() {
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Initialiser.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Player player = new Player("Player");
+		Behaviour aBehaviour = new Behaviour(player, board);
+
+		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
+		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
+
+		Character king = new Character("King", Initialiser.KING_INDEX);
+
+		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
+	}
+
+	@Test
+	public void chooseCharacterMerchantTest() {
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Initialiser.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Player player = new Player("Player");
+		Behaviour aBehaviour = new Behaviour(player, board);
+
+		player.buildDistrict(new District("Trading Post",2,"Green","Trade and Handicrafts"));
+		player.buildDistrict(new District("Docks",3,"Green","Trade and Handicrafts"));
+		player.buildDistrict(new District("Harbor",4,"Green","Trade and Handicrafts"));
+
+		Character merchant = new Character("Merchant", Initialiser.MERCHANT_INDEX);
+
+		assertEquals(merchant, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
 }
