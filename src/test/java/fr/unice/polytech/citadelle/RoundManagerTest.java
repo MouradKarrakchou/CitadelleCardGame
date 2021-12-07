@@ -227,4 +227,9 @@ public class RoundManagerTest {
 		assertEquals(leaderboard.size(), 1);
 	}
 
+	@Test
+	public void chooseCharacterTest() {
+		
+	}
+
 }

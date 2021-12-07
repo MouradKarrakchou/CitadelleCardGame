@@ -87,9 +87,8 @@ public class RoundManager {
 		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-	// !!! NE PAS EFFACER CES COMMENTAIREs !!!
-	// assassin : s'il y a un joueur proche de la fin (préférable de tuer
-	// l'architecte)
+	// !!! NE PAS EFFACER CES COMMENTAIRES !!!
+	// assassin : s'il y a un joueur proche de la fin (préférable de tuer l'architecte)
 	// voleur : s'il y a un joueur avec beaucoup de golds
 	// roi : si 3 quartiers noble construits
 	// marchand : si 3 quartier commerce construits
