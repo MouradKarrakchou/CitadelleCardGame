@@ -85,7 +85,7 @@ public class RushBot extends Behaviour {
 		}
 	}
 
-	private District getCheaperDistrict(ArrayList<District> districtWeCanBuild) {
+	public District getCheaperDistrict(ArrayList<District> districtWeCanBuild) {
 		District cheaperDistrict = districtWeCanBuild.get(0);
 		for (District current : districtWeCanBuild) {
 			if (cheaperDistrict.getValue() > current.getValue())

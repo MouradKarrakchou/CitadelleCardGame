@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -333,6 +334,20 @@ public class RoundManagerTest {
 		assertEquals(roundMan.getListOfBehaviour().get(3),listOfAllBehaviour.get(1));
 		assertEquals(roundMan.getListOfBehaviour().get(0),listOfAllBehaviour.get(2));
 		assertEquals(roundMan.getListOfBehaviour().get(1),listOfAllBehaviour.get(3));
+	}
+
+	@Test
+	public void reviveAllTest() {
+		ArrayList<Behaviour> listOfAllBehaviour=new ArrayList<>();
+		Player player = new Player("testPlayer");
+		player.setRole(new Character("testCharacter", 0));
+		Behaviour behaviour  = new Behaviour(player, board);
+		listOfAllBehaviour.add(behaviour);
+		player.getCharacter().setCharacterIsAlive(false);
+		RoundManager roundManager = new RoundManager(listOfAllCharacter, listOfAllBehaviour, hashOfCharacter, board);
+		assertFalse(player.getCharacter().isCharacterIsAlive());
+		roundManager.reviveAll();
+		assertTrue(player.getCharacter().isCharacterIsAlive());
 	}
 
 }
