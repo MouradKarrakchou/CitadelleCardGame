@@ -19,7 +19,7 @@ public class Executor {
 
 
     public void takeCard(District district, DeckDistrict deckDistrict) {
-    	System.out.println(player.getName()+" add 1 cards "+district.getName());
+		printC.printAddCardToTheDeck(player,district);
 		player.addDistrict(district);
 		//deckDistrict.removeDistrict(district);
 	}
@@ -36,9 +36,10 @@ public class Executor {
 	}
 	
 	public void putCardBackInDeck(DeckDistrict deckDistrict, District districtCard) {
-    	System.out.println(player.getName()+" putBack 1 cards "+districtCard.getName());
+		printC.printPutCardBackToTheDeck(player,districtCard);
 		deckDistrict.addDistrict(districtCard);
 	}
+
 	public District pickCard(DeckDistrict deckDistrict) {
 		return pickBlindDistrict(deckDistrict);
 	}
