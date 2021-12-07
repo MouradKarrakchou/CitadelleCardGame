@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -68,7 +70,7 @@ public class ExecutorTest {
 		executor.putCardBackInDeck(deckDistrict, aDistrict);
 		assertEquals(deckDistrict.getSize(), sizeBefore+1);
 	}
-	
+
 	@Test
 	public void pickCardsTest() {
 		ArrayList<District> pickedCards = new ArrayList<District>();

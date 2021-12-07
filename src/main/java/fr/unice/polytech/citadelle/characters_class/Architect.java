@@ -12,11 +12,13 @@ public class Architect extends Character {
     public Architect(){
         super("Architect", 7);
     }
+    @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
         //Giving 2 Cards to the Player with Architect character
-    	/*bot.takeCard(bot.pickCard());
-    	bot.getPlayer().getDistrictCards().add(bot.pickCard());
-        bot.getPlayer().getDistrictCards().add(bot.pickCard());
-        bot.setBotIsArchitect(true);*/
+        printC.printArchitectSpell();
+        bot.addDistrict(bot.pickCard());
+        bot.addDistrict(bot.pickCard());
+        bot.setBotIsArchitect(true);
+
     }
 }

@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
 public class CharacterTest {
@@ -36,18 +37,21 @@ public class CharacterTest {
 
     PrintCitadels printC;
     ArrayList<Behaviour> listOfBehaviour;
+    DeckDistrict deckDistrict;
 
     @BeforeEach
     public void init(){
         hashOfCharacters = new LinkedHashMap<>();
         printC=new PrintCitadels();
-    	Board board = new Board();
+        deckDistrict=new DeckDistrict();
+        Board board = new Board(new ArrayList<Player>(),deckDistrict,new DeckCharacter());
+        board.getDeckDistrict().initialise();
 
         
         //creation of Behaviour
         botArchitecte = new Behaviour(new Player("architectePlayer"), board);
         botBishop =new Behaviour(new Player("bishopPlayer"), board);
-        botMagician = new Behaviour(new Player("magicianPlayer"), board);
+        botMagician =spy(new Behaviour(new Player("magicianPlayer"), board));
         botAssassin = new Behaviour(new Player("assassinPlayer"), board);
         botKing=new Behaviour(new Player("kingPlayer"), board);
         botThief=spy(new Behaviour(new Player("thiefPlayer"), board));
@@ -91,6 +95,8 @@ public class CharacterTest {
         listOfBehaviour.add(botArchitecte);
         listOfBehaviour.add(botBishop);
         listOfBehaviour.add(botMagician);
+
+
     }
 
     @Test
@@ -162,4 +168,37 @@ public class CharacterTest {
         merchant.spellOfTurn(botMerchant,hashOfCharacters,printC);
         assertEquals(5,botMerchant.getPlayer().getGolds());
     }
+    @Test
+    void testArchitectTakes2Cards(){
+        //We verify that the Value of behaviourIsArchitect becomes true
+        architect.spellOfTurn(botArchitecte,hashOfCharacters,printC);
+        assertEquals(true,botArchitecte.getBehaviourIsArchitect());
+        assertEquals(2, botArchitecte.getPlayer().getDistrictCards().size());
+    }
+    @Test
+    void testMagicianSwapWithAnotherCharacter(){
+        ArrayList<Integer> positionOfCardsToSwap=new ArrayList<>();
+        botMerchant.getPlayer().getDistrictCards().add(new District("MerchantDistrict",0," "," "));
+        botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict",0," "," "));
+        when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
+        when(botMagician.chooseCharacterForMagician(hashOfCharacters)).thenReturn(merchant);
+        magician.spellOfTurn(botMagician,hashOfCharacters,printC);
+        assertEquals("MagicianDistrict",botMerchant.getPlayer().getDistrictCards().get(0).getName());
+        assertEquals("MerchantDistrict",botMagician.getPlayer().getDistrictCards().get(0).getName());
+    }
+    @Test
+    void testMagicianSwapWithTheDeck(){
+        ArrayList<Integer> positionOfCardsToSwap=new ArrayList<>();
+        positionOfCardsToSwap.add(2);
+        botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict0",0," "," "));
+        botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict1",0," "," "));
+        botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict2",0," "," "));
+        when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
+        when(botMagician.pickCard()).thenReturn(new District("MagicianDistrict3",0," "," "));
+        magician.spellOfTurn(botMagician,hashOfCharacters,printC);
+        assertEquals("MagicianDistrict0",botMagician.getPlayer().getDistrictCards().get(0).getName());
+        assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
+        assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
+    }
+
 }

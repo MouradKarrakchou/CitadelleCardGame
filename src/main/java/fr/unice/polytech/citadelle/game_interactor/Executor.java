@@ -16,8 +16,9 @@ public class Executor {
 	public Executor(Player player){
 		this.player = player;
 	}
-	
-	public void takeCard(District district, DeckDistrict deckDistrict) {
+
+
+    public void takeCard(District district, DeckDistrict deckDistrict) {
     	System.out.println(player.getName()+" add 1 cards "+district.getName());
 		player.addDistrict(district);
 		//deckDistrict.removeDistrict(district);
@@ -56,4 +57,8 @@ public class Executor {
     	System.out.println(player.getName()+" take one cards "+ deckDistrict.getDeckDistrict().get(randomValue).getName());
         return deckDistrict.getDeckDistrict().remove(randomValue);
     }
+
+	public void addDistrict(District district) {
+		player.getDistrictCards().add(district);
+	}
 }

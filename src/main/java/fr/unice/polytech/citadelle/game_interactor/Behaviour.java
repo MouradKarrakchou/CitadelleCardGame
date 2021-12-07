@@ -20,6 +20,7 @@ public class Behaviour {
 	protected final Player player;
 	protected final PrintCitadels printC = new PrintCitadels();
 	protected Boolean botIsKing = false;
+	protected Boolean botIsArchitect = false;
 	protected int numberOfCharacter = 8;
 
 	// ---
@@ -78,8 +79,15 @@ public class Behaviour {
 			lastTurnBehaviour();
 		else
 			normalBehaviour();
-		return (player.getCity().isComplete());
+		buildArchitect();
 
+		return (player.getCity().isComplete());
+	}
+
+	public void buildArchitect() {
+		if (botIsArchitect)
+			{ifPossibleBuildADistrict();
+			ifPossibleBuildADistrict();}
 	}
 
 	public void normalBehaviour() {
@@ -156,9 +164,15 @@ public class Behaviour {
 	public void takeGold() {
 		executor.takeGold();
 	}
+	public void addDistrict(District district){
+		executor.addDistrict(district);
+	}
 
 	public void buildDistrict(District district) {
 		executor.buildDistrict(district);
+	}
+	public District pickCard() {
+		return(executor.pickCard(board.getDeckDistrict()));
 	}
 
 	public District pickCardsInDeck() {
@@ -216,4 +230,28 @@ public class Behaviour {
 		return executor;
 	}
 
+
+	public ArrayList<Integer> chooseMagicianAction() {
+		//return an empty array if he wants to swap Cards with another Character
+		//return the position of the Cards that he wants to swap
+		ArrayList listOfInteger = new ArrayList();
+		return(listOfInteger);
+		//(for now he always chooses to steal from another Character)
+	}
+	public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
+		List<Character> list = hashOfCharacters.keySet().stream().toList();
+		Character randomCharacter=list.get(randomInt(8));
+		while (randomCharacter.getName()=="Magician")
+			randomCharacter=list.get(randomInt(8));
+		return randomCharacter;
+	}
+
+
+	public void setBotIsArchitect(boolean botIsArchitect) {
+		this.botIsArchitect=botIsArchitect;
+	}
+
+	public boolean getBehaviourIsArchitect() {
+		return botIsArchitect;
+	}
 }
