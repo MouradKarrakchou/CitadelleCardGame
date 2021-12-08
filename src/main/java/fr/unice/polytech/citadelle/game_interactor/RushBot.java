@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import fr.unice.polytech.citadelle.basic_actions.BasicActions;
+import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -25,8 +27,9 @@ public class RushBot extends Behaviour {
 	}
 
 	@Override
-	public void normalBehaviour() {
+	public ArrayList<BasicActions> normalBehaviour() {
 		DeckDistrict deckDistrict = board.getDeckDistrict();
+		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
@@ -42,18 +45,23 @@ public class RushBot extends Behaviour {
 				takeCard(choosenDistrictCard);
 			}
 		} else {
-			takeGold();
+			TakeGoldAction takeGoldAction = takeGold();
+			basicActions.add(takeGoldAction);
 		}
 		ifPossibleBuildACheapDistrict();
+		return basicActions;
 	}
 
 	@Override
-	public void endGameBehaviour() {
+	public ArrayList<BasicActions> endGameBehaviour() {
 		printC.printPhase("Endgame", player);
+		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
-		if (futurBuildableDistrict.size() > 0) // s'il peut poser un bat en prenant les deux gold
-			takeGold();
+		if (futurBuildableDistrict.size() > 0) {// s'il peut poser un bat en prenant les deux gold
+			TakeGoldAction takeGoldAction = takeGold();
+			basicActions.add(takeGoldAction);
+		}
 		else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
@@ -68,11 +76,13 @@ public class RushBot extends Behaviour {
 		}
 
 		ifPossibleBuildADistrict();
+		return basicActions;
 	}
 
 	@Override
-	public void lastTurnBehaviour() {
-		endGameBehaviour();
+	public ArrayList<BasicActions> lastTurnBehaviour() {
+		printC.printPhase("LAST TURN", player);
+		return normalBehaviour();
 	}
 
 	public void ifPossibleBuildACheapDistrict() {

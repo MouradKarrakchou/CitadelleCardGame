@@ -2,6 +2,8 @@ package fr.unice.polytech.citadelle.game_interactor;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.basic_actions.BasicActions;
+import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -20,11 +22,15 @@ public class NormalBot extends Behaviour {
 
 
 	@Override
-	public void normalBehaviour() {
+	public ArrayList<BasicActions> normalBehaviour() {
+		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		int goldOfPlayer = player.getGolds();
-		if (goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer + 2).size() > 0)
-			takeGold();
+		TakeGoldAction takeGoldAction;
+		if (goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer + 2).size() > 0) {
+			takeGoldAction = takeGold();
+			basicActions.add(takeGoldAction);
+		}
 		else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
@@ -37,17 +43,18 @@ public class NormalBot extends Behaviour {
 			}
 		}
 		ifPossibleBuildADistrict();
+		return basicActions;
 	}
 	@Override
-	public void endGameBehaviour() {
+	public ArrayList<BasicActions> endGameBehaviour() {
 		printC.printPhase("Endgame", player);
-		normalBehaviour();
+		return normalBehaviour();
 	}
 
 	@Override
-	public void lastTurnBehaviour() {
+	public ArrayList<BasicActions> lastTurnBehaviour() {
 		printC.printPhase("LAST TURN", player);
-		normalBehaviour();
+		return normalBehaviour();
 	}
 
 	@Override

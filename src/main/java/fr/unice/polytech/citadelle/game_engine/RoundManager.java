@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import fr.unice.polytech.citadelle.basic_actions.BasicActions;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -130,6 +131,7 @@ public class RoundManager {
 
 	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict,
 			Initialiser initialiser) {
+		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		ArrayList<Behaviour> leaderBoard = new ArrayList<Behaviour>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
@@ -139,9 +141,11 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				actionOfBehaviour(currentBehaviour, deckDistrict);
+				basicActions = actionOfBehaviour(currentBehaviour, deckDistrict);
 				cityVerification(currentBehaviour, leaderBoard);		
 			}
+			printC.printBasicAction(basicActions);
+			basicActions.clear();
 		}
 		
 		initialiser.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
@@ -149,12 +153,13 @@ public class RoundManager {
 		return leaderBoard;
 	}
 
-	public void actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
+	public ArrayList<BasicActions> actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
 		
-		if (currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive())
-			currentBehaviour.play(currentPhase, hashOfCharacters);
-		else
+		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			printC.botIsDead(currentBehaviour.getPlayer());
+			return new ArrayList<BasicActions>();
+		}
+		return currentBehaviour.play(currentPhase, hashOfCharacters);
 	}
 
 	public void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
