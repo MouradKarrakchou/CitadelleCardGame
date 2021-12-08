@@ -1,2 +1,13 @@
 # La Citadelle
-projet2-ps5-21-22-ps5-21-22-projet2-k
+Projet Citadelle en lien avec le cours d'introduction sur le developpement logiciel.
+
+## Authors
+- Leo Le Bihan
+- Ayoub Imami
+- Mourad Karrakchou
+- Kilian Bonnet
+
+# Execution
+## Maven Commands
+- `mvn clean package`
+- `mvn exec : java`
