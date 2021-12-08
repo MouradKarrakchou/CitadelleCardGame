@@ -298,10 +298,6 @@ public class RoundManagerTest {
 
 	@Test
 	public void isThereAFamilyTestNothing(){
-		ArrayList<Character> listOfAllCharacter = init.createListOfAllCharacter();
-		ArrayList<Integer> listOfCharacterValues = listOfAllCharacter.stream()
-				.map(Character::getValue)
-				.collect(Collectors.toCollection(ArrayList::new));
 
 		Player fred = new Player("fred");
 		Behaviour fredBehaviour = new Behaviour(fred, board);
@@ -313,7 +309,8 @@ public class RoundManagerTest {
 		fred.buildDistrict(new District("Other district 02", 2, "notImportant", "otherFamily"));
 
 		assertEquals(6, fred.getCity().getSizeOfCity());
-		assertTrue(listOfCharacterValues.contains(roundMan.isThereAFamily(fredBehaviour)));
+		assertTrue(0 <= roundMan.isThereAFamily(fredBehaviour));
+		assertTrue(8 > roundMan.isThereAFamily(fredBehaviour));
 	}
 
 	@Test

@@ -34,6 +34,7 @@ public class Initialiser {
 	public static final int MERCHANT_INDEX = 5;
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
+
 	public final static int NUMBER_OF_PLAYER = 4;
 
 	
