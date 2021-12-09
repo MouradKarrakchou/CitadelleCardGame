@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import fr.unice.polytech.citadelle.characters_class.Architect;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -191,8 +192,9 @@ public class BehaviourTest {
 	@Test
 	public void architectBuilds3Districts(){
 		Behaviour botArchitect=new Behaviour(new Player("playerArchitect"),board);
-		botArchitect.setBotIsArchitect(true);
+		botArchitect.getPlayer().setRole(new Architect());
 		botArchitect.getPlayer().setGolds(999);
+
 
 		ArrayList<District> districtsToBuild=new ArrayList<>();
 		districtsToBuild.add(new District("Test1",1,"Yellow","Trade and Handicrafts"));

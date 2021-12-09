@@ -49,7 +49,8 @@ public class RoundManager {
 				.analyseGame(getTheListOfCity(getListOfPlayers()))) != PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(roundNumber);
-			updateListOfBehaviour();
+			if (roundNumber>0)
+				updateListOfBehaviour();
 
 			setupCharacters(initialiser);
 			leaderBoard = askEachCharacterToPlay(phaseManager, board.getDeckDistrict(), initialiser);
@@ -191,7 +192,6 @@ public class RoundManager {
 	public int findKing(ArrayList<Behaviour> listOfBehaviour) {
 		for (int k = 0; k < listOfBehaviour.size(); k++) {
 			if (listOfBehaviour.get(k).getBehaviourIsKing()) {
-				listOfBehaviour.get(k).setBehaviourIsKing(false);
 				return (k);
 			}
 		}

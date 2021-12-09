@@ -164,30 +164,21 @@ public class RoundManagerTest {
 		Behaviour botBishop =new Behaviour(new Player("bishopPlayer"), board);
 		Behaviour botMagician = new Behaviour(new Player("magicianPlayer"), board);
 		Behaviour botKing=new Behaviour(new Player("kingPlayer"), board);
-
 		//creation of the list of bot
 		listOfAllBehaviour.clear();
+
 		listOfAllBehaviour.add(botArchitecte);
 		listOfAllBehaviour.add(botBishop);
 		listOfAllBehaviour.add(botMagician);
 		listOfAllBehaviour.add(botKing);
-		//creation of the characters in game
-		Architect architect = new Architect();
-		Bishop bishop = new Bishop();
-		Magician magician = new Magician();
-		King king = new King();
 
-		//we set the character of our bot
-		botKing.getPlayer().setRole(king);
+		listOfAllBehaviour.get(0).getPlayer().setRole(new Architect());
+		listOfAllBehaviour.get(1).getPlayer().setRole(new Bishop());
+		listOfAllBehaviour.get(2).getPlayer().setRole(new Magician());
+		listOfAllBehaviour.get(3).getPlayer().setRole(new King());
 
-		//creation of the hashOfCharacter
-		hashOfCharacter.put(architect, Optional.of(botArchitecte));
-		hashOfCharacter.put(bishop, Optional.of(botBishop));
-		hashOfCharacter.put(magician, Optional.of(botMagician));
-		hashOfCharacter.put(king,Optional.of(botKing));
 
 		//Verify that he finds the right spot for the king
-		botKing.setBehaviourIsKing(true);
 		assertEquals(3,roundMan.findKing(listOfAllBehaviour));
 
 		//Verify that they are well ordered
@@ -315,19 +306,46 @@ public class RoundManagerTest {
 
 	@Test
 	public void testFindKing(){
-		assertEquals(-1,roundMan.findKing(listOfAllBehaviour));
-		listOfAllBehaviour.get(2).setBehaviourIsKing(true);
+		listOfAllBehaviour.get(0).getPlayer().setRole(new Magician());
+		listOfAllBehaviour.get(1).getPlayer().setRole(new Bishop());
+		listOfAllBehaviour.get(2).getPlayer().setRole(new King());
+		listOfAllBehaviour.get(3).getPlayer().setRole(new Assassin());
+		roundMan.findKing(listOfAllBehaviour);
+
 		assertEquals(2,roundMan.findKing(listOfAllBehaviour));
 	}
 
 	@Test
 	public void testUpdateListOfBehaviour(){
-		roundMan=new RoundManager(listOfAllCharacter,listOfAllBehaviour,hashOfCharacter,board);
 		ArrayList<Behaviour> listOfAllBehaviourCopy=new ArrayList<>();
+
+
+		//creation of Behaviour
+		Behaviour botArchitecte = new Behaviour(new Player("architectePlayer"), board);
+		Behaviour botBishop =new Behaviour(new Player("bishopPlayer"), board);
+		Behaviour botKing=new Behaviour(new Player("kingPlayer"), board);
+		Behaviour botMagician = new Behaviour(new Player("magicianPlayer"), board);
+		//creation of the list of bot
+
+		listOfAllBehaviour.clear();
+
+		listOfAllBehaviour.add(botArchitecte);
+		listOfAllBehaviour.add(botBishop);
+		listOfAllBehaviour.add(botKing);
+		listOfAllBehaviour.add(botMagician);
+
+		listOfAllBehaviour.get(0).getPlayer().setRole(new Architect());
+		listOfAllBehaviour.get(1).getPlayer().setRole(new Bishop());
+		listOfAllBehaviour.get(2).getPlayer().setRole(new King());
+		listOfAllBehaviour.get(3).getPlayer().setRole(new Magician());
+
+
 		listOfAllBehaviourCopy.addAll(listOfAllBehaviour);
 
-		listOfAllBehaviour.get(2).setBehaviourIsKing(true);
+		roundMan=new RoundManager(listOfAllCharacter,listOfAllBehaviour,hashOfCharacter,board);
 		roundMan.updateListOfBehaviour();
+
+
 		assertEquals(roundMan.getListOfBehaviour().get(2),listOfAllBehaviour.get(0));
 		assertEquals(roundMan.getListOfBehaviour().get(3),listOfAllBehaviour.get(1));
 		assertEquals(roundMan.getListOfBehaviour().get(0),listOfAllBehaviour.get(2));

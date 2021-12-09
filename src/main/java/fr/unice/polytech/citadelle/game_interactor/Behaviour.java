@@ -21,8 +21,6 @@ public class Behaviour {
 	// The player controlled by the Behaviour.
 	protected final Player player;
 	protected final PrintCitadels printC = new PrintCitadels();
-	protected Boolean botIsKing = false;
-	protected Boolean botIsArchitect = false;
 	protected int numberOfCharacter = 8;
 
 	// ---
@@ -88,10 +86,9 @@ public class Behaviour {
 	}
 
 	public void buildArchitect() {
-		if (botIsArchitect)
+		if (player.getCharacter().getName().equals("Architect"))
 			{ifPossibleBuildADistrict();
-			ifPossibleBuildADistrict();
-			botIsArchitect=false;}
+			ifPossibleBuildADistrict();}
 	}
 
 	public ArrayList<BasicActions> normalBehaviour() {
@@ -231,9 +228,6 @@ public class Behaviour {
 		return (random.nextInt(scope));
 	}
 
-	public void setBehaviourIsKing(Boolean BehaviourIsKing) {
-		this.botIsKing = BehaviourIsKing;
-	}
 
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
@@ -244,7 +238,7 @@ public class Behaviour {
 	}
 
 	public Boolean getBehaviourIsKing() {
-		return botIsKing;
+		return player.getCharacter().getName().equals("King");
 	}
 
 	public CityManagement getCityManager() {
@@ -271,12 +265,4 @@ public class Behaviour {
 		return randomCharacter;
 	}
 
-
-	public void setBotIsArchitect(boolean botIsArchitect) {
-		this.botIsArchitect=botIsArchitect;
-	}
-
-	public boolean getBehaviourIsArchitect() {
-		return botIsArchitect;
-	}
 }

@@ -24,13 +24,9 @@ public class King extends Character {
         bot.getPlayer().setGolds(goldEarned);
         return(goldEarned);
     }
+
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
-        List<Optional<Behaviour>> listOfBot=hashOfCharacters.values().stream().toList();
-        for (int i=0;i<listOfBot.size();i++){
-            if (listOfBot.get(i).isPresent()&&bot.equals(listOfBot.get(i).get()))
-                bot.setBehaviourIsKing(true);
-        }
         printC.printKingSpell(bot.getPlayer());
         printC.printKingEarnedMoney(collectGold(bot));
     }

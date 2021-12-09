@@ -172,7 +172,6 @@ public class CharacterTest {
     void testArchitectTakes2Cards(){
         //We verify that the Value of behaviourIsArchitect becomes true
         architect.spellOfTurn(botArchitecte,hashOfCharacters,printC);
-        assertEquals(true,botArchitecte.getBehaviourIsArchitect());
         assertEquals(2, botArchitecte.getPlayer().getDistrictCards().size());
     }
     @Test

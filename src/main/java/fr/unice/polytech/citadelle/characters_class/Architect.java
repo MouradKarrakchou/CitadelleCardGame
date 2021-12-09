@@ -18,7 +18,5 @@ public class Architect extends Character {
         printC.printArchitectSpell();
         bot.addDistrict(bot.pickCard());
         bot.addDistrict(bot.pickCard());
-        bot.setBotIsArchitect(true);
-
     }
 }
