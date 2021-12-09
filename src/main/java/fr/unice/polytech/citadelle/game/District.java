@@ -41,6 +41,8 @@ public class District implements Comparable<District>{
         return nameOfFamily;
     }
 
+    public void setColor(String color) { this.color = color; }
+
     @Override
     public String toString(){
         return(name + " (" + value + ")");
