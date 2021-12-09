@@ -1,12 +1,10 @@
 package fr.unice.polytech.citadelle.game_engine;
 
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.BonusDistrict;
-import fr.unice.polytech.citadelle.game.District;
-import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game.purple_districts.University;
+import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +21,8 @@ public class Referee {
         this.board=board;
     }
     public void updatePlayerWithCityScore(Player player) {
+        //Color joker in order to get 5 different district colors
+        if (isThereColorJokerDistrictInCity(player).size() != 0) activateColorJoker(player, isThereColorJokerDistrictInCity(player));
         // City Score
         int scoreToAdd = cityDistrictScore(player);
         // Add 3 bonus point if the player has 5 built city of different colors
@@ -113,6 +113,29 @@ public class Referee {
             bonusDistrict.bonusDistrict(player);
         }
     }
+
+    private ArrayList<ColorDistrict> isThereColorJokerDistrictInCity(Player player) {
+        ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
+        builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
+
+        ArrayList<ColorDistrict> colorDistrictList = new ArrayList<>();
+
+        for (District district : builtDistrict) {
+            if (district.getName().equals("Haunted City"))
+                colorDistrictList.add(new HauntedCity("Haunted City", 2,"Purple","Prestige"));
+        }
+
+        return colorDistrictList;
+    }
+
+    private void activateColorJoker(Player player, ArrayList<ColorDistrict> colorJokerDistrictList) {
+
+        for (ColorDistrict colorJokerDistrict : colorJokerDistrictList) {
+            if (colorJokerDistrict.getName().equals("Haunted City"))
+                colorJokerDistrict.hauntedCitySpell(player);
+        }
+    }
+
 	public boolean CityIsComplete(Player player) {
 		if(player.getCity().getSizeOfCity() >= 8) return true;
 		return false;
