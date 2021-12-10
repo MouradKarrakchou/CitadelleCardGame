@@ -144,8 +144,10 @@ public class RoundManager {
 				basicActions = actionOfBehaviour(currentBehaviour, deckDistrict);
 				cityVerification(currentBehaviour, leaderBoard);		
 			}
-			printC.printBasicAction(basicActions);
-			basicActions.clear();
+			if(basicActions != null) {
+				printC.printBasicAction(basicActions);
+				basicActions.clear();
+			}
 		}
 		
 		initialiser.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
