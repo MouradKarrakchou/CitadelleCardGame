@@ -33,6 +33,10 @@ public class District implements Comparable<District>{
         return false;
     }
 
+    public boolean isA(String nameOfDistrict) {
+        return name.equals(nameOfDistrict);
+    }
+
     public String getColor() {
         return color;
     }

@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 
@@ -13,10 +14,10 @@ public class Board {
     private ArrayList<Player> listOfPlayer;
     private DeckDistrict deckDistrict;
     private DeckCharacter deckCharacter;
+    private int roundNumber = 0;
 
 
-
-    public Board( ArrayList<Player> listOfPlayer, DeckDistrict deckDistrict,DeckCharacter deckCharacter) {
+    public Board( ArrayList<Player> listOfPlayer, DeckDistrict deckDistrict, DeckCharacter deckCharacter) {
         this.listOfPlayer = listOfPlayer;
         this.deckDistrict = deckDistrict;
         this.deckCharacter = deckCharacter;
@@ -39,10 +40,14 @@ public class Board {
 		return deckCharacter;
 	}
 
-	public void setListOfPlayer(ArrayList<Player> listOfPlayer) {
+    public void setListOfPlayer(ArrayList<Player> listOfPlayer) {
 		this.listOfPlayer = listOfPlayer;
 	}
 	
-    
+    public void incrementRoundNumber() {
+        roundNumber++;
+    }
+
+    public int getRoundNumber() { return roundNumber;}
 }
 

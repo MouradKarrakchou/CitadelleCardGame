@@ -28,7 +28,7 @@ public class DeckDistrict {
     private void oneCard() {
         ArrayList<String> districtsNamesWithSameNumberOfCards = new ArrayList<>();
 
-        deckDistrict.add(new HauntedCity("Haunted City", 2,"Purple","Prestige"));
+        deckDistrict.add(new HauntedCity("Haunted City", 2,"Purple","Prestige", 0));
 
         deckDistrict.add(new Laboratory("Laboratory", 5,"Purple","Prestige"));
         deckDistrict.add(new Smithy("Smithy", 5,"Purple","Prestige"));

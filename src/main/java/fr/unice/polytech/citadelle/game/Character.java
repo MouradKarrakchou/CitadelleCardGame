@@ -47,6 +47,10 @@ public class Character {
         return characterIsAlive;
     }
 
+    public boolean isA(String nameOfCharacter) {
+        return name.equals(nameOfCharacter);
+    }
+
     @Override
     public boolean equals(Object obj) {
         Character other = (Character) obj;

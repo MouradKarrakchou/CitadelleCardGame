@@ -29,7 +29,6 @@ public class RoundManager {
 	private Referee referee;
 
 	private String currentPhase;
-	private int roundNumber = 0;
 
 	public RoundManager(ArrayList<Character> listOfAllCharacter, ArrayList<Behaviour> listOfAllBehaviour,
 			LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter, Board board) {
@@ -48,8 +47,8 @@ public class RoundManager {
 		while ((currentPhase = phaseManager
 				.analyseGame(getTheListOfCity(getListOfPlayers()))) != PhaseManager.LAST_TURN_PHASE) {
 
-			printC.printNumberRound(roundNumber);
-			if (roundNumber>0)
+			printC.printNumberRound(board.getRoundNumber());
+			if (board.getRoundNumber() > 0)
 				updateListOfBehaviour();
 
 			setupCharacters(initialiser);
@@ -81,7 +80,7 @@ public class RoundManager {
 
 	public void chooseACharacterCard(Behaviour bot, Initialiser initialiser, DeckCharacter deckCharacter) {
 		Player playerOfBehaviour = bot.getPlayer();
-		if (roundNumber == 0)
+		if (board.getRoundNumber() == 0)
 			playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
 		else
 			playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
@@ -150,7 +149,7 @@ public class RoundManager {
 		}
 		
 		initialiser.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
-		roundNumber++;
+		board.incrementRoundNumber();
 		return leaderBoard;
 	}
 
@@ -209,10 +208,6 @@ public class RoundManager {
 			positionToChange++;
 		}
 		return (listOfBehaviourNextRound);
-	}
-
-	public int getRoundNumber() {
-		return roundNumber;
 	}
 
 	public void reviveAll() {

@@ -9,6 +9,7 @@ import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
+import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -130,11 +131,16 @@ public class Behaviour {
 	}
 
 	public void ifPossibleBuildADistrict() {
+		ArrayList<HauntedCity> hauntedCityArrayList = new ArrayList<>();
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
 			Collections.sort(districtWeCanBuild);
 			Collections.reverse(districtWeCanBuild);
 			District district = districtWeCanBuild.get(0);
+			if(district.isA("Haunted City")) {
+				HauntedCity hauntedCity = (HauntedCity) district;
+				hauntedCity.setRoundBuilt(board.getRoundNumber());
+			}
 			executor.buildDistrict(district);
 		}
 	}

@@ -2,12 +2,13 @@ package fr.unice.polytech.citadelle.game_engine;
 
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
-import fr.unice.polytech.citadelle.game.purple_districts.University;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
+import fr.unice.polytech.citadelle.game.purple_districts.University;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class Referee {
 
@@ -15,14 +16,14 @@ public class Referee {
 	public static final int BONUS_END = 2;
 	Board board;
 
-	
-	
+
+
     public Referee(Board board){
         this.board=board;
     }
     public void updatePlayerWithCityScore(Player player) {
         //Color joker in order to get 5 different district colors
-        if (isThereColorJokerDistrictInCity(player).size() != 0) activateColorJoker(player, isThereColorJokerDistrictInCity(player));
+        if (isThereColorJokerHCDistrictInCity(player).size() != 0) activateColorJokerHC(player, isThereColorJokerHCDistrictInCity(player));
         // City Score
         int scoreToAdd = cityDistrictScore(player);
         // Add 3 bonus point if the player has 5 built city of different colors
@@ -114,21 +115,27 @@ public class Referee {
         }
     }
 
-    private ArrayList<ColorDistrict> isThereColorJokerDistrictInCity(Player player) {
+    private ArrayList<HauntedCity> isThereColorJokerHCDistrictInCity(Player player) {
         ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
-        builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
+        ArrayList<District> builtDistrictFilter = builtDistrict.stream()
+                .filter(district -> district.getNameOfFamily().equals("Prestige"))
+                .collect(Collectors.toCollection(ArrayList::new));
 
-        ArrayList<ColorDistrict> colorDistrictList = new ArrayList<>();
+        ArrayList<HauntedCity> colorDistrictList = new ArrayList<>();
 
-        for (District district : builtDistrict) {
+        for (District district : builtDistrictFilter) {
             if (district.getName().equals("Haunted City"))
-                colorDistrictList.add(new HauntedCity("Haunted City", 2,"Purple","Prestige"));
+                colorDistrictList.add((HauntedCity) district);
         }
 
+        if(!colorDistrictList.isEmpty() && colorDistrictList.get(0).getRoundBuilt() < board.getRoundNumber())
+            return colorDistrictList;
+
+        colorDistrictList.clear();
         return colorDistrictList;
     }
 
-    private void activateColorJoker(Player player, ArrayList<ColorDistrict> colorJokerDistrictList) {
+    private void activateColorJokerHC(Player player, ArrayList<HauntedCity> colorJokerDistrictList) {
 
         for (ColorDistrict colorJokerDistrict : colorJokerDistrictList) {
             if (colorJokerDistrict.getName().equals("Haunted City"))
