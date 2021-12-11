@@ -20,13 +20,11 @@ import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 /**
- * The Initialiser initialize all objects needed for a game
+ * The Initializer class initialize all objects needed during the game
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
-public class Initialiser {
-	
-	//créer un enum
-	public static final int ASSASIN_INDEX = 0;
+public class Initializer {
+	public static final int ASSASSIN_INDEX = 0;
 	public static final int THIEF_INDEX = 1;
 	public static final int MAGICIAN_INDEX = 2;
 	public static final int KING_INDEX = 3;
@@ -37,12 +35,14 @@ public class Initialiser {
 
 	public final static int NUMBER_OF_PLAYER = 4;
 
-	
-	public Initialiser() {}
-
-	public LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
-			ArrayList<Character> listOfAllCharacters) {
-		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
+	/**
+	 * Reset a given hash of characters using a given list of characters.
+	 * @param hashOfCharacters The hash of characters to reset.
+	 * @param listOfAllCharacters The list containing all the characters.
+	 */
+	public static void resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
+											ArrayList<Character> listOfAllCharacters) {
+		hashOfCharacters.put(listOfAllCharacters.get(ASSASSIN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(KING_INDEX), Optional.empty());
@@ -50,11 +50,14 @@ public class Initialiser {
 		hashOfCharacters.put(listOfAllCharacters.get(MERCHANT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(ARCHITECT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(WARLORD_INDEX), Optional.empty());
-		
-		return hashOfCharacters;
+
 	}
-	
-	public ArrayList<Character> createListOfAllCharacter() {
+
+	/**
+	 * Create a new list containing all characters.
+	 * @return A list containing all the characters.
+	 */
+	public static ArrayList<Character> createListOfAllCharacter() {
 		ArrayList<Character> listOfAllCharacters = new ArrayList<>();
 		Assassin theAssassin = new Assassin();
 		Thief theThief = new Thief();
@@ -76,9 +79,14 @@ public class Initialiser {
 		
 		return listOfAllCharacters;
 	}
-	
-	public ArrayList<Behaviour> createListOfBehaviour(Board board){
-		ArrayList<Behaviour> listOfBehaviour = new ArrayList<Behaviour>();
+
+	/**
+	 * Initialize 4 players with a certain behavior.
+	 * @param board The board to add the new player behaviours.
+	 * @return The list of behaviours.
+	 */
+	public static ArrayList<Behaviour> createListOfBehaviour(Board board){
+		ArrayList<Behaviour> listOfBehaviour = new ArrayList<>();
 		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("Robot " + i);
@@ -90,41 +98,55 @@ public class Initialiser {
 		return listOfBehaviour;
 
 	}
-	
-	public Board createBoard(ArrayList<Character> listOfCharacter){
-		Board board = new Board(new ArrayList<Player>(), new DeckDistrict(), new DeckCharacter());
-		return board;
+
+	/**
+	 * Create a new empty Board.
+	 * @return The new empty Board object created.
+	 */
+	public static Board createBoard(){
+		return new Board(new ArrayList<>(), new DeckDistrict(), new DeckCharacter());
 	}
-	
-	public void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
+
+	/**
+	 * @param hashOfCharacters The empty hash of characters to fill.
+	 * @param character The character to add to the hash of characters.
+	 * @param Behaviour The associated behaviour.
+	 */
+	public static void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
 		hashOfCharacters.put(character, Optional.of(Behaviour));
 	}
-	
-	
-	public DeckDistrict initDeckDistrict(DeckDistrict deck) {
+
+	/**
+	 * Initialize a given deck of districts.
+	 * @param deck - The DeckDistrict to initialize.
+	 */
+	public static void initDeckDistrict(DeckDistrict deck) {
 		deck.initialise();
-		return deck;
 	}
-	
-	public static DeckCharacter initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
+
+	/**
+	 * Initialize a given deck of characters.
+	 * @param deckCharacter The empty deck of characters to fill with characters.
+	 * @param listOfCharacter The list of all the characters.
+	 */
+	public static void initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
 			ArrayList<Character> listOfCharacterCards = deckCharacter.getDeckCharacter();
 			listOfCharacterCards.clear();
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ASSASIN_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.THIEF_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MAGICIAN_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.KING_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.BISHOP_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MERCHANT_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ARCHITECT_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.WARLORD_INDEX));
-			return deckCharacter;
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.ASSASSIN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.THIEF_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.MAGICIAN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.KING_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.BISHOP_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.MERCHANT_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.ARCHITECT_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.WARLORD_INDEX));
 	}
 
 	/**
 	 * Method used to give to each player the 4 firsts cards at the beginning of the game.
 	 * @param board - The game board allows us to take player and district deck information.
 	 */
-	public void initPlayerCards(Board board) {
+	public static void initPlayerCards(Board board) {
 		ArrayList<Player> players = board.getListOfPlayer();
 		DeckDistrict boardDistrictDeck = board.getDeckDistrict();
 

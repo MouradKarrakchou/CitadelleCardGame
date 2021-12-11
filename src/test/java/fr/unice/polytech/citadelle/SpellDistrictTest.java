@@ -5,7 +5,7 @@ import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.game.purple_districts.Library;
-import fr.unice.polytech.citadelle.game_engine.Initialiser;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
 import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.times;
 public class SpellDistrictTest {
 
     private final DeckDistrict deckDistrict = new DeckDistrict();
-    private final Initialiser initialiser = new Initialiser();
+    private final Initializer initializer = new Initializer();
 
     Player player = new Player("Player");
     Executor executor = new Executor(player);
@@ -32,7 +32,7 @@ public class SpellDistrictTest {
 
     @BeforeEach
     void beforeEach() {
-        initialiser.initDeckDistrict(deckDistrict);
+        initializer.initDeckDistrict(deckDistrict);
     }
 
     @Test

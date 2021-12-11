@@ -180,7 +180,7 @@ public class CharacterTest {
         botMerchant.getPlayer().getDistrictCards().add(new District("MerchantDistrict",0," "," "));
         botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict",0," "," "));
         when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
-        when(botMagician.chooseCharacterForMagician(hashOfCharacters)).thenReturn(merchant);
+        when(botMagician.selectCharacterForSpell(hashOfCharacters)).thenReturn(merchant);
         magician.spellOfTurn(botMagician,hashOfCharacters,printC);
         assertEquals("MagicianDistrict",botMerchant.getPlayer().getDistrictCards().get(0).getName());
         assertEquals("MerchantDistrict",botMagician.getPlayer().getDistrictCards().get(0).getName());

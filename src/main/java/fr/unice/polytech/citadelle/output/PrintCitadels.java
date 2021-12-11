@@ -130,13 +130,13 @@ public class PrintCitadels {
 		System.out.println(colorize(output, BLUE_TEXT()));
 	}
 
-	public void printKingEarnedMoney(int collectGold) {
-		System.out.println("The king has " + collectGold + " noble district.(+" + collectGold + " golds).");
-	}
 
-	public void printMerchantEarnedMoney(int collectGold) {
+	public void printCharacterEarnedMoney(int collectGold,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
 		System.out.println(
-				"The merchant has " + collectGold + " trade and handicrafts district.(+" + collectGold + " golds).");
+				"The "+nameOfTheCharacter+" has " + collectGold + " "+nameOfTheFamilyDistrict+" district.(+" + collectGold + " golds).");
+	}
+	public void printCharacterEarnedNoMoney(String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
+		System.out.println("The "+ nameOfTheCharacter+" has no "+nameOfTheFamilyDistrict+" District.(+0 gold)");
 	}
 
 	public Attribute getDistrictColor(District district) {
@@ -198,4 +198,7 @@ public class PrintCitadels {
 			System.out.println(action);
 	}
 
+	public void printMerchantEarnedStartRoundMoney() {
+		System.out.println("The Merchant wins 1 gold at the beggining of his turn");
+	}
 }
