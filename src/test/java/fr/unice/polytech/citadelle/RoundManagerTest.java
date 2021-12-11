@@ -65,7 +65,7 @@ public class RoundManagerTest {
 		hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
 		listOfAllCharacter = init.createListOfAllCharacter();
 		listOfAllBehaviour = init.createListOfBehaviour(board);
-		board = init.createBoard(listOfAllCharacter);
+		board = init.createBoard();
 		init.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
 		hashOfCharacter = init.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
 		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board));

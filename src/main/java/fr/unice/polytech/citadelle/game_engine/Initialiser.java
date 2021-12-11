@@ -20,7 +20,7 @@ import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 /**
- * The Initialiser initialize all objects needed for a game
+ * The Initialiser class initialize all objects needed during the game
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Initialiser {
@@ -76,9 +76,14 @@ public class Initialiser {
 		
 		return listOfAllCharacters;
 	}
-	
+
+	/**
+	 * Initialize 4 players with a certain behavior.
+	 * @param board The board to add the new player behaviours.
+	 * @return The list of behaviours.
+	 */
 	public static ArrayList<Behaviour> createListOfBehaviour(Board board){
-		ArrayList<Behaviour> listOfBehaviour = new ArrayList<Behaviour>();
+		ArrayList<Behaviour> listOfBehaviour = new ArrayList<>();
 		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("Robot " + i);
@@ -90,23 +95,38 @@ public class Initialiser {
 		return listOfBehaviour;
 
 	}
-	
-	public static Board createBoard(ArrayList<Character> listOfCharacter){
-		Board board = new Board(new ArrayList<Player>(), new DeckDistrict(), new DeckCharacter());
-		return board;
+
+	/**
+	 * Create a new empty Board.
+	 * @return The new empty Board object created.
+	 */
+	public static Board createBoard(){
+		return new Board(new ArrayList<>(), new DeckDistrict(), new DeckCharacter());
 	}
-	
+
+	/**
+	 * @param hashOfCharacters The empty hash of characters to fill.
+	 * @param character The character to add to the hash of characters.
+	 * @param Behaviour The associated behaviour.
+	 */
 	public void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
 		hashOfCharacters.put(character, Optional.of(Behaviour));
 	}
-	
-	
-	public static DeckDistrict initDeckDistrict(DeckDistrict deck) {
+
+	/**
+	 * Initialize a given deck of districts.
+	 * @param deck - The DeckDistrict to initialize.
+	 */
+	public static void initDeckDistrict(DeckDistrict deck) {
 		deck.initialise();
-		return deck;
 	}
-	
-	public static DeckCharacter initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
+
+	/**
+	 * Initialize a given deck of characters.
+	 * @param deckCharacter The empty deck of characters to fill with characters.
+	 * @param listOfCharacter The list of all the characters.
+	 */
+	public static void initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
 			ArrayList<Character> listOfCharacterCards = deckCharacter.getDeckCharacter();
 			listOfCharacterCards.clear();
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ASSASIN_INDEX));
@@ -117,7 +137,6 @@ public class Initialiser {
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MERCHANT_INDEX));
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ARCHITECT_INDEX));
 			listOfCharacterCards.add(listOfCharacter.get(Initialiser.WARLORD_INDEX));
-			return deckCharacter;
 	}
 
 	/**
