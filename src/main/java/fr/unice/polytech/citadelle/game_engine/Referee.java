@@ -23,7 +23,7 @@ public class Referee {
     }
     public void updatePlayerWithCityScore(Player player) {
         //Color joker in order to get 5 different district colors
-        if (isThereColorJokerHCDistrictInCity(player).size() != 0) activateColorJokerHC(player, isThereColorJokerHCDistrictInCity(player));
+        if (isThereHauntedCityJokerInCity(player).size() != 0) activateHauntedCityJoker(player, isThereHauntedCityJokerInCity(player));
         // City Score
         int scoreToAdd = cityDistrictScore(player);
         // Add 3 bonus point if the player has 5 built city of different colors
@@ -115,32 +115,33 @@ public class Referee {
         }
     }
 
-    private ArrayList<HauntedCity> isThereColorJokerHCDistrictInCity(Player player) {
+    public ArrayList<HauntedCity> isThereHauntedCityJokerInCity(Player player) {
+        ArrayList<HauntedCity> hauntedCityJoker = new ArrayList<>();
+
         ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
-        ArrayList<District> builtDistrictFilter = builtDistrict.stream()
-                .filter(district -> district.getNameOfFamily().equals("Prestige"))
+
+        ArrayList<District> purpleDistricts = builtDistrict.stream()
+                .filter(district -> district.getColor().equals("Purple"))
+                .collect(Collectors.toCollection(ArrayList::new));;
+
+        ArrayList<District> builtDistrictHC = builtDistrict.stream()
+                .filter(district -> district.getName().equals("Haunted City"))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        ArrayList<HauntedCity> colorDistrictList = new ArrayList<>();
-
-        for (District district : builtDistrictFilter) {
-            if (district.getName().equals("Haunted City"))
-                colorDistrictList.add((HauntedCity) district);
+        if(!builtDistrictHC.isEmpty() && purpleDistricts.size() > 1) {
+            HauntedCity hauntedCity = (HauntedCity) builtDistrictHC.get(0);
+            if (hauntedCity.getRoundBuilt() < board.getRoundNumber()) {
+                hauntedCityJoker.add(hauntedCity);
+                return hauntedCityJoker;
+            }
         }
 
-        if(!colorDistrictList.isEmpty() && colorDistrictList.get(0).getRoundBuilt() < board.getRoundNumber())
-            return colorDistrictList;
-
-        colorDistrictList.clear();
-        return colorDistrictList;
+        hauntedCityJoker.clear();
+        return hauntedCityJoker;
     }
 
-    private void activateColorJokerHC(Player player, ArrayList<HauntedCity> colorJokerDistrictList) {
-
-        for (ColorDistrict colorJokerDistrict : colorJokerDistrictList) {
-            if (colorJokerDistrict.getName().equals("Haunted City"))
-                colorJokerDistrict.hauntedCitySpell(player);
-        }
+    public void activateHauntedCityJoker(Player player, ArrayList<HauntedCity> hauntedCityJoker) {
+        hauntedCityJoker.get(0).hauntedCitySpell(player);
     }
 
 	public boolean CityIsComplete(Player player) {
