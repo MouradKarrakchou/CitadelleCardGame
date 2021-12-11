@@ -26,7 +26,7 @@ import fr.unice.polytech.citadelle.game_interactor.RushBot;
 public class Initializer {
 	
 	//créer un enum
-	public static final int ASSASIN_INDEX = 0;
+	public static final int ASSASSIN_INDEX = 0;
 	public static final int THIEF_INDEX = 1;
 	public static final int MAGICIAN_INDEX = 2;
 	public static final int KING_INDEX = 3;
@@ -42,7 +42,7 @@ public class Initializer {
 
 	public static LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
 																					 ArrayList<Character> listOfAllCharacters) {
-		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
+		hashOfCharacters.put(listOfAllCharacters.get(ASSASSIN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(KING_INDEX), Optional.empty());
@@ -129,7 +129,7 @@ public class Initializer {
 	public static void initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
 			ArrayList<Character> listOfCharacterCards = deckCharacter.getDeckCharacter();
 			listOfCharacterCards.clear();
-			listOfCharacterCards.add(listOfCharacter.get(Initializer.ASSASIN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.ASSASSIN_INDEX));
 			listOfCharacterCards.add(listOfCharacter.get(Initializer.THIEF_INDEX));
 			listOfCharacterCards.add(listOfCharacter.get(Initializer.MAGICIAN_INDEX));
 			listOfCharacterCards.add(listOfCharacter.get(Initializer.KING_INDEX));

@@ -60,16 +60,16 @@ public class RoundManagerTest {
 		deckDistrict.initialise();
 
 		hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
-		listOfAllCharacter = init.createListOfAllCharacter();
-		listOfAllBehaviour = init.createListOfBehaviour(board);
-		board = init.createBoard();
-		init.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
-		hashOfCharacter = init.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
+		listOfAllCharacter = Initializer.createListOfAllCharacter();
+		listOfAllBehaviour = Initializer.createListOfBehaviour(board);
+		board = Initializer.createBoard();
+		Initializer.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
+		Initializer.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
 		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board));
 		referee = new Referee(board);
 		
-		init.initDeckCharacter(roundMan.getBoard().getDeckCharacter(), listOfAllCharacter);
-		init.initDeckDistrict(roundMan.getBoard().getDeckDistrict());
+		Initializer.initDeckCharacter(roundMan.getBoard().getDeckCharacter(), listOfAllCharacter);
+		Initializer.initDeckDistrict(roundMan.getBoard().getDeckDistrict());
 		
 		board.setListOfPlayer(roundMan.getListOfPlayers());
 
@@ -129,7 +129,7 @@ public class RoundManagerTest {
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
 		hashCharacter = roundMan.getHashOfCharacters();
 		
-		Character assasin = roundMan.getListOfAllCharacters().get(Initializer.ASSASIN_INDEX);
+		Character assassin = roundMan.getListOfAllCharacters().get(Initializer.ASSASSIN_INDEX);
 		Character thief = roundMan.getListOfAllCharacters().get(Initializer.THIEF_INDEX);
 		Character architect = roundMan.getListOfAllCharacters().get(Initializer.ARCHITECT_INDEX);
 		
@@ -145,7 +145,7 @@ public class RoundManagerTest {
 		Optional<Behaviour> behaviour2 = Optional.of(new Behaviour(p2, board));
 		Optional<Behaviour> behaviour3 = Optional.of(new Behaviour(p3, board));
 
-		hashCharacter.put(assasin, behaviour1);	
+		hashCharacter.put(assassin, behaviour1);
 		hashCharacter.put(thief, behaviour2);		
 		hashCharacter.put(architect, behaviour3);		
 		
@@ -314,11 +314,11 @@ public class RoundManagerTest {
 
 	@Test
 	public void testUpdateListOfBehaviour(){
-		ArrayList<Behaviour> listOfAllBehaviourCopy=new ArrayList<>();
+		ArrayList<Behaviour> listOfAllBehaviourCopy = new ArrayList<>();
 
 
 		//creation of Behaviour
-		Behaviour botArchitecte = new Behaviour(new Player("architectePlayer"), board);
+		Behaviour botArchitect = new Behaviour(new Player("architectPlayer"), board);
 		Behaviour botBishop =new Behaviour(new Player("bishopPlayer"), board);
 		Behaviour botKing=new Behaviour(new Player("kingPlayer"), board);
 		Behaviour botMagician = new Behaviour(new Player("magicianPlayer"), board);
@@ -326,7 +326,7 @@ public class RoundManagerTest {
 
 		listOfAllBehaviour.clear();
 
-		listOfAllBehaviour.add(botArchitecte);
+		listOfAllBehaviour.add(botArchitect);
 		listOfAllBehaviour.add(botBishop);
 		listOfAllBehaviour.add(botKing);
 		listOfAllBehaviour.add(botMagician);
