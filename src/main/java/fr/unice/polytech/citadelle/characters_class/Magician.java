@@ -39,7 +39,7 @@ public class Magician extends Character {
         ArrayList<Integer> magicianAction=bot.chooseMagicianAction();
         //If the magicianAction is empty then we have to exchange with another character
         if (magicianAction.size()==0){
-            Character characterToSwapWith=bot.chooseCharacterForMagician(hashOfCharacters);
+            Character characterToSwapWith=bot.selectCharacterForSpell(hashOfCharacters);
             Optional<Behaviour> botForSwap=hashOfCharacters.get(characterToSwapWith);
             if (botForSwap.isPresent()){
                 swapCardsWithBot(bot,botForSwap.get());

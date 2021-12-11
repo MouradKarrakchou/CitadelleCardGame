@@ -13,7 +13,6 @@ import java.util.Optional;
 public class Character {
     String name;
     int value;
-    Player player;
     boolean characterIsAlive=true;
 
     public Character(String name, int value) {
@@ -28,13 +27,14 @@ public class Character {
     public int getValue() {
         return value;
     }
-    
-    public Player getPlayer() {
-        return player;
-    }
-    
-    public void setPlayer(Player player) {
-        this.player = player;
+
+    public int collectGold(Behaviour bot, String familyOfTheDistrict){
+        int goldEarned=bot.getPlayer().getCity().getBuiltDistrict().stream()
+                .filter(district -> district.getNameOfFamily().equals(familyOfTheDistrict))
+                .map(district ->1)
+                .reduce(0, (total, count) -> total + count);
+        bot.getPlayer().setGolds(bot.getPlayer().getGolds()+goldEarned);
+        return(goldEarned);
     }
 
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){}
@@ -45,10 +45,6 @@ public class Character {
 
     public boolean isCharacterIsAlive() {
         return characterIsAlive;
-    }
-
-    public boolean isA(String nameOfCharacter) {
-        return name.equals(nameOfCharacter);
     }
 
     @Override
@@ -64,4 +60,11 @@ public class Character {
     }
 
 
+    protected void spellOfTurnDistrictFamily(Behaviour bot,String nameOfTheCharacter,String nameOfTheFamilyDistrict,PrintCitadels printC) {
+        int moneyEarned=collectGold(bot,nameOfTheFamilyDistrict);
+        if (moneyEarned>0)
+            printC.printCharacterEarnedMoney(moneyEarned,nameOfTheCharacter,nameOfTheFamilyDistrict);
+        else
+            printC.printCharacterEarnedNoMoney(nameOfTheCharacter,nameOfTheFamilyDistrict);
+    }
 }

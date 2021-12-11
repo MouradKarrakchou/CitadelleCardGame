@@ -104,31 +104,50 @@ public class Behaviour {
 		return null;
 	};
 
-	/**
-	 * 
-	 * Je comprend pas l'interêt, si on veut voler la carte de l'assasin pk on
-	 * retourne pas le character assasin direct ???
-	 */
+
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
 		List<Character> list = hashOfCharacters.keySet().stream().toList();
 		if (this.player.getCharacter().getName().equals("Thief")) {
-			while (list.get(i).getName().equals(this.player.getCharacter().getName())
-					|| list.get(i).getName().equals("Assassin") || character.isCharacterIsAlive() == false) {
-				i = randomInt(numberOfCharacter - 1);
-				character = (Character) hashOfCharacters.keySet().toArray()[i];
-			}
+			character=chooseCharacterForThief(hashOfCharacters);
 		}
-
-		while (hashOfCharacters.keySet().stream().toList().get(i).getName()
-				.equals(this.player.getCharacter().getName())) {
-			i = randomInt(numberOfCharacter - 1);
-			character = (Character) hashOfCharacters.keySet().toArray()[i];
+		else if(this.player.getCharacter().getName().equals("Assassin")){
+			character=chooseCharacterForAssassin(hashOfCharacters);
 		}
-
+		else if(this.player.getCharacter().getName().equals("Magician")){
+			character=chooseCharacterForMagician(hashOfCharacters);
+		}
 		return (character);
 	}
+
+	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		List<Character> list = hashOfCharacters.keySet().stream().toList();
+		Character randomCharacter=list.get(randomInt(8));
+		while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || randomCharacter.isCharacterIsAlive() == false) {
+			randomCharacter=list.get(randomInt(numberOfCharacter));
+		}
+		return randomCharacter;
+	}
+
+
+	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		List<Character> list = hashOfCharacters.keySet().stream().toList();
+		Character randomCharacter=list.get(randomInt(8));
+		while (randomCharacter.getName().equals("Assassin")) {
+			randomCharacter=list.get(randomInt(numberOfCharacter));
+		}
+		return(randomCharacter);
+	}
+
+	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
+		List<Character> list = hashOfCharacters.keySet().stream().toList();
+		Character randomCharacter=list.get(randomInt(numberOfCharacter));
+		while (randomCharacter.getName()=="Magician")
+			randomCharacter=list.get(randomInt(numberOfCharacter));
+		return randomCharacter;
+	}
+
 
 	public void ifPossibleBuildADistrict() {
 		ArrayList<HauntedCity> hauntedCityArrayList = new ArrayList<>();
@@ -262,13 +281,6 @@ public class Behaviour {
 		ArrayList listOfInteger = new ArrayList();
 		return(listOfInteger);
 		//(for now he always chooses to steal from another Character)
-	}
-	public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-		List<Character> list = hashOfCharacters.keySet().stream().toList();
-		Character randomCharacter=list.get(randomInt(8));
-		while (randomCharacter.getName()=="Magician")
-			randomCharacter=list.get(randomInt(8));
-		return randomCharacter;
 	}
 
 }

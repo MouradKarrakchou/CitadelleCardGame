@@ -12,18 +12,11 @@ public class Merchant extends Character {
     public Merchant(){
         super("Merchant", 6);
     }
-
-    private int collectGold(Behaviour bot){
-        int goldEarned=bot.getPlayer().getCity().getBuiltDistrict().stream()
-                .filter(district -> district.getNameOfFamily().equals("Trade and Handicrafts"))
-                .map(district ->1)
-                .reduce(1, (total, count) -> total + count);
-        bot.getPlayer().setGolds(goldEarned);
-        return(goldEarned);
-    }
     
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
-        printC.printMerchantEarnedMoney(collectGold(bot));
+        bot.getPlayer().setGolds(bot.getPlayer().getGolds()+1);
+        printC.printMerchantEarnedStartRoundMoney();
+        super.spellOfTurnDistrictFamily(bot,"Merchant","Trade and Handicrafts",printC);
     }
 }
