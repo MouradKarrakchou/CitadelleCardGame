@@ -15,13 +15,12 @@ import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_engine.Initialiser;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
-public class InitialiserTest {
-	Initialiser init;
+public class InitializerTest {
+	Initializer init;
 	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
 	ArrayList<Character> listOfAllCharacters;
 	ArrayList<Behaviour> listOfBehaviour; 
@@ -30,7 +29,7 @@ public class InitialiserTest {
 	
 	@BeforeEach
 	public void init() {
-		init = new Initialiser();
+		init = new Initializer();
 		hashOfCharacters= new LinkedHashMap<Character, Optional<Behaviour>>();
 		listOfAllCharacters= new ArrayList<Character>();
 		listOfBehaviour = new ArrayList<Behaviour>();
@@ -70,7 +69,7 @@ public class InitialiserTest {
 		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer); 
 		
 		listOfBehaviourSpy = init.createListOfBehaviour(board);
-		assertEquals(listOfBehaviourSpy.size(), Initialiser.NUMBER_OF_PLAYER);
+		assertEquals(listOfBehaviourSpy.size(), Initializer.NUMBER_OF_PLAYER);
 
 	}
 	

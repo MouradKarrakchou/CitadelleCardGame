@@ -1,7 +1,6 @@
 package fr.unice.polytech.citadelle;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,9 +14,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.Character;
@@ -30,7 +27,7 @@ import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_engine.Initialiser;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
@@ -51,11 +48,11 @@ public class RoundManagerTest {
 	Board board;
 	
 
-	Initialiser init;
+	Initializer init;
 	@BeforeEach
 	public void init() {
 
-		init = new Initialiser();
+		init = new Initializer();
 		deckDistrict = new DeckDistrict();
 		printer = new PrintCitadels();
 
@@ -123,7 +120,7 @@ public class RoundManagerTest {
 	@Test
 	public void setupCharactersTest() {
 		roundMan.setupCharacters(init);
-		verify(roundMan, times(Initialiser.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any(), Mockito.any());
+		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any(), Mockito.any());
 	}
 	
 	@Test
@@ -132,9 +129,9 @@ public class RoundManagerTest {
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
 		hashCharacter = roundMan.getHashOfCharacters();
 		
-		Character assasin = roundMan.getListOfAllCharacters().get(Initialiser.ASSASIN_INDEX);
-		Character thief = roundMan.getListOfAllCharacters().get(Initialiser.THIEF_INDEX);
-		Character architect = roundMan.getListOfAllCharacters().get(Initialiser.ARCHITECT_INDEX);
+		Character assasin = roundMan.getListOfAllCharacters().get(Initializer.ASSASIN_INDEX);
+		Character thief = roundMan.getListOfAllCharacters().get(Initializer.THIEF_INDEX);
+		Character architect = roundMan.getListOfAllCharacters().get(Initializer.ARCHITECT_INDEX);
 		
 		Player p1 = new Player("test1");
 		Player p2 = new Player("test2");
@@ -203,7 +200,7 @@ public class RoundManagerTest {
 	@Test
 	public void chooseCharacterKingTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
-		Initialiser.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
 		Player player = new Player("Player");
 		Behaviour aBehaviour = new Behaviour(player, board);
 
@@ -211,7 +208,7 @@ public class RoundManagerTest {
 		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
 		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
 
-		Character king = new Character("King", Initialiser.KING_INDEX);
+		Character king = new Character("King", Initializer.KING_INDEX);
 
 		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
@@ -219,7 +216,7 @@ public class RoundManagerTest {
 	@Test
 	public void chooseCharacterMerchantTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
-		Initialiser.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
 		Player player = new Player("Player");
 		Behaviour aBehaviour = new Behaviour(player, board);
 
@@ -227,7 +224,7 @@ public class RoundManagerTest {
 		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
 		player.buildDistrict(new District("Harbor", 4, "Green", "Trade and Handicrafts"));
 
-		Character merchant = new Character("Merchant", Initialiser.MERCHANT_INDEX);
+		Character merchant = new Character("Merchant", Initializer.MERCHANT_INDEX);
 
 		assertEquals(merchant, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
@@ -269,7 +266,7 @@ public class RoundManagerTest {
 		bob.buildDistrict(new District("Other district 03", 4, "notImportant", "otherFamily"));
 
 		assertEquals(6, bob.getCity().getSizeOfCity());
-		assertEquals(Initialiser.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
+		assertEquals(Initializer.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
 	}
 
 	@Test
@@ -284,7 +281,7 @@ public class RoundManagerTest {
 		alice.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
 
 		assertEquals(6, alice.getCity().getSizeOfCity());
-		assertEquals(Initialiser.MERCHANT_INDEX, roundMan.isThereAFamily(aliceBehaviour));
+		assertEquals(Initializer.MERCHANT_INDEX, roundMan.isThereAFamily(aliceBehaviour));
 	}
 
 	@Test

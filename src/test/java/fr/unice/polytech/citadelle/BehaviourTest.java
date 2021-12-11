@@ -2,28 +2,19 @@ package fr.unice.polytech.citadelle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Optional;
 
 import fr.unice.polytech.citadelle.characters_class.Architect;
-import fr.unice.polytech.citadelle.game_interactor.Executor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_engine.Initialiser;
-import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 public class BehaviourTest {

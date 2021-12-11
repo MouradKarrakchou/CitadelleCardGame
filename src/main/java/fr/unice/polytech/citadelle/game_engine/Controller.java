@@ -17,7 +17,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  */
 public class Controller {
 	private final PrintCitadels printC;
-	private final Initialiser initialiser;
+	private final Initializer initializer;
 	private RoundManager roundManager;
 	private final PhaseManager phaseManager;
 	private Referee referee;
@@ -27,7 +27,7 @@ public class Controller {
 	 */
 	public Controller() {
 		printC = new PrintCitadels();
-		initialiser = new Initialiser();
+		initializer = new Initializer();
 		phaseManager = new PhaseManager();			
 	}
 
@@ -42,23 +42,23 @@ public class Controller {
 	public void initGame() {
 		ArrayList<Behaviour> listOfAllBehaviour;
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = new LinkedHashMap<>();
-		ArrayList<Character> listOfAllCharacter = Initialiser.createListOfAllCharacter();
+		ArrayList<Character> listOfAllCharacter = Initializer.createListOfAllCharacter();
 
-		Board board = Initialiser.createBoard();
+		Board board = Initializer.createBoard();
 		referee = new Referee(board);
-		listOfAllBehaviour = Initialiser.createListOfBehaviour(board);
+		listOfAllBehaviour = Initializer.createListOfBehaviour(board);
 
-		Initialiser.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
-		Initialiser.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
+		Initializer.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
+		Initializer.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
 
 		roundManager = new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board);
 		
-		Initialiser.initDeckCharacter(roundManager.getBoard().getDeckCharacter(), listOfAllCharacter);
-		Initialiser.initDeckDistrict(roundManager.getBoard().getDeckDistrict());
+		Initializer.initDeckCharacter(roundManager.getBoard().getDeckCharacter(), listOfAllCharacter);
+		Initializer.initDeckDistrict(roundManager.getBoard().getDeckDistrict());
 
 		board.setListOfPlayer(roundManager.getListOfPlayers());
 
-		Initialiser.initPlayerCards(roundManager.getBoard());
+		Initializer.initPlayerCards(roundManager.getBoard());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Controller {
 	 */
 	public void runGame() {
 		ArrayList<Behaviour> leaderBoard;
-		leaderBoard = roundManager.runRounds(phaseManager, initialiser);
+		leaderBoard = roundManager.runRounds(phaseManager, initializer);
 		end(leaderBoard);
 	}
 

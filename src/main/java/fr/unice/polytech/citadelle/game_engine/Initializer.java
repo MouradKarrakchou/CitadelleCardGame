@@ -23,7 +23,7 @@ import fr.unice.polytech.citadelle.game_interactor.RushBot;
  * The Initialiser class initialize all objects needed during the game
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
-public class Initialiser {
+public class Initializer {
 	
 	//créer un enum
 	public static final int ASSASIN_INDEX = 0;
@@ -38,7 +38,7 @@ public class Initialiser {
 	public final static int NUMBER_OF_PLAYER = 4;
 
 	
-	public Initialiser() {}
+	public Initializer() {}
 
 	public static LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
 																					 ArrayList<Character> listOfAllCharacters) {
@@ -129,14 +129,14 @@ public class Initialiser {
 	public static void initDeckCharacter(DeckCharacter deckCharacter, ArrayList<Character> listOfCharacter) {
 			ArrayList<Character> listOfCharacterCards = deckCharacter.getDeckCharacter();
 			listOfCharacterCards.clear();
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ASSASIN_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.THIEF_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MAGICIAN_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.KING_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.BISHOP_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.MERCHANT_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.ARCHITECT_INDEX));
-			listOfCharacterCards.add(listOfCharacter.get(Initialiser.WARLORD_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.ASSASIN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.THIEF_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.MAGICIAN_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.KING_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.BISHOP_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.MERCHANT_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.ARCHITECT_INDEX));
+			listOfCharacterCards.add(listOfCharacter.get(Initializer.WARLORD_INDEX));
 	}
 
 	/**
