@@ -20,12 +20,10 @@ import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 import fr.unice.polytech.citadelle.game_interactor.RushBot;
 
 /**
- * The Initialiser class initialize all objects needed during the game
+ * The Initializer class initialize all objects needed during the game
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Initializer {
-	
-	//créer un enum
 	public static final int ASSASSIN_INDEX = 0;
 	public static final int THIEF_INDEX = 1;
 	public static final int MAGICIAN_INDEX = 2;
@@ -37,11 +35,13 @@ public class Initializer {
 
 	public final static int NUMBER_OF_PLAYER = 4;
 
-	
-	public Initializer() {}
-
-	public static LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
-																					 ArrayList<Character> listOfAllCharacters) {
+	/**
+	 * Reset a given hash of characters using a given list of characters.
+	 * @param hashOfCharacters The hash of characters to reset.
+	 * @param listOfAllCharacters The list containing all the characters.
+	 */
+	public static void resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
+											ArrayList<Character> listOfAllCharacters) {
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASSIN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), Optional.empty());
@@ -50,10 +50,13 @@ public class Initializer {
 		hashOfCharacters.put(listOfAllCharacters.get(MERCHANT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(ARCHITECT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(WARLORD_INDEX), Optional.empty());
-		
-		return hashOfCharacters;
+
 	}
-	
+
+	/**
+	 * Create a new list containing all characters.
+	 * @return A list containing all the characters.
+	 */
 	public static ArrayList<Character> createListOfAllCharacter() {
 		ArrayList<Character> listOfAllCharacters = new ArrayList<>();
 		Assassin theAssassin = new Assassin();
