@@ -40,8 +40,8 @@ public class Initialiser {
 	
 	public Initialiser() {}
 
-	public LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
-			ArrayList<Character> listOfAllCharacters) {
+	public static LinkedHashMap<Character, Optional<Behaviour>> resetHashOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters,
+																					 ArrayList<Character> listOfAllCharacters) {
 		hashOfCharacters.put(listOfAllCharacters.get(ASSASIN_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(THIEF_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(MAGICIAN_INDEX), Optional.empty());
@@ -54,7 +54,7 @@ public class Initialiser {
 		return hashOfCharacters;
 	}
 	
-	public ArrayList<Character> createListOfAllCharacter() {
+	public static ArrayList<Character> createListOfAllCharacter() {
 		ArrayList<Character> listOfAllCharacters = new ArrayList<>();
 		Assassin theAssassin = new Assassin();
 		Thief theThief = new Thief();
@@ -77,7 +77,7 @@ public class Initialiser {
 		return listOfAllCharacters;
 	}
 	
-	public ArrayList<Behaviour> createListOfBehaviour(Board board){
+	public static ArrayList<Behaviour> createListOfBehaviour(Board board){
 		ArrayList<Behaviour> listOfBehaviour = new ArrayList<Behaviour>();
 		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
@@ -91,7 +91,7 @@ public class Initialiser {
 
 	}
 	
-	public Board createBoard(ArrayList<Character> listOfCharacter){
+	public static Board createBoard(ArrayList<Character> listOfCharacter){
 		Board board = new Board(new ArrayList<Player>(), new DeckDistrict(), new DeckCharacter());
 		return board;
 	}
@@ -101,7 +101,7 @@ public class Initialiser {
 	}
 	
 	
-	public DeckDistrict initDeckDistrict(DeckDistrict deck) {
+	public static DeckDistrict initDeckDistrict(DeckDistrict deck) {
 		deck.initialise();
 		return deck;
 	}
@@ -124,7 +124,7 @@ public class Initialiser {
 	 * Method used to give to each player the 4 firsts cards at the beginning of the game.
 	 * @param board - The game board allows us to take player and district deck information.
 	 */
-	public void initPlayerCards(Board board) {
+	public static void initPlayerCards(Board board) {
 		ArrayList<Player> players = board.getListOfPlayer();
 		DeckDistrict boardDistrictDeck = board.getDeckDistrict();
 
