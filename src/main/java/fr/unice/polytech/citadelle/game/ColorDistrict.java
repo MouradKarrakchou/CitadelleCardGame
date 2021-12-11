@@ -34,4 +34,17 @@ public class ColorDistrict extends District {
                     .forEach(district -> district.setColor(finalMissingColor));
         }
     }
+
+    public void schoolOfMagicSpell(Player player) {
+        ArrayList<String> possibleRoles = new ArrayList<>();
+        possibleRoles.add("King");
+        possibleRoles.add("Bishop");
+        possibleRoles.add("Merchant");
+        possibleRoles.add("Warlord");
+
+        Character role = player.getCharacter();
+
+        for(String aRole : possibleRoles)
+            if(aRole.equals(role)) player.addOneGold();
+    }
 }

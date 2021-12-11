@@ -89,6 +89,8 @@ public class Player implements Comparable<Player> {
 		golds += 2;
 	}
 
+	public void addOneGold() { golds += 1; }
+
 	// setter
 	public void setRank(int rank) {
 		this.rank = rank;
