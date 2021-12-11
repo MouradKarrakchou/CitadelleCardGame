@@ -112,7 +112,7 @@ public class Initializer {
 	 * @param character The character to add to the hash of characters.
 	 * @param Behaviour The associated behaviour.
 	 */
-	public void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
+	public static void fillHashOfCharacter(HashMap<Character, Optional<Behaviour>> hashOfCharacters, Character character, Behaviour Behaviour) {
 		hashOfCharacters.put(character, Optional.of(Behaviour));
 	}
 

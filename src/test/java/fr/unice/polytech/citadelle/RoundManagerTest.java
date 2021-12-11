@@ -83,7 +83,7 @@ public class RoundManagerTest {
 	public void runRoundsOnceTest() {
 		PhaseManager phaseMan=Mockito.mock(PhaseManager.class);
 		when(phaseMan.analyseGame(Mockito.any())).thenReturn(PhaseManager.LAST_TURN_PHASE);
-		roundMan.runRounds(phaseMan,init);
+		roundMan.runRounds(phaseMan);
 		verify(phaseMan, times(1)).analyseGame(Mockito.any());
 	}
 	
@@ -119,8 +119,8 @@ public class RoundManagerTest {
 	
 	@Test
 	public void setupCharactersTest() {
-		roundMan.setupCharacters(init);
-		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any(), Mockito.any());
+		roundMan.setupCharacters();
+		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any());
 	}
 	
 	@Test
@@ -149,7 +149,7 @@ public class RoundManagerTest {
 		hashCharacter.put(thief, behaviour2);		
 		hashCharacter.put(architect, behaviour3);		
 		
-		roundMan.askEachCharacterToPlay(phaseMan, roundMan.getBoard().getDeckDistrict(), init);
+		roundMan.askEachCharacterToPlay(phaseMan, roundMan.getBoard().getDeckDistrict());
 		verify(roundMan, times(3)).actionOfBehaviour(Mockito.any(), Mockito.any());
 	
 	}

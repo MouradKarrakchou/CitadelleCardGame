@@ -66,7 +66,7 @@ public class Controller {
 	 */
 	public void runGame() {
 		ArrayList<Behaviour> leaderBoard;
-		leaderBoard = roundManager.runRounds(phaseManager, initializer);
+		leaderBoard = roundManager.runRounds(phaseManager);
 		end(leaderBoard);
 	}
 
