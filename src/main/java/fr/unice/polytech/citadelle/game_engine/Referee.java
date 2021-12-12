@@ -11,30 +11,41 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Referee {
-
 	public static final int BONUS_FIRST = 4;
 	public static final int BONUS_END = 2;
-	Board board;
-
-
+	private final Board board;
 
     public Referee(Board board){
-        this.board=board;
+        this.board = board;
     }
+
+    /**
+     * Called once for each player at the end of the game.
+     * Allow the Referee to calculate the score of a given player.
+     * @param player The player to calculate the score.
+     */
     public void updatePlayerWithCityScore(Player player) {
-        //Color joker in order to get 5 different district colors
-        if (isThereHauntedCityJokerInCity(player).size() != 0) activateHauntedCityJoker(player, isThereHauntedCityJokerInCity(player));
-        // City Score
+        //Color joker in order to get 5 different district colors.
+        if (isThereHauntedCityJokerInCity(player).size() != 0)
+            activateHauntedCityJoker(player, isThereHauntedCityJokerInCity(player));
+
+        // City Score processing.
         int scoreToAdd = cityDistrictScore(player);
-        // Add 3 bonus point if the player has 5 built city of different colors
+
+        // Add 3 bonus points if the player has 5 built cites of different colors.
         if (hasFiveDistrictColors(player)) scoreToAdd += 3;
 
-        // Update Player score
+        // Update Player score according to city district values.
         player.updateScore(scoreToAdd);
 
-        if (isThereBonusDistrictInCity(player).size() != 0) activateBonus(player, isThereBonusDistrictInCity(player));
+        if (isThereBonusDistrictInCity(player).size() != 0)
+            activateBonus(player, isThereBonusDistrictInCity(player));
     }
-    
+
+    /**
+     * Adding bonus based on city completion for each player.
+     * @param leaderBoard The game leaderboard.
+     */
 	public void addBonusForPlayers(ArrayList<Behaviour> leaderBoard) {
 		Player firstToEndCity = leaderBoard.get(0).getPlayer();
 		firstToEndCity.updateScore(BONUS_FIRST);
@@ -43,7 +54,6 @@ public class Referee {
 			firstWhoEndCity.updateScore(BONUS_END);
 		}
 	}
-
 
     /**
      * @param player The player to process.
@@ -84,18 +94,26 @@ public class Referee {
         return (hasBlue && hasRed && hasGreen && hasYellow && hasPurple);
     }
 
+    /**
+     * Called once at the end of the game.
+     * Updating each player score player and set each player rank properly.
+     */
     public void getWinner() {
     	ArrayList<Player> listOfPlayer = board.getListOfPlayer();
         listOfPlayer.forEach(this::updatePlayerWithCityScore);
         Collections.sort(listOfPlayer);
         Collections.reverse(listOfPlayer);
-        for (int i = 0; i < listOfPlayer.size(); i++) listOfPlayer.get(i).setRank(i + 1);
+        for (int i = 0; i < listOfPlayer.size(); i++)
+            listOfPlayer.get(i).setRank(i + 1);
     }
 
+    /**
+     * Return each bonus districts in the player city.
+     * @param player The player to process.
+     * @return The list of all bonus districts in the player city.
+     */
     private ArrayList<BonusDistrict> isThereBonusDistrictInCity(Player player) {
         ArrayList<District> builtDistrict = player.getCity().getBuiltDistrict();
-        builtDistrict.stream().filter(district -> district.getNameOfFamily().equals("Prestige"));
-
         ArrayList<BonusDistrict> bonusDistrictList = new ArrayList<>();
 
         for (District district : builtDistrict) {
@@ -108,6 +126,11 @@ public class Referee {
         return bonusDistrictList;
     }
 
+    /**
+     * Activate for a given player each bonus districtList found in the player city.
+     * @param player The player to process.
+     * @param bonusDistrictList The list of all bonus districts in the player city.
+     */
     private void activateBonus(Player player, ArrayList<BonusDistrict> bonusDistrictList) {
 
         for (BonusDistrict bonusDistrict : bonusDistrictList) {
@@ -115,6 +138,11 @@ public class Referee {
         }
     }
 
+    /**
+     * Return each haunted city joker districts in the player city.
+     * @param player The player to process.
+     * @return The list of all haunted city joker districts in the player city.
+     */
     public ArrayList<HauntedCity> isThereHauntedCityJokerInCity(Player player) {
         ArrayList<HauntedCity> hauntedCityJoker = new ArrayList<>();
 
@@ -122,7 +150,7 @@ public class Referee {
 
         ArrayList<District> purpleDistricts = builtDistrict.stream()
                 .filter(district -> district.getColor().equals("Purple"))
-                .collect(Collectors.toCollection(ArrayList::new));;
+                .collect(Collectors.toCollection(ArrayList::new));
 
         ArrayList<District> builtDistrictHC = builtDistrict.stream()
                 .filter(district -> district.getName().equals("Haunted City"))
@@ -136,17 +164,25 @@ public class Referee {
             }
         }
 
-        hauntedCityJoker.clear();
         return hauntedCityJoker;
     }
 
+    /**
+     * Activate for a given player each bonus haunted city joker found in the player city.
+     * @param player The player to process.
+     * @param hauntedCityJoker The list of all haunted city joker districts in the player city.
+     */
     public void activateHauntedCityJoker(Player player, ArrayList<HauntedCity> hauntedCityJoker) {
         hauntedCityJoker.get(0).hauntedCitySpell(player);
     }
 
+    /**
+     * Check if the city of a given player is completed.
+     * @param player The player to process.
+     * @return true/false The player has completed its city.
+     */
 	public boolean CityIsComplete(Player player) {
-		if(player.getCity().getSizeOfCity() >= 8) return true;
-		return false;
-	}
+        return player.getCity().getSizeOfCity() >= 8;
+    }
 
 }
