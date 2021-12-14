@@ -176,7 +176,7 @@ public class PrintCitadels {
 	}
 
 	public void killCharacter(Character characterToDie) {
-		String output = "[\uD83D\uDD2A] The Assassin chooses to kill " + characterToDie;
+		String output = "\t[\uD83D\uDD2A] The Assassin chooses to kill " + characterToDie;
 		System.out.println(colorize(output, RED_TEXT()));
 	}
 
