@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import fr.unice.polytech.citadelle.basic_actions.BasicActions;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -156,8 +155,7 @@ public class RoundManager {
 	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
 	 * @return The game leaderBoard (modified if a player complete its city).
 	 */
-	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager) {
-		ArrayList<BasicActions> basicActions = new ArrayList<>();
+	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict) {
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
@@ -167,12 +165,8 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				basicActions = actionOfBehaviour(currentBehaviour);
+				actionOfBehaviour(currentBehaviour);
 				cityVerification(currentBehaviour, leaderBoard);		
-			}
-			if(basicActions != null) {
-				printC.printBasicAction(basicActions);
-				basicActions.clear();
 			}
 		}
 		
@@ -186,12 +180,12 @@ public class RoundManager {
 	 * @param currentBehaviour The behaviour associated to the player.
 	 * @return The list of basic actions to process. Return an empty array if the player is kill.
 	 */
-	public ArrayList<BasicActions> actionOfBehaviour(Behaviour currentBehaviour) {
+	public void actionOfBehaviour(Behaviour currentBehaviour) {
+
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			printC.botIsDead(currentBehaviour.getPlayer());
-			return new ArrayList<>();
 		}
-		return currentBehaviour.play(currentPhase, hashOfCharacters);
+		currentBehaviour.play(currentPhase, hashOfCharacters);
 	}
 
 	/**
