@@ -9,6 +9,9 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+import static sun.util.locale.LocaleUtils.isEmpty;
+
+
 /**
  * The RoundManager manage the rounds inside a Game
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
@@ -104,14 +107,67 @@ public class RoundManager {
 		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-	// !!! NE PAS EFFACER CES COMMENTAIRES !!!
-	// assassin : s'il y a un joueur proche de la fin (préférable de tuer l'architecte)
-	// voleur : s'il y a un joueur avec beaucoup de golds
-	// roi : si 3 quartiers noble construits
-	// marchand : si 3 quartier commerce construits
+
 	public Character chooseCharacter(Behaviour bot, DeckCharacter deckCharacter) {
-		//Choice of King or Merchant (if they are both equality worth King is chosen)
-		int counter = 0;
+		int counter;
+
+		//Choice of Assassin
+		ArrayList<Character> listOfAssassin = deckCharacter.getDeckCharacter().stream()
+				.filter(character -> character.getName().equals("Assassin"))
+				.collect(Collectors.toCollection(ArrayList::new));
+		counter = 0;
+		for(Player player : board.getListOfPlayer()) {
+			if(player.getCity().getBuiltDistrict().size() >= 6 && !isEmpty(listOfAssassin)) {
+				for(Character character : listOfAllCharacters) {
+					if(character.getName().equals("Assassin")) return deckCharacter.getDeckCharacter().remove(counter);
+					counter++;
+				}
+			}
+		}
+
+		//Choice of Architect
+		ArrayList<Character> listOfArchitect = deckCharacter.getDeckCharacter().stream()
+				.filter(character -> character.getName().equals("Architect"))
+				.collect(Collectors.toCollection(ArrayList::new));
+		counter = 0;
+
+		if(bot.getPlayer().getDistrictCardsSize() <= 3 && !isEmpty(listOfArchitect)) {
+			for(Character character : listOfAllCharacters) {
+				if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
+				counter++;
+			}
+		}
+
+		//Choice of Magician
+		ArrayList<Character> listOfMagician = deckCharacter.getDeckCharacter().stream()
+				.filter(character -> character.getName().equals("Magician"))
+				.collect(Collectors.toCollection(ArrayList::new));
+		counter = 0;
+		for(Player player : board.getListOfPlayer()) {
+			if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && !isEmpty(listOfMagician)) {
+				for(Character character : listOfAllCharacters) {
+					if(character.getName().equals("Magician")) return deckCharacter.getDeckCharacter().remove(counter);
+					counter++;
+				}
+			}
+		}
+
+		//Choice of Thief !!!VERIFIE TOUS LES PLAYERS MEMES CELUI QUI VEUT CHOISIR SONT PERSO (PAS LOGIQUE : EX CELUI QUI A DES GOLDS)!!!
+		ArrayList<Character> listOfThief = deckCharacter.getDeckCharacter().stream()
+				.filter(character -> character.getName().equals("Thief"))
+				.collect(Collectors.toCollection(ArrayList::new));
+		counter = 0;
+		for(Player player : board.getListOfPlayer()) {
+			if(player.getGolds() >= 5 && !isEmpty(listOfThief)) {
+				for(Character character : listOfAllCharacters) {
+					if(character.getName().equals("Thief")) return deckCharacter.getDeckCharacter().remove(counter);
+					counter++;
+				}
+			}
+		}
+
+		//Choice of King or Merchant (if they are both equality worth, King is chosen)
+		counter = 0;
 		String nameOfCharacterChosen = listOfAllCharacters.get(isThereAFamily(bot)).getName();
 		for (Character character : deckCharacter.getDeckCharacter()) {
 			if (character.getName().equals(nameOfCharacterChosen))
@@ -119,18 +175,34 @@ public class RoundManager {
 			counter++;
 		}
 
-		//Choice of Thief
+		//Choice of Bishop
+		ArrayList<Character> listOfBishop = deckCharacter.getDeckCharacter().stream()
+				.filter(character -> character.getName().equals("Bishop"))
+				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
-		for(Player player : board.getListOfPlayer()) {
-			if(player.getGolds() >= 5) {
-				return deckCharacter.getDeckCharacter().remove(6);
+
+		if(bot.getPlayer().getCity().getBuiltDistrict().size() >= 6 && !isEmpty(listOfBishop)) {
+			for(Character character : listOfAllCharacters) {
+				if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
+				counter++;
 			}
 		}
 
-		//Choice of Assassin
+		//Choice of Warlord (Last one because his spell has not been implemented yet)
+		ArrayList<Character> listOfWarlord = deckCharacter.getDeckCharacter().stream()
+				.filter(character -> character.getName().equals("Warlord"))
+				.collect(Collectors.toCollection(ArrayList::new));
+		counter = 0;
+
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6) return deckCharacter.getDeckCharacter().remove(0);
+			if(player.getCity().getBuiltDistrict().size() >= 6 && !isEmpty(listOfWarlord)) {
+				for(Character character : listOfAllCharacters) {
+					if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
+					counter++;
+				}
+			}
 		}
+
 
 		return deckCharacter.getDeckCharacter().remove(0);
 	}
