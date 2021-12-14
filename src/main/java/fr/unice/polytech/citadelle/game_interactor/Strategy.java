@@ -29,7 +29,7 @@ public class Strategy {
     }
 
 
-    Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+    public Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
         while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || randomCharacter.isCharacterIsAlive() == false) {
@@ -39,7 +39,7 @@ public class Strategy {
     }
 
 
-    Character chooseCharacterForAssassinRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+    public Character chooseCharacterForAssassinRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
         while (randomCharacter.getName().equals("Assassin")) {
@@ -48,7 +48,7 @@ public class Strategy {
         return(randomCharacter);
     }
 
-    Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
+    public Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(numberOfCharacter));
         while (randomCharacter.getName()=="Magician")

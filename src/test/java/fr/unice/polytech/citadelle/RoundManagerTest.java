@@ -112,7 +112,7 @@ public class RoundManagerTest {
 		Character c = new Character("testCharacter", 0);
 		Behaviour bot = spy(new Behaviour(new Player("testPlayer"), board));
 		bot.getPlayer().setRole(c);
-		roundMan.actionOfBehaviour(bot, deckDistrict);
+		roundMan.actionOfBehaviour(bot);
 		verify(bot, times(1)).play(Mockito.any(), Mockito.any());
 	}
 	
@@ -149,8 +149,8 @@ public class RoundManagerTest {
 		hashCharacter.put(thief, behaviour2);		
 		hashCharacter.put(architect, behaviour3);		
 		
-		roundMan.askEachCharacterToPlay(phaseMan, roundMan.getBoard().getDeckDistrict());
-		verify(roundMan, times(3)).actionOfBehaviour(Mockito.any(), Mockito.any());
+		roundMan.askEachCharacterToPlay(phaseMan);
+		verify(roundMan, times(3)).actionOfBehaviour(Mockito.any());
 	
 	}
 	

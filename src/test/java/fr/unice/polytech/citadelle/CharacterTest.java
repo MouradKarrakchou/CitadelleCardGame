@@ -4,6 +4,7 @@ import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.Strategy;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -169,13 +170,25 @@ public class CharacterTest {
     void testMerchantEarnsMoney(){
 
         //The merchant win 4 gold with his district and 1 gold at the start of his turn
-        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
-        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
-        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
-        botMerchant.getPlayer().buildDistrict(new District("Test",1,"Yellow","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District(" ",1," ","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District(" ",1," ","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District(" ",1," ","Trade and Handicrafts"));
+        botMerchant.getPlayer().buildDistrict(new District(" ",1," ","Trade and Handicrafts"));
         botMerchant.getPlayer().setGolds(0);
         merchant.spellOfTurn(botMerchant,hashOfCharacters,printC);
         assertEquals(5,botMerchant.getPlayer().getGolds());
+    }
+    @Test
+    void testBishopEarnsMoney(){
+
+        //The bishop win 4 gold with his district and 1 gold at the start of his turn
+        botBishop.getPlayer().buildDistrict(new District(" ",1," ","Religion"));
+        botBishop.getPlayer().buildDistrict(new District(" ",1," ","Religion"));
+        botBishop.getPlayer().buildDistrict(new District(" ",1," ","Religion"));
+        botBishop.getPlayer().buildDistrict(new District(" ",1," ","Religion"));
+        botBishop.getPlayer().setGolds(1);
+        bishop.spellOfTurn(botBishop,hashOfCharacters,printC);
+        assertEquals(5,botBishop.getPlayer().getGolds());
     }
     @Test
     void testArchitectTakes2Cards(){
@@ -207,6 +220,27 @@ public class CharacterTest {
         assertEquals("MagicianDistrict0",botMagician.getPlayer().getDistrictCards().get(0).getName());
         assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
+    }
+    @Test
+    void chooseCharacterForThiefRandom(){
+        Strategy strategy=new Strategy(8,null, botThief.getPlayer());
+        Character characterChoosen=strategy.chooseCharacterForThiefRandom(hashOfCharacters);
+        assertNotEquals("Assassin",characterChoosen);
+        assertNotEquals("Thief",characterChoosen);
+        assertEquals(true,characterChoosen.isCharacterIsAlive());
+    }
+    @Test
+    void chooseCharacterForAssassinRandom() {
+        Strategy strategy = new Strategy(8, null, botAssassin.getPlayer());
+        Character characterChoosen = strategy.chooseCharacterForAssassinRandom(hashOfCharacters);
+        assertNotEquals("Assassin", characterChoosen);
+    }
+
+    @Test
+    void chooseCharacterForMagicianRandom(){
+        Strategy strategy=new Strategy(8,null, botMagician.getPlayer());
+        Character characterChoosen=strategy.chooseCharacterForMagicianRandom(hashOfCharacters);
+        assertNotEquals("Magician",characterChoosen);
     }
 
 }
