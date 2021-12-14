@@ -71,7 +71,6 @@ public class Behaviour {
 	}
 
 	public void play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		printC.dropALine();
 		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
 		this.getPlayer().getCity().getBuiltDistrict().stream()
 				.filter(district -> district.getName().equals("School of Magic"))
@@ -86,7 +85,6 @@ public class Behaviour {
 		else
 			 normalBehaviour();
 		buildArchitect();
-		
 	}
 
 	public void buildArchitect() {
