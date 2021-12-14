@@ -90,6 +90,7 @@ public class RoundManager {
 	// roi : si 3 quartiers noble construits
 	// marchand : si 3 quartier commerce construits
 	public Character chooseCharacter(Behaviour bot, DeckCharacter deckCharacter) {
+		//Choice of King or Merchant (if they are both equality worth King is chosen)
 		int counter = 0;
 		String nameOfCharacterChosen = listOfAllCharacters.get(isThereAFamily(bot)).getName();
 		for (Character character : deckCharacter.getDeckCharacter()) {
@@ -97,6 +98,20 @@ public class RoundManager {
 				return deckCharacter.getDeckCharacter().remove(counter);
 			counter++;
 		}
+
+		//Choice of Thief
+		counter = 0;
+		for(Player player : board.getListOfPlayer()) {
+			if(player.getGolds() >= 5) {
+				return deckCharacter.getDeckCharacter().remove(6);
+			}
+		}
+
+		//Choice of Assassin
+		for(Player player : board.getListOfPlayer()) {
+			if(player.getCity().getBuiltDistrict().size() >= 6) return deckCharacter.getDeckCharacter().remove(0);
+		}
+
 		return deckCharacter.getDeckCharacter().remove(0);
 	}
 
