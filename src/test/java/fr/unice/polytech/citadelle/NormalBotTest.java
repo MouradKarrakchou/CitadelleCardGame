@@ -32,7 +32,7 @@ public class NormalBotTest {
 		deckDistrict  = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");
-    	board = new Board(null,deckDistrict , null);
+    	board = new Board(null,new ArrayList<>(),deckDistrict , null);
 		investor = spy(new NormalBot(player, board));
 	}
 

@@ -42,7 +42,7 @@ public class ColorDistrict extends District {
         possibleRoles.add("Merchant");
         possibleRoles.add("Warlord");
 
-        Character role = player.getCharacter();
+        String role = player.getCharacter().getName();
 
         for(String aRole : possibleRoles)
             if(aRole.equals(role)) player.addOneGold();
