@@ -1,17 +1,16 @@
 package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
- * A Player represent a person in the citadelle, with his name, city and gold.
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * A Player represent a person in the citadel game, with his name, city and gold.
+ * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Player implements Comparable<Player> {
 	private final String name;
 	private Character character;
-	private ArrayList<District> districtCards;
-	private City city;
+	private final ArrayList<District> districtCards;
+	private final City city;
 	private int score;
 	private int rank;
 	public int golds;
@@ -41,8 +40,6 @@ public class Player implements Comparable<Player> {
 	public void updateScore(int number) {
 		score += number;
 	}
-	
-	
 
 	public boolean hasDistrict(District district) {
 		for (District districtCard : districtCards) {
@@ -127,10 +124,15 @@ public class Player implements Comparable<Player> {
 		return city;
 	}
 
+	/**
+	 * When called the player will give all its money to the other player
+	 * @param player The player who steal this player.
+	 * @return The amount of gold this player loose.
+	 */
     public int stealGoldOfThePlayer(Player player) {
-		int goldStolen=this.golds;
-		player.setGolds(player.getGolds()+this.golds);
-		this.golds=0;
+		int goldStolen = this.golds;
+		player.golds += goldStolen;
+		this.golds = 0;
 		return(goldStolen);
 	}
 }

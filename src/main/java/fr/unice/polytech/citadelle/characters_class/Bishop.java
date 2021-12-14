@@ -13,7 +13,6 @@ public class Bishop extends Character {
     }
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
-        int moneyEarned=super.collectGold(bot,"Religion");
         super.spellOfTurnDistrictFamily(bot,"Bishop","Religion",printC);
     }
 }
