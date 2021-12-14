@@ -85,7 +85,6 @@ public class RoundManager {
 		DeckCharacter deckCharacter = board.getDeckCharacter();
 		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacters);
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, deckCharacter));
-		printC.printFitLayer();
 		printC.dropALine();
 	}
 
@@ -167,8 +166,11 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
+				printC.dropALine();
+				printC.playerStartTurn(entry.getKey(), currentBehaviour.getPlayer());
 				actionOfBehaviour(currentBehaviour);
-				cityVerification(currentBehaviour, leaderBoard);		
+				cityVerification(currentBehaviour, leaderBoard);
+				printC.dropALine();
 			}
 		}
 		
@@ -182,7 +184,6 @@ public class RoundManager {
 	 * @param currentBehaviour The behaviour associated to the player.
 	 */
 	public void actionOfBehaviour(Behaviour currentBehaviour) {
-
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			printC.botIsDead(currentBehaviour.getPlayer());
 		}
