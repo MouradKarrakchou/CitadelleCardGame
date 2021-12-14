@@ -1,15 +1,16 @@
 package fr.unice.polytech.citadelle.game_engine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
-
-import static sun.util.locale.LocaleUtils.isEmpty;
 
 
 /**
@@ -117,8 +118,8 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6 && !isEmpty(listOfAssassin)) {
-				for(Character character : listOfAllCharacters) {
+			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfAssassin.size() != 0) {
+				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Assassin")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
 				}
@@ -131,8 +132,8 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 
-		if(bot.getPlayer().getDistrictCardsSize() <= 3 && !isEmpty(listOfArchitect)) {
-			for(Character character : listOfAllCharacters) {
+		if(bot.getPlayer().getDistrictCardsSize() <= 3 && listOfArchitect.size() != 0) {
+			for(Character character : deckCharacter.getDeckCharacter()) {
 				if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
 				counter++;
 			}
@@ -144,8 +145,8 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && !isEmpty(listOfMagician)) {
-				for(Character character : listOfAllCharacters) {
+			if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && listOfMagician.size() != 0) {
+				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Magician")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
 				}
@@ -158,8 +159,8 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getGolds() >= 5 && !isEmpty(listOfThief)) {
-				for(Character character : listOfAllCharacters) {
+			if(player.getGolds() >= 5 && listOfThief.size() != 0) {
+				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Thief")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
 				}
@@ -181,8 +182,8 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 
-		if(bot.getPlayer().getCity().getBuiltDistrict().size() >= 6 && !isEmpty(listOfBishop)) {
-			for(Character character : listOfAllCharacters) {
+		if(bot.getPlayer().getCity().getBuiltDistrict().size() >= 6 && listOfBishop.size() != 0) {
+			for(Character character : deckCharacter.getDeckCharacter()) {
 				if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
 				counter++;
 			}
@@ -195,8 +196,8 @@ public class RoundManager {
 		counter = 0;
 
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6 && !isEmpty(listOfWarlord)) {
-				for(Character character : listOfAllCharacters) {
+			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfWarlord.size() != 0) {
+				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
 				}
