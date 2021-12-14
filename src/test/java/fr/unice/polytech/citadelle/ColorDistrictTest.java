@@ -30,10 +30,6 @@ public class ColorDistrictTest {
     @Test
     //Haunted City built before the last round
     void isThereHauntedCityJokerInCityTest() {
-        //Board board = new Board();
-        //for(int i = 0; i < 10; i++) board.incrementRoundNumber();
-        //Problem: can't initialize the last round, stuck at round 0 -> must "build" Haunted City at round -1
-
         Player player = new Player("Player");
         player.buildDistrict(new Laboratory("Laboratory", 5,"Purple","Prestige"));
         player.buildDistrict(new District("Cathedral",5,"Blue","Religion"));
