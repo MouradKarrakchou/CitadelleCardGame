@@ -7,6 +7,7 @@ import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
+import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -74,6 +75,12 @@ public class Behaviour {
 		printC.dropALine();
 		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
+		this.getPlayer().getCity().getBuiltDistrict().stream()
+				.filter(district -> district.getName().equals("School of Magic"))
+				.forEach(district -> {
+					ColorDistrict schoolOfMagic = (SchoolOfMagic) district;
+					schoolOfMagic.schoolOfMagicSpell(this.getPlayer());
+				});
 		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
 			basicActions = endGameBehaviour();
 		else if (currentPhase == PhaseManager.LAST_TURN_PHASE)
