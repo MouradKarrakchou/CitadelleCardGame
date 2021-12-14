@@ -205,7 +205,8 @@ public class RoundManager {
 		}
 
 
-		return deckCharacter.getDeckCharacter().remove(0);
+		Random random = new Random();
+		return deckCharacter.getDeckCharacter().remove(random.nextInt(board.getDeckCharacter().getSize()));
 	}
 
 	/**
