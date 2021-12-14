@@ -184,6 +184,7 @@ public class RoundManager {
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			printC.botIsDead(currentBehaviour.getPlayer());
 		}
+		else
 		currentBehaviour.play(currentPhase, hashOfCharacters);
 	}
 
