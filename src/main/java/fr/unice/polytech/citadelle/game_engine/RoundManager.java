@@ -155,7 +155,7 @@ public class RoundManager {
 	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
 	 * @return The game leaderBoard (modified if a player complete its city).
 	 */
-	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict) {
+	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager) {
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
@@ -178,7 +178,6 @@ public class RoundManager {
 	/**
 	 * Return the character action according the player behaviour and if the player is not kill.
 	 * @param currentBehaviour The behaviour associated to the player.
-	 * @return The list of basic actions to process. Return an empty array if the player is kill.
 	 */
 	public void actionOfBehaviour(Behaviour currentBehaviour) {
 
