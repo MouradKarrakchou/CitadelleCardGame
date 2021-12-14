@@ -12,11 +12,9 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
  * The RoundManager manage the rounds inside a Game
- * 
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class RoundManager {
-
 	private ArrayList<Behaviour> listOfBehaviour;
 	private final ArrayList<Character> listOfAllCharacters;
 	private final LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
@@ -27,6 +25,13 @@ public class RoundManager {
 
 	private String currentPhase;
 
+	/**
+	 * Instantiate a RoundManager object.
+	 * @param listOfAllCharacter The list filled with all the characters.
+	 * @param listOfAllBehaviour The list filled with all the behaviours.
+	 * @param hashOfCharacter The hash list associating a character with his behaviour.
+	 * @param board The game board.
+	 */
 	public RoundManager(ArrayList<Character> listOfAllCharacter, ArrayList<Behaviour> listOfAllBehaviour,
 			LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter, Board board) {
 		this.hashOfCharacters = hashOfCharacter;
@@ -37,18 +42,23 @@ public class RoundManager {
 		this.referee = new Referee(board);
 	}
 
+	/**
+	 * Run a round while the game is not finished.
+	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
+	 * @return The game leaderBoard.
+	 */
 	public ArrayList<Behaviour> runRounds(PhaseManager phaseManager) {
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 
-		while ((currentPhase = phaseManager
-				.analyseGame(getTheListOfCity(getListOfPlayers()))) != PhaseManager.LAST_TURN_PHASE) {
+		while ((currentPhase = phaseManager.analyseGame(getTheListOfCity(getListOfPlayers())))
+				!= PhaseManager.LAST_TURN_PHASE) {
 
 			printC.printNumberRound(board.getRoundNumber());
 			if (board.getRoundNumber() > 0)
 				updateListOfBehaviour();
 
 			setupCharacters();
-			leaderBoard = askEachCharacterToPlay(phaseManager, board.getDeckDistrict());
+			leaderBoard = askEachCharacterToPlay(phaseManager);
 
 			printC.printBoard(board);
 			printC.printLayer();
@@ -57,6 +67,11 @@ public class RoundManager {
 		return leaderBoard;
 	}
 
+	/**
+	 * Get the city of each player.
+	 * @param listOfPlayer The list of all players.
+	 * @return The list of each player's city.
+	 */
 	public ArrayList<City> getTheListOfCity(ArrayList<Player> listOfPlayer) {
 		return listOfPlayer.stream()
 				.map(Player::getCity)
@@ -64,8 +79,7 @@ public class RoundManager {
 	}
 
 	/**
-	 * Initialise the deck of character then for each behaviour, choose a
-	 * characterCard
+	 * Initialise the deck of character then for each behaviour, choose a characterCard.
 	 */
 	public void setupCharacters() {
 		DeckCharacter deckCharacter = board.getDeckCharacter();
@@ -74,12 +88,19 @@ public class RoundManager {
 		printC.dropALine();
 	}
 
+	/**
+	 * Player will choose a character card according to its associated behaviour and the round of the game.
+	 * @param bot The given bot to take a character card.
+	 * @param deckCharacter The current deck of character to choose a character card from.
+	 */
 	public void chooseACharacterCard(Behaviour bot, DeckCharacter deckCharacter) {
 		Player playerOfBehaviour = bot.getPlayer();
+
 		if (board.getRoundNumber() == 0)
 			playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
 		else
 			playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
+
 		Initializer.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
 		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
@@ -100,6 +121,11 @@ public class RoundManager {
 		return deckCharacter.getDeckCharacter().remove(0);
 	}
 
+	/**
+	 * Check if the player of the given bot has a family in its city.
+	 * @param bot The given bot to check.
+	 * @return the integer index value of the family owned by the bot. Return a random family if bot don't own any family.
+	 */
 	public int isThereAFamily(Behaviour bot) {
 		Random random = new Random();
 		Player playerOfBehaviour = bot.getPlayer();
@@ -121,11 +147,16 @@ public class RoundManager {
 			else if (familyName.equals("Trade and Handicrafts") && districtFilter.size() >= 3)
 				return Initializer.MERCHANT_INDEX;
 		}
-
 		return random.nextInt(board.getDeckCharacter().getSize());
 	}
 
-	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict) {
+	/**
+	 * According to the Citadels rule, RoundManager will ask a character to play.
+	 * If a player own a called character, associated behaviour will play for the player.
+	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
+	 * @return The game leaderBoard (modified if a player complete its city).
+	 */
+	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager) {
 		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
@@ -136,7 +167,7 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				basicActions = actionOfBehaviour(currentBehaviour, deckDistrict);
+				basicActions = actionOfBehaviour(currentBehaviour);
 				cityVerification(currentBehaviour, leaderBoard);		
 			}
 			if(basicActions != null) {
@@ -150,15 +181,24 @@ public class RoundManager {
 		return leaderBoard;
 	}
 
-	public ArrayList<BasicActions> actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
-		
+	/**
+	 * Return the character action according the player behaviour and if the player is not kill.
+	 * @param currentBehaviour The behaviour associated to the player.
+	 * @return The list of basic actions to process. Return an empty array if the player is kill.
+	 */
+	public ArrayList<BasicActions> actionOfBehaviour(Behaviour currentBehaviour) {
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			printC.botIsDead(currentBehaviour.getPlayer());
-			return new ArrayList<BasicActions>();
+			return new ArrayList<>();
 		}
 		return currentBehaviour.play(currentPhase, hashOfCharacters);
 	}
 
+	/**
+	 * Check if a player's city is completed.
+	 * @param currentBehaviour The given player behaviour to process.
+	 * @param leaderBoard Updating the leaderboard if the player complete its city.
+	 */
 	public void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
 		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
 		if (aPlayerCompleteCity) {
@@ -170,11 +210,21 @@ public class RoundManager {
 		}
 	}
 
+	/**
+	 * If the city is completed updateLeaderboard will be called.
+	 * updateLeaderboard will add the player that trigger the event (by completing its city) to the leaderboard.
+	 * currentPhase will be also changed to the LAST_TURN_PHASE.
+	 * @param currentBehaviour The associated player behaviour who have completed its city.
+	 * @param leaderBoard The game leaderboard.
+	 */
 	public void updateLeaderboard(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
 		leaderBoard.add(currentBehaviour);
 		currentPhase = PhaseManager.LAST_TURN_PHASE;
 	}
 
+	/**
+	 * Updating the list of behaviour to let the player's behaviour having the king card to play the first.
+	 */
 	public void updateListOfBehaviour() {
 		int indexOfKing = findKing(listOfBehaviour);
 		if (indexOfKing != -1) {
@@ -184,6 +234,11 @@ public class RoundManager {
 		}
 	}
 
+	/**
+	 * Check which player has the king character.
+	 * @param listOfBehaviour The list of the behaviours.
+	 * @return The index on the player list of the player having the king character. -1 if no one has the king card.
+	 */
 	public int findKing(ArrayList<Behaviour> listOfBehaviour) {
 		for (int k = 0; k < listOfBehaviour.size(); k++) {
 			if (listOfBehaviour.get(k).getBehaviourIsKing()) {
@@ -193,25 +248,36 @@ public class RoundManager {
 		return (-1);
 	}
 
+	/**
+	 * Order properly the player's behaviour order according to their character card (eh. king should be playing the first)
+	 * @param listOfBehaviour The list of player's behaviour.
+	 * @param positionOfKingHolder The position of the king on the player's behaviour list.
+	 * @return The ordered player's behaviour list.
+	 */
 	public ArrayList<Behaviour> orderListOfPlayer(ArrayList<Behaviour> listOfBehaviour, int positionOfKingHolder) {
 		int positionToChange = positionOfKingHolder;
 		int sizeListOfPlayer = listOfBehaviour.size();
 		ArrayList<Behaviour> listOfBehaviourNextRound = new ArrayList<>();
+
 		for (int i = 0; i < sizeListOfPlayer; i++) {
 			if (positionToChange >= sizeListOfPlayer)
 				positionToChange = 0;
 			listOfBehaviourNextRound.add(listOfBehaviour.get(positionToChange));
 			positionToChange++;
 		}
+
 		return (listOfBehaviourNextRound);
 	}
 
+	/**
+	 * Revive all killed players.
+	 */
 	public void reviveAll() {
 		listOfBehaviour.forEach(bot -> bot.getPlayer().getCharacter().setCharacterIsAlive(true));
 	}
 
 	public ArrayList<Player> getListOfPlayers() {
-		return (ArrayList<Player>) listOfBehaviour.stream().map(Behaviour::getPlayer)
+		return listOfBehaviour.stream().map(Behaviour::getPlayer)
 				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
@@ -230,5 +296,4 @@ public class RoundManager {
 	public Board getBoard() {
 		return board;
 	}
-
 }
