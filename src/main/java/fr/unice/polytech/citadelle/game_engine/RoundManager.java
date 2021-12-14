@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import fr.unice.polytech.citadelle.basic_actions.BasicActions;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -126,7 +125,6 @@ public class RoundManager {
 	}
 
 	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager, DeckDistrict deckDistrict) {
-		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
@@ -136,12 +134,8 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				basicActions = actionOfBehaviour(currentBehaviour, deckDistrict);
+				actionOfBehaviour(currentBehaviour, deckDistrict);
 				cityVerification(currentBehaviour, leaderBoard);		
-			}
-			if(basicActions != null) {
-				printC.printBasicAction(basicActions);
-				basicActions.clear();
 			}
 		}
 		
@@ -150,13 +144,12 @@ public class RoundManager {
 		return leaderBoard;
 	}
 
-	public ArrayList<BasicActions> actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
+	public void actionOfBehaviour(Behaviour currentBehaviour, DeckDistrict deckDistrict) {
 		
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			printC.botIsDead(currentBehaviour.getPlayer());
-			return new ArrayList<BasicActions>();
 		}
-		return currentBehaviour.play(currentPhase, hashOfCharacters);
+		currentBehaviour.play(currentPhase, hashOfCharacters);
 	}
 
 	public void cityVerification(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {

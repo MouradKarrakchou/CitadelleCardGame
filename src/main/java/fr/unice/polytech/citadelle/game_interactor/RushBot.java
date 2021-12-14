@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import fr.unice.polytech.citadelle.basic_actions.BasicActions;
-import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -27,9 +25,8 @@ public class RushBot extends Behaviour {
 	}
 
 	@Override
-	public ArrayList<BasicActions> normalBehaviour() {
+	public void normalBehaviour() {
 		DeckDistrict deckDistrict = board.getDeckDistrict();
-		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
@@ -45,22 +42,18 @@ public class RushBot extends Behaviour {
 				takeCard(choosenDistrictCard);
 			}
 		} else {
-			TakeGoldAction takeGoldAction = takeGold();
-			basicActions.add(takeGoldAction);
+			takeGold();
 		}
 		ifPossibleBuildACheapDistrict();
-		return basicActions;
 	}
 
 	@Override
-	public ArrayList<BasicActions> endGameBehaviour() {
+	public void endGameBehaviour() {
 		printC.printPhase("Endgame", player);
-		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
 		if (futurBuildableDistrict.size() > 0) {// s'il peut poser un bat en prenant les deux gold
-			TakeGoldAction takeGoldAction = takeGold();
-			basicActions.add(takeGoldAction);
+			takeGold();
 		}
 		else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
@@ -76,13 +69,12 @@ public class RushBot extends Behaviour {
 		}
 
 		ifPossibleBuildADistrict();
-		return basicActions;
 	}
 
 	@Override
-	public ArrayList<BasicActions> lastTurnBehaviour() {
+	public void lastTurnBehaviour() {
 		printC.printPhase("LAST TURN", player);
-		return normalBehaviour();
+		normalBehaviour();
 	}
 
 	public void ifPossibleBuildACheapDistrict() {
