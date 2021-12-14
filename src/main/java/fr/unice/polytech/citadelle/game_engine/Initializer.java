@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle.game_engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Optional;
@@ -122,6 +123,8 @@ public class Initializer {
 	 */
 	public static void initDeckDistrict(DeckDistrict deck) {
 		deck.initialise();
+		for(int i = 0 ; i < 15; i++)
+			Collections.shuffle(deck.getDeckDistrict());
 	}
 
 	/**
@@ -156,4 +159,5 @@ public class Initializer {
 				player.addDistrict(selectedDistrict);
 			}
 	}
+	
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.diogonunes.jcolor.Attribute;
 
-import fr.unice.polytech.citadelle.basic_actions.BasicActions;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 
@@ -190,12 +189,6 @@ public class PrintCitadels {
 	public void printPutCardBackToTheDeck(Player player, District district) {
 		String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
 		System.out.println(player.getName() + " putBack the card " + coloredOutput2);
-	}
-
-	public void printBasicAction(ArrayList<BasicActions> basicActions) {
-		//basicActions.forEach(basicAction -> System.out.println(basicActions));
-		for(BasicActions action : basicActions)
-			System.out.println(action);
 	}
 
 	public void printMerchantEarnedStartRoundMoney() {

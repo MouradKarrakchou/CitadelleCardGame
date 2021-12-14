@@ -17,17 +17,15 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  */
 public class Controller {
 	private final PrintCitadels printC;
-	private final Initializer initializer;
 	private RoundManager roundManager;
 	private final PhaseManager phaseManager;
 	private Referee referee;
 
 	/**
-	 * Controller constructor, setting-up the printer class, the Initialiser class and the PhaseManager class
+	 * Controller constructor, setting-up the printer class, the Initializer class and the PhaseManager class
 	 */
 	public Controller() {
 		printC = new PrintCitadels();
-		initializer = new Initializer();
 		phaseManager = new PhaseManager();			
 	}
 

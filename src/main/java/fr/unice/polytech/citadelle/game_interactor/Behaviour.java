@@ -2,8 +2,7 @@ package fr.unice.polytech.citadelle.game_interactor;
 
 import java.util.*;
 
-import fr.unice.polytech.citadelle.basic_actions.BasicActions;
-import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
+
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
@@ -71,9 +70,8 @@ public class Behaviour {
 		return pickedDistricts.get(1);
 	}
 
-	public ArrayList<BasicActions> play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public void play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		printC.dropALine();
-		ArrayList<BasicActions> basicActions = new ArrayList<>();
 		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
 		this.getPlayer().getCity().getBuiltDistrict().stream()
 				.filter(district -> district.getName().equals("School of Magic"))
@@ -82,14 +80,13 @@ public class Behaviour {
 					schoolOfMagic.schoolOfMagicSpell(this.getPlayer());
 				});
 		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-			basicActions = endGameBehaviour();
+			endGameBehaviour();
 		else if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-			basicActions = lastTurnBehaviour();
+			lastTurnBehaviour();
 		else
-			basicActions = normalBehaviour();
+			 normalBehaviour();
 		buildArchitect();
 		
-		return basicActions;
 	}
 
 	public void buildArchitect() {
@@ -98,17 +95,11 @@ public class Behaviour {
 			ifPossibleBuildADistrict();}
 	}
 
-	public ArrayList<BasicActions> normalBehaviour() {
-		return null;
-	};
+	public void normalBehaviour() {};
 
-	public ArrayList<BasicActions> endGameBehaviour() {
-		return null;
-	};
+	public void endGameBehaviour() {};
 
-	public ArrayList<BasicActions> lastTurnBehaviour() {
-		return null;
-	};
+	public void lastTurnBehaviour() {};
 
 
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
@@ -185,8 +176,8 @@ public class Behaviour {
 	 * Add two gold to the player.
 	 * @return a takeGoldAction, that will be print with the printer
 	 */
-	public TakeGoldAction takeGold() {
-		return executor.takeGold();
+	public void takeGold() {
+		executor.takeGold();
 	}
 	
 	/**
