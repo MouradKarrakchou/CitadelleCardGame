@@ -1,9 +1,11 @@
 package fr.unice.polytech.citadelle;
 
+import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.ColorDistrict;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.Laboratory;
@@ -118,6 +120,46 @@ public class ColorDistrictTest {
         }
 
         assertEquals("Yellow", player.getCity().getBuiltDistrict().get(2).getColor());
+    }
+
+    @Test
+    //Test if the School of Magic spell does its job
+    void schoolOfMagicSpellTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
+        player.setGolds(0);
+
+        SchoolOfMagic schoolOfMagic = (SchoolOfMagic) player.getCity().getBuiltDistrict().get(0);
+
+        //Must add one gold
+        player.setRole(new King());
+        schoolOfMagic.schoolOfMagicSpell(player);
+        assertEquals(1,player.getGolds());
+
+        //Must add one gold
+        player.setRole(new Bishop());
+        schoolOfMagic.schoolOfMagicSpell(player);
+        assertEquals(2,player.getGolds());
+
+        //Do nothing
+        player.setRole(new Assassin());
+        schoolOfMagic.schoolOfMagicSpell(player);
+        assertEquals(2,player.getGolds());
+
+        //Must add one gold
+        player.setRole(new Merchant());
+        schoolOfMagic.schoolOfMagicSpell(player);
+        assertEquals(3,player.getGolds());
+
+        //Do nothing
+        player.setRole(new Thief());
+        schoolOfMagic.schoolOfMagicSpell(player);
+        assertEquals(3,player.getGolds());
+
+        //Must add one gold
+        player.setRole(new Warlord());
+        schoolOfMagic.schoolOfMagicSpell(player);
+        assertEquals(4,player.getGolds());
     }
 
 }
