@@ -1,31 +1,31 @@
 package fr.unice.polytech.citadelle;
 
 import fr.unice.polytech.citadelle.characters_class.*;
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.ColorDistrict;
-import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.*;
+
 import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
-import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.Laboratory;
 
+import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game_engine.Referee;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
 
-import fr.unice.polytech.citadelle.game_interactor.NormalBot;
-import org.junit.jupiter.api.BeforeEach;
+import static org.mockito.Mockito.*;
+import org.mockito.Mockito;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 public class ColorDistrictTest {
     Referee referee = new Referee(new Board());
-    ColorDistrict colorDistrict = spy(new ColorDistrict("Haunted City", 2,"Purple","Prestige"));
+
+
+    Board board;
 
     @Test
     //Haunted City built before the last round
@@ -156,6 +156,68 @@ public class ColorDistrictTest {
         player.setRole(new Warlord());
         schoolOfMagic.schoolOfMagicSpell(player);
         assertEquals(4,player.getGolds());
+    }
+
+    @Test
+    //Test on play() method from Behavior with King
+    void playKTest() {
+        Character character = new King();
+        Behaviour behavior = spy(new Behaviour(new Player("testPlayer"), board));
+
+        behavior.getPlayer().setRole(character);
+
+        behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
+        behavior.getPlayer().setGolds(0);
+
+        behavior.play(Mockito.any(), Mockito.any());
+        assertEquals(1, behavior.getPlayer().getGolds());
+    }
+
+    @Test
+    //Test on play() method from Behavior with Bishop
+    void playBTest() {
+        Character character = new Bishop();
+        Behaviour behavior = spy(new Behaviour(new Player("testPlayer"), board));
+
+        behavior.getPlayer().setRole(character);
+
+        behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
+        behavior.getPlayer().setGolds(0);
+
+        behavior.play(Mockito.any(), Mockito.any());
+        assertEquals(1, behavior.getPlayer().getGolds());
+    }
+
+    @Test
+    //Test on play() method from Behavior with Merchant
+    void playMTest() {
+        Character character = new Merchant();
+        Behaviour behavior = spy(new Behaviour(new Player("testPlayer"), board));
+
+        behavior.getPlayer().setRole(character);
+
+        behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
+        behavior.getPlayer().setGolds(0);
+
+        behavior.play(Mockito.any(), Mockito.any());
+        assertEquals(2, behavior.getPlayer().getGolds());
+        //2 golds because the merchant earn one gold at the beginning of his turn
+        //So one gold from the beginning of the turn plus one gold from the spell of the district
+    }
+
+    @Test
+    //Test on play() method from Behavior with Warlord
+    void playWTest() {
+        Character character = new Warlord();
+        Behaviour behavior = spy(new Behaviour(new Player("testPlayer"), board));
+
+        behavior.getPlayer().setRole(character);
+
+        behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
+        behavior.getPlayer().setGolds(0);
+
+        behavior.play(Mockito.any(), Mockito.any());
+        assertEquals(1, behavior.getPlayer().getGolds());
     }
 
 }
