@@ -104,7 +104,7 @@ public class Initializer {
 	 * @return The new empty Board object created.
 	 */
 	public static Board createBoard(){
-		return new Board(new ArrayList<>(), new DeckDistrict(), new DeckCharacter());
+		return new Board(new ArrayList<>(),createListOfAllCharacter(), new DeckDistrict(), new DeckCharacter());
 	}
 
 	/**
