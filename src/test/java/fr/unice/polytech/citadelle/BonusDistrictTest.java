@@ -3,6 +3,7 @@ package fr.unice.polytech.citadelle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import fr.unice.polytech.citadelle.game.*;
+import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game.purple_districts.University;
 import fr.unice.polytech.citadelle.game_engine.Referee;
@@ -10,6 +11,7 @@ import fr.unice.polytech.citadelle.game_interactor.Executor;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BonusDistrictTest {
@@ -19,7 +21,7 @@ public class BonusDistrictTest {
 
     Player player = new Player("Player");
     Executor executor = new Executor(player);
-    Board board = new Board(listOfPlayer, deckDistrict, deckCharacter);
+    Board board = new Board(listOfPlayer,new ArrayList<>(), deckDistrict, deckCharacter);
     Referee referee = new Referee(board);
 
     @Test

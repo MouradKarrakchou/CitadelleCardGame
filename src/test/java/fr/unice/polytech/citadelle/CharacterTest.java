@@ -44,7 +44,7 @@ public class CharacterTest {
         hashOfCharacters = new LinkedHashMap<>();
         printC=new PrintCitadels();
         deckDistrict=new DeckDistrict();
-        Board board = new Board(new ArrayList<Player>(),deckDistrict,new DeckCharacter());
+        Board board = new Board(new ArrayList<Player>(),new ArrayList<Character>(),deckDistrict,new DeckCharacter());
         board.getDeckDistrict().initialise();
 
         
@@ -89,6 +89,15 @@ public class CharacterTest {
         hashOfCharacters.put(architect, Optional.of(botArchitecte));
         hashOfCharacters.put(warlord, Optional.of(botWarlord));
 
+        //Adding the character in the Board
+        board.getListOfCharacter().add(assassin);
+        board.getListOfCharacter().add(thief);
+        board.getListOfCharacter().add(magician);
+        board.getListOfCharacter().add(king);
+        board.getListOfCharacter().add(bishop);
+        board.getListOfCharacter().add(merchant);
+        board.getListOfCharacter().add(architect);
+        board.getListOfCharacter().add(warlord);
 
         //creation of the bot List
         listOfBehaviour=new ArrayList<>();

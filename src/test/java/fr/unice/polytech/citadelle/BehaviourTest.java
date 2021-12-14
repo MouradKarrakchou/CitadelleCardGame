@@ -7,6 +7,7 @@ import static org.mockito.Mockito.spy;
 import java.util.ArrayList;
 
 import fr.unice.polytech.citadelle.characters_class.Architect;
+import fr.unice.polytech.citadelle.game.Character;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ public class BehaviourTest {
 	public void init() {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
-    	board = new Board(new ArrayList<Player>(), deckDistrict, new DeckCharacter());
+    	board = new Board(new ArrayList<Player>(),new ArrayList<Character>(), deckDistrict, new DeckCharacter());
 		playerTest = new Player("playerTest");
 		bea = new Behaviour(playerTest, board);
 		

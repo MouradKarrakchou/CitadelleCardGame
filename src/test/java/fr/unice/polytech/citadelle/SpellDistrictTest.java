@@ -26,7 +26,7 @@ public class SpellDistrictTest {
 
     Player player = new Player("Player");
     Executor executor = new Executor(player);
-    Board board = new Board(null,deckDistrict , null);
+    Board board = new Board(null,new ArrayList<>(),deckDistrict , null);
     NormalBot normalBot = spy(new NormalBot(player, board));
     RushBot rushBot = spy(new RushBot(player, board));
 

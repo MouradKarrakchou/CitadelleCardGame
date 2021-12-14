@@ -29,7 +29,7 @@ public class RushBotTest {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player1");
-		board = new Board(null,deckDistrict , null);
+		board = new Board(null,new ArrayList<>(),deckDistrict , null);
 		rusher = spy(new RushBot(player, board));
 	}
 

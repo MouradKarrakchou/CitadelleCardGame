@@ -1,14 +1,11 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
-import java.nio.file.DirectoryStream;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.basic_actions.BasicActions;
 import fr.unice.polytech.citadelle.basic_actions.TakeGoldAction;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
-import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
@@ -24,6 +21,7 @@ public class Behaviour {
 	protected final Player player;
 	protected final PrintCitadels printC = new PrintCitadels();
 	protected int numberOfCharacter = 8;
+	Strategy strategy;
 
 	// ---
 	CityManagement cityMan;
@@ -39,6 +37,7 @@ public class Behaviour {
 		cityMan = new CityManagement(player);
 		executor = new Executor(player);
 		this.board = board;
+		strategy=new Strategy(numberOfCharacter,board,player);
 	}
 
 	/**
@@ -117,42 +116,27 @@ public class Behaviour {
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
 		List<Character> list = hashOfCharacters.keySet().stream().toList();
 		if (this.player.getCharacter().getName().equals("Thief")) {
-			character=chooseCharacterForThief(hashOfCharacters);
+			character= chooseCharacterForThiefRandom(hashOfCharacters);
 		}
 		else if(this.player.getCharacter().getName().equals("Assassin")){
-			character=chooseCharacterForAssassin(hashOfCharacters);
+			character= chooseCharacterForAssassinRandom(hashOfCharacters);
 		}
 		else if(this.player.getCharacter().getName().equals("Magician")){
-			character=chooseCharacterForMagician(hashOfCharacters);
+			character= chooseCharacterForMagicianRandom(hashOfCharacters);
 		}
 		return (character);
 	}
 
-	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		List<Character> list = hashOfCharacters.keySet().stream().toList();
-		Character randomCharacter=list.get(randomInt(8));
-		while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || randomCharacter.isCharacterIsAlive() == false) {
-			randomCharacter=list.get(randomInt(numberOfCharacter));
-		}
-		return randomCharacter;
+	private Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		return(strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
-
-	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		List<Character> list = hashOfCharacters.keySet().stream().toList();
-		Character randomCharacter=list.get(randomInt(8));
-		while (randomCharacter.getName().equals("Assassin")) {
-			randomCharacter=list.get(randomInt(numberOfCharacter));
-		}
-		return(randomCharacter);
+	private Character chooseCharacterForAssassinRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		return(strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
 	}
 
-	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-		List<Character> list = hashOfCharacters.keySet().stream().toList();
-		Character randomCharacter=list.get(randomInt(numberOfCharacter));
-		while (randomCharacter.getName()=="Magician")
-			randomCharacter=list.get(randomInt(numberOfCharacter));
-		return randomCharacter;
+	private Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		return(strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
 
 
