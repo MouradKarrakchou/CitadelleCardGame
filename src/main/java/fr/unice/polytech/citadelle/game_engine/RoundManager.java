@@ -67,9 +67,11 @@ public class RoundManager {
 	 * characterCard
 	 */
 	public void setupCharacters() {
+		printC.printRolePhase();
 		DeckCharacter deckCharacter = board.getDeckCharacter();
 		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacters);
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, deckCharacter));
+		printC.printFitLayer();
 		printC.dropALine();
 	}
 

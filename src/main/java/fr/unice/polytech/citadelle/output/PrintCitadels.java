@@ -13,9 +13,34 @@ import static com.diogonunes.jcolor.Attribute.*;
 public class PrintCitadels {
 	public PrintCitadels() {
 	}
-
+	
+	public void startCitadelles() {
+		String normal = "  ____ _ _            _      _ _           \r\n"
+				+ " / ___(_) |_ __ _  __| | ___| | | ___  ___ \r\n"
+				+ "| |   | | __/ _` |/ _` |/ _ \\ | |/ _ \\/ __|\r\n"
+				+ "| |___| | || (_| | (_| |  __/ | |  __/\\__ \\\r\n"
+				+ " \\____|_|\\__\\__,_|\\__,_|\\___|_|_|\\___||___/";
+		String epic = " _______ __________________ _______  ______   _______  _        _        _______  _______ \\r\\n\"\r\n"
+				+ "				+ \"(  ____ \\\\\\\\__   __/\\\\__   __/(  ___  )(  __  \\\\ (  ____ \\\\( \\\\      ( \\\\      (  ____ \\\\(  ____ \\\\\\r\\n\"\r\n"
+				+ "				+ \"| (    \\\\/   ) (      ) (   | (   ) || (  \\\\  )| (    \\\\/| (      | (      | (    \\\\/| (    \\\\/\\r\\n\"\r\n"
+				+ "				+ \"| |         | |      | |   | (___) || |   ) || (__    | |      | |      | (__    | (_____ \\r\\n\"\r\n"
+				+ "				+ \"| |         | |      | |   |  ___  || |   | ||  __)   | |      | |      |  __)   (_____  )\\r\\n\"\r\n"
+				+ "				+ \"| |         | |      | |   | (   ) || |   ) || (      | |      | |      | (            ) |\\r\\n\"\r\n"
+				+ "				+ \"| (____/\\\\___) (___   | |   | )   ( || (__/  )| (____/\\\\| (____/\\\\| (____/\\\\| (____/\\\\/\\\\____) |\\r\\n\"\r\n"
+				+ "				+ \"(_______/\\\\_______/   )_(   |/     \\\\|(______/ (_______/(_______/(_______/(_______/\\\\_______)";
+		dropALine();
+		dropALine();
+		System.out.println(normal);
+		dropALine();
+	}
+	
+	public void printRolePhase() {
+		System.out.println("____________________________________________________________________");
+		System.out.println("Pick character cards:");   
+	}
+	
 	public void chooseRole(Player player, Character role) {
-		System.out.println("    - The robot " + player.getName() + " choose the character " + role.getName() + " "
+		System.out.println("\t- The robot " + player.getName() + " choose the character " + role.getName() + " "
 				+ role.getValue());
 	}
 
@@ -46,9 +71,13 @@ public class PrintCitadels {
 		System.out.println(colorize(output, YELLOW_BACK(), BLACK_TEXT()));
 	}
 
+	public void printFitLayer(){
+		System.out.println("____________________________________________________________________");
+	}
+	
 	public void printLayer() {
 		System.out.println(
-				"=============================================================================================================================");
+				"==================================================================================================================");
 	}
 
 	public void printKingSpell(Player player) {
@@ -65,7 +94,7 @@ public class PrintCitadels {
 	 */
 
 	public void printTakeGold(Player player) {
-		String coloredOutput = colorize("    [+] ", GREEN_TEXT());
+		String coloredOutput = colorize("[+] ", GREEN_TEXT());
 		System.out.println(coloredOutput + player.getName() + " takes two golds.");
 	}
 
@@ -75,7 +104,7 @@ public class PrintCitadels {
 	}
 
 	public void printBuildDistrict(Player player, District district) {
-		String coloredOutput = colorize("    [⛏] ", GREEN_TEXT());
+		String coloredOutput = colorize("[⛏] ", GREEN_TEXT());
 		System.out.print(coloredOutput + player.getName() + " builds ");
 		coloredOutput = colorize(district.toString(), getDistrictColor(district));
 		System.out.println(coloredOutput);
@@ -85,20 +114,35 @@ public class PrintCitadels {
 		System.out.println();
 		System.out.println("[?] City of all the Players:");
 		game.getListOfPlayer().forEach(player -> {
-			System.out.print("    City of " + player.getName() + ": ");
-			printDistrictWithColor(player);
+			System.out.print('\t');
+			printBoardOfPlayer(player);
 		});
 		System.out.println("");
 	}
 
 	public void printBoardOfPlayer(Player player) {
-		System.out.println("[?] City of " + player.getName() + ": " + player.getCity());
-		System.out.println();
+		System.out.print("[?] City of " + player.getName() + ": ");
+		printDistrictWithColor(player);
 	}
 
 	public void printNumberRound(int roundNumber) {
 		String output = colorize("Round number " + roundNumber + ".", BRIGHT_BLUE_TEXT());
-		System.out.println(output);
+		String topLayer;
+		String botLayer;
+
+		if(roundNumber >=10) {
+			topLayer = " ____________________\r\n"
+					+ "|                    |";
+			botLayer = "|____________________|";
+		}
+		else {
+			topLayer = " ___________________\r\n"
+					+ "|                   |";
+			botLayer = "|___________________|";
+		}
+		System.out.println(topLayer);
+		System.out.println("|  "+output+"  |");
+		System.out.println(botLayer);
 	}
 
 	public void botIsDead(Player player) {

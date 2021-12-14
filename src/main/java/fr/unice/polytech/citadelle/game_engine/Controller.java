@@ -66,6 +66,7 @@ public class Controller {
 	 */
 	public void runGame() {
 		ArrayList<Behaviour> leaderBoard;
+		printC.startCitadelles();
 		leaderBoard = roundManager.runRounds(phaseManager);
 		end(leaderBoard);
 	}
