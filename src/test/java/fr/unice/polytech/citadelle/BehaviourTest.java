@@ -21,6 +21,7 @@ import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 
 public class BehaviourTest {
 	Player playerTest;
@@ -185,6 +186,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getDistrictCards().size(), 1);
 		assertEquals(playerTest.getDistrictCards().get(0), choosenCard);
 	}
+	
 	@Test
 	public void architectBuilds3Districts(){
 		Behaviour botArchitect=new Behaviour(new Player("playerArchitect"),board);
@@ -202,22 +204,27 @@ public class BehaviourTest {
 		assertEquals(2,botArchitect.getPlayer().getCity().getSizeOfCity());
 	}
 	@Test
-	public void pickCardsInDeckTest() {
-		ArrayList<District> pickedCard = new ArrayList<District>();
-		District districtA = new District("districtA", 1, "districtColor", "districtFamily");
-		District districtB = new District("districtB", 1, "districtColor", "districtFamily");
-		pickedCard.add(districtA);
-		pickedCard.add(districtB);
-		
-		Behaviour spyBea = spy(new Behaviour(new Player("players"),board));
-		spyBea.getPlayer().addDistrict(districtA);
-		spyBea.getPlayer().addDistrict(districtB);
+    public void pickCardsInDeckTest() {
+		System.out.println("-------aaaaaaaaaaaaa------");
+		DeckDistrict theDeckDistrict = new DeckDistrict();
+		theDeckDistrict.initialise();
+        ArrayList<District> pickedCard = new ArrayList<District>();
+        District districtA = new District("distraaaaaaaictA", 1, "districtColor", "districtFamily");
+        District districtB = new District("distraaaaaaaictB", 1, "districtColor", "districtFamily");
+        pickedCard.add(districtA);
+        pickedCard.add(districtB);
+        
+        Board aBoard = new Board(new ArrayList<Player>(),new ArrayList<Character>(), theDeckDistrict, new DeckCharacter());
 
-		when(spyBea.pick2CardsIntoTheDeck()).thenReturn(pickedCard);
-		//doReturn(pickedCard).when(bea).getName());
+        NormalBot aaaaaaa = spy(new NormalBot(new Player("players"), aBoard));
+        aaaaaaa.getPlayer().addDistrict(districtA);
+        aaaaaaa.getPlayer().addDistrict(districtB);
+
+        when(aaaaaaa.pick2CardsIntoTheDeck()).thenReturn(pickedCard);
+        //doReturn(pickedCard).when(bea).getName());
 
 
-		spyBea.pickCardsInDeck();
-		verify(spyBea, times(1)).chooseBetweenTwoCards(Mockito.any(), Mockito.any()); 
-	}
+        aaaaaaa.pickCardsInDeck();
+        verify(aaaaaaa, times(1)).chooseBetweenTwoCards(Mockito.any(), Mockito.any()); 
+    }
 }

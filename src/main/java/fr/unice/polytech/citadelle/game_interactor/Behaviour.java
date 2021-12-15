@@ -155,7 +155,6 @@ public class Behaviour {
 		for (int i = 0; i < 2; i++) {
 			District currentDistrictCard = pickedDistrictCards.get(i);
 			if (cityMan.isAlreadyBuilt(currentDistrictCard.getName()) || player.hasDistrict(currentDistrictCard)) {
-				executor.putCardBackInDeck(board.getDeckDistrict(), currentDistrictCard);
 				removeDistrictCards.add(pickedDistrictCards.get(i));
 			}
 		}
@@ -205,11 +204,25 @@ public class Behaviour {
 		possibleCards = chooseToKeepOrNotPickedCards((ArrayList<District>) pickedCards.clone());
 
 		switch (possibleCards.size()) {
-			case ONE_CARD -> choosenDistrictCard = possibleCards.get(0);
-			case TWO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
-			case ZERO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
+		case ONE_CARD:
+			choosenDistrictCard = possibleCards.get(0);
+			removeOtherCard(pickedCards, possibleCards.get(0));
+			break;
+		case TWO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
+			break;
+		case ZERO_CARD:
+			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
+			break;
 		}
 		return choosenDistrictCard;
+	}
+
+	void removeOtherCard(ArrayList<District> pickedCards, District district) {
+		if(pickedCards.get(0) == district)
+			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(0));
+		else
+			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(1));
 	}
 
 	public District chooseBetweenTwoCards(District district, District district1) {
