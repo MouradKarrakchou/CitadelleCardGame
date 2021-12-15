@@ -102,14 +102,10 @@ public class Behaviour {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
 		List<Character> list = hashOfCharacters.keySet().stream().toList();
-		if (this.player.getCharacter().getName().equals("Thief")) {
-			character= chooseCharacterForThiefRandom(hashOfCharacters);
-		}
-		else if(this.player.getCharacter().getName().equals("Assassin")){
-			character= chooseCharacterForAssassinRandom(hashOfCharacters);
-		}
-		else if(this.player.getCharacter().getName().equals("Magician")){
-			character= chooseCharacterForMagicianRandom(hashOfCharacters);
+		switch (this.player.getCharacter().getName()) {
+			case "Thief" -> character = chooseCharacterForThiefRandom(hashOfCharacters);
+			case "Assassin" -> character = chooseCharacterForAssassinRandom(hashOfCharacters);
+			case "Magician" -> character = chooseCharacterForMagicianRandom(hashOfCharacters);
 		}
 		return (character);
 	}
@@ -196,24 +192,20 @@ public class Behaviour {
 	}
 
 	public District pickCardsInDeck() {
-		ArrayList<District> pickedCards = new ArrayList<>();
-		ArrayList<District> possibleCards = new ArrayList<>();
+		ArrayList<District> pickedCards;
+		ArrayList<District> possibleCards;
 		District choosenDistrictCard = null; // bof
 
 		pickedCards = pick2CardsIntoTheDeck();
 		possibleCards = chooseToKeepOrNotPickedCards((ArrayList<District>) pickedCards.clone());
 
 		switch (possibleCards.size()) {
-		case ONE_CARD:
-			choosenDistrictCard = possibleCards.get(0);
-			removeOtherCard(pickedCards, possibleCards.get(0));
-			break;
-		case TWO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
-			break;
-		case ZERO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
-			break;
+			case ONE_CARD -> {
+				choosenDistrictCard = possibleCards.get(0);
+				removeOtherCard(pickedCards, possibleCards.get(0));
+			}
+			case TWO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
+			case ZERO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
 		}
 		return choosenDistrictCard;
 	}
