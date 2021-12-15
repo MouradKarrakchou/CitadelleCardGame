@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game.*;
@@ -152,7 +151,7 @@ public class RoundManager {
 			}
 		}
 
-		//Choice of Thief !!!VERIFIE TOUS LES PLAYERS MEMES CELUI QUI VEUT CHOISIR SONT PERSO (PAS LOGIQUE : EX CELUI QUI A DES GOLDS)!!!
+		//Choice of Thief
 		ArrayList<Character> listOfThief = deckCharacter.getDeckCharacter().stream()
 				.filter(character -> character.getName().equals("Thief"))
 				.collect(Collectors.toCollection(ArrayList::new));
@@ -175,7 +174,8 @@ public class RoundManager {
 				if (character.getName().equals(nameOfCharacterChosen))
 					return deckCharacter.getDeckCharacter().remove(counter);
 				counter++;
-			}}
+			}
+		}
 
 		//Choice of Bishop
 		ArrayList<Character> listOfBishop = deckCharacter.getDeckCharacter().stream()
@@ -199,7 +199,7 @@ public class RoundManager {
 		for(Player player : board.getListOfPlayer()) {
 			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
-					if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
+					if(character.getName().equals("Warlord")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
 				}
 			}
@@ -211,10 +211,9 @@ public class RoundManager {
 	/**
 	 * Check if the player of the given bot has a family in its city.
 	 * @param bot The given bot to check.
-	 * @return the integer index value of the family owned by the bot. Return -1 if bot don't own any family.
+	 * @return the integer index value of the family owned by the bot. Return -1 if bot does not own any family.
 	 */
 	public int isThereAFamily(Behaviour bot) {
-		Random random = new Random();
 		Player playerOfBehaviour = bot.getPlayer();
 		ArrayList<District> districtsInACity;
 		ArrayList<String> nameOfFamilies = new ArrayList<>();

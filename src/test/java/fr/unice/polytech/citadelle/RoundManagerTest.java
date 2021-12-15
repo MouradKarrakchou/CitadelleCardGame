@@ -233,6 +233,8 @@ public class RoundManagerTest {
 		player1.addDistrict(new District("Manor", 3,"Yellow","Nobility"));
 		player1.addDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
 
+		player1.setGolds(6);
+
 		Character architect = new Character("Architect", Initializer.ARCHITECT_INDEX);
 
 		assertEquals(architect, roundMan.chooseCharacter(aBehaviour, deckCharacter));
@@ -331,8 +333,7 @@ public class RoundManagerTest {
 		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
-	@RepeatedTest(100)
-	@Test//!!!!!!!!!!!!! RANDOM CALLED...
+	@Test
 	public void chooseCharacterBishopTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
 		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
@@ -354,8 +355,7 @@ public class RoundManagerTest {
 		assertEquals(bishop, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
-
-	@Test//!!!!!!!!!!!!! RANDOM CALLED...
+	@Test
 	public void chooseCharacterWarlordTest() {
 		Player player1 = new Player("Player1");
 		Player player2 = new Player("Player2");
@@ -380,6 +380,19 @@ public class RoundManagerTest {
 		Character warlord = new Character("Warlord", Initializer.WARLORD_INDEX);
 
 		assertEquals(warlord, roundMan.chooseCharacter(aBehaviour, deckCharacter));
+	}
+
+	@Test
+	//Test the last return of the chooseCharacter method from RoundManager
+	//which return the first character (Assassin) by default
+	void chooseCharacterDefaultTest() {
+		Player player1 = new Player("Player1");
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Behaviour aBehaviour = new Behaviour(player1, board);
+		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
+
+		Character assassin = new Character("Assassin", Initializer.ASSASSIN_INDEX);
+		assertEquals(assassin, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
 
@@ -451,8 +464,7 @@ public class RoundManagerTest {
 		fred.buildDistrict(new District("Other district 02", 2, "notImportant", "otherFamily"));
 
 		assertEquals(6, fred.getCity().getSizeOfCity());
-		assertTrue(0 <= roundMan.isThereAFamily(fredBehaviour));
-		assertTrue(8 > roundMan.isThereAFamily(fredBehaviour));
+		assertTrue(roundMan.isThereAFamily(fredBehaviour) == -1);
 	}
 
 	@Test
