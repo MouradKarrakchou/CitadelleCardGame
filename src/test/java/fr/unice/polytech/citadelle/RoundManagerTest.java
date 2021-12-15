@@ -334,7 +334,7 @@ public class RoundManagerTest {
 		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
-	//@RepeatedTest(100)
+	@RepeatedTest(100)
 	@Test//!!!!!!!!!!!!! RANDOM CALLED...
 	public void chooseCharacterBishopTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
@@ -357,33 +357,33 @@ public class RoundManagerTest {
 		assertEquals(bishop, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
-//	@RepeatedTest(100)
-//	@Test//!!!!!!!!!!!!! RANDOM CALLED...
-//	public void chooseCharacterWarlordTest() {
-//		Player player1 = new Player("Player1");
-//		Player player2 = new Player("Player2");
-//		DeckCharacter deckCharacter = new DeckCharacter();
-//		Behaviour aBehaviour = new Behaviour(player1, board);
-//		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-//		ArrayList<Player> listOfPlayers = new ArrayList<>();
-//		listOfPlayers.add(player1);
-//		listOfPlayers.add(player2);
-//		board.setListOfPlayer(listOfPlayers);
-//
-//		player2.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-//		player2.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-//		player2.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
-//		player2.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-//		player2.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
-//		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
-//
-//		//Remove the Assassin because he does the same thing
-//		deckCharacter.getDeckCharacter().remove(0);
-//
-//		Character warlord = new Character("Warlord", Initializer.WARLORD_INDEX);
-//
-//		assertEquals(warlord, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-//	}
+
+	@Test//!!!!!!!!!!!!! RANDOM CALLED...
+	public void chooseCharacterWarlordTest() {
+		Player player1 = new Player("Player1");
+		Player player2 = new Player("Player2");
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Behaviour aBehaviour = new Behaviour(player1, board);
+		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		ArrayList<Player> listOfPlayers = new ArrayList<>();
+		listOfPlayers.add(player1);
+		listOfPlayers.add(player2);
+		board.setListOfPlayer(listOfPlayers);
+
+		player2.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+		player2.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
+		player2.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
+		player2.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
+		player2.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+
+		//Remove the Assassin because he does the same thing
+		deckCharacter.getDeckCharacter().remove(0);
+
+		Character warlord = new Character("Warlord", Initializer.WARLORD_INDEX);
+
+		assertEquals(warlord, roundMan.chooseCharacter(aBehaviour, deckCharacter));
+	}
 
 
 	@Test

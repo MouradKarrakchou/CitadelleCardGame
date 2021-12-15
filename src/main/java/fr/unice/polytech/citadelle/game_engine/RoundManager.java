@@ -119,7 +119,7 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfAssassin.size() != 0) {
+			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfAssassin.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Assassin")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
@@ -146,7 +146,7 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && listOfMagician.size() != 0) {
+			if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && listOfMagician.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Magician")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
@@ -160,7 +160,7 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getGolds() >= 5 && listOfThief.size() != 0) {
+			if(player.getGolds() >= 5 && listOfThief.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Thief")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
@@ -170,12 +170,14 @@ public class RoundManager {
 
 		//Choice of King or Merchant (if they are both equality worth, King is chosen)
 		counter = 0;
-		String nameOfCharacterChosen = listOfAllCharacters.get(isThereAFamily(bot)).getName();
-		for (Character character : deckCharacter.getDeckCharacter()) {
-			if (character.getName().equals(nameOfCharacterChosen))
-				return deckCharacter.getDeckCharacter().remove(counter);
-			counter++;
-		}
+		int index=isThereAFamily(bot);
+		if (index!=-1) {
+			String nameOfCharacterChosen = listOfAllCharacters.get(index).getName();
+			for (Character character : deckCharacter.getDeckCharacter()) {
+				if (character.getName().equals(nameOfCharacterChosen))
+					return deckCharacter.getDeckCharacter().remove(counter);
+				counter++;
+			}}
 
 		//Choice of Bishop
 		ArrayList<Character> listOfBishop = deckCharacter.getDeckCharacter().stream()
@@ -197,7 +199,7 @@ public class RoundManager {
 		counter = 0;
 
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfWarlord.size() != 0) {
+			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
@@ -211,7 +213,7 @@ public class RoundManager {
 	/**
 	 * Check if the player of the given bot has a family in its city.
 	 * @param bot The given bot to check.
-	 * @return the integer index value of the family owned by the bot. Return a random family if bot don't own any family.
+	 * @return the integer index value of the family owned by the bot. Return -1 if bot don't own any family.
 	 */
 	public int isThereAFamily(Behaviour bot) {
 		Random random = new Random();
@@ -234,7 +236,7 @@ public class RoundManager {
 			else if (familyName.equals("Trade and Handicrafts") && districtFilter.size() >= 3)
 				return Initializer.MERCHANT_INDEX;
 		}
-		return random.nextInt(board.getDeckCharacter().getSize());
+		return (-1);
 	}
 
 	/**
