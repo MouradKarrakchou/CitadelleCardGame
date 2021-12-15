@@ -133,7 +133,7 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 
-		if(bot.getPlayer().getDistrictCardsSize() >= 3 && listOfArchitect.size() != 0) {
+		if(bot.getPlayer().getDistrictCardsSize() >= 3 && bot.getPlayer().getGolds() >= 6 && listOfArchitect.size() != 0) {
 			for(Character character : deckCharacter.getDeckCharacter()) {
 				if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
 				counter++;

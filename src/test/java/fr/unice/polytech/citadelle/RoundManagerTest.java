@@ -334,25 +334,28 @@ public class RoundManagerTest {
 		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
-//	@RepeatedTest(100)
-//	@Test//!!!!!!!!!!!!! RANDOM CALLED...
-//	public void chooseCharacterBishopTest() {
-//		DeckCharacter deckCharacter = new DeckCharacter();
-//		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-//		Player player = new Player("Player");
-//		Behaviour aBehaviour = new Behaviour(player, board);
-//
-//		player.buildDistrict(new District("Trading Post", 2, "Green", "Trade and Handicrafts"));
-//		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-//		player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
-//		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-//		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-//		player.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-//
-//		Character bishop = new Character("Bishop", Initializer.BISHOP_INDEX);
-//
-//		assertEquals(bishop, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-//	}
+	//@RepeatedTest(100)
+	@Test//!!!!!!!!!!!!! RANDOM CALLED...
+	public void chooseCharacterBishopTest() {
+		DeckCharacter deckCharacter = new DeckCharacter();
+		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
+		Player player = new Player("Player");
+		Behaviour aBehaviour = new Behaviour(player, board);
+
+		board.getListOfPlayer().clear();
+		board.getListOfPlayer().add(player);
+
+		player.buildDistrict(new District("Trading Post", 2, "Green", "Trade and Handicrafts"));
+		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+		player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
+		player.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
+
+		Character bishop = new Character("Bishop", Initializer.BISHOP_INDEX);
+
+		assertEquals(bishop, roundMan.chooseCharacter(aBehaviour, deckCharacter));
+	}
 
 //	@RepeatedTest(100)
 //	@Test//!!!!!!!!!!!!! RANDOM CALLED...
