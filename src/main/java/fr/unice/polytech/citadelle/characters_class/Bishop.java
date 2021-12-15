@@ -7,10 +7,15 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+/**
+ * Bishop districts cannot be destroyed by Warlord.
+ * Each religious districts bring one gold to the Bishop.
+ */
 public class Bishop extends Character {
     public Bishop(){
         super("Bishop", 5);
     }
+
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
         super.spellOfTurnDistrictFamily(bot,"Bishop","Religion",printC);
