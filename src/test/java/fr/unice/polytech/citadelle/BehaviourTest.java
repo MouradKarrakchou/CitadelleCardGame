@@ -3,6 +3,9 @@ package fr.unice.polytech.citadelle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -10,6 +13,7 @@ import fr.unice.polytech.citadelle.characters_class.Architect;
 import fr.unice.polytech.citadelle.game.Character;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
@@ -196,5 +200,24 @@ public class BehaviourTest {
 
 		botArchitect.buildArchitect();
 		assertEquals(2,botArchitect.getPlayer().getCity().getSizeOfCity());
+	}
+	@Test
+	public void pickCardsInDeckTest() {
+		ArrayList<District> pickedCard = new ArrayList<District>();
+		District districtA = new District("districtA", 1, "districtColor", "districtFamily");
+		District districtB = new District("districtB", 1, "districtColor", "districtFamily");
+		pickedCard.add(districtA);
+		pickedCard.add(districtB);
+		
+		Behaviour spyBea = spy(new Behaviour(new Player("players"),board));
+		spyBea.getPlayer().addDistrict(districtA);
+		spyBea.getPlayer().addDistrict(districtB);
+
+		when(spyBea.pick2CardsIntoTheDeck()).thenReturn(pickedCard);
+		//doReturn(pickedCard).when(bea).getName());
+
+
+		spyBea.pickCardsInDeck();
+		verify(spyBea, times(1)).chooseBetweenTwoCards(Mockito.any(), Mockito.any()); 
 	}
 }

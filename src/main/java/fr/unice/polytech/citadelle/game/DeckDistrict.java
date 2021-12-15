@@ -11,12 +11,15 @@ import java.util.Random;
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class DeckDistrict {
-    private ArrayList<District> deckDistrict;
+    private final ArrayList<District> deckDistrict;
 
     public DeckDistrict() {
         deckDistrict = new ArrayList<>();
     }
 
+    /**
+     * Initialize the deck of districts of the game.
+     */
     public void initialise(){
         oneCard();
         doubleCards();
@@ -25,9 +28,10 @@ public class DeckDistrict {
         pentaCards();
     }
 
+    /**
+     * Instantiate the cards present once on the deck.
+     */
     private void oneCard() {
-        ArrayList<String> districtsNamesWithSameNumberOfCards = new ArrayList<>();
-
         deckDistrict.add(new HauntedCity("Haunted City", 2,"Purple","Prestige", 0));
 
         deckDistrict.add(new Laboratory("Laboratory", 5,"Purple","Prestige"));
@@ -39,9 +43,11 @@ public class DeckDistrict {
         deckDistrict.add(new University("University", 6,"Purple","Prestige"));
         deckDistrict.add(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
         deckDistrict.add(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
-
     }
 
+    /**
+     * Instantiate the cards present twice on the deck.
+     */
     private void doubleCards() {
         ArrayList<District> districtsWithSameValue = new ArrayList<>();
 
@@ -51,12 +57,14 @@ public class DeckDistrict {
         districtsWithSameValue.add(new District("Palace",5,"Yellow","Nobility"));
         districtsWithSameValue.add(new Keep("Keep",3,"Purple","Prestige"));
 
-        for (int i = 0; i < 2; i++){
-            districtsWithSameValue.stream().forEach(district -> deckDistrict.add(district));
-        }
+        for (int i = 0; i < 2; i++)
+            deckDistrict.addAll(districtsWithSameValue);
         districtsWithSameValue.clear();
     }
 
+    /**
+     * Instantiate the cards present three times on the deck.
+     */
     private void tripleCards() {
         ArrayList<District> districtsNamesWithSameNumberOfCards = new ArrayList<>();
 
@@ -69,12 +77,14 @@ public class DeckDistrict {
         districtsNamesWithSameNumberOfCards.add(new District("Docks",3,"Green","Trade and Handicrafts"));
         districtsNamesWithSameNumberOfCards.add(new District("Harbor",4,"Green","Trade and Handicrafts"));
 
-        for (int i = 0; i < 3; i++){
-            districtsNamesWithSameNumberOfCards.stream().forEach(district -> deckDistrict.add(district));
-        }
+        for (int i = 0; i < 3; i++)
+            deckDistrict.addAll(districtsNamesWithSameNumberOfCards);
         districtsNamesWithSameNumberOfCards.clear();
     }
 
+    /**
+     * Instantiate the cards present four times on the deck.
+     */
     private void quadraCards () {
         ArrayList<District> districtsNamesWithSameNumberOfCards = new ArrayList<>();
 
@@ -83,10 +93,13 @@ public class DeckDistrict {
         districtsNamesWithSameNumberOfCards.add(new District("Market",2,"Green","Trade and Handicrafts"));
 
         for (int i = 0; i < 4; i++){
-            districtsNamesWithSameNumberOfCards.stream().forEach(district -> deckDistrict.add(district));
+            deckDistrict.addAll(districtsNamesWithSameNumberOfCards);
         }
     }
 
+    /**
+     * Instantiate the cards present five times on the deck.
+     */
     private void pentaCards() {
         for (int i = 0; i < 5; i++){
             deckDistrict.add(new District("Tavern", 1,"Green","Trade and Handicrafts"));
@@ -98,8 +111,9 @@ public class DeckDistrict {
         return deckDistrict.size();
     }
 
-
-    public ArrayList<District> getDeckDistrict(){ return deckDistrict; }
+    public ArrayList<District> getDeckDistrict(){
+        return deckDistrict;
+    }
 
     public void addDistrict(District district){
         deckDistrict.add(district);
@@ -108,7 +122,6 @@ public class DeckDistrict {
 	public void removeDistrict(District district) {
         deckDistrict.remove(district);
 	}
-
 
     /**
      * Select a random district from the deck

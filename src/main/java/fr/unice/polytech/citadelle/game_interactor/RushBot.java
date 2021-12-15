@@ -36,11 +36,12 @@ public class RushBot extends Behaviour {
 				if (district.getName().equals("Library"))
 					spellDistrict.add((SpellDistrict) district);
 			}
-			if (spellDistrict.size() != 0) executeSpell(spellDistrict, deckDistrict);
-			else {
-				District choosenDistrictCard = pickCardsInDeck();
-				takeCard(choosenDistrictCard);
-			}
+			if (spellDistrict.size() != 0)
+				executeSpell(spellDistrict, deckDistrict);
+
+			District choosenDistrictCard = pickCardsInDeck();
+			takeCard(choosenDistrictCard);
+
 		} else {
 			takeGold();
 		}
@@ -54,14 +55,14 @@ public class RushBot extends Behaviour {
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
 		if (futurBuildableDistrict.size() > 0) {// s'il peut poser un bat en prenant les deux gold
 			takeGold();
-		}
-		else {
+		} else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
 				if (district.getName().equals("Library"))
 					spellDistrict.add((SpellDistrict) district);
 			}
-			if (spellDistrict.size() != 0) executeSpell(spellDistrict, deckDistrict);
+			if (spellDistrict.size() != 0)
+				executeSpell(spellDistrict, deckDistrict);
 			else {
 				District choosenDistrictCard = pickCardsInDeck();
 				takeCard(choosenDistrictCard);
@@ -109,7 +110,7 @@ public class RushBot extends Behaviour {
 		pickedCards.add(firstDistrict);
 		pickedCards.add(secondDistrict);
 		District chosenCard = selectTheLowerDistrict(pickedCards);
-		if(chosenCard.equals(firstDistrict))
+		if (chosenCard.equals(firstDistrict))
 			executor.putCardBackInDeck(deckDistrict, secondDistrict);
 		else
 			executor.putCardBackInDeck(deckDistrict, firstDistrict);
