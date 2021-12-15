@@ -8,7 +8,6 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
 import fr.unice.polytech.citadelle.game_engine.PhaseManager;
-import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
  * A Behaviour realize all the action of a player.
@@ -144,8 +143,7 @@ public class Behaviour {
 	}
 
 	public ArrayList<District> pick2CardsIntoTheDeck() {
-		ArrayList<District> pickedCards = executor.pickCards(board.getDeckDistrict());
-		return pickedCards;
+		return executor.pickCards(board.getDeckDistrict());
 	}
 
 	/*
@@ -171,7 +169,6 @@ public class Behaviour {
 
 	/**
 	 * Add two gold to the player.
-	 * @return a takeGoldAction, that will be print with the printer
 	 */
 	public void takeGold() {
 		executor.takeGold();
@@ -179,7 +176,6 @@ public class Behaviour {
 	
 	/**
 	 * Add a district to the hand of the player.
-	 * @return a addDistrictAction, that will be print with the printer
 	 */
 	public void addDistrict(District district){
 		executor.addDistrict(district);
@@ -187,7 +183,6 @@ public class Behaviour {
 
 	/**
 	 * Build a district.
-	 * @return a buildDistrictAction, that will be print with the printer
 	 */
 	public void buildDistrict(District district) {
 		executor.buildDistrict(district);
@@ -210,15 +205,9 @@ public class Behaviour {
 		possibleCards = chooseToKeepOrNotPickedCards((ArrayList<District>) pickedCards.clone());
 
 		switch (possibleCards.size()) {
-		case ONE_CARD:
-			choosenDistrictCard = possibleCards.get(0);
-			break;
-		case TWO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
-			break;
-		case ZERO_CARD:
-			choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
-			break;
+			case ONE_CARD -> choosenDistrictCard = possibleCards.get(0);
+			case TWO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
+			case ZERO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
 		}
 		return choosenDistrictCard;
 	}
@@ -257,8 +246,7 @@ public class Behaviour {
 	public ArrayList<Integer> chooseMagicianAction() {
 		//return an empty array if he wants to swap Cards with another Character
 		//return the position of the Cards that he wants to swap
-		ArrayList listOfInteger = new ArrayList();
-		return(listOfInteger);
+		return(new ArrayList());
 		//(for now he always chooses to steal from another Character)
 	}
 
