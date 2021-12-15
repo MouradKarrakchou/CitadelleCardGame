@@ -11,12 +11,14 @@ public class Thief extends Character {
     public Thief(){
         super("Thief", 2);
     }
+
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-        int goldStolen=0;
         Character characterToSteal= bot.selectCharacterForSpell(hashOfCharacters);
-        if (hashOfCharacters.get(characterToSteal).isPresent())
-        {goldStolen=hashOfCharacters.get(characterToSteal).get().getPlayer().stealGoldOfThePlayer(bot.getPlayer());
-            PrintCitadels.stealCharacter(characterToSteal,goldStolen);}
-        else PrintCitadels.failedToStealCharacter(characterToSteal);
+        if (hashOfCharacters.get(characterToSteal).isPresent()) {
+            int goldStolen = hashOfCharacters.get(characterToSteal).get().getPlayer().stealGoldOfThePlayer(bot.getPlayer());
+            PrintCitadels.stealCharacter(characterToSteal, goldStolen);
+        }
+        else
+            PrintCitadels.failedToStealCharacter(characterToSteal);
     }
 }

@@ -4,10 +4,8 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
@@ -32,7 +30,7 @@ public class Strategy {
     public Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
-        while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || randomCharacter.isCharacterIsAlive() == false) {
+        while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || !randomCharacter.isCharacterIsAlive()) {
             randomCharacter=list.get(randomInt(numberOfCharacter));
         }
         return randomCharacter;
@@ -51,7 +49,7 @@ public class Strategy {
     public Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(numberOfCharacter));
-        while (randomCharacter.getName()=="Magician")
+        while (randomCharacter.getName().equals("Magician"))
             randomCharacter=list.get(randomInt(numberOfCharacter));
         return randomCharacter;
     }
@@ -65,12 +63,11 @@ public class Strategy {
         int scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(0))-predictedScore);
         Player playerWithClosestScore=listOfPlayer.get(0);
 
-        for (int k=0;k<listOfPlayer.size();k++){
-            int scoreDifference=abs(playerPredictScore(listOfPlayer.get(k))-predictedScore);
-            if (scoreDiffenreceWithClosestScore>scoreDifference)
-            {
-                playerWithClosestScore=listOfPlayer.get(k);
-                scoreDiffenreceWithClosestScore=scoreDifference;
+        for (Player value : listOfPlayer) {
+            int scoreDifference = abs(playerPredictScore(value) - predictedScore);
+            if (scoreDiffenreceWithClosestScore > scoreDifference) {
+                playerWithClosestScore = value;
+                scoreDiffenreceWithClosestScore = scoreDifference;
             }
         }
         return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));

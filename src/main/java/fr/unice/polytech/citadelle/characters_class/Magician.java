@@ -13,13 +13,12 @@ public class Magician extends Character {
     public Magician(){
         super("Magician", 3);
     }
+
     public void swapCardsWithBot(Behaviour bot1,Behaviour bot2) {
         ArrayList<District> deckDistrict1=bot1.getPlayer().getDistrictCards();
         ArrayList<District> deckDistrict2=bot2.getPlayer().getDistrictCards();
-        ArrayList<District> deckDistrict1copy=new ArrayList<>();
-        ArrayList<District> deckDistrict2copy=new ArrayList<>();
-        deckDistrict1copy.addAll(deckDistrict1);
-        deckDistrict2copy.addAll(deckDistrict2);
+        ArrayList<District> deckDistrict1copy = new ArrayList<>(deckDistrict1);
+        ArrayList<District> deckDistrict2copy = new ArrayList<>(deckDistrict2);
         deckDistrict1.clear();
         deckDistrict2.clear();
         deckDistrict1.addAll(deckDistrict2copy);
@@ -27,10 +26,10 @@ public class Magician extends Character {
     }
     public ArrayList<District> swapCardsWithDeck(Behaviour bot, ArrayList<Integer> positionOfCardsToBeSwaped){
         ArrayList<District> districtDeleted=new ArrayList<>();
-        for(int k=0;k<positionOfCardsToBeSwaped.size();k++){
-            ArrayList<District> districtCards=bot.getPlayer().getDistrictCards();
-            districtDeleted.add(districtCards.get(positionOfCardsToBeSwaped.get(k)));
-            bot.getPlayer().getDistrictCards().remove(positionOfCardsToBeSwaped.get(k).intValue());
+        for (Integer integer : positionOfCardsToBeSwaped) {
+            ArrayList<District> districtCards = bot.getPlayer().getDistrictCards();
+            districtDeleted.add(districtCards.get(integer));
+            bot.getPlayer().getDistrictCards().remove(integer.intValue());
         }
         return districtDeleted;
     }

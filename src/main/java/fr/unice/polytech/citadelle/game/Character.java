@@ -29,10 +29,10 @@ public class Character {
     }
 
     public int collectGold(Behaviour bot, String familyOfTheDistrict){
-        int goldEarned=bot.getPlayer().getCity().getBuiltDistrict().stream()
+        int goldEarned = bot.getPlayer().getCity().getBuiltDistrict().stream()
                 .filter(district -> district.getNameOfFamily().equals(familyOfTheDistrict))
                 .map(district ->1)
-                .reduce(0, (total, count) -> total + count);
+                .reduce(0, Integer::sum);
         bot.getPlayer().setGolds(bot.getPlayer().getGolds()+goldEarned);
         return(goldEarned);
     }
@@ -40,7 +40,7 @@ public class Character {
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){}
 
     public  void setCharacterIsAlive(boolean characterIsAlive) {
-        this.characterIsAlive=characterIsAlive;
+        this.characterIsAlive = characterIsAlive;
     }
 
     public boolean isCharacterIsAlive() {
@@ -49,9 +49,10 @@ public class Character {
 
     @Override
     public boolean equals(Object obj) {
-        Character other = (Character) obj;
-        if(name.equals(other.getName())) return true;
-        return  false;
+        if (!(obj instanceof Character other))
+            return false;
+
+        return name.equals(other.getName());
     }
 
     @Override
@@ -61,7 +62,7 @@ public class Character {
 
 
     protected void spellOfTurnDistrictFamily(Behaviour bot,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
-        int moneyEarned=collectGold(bot,nameOfTheFamilyDistrict);
+        int moneyEarned = collectGold(bot,nameOfTheFamilyDistrict);
         if (moneyEarned>0)
             PrintCitadels.printCharacterEarnedMoney(moneyEarned,nameOfTheCharacter,nameOfTheFamilyDistrict);
         else

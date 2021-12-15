@@ -14,7 +14,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
  * The RoundManager manage the rounds inside a Game
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class RoundManager {
 	private ArrayList<Behaviour> listOfBehaviour;

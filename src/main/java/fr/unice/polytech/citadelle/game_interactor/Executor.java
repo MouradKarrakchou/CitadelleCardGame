@@ -1,7 +1,6 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
@@ -44,7 +43,7 @@ public class Executor {
 	}
 
 	public ArrayList<District> pickCards(DeckDistrict deckDistrict) {
-		ArrayList<District> pickedCards = new ArrayList<District>();
+		ArrayList<District> pickedCards = new ArrayList<>();
 				pickedCards.add(pickBlindDistrict(deckDistrict));
 				pickedCards.add(pickBlindDistrict(deckDistrict));
 				return pickedCards;

@@ -66,7 +66,4 @@ public class NormalBot extends Behaviour {
 		return chosenCard;
 
 	}
-
-
-
 }

@@ -1,7 +1,6 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
 import fr.unice.polytech.citadelle.characters_class.Assassin;
-import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
 

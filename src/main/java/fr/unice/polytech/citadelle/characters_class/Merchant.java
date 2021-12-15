@@ -5,7 +5,6 @@ import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Optional;
 
 public class Merchant extends Character {

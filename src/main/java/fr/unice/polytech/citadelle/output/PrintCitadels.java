@@ -70,7 +70,7 @@ public class PrintCitadels {
 	}
 
 	public static void dropALine() {
-		System.out.println("");
+		System.out.println();
 	}
 
 	public static void printFirstPlayerToComplete(Player firstPlayerToComplete) {
@@ -131,9 +131,7 @@ public class PrintCitadels {
 	public static void printBoard(Board game) {
 		printFitLayer();
 		System.out.println(colorize("[?] City of all the Players:", BOLD()));
-		game.getListOfPlayer().forEach(player -> {
-			printBoardOfPlayer(player);
-		});
+		game.getListOfPlayer().forEach(PrintCitadels::printBoardOfPlayer);
 		dropALine();
 	}
 
