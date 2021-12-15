@@ -18,7 +18,6 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 public class Behaviour {
 	// The player controlled by the Behaviour.
 	protected final Player player;
-	protected final PrintCitadels printC = new PrintCitadels();
 	protected int numberOfCharacter = 8;
 	Strategy strategy;
 
@@ -71,7 +70,7 @@ public class Behaviour {
 	}
 
 	public void play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters, printC);
+		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters);
 		this.getPlayer().getCity().getBuiltDistrict().stream()
 				.filter(district -> district.getName().equals("School of Magic"))
 				.forEach(district -> {

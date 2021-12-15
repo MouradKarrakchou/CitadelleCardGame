@@ -14,9 +14,9 @@ public class Merchant extends Character {
     }
     
     @Override
-    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         bot.getPlayer().setGolds(bot.getPlayer().getGolds()+1);
-        printC.printMerchantEarnedStartRoundMoney();
-        super.spellOfTurnDistrictFamily(bot,"Merchant","Trade and Handicrafts",printC);
+        PrintCitadels.printMerchantEarnedStartRoundMoney();
+        super.spellOfTurnDistrictFamily(bot,"Merchant","Trade and Handicrafts");
     }
 }

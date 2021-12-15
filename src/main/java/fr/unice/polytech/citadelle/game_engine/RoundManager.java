@@ -22,7 +22,6 @@ public class RoundManager {
 	private final LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
 	private final Board board;
 
-	private final PrintCitadels printC;
 	private final Referee referee;
 
 	private String currentPhase;
@@ -40,7 +39,6 @@ public class RoundManager {
 		this.listOfAllCharacters = listOfAllCharacter;
 		this.listOfBehaviour = listOfAllBehaviour;
 		this.board = board;
-		this.printC = new PrintCitadels();
 		this.referee = new Referee(board);
 	}
 
@@ -55,15 +53,15 @@ public class RoundManager {
 		while ((currentPhase = phaseManager.analyseGame(getTheListOfCity(getListOfPlayers())))
 				!= PhaseManager.LAST_TURN_PHASE) {
 
-			printC.printNumberRound(board.getRoundNumber());
+			PrintCitadels.printNumberRound(board.getRoundNumber());
 			if (board.getRoundNumber() > 0)
 				updateListOfBehaviour();
 
 			setupCharacters();
 			leaderBoard = askEachCharacterToPlay(phaseManager);
 
-			printC.printBoard(board);
-			printC.printLayer();
+			PrintCitadels.printBoard(board);
+			PrintCitadels.printLayer();
 			reviveAll();
 		}
 		return leaderBoard;
@@ -84,11 +82,11 @@ public class RoundManager {
 	 * Initialise the deck of character then for each behaviour, choose a characterCard.
 	 */
 	public void setupCharacters() {
-		printC.printRolePhase();
+		PrintCitadels.printRolePhase();
 		DeckCharacter deckCharacter = board.getDeckCharacter();
 		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacters);
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, deckCharacter));
-		printC.dropALine();
+		PrintCitadels.dropALine();
 	}
 
 	/**
@@ -105,7 +103,7 @@ public class RoundManager {
 			playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
 
 		Initializer.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
-		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
+		PrintCitadels.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
 
@@ -254,11 +252,11 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				printC.dropALine();
-				printC.playerStartTurn(entry.getKey(), currentBehaviour.getPlayer());
+				PrintCitadels.dropALine();
+				PrintCitadels.playerStartTurn(entry.getKey(), currentBehaviour.getPlayer());
 				actionOfBehaviour(currentBehaviour);
 				cityVerification(currentBehaviour, leaderBoard);
-				printC.dropALine();
+				PrintCitadels.dropALine();
 			}
 		}
 		
@@ -273,7 +271,7 @@ public class RoundManager {
 	 */
 	public void actionOfBehaviour(Behaviour currentBehaviour) {
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
-			printC.botIsDead(currentBehaviour.getPlayer());
+			PrintCitadels.botIsDead(currentBehaviour.getPlayer());
 		}
 		else
 		currentBehaviour.play(currentPhase, hashOfCharacters);
@@ -288,9 +286,9 @@ public class RoundManager {
 		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
 		if (aPlayerCompleteCity) {
 			if(leaderBoard.size() ==0)
-				printC.printFirstPlayerToComplete(currentBehaviour.getPlayer());
-			else 
-				printC.printPlayerToCompleteCity(currentBehaviour.getPlayer());
+				PrintCitadels.printFirstPlayerToComplete(currentBehaviour.getPlayer());
+			else
+				PrintCitadels.printPlayerToCompleteCity(currentBehaviour.getPlayer());
 			updateLeaderboard(currentBehaviour, leaderBoard);
 		}
 	}

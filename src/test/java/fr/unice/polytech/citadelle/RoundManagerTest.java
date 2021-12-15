@@ -36,14 +36,12 @@ import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
-import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class RoundManagerTest {
 	RoundManager roundMan;
 	DeckDistrict deckDistrict;
 	ArrayList<Player> listOfPlayerSpy;
 	Board game;
-	PrintCitadels printer;
 	Referee referee;
 	
 	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter;
@@ -58,7 +56,6 @@ public class RoundManagerTest {
 
 		init = new Initializer();
 		deckDistrict = new DeckDistrict();
-		printer = new PrintCitadels();
 
 		
 		deckDistrict.initialise();

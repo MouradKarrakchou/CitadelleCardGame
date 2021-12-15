@@ -16,7 +16,6 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  *
  */
 public class Controller {
-	private final PrintCitadels printC;
 	private RoundManager roundManager;
 	private final PhaseManager phaseManager;
 	private Referee referee;
@@ -25,7 +24,6 @@ public class Controller {
 	 * Controller constructor, setting-up the printer class, the Initializer class and the PhaseManager class
 	 */
 	public Controller() {
-		printC = new PrintCitadels();
 		phaseManager = new PhaseManager();			
 	}
 
@@ -64,7 +62,7 @@ public class Controller {
 	 */
 	public void runGame() {
 		ArrayList<Behaviour> leaderBoard;
-		printC.startCitadelles();
+		PrintCitadels.startCitadelles();
 		leaderBoard = roundManager.runRounds(phaseManager);
 		end(leaderBoard);
 	}
@@ -75,7 +73,7 @@ public class Controller {
 	public void end(ArrayList<Behaviour> leaderBoard) {
 		referee.addBonusForPlayers(leaderBoard);
 		referee.getWinner();
-		printC.printRanking(roundManager.getBoard().getListOfPlayer());
+		PrintCitadels.printRanking(roundManager.getBoard().getListOfPlayer());
 	}
 
 }
