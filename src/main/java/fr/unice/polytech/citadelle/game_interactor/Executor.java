@@ -10,7 +10,6 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class Executor {
 	Player player;
-	PrintCitadels printC = new PrintCitadels();
 
 	
 	public Executor(Player player){
@@ -19,24 +18,24 @@ public class Executor {
 
 
     public void takeCard(District district, DeckDistrict deckDistrict) {
-		printC.printAddCardToTheDeck(player,district);
+		PrintCitadels.printAddCardToTheDeck(player,district);
 		player.addDistrict(district);
 		//deckDistrict.removeDistrict(district);
 	}
 	
 	public void buildDistrict(District district){
 		player.buildDistrict(district);
-		printC.printBuildDistrict(player, district);
-		printC.printBoardOfPlayer(player);
+		PrintCitadels.printBuildDistrict(player, district);
+		PrintCitadels.printBoardOfPlayer(player);
 	}
 	
 	public void takeGold() {
 		player.addGold();
-		printC.printTakeGold(player);
+		PrintCitadels.printTakeGold(player);
 	}
 	
 	public void putCardBackInDeck(DeckDistrict deckDistrict, District districtCard) {
-		printC.printPutCardBackToTheDeck(player,districtCard);
+		PrintCitadels.printPutCardBackToTheDeck(player,districtCard);
 		deckDistrict.addDistrict(districtCard);
 	}
 
@@ -58,7 +57,7 @@ public class Executor {
 	 */
     public District pickBlindDistrict(DeckDistrict deckDistrict) {
 		District selectedDistrict = deckDistrict.blindPick();
-		printC.printTakeDistrictCard(player, selectedDistrict);
+		PrintCitadels.printTakeDistrictCard(player, selectedDistrict);
         return selectedDistrict;
     }
 
