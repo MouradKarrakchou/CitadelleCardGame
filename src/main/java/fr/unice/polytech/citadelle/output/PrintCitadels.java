@@ -11,10 +11,8 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
 
 public class PrintCitadels {
-	public PrintCitadels() {
-	}
 
-	public void startCitadelles() {
+	public static void startCitadelles() {
 		String normal = "  ____ _ _            _      _ _           \r\n"
 				+ " / ___(_) |_ __ _  __| | ___| | | ___  ___ \r\n"
 				+ "| |   | | __/ _` |/ _` |/ _ \\ | |/ _ \\/ __|\r\n"
@@ -38,60 +36,60 @@ public class PrintCitadels {
 		
 	}
 
-	public void printRolePhase() {
+	public static void printRolePhase() {
 		printFitLayer();
 		System.out.println(colorize("Pick character cards:", BOLD()));
 	}
 	
-	public String stringColoredGold(int value) {
+	public static String stringColoredGold(int value) {
 		String gold = " golds";
 		if(value < 2) gold= " gold";
 		return colorize(value+gold, BRIGHT_YELLOW_TEXT());
 	}
 	
-	public void playerStartTurn(Character character, Player player) {
+	public static void playerStartTurn(Character character, Player player) {
 		String output = "It is up to the "+ character +" to play ("+player.getName()+", "+stringColoredGold(player.getGolds())+"):";
 		System.out.println(colorize(output, BOLD()));
 	}
 
-	public void chooseRole(Player player, Character role) {
+	public static void chooseRole(Player player, Character role) {
 		System.out.println("\t- The robot " + player.getName() + " choose the character " + role.getName() + " "
 				+ role.getValue());
 	}
 
-	public void chooseDistrict(Player player, District district) {
+	public static void chooseDistrict(Player player, District district) {
 		System.out.println("The robot " + player.getName() + " choose the district " + district.getName() + " "
 				+ district.getValue());
 	}
 
-	public void printRanking(ArrayList<Player> listOfPlayer) {
+	public static void printRanking(ArrayList<Player> listOfPlayer) {
 		System.out.println(colorize("- Game Results -", BOLD()));
 		System.out.println(colorize("================", BOLD()));
 		listOfPlayer.forEach(player -> System.out.println("[" + player.getRank() + "] " + player.getName()
 				+ " with a score of " + player.getScore() + " (" +stringColoredGold(player.getGolds())+ ")"));
 	}
 
-	public void dropALine() {
+	public static void dropALine() {
 		System.out.println("");
 	}
 
-	public void printFirstPlayerToComplete(Player firstPlayerToComplete) {
+	public static void printFirstPlayerToComplete(Player firstPlayerToComplete) {
 		String output = "*** The player " + firstPlayerToComplete.getName()
 				+ " is the first player to complete his city ! ***";
 		System.out.println(colorize(output, YELLOW_BACK(), BLACK_TEXT()));
 	}
 
-	public void printPlayerToCompleteCity(Player player) {
+	public static void printPlayerToCompleteCity(Player player) {
 		String output = player.getName() + " has completed his city !";
 		System.out.println(colorize(output, YELLOW_BACK(), BLACK_TEXT()));
 	}
 
-	public void printFitLayer() {
+	public static void printFitLayer() {
 		dropALine();
 		System.out.println(colorize("____________________________________________________________________", BOLD()));
 	}
 
-	public void printLayer() {
+	public static void printLayer() {
 		String layer = 
 				"________________________________________________________________________________________________________________________________________";
 		System.out.println(colorize(layer, BOLD()));
@@ -100,7 +98,7 @@ public class PrintCitadels {
 		dropALine();
 	}
 
-	public void printKingSpell(Player player) {
+	public static void printKingSpell(Player player) {
 		String output = "[!] The robot " + player.getName() + " has the king, he will play first next round.";
 		System.out.println(colorize(output, YELLOW_TEXT()));
 	}
@@ -113,24 +111,24 @@ public class PrintCitadels {
 	 * ); }
 	 */
 
-	public void printTakeGold(Player player) {
+	public static void printTakeGold(Player player) {
 		String coloredOutput = colorize("[+] ", GREEN_TEXT());
 		System.out.println("\t"+coloredOutput + player.getName() + " takes "+stringColoredGold(2)+".");
 	}
 
-	public void printTakeDistrictCard(Player player, District district) {
+	public static void printTakeDistrictCard(Player player, District district) {
 		String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
 		System.out.println("\t"+player.getName() + " takes a district card: " + coloredOutput2);
 	}
 
-	public void printBuildDistrict(Player player, District district) {
+	public static void printBuildDistrict(Player player, District district) {
 		String coloredOutput = colorize("[⛏] ", GREEN_TEXT());
 		System.out.print("\t"+coloredOutput + player.getName() + " builds ");
 		coloredOutput = colorize(district.toString(), getDistrictColor(district));
 		System.out.println(coloredOutput);
 	}
 
-	public void printBoard(Board game) {
+	public static void printBoard(Board game) {
 		printFitLayer();
 		System.out.println(colorize("[?] City of all the Players:", BOLD()));
 		game.getListOfPlayer().forEach(player -> {
@@ -139,12 +137,12 @@ public class PrintCitadels {
 		dropALine();
 	}
 
-	public void printBoardOfPlayer(Player player) {
+	public static void printBoardOfPlayer(Player player) {
 		System.out.print("\t[?] City of " + player.getName() + ": ");
 		printDistrictWithColor(player);
 	}
 
-	public void printNumberRound(int roundNumber) {
+	public static void printNumberRound(int roundNumber) {
 		//String output = colorize("Round number " + roundNumber + ".", BRIGHT_BLUE_TEXT());
 		String output = "Round number " + roundNumber + ".";
 		String topLayer;
@@ -169,43 +167,43 @@ public class PrintCitadels {
 		dropALine();
 	}
 
-	public void botIsDead(Player player) {
+	public static void botIsDead(Player player) {
 		String output = "[\uD83D\uDC80] " + player.getName() + " was the " + player.getCharacter()
 				+ ". He has been killed he will not play this turn";
 		System.out.println("\t"+colorize(output, RED_TEXT()));
 	}
 
-	public void killCharacter(Character characterToDie) {
+	public static void killCharacter(Character characterToDie) {
 		String output = "\t[\uD83D\uDD2A] The Assassin chooses to kill " + characterToDie;
 		System.out.println(colorize(output, RED_TEXT()));
 	}
 
-	public void printPhase(String phase, Player player) {
+	public static void printPhase(String phase, Player player) {
 		String output = "*** " + player.getName() + " is in " + phase + " mode ***";
 		System.out.println(colorize(output, MAGENTA_BACK(), BLACK_TEXT()));
 	}
 
-	public void stealCharacter(Character characterToSteal, int golds) {
+	public static void stealCharacter(Character characterToSteal, int golds) {
 		String output = "\t[!] The Thief chooses to steal from " + characterToSteal + " (+" + stringColoredGold(golds) + " ).";
 		System.out.println(colorize(output, BLUE_TEXT()));
 	}
 
-	public void failedToStealCharacter(Character characterToSteal) {
+	public static void failedToStealCharacter(Character characterToSteal) {
 		String output = "\t[?] The Thief chooses to steal from " + characterToSteal
 				+ " but no one has chosen this character.";
 		System.out.println(colorize(output, BLUE_TEXT()));
 	}
 
 
-	public void printCharacterEarnedMoney(int collectGold,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
+	public static void printCharacterEarnedMoney(int collectGold,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
 		System.out.println(
 				"\tThe "+nameOfTheCharacter+" has " + collectGold + " "+nameOfTheFamilyDistrict+" district.(+" + stringColoredGold(collectGold) + " ).");
 	}
-	public void printCharacterEarnedNoMoney(String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
+	public static void printCharacterEarnedNoMoney(String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
 		System.out.println("\tThe "+ nameOfTheCharacter+" has no "+nameOfTheFamilyDistrict+" District.(+"+stringColoredGold(0)+")");
 	}
 
-	public Attribute getDistrictColor(District district) {
+	public static Attribute getDistrictColor(District district) {
 		return switch (district.getColor()) {
 		case "Blue" -> BLUE_TEXT();
 		case "Red" -> RED_TEXT();
@@ -216,7 +214,7 @@ public class PrintCitadels {
 		};
 	}
 
-	public void printDistrictWithColor(Player player) {
+	public static void printDistrictWithColor(Player player) {
 		City playerCity = player.getCity();
 		for (District district : playerCity.getBuiltDistrict()) {
 			System.out.print("| ");
@@ -226,39 +224,39 @@ public class PrintCitadels {
 		System.out.println();
 	}
 
-	public void printArchitectSpell() {
+	public static void printArchitectSpell() {
 		String output = "\t[!] The Architect can take 2 more Districts and build 3 Districts";
 		System.out.println(colorize(output, GREEN_TEXT()));
 	}
 
-	public void printMagicianSpellSwapHands(Character character) {
+	public static void printMagicianSpellSwapHands(Character character) {
 		String output = "\t[!] The Magician swaps hand with " + character;
 		System.out.println(colorize(output, CYAN_TEXT()));
 	}
 
-	public void printMagicianSpellSwapCards(ArrayList<District> districts) {
+	public static void printMagicianSpellSwapCards(ArrayList<District> districts) {
 		String output = "\t[!] The Magician swaps " + districts.size() + " with the deck: " + districts;
 		System.out.println(colorize(output, CYAN_TEXT()));
 	}
 
-	public void printMagicianSpellFailed(Character characterToSwapWith) {
+	public static void printMagicianSpellFailed(Character characterToSwapWith) {
 		String output = "\t[!] The Magician tried to swap with " + characterToSwapWith
 				+ " but no Player has this Character.";
 		System.out.println(colorize(output, CYAN_TEXT()));
 	}
 
-	public void printAddCardToTheDeck(Player player, District district) {
+	public static void printAddCardToTheDeck(Player player, District district) {
 		String coloredOutput = colorize("\t[+] ", GREEN_TEXT());
 		String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
 		System.out.println(coloredOutput + player.getName() + " add the card to his hand " + coloredOutput2);
 	}
 
-	public void printPutCardBackToTheDeck(Player player, District district) {
+	public static void printPutCardBackToTheDeck(Player player, District district) {
 		String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
 		System.out.println("\t"+player.getName() + " putBack the card " + coloredOutput2);
 	}
 
-	public void printMerchantEarnedStartRoundMoney() {
+	public static void printMerchantEarnedStartRoundMoney() {
 		System.out.println("\tThe Merchant wins "+stringColoredGold(1)+" at the beggining of his turn");
 	}
 }

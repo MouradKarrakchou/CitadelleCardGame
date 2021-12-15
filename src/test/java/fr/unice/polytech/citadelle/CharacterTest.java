@@ -36,14 +36,12 @@ public class CharacterTest {
     Merchant merchant;
     Warlord warlord;
 
-    PrintCitadels printC;
     ArrayList<Behaviour> listOfBehaviour;
     DeckDistrict deckDistrict;
 
     @BeforeEach
     public void init(){
         hashOfCharacters = new LinkedHashMap<>();
-        printC=new PrintCitadels();
         deckDistrict=new DeckDistrict();
         Board board = new Board(new ArrayList<Player>(),new ArrayList<Character>(),deckDistrict,new DeckCharacter());
         board.getDeckDistrict().initialise();
@@ -118,7 +116,7 @@ public class CharacterTest {
 
         //Creation of a mock for bot and the magician becomes the target
         when(botAssassin.selectCharacterForSpell(hashOfCharacters)).thenReturn(magician);
-        assassin.spellOfTurn(botAssassin,hashOfCharacters,printC);
+        assassin.spellOfTurn(botAssassin,hashOfCharacters);
 
         //We verify that the Magician is dead
         assertEquals(false,botMagician.getPlayer().getCharacter().isCharacterIsAlive());
@@ -132,7 +130,7 @@ public class CharacterTest {
         listOfBehaviour.add(botKing);
 
         //The king plays and the players after him plays
-        king.spellOfTurn(botKing,hashOfCharacters,printC);
+        king.spellOfTurn(botKing,hashOfCharacters);
         assertEquals(true,botKing.getBehaviourIsKing());
     }
     @Test
@@ -146,7 +144,7 @@ public class CharacterTest {
         botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
         botKing.getPlayer().buildDistrict(new District("Test",1,"Yellow","Nobility"));
         botKing.getPlayer().setGolds(0);
-        king.spellOfTurn(botKing,hashOfCharacters,printC);
+        king.spellOfTurn(botKing,hashOfCharacters);
         assertEquals(4,botKing.getPlayer().getGolds());
     }
     @Test
@@ -160,7 +158,7 @@ public class CharacterTest {
         botThief.getPlayer().setRole(thief);
         //Creation of a mock for bot and the magician becomes the target
         when(botThief.selectCharacterForSpell(hashOfCharacters)).thenReturn(magician);
-        thief.spellOfTurn(botThief,hashOfCharacters,printC);
+        thief.spellOfTurn(botThief,hashOfCharacters);
 
         //We verify that the Magician has been stolen
         assertEquals(0,botMagician.getPlayer().getGolds());
@@ -175,7 +173,7 @@ public class CharacterTest {
         botMerchant.getPlayer().buildDistrict(new District(" ",1," ","Trade and Handicrafts"));
         botMerchant.getPlayer().buildDistrict(new District(" ",1," ","Trade and Handicrafts"));
         botMerchant.getPlayer().setGolds(0);
-        merchant.spellOfTurn(botMerchant,hashOfCharacters,printC);
+        merchant.spellOfTurn(botMerchant,hashOfCharacters);
         assertEquals(5,botMerchant.getPlayer().getGolds());
     }
     @Test
@@ -187,13 +185,13 @@ public class CharacterTest {
         botBishop.getPlayer().buildDistrict(new District(" ",1," ","Religion"));
         botBishop.getPlayer().buildDistrict(new District(" ",1," ","Religion"));
         botBishop.getPlayer().setGolds(1);
-        bishop.spellOfTurn(botBishop,hashOfCharacters,printC);
+        bishop.spellOfTurn(botBishop,hashOfCharacters);
         assertEquals(5,botBishop.getPlayer().getGolds());
     }
     @Test
     void testArchitectTakes2Cards(){
         //We verify that the Value of behaviourIsArchitect becomes true
-        architect.spellOfTurn(botArchitecte,hashOfCharacters,printC);
+        architect.spellOfTurn(botArchitecte,hashOfCharacters);
         assertEquals(2, botArchitecte.getPlayer().getDistrictCards().size());
     }
     @Test
@@ -203,7 +201,7 @@ public class CharacterTest {
         botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict",0," "," "));
         when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
         when(botMagician.selectCharacterForSpell(hashOfCharacters)).thenReturn(merchant);
-        magician.spellOfTurn(botMagician,hashOfCharacters,printC);
+        magician.spellOfTurn(botMagician,hashOfCharacters);
         assertEquals("MagicianDistrict",botMerchant.getPlayer().getDistrictCards().get(0).getName());
         assertEquals("MerchantDistrict",botMagician.getPlayer().getDistrictCards().get(0).getName());
     }
@@ -216,7 +214,7 @@ public class CharacterTest {
         botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict2",0," "," "));
         when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
         when(botMagician.pickCard()).thenReturn(new District("MagicianDistrict3",0," "," "));
-        magician.spellOfTurn(botMagician,hashOfCharacters,printC);
+        magician.spellOfTurn(botMagician,hashOfCharacters);
         assertEquals("MagicianDistrict0",botMagician.getPlayer().getDistrictCards().get(0).getName());
         assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());

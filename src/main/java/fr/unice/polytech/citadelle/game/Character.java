@@ -37,7 +37,7 @@ public class Character {
         return(goldEarned);
     }
 
-    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){}
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){}
 
     public  void setCharacterIsAlive(boolean characterIsAlive) {
         this.characterIsAlive=characterIsAlive;
@@ -60,11 +60,11 @@ public class Character {
     }
 
 
-    protected void spellOfTurnDistrictFamily(Behaviour bot,String nameOfTheCharacter,String nameOfTheFamilyDistrict,PrintCitadels printC) {
+    protected void spellOfTurnDistrictFamily(Behaviour bot,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
         int moneyEarned=collectGold(bot,nameOfTheFamilyDistrict);
         if (moneyEarned>0)
-            printC.printCharacterEarnedMoney(moneyEarned,nameOfTheCharacter,nameOfTheFamilyDistrict);
+            PrintCitadels.printCharacterEarnedMoney(moneyEarned,nameOfTheCharacter,nameOfTheFamilyDistrict);
         else
-            printC.printCharacterEarnedNoMoney(nameOfTheCharacter,nameOfTheFamilyDistrict);
+            PrintCitadels.printCharacterEarnedNoMoney(nameOfTheCharacter,nameOfTheFamilyDistrict);
     }
 }

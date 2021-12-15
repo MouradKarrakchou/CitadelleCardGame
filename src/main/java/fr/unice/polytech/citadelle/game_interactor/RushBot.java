@@ -11,6 +11,7 @@ import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.SpellDistrict;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class RushBot extends Behaviour {
 
@@ -50,7 +51,7 @@ public class RushBot extends Behaviour {
 
 	@Override
 	public void endGameBehaviour() {
-		printC.printPhase("Endgame", player);
+		PrintCitadels.printPhase("Endgame", player);
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
 		if (futurBuildableDistrict.size() > 0) {// s'il peut poser un bat en prenant les deux gold
@@ -74,7 +75,7 @@ public class RushBot extends Behaviour {
 
 	@Override
 	public void lastTurnBehaviour() {
-		printC.printPhase("LAST TURN", player);
+		PrintCitadels.printPhase("LAST TURN", player);
 		normalBehaviour();
 	}
 

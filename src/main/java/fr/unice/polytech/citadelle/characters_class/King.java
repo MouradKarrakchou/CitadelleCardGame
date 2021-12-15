@@ -17,7 +17,7 @@ public class King extends Character {
     }
 
     @Override
-    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
-        printC.printKingSpell(bot.getPlayer());
-        super.spellOfTurnDistrictFamily(bot,"King","Nobility",printC);
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
+        PrintCitadels.printKingSpell(bot.getPlayer());
+        super.spellOfTurnDistrictFamily(bot,"King","Nobility");
     }}

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game.*;
@@ -23,7 +22,6 @@ public class RoundManager {
 	private final LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
 	private final Board board;
 
-	private final PrintCitadels printC;
 	private final Referee referee;
 
 	private String currentPhase;
@@ -41,7 +39,6 @@ public class RoundManager {
 		this.listOfAllCharacters = listOfAllCharacter;
 		this.listOfBehaviour = listOfAllBehaviour;
 		this.board = board;
-		this.printC = new PrintCitadels();
 		this.referee = new Referee(board);
 	}
 
@@ -56,15 +53,15 @@ public class RoundManager {
 		while ((currentPhase = phaseManager.analyseGame(getTheListOfCity(getListOfPlayers())))
 				!= PhaseManager.LAST_TURN_PHASE) {
 
-			printC.printNumberRound(board.getRoundNumber());
+			PrintCitadels.printNumberRound(board.getRoundNumber());
 			if (board.getRoundNumber() > 0)
 				updateListOfBehaviour();
 
 			setupCharacters();
 			leaderBoard = askEachCharacterToPlay(phaseManager);
 
-			printC.printBoard(board);
-			printC.printLayer();
+			PrintCitadels.printBoard(board);
+			PrintCitadels.printLayer();
 			reviveAll();
 		}
 		return leaderBoard;
@@ -85,11 +82,11 @@ public class RoundManager {
 	 * Initialise the deck of character then for each behaviour, choose a characterCard.
 	 */
 	public void setupCharacters() {
-		printC.printRolePhase();
+		PrintCitadels.printRolePhase();
 		DeckCharacter deckCharacter = board.getDeckCharacter();
 		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacters);
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, deckCharacter));
-		printC.dropALine();
+		PrintCitadels.dropALine();
 	}
 
 	/**
@@ -106,7 +103,7 @@ public class RoundManager {
 			playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
 
 		Initializer.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
-		printC.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
+		PrintCitadels.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
 
@@ -154,7 +151,7 @@ public class RoundManager {
 			}
 		}
 
-		//Choice of Thief !!!VERIFIE TOUS LES PLAYERS MEMES CELUI QUI VEUT CHOISIR SONT PERSO (PAS LOGIQUE : EX CELUI QUI A DES GOLDS)!!!
+		//Choice of Thief
 		ArrayList<Character> listOfThief = deckCharacter.getDeckCharacter().stream()
 				.filter(character -> character.getName().equals("Thief"))
 				.collect(Collectors.toCollection(ArrayList::new));
@@ -177,7 +174,8 @@ public class RoundManager {
 				if (character.getName().equals(nameOfCharacterChosen))
 					return deckCharacter.getDeckCharacter().remove(counter);
 				counter++;
-			}}
+			}
+		}
 
 		//Choice of Bishop
 		ArrayList<Character> listOfBishop = deckCharacter.getDeckCharacter().stream()
@@ -201,7 +199,7 @@ public class RoundManager {
 		for(Player player : board.getListOfPlayer()) {
 			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
-					if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
+					if(character.getName().equals("Warlord")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
 				}
 			}
@@ -213,10 +211,9 @@ public class RoundManager {
 	/**
 	 * Check if the player of the given bot has a family in its city.
 	 * @param bot The given bot to check.
-	 * @return the integer index value of the family owned by the bot. Return -1 if bot don't own any family.
+	 * @return the integer index value of the family owned by the bot. Return -1 if bot does not own any family.
 	 */
 	public int isThereAFamily(Behaviour bot) {
-		Random random = new Random();
 		Player playerOfBehaviour = bot.getPlayer();
 		ArrayList<District> districtsInACity;
 		ArrayList<String> nameOfFamilies = new ArrayList<>();
@@ -255,11 +252,11 @@ public class RoundManager {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
 			if (optionalBehaviour.isPresent()) {
 				Behaviour currentBehaviour = optionalBehaviour.get();
-				printC.dropALine();
-				printC.playerStartTurn(entry.getKey(), currentBehaviour.getPlayer());
+				PrintCitadels.dropALine();
+				PrintCitadels.playerStartTurn(entry.getKey(), currentBehaviour.getPlayer());
 				actionOfBehaviour(currentBehaviour);
 				cityVerification(currentBehaviour, leaderBoard);
-				printC.dropALine();
+				PrintCitadels.dropALine();
 			}
 		}
 		
@@ -274,7 +271,7 @@ public class RoundManager {
 	 */
 	public void actionOfBehaviour(Behaviour currentBehaviour) {
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
-			printC.botIsDead(currentBehaviour.getPlayer());
+			PrintCitadels.botIsDead(currentBehaviour.getPlayer());
 		}
 		else
 		currentBehaviour.play(currentPhase, hashOfCharacters);
@@ -289,9 +286,9 @@ public class RoundManager {
 		boolean aPlayerCompleteCity = referee.CityIsComplete(currentBehaviour.getPlayer());
 		if (aPlayerCompleteCity) {
 			if(leaderBoard.size() ==0)
-				printC.printFirstPlayerToComplete(currentBehaviour.getPlayer());
-			else 
-				printC.printPlayerToCompleteCity(currentBehaviour.getPlayer());
+				PrintCitadels.printFirstPlayerToComplete(currentBehaviour.getPlayer());
+			else
+				PrintCitadels.printPlayerToCompleteCity(currentBehaviour.getPlayer());
 			updateLeaderboard(currentBehaviour, leaderBoard);
 		}
 	}

@@ -35,7 +35,7 @@ public class Magician extends Character {
         return districtDeleted;
     }
     @Override
-    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters, PrintCitadels printC){
+    public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         ArrayList<Integer> magicianAction=bot.chooseMagicianAction();
         //If the magicianAction is empty then we have to exchange with another character
         if (magicianAction.size()==0){
@@ -43,12 +43,12 @@ public class Magician extends Character {
             Optional<Behaviour> botForSwap=hashOfCharacters.get(characterToSwapWith);
             if (botForSwap.isPresent()){
                 swapCardsWithBot(bot,botForSwap.get());
-                printC.printMagicianSpellSwapHands(characterToSwapWith);}
+                PrintCitadels.printMagicianSpellSwapHands(characterToSwapWith);}
             else
-                printC.printMagicianSpellFailed(characterToSwapWith);}
+                PrintCitadels.printMagicianSpellFailed(characterToSwapWith);}
         //If the magicianAction isn't empty it's an array of Integer wish are the position of the Cards to be Swapped
         else
-            printC.printMagicianSpellSwapCards(swapCardsWithDeck(bot,magicianAction));
+            PrintCitadels.printMagicianSpellSwapCards(swapCardsWithDeck(bot,magicianAction));
             for(int k=0;k<magicianAction.size();k++)
                 bot.takeCard(bot.pickCard());
     }
