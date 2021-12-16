@@ -34,13 +34,21 @@ public class Predict {
         if(cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains("Bishop"))
             return new Bishop();
 
-        //Is the King interesting for this player? It can be if he has 6 or more districts built in his city
+        //Is the King interesting for this player? It can be if he has 3 nobility districts built in his city
         int counter = 0;
         for(District district : cityOfPlayer) {
             if(district.getNameOfFamily().equals("Nobility")) counter++;
         }
-        if(counter == 3 && listOfTargetableCharacter.contains("Bishop"))
-            return new Bishop();
+            if(counter == 3 && listOfTargetableCharacter.contains("King"))
+            return new King();
+
+        //Is the Merchant interesting for this player? It can be if he has 3 or more Trade and Handicrafts districts built in his city
+        counter = 0;
+        for(District district : cityOfPlayer) {
+            if(district.getNameOfFamily().equals("Trade and Handicrafts")) counter++;
+        }
+        if(counter >= 3 && listOfTargetableCharacter.contains("Merchant"))
+            return new Merchant();
 
         //Is the Thief interesting for this player? It can be if he does not have a lot of golds
         if(goldsOfPlayer <= 3 && listOfTargetableCharacter.contains("Thief"))
