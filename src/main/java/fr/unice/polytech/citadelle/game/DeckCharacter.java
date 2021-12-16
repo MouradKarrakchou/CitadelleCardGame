@@ -10,12 +10,11 @@ import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAY
 
 /**
  * A DeckCharacter is composed of all the character cards in the game.
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class DeckCharacter {
     private final ArrayList<Character> deckOfCharacters;
     private final ArrayList<Character> burnedAndVisibleCharacters;
-    private Character hiddenCard;
     private final int nbPlayers;
 
     public DeckCharacter(){
@@ -40,18 +39,12 @@ public class DeckCharacter {
     }
 
     /**
+     * Should be called ONCE in round by each player.
      * @return A list of character cards a player can actually pick.
      */
 	public ArrayList<Character> getDeckCharacter() {
 		return deckOfCharacters;
 	}
-
-    /**
-     * @return The card hid at the beginning of a round. The last player to play should be able to take it.
-     */
-    public Character getHiddenCard(){
-        return hiddenCard;
-    }
 
     /**
      * @return A list of characters cards a player can see but can't pick (cards are burned).
@@ -111,21 +104,6 @@ public class DeckCharacter {
                 return deckOfCharacters.remove(index);
         }
         return null;
-    }
-
-    /**
-     * Hide the last card of the actual deck of character.
-     * The king character should not bo hid, so the next card will be hid.
-     */
-    public void hideTheLastCard(){
-        int sizeOfDeck = deckOfCharacters.size();
-
-        Character lastCard = deckOfCharacters.get(sizeOfDeck - 1);
-        if (lastCard.getName().equals("King"))
-            lastCard = deckOfCharacters.get(sizeOfDeck - 2);
-
-        deckOfCharacters.remove(lastCard);
-        hiddenCard = lastCard;
     }
 
     /**
