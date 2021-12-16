@@ -37,7 +37,9 @@ public class Predict {
         //Is the Magician interesting for this player? It can be if he does not have a lot of district cards
         if(handOfPlayer.size() <= 2) return new Magician();
 
-        
+        //Is the Assassin interesting for this player? It can be if someone is close to finish the game
+
+        //Is the Assassin interesting for this player? It can be if someone is close to finish the game
 
         return (new Assassin());
     }

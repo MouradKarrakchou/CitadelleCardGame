@@ -373,6 +373,7 @@ public class RoundManagerTest {
 		player2.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
 		player2.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
 		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+		player2.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
 
 		//Remove the Assassin because he does the same thing
 		deckCharacter.getDeckCharacter().remove(0);

@@ -122,7 +122,7 @@ public class RoundManager {
 				.collect(Collectors.toCollection(ArrayList::new));
 		counter = 0;
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfAssassin.size() != 0 && !player.equals(bot.getPlayer())) {
+			if(player.getCity().getBuiltDistrict().size() == 6 && listOfAssassin.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Assassin")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
@@ -203,7 +203,7 @@ public class RoundManager {
 		counter = 0;
 
 		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() >= 6 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
+			if(player.getCity().getBuiltDistrict().size() == 7 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
 				for(Character character : deckCharacter.getDeckCharacter()) {
 					if(character.getName().equals("Warlord")) return deckCharacter.getDeckCharacter().remove(counter);
 					counter++;
