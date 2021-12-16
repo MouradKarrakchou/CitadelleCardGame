@@ -6,7 +6,6 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Predict {
@@ -21,28 +20,16 @@ public class Predict {
         if(canBeArchitect(player, listOfUntargetableCharacter))
             return new Architect();
 
-        //Is the Bishop interesting for this player? It can be if he has 6 or more districts built in his city
         if(canBeBishop(player, listOfUntargetableCharacter))
             return new Bishop();
 
-        //Is the King interesting for this player? It can be if he has 3 nobility districts built in his city
-        int counter = 0;
-        for(District district : cityOfPlayer) {
-            if(district.getNameOfFamily().equals("Nobility")) counter++;
-        }
-            if(counter == 3 && listOfTargetableCharacter.contains("King"))
+        if(canBeKing(player, listOfUntargetableCharacter))
             return new King();
 
-        //Is the Merchant interesting for this player? It can be if he has 3 or more Trade and Handicrafts districts built in his city
-        counter = 0;
-        for(District district : cityOfPlayer) {
-            if(district.getNameOfFamily().equals("Trade and Handicrafts")) counter++;
-        }
-        if(counter >= 3 && listOfTargetableCharacter.contains("Merchant"))
+        if(canBeMerchant(player, listOfUntargetableCharacter))
             return new Merchant();
 
-        //Is the Thief interesting for this player? It can be if he does not have a lot of golds
-        if(goldsOfPlayer <= 3 && listOfTargetableCharacter.contains("Thief"))
+        if(canBeThief(player, listOfUntargetableCharacter))
             return new Thief();
 
         //Is the Magician interesting for this player? It can be if he does not have a lot of district cards
@@ -118,6 +105,48 @@ public class Predict {
         ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
 
         return (cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains("Bishop"));
+    }
+
+    //Is the King interesting for this player? It can be if he has 3 nobility districts built in his city
+    private boolean canBeKing(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
+
+        int counter = 0;
+        for (District district : cityOfPlayer) {
+            if (district.getNameOfFamily().equals("Nobility")) counter++;
+        }
+        
+        return (counter == 3 && listOfTargetableCharacter.contains("King"));
+    }
+
+    //Is the Merchant interesting for this player? It can be if he has 3 or more Trade and Handicrafts districts built in his city
+    private boolean canBeMerchant(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
+
+        int counter = 0;
+        for (District district : cityOfPlayer) {
+            if (district.getNameOfFamily().equals("Trade and Handicrafts")) counter++;
+        }
+
+        return (counter >= 3 && listOfTargetableCharacter.contains("Merchant"));
+    }
+
+    //Is the Thief interesting for this player? It can be if he does not have a lot of golds
+    private boolean canBeThief(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
+
+        return (goldsOfPlayer <= 3 && listOfTargetableCharacter.contains("Thief"));
+    }
+
+    //Is the Magician interesting for this player? It can be if he does not have a lot of district cards
+    private boolean canBeMagician(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
+
+        return (handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains("Magician"));
     }
 
 }
