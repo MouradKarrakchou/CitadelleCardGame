@@ -32,15 +32,11 @@ public class Predict {
         if(canBeThief(player, listOfUntargetableCharacter))
             return new Thief();
 
-        //Is the Magician interesting for this player? It can be if he does not have a lot of district cards
-        if(handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains("Magician"))
+        if(canBeMagician(player, listOfUntargetableCharacter))
             return new Magician();
 
-        //Is the Warlord interesting for this player? It can be if someone is close to finish the game (has 7 districts)
-        for(Player otherPlayer : listOfPlayers) {
-            if(otherPlayer.getCity().getBuiltDistrict().size() == 7 && listOfTargetableCharacter.contains("Warlord"))
-                return new Warlord();
-        }
+        if(canBeWarlord(player, listOfUntargetableCharacter))
+            return new Warlord();
 
         return new Assassin();
     }
@@ -59,7 +55,7 @@ public class Predict {
         return listOfTargetableCharacter;
     }
 
-    private ArrayList<String> targetableCharactersForPredictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter) {
+    private ArrayList<String> targetableCharactersForPredictWhoIsPlayer(ArrayList<String> listOfUntargetableCharacter) {
         ArrayList<String> listOfTargetableCharacter = allCharacters();
 
         for(String character : listOfUntargetableCharacter)
@@ -92,7 +88,7 @@ public class Predict {
 
     //Is the Architect interesting for this player? It can be if he does not have a lot of golds
     private boolean canBeArchitect(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
         ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
         int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
 
@@ -101,7 +97,7 @@ public class Predict {
 
     //Is the Bishop interesting for this player? It can be if he has 6 or more districts built in his city
     private boolean canBeBishop(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
         ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
 
         return (cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains("Bishop"));
@@ -109,20 +105,20 @@ public class Predict {
 
     //Is the King interesting for this player? It can be if he has 3 nobility districts built in his city
     private boolean canBeKing(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
         ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
 
         int counter = 0;
         for (District district : cityOfPlayer) {
             if (district.getNameOfFamily().equals("Nobility")) counter++;
         }
-        
+
         return (counter == 3 && listOfTargetableCharacter.contains("King"));
     }
 
     //Is the Merchant interesting for this player? It can be if he has 3 or more Trade and Handicrafts districts built in his city
     private boolean canBeMerchant(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
         ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
 
         int counter = 0;
@@ -135,7 +131,7 @@ public class Predict {
 
     //Is the Thief interesting for this player? It can be if he does not have a lot of golds
     private boolean canBeThief(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
         int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
 
         return (goldsOfPlayer <= 3 && listOfTargetableCharacter.contains("Thief"));
@@ -143,10 +139,22 @@ public class Predict {
 
     //Is the Magician interesting for this player? It can be if he does not have a lot of district cards
     private boolean canBeMagician(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
         ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
 
         return (handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains("Magician"));
+    }
+
+    //Is the Warlord interesting for this player? It can be if someone is close to finish the game (has 7 districts)
+    private boolean canBeWarlord(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter);
+        ArrayList<Player> listOfPlayers = playersForPredictWhoIsPlayer(player);
+
+        for(Player otherPlayer : listOfPlayers)
+            if (otherPlayer.getCity().getBuiltDistrict().size() == 7 && listOfTargetableCharacter.contains("Warlord"))
+                return true;
+
+        return false;
     }
 
 }
