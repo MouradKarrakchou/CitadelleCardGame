@@ -6,6 +6,7 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Predict {
@@ -16,12 +17,12 @@ public class Predict {
     //A changer : il faut une methode qui predit ce que le player a.
     Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
 
-        //Is the Architect interesting for this player? It can be if he does not have a lot of golds
-        if(handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains("Architect"))
+
+        if(canBeArchitect(player, listOfUntargetableCharacter))
             return new Architect();
 
         //Is the Bishop interesting for this player? It can be if he has 6 or more districts built in his city
-        if(cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains("Bishop"))
+        if(canBeBishop(player, listOfUntargetableCharacter))
             return new Bishop();
 
         //Is the King interesting for this player? It can be if he has 3 nobility districts built in his city
@@ -102,11 +103,21 @@ public class Predict {
         return listOfPlayers;
     }
 
+    //Is the Architect interesting for this player? It can be if he does not have a lot of golds
     private boolean canBeArchitect(Player player, ArrayList<String> listOfUntargetableCharacter) {
-        ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
         ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
         int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
 
         return (handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains("Architect"));
     }
+
+    //Is the Bishop interesting for this player? It can be if he has 6 or more districts built in his city
+    private boolean canBeBishop(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
+
+        return (cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains("Bishop"));
+    }
+
 }
