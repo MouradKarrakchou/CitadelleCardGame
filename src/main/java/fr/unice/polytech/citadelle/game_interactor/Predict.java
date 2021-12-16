@@ -1,9 +1,6 @@
 package fr.unice.polytech.citadelle.game_interactor;
 
-import fr.unice.polytech.citadelle.characters_class.Assassin;
-import fr.unice.polytech.citadelle.characters_class.Magician;
-import fr.unice.polytech.citadelle.characters_class.Thief;
-import fr.unice.polytech.citadelle.characters_class.Warlord;
+import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
@@ -19,7 +16,7 @@ public class Predict {
     //A changer : il faut une methode qui predit ce que le player a.
     Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
         ArrayList<Player> listOfPlayers = board.getListOfPlayer();
-                
+
         ArrayList<String> listOfTargetableCharacter = allCharacters();
         for(String character : listOfUntargetableCharacter) {
             if(listOfTargetableCharacter.contains(character)) listOfTargetableCharacter.remove(character);
@@ -27,6 +24,23 @@ public class Predict {
 
         int goldsOfPlayer = player.getGolds();
         ArrayList<District> handOfPlayer = player.getDistrictCards();
+        ArrayList<District> cityOfPlayer = player.getCity().getBuiltDistrict();
+
+        //Is the Architect interesting for this player? It can be if he does not have a lot of golds
+        if(handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains("Architect"))
+            return new Architect();
+
+        //Is the Bishop interesting for this player? It can be if he has 6 or more districts built in his city
+        if(cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains("Bishop"))
+            return new Bishop();
+
+        //Is the King interesting for this player? It can be if he has 6 or more districts built in his city
+        int counter = 0;
+        for(District district : cityOfPlayer) {
+            if(district.getNameOfFamily().equals("Nobility")) counter++;
+        }
+        if(counter == 3 && listOfTargetableCharacter.contains("Bishop"))
+            return new Bishop();
 
         //Is the Thief interesting for this player? It can be if he does not have a lot of golds
         if(goldsOfPlayer <= 3 && listOfTargetableCharacter.contains("Thief"))
