@@ -126,8 +126,6 @@ public class RefereeTest {
 		assertEquals(player1.getScore(), Referee.BONUS_FIRST);
 		assertEquals(player2.getScore(), Referee.BONUS_END);
 		assertEquals(player2.getScore(), Referee.BONUS_END);
-
 	}
-	
 
 }

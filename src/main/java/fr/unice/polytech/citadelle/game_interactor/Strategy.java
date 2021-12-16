@@ -4,6 +4,7 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.*;
 
@@ -54,23 +55,36 @@ public class Strategy {
         return randomCharacter;
     }
 
-    Character chooseCharacterForAssassinAdvanced(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-        int predictedScore=playerPredictScore(player);
-        ArrayList<Player> listOfPlayer=board.getListOfPlayer();
+    public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
-        //We want to find the player with the PredictedScore the closest to the score of our Player
-        int scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(0))-predictedScore);
-        Player playerWithClosestScore=listOfPlayer.get(0);
 
-        for (Player value : listOfPlayer) {
-            int scoreDifference = abs(playerPredictScore(value) - predictedScore);
-            if (scoreDiffenreceWithClosestScore > scoreDifference) {
-                playerWithClosestScore = value;
-                scoreDiffenreceWithClosestScore = scoreDifference;
+        Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
+        return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
+    }
+    public Player findThePlayerWithClosestScoreAssassin(){
+        int predictedScore=playerPredictScore(player);
+        ArrayList<Player> listOfPlayer=board.getListOfPlayer();
+        int k=0;
+        //We want to find the player with the PredictedScore the closest to the score of our Player
+        int scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(k))-predictedScore);
+        Player playerWithClosestScore=listOfPlayer.get(k);
+        while (playerWithClosestScore.equals(this.player)){
+            scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(k))-predictedScore);
+            playerWithClosestScore=listOfPlayer.get(k);
+            k++;
+        }
+
+        for (Player playerComparing : listOfPlayer) {
+            if (!playerComparing.equals(this.player)){
+                int scoreDifference = abs(playerPredictScore(playerComparing) - predictedScore);
+                if (scoreDiffenreceWithClosestScore > scoreDifference) {
+                    playerWithClosestScore = playerComparing;
+                    scoreDiffenreceWithClosestScore = scoreDifference;}
             }
         }
-        return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
+        PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
+        return playerWithClosestScore;
     }
 
     /**

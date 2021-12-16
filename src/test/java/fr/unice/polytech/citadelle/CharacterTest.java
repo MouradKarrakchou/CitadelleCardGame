@@ -219,26 +219,6 @@ public class CharacterTest {
         assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
     }
-    @Test
-    void chooseCharacterForThiefRandom(){
-        Strategy strategy=new Strategy(8,null, botThief.getPlayer());
-        Character characterChoosen=strategy.chooseCharacterForThiefRandom(hashOfCharacters);
-        assertNotEquals("Assassin",characterChoosen);
-        assertNotEquals("Thief",characterChoosen);
-        assertEquals(true,characterChoosen.isCharacterIsAlive());
-    }
-    @Test
-    void chooseCharacterForAssassinRandom() {
-        Strategy strategy = new Strategy(8, null, botAssassin.getPlayer());
-        Character characterChoosen = strategy.chooseCharacterForAssassinRandom(hashOfCharacters);
-        assertNotEquals("Assassin", characterChoosen);
-    }
 
-    @Test
-    void chooseCharacterForMagicianRandom(){
-        Strategy strategy=new Strategy(8,null, botMagician.getPlayer());
-        Character characterChoosen=strategy.chooseCharacterForMagicianRandom(hashOfCharacters);
-        assertNotEquals("Magician",characterChoosen);
-    }
 
 }
