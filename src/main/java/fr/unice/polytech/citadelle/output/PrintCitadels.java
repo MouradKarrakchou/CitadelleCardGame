@@ -257,4 +257,14 @@ public class PrintCitadels {
 	public static void printMerchantEarnedStartRoundMoney() {
 		System.out.println("\tThe Merchant wins "+stringColoredGold(1)+" at the beggining of his turn");
 	}
+
+    public static void printShuffle(String deckName) {
+		String output = "The " + deckName + " has been shuffled";
+		System.out.println(colorize(output));
+    }
+
+    public static void printBurned(Character character) {
+		String output = "The character " + character.getName() + "has been burned. (players can see it but can't pick it)";
+		System.out.println(colorize(output));
+    }
 }
