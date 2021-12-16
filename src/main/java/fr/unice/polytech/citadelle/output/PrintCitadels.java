@@ -267,4 +267,11 @@ public class PrintCitadels {
 		String output = "\t- The character " + character.getName() + " has been burned. (players can see it but can't pick it)";
 		System.out.println(colorize(output));
     }
+
+	public static void printAssassinAdvancedChoice(Player playerWithClosestScore, int predictedScore, int scoreDiffenreceWithClosestScore) {
+		System.out.println("STRATEGIE:");
+		System.out.println("The bot tries to find who is the player that currently has the score the closest to his own score.");
+		System.out.println("He predicts thats his own score is "+predictedScore+" points.");
+		System.out.println("After predicting the score of all the players he thinks that "+playerWithClosestScore+" has the score the closet to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.");
+	}
 }

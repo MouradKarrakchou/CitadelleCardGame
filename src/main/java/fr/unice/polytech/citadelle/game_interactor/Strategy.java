@@ -4,6 +4,7 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.*;
 
@@ -70,6 +71,7 @@ public class Strategy {
                 scoreDiffenreceWithClosestScore = scoreDifference;
             }
         }
+        PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
         return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
     }
 
