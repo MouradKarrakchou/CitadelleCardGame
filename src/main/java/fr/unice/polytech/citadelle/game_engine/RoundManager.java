@@ -82,9 +82,12 @@ public class RoundManager {
 	 * Initialise the deck of character then for each behaviour, choose a characterCard.
 	 */
 	public void setupCharacters() {
-		PrintCitadels.printRolePhase();
 		DeckCharacter deckCharacter = board.getDeckCharacter();
 		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacters);
+
+		deckCharacter.deckStartRound(); // Method called to burn a certain number of cards.
+
+		PrintCitadels.printRolePhase();
 		listOfBehaviour.forEach(bot -> chooseACharacterCard(bot, deckCharacter));
 		PrintCitadels.dropALine();
 	}
