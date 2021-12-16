@@ -15,16 +15,6 @@ public class Predict {
 
     //A changer : il faut une methode qui predit ce que le player a.
     Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
-        ArrayList<Player> listOfPlayers = board.getListOfPlayer();
-
-        ArrayList<String> listOfTargetableCharacter = allCharacters();
-        for(String character : listOfUntargetableCharacter) {
-            if(listOfTargetableCharacter.contains(character)) listOfTargetableCharacter.remove(character);
-        }
-
-        int goldsOfPlayer = player.getGolds();
-        ArrayList<District> handOfPlayer = player.getDistrictCards();
-        ArrayList<District> cityOfPlayer = player.getCity().getBuiltDistrict();
 
         //Is the Architect interesting for this player? It can be if he does not have a lot of golds
         if(handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains("Architect"))
@@ -79,5 +69,44 @@ public class Predict {
         listOfTargetableCharacter.add("Warlord");
 
         return listOfTargetableCharacter;
+    }
+
+    private ArrayList<String> targetableCharactersForPredictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<String> listOfTargetableCharacter = allCharacters();
+
+        for(String character : listOfUntargetableCharacter)
+            listOfTargetableCharacter.remove(character);
+
+        return listOfTargetableCharacter;
+    }
+
+    //Return the golds of the player who is targeted
+    private int goldsForPredictWhoIsPlayer(Player player) {
+        return player.getGolds();
+    }
+
+    //Return the hand of the player who is targeted
+    private ArrayList<District> handForPredictWhoIsPlayer(Player player) {
+        return player.getDistrictCards();
+    }
+
+    //Return the city of the player who is targeted
+    private ArrayList<District> cityForPredictWhoIsPlayer(Player player) {
+        return player.getCity().getBuiltDistrict();
+    }
+
+    //Return the players other than the one who is targeted
+    private ArrayList<Player> playersForPredictWhoIsPlayer(Player player) {
+        ArrayList<Player> listOfPlayers = board.getListOfPlayer();
+        listOfPlayers.remove(player);
+        return listOfPlayers;
+    }
+
+    private boolean canBeArchitect(Player player, ArrayList<String> listOfUntargetableCharacter) {
+        ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
+        ArrayList<String> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(player, listOfUntargetableCharacter);
+        int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
+
+        return (handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains("Architect"));
     }
 }
