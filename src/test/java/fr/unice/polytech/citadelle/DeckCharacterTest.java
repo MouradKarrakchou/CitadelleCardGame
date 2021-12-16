@@ -29,9 +29,8 @@ public class DeckCharacterTest {
     private DeckCharacter deckOfCharacters;
 
 
-
     @Test
-    public void calculateNbCardToBurnTest(){
+    public void calculateNbCardToBurnTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
         assertEquals(2, deckOfCharacters.calculateNbCardToBurn());
 
@@ -49,7 +48,7 @@ public class DeckCharacterTest {
     }
 
     @Test
-    public void burnCharacters4PlayersTest(){
+    public void burnCharacters4PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
 
         ArrayList<Character> customListOfCharacters = new ArrayList<>();
@@ -88,7 +87,7 @@ public class DeckCharacterTest {
     }
 
     @Test
-    public void burnCharacters5PlayersTest(){
+    public void burnCharacters5PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_5_PLAYERS);
 
         ArrayList<Character> customListOfCharacters = new ArrayList<>();
@@ -127,7 +126,7 @@ public class DeckCharacterTest {
     }
 
     @Test
-    public void burnCharacters6PlayersTest(){
+    public void burnCharacters6PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_6_PLAYERS);
 
         ArrayList<Character> customListOfCharacters = new ArrayList<>();
@@ -162,5 +161,62 @@ public class DeckCharacterTest {
 
         // Check the new size of the deck
         assertEquals(8, deckOfCharacters.getDeckCharacter().size());
+    }
+
+    @Test
+    public void hideTheLastCard() {
+        deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
+
+        ArrayList<Character> customListOfCharacters = new ArrayList<>();
+        customListOfCharacters.add(theMerchant);
+        customListOfCharacters.add(theThief);
+        customListOfCharacters.add(theArchitect);
+        customListOfCharacters.add(theMagician);
+        customListOfCharacters.add(theKing);
+        customListOfCharacters.add(theWarlord);
+        customListOfCharacters.add(theBishop);
+        customListOfCharacters.add(theAssassin);
+        deckOfCharacters.getDeckCharacter().addAll(customListOfCharacters);
+
+        // Check if there is 8 cards in the deck of characters.
+        assertEquals(8, deckOfCharacters.getDeckCharacter().size());
+
+        deckOfCharacters.hideCard();
+
+        // Check if there is 7 cards in the deck of characters.
+        assertEquals(7, deckOfCharacters.getDeckCharacter().size());
+
+        // Check if the hidden card is the Assassin
+        assertEquals(theAssassin, deckOfCharacters.getHiddenCard());
+    }
+
+    @Test
+    public void deckStartRound4PlayersTest() {
+        deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
+
+        ArrayList<Character> customListOfCharacters = new ArrayList<>();
+        customListOfCharacters.add(theKing);
+        customListOfCharacters.add(theMerchant);
+        customListOfCharacters.add(theThief);
+        customListOfCharacters.add(theArchitect);
+        customListOfCharacters.add(theMagician);
+        customListOfCharacters.add(theWarlord);
+        customListOfCharacters.add(theBishop);
+        customListOfCharacters.add(theAssassin);
+        deckOfCharacters.getDeckCharacter().addAll(customListOfCharacters);
+
+        // Check if there is 8 cards in the deck of characters.
+        assertEquals(8, deckOfCharacters.getDeckCharacter().size());
+
+        deckOfCharacters.deckStartRound();
+
+        // Check if 2 cards has been burned.
+        assertEquals(2, deckOfCharacters.getBurnedAndVisibleCharacters().size());
+
+        // Check the new size of the deck
+        assertEquals(5, deckOfCharacters.getDeckCharacter().size());
+
+        // Check if one card has been hid
+        assertNotNull(deckOfCharacters.getHiddenCard());
     }
 }

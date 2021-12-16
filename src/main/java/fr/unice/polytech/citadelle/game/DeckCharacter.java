@@ -10,11 +10,12 @@ import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAY
 
 /**
  * A DeckCharacter is composed of all the character cards in the game.
- * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class DeckCharacter {
     private final ArrayList<Character> deckOfCharacters;
     private final ArrayList<Character> burnedAndVisibleCharacters;
+    private Character hiddenCard;
     private final int nbPlayers;
 
     public DeckCharacter(){
@@ -39,12 +40,18 @@ public class DeckCharacter {
     }
 
     /**
-     * Should be called ONCE in round by each player.
      * @return A list of character cards a player can actually pick.
      */
 	public ArrayList<Character> getDeckCharacter() {
 		return deckOfCharacters;
 	}
+
+    /**
+     * @return The card hid at the beginning of a round. The last player to play should be able to take it.
+     */
+    public Character getHiddenCard(){
+        return hiddenCard;
+    }
 
     /**
      * @return A list of characters cards a player can see but can't pick (cards are burned).
@@ -90,7 +97,10 @@ public class DeckCharacter {
             burnedAndVisibleCharacters.add(burnedCharacter);
             PrintCitadels.printBurned(burnedCharacter);
         }
-        deckOfCharacters.add(kingCard);
+
+        // If the king is not the hidden card
+        if (kingCard != null)
+            deckOfCharacters.add(kingCard);
     }
 
     /**
@@ -100,10 +110,38 @@ public class DeckCharacter {
     public Character removeKingFromDeck(){
         int sizeOfDeck = deckOfCharacters.size();
         for (int index = 0; index < sizeOfDeck; index++) {
-            if (deckOfCharacters.get(index).getName().equals("King"))
+            if (deckOfCharacters.get(index).getName().equals("King")){
                 return deckOfCharacters.remove(index);
+            }
         }
         return null;
+    }
+
+    /**
+     * Add the hidden card to deck when the last player of a game of 7 players is playing.
+     */
+    public void checkAndUpdateDeckForLastPlayer(){
+        if (canPickTheHiddenCard())
+            deckOfCharacters.add(hiddenCard);
+    }
+
+    /**
+     * According to the character selection advancement, the last player could take the hidden card.
+     * @return True/False - The player can take the hidden card.
+     */
+    public boolean canPickTheHiddenCard(){
+        return deckOfCharacters.size() == 1;
+    }
+
+    /**
+     * Hide the last card of the actual deck of character.
+     * The king character should not bo hid, so the next card will be hid.
+
+     */
+    public void hideCard(){
+        int sizeOfDeck = deckOfCharacters.size();
+        hiddenCard = deckOfCharacters.remove(sizeOfDeck - 1);
+        PrintCitadels.printHidCharacter(hiddenCard);
     }
 
     /**
@@ -119,6 +157,7 @@ public class DeckCharacter {
      */
     public void deckStartRound(){
         shuffleDeck();
+        hideCard();
         burnCharacters();
     }
 }

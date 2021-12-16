@@ -264,7 +264,16 @@ public class PrintCitadels {
     }
 
     public static void printBurned(Character character) {
-		String output = "\t- The character " + character.getName() + " has been burned. (players can see it but can't pick it)";
-		System.out.println(colorize(output));
+		String output = "\t- The character " + character.getName() + " has been ";
+		String output2 = "burned";
+		String output3 = ". (players can see it but can't pick it)";
+		System.out.println(output + colorize(output2, BRIGHT_YELLOW_TEXT()) + output3);
     }
+
+	public static void printHidCharacter(Character hidCharacter) {
+		String output = "\t- The character " + hidCharacter.getName() + " has been ";
+		String output2 = "hiddenly burned";
+		String output3 = ". (players can't see an pick it except for the last player.)";
+		System.out.println(output + colorize(output2, YELLOW_TEXT()) + output3);
+	}
 }
