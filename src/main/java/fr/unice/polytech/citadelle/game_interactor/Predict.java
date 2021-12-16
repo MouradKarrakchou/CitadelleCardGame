@@ -19,7 +19,7 @@ public class Predict {
     //A changer : il faut une methode qui predit ce que le player a.
     Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
         ArrayList<Player> listOfPlayers = board.getListOfPlayer();
-
+                
         ArrayList<String> listOfTargetableCharacter = allCharacters();
         for(String character : listOfUntargetableCharacter) {
             if(listOfTargetableCharacter.contains(character)) listOfTargetableCharacter.remove(character);
@@ -35,12 +35,6 @@ public class Predict {
         //Is the Magician interesting for this player? It can be if he does not have a lot of district cards
         if(handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains("Magician"))
             return new Magician();
-
-        //Is the Assassin interesting for this player? It can be if someone has a lot of districts (6 districts)
-        for(Player otherPlayer : listOfPlayers) {
-            if(otherPlayer.getCity().getBuiltDistrict().size() == 6 && listOfTargetableCharacter.contains("Assassin"))
-                return new Assassin();
-        }
 
         //Is the Warlord interesting for this player? It can be if someone is close to finish the game (has 7 districts)
         for(Player otherPlayer : listOfPlayers) {
