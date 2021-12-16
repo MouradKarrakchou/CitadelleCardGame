@@ -264,14 +264,23 @@ public class PrintCitadels {
     }
 
     public static void printBurned(Character character) {
-		String output = "\t- The character " + character.getName() + " has been burned. (players can see it but can't pick it)";
-		System.out.println(colorize(output));
+		String output = "\t- The character " + character.getName() + " has been ";
+		String output2 = "burned";
+		String output3 = ". (players can see it but can't pick it)";
+		System.out.println(output + colorize(output2, BRIGHT_YELLOW_TEXT()) + output3);
     }
 
 	public static void printAssassinAdvancedChoice(Player playerWithClosestScore, int predictedScore, int scoreDiffenreceWithClosestScore) {
-		System.out.println("STRATEGIE:");
-		System.out.println("The bot tries to find who is the player that currently has the score the closest to his own score.");
-		System.out.println("He predicts thats his own score is "+predictedScore+" points.");
-		System.out.println("After predicting the score of all the players he thinks that "+playerWithClosestScore+" has the score the closet to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.");
+		System.out.println("STRATEGY:");
+		System.out.println(colorize("The bot tries to find who is the player that currently has the score the closest to his own score.",ITALIC()));
+		System.out.println(colorize("He predicts thats his own score is "+predictedScore+" points.",ITALIC()));
+		System.out.println(colorize("After predicting the score of all the players he thinks that "+playerWithClosestScore.getName()+" has the score the closet to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.",ITALIC()));
+	}
+
+	public static void printHidCharacter(Character hidCharacter) {
+		String output = "\t- The character " + hidCharacter.getName() + " has been ";
+		String output2 = "hiddenly burned";
+		String output3 = ". (players can't see an pick it except for the last player.)";
+		System.out.println(output + colorize(output2, YELLOW_TEXT()) + output3);
 	}
 }

@@ -11,6 +11,8 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAYER;
+
 
 /**
  * The RoundManager manage the rounds inside a Game
@@ -100,6 +102,8 @@ public class RoundManager {
 	public void chooseACharacterCard(Behaviour bot, DeckCharacter deckCharacter) {
 		Player playerOfBehaviour = bot.getPlayer();
 
+		deckCharacter.checkAndUpdateDeckForLastPlayer();
+
 		if (board.getRoundNumber() == 0)
 			playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
 		else
@@ -108,7 +112,6 @@ public class RoundManager {
 		Initializer.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
 		PrintCitadels.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
-
 
 	public Character chooseCharacter(Behaviour bot, DeckCharacter deckCharacter) {
 		int counter;
