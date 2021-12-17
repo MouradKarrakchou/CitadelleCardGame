@@ -100,7 +100,7 @@ public class Strategy {
             return(null);
         for(int k=0;k<player.getCity().getSizeOfCity();k++){
             District currentDistrictCheck=player.getCity().getBuiltDistrict().get(k);
-            if (currentDistrictCheck.getValue()<this.player.getGolds()&&!currentDistrictCheck.getName().equals("DragonGate"))
+            if (currentDistrictCheck.getValue()<this.player.getGolds()-1 && !currentDistrictCheck.getName().equals("DragonGate"))
                 return(player.getCity().getBuiltDistrict().get(k));
         }
         return null;

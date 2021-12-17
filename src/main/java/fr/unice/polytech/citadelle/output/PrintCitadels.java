@@ -290,7 +290,7 @@ public class PrintCitadels {
 	}
 
 	public static void warlordDoHisSpell(Player player,Character characterToDestroy, District districtToDestroy) {
-		String output = "\t[!] The "+ player.getName()+" use His Warlord spell and destroy a "+characterToDestroy.getName()+"'s District :"+districtToDestroy.getName();
+		String output = "\t[!] The "+ player.getName()+" use His Warlord spell and destroy a "+characterToDestroy.getName()+"'s District :"+districtToDestroy.getName()+"(-"+(districtToDestroy.getValue()-1)+"golds).";
 		System.out.println(colorize(output, MAGENTA_TEXT()));
 	}
 
