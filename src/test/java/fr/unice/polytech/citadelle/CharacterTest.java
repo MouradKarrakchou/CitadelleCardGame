@@ -35,6 +35,7 @@ public class CharacterTest {
     Thief thief;
     Merchant merchant;
     Warlord warlord;
+    Board board;
 
     ArrayList<Behaviour> listOfBehaviour;
     DeckDistrict deckDistrict;
@@ -43,7 +44,7 @@ public class CharacterTest {
     public void init(){
         hashOfCharacters = new LinkedHashMap<>();
         deckDistrict=new DeckDistrict();
-        Board board = new Board(new ArrayList<Player>(),new ArrayList<Character>(),deckDistrict,new DeckCharacter());
+        board = new Board(new ArrayList<Player>(),new ArrayList<Character>(),deckDistrict,new DeckCharacter());
         board.getDeckDistrict().initialise();
 
         
@@ -55,7 +56,7 @@ public class CharacterTest {
         botKing=new Behaviour(new Player("kingPlayer"), board);
         botThief=spy(new Behaviour(new Player("thiefPlayer"), board));
         botMerchant=new Behaviour(new Player("merchantPlayer"), board);
-        botWarlord=new Behaviour(new Player("warlordPlayer"), board);
+        botWarlord=spy(new Behaviour(new Player("warlordPlayer"), board));
 
         //creation of the characters in game
         architect=new Architect();
@@ -219,7 +220,23 @@ public class CharacterTest {
         assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
     }
-    
+    @Test
+    void testWarlordDestroyDistrict(){
+        Player player=new Player("playerDistrictToDestroy");
+        player.setGolds(4);
+        District district= new District("DistrictToBeDestroyed",2,null,null);
+        player.buildDistrict(district);
+        player.buildDistrict(new District("DistrictToNotBeDestroyed",2,null,null));
+        board.getListOfPlayer().add(player);
+        board.getListOfPlayer().add(botWarlord.getPlayer());
+        botWarlord.getPlayer().setGolds(2);
+        when(botWarlord.selectPlayerForWarlord()).thenReturn(player);
+        when(botWarlord.chooseDistrictToDestroy(player)).thenReturn(district);
+        warlord.spellOfTurn(botWarlord,hashOfCharacters);
+        assertEquals(false,player.getCity().getBuiltDistrict().contains(district));
+        assertEquals(1,botWarlord.getPlayer().getGolds());
+
+    }
 
 
 }

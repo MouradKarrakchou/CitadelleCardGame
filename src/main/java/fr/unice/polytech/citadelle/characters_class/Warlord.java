@@ -28,8 +28,7 @@ public class Warlord extends Character {
 
             if (districtToDestroy==null)
                 PrintCitadels.warlordDontUseSpell(bot.getPlayer());
-            else
-                {
+            else {
                     destroyDistrict(playerToDestroy,districtToDestroy,bot.getPlayer());
                     PrintCitadels.warlordDoHisSpell(bot.getPlayer(),playerToDestroy, districtToDestroy);}}
     }
