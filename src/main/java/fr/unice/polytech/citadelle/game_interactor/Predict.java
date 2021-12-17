@@ -19,10 +19,10 @@ public class Predict {
 
 	// A changer : il faut une methode qui predit ce que le player a.
 	public Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter) {
-		Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(player);
-		if (potentialCharacterOfTargetPlayer.isPresent()) {
+		Optional<Character> potentialCharacterOfTargetPlayer = checkAlreadyReveal(player);
+		//vérifer que l'on puisse renvoyer bien utiliser le sort sur ce character
+		if(potentialCharacterOfTargetPlayer.isPresent()) {
 			Character targetCharacter = potentialCharacterOfTargetPlayer.get();
-			PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, player, targetCharacter);
 			return targetCharacter;
 		}
 
@@ -48,6 +48,17 @@ public class Predict {
 			return listGetCharacter("Warlord");
 
 		return listGetCharacter("Assassin");
+	}
+	
+	private Optional<Character> checkAlreadyReveal(Player player) {
+		Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(player);
+		if (potentialCharacterOfTargetPlayer.isPresent()) {
+			Character targetCharacter = potentialCharacterOfTargetPlayer.get();
+			PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, player, targetCharacter);
+			return Optional.of(targetCharacter);
+		}
+		else
+			return Optional.empty();
 	}
 
 	ArrayList<String> allCharacters() {

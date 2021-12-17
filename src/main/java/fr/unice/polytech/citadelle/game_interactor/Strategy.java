@@ -6,7 +6,6 @@ import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static java.lang.Math.abs;
@@ -109,42 +108,6 @@ public class Strategy {
 
     }
 
-    public Character chooseCharacterForThiefAdvanced(){
-        ArrayList<String> listOfCharacterToNotSteal=new ArrayList<>();
-        listOfCharacterToNotSteal.add("Assassin");
-        listOfCharacterToNotSteal.add("Thief");
-        listOfCharacterToNotSteal.addAll(board.getListOfPlayerWhoHasAlreadyPlayedStringVersion());
-        Player playerWithMostGolds=findThePlayerWithMostGolds();
-        return(predict.predictWhoIsPlayer(playerWithMostGolds,listOfCharacterToNotSteal));
-
-
-    }
-
-    private Player findThePlayerWithMostGolds() {
-        ArrayList<Player> listOfPlayer= board.getListOfPlayer();
-        //In this list we got the Assassin (if there is one) and he can't steal from him
-        ArrayList<Player> listOfPlayerToNotTarget=board.getListOfPlayerWhoPlayed();
-        int k=0;
-        //We want to find the player with the PredictedScore the closest to the score of our Player
-        int mostGoldsThatAPlayerHas=listOfPlayer.get(k).getGolds();
-        Player playerWithMostGold=listOfPlayer.get(k);
-
-        for (Player playerComparing : listOfPlayer) {
-            if (playerWithMostGold.equals(this.player) || listOfPlayerToNotTarget.contains(player)){
-                playerWithMostGold = playerComparing;
-                mostGoldsThatAPlayerHas = player.getGolds();
-            }
-            else if (!playerComparing.equals(this.player)&& !listOfPlayerToNotTarget.contains(player)){
-                int goldOfPlayerComparing = playerComparing.getGolds();
-                if (mostGoldsThatAPlayerHas > goldOfPlayerComparing) {
-                    playerWithMostGold = playerComparing;
-                    mostGoldsThatAPlayerHas = player.getGolds();}
-            }
-        }
-        PrintCitadels.printThiefAdvancedChoice(playerWithMostGold);
-        return (playerWithMostGold);
-    }
-
     public Player findThePlayerWithClosestScoreAssassin(){
         int predictedScore=playerPredictScore(player);
         ArrayList<Player> listOfPlayer=board.getListOfPlayer();
@@ -180,7 +143,7 @@ public class Strategy {
             return 0;
 
         // If the player has 4 districts of the same colour.
-        String colorOfDistrictToDestroy = has3districtWithSameColour(playerToDestroy);
+        String colorOfDistrictToDestroy = has4districtWithSameColour(playerToDestroy);
         if (colorOfDistrictToDestroy != null){
             if (district.getColor().equals(colorOfDistrictToDestroy))
                 return 100000;
@@ -200,41 +163,25 @@ public class Strategy {
      * @param playerToDestroy The player to proceed.
      * @return The district to destroy (can be null if the spell is not used).
      */
-    public District chooseDistrictToDestroy(Player playerToDestroy) {
-        //Flags
-        boolean playerToDestroyHasCompletedCity = false;
-        boolean playerToDestroyIsBishop = false;
-
+    District chooseDistrictToDestroy(Player playerToDestroy) {
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
         ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
         int playerGolds = player.getGolds();
         District districtToDestroy = null;
 
-        // Warlord can't destroy a Bishop district
-        String characterName;
-        if (playerToDestroy.getCharacter() == null)
-            characterName = "";
-        else
-            characterName = playerToDestroy.getCharacter().getName();
-
-        if(characterName.equals("Bishop"))
-            playerToDestroyIsBishop = true;
-
         // Warlord can't destroy a completed city.
         if (playerToDestroyCitySize >= 8)
-            playerToDestroyHasCompletedCity = true;
+            return null;
 
-        if (!playerToDestroyIsBishop && !playerToDestroyHasCompletedCity)
-            for (District districtToCheck : playerToDestroyCity){
-                // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
-                if((!districtToCheck.getName().equals("Keep")) && districtToCheck.getValue() - 1 <= playerGolds){
-                    districtToDestroy =
-                            warlordInterestScore(districtToCheck, playerToDestroy) > warlordInterestScore(districtToDestroy, playerToDestroy)
-                            ? districtToCheck : districtToDestroy;
-                }
+        for (District districtToCheck : playerToDestroyCity){
+            // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
+            if(!districtToCheck.getName().equals("Keep") && districtToCheck.getValue() - 1 <= playerGolds){
+                districtToDestroy =
+                        warlordInterestScore(districtToDestroy, playerToDestroy) < warlordInterestScore(districtToCheck, playerToDestroy)
+                        ? districtToDestroy : districtToCheck;
+            }
+
         }
-
-        PrintCitadels.printWarlordAdvancedChoice(playerToDestroy, playerToDestroyHasCompletedCity, playerToDestroyIsBishop, districtToDestroy);
         return districtToDestroy;
     }
     public ArrayList<Integer> chooseMagicianAction() {
@@ -306,7 +253,7 @@ public class Strategy {
      * @param player The player to process.
      * @return The color of the district that the player has more than 3 times.
      */
-    public String has3districtWithSameColour(Player player){
+    public String has4districtWithSameColour(Player player){
         String[] listOfColour = {"Blue", "Red", "Green", "Yellow", "Purple"};
         for (String colour : listOfColour){
             if (countNumberOfDistrictWithColor(player, colour) >= 3)
