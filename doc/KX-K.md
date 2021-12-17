@@ -37,14 +37,29 @@ Le la même façon que les cartes de personnages, l'implémentation des cartes d
 
 ### Issues associés :
 
-| Isssue                                                                                     | Description                                                      | Date       |
-|--------------------------------------------------------------------------------------------|------------------------------------------------------------------|------------|
-| [#7](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/7)   | Ajout des quartiers ayant 8 différents prix                      | 18/11/2021 |
-| [#19](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Ajout des couleurs de quartier                                   | 24/11/2021 |
-| [#27](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/27) | Ajout du sort de quartier : Dragoport                            | 03/12/2021 |
-| [#34](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/34) | Ajout du sort de quartier : Université                           | 05/12/2021 |
-| [#42](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/42) |  Ajout du sort de quartier : Cour des miracles et École de magie | 25/11/2021 |
+| Isssue                                                                                     | Description                                                     | Date       |
+|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------|------------|
+| [#7](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/7)   | Ajout des quartiers ayant 8 différents prix                     | 18/11/2021 |
+| [#19](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Ajout des couleurs de quartier                                  | 24/11/2021 |
+| [#27](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/27) | Ajout du sort de quartier : Dragoport                           | 03/12/2021 |
+| [#34](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/34) | Ajout du sort de quartier : Université                          | 05/12/2021 |
+| [#42](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/42) | Ajout du sort de quartier : Cour des miracles et École de magie | 25/11/2021 |
 
+
+## La représentation du jeu
+La représentation jeu correspond à la façon dont le plateau de jeu de Citadelle a été pensé et implémenté dans le code. Ces différents aspects et choix de modélisation sont trouvables dans le package game. Cet élément regroupant à la fois joueurs et cartes, cette implémentation fut faite par l'ensemble du groupe. 
+
+### Issues associés (les noms seront indiqués):
+| Isssue  | Description  | Date | Nom |
+|---------|--------------|------|-----|
+| [#1](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/7) | Ajout des quartiers ayant 8 différents prix | 11/11/2021 | [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
+| [#2](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/2) | Ajout du deck de quartiers | 14/11/2021 | [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
+| [#4](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/4) | Ajout de la gestion des de l’or | 16/11/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#8](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/8) | Piocher deux cartes quartiers et en brûler une | 19/11/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#9](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/9) | Construire un quartier et passer son tour | 19/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+| [#30](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/30) | Le joueur commence avec 4 cartes quartiers | 07/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#37](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/37) | Le deck de quartiers peut être mélanger| 08/12/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#52](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/52) | Les cartes personnages peuvent être brûlées | 16/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
 
 # Fonctionnement de l’équipe
 
