@@ -529,5 +529,38 @@ public class RoundManagerTest {
 		roundManager.reviveAll();
 		assertTrue(player.getCharacter().isCharacterIsAlive());
 	}
+	
+	@Test
+	public void checkIfUpdateViewCharacterInBoardWorkTest() {
+		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();
+		Character testCharacter = new Character("testCharacter", 0);
+		Player player = new Player("testPlayer");
+		player.setRole(testCharacter);
+		Behaviour bot = spy(new Behaviour(player, board));
+		
+		listOfPlayerForHash.add(player);
+		board.setListOfPlayer(listOfPlayerForHash);
+		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+		assertEquals(Optional.empty(), board.gethashOfViewCharacters().get(player));
+		roundMan.actionOfBehaviour(bot);
+		assertEquals(Optional.of(testCharacter), board.gethashOfViewCharacters().get(player));
+	}
+	
+	@Test
+	public void getListOfPlayerWhoHasAlreadyPlayedTest() {
+		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();
+		Character testCharacter = new Character("testCharacter", 0);
+		Player player = new Player("testPlayer");
+		player.setRole(testCharacter);
+		Behaviour bot = spy(new Behaviour(player, board));
+		
+		listOfPlayerForHash.add(player);
+		board.setListOfPlayer(listOfPlayerForHash);
+		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+		assertEquals(0, board.getListOfPlayerWhoHasAlreadyPlayed().size());
+		roundMan.actionOfBehaviour(bot);
+		assertEquals(testCharacter, board.getListOfPlayerWhoHasAlreadyPlayed().get(0));
+		
+	}
 
 }

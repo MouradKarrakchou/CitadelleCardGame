@@ -1,23 +1,37 @@
 package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Optional;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import fr.unice.polytech.citadelle.game_engine.Initializer;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
 /**
  * A Board represents an instance of the Citadel game with all the cards (districts and character) and players that go with.
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
+/**
+ * @author leolb
+ *
+ */
 public class Board {
+    private int roundNumber = 0;
     private ArrayList<Player> listOfPlayer;
     private DeckDistrict deckDistrict;
     private DeckCharacter deckCharacter;
-    private int roundNumber = 0;
     private ArrayList<Character> listOfCharacter;
+	private final LinkedHashMap<Player, Optional<Character>> hashOfViewCharacters = new LinkedHashMap<>();
+
 
     public Board( ArrayList<Player> listOfPlayer,ArrayList<Character>listOfCharacter, DeckDistrict deckDistrict, DeckCharacter deckCharacter) {
         this.listOfPlayer = listOfPlayer;
         this.deckDistrict = deckDistrict;
         this.deckCharacter = deckCharacter;
         this.listOfCharacter=listOfCharacter;
+        Initializer.initTheHashOfViewCharacters(hashOfViewCharacters, listOfPlayer);
     }
 
     public Board() {}
@@ -49,5 +63,41 @@ public class Board {
     public ArrayList<Character> getListOfCharacter(){
         return listOfCharacter;
     }
+    
+    public LinkedHashMap<Player, Optional<Character>> gethashOfViewCharacters(){
+        return hashOfViewCharacters;
+    }
+    
+    
+    /**
+     * Update the LinkedHashMap of Character/Behaviour when a Behaviour Reveals his Character
+     * @param character
+     * @param behaviour
+     */
+    public void revealCharacter(Player player, Character character) {
+    	hashOfViewCharacters.put(player, Optional.of(character));
+    }
+    
+    /**
+     * @return the list of player who has already played, compute with the hashOfViewCharacters
+     */
+    public ArrayList<Character> getListOfPlayerWhoHasAlreadyPlayed(){
+    	ArrayList<Character> listOfPlayerWhoHasAlreadyPlayed = new ArrayList<>();
+    	for (Entry<Player, Optional<Character>> entry : hashOfViewCharacters.entrySet()) {
+			Optional<Character> optionalBehaviour = entry.getValue();
+			if(optionalBehaviour.isPresent())
+				listOfPlayerWhoHasAlreadyPlayed.add(optionalBehaviour.get());
+    	}
+    	return listOfPlayerWhoHasAlreadyPlayed;
+    }
+    
+    public ArrayList<String> getListOfPlayerWhoHasAlreadyPlayedStringVersion(){
+    	return getListOfPlayerWhoHasAlreadyPlayed().stream().
+    												map(character -> character.getName())
+    												.collect(Collectors.toCollection(ArrayList::new));
+
+    }
+    
+    
 }
 

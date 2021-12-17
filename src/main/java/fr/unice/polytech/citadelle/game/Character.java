@@ -11,9 +11,9 @@ import java.util.Optional;
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Character {
-    String name;
-    int value;
-    boolean characterIsAlive=true;
+    private String name;
+    private int value;
+    private  boolean characterIsAlive=true;
 
     public Character(String name, int value) {
     	this.name = name;    	
@@ -49,10 +49,11 @@ public class Character {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Character other))
-            return false;
+    	if(!(obj instanceof Character))
+		  return false;
 
-        return name.equals(other.getName());
+		Character other = (Character) obj;
+		return name.equals(other.name);
     }
 
     @Override

@@ -51,8 +51,19 @@ public class Initializer {
 		hashOfCharacters.put(listOfAllCharacters.get(MERCHANT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(ARCHITECT_INDEX), Optional.empty());
 		hashOfCharacters.put(listOfAllCharacters.get(WARLORD_INDEX), Optional.empty());
-
 	}
+	
+	/**
+	 * Reset a given hash of characters using a given list of characters.
+	 * @param hashOfCharacters The hash of characters to reset.
+	 * @param listOfAllCharacters The list containing all the characters.
+	 */
+	public static void initTheHashOfViewCharacters(LinkedHashMap<Player, Optional<Character>> hashOfViewCharacters,
+											ArrayList<Player> listOfAllPlayers) {
+		listOfAllPlayers.forEach(player -> hashOfViewCharacters.put(player, Optional.empty()));
+		int a  = 5;
+	}
+
 
 	/**
 	 * Create a new list containing all characters.

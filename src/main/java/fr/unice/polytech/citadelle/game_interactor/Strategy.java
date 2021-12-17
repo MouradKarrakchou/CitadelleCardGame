@@ -22,6 +22,14 @@ public class Strategy {
         this.player=player;
     }
 
+    public Strategy(int numberOfCharacter,Board board,Player player, Predict predict){
+        predict=new Predict(board);
+        this.numberOfCharacter=numberOfCharacter;
+        this.board=board;
+        this.player=player;
+        this.predict = predict;
+    }
+
     public int randomInt(int scope) {
         Random random = new Random();
         return (random.nextInt(scope));
@@ -92,9 +100,17 @@ public class Strategy {
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
+        listOfCharacterToNotKill.addAll(board.getListOfPlayerWhoHasAlreadyPlayedStringVersion());
+        //listOfCharacterToNotKill.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
 
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
-        return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
+        Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(playerWithClosestScore);
+
+        if(potentialCharacterOfTargetPlayer.isPresent())
+        	return potentialCharacterOfTargetPlayer.get();
+        else
+        	return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
+
     }
 
     public Player findThePlayerWithClosestScoreAssassin(){
@@ -184,5 +200,13 @@ public class Strategy {
 
         return (hasBlue && hasRed && hasGreen && hasYellow && hasPurple);
     }
+
+    public Character getAPrediction(Player player, ArrayList<String> listOfCharacterToNotKill){
+    	return predict.predictWhoIsPlayer(player,listOfCharacterToNotKill);
+    }
+
+	public Predict getPredict() {
+		return predict;
+	}
 
 }
