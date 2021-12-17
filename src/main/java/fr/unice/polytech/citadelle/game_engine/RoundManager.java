@@ -264,6 +264,7 @@ public class RoundManager {
 		
 		Initializer.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
 		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayer);
+		board.resetListOfPlayerWhoPlayed();
 		board.incrementRoundNumber();
 		return leaderBoard;
 	}

@@ -20,6 +20,7 @@ import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 public class Board {
     private int roundNumber = 0;
     private ArrayList<Player> listOfPlayer;
+    private ArrayList<Player> listOfPlayerWhoPlayed=new ArrayList<>();
     private DeckDistrict deckDistrict;
     private DeckCharacter deckCharacter;
     private ArrayList<Character> listOfCharacter;
@@ -64,9 +65,17 @@ public class Board {
     public ArrayList<Character> getListOfCharacter(){
         return listOfCharacter;
     }
-    
+
+    public ArrayList<Player> getListOfPlayerWhoPlayed() {
+        return listOfPlayerWhoPlayed;
+    }
+
     public LinkedHashMap<Player, Optional<Character>> gethashOfViewCharacters(){
         return hashOfViewCharacters;
+    }
+
+    public void resetListOfPlayerWhoPlayed(){
+        this.listOfPlayerWhoPlayed.clear();
     }
     
     
@@ -77,6 +86,7 @@ public class Board {
      */
     public void revealCharacter(Player player, Character character) {
     	hashOfViewCharacters.put(player, Optional.of(character));
+        listOfPlayerWhoPlayed.add(player);
     }
     
     /**
