@@ -224,9 +224,9 @@ public class CharacterTest {
     void testWarlordDestroyDistrict(){
         Player player=new Player("playerDistrictToDestroy");
         player.setGolds(4);
-        District district= new District("DistrictToBeDestroyed",2,null,null);
+        District district= new District("DistrictToBeDestroyed",2,"Green",null);
         player.buildDistrict(district);
-        player.buildDistrict(new District("DistrictToNotBeDestroyed",2,null,null));
+        player.buildDistrict(new District("DistrictToNotBeDestroyed",2,"Green",null));
         board.getListOfPlayer().add(player);
         board.getListOfPlayer().add(botWarlord.getPlayer());
         botWarlord.getPlayer().setGolds(2);
