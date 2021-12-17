@@ -276,6 +276,11 @@ public class PrintCitadels {
 		System.out.println(colorize("He predicts thats his own score is "+predictedScore+" points.",ITALIC()));
 		System.out.println(colorize("After predicting the score of all the players he thinks that "+playerWithClosestScore.getName()+" has the score the closet to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.",ITALIC()));
 	}
+	public static void printThiefAdvancedChoice(Player playerWithMostGold) {
+		System.out.println("STRATEGY:");
+		System.out.println(colorize("The Bot wants to steal from the player with most golds.",ITALIC()));
+		System.out.println(colorize("He analysed the board and sew that "+playerWithMostGold.getName()+" has the mostGolds.",ITALIC()));
+	}
 
 	public static void printWarlordAdvancedChoice(Player playerToDestroy, boolean playerToDestroyHasCompletedCity, District destroyedDistrict){
 		System.out.println("STRATEGY:");

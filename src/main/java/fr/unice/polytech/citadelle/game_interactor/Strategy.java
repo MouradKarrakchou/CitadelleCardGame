@@ -6,6 +6,7 @@ import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static java.lang.Math.abs;
@@ -106,6 +107,41 @@ public class Strategy {
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
         return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 
+    }
+
+    public Character chooseCharacterForThiefAdvanced(){
+        ArrayList<String> listOfCharacterToNotSteal=new ArrayList<>();
+        listOfCharacterToNotSteal.add("Assassin");
+        listOfCharacterToNotSteal.add("Thief");
+        listOfCharacterToNotSteal.addAll(board.getListOfPlayerWhoHasAlreadyPlayedStringVersion());
+        Player playerWithMostGolds=findThePlayerWithMostGolds();
+
+        return(predict.predictWhoIsPlayer(playerWithMostGolds,listOfCharacterToNotSteal));
+
+
+    }
+
+    private Player findThePlayerWithMostGolds() {
+        ArrayList<Player> listOfPlayer= board.getListOfPlayer();
+        int k=0;
+        //We want to find the player with the PredictedScore the closest to the score of our Player
+        int mostGoldsThatAPlayerHas=listOfPlayer.get(k).getGolds();
+        Player playerWithMostGold=listOfPlayer.get(k);
+
+        for (Player playerComparing : listOfPlayer) {
+            if (playerWithMostGold.equals(this.player)){
+                playerWithMostGold = playerComparing;
+                mostGoldsThatAPlayerHas = player.getGolds();
+            }
+            else if (!playerComparing.equals(this.player)){
+                int goldOfPlayerComparing = playerComparing.getGolds();
+                if (mostGoldsThatAPlayerHas > goldOfPlayerComparing) {
+                    playerWithMostGold = playerComparing;
+                    mostGoldsThatAPlayerHas = player.getGolds();}
+            }
+        }
+        PrintCitadels.printThiefAdvancedChoice(playerWithMostGold);
+        return (playerWithMostGold);
     }
 
     public Player findThePlayerWithClosestScoreAssassin(){
