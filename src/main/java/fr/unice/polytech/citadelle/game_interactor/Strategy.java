@@ -55,6 +55,15 @@ public class Strategy {
         return randomCharacter;
     }
 
+    public Character chooseCharacterForWarlordRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+        List<Character> list = hashOfCharacters.keySet().stream().toList();
+        Character randomCharacter=list.get(randomInt(8));
+        while (randomCharacter.getName().equals("Warlord") || randomCharacter.getName().equals("Bishop")) {
+            randomCharacter=list.get(randomInt(numberOfCharacter));
+        }
+        return randomCharacter;
+    }
+
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
@@ -85,6 +94,19 @@ public class Strategy {
         }
         PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
         return playerWithClosestScore;
+    }
+    District chooseDistrictToDestroy(Player player){
+        if (player.getCity().getSizeOfCity()==8)
+            return(null);
+        for(int k=0;k<player.getCity().getSizeOfCity();k++){
+            District currentDistrictCheck=player.getCity().getBuiltDistrict().get(k);
+            if (currentDistrictCheck.getValue()<this.player.getGolds()&&!currentDistrictCheck.getName().equals("DragonGate"))
+                return(player.getCity().getBuiltDistrict().get(k));
+        }
+        return null;
+    }
+    public ArrayList<Integer> chooseMagicianAction() {
+        return(new ArrayList());
     }
 
     /**
@@ -136,6 +158,5 @@ public class Strategy {
 
         return (hasBlue && hasRed && hasGreen && hasYellow && hasPurple);
     }
-
 
 }
