@@ -131,5 +131,13 @@ L’affichage du jeu permet de véhiculer rapidement les informations essentiell
 
 
 # Fonctionnement de l’équipe
+Globalement, nous n'avons jamais programmé, ou très peu lors des réunions du mercredi. Nous vérifiions plutôt l’avancement du projet et s’il y avait des choses à changer, enlever ou améliorer. Puis, nous écrivions la nouvelle Milestone et les issues sur lesquelles nous nous étions mis d’accord pendant la semaine de travail précédant la réunion du mercredi. Parfois, nous nous divisions le travail, deux membres du groupe écrivaient les issues pendant que les deux autres réfléchissaient à des améliorations.
+
+<br>
+Nous avons divisé notre Kanban en 4 parties: To do, In progress, Tests, Done. Au début, toutes les issues sont dans “To do”. Chacun choisissait une issue et la déplaçait donc dans “In progress” en faisant des commits au fur et à mesure que l’issue avançait. Puis, une fois l’implémentation faite, la personne chargée de l’issue la déplace dans “Tests” puis effectue les tests sur cette partie du programme. Une fois la nouvelle fonctionnalité testée, elle est déplacée dans dans “Done” et alors seulement nous pouvions close l’issue.
+
+<br>
+Pendant la semaine, tous les membres étaient conscients du travail à faire et chacun travaillait et gérait son temps comme bon lui semblait. Nous nous posions souvent des question entre nous pour connaître l’avis de chacun, obtenir de l’aide ou une information.
+
 
 # Avancement du projet
