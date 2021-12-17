@@ -365,4 +365,9 @@ public class StrategyTest {
 		assertEquals(testCharacter3, predictCharacter.get());
 	}
 
+	@Test
+	void test() {
+		board.getListOfCharacter().stream().forEach(p -> System.out.println(p.getName()));
+	}
+
 }
