@@ -155,14 +155,38 @@ public class Strategy {
     }
 
     /**
+     * For a given district, return the interest score the warlord has in destroying this district.
+     * @param district The district to proceed.
+     * @return The interest score the district.
+     */
+    public int warlordInterestScore(District district, Player playerToDestroy) {
+        if (district == null)
+            return 0;
+
+        // If the player has 4 districts of the same colour.
+        String colorOfDistrictToDestroy = has4districtWithSameColour(playerToDestroy);
+        if (colorOfDistrictToDestroy != null){
+            if (district.getColor().equals(colorOfDistrictToDestroy))
+                return 100000;
+        }
+
+        int interestScore = 0;
+        switch(district.getName()){
+            case "Dragon Gate", "University" -> interestScore = 10000;
+            case "Haunted City" -> interestScore = 1000;
+            case "School of Magic" -> interestScore = 100;
+        }
+        return interestScore;
+    }
+
+    /**
      * For a given player, will analyze player city to choose a district to destroy.
-     *
-     *
      * @param playerToDestroy The player to proceed.
      * @return The district to destroy (can be null if the spell is not used).
      */
     District chooseDistrictToDestroy(Player playerToDestroy) {
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
+        ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
         int playerGolds = player.getGolds();
         District districtToDestroy = null;
 
@@ -170,12 +194,16 @@ public class Strategy {
         if (playerToDestroyCitySize >= 8)
             return null;
 
-        for(int k=0; k<playerToDestroy.getCity().getSizeOfCity(); k++){
-            District currentDistrictCheck = playerToDestroy.getCity().getBuiltDistrict().get(k);
-            if (currentDistrictCheck.getValue() - 1 < playerGolds && !currentDistrictCheck.getName().equals("DragonGate"))
-                return(playerToDestroy.getCity().getBuiltDistrict().get(k));
+        for (District districtToCheck : playerToDestroyCity){
+            // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
+            if(!districtToCheck.getName().equals("Keep") && districtToCheck.getValue() - 1 <= playerGolds){
+                districtToDestroy =
+                        warlordInterestScore(districtToDestroy, playerToDestroy) < warlordInterestScore(districtToCheck, playerToDestroy)
+                        ? districtToDestroy : districtToCheck;
+            }
+
         }
-        return null;
+        return districtToDestroy;
     }
 
     public ArrayList<Integer> chooseMagicianAction() {
@@ -230,6 +258,30 @@ public class Strategy {
         }
 
         return (hasBlue && hasRed && hasGreen && hasYellow && hasPurple);
+    }
+
+    public int countNumberOfDistrictWithColor(Player player, String colour){
+        ArrayList<District> playerCity = player.getCity().getBuiltDistrict();
+        int count = 0;
+
+        for (District district : playerCity){
+            if (district.getColor().equals(colour))
+                count++;
+        }
+        return count;
+    }
+
+    /**
+     * @param player The player to process.
+     * @return The color of the district that the player has more than 3 times.
+     */
+    public String has4districtWithSameColour(Player player){
+        String[] listOfColour = {"Blue", "Red", "Green", "Yellow", "Purple"};
+        for (String colour : listOfColour){
+            if (countNumberOfDistrictWithColor(player, colour) >= 3)
+                return colour;
+        }
+        return null;
     }
 
     public Character getAPrediction(Player player, ArrayList<String> listOfCharacterToNotKill){
