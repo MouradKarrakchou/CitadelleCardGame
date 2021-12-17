@@ -70,8 +70,8 @@ public class Strategy {
     public Player choosePlayerForWarlordRandom() {
         List<Player> list = board.getListOfPlayer();
         Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
-        while (randomPlayer.getName().equals("Warlord")) {
-            randomPlayer=list.get(randomInt(numberOfCharacter));
+        while (randomPlayer.equals(this.player)) {
+            randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
         }
         return randomPlayer;
     }
