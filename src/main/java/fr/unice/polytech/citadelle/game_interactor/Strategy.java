@@ -168,8 +168,8 @@ public class Strategy {
         PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
         return playerWithClosestScore;
     }
-    
-     /**
+
+    /**
      * For a given district, return the interest score the warlord has in destroying this district.
      * @param district The district to proceed.
      * @return The interest score the district.
@@ -179,7 +179,7 @@ public class Strategy {
             return 0;
 
         // If the player has 4 districts of the same colour.
-        String colorOfDistrictToDestroy = has4districtWithSameColour(playerToDestroy);
+        String colorOfDistrictToDestroy = has3districtWithSameColour(playerToDestroy);
         if (colorOfDistrictToDestroy != null){
             if (district.getColor().equals(colorOfDistrictToDestroy))
                 return 100000;
@@ -200,26 +200,43 @@ public class Strategy {
      * @return The district to destroy (can be null if the spell is not used).
      */
     public District chooseDistrictToDestroy(Player playerToDestroy) {
+        //Flags
+        boolean playerToDestroyHasCompletedCity = false;
+        boolean playerToDestroyIsBishop = false;
+
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
-        ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
+        ArrayList<District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
         int playerGolds = player.getGolds();
         District districtToDestroy = null;
 
+        // Warlord can't destroy a Bishop district
+        String characterName;
+        if (playerToDestroy.getCharacter() == null)
+            characterName = "";
+        else
+            characterName = playerToDestroy.getCharacter().getName();
+
+        if (characterName.equals("Bishop"))
+            playerToDestroyIsBishop = true;
+
         // Warlord can't destroy a completed city.
         if (playerToDestroyCitySize >= 8)
-            return null;
+            playerToDestroyHasCompletedCity = true;
 
-        for (District districtToCheck : playerToDestroyCity){
-            // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
-            if(!districtToCheck.getName().equals("Keep") && districtToCheck.getValue() - 1 <= playerGolds){
-                districtToDestroy =
-                        warlordInterestScore(districtToDestroy, playerToDestroy) < warlordInterestScore(districtToCheck, playerToDestroy)
-                        ? districtToDestroy : districtToCheck;
+        if (!playerToDestroyIsBishop && !playerToDestroyHasCompletedCity)
+            for (District districtToCheck : playerToDestroyCity) {
+                // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
+                if ((!districtToCheck.getName().equals("Keep")) && districtToCheck.getValue() - 1 <= playerGolds) {
+                    districtToDestroy =
+                            warlordInterestScore(districtToCheck, playerToDestroy) > warlordInterestScore(districtToDestroy, playerToDestroy)
+                                    ? districtToCheck : districtToDestroy;
+                }
             }
-
-        }
+        PrintCitadels.printWarlordAdvancedChoice(playerToDestroy, playerToDestroyHasCompletedCity, playerToDestroyIsBishop, districtToDestroy);
         return districtToDestroy;
     }
+
+
     public ArrayList<Integer> chooseMagicianAction() {
         return(new ArrayList());
     }
@@ -289,8 +306,8 @@ public class Strategy {
      * @param player The player to process.
      * @return The color of the district that the player has more than 3 times.
      */
-    public String has4districtWithSameColour(Player player){
-        String[] listOfColour = {"Blue", "Red", "Green", "Yellow", "Purple"};
+    public String has3districtWithSameColour(Player player){
+        String[] listOfColour = {"Blue", "Red", "Green", "Yellow"};
         for (String colour : listOfColour){
             if (countNumberOfDistrictWithColor(player, colour) >= 3)
                 return colour;
