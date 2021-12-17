@@ -150,7 +150,6 @@ Tout les quartiers sont bien mit dans un deck qui est mélangé en début de par
 ## Bots
 Nous avons 3 types de bots qui reposent sur un systeme de phase de jeu. Il y a 3 phases de jeux, début de partie, fin de partie et dernier tour, commun à tous les bots et reposant sur le nombre de bâtiments posés dans la ville de chaque joueurs.
 
-<br>
 * Le premier bot tente d’accumuler le plus de points possible en cherchant a poser les bâtiments les plus chères. 
 * Le deuxième bot tente de poser les bâtiments avec les plus petits coûts pour essayer d’obtenir le bonus le plus rapidement possible.
 * Le troisième essaye de viser des joueurs en particulier et de prédire le personnages qu’ils ont choisit pour pouvoir les attaquer avec ses sorts. 
