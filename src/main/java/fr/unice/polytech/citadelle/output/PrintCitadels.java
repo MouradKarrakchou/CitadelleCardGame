@@ -282,12 +282,14 @@ public class PrintCitadels {
 		System.out.println(colorize("He analysed the board and sew that "+playerWithMostGold.getName()+" has the mostGolds.",ITALIC()));
 	}
 
-	public static void printWarlordAdvancedChoice(Player playerToDestroy, boolean playerToDestroyHasCompletedCity, District destroyedDistrict){
+	public static void printWarlordAdvancedChoice(Player playerToDestroy, boolean playerToDestroyHasCompletedCity, boolean playerToDestroyIsBishop, District destroyedDistrict){
 		System.out.println("STRATEGY:");
 		System.out.println(colorize("The bot tries to guess who is the player that currently has a better score than him.",ITALIC()));
 		System.out.println(colorize("He predicts that " + playerToDestroy.getName() + " was the player to attack.",ITALIC()));
 		if (playerToDestroyHasCompletedCity){
 			System.out.println(colorize("However, " + playerToDestroy.getName() + " has completed his city.",ITALIC()));
+		} else if (playerToDestroyIsBishop) {
+			System.out.println(colorize("However, " + playerToDestroy.getName() + " is the bishop, player Warlord prefer cancel his spell.", ITALIC()));
 		} else {
 			if (destroyedDistrict == null)
 				System.out.println(colorize("Warlord strategy algorithm didn't find it interesting to destroy a building.",ITALIC()));

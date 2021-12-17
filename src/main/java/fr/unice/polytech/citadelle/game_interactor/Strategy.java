@@ -200,17 +200,30 @@ public class Strategy {
      * @return The district to destroy (can be null if the spell is not used).
      */
     public District chooseDistrictToDestroy(Player playerToDestroy) {
+        //Flags
+        boolean playerToDestroyHasCompletedCity = false;
+        boolean playerToDestroyIsBishop = false;
+
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
         ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
-        boolean playerToDestroyHasCompletedCity = false;
         int playerGolds = player.getGolds();
         District districtToDestroy = null;
 
-        // Warlord can't destroy a completed city.
-        if (playerToDestroyCitySize >= 8){
-            playerToDestroyHasCompletedCity = true;
-        }
+        // Warlord can't destroy a Bishop district
+        String characterName;
+        if (playerToDestroy.getCharacter() == null)
+            characterName = "";
         else
+            characterName = playerToDestroy.getCharacter().getName();
+
+        if(characterName.equals("Bishop"))
+            playerToDestroyIsBishop = true;
+
+        // Warlord can't destroy a completed city.
+        if (playerToDestroyCitySize >= 8)
+            playerToDestroyHasCompletedCity = true;
+
+        if (!playerToDestroyIsBishop && !playerToDestroyHasCompletedCity)
             for (District districtToCheck : playerToDestroyCity){
                 // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
                 if((!districtToCheck.getName().equals("Keep")) && districtToCheck.getValue() - 1 <= playerGolds){
@@ -220,7 +233,7 @@ public class Strategy {
                 }
         }
 
-        PrintCitadels.printWarlordAdvancedChoice(playerToDestroy, playerToDestroyHasCompletedCity, districtToDestroy);
+        PrintCitadels.printWarlordAdvancedChoice(playerToDestroy, playerToDestroyHasCompletedCity, playerToDestroyIsBishop, districtToDestroy);
         return districtToDestroy;
     }
     public ArrayList<Integer> chooseMagicianAction() {
