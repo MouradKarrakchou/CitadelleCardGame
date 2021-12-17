@@ -277,6 +277,24 @@ public class PrintCitadels {
 		System.out.println(colorize("After predicting the score of all the players he thinks that "+playerWithClosestScore.getName()+" has the score the closet to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.",ITALIC()));
 	}
 
+	public static void printWarlordAdvancedChoice(Player playerToDestroy, boolean playerToDestroyHasCompletedCity, District destroyedDistrict){
+		System.out.println("STRATEGY:");
+		System.out.println(colorize("The bot tries to guess who is the player that currently has a better score than him.",ITALIC()));
+		System.out.println(colorize("He predicts that " + playerToDestroy.getName() + " was the player to attack.",ITALIC()));
+		if (playerToDestroyHasCompletedCity){
+			System.out.println(colorize("However, " + playerToDestroy.getName() + " has completed his city.",ITALIC()));
+		} else {
+			if (destroyedDistrict == null)
+				System.out.println(colorize("Warlord strategy algorithm didn't find it interesting to destroy a building.",ITALIC()));
+			else if (destroyedDistrict.getColor().equals("Purple"))
+				System.out.println(colorize("Warlord strategy algorithm find it interesting to destroy a purple district.",ITALIC()));
+			else
+				System.out.println(colorize(
+						"Warlord strategy algorithm find it interesting to destroy a "
+								+ destroyedDistrict.getColor() + " district to reduce gold round collection.",ITALIC()));
+		}
+	}
+
 	public static void printHidCharacter(Character hidCharacter) {
 		String output = "\t- The character " + hidCharacter.getName() + " has been ";
 		String output2 = "hiddenly burned";

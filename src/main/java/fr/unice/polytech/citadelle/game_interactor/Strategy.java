@@ -143,7 +143,7 @@ public class Strategy {
             return 0;
 
         // If the player has 4 districts of the same colour.
-        String colorOfDistrictToDestroy = has4districtWithSameColour(playerToDestroy);
+        String colorOfDistrictToDestroy = has3districtWithSameColour(playerToDestroy);
         if (colorOfDistrictToDestroy != null){
             if (district.getColor().equals(colorOfDistrictToDestroy))
                 return 100000;
@@ -166,22 +166,25 @@ public class Strategy {
     public District chooseDistrictToDestroy(Player playerToDestroy) {
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
         ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
+        boolean playerToDestroyHasCompletedCity = false;
         int playerGolds = player.getGolds();
         District districtToDestroy = null;
 
         // Warlord can't destroy a completed city.
-        if (playerToDestroyCitySize >= 8)
-            return null;
-
-        for (District districtToCheck : playerToDestroyCity){
-            // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
-            if((!districtToCheck.getName().equals("Keep")) && districtToCheck.getValue() - 1 <= playerGolds){
-                districtToDestroy =
-                        warlordInterestScore(districtToCheck, playerToDestroy) > warlordInterestScore(districtToDestroy, playerToDestroy)
-                        ? districtToCheck : districtToDestroy;
-            }
-
+        if (playerToDestroyCitySize >= 8){
+            playerToDestroyHasCompletedCity = true;
         }
+        else
+            for (District districtToCheck : playerToDestroyCity){
+                // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
+                if((!districtToCheck.getName().equals("Keep")) && districtToCheck.getValue() - 1 <= playerGolds){
+                    districtToDestroy =
+                            warlordInterestScore(districtToCheck, playerToDestroy) > warlordInterestScore(districtToDestroy, playerToDestroy)
+                            ? districtToCheck : districtToDestroy;
+                }
+        }
+
+        PrintCitadels.printWarlordAdvancedChoice(playerToDestroy, playerToDestroyHasCompletedCity, districtToDestroy);
         return districtToDestroy;
     }
     public ArrayList<Integer> chooseMagicianAction() {
@@ -253,7 +256,7 @@ public class Strategy {
      * @param player The player to process.
      * @return The color of the district that the player has more than 3 times.
      */
-    public String has4districtWithSameColour(Player player){
+    public String has3districtWithSameColour(Player player){
         String[] listOfColour = {"Blue", "Red", "Green", "Yellow", "Purple"};
         for (String colour : listOfColour){
             if (countNumberOfDistrictWithColor(player, colour) >= 3)
