@@ -126,11 +126,7 @@ public class Behaviour {
 	}
 
 	public Player selectPlayerForWarlord() {
-<<<<<<< HEAD
-		return (strategy.choosePlayerForWarlordRandom());
-=======
 		return(strategy.choosePlayerForWarlordAdvanced());
->>>>>>> 9b5652b2bbc59c57e813bf3be71e78bae06785f2
 	}
 
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
