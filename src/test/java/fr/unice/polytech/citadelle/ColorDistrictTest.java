@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class ColorDistrictTest {
-    Referee referee = new Referee(new Board());
+    /**Referee referee = new Referee(new Board());
 
 
     Board board;
@@ -220,6 +220,6 @@ public class ColorDistrictTest {
 
         behavior.play(Mockito.any(), Mockito.any());
         assertEquals(1, behavior.getPlayer().getGolds());
-    }
+    }*/
 
 }

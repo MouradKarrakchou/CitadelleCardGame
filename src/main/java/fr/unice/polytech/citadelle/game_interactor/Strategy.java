@@ -115,7 +115,9 @@ public class Strategy {
         listOfCharacterToNotSteal.add("Thief");
         listOfCharacterToNotSteal.addAll(board.getListOfPlayerWhoHasAlreadyPlayedStringVersion());
         Player playerWithMostGolds=findThePlayerWithMostGolds();
+
         return(predict.predictWhoIsPlayer(playerWithMostGolds,listOfCharacterToNotSteal));
+
 
     }
 
@@ -138,6 +140,7 @@ public class Strategy {
                     mostGoldsThatAPlayerHas = player.getGolds();}
             }
         }
+        PrintCitadels.printThiefAdvancedChoice(playerWithMostGold);
         return (playerWithMostGold);
     }
 
