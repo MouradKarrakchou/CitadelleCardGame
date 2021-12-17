@@ -58,10 +58,17 @@ public class Strategy {
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
+        //ajoutez le printer 
+        //ajoutez character déjà vue
+        //ajoutez cartes brulées face visible
+        //si dan hashmap player on trouve un character alors return the character
+        //else predict
 
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
         return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
     }
+    
+    
     public Player findThePlayerWithClosestScoreAssassin(){
         int predictedScore=playerPredictScore(player);
         ArrayList<Player> listOfPlayer=board.getListOfPlayer();

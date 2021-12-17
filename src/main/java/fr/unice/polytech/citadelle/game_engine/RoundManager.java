@@ -279,8 +279,10 @@ public class RoundManager {
 		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
 			PrintCitadels.botIsDead(currentBehaviour.getPlayer());
 		}
-		else
-		currentBehaviour.play(currentPhase, hashOfCharacters);
+		else {
+			Character CharacterOfTheBehaviour = currentBehaviour.play(currentPhase, hashOfCharacters);
+			board.updateViewCharacter(currentBehaviour.getPlayer(), CharacterOfTheBehaviour);
+		}
 	}
 
 	/**
