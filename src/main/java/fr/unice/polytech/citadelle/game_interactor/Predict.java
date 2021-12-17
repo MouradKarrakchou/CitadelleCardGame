@@ -63,15 +63,15 @@ public class Predict {
 	}
 
 	ArrayList<Character> allCharacters() {
-		ArrayList<Character> listOfTargetableCharacter = new ArrayList<>();
+		ArrayList<Character> listOfAllCharacter = new ArrayList<>();
 
 		for(int i = 0; i < 8; i++)
-			listOfTargetableCharacter.add(listGetCharacter(i));
+			listOfAllCharacter.add(listGetCharacter(i));
 
-		return listOfTargetableCharacter;
+		return listOfAllCharacter;
 	}
 
-	private ArrayList<Character> targetableCharactersForPredictWhoIsPlayer(ArrayList<Character> listOfUntargetableCharacter) {
+	public ArrayList<Character> targetableCharactersForPredictWhoIsPlayer(ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = allCharacters();
 
 		for (Character character : listOfUntargetableCharacter)
