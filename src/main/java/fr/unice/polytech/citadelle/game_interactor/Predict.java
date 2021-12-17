@@ -18,7 +18,7 @@ public class Predict {
 	}
 
 	// A changer : il faut une methode qui predit ce que le player a.
-	public Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter) {
+	public Character predictWhoIsPlayer(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		Optional<Character> potentialCharacterOfTargetPlayer = checkAlreadyReveal(player);
 		//vérifer que l'on puisse renvoyer bien utiliser le sort sur ce character
 		if(potentialCharacterOfTargetPlayer.isPresent()) {

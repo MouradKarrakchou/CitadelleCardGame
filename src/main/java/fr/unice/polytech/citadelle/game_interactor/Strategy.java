@@ -4,6 +4,7 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.*;
@@ -98,10 +99,10 @@ public class Strategy {
     }
 
     public Character chooseCharacterForAssassinAdvanced(){
-        ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
-        listOfCharacterToNotKill.add("Assassin");
-        listOfCharacterToNotKill.addAll(board.getListOfPlayerWhoHasAlreadyPlayedStringVersion());
-        //listOfCharacterToNotKill.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
+        ArrayList<Character> listOfCharacterToNotKill=new ArrayList<>();
+        listOfCharacterToNotKill.add(board.getListOfCharacter().get(Initializer.ASSASSIN_INDEX));
+        listOfCharacterToNotKill.addAll(board.getListOfPlayerWhoHasAlreadyPlayed());
+        listOfCharacterToNotKill.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
 
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
         return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
@@ -262,7 +263,7 @@ public class Strategy {
         return null;
     }
 
-    public Character getAPrediction(Player player, ArrayList<String> listOfCharacterToNotKill){
+    public Character getAPrediction(Player player, ArrayList<Character> listOfCharacterToNotKill){
     	return predict.predictWhoIsPlayer(player,listOfCharacterToNotKill);
     }
 

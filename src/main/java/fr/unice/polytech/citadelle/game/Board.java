@@ -82,7 +82,7 @@ public class Board {
     /**
      * Update the LinkedHashMap of Character/Behaviour when a Behaviour Reveals his Character
      * @param character
-     * @param behaviour
+     * @param player
      */
     public void revealCharacter(Player player, Character character) {
     	hashOfViewCharacters.put(player, Optional.of(character));
