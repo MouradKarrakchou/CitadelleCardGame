@@ -293,5 +293,12 @@ public class PrintCitadels {
 		String output = "\t[!] The "+ player.getName()+" use his Warlord spell and destroy a "+playerToDestroy.getName()+"'s District :"+districtToDestroy.getName()+"(-"+(districtToDestroy.getValue()-1)+"golds).";
 		System.out.println(colorize(output, MAGENTA_TEXT()));
 	}
+	
+	public static void printResultOfPrediction() {}
+	
+	public static void printPlayerHasAlreadyRevealCharacter(Player currentPlayer, Player playerTarget, Character characterTarget) {
+		String output = "\t[!] The "+ currentPlayer.getName()+" want to use his spell on "+playerTarget.getName()+". He doesn't need to predict his Character because "+playerTarget.getName()+" has already reveal that he was "+characterTarget;
+		System.out.println(output);
+	}
 
 }

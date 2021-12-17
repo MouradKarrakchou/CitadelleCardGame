@@ -70,8 +70,8 @@ public class Strategy {
     public Player choosePlayerForWarlordRandom() {
         List<Player> list = board.getListOfPlayer();
         Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
-        while (randomPlayer.getName().equals("Warlord")) {
-            randomPlayer=list.get(randomInt(numberOfCharacter));
+        while (randomPlayer.equals(this.player)) {
+            randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
         }
         return randomPlayer;
     }
@@ -106,8 +106,13 @@ public class Strategy {
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
         Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(playerWithClosestScore);
 
-        if(potentialCharacterOfTargetPlayer.isPresent())
-        	return potentialCharacterOfTargetPlayer.get();
+        if(potentialCharacterOfTargetPlayer.isPresent()) {
+        	Character targetCharacter = potentialCharacterOfTargetPlayer.get();
+        	PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, playerWithClosestScore, targetCharacter);
+        	return targetCharacter;
+
+        }
+        //Ayoub ajoute un printer pour ca svp
         else
         	return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 
