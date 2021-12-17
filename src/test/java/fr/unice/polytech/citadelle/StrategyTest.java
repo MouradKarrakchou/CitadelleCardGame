@@ -364,5 +364,71 @@ public class StrategyTest {
 		assertTrue(predictCharacter.isPresent());
 		assertEquals(testCharacter3, predictCharacter.get());
 	}
+	@Test
+	void testchooseCharacterWithMostGolds() {
+		board.getListOfPlayer().clear();
+		Player player1=new Player("p1");
+		player1.setRole(new Thief());
+		Player player2=new Player("p2");
+		player2.setRole(new Magician());
+		Player player3=new Player("p3");
+		player3.setRole(new Merchant());
+
+		board.getListOfPlayer().add(player1);
+		board.getListOfPlayer().add(player2);
+		board.getListOfPlayer().add(player3);
+		strategy = new Strategy(8, board, player1);
+		player1.setGolds(3);
+		player2.setGolds(4);
+		player3.setGolds(5);
+		strategy.findThePlayerWithMostGolds();
+		assertEquals(player3, strategy.findThePlayerWithMostGolds());
+	}
+	@Test
+	void testchooseCharacterWithMostGolds2() {
+		//We now Try when the thief has the most golds
+		board.getListOfPlayer().clear();
+		Player player1=new Player("p1");
+		player1.setRole(new Thief());
+		Player player2=new Player("p2");
+		player2.setRole(new Magician());
+		Player player3=new Player("p3");
+		player3.setRole(new Merchant());
+
+		board.getListOfPlayer().add(player1);
+		board.getListOfPlayer().add(player2);
+		board.getListOfPlayer().add(player3);
+		strategy = new Strategy(8, board, player1);
+		player1.setGolds(5);
+		player2.setGolds(4);
+		player3.setGolds(3);
+		strategy.findThePlayerWithMostGolds();
+		assertEquals(player2, strategy.findThePlayerWithMostGolds());
+	}
+
+	@Test
+	void testchooseCharacterWithMostGolds3() {
+		//We now Try when the assassin has the most golds
+		board.getListOfPlayer().clear();
+		Player player1=new Player("p1");
+		player1.setRole(new Thief());
+		Player player2=new Player("p2");
+		player2.setRole(new Assassin());
+		Player player3=new Player("p3");
+		player3.setRole(new Merchant());
+
+		board.getListOfPlayerWhoPlayed().add(player2);
+
+
+		board.getListOfPlayer().add(player1);
+		board.getListOfPlayer().add(player2);
+		board.getListOfPlayer().add(player3);
+		strategy = new Strategy(8, board, player1);
+		player1.setGolds(5);
+		player2.setGolds(7);
+		player3.setGolds(3);
+		strategy.findThePlayerWithMostGolds();
+		assertEquals(player3, strategy.findThePlayerWithMostGolds());
+	}
 
 }
