@@ -32,10 +32,10 @@ import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
-import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 
 public class RoundManagerTest {
 	RoundManager roundMan;
@@ -79,15 +79,7 @@ public class RoundManagerTest {
 
 	
 	}
-	
-	@Test
-	public void runRoundsOnceTest() {
-		PhaseManager phaseMan=Mockito.mock(PhaseManager.class);
-		when(phaseMan.analyseGame(Mockito.any())).thenReturn(PhaseManager.LAST_TURN_PHASE);
-		roundMan.runRounds(phaseMan);
-		verify(phaseMan, times(1)).analyseGame(Mockito.any());
-	}
-	
+		
 	@Test
 	public void getTheListOfCityTest() {
 		Player p1 = new Player("p1");
@@ -114,7 +106,7 @@ public class RoundManagerTest {
 		Behaviour bot = spy(new Behaviour(new Player("testPlayer"), board));
 		bot.getPlayer().setRole(c);
 		roundMan.actionOfBehaviour(bot);
-		verify(bot, times(1)).play(Mockito.any(), Mockito.any());
+		verify(bot, times(1)).play(Mockito.any());
 	}
 	
 	
@@ -126,7 +118,6 @@ public class RoundManagerTest {
 	
 	@Test
 	public void askEachCharacterToPlayTest() {
-		PhaseManager phaseMan = new PhaseManager();
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
 		hashCharacter = roundMan.getHashOfCharacters();
 		
@@ -150,7 +141,7 @@ public class RoundManagerTest {
 		hashCharacter.put(thief, behaviour2);		
 		hashCharacter.put(architect, behaviour3);		
 		
-		roundMan.askEachCharacterToPlay(phaseMan);
+		roundMan.askEachCharacterToPlay();
 		verify(roundMan, times(3)).actionOfBehaviour(Mockito.any());
 	
 	}

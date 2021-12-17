@@ -327,5 +327,43 @@ public class StrategyTest {
 		verify(strategy, times(1)).getAPrediction(any(), any());
 
 	}
+	
+	@Test
+	@RepeatedTest(100)
+	void getCharacterOfPlayerTest() {
+		strategy = new Strategy(8, board, botAssassin.getPlayer());
+		ArrayList<Player> listOfPlayers = board.getListOfPlayer();
+		listOfPlayers.clear();
+
+		
+		Player player1 = new Player("player1");
+		Character testCharacter1 = new Character("testCharacter1", 0);
+		player1.setRole(testCharacter1);
+		
+		Player player2 = new Player("player2");
+		Character testCharacter2 = new Character("testCharacter2", 0);
+		player2.setRole(testCharacter2);
+
+		
+		Player player3 = new Player("player3");
+		Character testCharacter3 = new Character("testCharacter3", 0);
+		player3.setRole(testCharacter3);
+		
+		listOfPlayers.add(player1);
+		listOfPlayers.add(player2);
+		listOfPlayers.add(player3);
+
+		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayers);
+		
+		Player botPlayer = botAssassin.getPlayer();
+		botPlayer= player1;
+		board.revealCharacter(player3, testCharacter3);
+		board.revealCharacter(player2, testCharacter2);
+
+
+		Optional<Character> predictCharacter = strategy.getCharacterOfPlayer(player3);
+		assertTrue(predictCharacter.isPresent());
+		assertEquals(testCharacter3, predictCharacter.get());
+	}
 
 }

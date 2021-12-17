@@ -71,8 +71,8 @@ public class Strategy {
     public Player choosePlayerForWarlordRandom() {
         List<Player> list = board.getListOfPlayer();
         Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
-        while (randomPlayer.equals(this.player)) {
-            randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
+        while (randomPlayer.getName().equals("Warlord")) {
+            randomPlayer=list.get(randomInt(numberOfCharacter));
         }
         return randomPlayer;
     }
@@ -86,27 +86,16 @@ public class Strategy {
         List<Player> listOfPlayers = board.getListOfPlayer();
 
         Player playerToDestroy = null;
-        int scoreOfPlayerToDestroy = -1;
+        int scoreOfPlayerToDestroy = 0;
 
         for (Player playerToCheck : listOfPlayers) {
             // For now Warlord will not self-destroy a district.
             if ((playerToCheck != player) && playerPredictScore(playerToCheck) > scoreOfPlayerToDestroy){
-                    playerToDestroy = playerToCheck;
-                    scoreOfPlayerToDestroy = playerPredictScore(playerToCheck);
-                }
+                playerToDestroy = playerToCheck;
+                scoreOfPlayerToDestroy = playerPredictScore(playerToCheck);
+            }
         }
-
-        if (playerToDestroy == null)
-            return null;
-
-        // A player should always have an associated character when this method is called.
-        String playerToCheckCharacterName;
-        if (playerToDestroy.getCharacter() == null)
-            playerToCheckCharacterName = "";
-        else
-            playerToCheckCharacterName = playerToDestroy.getCharacter().getName();
-
-        return playerToCheckCharacterName.equals("Beshop") ? null : playerToDestroy;
+        return playerToDestroy;
     }
 
     public Character chooseCharacterForAssassinAdvanced(){
@@ -116,17 +105,7 @@ public class Strategy {
         //listOfCharacterToNotKill.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
 
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
-        Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(playerWithClosestScore);
-
-        if(potentialCharacterOfTargetPlayer.isPresent()) {
-        	Character targetCharacter = potentialCharacterOfTargetPlayer.get();
-        	PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, playerWithClosestScore, targetCharacter);
-        	return targetCharacter;
-
-        }
-        //Ayoub ajoute un printer pour ca svp
-        else
-        	return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
+        return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 
     }
 
@@ -185,8 +164,8 @@ public class Strategy {
         PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
         return playerWithClosestScore;
     }
-
-    /**
+    
+     /**
      * For a given district, return the interest score the warlord has in destroying this district.
      * @param district The district to proceed.
      * @return The interest score the district.
@@ -237,7 +216,6 @@ public class Strategy {
         }
         return districtToDestroy;
     }
-
     public ArrayList<Integer> chooseMagicianAction() {
         return(new ArrayList());
     }
@@ -324,4 +302,7 @@ public class Strategy {
 		return predict;
 	}
 
+	public Optional<Character> getCharacterOfPlayer(Player player) {
+		return board.gethashOfViewCharacters().get(player);
+	}
 }
