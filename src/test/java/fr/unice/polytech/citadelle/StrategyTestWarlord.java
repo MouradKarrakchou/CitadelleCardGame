@@ -90,20 +90,20 @@ public class StrategyTestWarlord {
         assertEquals(bob, selectPlayerForWarlord);
     }
 
-//    @Test
-//    public void chooseDistrictToDestroyTest(){
-//        bob.buildDistrict(harbor);
-//        bob.buildDistrict(church);
-//        bob.buildDistrict(dragonGate);
-//        Strategy aliceStrategy = new Strategy(8, gameBoard, alice, predict);
-//
-//        alice.setGolds(4);
-//        assertNull(aliceStrategy.chooseDistrictToDestroy(bob));
-//
-//        alice.setGolds(5);
-//        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
-//
-//        alice.setGolds(6);
-//        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
-//    }
+    @Test
+    public void chooseDistrictToDestroyTest(){
+        bob.buildDistrict(harbor);
+        bob.buildDistrict(church);
+        bob.buildDistrict(dragonGate);
+        Strategy aliceStrategy = new Strategy(8, gameBoard, alice, predict);
+
+        alice.setGolds(4);
+        assertNull(aliceStrategy.chooseDistrictToDestroy(bob));
+
+        alice.setGolds(5);
+        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
+
+        alice.setGolds(6);
+        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
+    }
 }
