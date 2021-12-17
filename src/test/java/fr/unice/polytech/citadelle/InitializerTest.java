@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Player;
@@ -79,5 +80,17 @@ public class InitializerTest {
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharactersSpy = spy(hashOfCharacters);
 		init.fillHashOfCharacter(hashOfCharactersSpy, new Character("testCharacter", 0), new Behaviour(new Player("testPlayer"), board));
 		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
+	}
+	
+	@Test
+	public void initTheHashOfViewCharactersTest() {
+		ArrayList<Player> listOfPlayer = new ArrayList<>();
+		for(int i = 0 ; i < 5 ; i++)
+			listOfPlayer.add(new Player("player"+i));
+
+		
+		LinkedHashMap<Player, Optional<Character>> hashOfPlayer = new LinkedHashMap<Player, Optional<Character>>();
+		Initializer.initTheHashOfViewCharacters(hashOfPlayer, listOfPlayer);
+		assertEquals(5, hashOfPlayer.size());
 	}
 }

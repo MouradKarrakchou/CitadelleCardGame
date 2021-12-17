@@ -106,8 +106,13 @@ public class Strategy {
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
         Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(playerWithClosestScore);
 
-        if(potentialCharacterOfTargetPlayer.isPresent())
-        	return potentialCharacterOfTargetPlayer.get();
+        if(potentialCharacterOfTargetPlayer.isPresent()) {
+        	Character targetCharacter = potentialCharacterOfTargetPlayer.get();
+        	PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, playerWithClosestScore, targetCharacter);
+        	return targetCharacter;
+
+        }
+        //Ayoub ajoute un printer pour ca svp
         else
         	return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 

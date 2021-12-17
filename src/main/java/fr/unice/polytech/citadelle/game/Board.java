@@ -31,7 +31,6 @@ public class Board {
         this.deckDistrict = deckDistrict;
         this.deckCharacter = deckCharacter;
         this.listOfCharacter=listOfCharacter;
-        Initializer.initTheHashOfViewCharacters(hashOfViewCharacters, listOfPlayer);
     }
 
     public Board() {}
@@ -50,6 +49,8 @@ public class Board {
 
     public void setListOfPlayer(ArrayList<Player> listOfPlayer) {
 		this.listOfPlayer = listOfPlayer;
+        Initializer.initTheHashOfViewCharacters(hashOfViewCharacters, listOfPlayer);
+
 	}
 	
     public void incrementRoundNumber() {

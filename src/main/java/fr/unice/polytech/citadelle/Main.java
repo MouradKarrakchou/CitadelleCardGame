@@ -8,5 +8,6 @@ public class Main {
 			Controller controller = new Controller();
 			controller.initGame();
 			controller.runGame();
+			
 	}
 }
