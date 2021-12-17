@@ -325,7 +325,7 @@ public class PrintCitadels {
 	public static void printResultOfPrediction() {}
 	
 	public static void printPlayerHasAlreadyRevealCharacter(Player currentPlayer, Player playerTarget, Character characterTarget) {
-		String output = "\t[!] The "+ currentPlayer.getName()+" want to use his spell on "+playerTarget.getName()+". He doesn't need to predict his Character because "+playerTarget.getName()+" has already reveal that he was "+characterTarget;
+		String output = "\t[!] The "+ currentPlayer.getName()+" wants to use his spell on "+playerTarget.getName()+". He doesn't need to predict his Character because "+playerTarget.getName()+" has already reveal that he was "+characterTarget;
 		System.out.println(output);
 	}
 
