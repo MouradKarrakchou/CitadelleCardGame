@@ -125,7 +125,7 @@ public class PrintCitadels {
 	}
 
 	public static void printBuildDistrict(Player player, District district) {
-		String coloredOutput = colorize("[⛏] ", GREEN_TEXT());
+		String coloredOutput = colorize("[?] ", GREEN_TEXT());
 		System.out.print("\t"+coloredOutput + player.getName() + " builds ");
 		coloredOutput = colorize(district.toString(), getDistrictColor(district));
 		System.out.println(coloredOutput);
@@ -169,13 +169,13 @@ public class PrintCitadels {
 	}
 
 	public static void botIsDead(Player player) {
-		String output = "[\uD83D\uDC80] " + player.getName() + " was the " + player.getCharacter()
+		String output = "[?] " + player.getName() + " was the " + player.getCharacter()
 				+ ". He has been killed he will not play this turn";
 		System.out.println("\t"+colorize(output, RED_TEXT()));
 	}
 
 	public static void killCharacter(Character characterToDie) {
-		String output = "\t[\uD83D\uDD2A] The Assassin chooses to kill " + characterToDie;
+		String output = "\t[?] The Assassin chooses to kill " + characterToDie;
 		System.out.println(colorize(output, RED_TEXT()));
 	}
 

@@ -109,6 +109,7 @@ public class Board {
 
     }
 
+
 	public ArrayList<City> getListOfCity() {
 		return listOfPlayer.stream().
 				map(player -> player.getCity()).
