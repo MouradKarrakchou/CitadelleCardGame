@@ -196,7 +196,7 @@ public class Strategy {
      * @param playerToDestroy The player to proceed.
      * @return The district to destroy (can be null if the spell is not used).
      */
-    District chooseDistrictToDestroy(Player playerToDestroy) {
+    public District chooseDistrictToDestroy(Player playerToDestroy) {
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
         ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
         int playerGolds = player.getGolds();
@@ -208,10 +208,10 @@ public class Strategy {
 
         for (District districtToCheck : playerToDestroyCity){
             // Check if the current district isn't a keep and check if the player has enough money to destroy the district.
-            if(!districtToCheck.getName().equals("Keep") && districtToCheck.getValue() - 1 <= playerGolds){
+            if((!districtToCheck.getName().equals("Keep")) && districtToCheck.getValue() - 1 <= playerGolds){
                 districtToDestroy =
-                        warlordInterestScore(districtToDestroy, playerToDestroy) < warlordInterestScore(districtToCheck, playerToDestroy)
-                        ? districtToDestroy : districtToCheck;
+                        warlordInterestScore(districtToCheck, playerToDestroy) > warlordInterestScore(districtToDestroy, playerToDestroy)
+                        ? districtToCheck : districtToDestroy;
             }
 
         }

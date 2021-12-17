@@ -3,6 +3,7 @@ package fr.unice.polytech.citadelle;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Predict;
 import fr.unice.polytech.citadelle.game_interactor.Strategy;
@@ -12,12 +13,16 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class StrategyTestWarlord {
     private District green01;
     private District green03;
     private District green06;
 
+    private District harbor;
+    private District church;
+    private District dragonGate;
 
     private Board gameBoard;
     private Predict predict;
@@ -32,6 +37,10 @@ public class StrategyTestWarlord {
         green01 = new District("greenDistrict", 1, "Green", "empty");
         green03 = new District("greenDistrict", 3, "Green", "empty");
         green06 = new District("greenDistrict", 6, "Green", "empty");
+
+        harbor = new District("Harbor",4,"Green","Trade and Handicrafts");
+        church = new District("Church",2,"Blue","Religion");
+        dragonGate = new DragonGate("Dragon Gate", 6,"Purple","Prestige");
 
 
         gameBoard = Initializer.createBoard(Initializer.createListOfAllCharacter());
@@ -79,5 +88,22 @@ public class StrategyTestWarlord {
         // peter will try to destroy a bob's district, second on the predicted leaderboard.
         Player selectPlayerForWarlord = bobStrategy.choosePlayerForWarlordAdvanced();
         assertEquals(bob, selectPlayerForWarlord);
+    }
+
+    @Test
+    public void chooseDistrictToDestroyTest(){
+        bob.buildDistrict(harbor);
+        bob.buildDistrict(church);
+        bob.buildDistrict(dragonGate);
+        Strategy aliceStrategy = new Strategy(8, gameBoard, alice, predict);
+
+        alice.setGolds(4);
+        assertNull(aliceStrategy.chooseDistrictToDestroy(bob));
+
+        alice.setGolds(5);
+        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
+
+        alice.setGolds(6);
+        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
     }
 }
