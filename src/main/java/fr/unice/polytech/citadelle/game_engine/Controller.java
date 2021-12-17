@@ -40,7 +40,7 @@ public class Controller {
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter = new LinkedHashMap<>();
 		ArrayList<Character> listOfAllCharacter = Initializer.createListOfAllCharacter();
 
-		Board board = Initializer.createBoard();
+		Board board = Initializer.createBoard(listOfAllCharacter);
 		referee = new Referee(board);
 		listOfAllBehaviour = Initializer.createListOfBehaviour(board);
 
