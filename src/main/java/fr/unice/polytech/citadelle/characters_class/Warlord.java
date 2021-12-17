@@ -19,24 +19,19 @@ public class Warlord extends Character {
     }
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-        Character characterToDestroy= bot.selectCharacterForSpell(hashOfCharacters);
         super.spellOfTurnDistrictFamily(bot,"Warlord","Soldiery");
-        if (characterToDestroy==null)
+        Player playerToDestroy= bot.selectPlayerForWarlord();
+        if (playerToDestroy==null)
             PrintCitadels.warlordDontUseSpell(bot.getPlayer());
         else{
-            if (hashOfCharacters.get(characterToDestroy).isPresent()) {
+            District districtToDestroy=bot.chooseDistrictToDestroy(playerToDestroy);
 
-                Player playerToDetroy=hashOfCharacters.get(characterToDestroy).get().getPlayer();
-                District districtToDestroy=bot.chooseDistrictToDestroy(playerToDetroy);
-
-                if (districtToDestroy==null)
-                    PrintCitadels.warlordDontUseSpell(bot.getPlayer());
-                else
-                {destroyDistrict(playerToDetroy,districtToDestroy,bot.getPlayer());
-                    PrintCitadels.warlordDoHisSpell(bot.getPlayer(),characterToDestroy, districtToDestroy);}
-            }
+            if (districtToDestroy==null)
+                PrintCitadels.warlordDontUseSpell(bot.getPlayer());
             else
-                PrintCitadels.warlordTargetedACharacterUnpicked(bot.getPlayer(),characterToDestroy);}
+                {
+                    destroyDistrict(playerToDestroy,districtToDestroy,bot.getPlayer());
+                    PrintCitadels.warlordDoHisSpell(bot.getPlayer(),playerToDestroy, districtToDestroy);}}
     }
 
 }

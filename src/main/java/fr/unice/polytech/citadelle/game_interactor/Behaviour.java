@@ -106,13 +106,12 @@ public class Behaviour {
 			case "Thief" -> character = chooseCharacterForThief(hashOfCharacters);
 			case "Assassin" -> character = chooseCharacterForAssassin(hashOfCharacters);
 			case "Magician" -> character = chooseCharacterForMagician(hashOfCharacters);
-			case "Warlord" -> character = chooseCharacterForWarlord(hashOfCharacters);
 		}
 		return (character);
 	}
 
-	private Character chooseCharacterForWarlord(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return(strategy.chooseCharacterForWarlordRandom(hashOfCharacters));
+	public Player selectPlayerForWarlord() {
+		return(strategy.choosePlayerForWarlordRandom());
 	}
 
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
@@ -263,4 +262,5 @@ public class Behaviour {
 	public District chooseDistrictToDestroy(Player playerToDestroy) {
 		return(strategy.chooseDistrictToDestroy(playerToDestroy));
 	}
+
 }

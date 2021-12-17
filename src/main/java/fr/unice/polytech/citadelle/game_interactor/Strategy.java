@@ -55,13 +55,13 @@ public class Strategy {
         return randomCharacter;
     }
 
-    public Character chooseCharacterForWarlordRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-        List<Character> list = hashOfCharacters.keySet().stream().toList();
-        Character randomCharacter=list.get(randomInt(8));
-        while (randomCharacter.getName().equals("Warlord") || randomCharacter.getName().equals("Bishop")) {
-            randomCharacter=list.get(randomInt(numberOfCharacter));
+    public Player choosePlayerForWarlordRandom() {
+        List<Player> list = board.getListOfPlayer();
+        Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
+        while (randomPlayer.getName().equals("Warlord")) {
+            randomPlayer=list.get(randomInt(numberOfCharacter));
         }
-        return randomCharacter;
+        return randomPlayer;
     }
 
     public Character chooseCharacterForAssassinAdvanced(){

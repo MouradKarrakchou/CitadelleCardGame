@@ -289,13 +289,9 @@ public class PrintCitadels {
 		System.out.println(colorize(output, MAGENTA_TEXT()));
 	}
 
-	public static void warlordDoHisSpell(Player player,Character characterToDestroy, District districtToDestroy) {
-		String output = "\t[!] The "+ player.getName()+" use His Warlord spell and destroy a "+characterToDestroy.getName()+"'s District :"+districtToDestroy.getName()+"(-"+(districtToDestroy.getValue()-1)+"golds).";
+	public static void warlordDoHisSpell(Player player, Player playerToDestroy, District districtToDestroy) {
+		String output = "\t[!] The "+ player.getName()+" use his Warlord spell and destroy a "+playerToDestroy.getName()+"'s District :"+districtToDestroy.getName()+"(-"+(districtToDestroy.getValue()-1)+"golds).";
 		System.out.println(colorize(output, MAGENTA_TEXT()));
 	}
 
-	public static void warlordTargetedACharacterUnpicked(Player player, Character characterToDestroy) {
-		String output = "\t[!] The "+ player.getName()+" use His Warlord spell and try to destroy a "+characterToDestroy.getName()+"'s District but no one picked this character.";
-		System.out.println(colorize(output, MAGENTA_TEXT()));
-	}
 }
