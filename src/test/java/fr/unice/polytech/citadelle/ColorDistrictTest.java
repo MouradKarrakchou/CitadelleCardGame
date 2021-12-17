@@ -26,7 +26,7 @@ public class ColorDistrictTest {
     Referee referee = new Referee(new Board());
 
 
-    Board board;
+    Board board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
 
     @Test
     //Haunted City built before the last round
@@ -170,7 +170,7 @@ public class ColorDistrictTest {
         behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
         behavior.getPlayer().setGolds(0);
 
-        behavior.play(Mockito.any(), Mockito.any());
+        behavior.play(Mockito.any());
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
@@ -185,7 +185,7 @@ public class ColorDistrictTest {
         behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
         behavior.getPlayer().setGolds(0);
 
-        behavior.play(Mockito.any(), Mockito.any());
+        behavior.play(Mockito.any());
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
@@ -200,7 +200,7 @@ public class ColorDistrictTest {
         behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
         behavior.getPlayer().setGolds(0);
 
-        behavior.play(Mockito.any(), Mockito.any());
+        behavior.play(Mockito.any());
         assertEquals(2, behavior.getPlayer().getGolds());
         //2 golds because the merchant earn one gold at the beginning of his turn
         //So one gold from the beginning of the turn plus one gold from the spell of the district
@@ -218,7 +218,7 @@ public class ColorDistrictTest {
         behavior.getPlayer().buildDistrict(new SchoolOfMagic("School of Magic", 6,"Purple","Prestige"));
         behavior.getPlayer().setGolds(0);
 
-        behavior.play(Mockito.any(), Mockito.any());
+        behavior.play(Mockito.any());
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
