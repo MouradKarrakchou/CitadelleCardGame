@@ -103,22 +103,22 @@ public class Behaviour {
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
 		List<Character> list = hashOfCharacters.keySet().stream().toList();
 		switch (this.player.getCharacter().getName()) {
-			case "Thief" -> character = chooseCharacterForThiefRandom(hashOfCharacters);
-			case "Assassin" -> character = chooseCharacterForAssassinRandom(hashOfCharacters);
-			case "Magician" -> character = chooseCharacterForMagicianRandom(hashOfCharacters);
+			case "Thief" -> character = chooseCharacterForThief(hashOfCharacters);
+			case "Assassin" -> character = chooseCharacterForAssassin(hashOfCharacters);
+			case "Magician" -> character = chooseCharacterForMagician(hashOfCharacters);
 		}
 		return (character);
 	}
 
-	private Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return(strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
-	private Character chooseCharacterForAssassinRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return(strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
+	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		return(strategy.chooseCharacterForAssassinAdvanced());
 	}
 
-	private Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return(strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
 

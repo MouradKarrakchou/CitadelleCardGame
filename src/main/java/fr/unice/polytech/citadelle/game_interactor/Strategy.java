@@ -16,7 +16,7 @@ public class Strategy {
     Predict predict;
     int numberOfCharacter;
     public Strategy(int numberOfCharacter,Board board,Player player){
-        predict=new Predict();
+        predict=new Predict(board);
         this.numberOfCharacter=numberOfCharacter;
         this.board=board;
         this.player=player;

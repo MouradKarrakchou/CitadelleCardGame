@@ -11,34 +11,36 @@ import java.util.ArrayList;
 public class Predict {
     Board board;
 
-    public Predict(){}
+    public Predict(Board board){
+        this.board=board;
+    }
 
     //A changer : il faut une methode qui predit ce que le player a.
     Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
 
 
         if(canBeArchitect(player, listOfUntargetableCharacter))
-            return new Architect();
+            return listGetCharacter("Architect");
 
         if(canBeBishop(player, listOfUntargetableCharacter))
-            return new Bishop();
+            return listGetCharacter("Bishop");
 
         if(canBeKing(player, listOfUntargetableCharacter))
-            return new King();
+            return listGetCharacter("King");
 
         if(canBeMerchant(player, listOfUntargetableCharacter))
-            return new Merchant();
+            return listGetCharacter("Merchant");
 
         if(canBeThief(player, listOfUntargetableCharacter))
-            return new Thief();
+            return listGetCharacter("Thief");
 
         if(canBeMagician(player, listOfUntargetableCharacter))
-            return new Magician();
+            return listGetCharacter("Magician");
 
         if(canBeWarlord(player, listOfUntargetableCharacter))
-            return new Warlord();
+            return listGetCharacter("Warlord");
 
-        return new Assassin();
+        return listGetCharacter("Assassin");
     }
 
     ArrayList<String> allCharacters() {
@@ -155,6 +157,13 @@ public class Predict {
                 return true;
 
         return false;
+    }
+    Character listGetCharacter(String name){
+        ArrayList<Character> listOfCharacter=board.getListOfCharacter();
+        for (int k=0;k<listOfCharacter.size();k++)
+        {if (name.equals(listOfCharacter.get(k).getName()))
+                return(listOfCharacter.get(k));}
+        return(null);
     }
 
 }
