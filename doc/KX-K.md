@@ -76,7 +76,8 @@ La gestion du jeu est un élément qui s’est vu séparé du jeu suite à un re
 | [#29](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/29) | Refactor de la classe d’initialisation | 03/12/2021 |  [BONNET Kilian](https://github.com/KilianBonnet) |
 
 ## La gestion des interactions du jeu
-Les éléments permettant les interactions avec le jeu se situent dans le package [game_interacor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor). Ces interactions _(gérées par [l’executor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Executor.java))_ sont décidées en fonction du comportement associé à un joueur. Cette implémentation fut en grande partie menée par [LE BIHAN Léo](https://github.com/LeBihanLeo). Vers le début de ce mois de décembre, l’ajout de stratégies à été décidé et est en cour d’implémentation afin d’ajouter aux différents bots des stratégies plus ou moins complexes basées sur une analyse plus poussée des différents paramètres du jeu (joueurs, personnages, bâtiments construits, … ).
+Les éléments permettant les interactions avec le jeu se situent dans le package [game_interacor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor). Ces interactions _(gérées par [l’executor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Executor.java))_ sont décidées en fonction du comportement associé à un joueur. Cette implémentation fut en grande partie menée par [LE BIHAN Léo](https://github.com/LeBihanLeo). Vers le début de ce mois de décembre, l’ajout de stratégies a été décidé et est en cours d’implémentation afin d’ajouter aux différents bots des stratégies plus ou moins complexes basées sur une analyse plus poussée des différents paramètres du jeu (joueurs, personnages, bâtiments construits, … ).
+
 ### Issues associés (les noms seront indiqués):
 | Isssue  | Description  | Date | Nom |
 |---------|--------------|------|-----|
@@ -84,14 +85,25 @@ Les éléments permettant les interactions avec le jeu se situent dans le packag
 | [#10](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/10) | Stratégie de fin de jeu | 21/11/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
 | [#15](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/15) | Stratégie du choix de personnage | 24/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 | [#20](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/20) | Mise à jour de la stratégie de fin de jeu/tour  | 01/12/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
-| [#21](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/21) | Bot pour rush les quartiers pas cher | 30/11/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
-| [#22](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/22) | Refactor de l'implémentation du bot  | 01/12/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#21](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/21) | Bot pour rush les quartiers pas cher | 30/11/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#22](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/22) | Refactor de l'implémentation du bot  | 01/12/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
 | [#40](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Implémentation de la stratégie et de la prédiction | 14/12/2021 |  [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
-| [#47](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/47) | Façon intelligente d'uiliser le sort du Voleur | 17/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#47](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/47) | Façon intelligente d'uiliser le sort du Voleur | 17/12/2021 |  [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
 | [#49](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Façon intelligente d'uiliser le sort du Magicien | 17/12/2021 | [COLLET Philippe](https://github.com/collet) |
-| [#50](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/50) | Façon intelligente d'uiliser le sort du Condottiere | 17/12/2021 |[KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
+| [#50](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/50) | Façon intelligente d'uiliser le sort du Condottiere | 17/12/2021 [BONNET Kilian](https://github.com/KilianBonnet) |
 | [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 | [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+
+## La gestion de l’affichage du jeu
+L’affichage du jeu permet de véhiculer rapidement les informations essentielles du jeu afin de pouvoir comprendre facilement l’état d’avancement de la partie. Cette implémentation a été en partie réalisée par [Kilian Bonnet](https://github.com/KilianBonnet) | en s’appuyant sur la librairie [JColor](https://github.com/dialex/JColor) conçue par [Diogo Nunes](https://github.com/dialex).
+
+### Issues associés (les noms seront indiqués):
+| Isssue  | Description  | Date | Nom |
+|---------|--------------|------|-----|
+| [#18](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/18) | Couleurs sur les logs | 26/11/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#38](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/38) | Amélioration des logs | 07/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet)  & [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
+| [#45](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/45) | Amélioration de la visibilité des logs | 14/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+
 
 # Fonctionnement de l’équipe
 

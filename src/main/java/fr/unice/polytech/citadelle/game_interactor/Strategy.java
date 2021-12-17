@@ -108,6 +108,41 @@ public class Strategy {
         return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 
     }
+    public Character chooseCharacterForThiefAdvanced(){
+        ArrayList<Character> listOfCharacterToNotSteal=new ArrayList<>();
+        listOfCharacterToNotSteal.add(board.getListOfCharacter().get(Initializer.ASSASSIN_INDEX));
+        listOfCharacterToNotSteal.add(board.getListOfCharacter().get(Initializer.THIEF_INDEX));
+        listOfCharacterToNotSteal.addAll(board.getListOfPlayerWhoHasAlreadyPlayed());
+        Player playerWithMostGolds=findThePlayerWithMostGolds();
+        return(predict.predictWhoIsPlayer(playerWithMostGolds,listOfCharacterToNotSteal));
+
+
+    }
+
+    private Player findThePlayerWithMostGolds() {
+        ArrayList<Player> listOfPlayer= board.getListOfPlayer();
+        //In this list we got the Assassin (if there is one) and he can't steal from him
+        ArrayList<Player> listOfPlayerToNotTarget=board.getListOfPlayerWhoPlayed();
+        int k=0;
+        //We want to find the player with the PredictedScore the closest to the score of our Player
+        int mostGoldsThatAPlayerHas=listOfPlayer.get(k).getGolds();
+        Player playerWithMostGold=listOfPlayer.get(k);
+
+        for (Player playerComparing : listOfPlayer) {
+            if (playerWithMostGold.equals(this.player) || listOfPlayerToNotTarget.contains(player)){
+                playerWithMostGold = playerComparing;
+                mostGoldsThatAPlayerHas = player.getGolds();
+            }
+            else if (!playerComparing.equals(this.player)&& !listOfPlayerToNotTarget.contains(player)){
+                int goldOfPlayerComparing = playerComparing.getGolds();
+                if (mostGoldsThatAPlayerHas > goldOfPlayerComparing) {
+                    playerWithMostGold = playerComparing;
+                    mostGoldsThatAPlayerHas = player.getGolds();}
+            }
+        }
+        PrintCitadels.printThiefAdvancedChoice(playerWithMostGold);
+        return (playerWithMostGold);
+    }
 
     public Player findThePlayerWithClosestScoreAssassin(){
         int predictedScore=playerPredictScore(player);
