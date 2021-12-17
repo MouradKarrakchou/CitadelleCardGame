@@ -1,6 +1,8 @@
 package fr.unice.polytech.citadelle.output;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.diogonunes.jcolor.Attribute;
 
@@ -48,7 +50,8 @@ public class PrintCitadels {
 	}
 	
 	public static void playerStartTurn(Character character, Player player) {
-		String output = "It is up to the "+ character +" to play ("+player.getName()+", "+stringColoredGold(player.getGolds())+"):";
+		String output1=""+player.getDistrictCards().stream().map(district->colorize(district.getName()+" ("+district.getValue()+")",getDistrictColor(district))).collect(Collectors.toList());
+		String output = "It is up to the "+ character +" to play ("+player.getName()+", "+stringColoredGold(player.getGolds())+", Hand:"+output1+"):";
 		System.out.println(colorize(output, BOLD()));
 	}
 
