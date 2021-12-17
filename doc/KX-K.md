@@ -48,7 +48,7 @@ Le la même façon que les cartes de personnages, l'implémentation des cartes d
 
 
 ## La représentation du jeu
-La représentation jeu correspond à la façon dont le plateau de jeu de Citadelle a été pensé et implémenté dans le code. Ces différents aspects et choix de modélisation sont trouvables dans le package game. Cet élément regroupant à la fois joueurs et cartes, cette implémentation fut faite par l'ensemble du groupe. 
+La représentation jeu correspond à la façon dont le plateau de jeu de Citadelle a été pensé et implémenté dans le code. Ces différents aspects et choix de modélisation sont trouvables dans le package [game](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game). Cet élément regroupant à la fois joueurs et cartes, cette implémentation fut faite par l'ensemble du groupe. 
 
 ### Issues associés (les noms seront indiqués):
 | Isssue  | Description  | Date | Nom |
@@ -74,6 +74,24 @@ La gestion du jeu est un élément qui s’est vu séparé du jeu suite à un re
 | [#8](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/6) | Gestion de la fin du jeu à 8 quartiers posés | 16/11/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
 | [#22](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/22) | Refactor de la classe d’initialisation | 27/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 | [#29](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/29) | Refactor de la classe d’initialisation | 03/12/2021 |  [BONNET Kilian](https://github.com/KilianBonnet) |
+
+## La gestion des interactions du jeu
+Les éléments permettant les interactions avec le jeu se situent dans le package [game_interacor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor). Ces interactions _(gérées par [l’executor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Executor.java))_ sont décidées en fonction du comportement associé à un joueur. Cette implémentation fut en grande partie menée par [LE BIHAN Léo](https://github.com/LeBihanLeo). Vers le début de ce mois de décembre, l’ajout de stratégies à été décidé et est en cour d’implémentation afin d’ajouter aux différents bots des stratégies plus ou moins complexes basées sur une analyse plus poussée des différents paramètres du jeu (joueurs, personnages, bâtiments construits, … ).
+### Issues associés (les noms seront indiqués):
+| Isssue  | Description  | Date | Nom |
+|---------|--------------|------|-----|
+| [#9](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/9) | Passer son tour après avoir construit un quarier | 18/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+| [#10](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/10) | Stratégie de fin de jeu | 21/11/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#15](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/15) | Stratégie du choix de personnage | 24/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+| [#20](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/20) | Mise à jour de la stratégie de fin de jeu/tour  | 01/12/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#21](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/21) | Bot pour rush les quartiers pas cher | 30/11/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#22](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/22) | Refactor de l'implémentation du bot  | 01/12/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#40](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Implémentation de la stratégie et de la prédiction | 14/12/2021 |  [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
+| [#47](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/47) | Façon intelligente d'uiliser le sort du Voleur | 17/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#49](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Façon intelligente d'uiliser le sort du Magicien | 17/12/2021 | [COLLET Philippe](https://github.com/collet) |
+| [#50](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/50) | Façon intelligente d'uiliser le sort du Condottiere | 17/12/2021 |[KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
+| [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+| [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 
 # Fonctionnement de l’équipe
 
