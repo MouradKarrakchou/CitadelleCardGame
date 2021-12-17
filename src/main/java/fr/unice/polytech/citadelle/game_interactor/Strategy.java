@@ -55,6 +55,10 @@ public class Strategy {
         return randomCharacter;
     }
 
+    /**
+     * Randomly choose a player (self-excluded) to destroy a district.
+     * @return The chosen player.
+     */
     public Player choosePlayerForWarlordRandom() {
         List<Player> list = board.getListOfPlayer();
         Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
@@ -64,6 +68,27 @@ public class Strategy {
         return randomPlayer;
     }
 
+    /**
+     * According to the G.L.P.A. (game leaderboard prediction algorithm), the Warlord will attack the player in front of him.
+     * If the G.L.P.A. predicts the player as the first, Warlord will attack the player behind him.
+     * @return The player to attack. (can be null if the spell is not used).
+     */
+    public Player choosePlayerForWarlordAdvanced() {
+        List<Player> listOfPlayers = board.getListOfPlayer();
+
+        Player playerToDestroy = null;
+        int scoreOfPlayerToDestroy = 0;
+
+        for (Player playerToCheck : listOfPlayers) {
+            // For now Warlord will not self-destroy a district.
+            if ((playerToCheck != player) && playerPredictScore(playerToCheck) > scoreOfPlayerToDestroy){
+                playerToDestroy = playerToCheck;
+                scoreOfPlayerToDestroy = playerPredictScore(playerToCheck);
+            }
+        }
+        return playerToDestroy;
+    }
+
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
@@ -71,6 +96,7 @@ public class Strategy {
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
         return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
     }
+
     public Player findThePlayerWithClosestScoreAssassin(){
         int predictedScore=playerPredictScore(player);
         ArrayList<Player> listOfPlayer=board.getListOfPlayer();
