@@ -164,7 +164,7 @@ public class Strategy {
      * @param playerToDestroy The player to proceed.
      * @return The district to destroy (can be null if the spell is not used).
      */
-    District chooseDistrictToDestroy(Player playerToDestroy) {
+    public District chooseDistrictToDestroy(Player playerToDestroy) {
         int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
         ArrayList <District> playerToDestroyCity = playerToDestroy.getCity().getBuiltDistrict();
         int playerGolds = player.getGolds();
