@@ -8,6 +8,7 @@ import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.Laboratory;
 
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 
@@ -208,6 +209,7 @@ public class ColorDistrictTest {
     @Test
     //Test on play() method from Behavior with Warlord
     void playWTest() {
+        board = Initializer.createBoard(Initializer.createListOfAllCharacter());
         Character character = new Warlord();
         Behaviour behavior = spy(new Behaviour(new Player("testPlayer"), board));
 
