@@ -327,8 +327,7 @@ public class StrategyTest {
 		verify(strategy, times(1)).getAPrediction(any(), any());
 
 	}
-	
-	@Test
+
 	@RepeatedTest(100)
 	void getCharacterOfPlayerTest() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());

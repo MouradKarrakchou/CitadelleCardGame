@@ -36,6 +36,7 @@ public class CharacterTest {
     Merchant merchant;
     Warlord warlord;
     Board board;
+    ArrayList<Player> listOfPlayer;
 
     ArrayList<Behaviour> listOfBehaviour;
     DeckDistrict deckDistrict;
@@ -44,7 +45,8 @@ public class CharacterTest {
     public void init(){
         hashOfCharacters = new LinkedHashMap<>();
         deckDistrict=new DeckDistrict();
-        board = new Board(new ArrayList<Player>(),new ArrayList<Character>(),deckDistrict,new DeckCharacter());
+        listOfPlayer=new ArrayList<>();
+        board = new Board(listOfPlayer,new ArrayList<Character>(),deckDistrict,new DeckCharacter());
         board.getDeckDistrict().initialise();
 
         
@@ -67,6 +69,17 @@ public class CharacterTest {
         thief=new Thief();
         merchant=new Merchant();
         warlord=new Warlord();
+
+        //creation of the list of player
+        listOfPlayer.add(botKing.getPlayer());
+        listOfPlayer.add(botBishop.getPlayer());
+        listOfPlayer.add(botArchitecte.getPlayer());
+        listOfPlayer.add(botWarlord.getPlayer());
+        listOfPlayer.add(botAssassin.getPlayer());
+        listOfPlayer.add(botMagician.getPlayer());
+        listOfPlayer.add(botThief.getPlayer());
+        listOfPlayer.add(botMerchant.getPlayer());
+
 
         //we set the character of our bot
         botKing.getPlayer().setRole(king);
