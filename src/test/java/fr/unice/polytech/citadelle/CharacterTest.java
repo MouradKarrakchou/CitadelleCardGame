@@ -219,6 +219,7 @@ public class CharacterTest {
         assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
     }
+    
 
 
 }

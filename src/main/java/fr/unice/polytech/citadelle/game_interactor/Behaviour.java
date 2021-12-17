@@ -111,6 +111,10 @@ public class Behaviour {
 		return (character);
 	}
 
+	public Player selectPlayerForWarlord() {
+		return(strategy.choosePlayerForWarlordRandom());
+	}
+
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return(strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
@@ -252,8 +256,12 @@ public class Behaviour {
 	public ArrayList<Integer> chooseMagicianAction() {
 		//return an empty array if he wants to swap Cards with another Character
 		//return the position of the Cards that he wants to swap
-		return(new ArrayList());
+		return(strategy.chooseMagicianAction());
 		//(for now he always chooses to steal from another Character)
+	}
+
+	public District chooseDistrictToDestroy(Player playerToDestroy) {
+		return(strategy.chooseDistrictToDestroy(playerToDestroy));
 	}
 
 }

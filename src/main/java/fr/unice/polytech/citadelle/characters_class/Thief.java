@@ -12,6 +12,7 @@ public class Thief extends Character {
         super("Thief", 2);
     }
 
+    @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         Character characterToSteal= bot.selectCharacterForSpell(hashOfCharacters);
         if (hashOfCharacters.get(characterToSteal).isPresent()) {

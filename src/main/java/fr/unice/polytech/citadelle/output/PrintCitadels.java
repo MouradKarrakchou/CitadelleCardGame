@@ -99,7 +99,7 @@ public class PrintCitadels {
 	}
 
 	public static void printKingSpell(Player player) {
-		String output = "[!] The robot " + player.getName() + " has the king, he will play first next round.";
+		String output = "\t[!] The robot " + player.getName() + " has the king, he will play first next round.";
 		System.out.println(colorize(output, YELLOW_TEXT()));
 	}
 
@@ -283,4 +283,15 @@ public class PrintCitadels {
 		String output3 = ". (players can't see an pick it except for the last player.)";
 		System.out.println(output + colorize(output2, YELLOW_TEXT()) + output3);
 	}
+
+	public static void warlordDontUseSpell(Player player) {
+		String output = "\t[!] The "+ player.getName()+" chooses to not use his Warlord spell.";
+		System.out.println(colorize(output, MAGENTA_TEXT()));
+	}
+
+	public static void warlordDoHisSpell(Player player, Player playerToDestroy, District districtToDestroy) {
+		String output = "\t[!] The "+ player.getName()+" use his Warlord spell and destroy a "+playerToDestroy.getName()+"'s District :"+districtToDestroy.getName()+"(-"+(districtToDestroy.getValue()-1)+"golds).";
+		System.out.println(colorize(output, MAGENTA_TEXT()));
+	}
+
 }

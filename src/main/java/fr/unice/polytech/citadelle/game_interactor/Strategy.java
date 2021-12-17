@@ -63,11 +63,16 @@ public class Strategy {
         return randomCharacter;
     }
 
-    //ajoutez le printer 
-    //ajoutez character déjà vue
-    //ajoutez cartes brulées face visible
-    //si dan hashmap player on trouve un character alors return the character
-    //else predict
+
+    public Player choosePlayerForWarlordRandom() {
+        List<Player> list = board.getListOfPlayer();
+        Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
+        while (randomPlayer.getName().equals("Warlord")) {
+            randomPlayer=list.get(randomInt(numberOfCharacter));
+        }
+        return randomPlayer;
+    }
+
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
@@ -108,6 +113,19 @@ public class Strategy {
         }
         PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
         return playerWithClosestScore;
+    }
+    District chooseDistrictToDestroy(Player player){
+        if (player.getCity().getSizeOfCity()==8)
+            return(null);
+        for(int k=0;k<player.getCity().getSizeOfCity();k++){
+            District currentDistrictCheck=player.getCity().getBuiltDistrict().get(k);
+            if (currentDistrictCheck.getValue()<this.player.getGolds()-1 && !currentDistrictCheck.getName().equals("DragonGate"))
+                return(player.getCity().getBuiltDistrict().get(k));
+        }
+        return null;
+    }
+    public ArrayList<Integer> chooseMagicianAction() {
+        return(new ArrayList());
     }
 
     /**
@@ -167,6 +185,5 @@ public class Strategy {
 	public Predict getPredict() {
 		return predict;
 	}
-
 
 }
