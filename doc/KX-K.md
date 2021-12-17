@@ -141,3 +141,19 @@ Pendant la semaine, tous les membres étaient conscients du travail à faire et 
 
 
 # Avancement du projet
+## Règles métiers du jeux Citadelle 
+L’ensemble des personnages sont implementés avec leurs sorts. Les quartiers ont leurs couleurs et nous avons implementés les sorts spéciaux du Donjon, du Dracoport, de l'Université, de l'Ecole de Magie, de la Cour des miracles et de la Bibliothèque. Il nous manque donc les sorts des autres quartiers qui ont des sorts spéciaux.
+
+<br>
+Tout les quartiers sont bien mit dans un deck qui est mélangé en début de partie. Les règles de l’ordre de choix des personnages a aussi été respecté ainsi que l’ordre de jeu de chacun des personnages.
+
+## Bots
+Nous avons 3 types de bots qui reposent sur un systeme de phase de jeu. Il y a 3 phases de jeux, début de partie, fin de partie et dernier tour, commun à tous les bots et reposant sur le nombre de bâtiments posés dans la ville de chaque joueurs.
+
+<br>
+* Le premier bot tente d’accumuler le plus de points possible en cherchant a poser les bâtiments les plus chères. 
+* Le deuxième bot tente de poser les bâtiments avec les plus petits coûts pour essayer d’obtenir le bonus le plus rapidement possible.
+* Le troisième essaye de viser des joueurs en particulier et de prédire le personnages qu’ils ont choisit pour pouvoir les attaquer avec ses sorts. 
+* _Certains mécanismes sont commun aux 3 bots comme le fait de ne pas piocher un quartier que l’on a déjà dans sa main ou que l’on a déjà construit._
+
+Ainsi, ce qu’il nous resterait à faire est de créer un superBot qui utiliserait les stratégies de nos 3 bots déjà existant ce qui est implementable grâce à l’architecture que nous avons. Nous pourrions aussi ajouter de nouvelle stratégie spéciales pour essayer de profiter le plus possible du sort spécial d’un personnage. Nous n’avons pas ajouté le fait de prendre en compte les personnages piochés (lors de la première partie du tour de jeu) avant nous ou après nous pour ensuite avoir une information plus précise sur les roles possibles de chacun.
