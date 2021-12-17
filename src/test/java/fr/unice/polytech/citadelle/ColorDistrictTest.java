@@ -1,4 +1,4 @@
-/**package fr.unice.polytech.citadelle;
+package fr.unice.polytech.citadelle;
 
 import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
@@ -223,4 +223,3 @@ public class ColorDistrictTest {
     }*/
 
 }
-**/
