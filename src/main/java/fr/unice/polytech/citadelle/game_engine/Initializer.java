@@ -61,6 +61,7 @@ public class Initializer {
 	public static void initTheHashOfViewCharacters(LinkedHashMap<Player, Optional<Character>> hashOfViewCharacters,
 											ArrayList<Player> listOfAllPlayers) {
 		listOfAllPlayers.forEach(player -> hashOfViewCharacters.put(player, Optional.empty()));
+		int a  = 5;
 	}
 
 

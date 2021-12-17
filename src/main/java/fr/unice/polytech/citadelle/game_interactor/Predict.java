@@ -16,7 +16,7 @@ public class Predict {
     }
 
     //A changer : il faut une methode qui predit ce que le player a.
-    Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
+    public Character predictWhoIsPlayer(Player player, ArrayList<String> listOfUntargetableCharacter){
 
 
         if(canBeArchitect(player, listOfUntargetableCharacter))

@@ -21,6 +21,14 @@ public class Strategy {
         this.board=board;
         this.player=player;
     }
+    
+    public Strategy(int numberOfCharacter,Board board,Player player, Predict predict){
+        predict=new Predict(board);
+        this.numberOfCharacter=numberOfCharacter;
+        this.board=board;
+        this.player=player;
+        this.predict = predict;
+    }
 
     public int randomInt(int scope) {
         Random random = new Random();
@@ -55,17 +63,25 @@ public class Strategy {
         return randomCharacter;
     }
 
+    //ajoutez le printer 
+    //ajoutez character déjà vue
+    //ajoutez cartes brulées face visible
+    //si dan hashmap player on trouve un character alors return the character
+    //else predict
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<String> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add("Assassin");
-        //ajoutez le printer 
-        //ajoutez character déjà vue
-        //ajoutez cartes brulées face visible
-        //si dan hashmap player on trouve un character alors return the character
-        //else predict
-
+        listOfCharacterToNotKill.addAll(board.getListOfPlayerWhoHasAlreadyPlayedStringVersion());
+        //listOfCharacterToNotKill.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
+        
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
-        return (predict.predictWhoIsPlayer(playerWithClosestScore,listOfCharacterToNotKill));
+        Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(playerWithClosestScore);
+        
+        if(potentialCharacterOfTargetPlayer.isPresent())
+        	return potentialCharacterOfTargetPlayer.get();
+        else
+        	return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
+        
     }
     
     
@@ -143,6 +159,14 @@ public class Strategy {
 
         return (hasBlue && hasRed && hasGreen && hasYellow && hasPurple);
     }
+    
+    public Character getAPrediction(Player player, ArrayList<String> listOfCharacterToNotKill){
+    	return predict.predictWhoIsPlayer(player,listOfCharacterToNotKill);
+    }
+
+	public Predict getPredict() {
+		return predict;
+	}
 
 
 }

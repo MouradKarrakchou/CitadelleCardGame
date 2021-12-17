@@ -3,6 +3,8 @@ package fr.unice.polytech.citadelle.game;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
@@ -62,14 +64,40 @@ public class Board {
         return listOfCharacter;
     }
     
+    public LinkedHashMap<Player, Optional<Character>> gethashOfViewCharacters(){
+        return hashOfViewCharacters;
+    }
+    
     
     /**
      * Update the LinkedHashMap of Character/Behaviour when a Behaviour Reveals his Character
      * @param character
      * @param behaviour
      */
-    public void updateViewCharacter(Player player, Character character) {
+    public void revealCharacter(Player player, Character character) {
     	hashOfViewCharacters.put(player, Optional.of(character));
     }
+    
+    /**
+     * @return the list of player who has already played, compute with the hashOfViewCharacters
+     */
+    public ArrayList<Character> getListOfPlayerWhoHasAlreadyPlayed(){
+    	ArrayList<Character> listOfPlayerWhoHasAlreadyPlayed = new ArrayList<>();
+    	for (Entry<Player, Optional<Character>> entry : hashOfViewCharacters.entrySet()) {
+			Optional<Character> optionalBehaviour = entry.getValue();
+			if(optionalBehaviour.isPresent())
+				listOfPlayerWhoHasAlreadyPlayed.add(optionalBehaviour.get());
+    	}
+    	return listOfPlayerWhoHasAlreadyPlayed;
+    }
+    
+    public ArrayList<String> getListOfPlayerWhoHasAlreadyPlayedStringVersion(){
+    	return getListOfPlayerWhoHasAlreadyPlayed().stream().
+    												map(character -> character.getName())
+    												.collect(Collectors.toCollection(ArrayList::new));
+
+    }
+    
+    
 }
 

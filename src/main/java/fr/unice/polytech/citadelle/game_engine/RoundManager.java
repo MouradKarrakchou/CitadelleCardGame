@@ -281,7 +281,7 @@ public class RoundManager {
 		}
 		else {
 			Character CharacterOfTheBehaviour = currentBehaviour.play(currentPhase, hashOfCharacters);
-			board.updateViewCharacter(currentBehaviour.getPlayer(), CharacterOfTheBehaviour);
+			board.revealCharacter(currentBehaviour.getPlayer(), CharacterOfTheBehaviour);
 		}
 	}
 
