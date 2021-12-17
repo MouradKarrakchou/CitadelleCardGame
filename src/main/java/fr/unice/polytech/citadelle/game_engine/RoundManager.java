@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAYER;
@@ -23,10 +24,7 @@ public class RoundManager {
 	private final ArrayList<Character> listOfAllCharacters;
 	private final LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters;
 	private final Board board;
-
 	private final Referee referee;
-
-	private String currentPhase;
 
 	/**
 	 * Instantiate a RoundManager object.
@@ -49,18 +47,17 @@ public class RoundManager {
 	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
 	 * @return The game leaderBoard.
 	 */
-	public ArrayList<Behaviour> runRounds(PhaseManager phaseManager) {
+	public ArrayList<Behaviour> runRounds() {
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 
-		while ((currentPhase = phaseManager.analyseGame(getTheListOfCity(getListOfPlayers())))
-				!= PhaseManager.LAST_TURN_PHASE) {
+		while (leaderBoard.size() == 0) {
 
 			PrintCitadels.printNumberRound(board.getRoundNumber());
 			if (board.getRoundNumber() > 0)
 				updateListOfBehaviour();
 
 			setupCharacters();
-			leaderBoard = askEachCharacterToPlay(phaseManager);
+			leaderBoard = askEachCharacterToPlay();
 
 			PrintCitadels.printBoard(board);
 			PrintCitadels.printLayer();
@@ -248,11 +245,10 @@ public class RoundManager {
 	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
 	 * @return The game leaderBoard (modified if a player complete its city).
 	 */
-	public ArrayList<Behaviour> askEachCharacterToPlay(PhaseManager phaseManager) {
+	public ArrayList<Behaviour> askEachCharacterToPlay() {
 		ArrayList<Behaviour> leaderBoard = new ArrayList<>();
 		ArrayList<Player> listOfPlayer = getListOfPlayers();
 		ArrayList<City> listOfCity = getTheListOfCity(listOfPlayer);
-		currentPhase = phaseManager.analyseGame(listOfCity);
 
 		for (Entry<Character, Optional<Behaviour>> entry : hashOfCharacters.entrySet()) {
 			Optional<Behaviour> optionalBehaviour = entry.getValue();
@@ -267,6 +263,7 @@ public class RoundManager {
 		}
 		
 		Initializer.resetHashOfCharacter(hashOfCharacters, listOfAllCharacters);
+		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayer);
 		board.incrementRoundNumber();
 		return leaderBoard;
 	}
@@ -280,7 +277,7 @@ public class RoundManager {
 			PrintCitadels.botIsDead(currentBehaviour.getPlayer());
 		}
 		else {
-			Character CharacterOfTheBehaviour = currentBehaviour.play(currentPhase, hashOfCharacters);
+			Character CharacterOfTheBehaviour = currentBehaviour.play(hashOfCharacters);
 			board.revealCharacter(currentBehaviour.getPlayer(), CharacterOfTheBehaviour);
 		}
 	}
@@ -310,7 +307,6 @@ public class RoundManager {
 	 */
 	public void updateLeaderboard(Behaviour currentBehaviour, ArrayList<Behaviour> leaderBoard) {
 		leaderBoard.add(currentBehaviour);
-		currentPhase = PhaseManager.LAST_TURN_PHASE;
 	}
 
 	/**

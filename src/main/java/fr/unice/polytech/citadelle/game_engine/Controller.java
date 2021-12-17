@@ -7,6 +7,7 @@ import java.util.Optional;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 
@@ -17,15 +18,12 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  */
 public class Controller {
 	private RoundManager roundManager;
-	private final PhaseManager phaseManager;
 	private Referee referee;
 
 	/**
 	 * Controller constructor, setting-up the printer class, the Initializer class and the PhaseManager class
 	 */
-	public Controller() {
-		phaseManager = new PhaseManager();			
-	}
+	public Controller() {}
 
 	/**
 	 * Method called once to initialize the game.
@@ -63,7 +61,7 @@ public class Controller {
 	public void runGame() {
 		ArrayList<Behaviour> leaderBoard;
 		PrintCitadels.startCitadelles();
-		leaderBoard = roundManager.runRounds(phaseManager);
+		leaderBoard = roundManager.runRounds();
 		end(leaderBoard);
 	}
 

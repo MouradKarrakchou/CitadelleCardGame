@@ -2,12 +2,10 @@ package fr.unice.polytech.citadelle.game_interactor;
 
 import java.util.*;
 
-
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
-import fr.unice.polytech.citadelle.game_engine.PhaseManager;
 
 /**
  * A Behaviour realize all the action of a player.
@@ -20,9 +18,9 @@ public class Behaviour {
 	protected int numberOfCharacter = 8;
 	Strategy strategy;
 
-	// ---
 	CityManagement cityMan;
 	Executor executor;
+	PhaseManager phaseManager;
 	Board board;
 
 	protected static final int ZERO_CARD = 0;
@@ -31,10 +29,11 @@ public class Behaviour {
 
 	public Behaviour(Player player, Board board) {
 		this.player = player;
+		this.board = board;
+		strategy = new Strategy(numberOfCharacter, board, player);
 		cityMan = new CityManagement(player);
 		executor = new Executor(player);
-		this.board = board;
-		strategy=new Strategy(numberOfCharacter,board,player);
+		phaseManager = new PhaseManager(player, board);
 	}
 
 	/**
@@ -68,65 +67,79 @@ public class Behaviour {
 		return pickedDistricts.get(1);
 	}
 
-	public Character play(String currentPhase, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		this.getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters);
-		this.getPlayer().getCity().getBuiltDistrict().stream()
-				.filter(district -> district.getName().equals("School of Magic"))
-				.forEach(district -> {
-					ColorDistrict schoolOfMagic = (SchoolOfMagic) district;
-					schoolOfMagic.schoolOfMagicSpell(this.getPlayer());
-				});
-		if (currentPhase == PhaseManager.END_GAME_PHASE && player.getCity().getSizeOfCity() < 6)
-			endGameBehaviour();
-		else if (currentPhase == PhaseManager.LAST_TURN_PHASE)
-			lastTurnBehaviour();
-		else
-			 normalBehaviour();
+	public Character play(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		executeSpellOfCharacter(this, hashOfCharacters);
+		executeSpellOfPurpleDistricts(this.getPlayer());
+
+
+		switch (phaseManager.analyseGame()) {
+		case PhaseManager.MID_GAME_PHASE -> normalBehaviour();
+		case PhaseManager.END_GAME_PHASE -> lastTurnBehaviour();
+		case PhaseManager.LAST_TURN_PHASE -> endGameBehaviour();
+		}
+
 		buildArchitect();
 		return player.getCharacter();
 	}
 
-	public void buildArchitect() {
-		if (player.getCharacter().getName().equals("Architect"))
-			{ifPossibleBuildADistrict();
-			ifPossibleBuildADistrict();}
+	
+
+	private void executeSpellOfCharacter(Behaviour behaviour,LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+		getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters);
+	}
+	
+	private void executeSpellOfPurpleDistricts(Player player2) {
+		this.getPlayer().getCity().getBuiltDistrict().stream().
+													filter(district -> district.getName().equals("School of Magic")).
+													forEach(district -> {
+														ColorDistrict schoolOfMagic = (SchoolOfMagic) district;
+														schoolOfMagic.schoolOfMagicSpell(this.getPlayer());
+													});
 	}
 
-	public void normalBehaviour() {};
+	public void buildArchitect() {
+		if (player.getCharacter().getName().equals("Architect")) {
+			ifPossibleBuildADistrict();
+			ifPossibleBuildADistrict();
+		}
+	}
 
-	public void endGameBehaviour() {};
+	public void normalBehaviour() {
+	};
 
-	public void lastTurnBehaviour() {};
+	public void endGameBehaviour() {
+	};
 
+	public void lastTurnBehaviour() {
+	};
 
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
 		List<Character> list = hashOfCharacters.keySet().stream().toList();
 		switch (this.player.getCharacter().getName()) {
-			case "Thief" -> character = chooseCharacterForThief(hashOfCharacters);
-			case "Assassin" -> character = chooseCharacterForAssassin(hashOfCharacters);
-			case "Magician" -> character = chooseCharacterForMagician(hashOfCharacters);
+		case "Thief" -> character = chooseCharacterForThief(hashOfCharacters);
+		case "Assassin" -> character = chooseCharacterForAssassin(hashOfCharacters);
+		case "Magician" -> character = chooseCharacterForMagician(hashOfCharacters);
 		}
 		return (character);
 	}
 
 	public Player selectPlayerForWarlord() {
-		return(strategy.choosePlayerForWarlordRandom());
+		return (strategy.choosePlayerForWarlordRandom());
 	}
 
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return(strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
+		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
 	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return(strategy.chooseCharacterForAssassinAdvanced());
+		return (strategy.chooseCharacterForAssassinAdvanced());
 	}
 
 	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return(strategy.chooseCharacterForThiefRandom(hashOfCharacters));
+		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
-
 
 	public void ifPossibleBuildADistrict() {
 		ArrayList<HauntedCity> hauntedCityArrayList = new ArrayList<>();
@@ -135,7 +148,7 @@ public class Behaviour {
 			Collections.sort(districtWeCanBuild);
 			Collections.reverse(districtWeCanBuild);
 			District district = districtWeCanBuild.get(0);
-			if(district.isA("Haunted City")) {
+			if (district.isA("Haunted City")) {
 				HauntedCity hauntedCity = (HauntedCity) district;
 				hauntedCity.setRoundBuilt(board.getRoundNumber());
 			}
@@ -173,11 +186,11 @@ public class Behaviour {
 	public void takeGold() {
 		executor.takeGold();
 	}
-	
+
 	/**
 	 * Add a district to the hand of the player.
 	 */
-	public void addDistrict(District district){
+	public void addDistrict(District district) {
 		executor.addDistrict(district);
 	}
 
@@ -187,13 +200,14 @@ public class Behaviour {
 	public void buildDistrict(District district) {
 		executor.buildDistrict(district);
 	}
-	
+
 	/**
 	 * Pick a districtCard into the deck.
+	 * 
 	 * @return a pickCardAction, that will be print with the printer
 	 */
 	public District pickCard() {
-		return(executor.pickCard(board.getDeckDistrict()));
+		return (executor.pickCard(board.getDeckDistrict()));
 	}
 
 	public District pickCardsInDeck() {
@@ -205,18 +219,18 @@ public class Behaviour {
 		possibleCards = chooseToKeepOrNotPickedCards((ArrayList<District>) pickedCards.clone());
 
 		switch (possibleCards.size()) {
-			case ONE_CARD -> {
-				choosenDistrictCard = possibleCards.get(0);
-				removeOtherCard(pickedCards, possibleCards.get(0));
-			}
-			case TWO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
-			case ZERO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
+		case ONE_CARD -> {
+			choosenDistrictCard = possibleCards.get(0);
+			removeOtherCard(pickedCards, possibleCards.get(0));
+		}
+		case TWO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(possibleCards.get(0), possibleCards.get(1));
+		case ZERO_CARD -> choosenDistrictCard = chooseBetweenTwoCards(pickedCards.get(0), pickedCards.get(1));
 		}
 		return choosenDistrictCard;
 	}
 
 	void removeOtherCard(ArrayList<District> pickedCards, District district) {
-		if(pickedCards.get(0) == district)
+		if (pickedCards.get(0) == district)
 			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(0));
 		else
 			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(1));
@@ -230,7 +244,6 @@ public class Behaviour {
 		Random random = new Random();
 		return (random.nextInt(scope));
 	}
-
 
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
@@ -252,16 +265,15 @@ public class Behaviour {
 		return executor;
 	}
 
-
 	public ArrayList<Integer> chooseMagicianAction() {
-		//return an empty array if he wants to swap Cards with another Character
-		//return the position of the Cards that he wants to swap
-		return(strategy.chooseMagicianAction());
-		//(for now he always chooses to steal from another Character)
+		// return an empty array if he wants to swap Cards with another Character
+		// return the position of the Cards that he wants to swap
+		return (strategy.chooseMagicianAction());
+		// (for now he always chooses to steal from another Character)
 	}
 
 	public District chooseDistrictToDestroy(Player playerToDestroy) {
-		return(strategy.chooseDistrictToDestroy(playerToDestroy));
+		return (strategy.chooseDistrictToDestroy(playerToDestroy));
 	}
 
 }

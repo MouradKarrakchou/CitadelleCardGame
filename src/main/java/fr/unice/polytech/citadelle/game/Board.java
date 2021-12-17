@@ -98,7 +98,13 @@ public class Board {
     												.collect(Collectors.toCollection(ArrayList::new));
 
     }
+
+	public ArrayList<City> getListOfCity() {
+		return listOfPlayer.stream().
+				map(player -> player.getCity()).
+				collect(Collectors.toCollection(ArrayList::new));
+	}
     
-    
+
 }
 

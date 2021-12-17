@@ -70,8 +70,8 @@ public class Strategy {
     public Player choosePlayerForWarlordRandom() {
         List<Player> list = board.getListOfPlayer();
         Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
-        while (randomPlayer.equals(this.player)) {
-            randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
+        while (randomPlayer.getName().equals("Warlord")) {
+            randomPlayer=list.get(randomInt(numberOfCharacter));
         }
         return randomPlayer;
     }
@@ -85,27 +85,16 @@ public class Strategy {
         List<Player> listOfPlayers = board.getListOfPlayer();
 
         Player playerToDestroy = null;
-        int scoreOfPlayerToDestroy = -1;
+        int scoreOfPlayerToDestroy = 0;
 
         for (Player playerToCheck : listOfPlayers) {
             // For now Warlord will not self-destroy a district.
             if ((playerToCheck != player) && playerPredictScore(playerToCheck) > scoreOfPlayerToDestroy){
-                    playerToDestroy = playerToCheck;
-                    scoreOfPlayerToDestroy = playerPredictScore(playerToCheck);
-                }
+                playerToDestroy = playerToCheck;
+                scoreOfPlayerToDestroy = playerPredictScore(playerToCheck);
+            }
         }
-
-        if (playerToDestroy == null)
-            return null;
-
-        // A player should always have an associated character when this method is called.
-        String playerToCheckCharacterName;
-        if (playerToDestroy.getCharacter() == null)
-            playerToCheckCharacterName = "";
-        else
-            playerToCheckCharacterName = playerToDestroy.getCharacter().getName();
-
-        return playerToCheckCharacterName.equals("Beshop") ? null : playerToDestroy;
+        return playerToDestroy;
     }
 
     public Character chooseCharacterForAssassinAdvanced(){
@@ -115,17 +104,7 @@ public class Strategy {
         //listOfCharacterToNotKill.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
 
         Player playerWithClosestScore=findThePlayerWithClosestScoreAssassin();
-        Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(playerWithClosestScore);
-
-        if(potentialCharacterOfTargetPlayer.isPresent()) {
-        	Character targetCharacter = potentialCharacterOfTargetPlayer.get();
-        	PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, playerWithClosestScore, targetCharacter);
-        	return targetCharacter;
-
-        }
-        //Ayoub ajoute un printer pour ca svp
-        else
-        	return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
+        return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 
     }
 
@@ -153,31 +132,16 @@ public class Strategy {
         PrintCitadels.printAssassinAdvancedChoice(playerWithClosestScore,predictedScore,scoreDiffenreceWithClosestScore);
         return playerWithClosestScore;
     }
-
-    /**
-     * For a given player, will analyze player city to choose a district to destroy.
-     *
-     *
-     * @param playerToDestroy The player to proceed.
-     * @return The district to destroy (can be null if the spell is not used).
-     */
-    District chooseDistrictToDestroy(Player playerToDestroy) {
-        int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
-        int playerGolds = player.getGolds();
-        District districtToDestroy = null;
-
-        // Warlord can't destroy a completed city.
-        if (playerToDestroyCitySize >= 8)
-            return null;
-
-        for(int k=0; k<playerToDestroy.getCity().getSizeOfCity(); k++){
-            District currentDistrictCheck = playerToDestroy.getCity().getBuiltDistrict().get(k);
-            if (currentDistrictCheck.getValue() - 1 < playerGolds && !currentDistrictCheck.getName().equals("DragonGate"))
-                return(playerToDestroy.getCity().getBuiltDistrict().get(k));
+    District chooseDistrictToDestroy(Player player){
+        if (player.getCity().getSizeOfCity()==8)
+            return(null);
+        for(int k=0;k<player.getCity().getSizeOfCity();k++){
+            District currentDistrictCheck=player.getCity().getBuiltDistrict().get(k);
+            if (currentDistrictCheck.getValue()<this.player.getGolds()-1 && !currentDistrictCheck.getName().equals("DragonGate"))
+                return(player.getCity().getBuiltDistrict().get(k));
         }
         return null;
     }
-
     public ArrayList<Integer> chooseMagicianAction() {
         return(new ArrayList());
     }
@@ -240,4 +204,7 @@ public class Strategy {
 		return predict;
 	}
 
+	public Optional<Character> getCharacterOfPlayer(Player player) {
+		return board.gethashOfViewCharacters().get(player);
+	}
 }
