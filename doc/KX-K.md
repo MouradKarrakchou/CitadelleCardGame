@@ -37,13 +37,14 @@ Le la même façon que les cartes de personnages, l'implémentation des cartes d
 
 ### Issues associés :
 
-| Isssue                                                                                     | Description                                                     | Date       |
-|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------|------------|
-| [#7](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/7)   | Ajout des quartiers ayant 8 différents prix                     | 18/11/2021 |
-| [#19](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Ajout des couleurs de quartier                                  | 24/11/2021 |
-| [#27](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/27) | Ajout du sort de quartier : Dragoport                           | 03/12/2021 |
-| [#34](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/34) | Ajout du sort de quartier : Université                          | 05/12/2021 |
-| [#42](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/42) | Ajout du sort de quartier : Cour des miracles et École de magie | 25/11/2021 |
+| Isssue                                                                                     | Description                                    | Date       |
+|--------------------------------------------------------------------------------------------|------------------------------------------------|------------|
+| [#7](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/7)   | Ajout des quartiers ayant 8 différents prix    | 18/11/2021 |
+| [#19](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Ajout des couleurs de quartier                 | 24/11/2021 |
+| [#27](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/27) | Ajout du sort de quartier : Dragoport          | 03/12/2021 |
+| [#34](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/34) | Ajout du sort de quartier : Université         | 05/12/2021 |
+| [#39](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/34) | Ajout du sort de quartier : Cour des miracles  | 08/12/2021 |
+| [#42](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/42) | Ajout du sort de quartier : École de magie     | 08/12/2021 |
 
 
 ## La représentation du jeu
@@ -60,6 +61,19 @@ La représentation jeu correspond à la façon dont le plateau de jeu de Citadel
 | [#30](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/30) | Le joueur commence avec 4 cartes quartiers | 07/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
 | [#37](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/37) | Le deck de quartiers peut être mélanger| 08/12/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
 | [#52](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/52) | Les cartes personnages peuvent être brûlées | 16/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
+
+## La gestion du jeu
+La gestion du jeu est un élément qui s’est vu séparé du jeu suite à un refactor au vu de la taille que cette dernière prenait au fur et à mesure des ajouts de code. La gestion du jeu _(trouvable dans le package [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine))_ fait la liaison entre la décision des robots et la modification de l’état du jeu. Comme l’implémentation du jeu, la gestion du jeu est un élément regroupant à la fois joueurs, cartes et choix des robots, cette implémentation a été faite par l'ensemble du groupe.
+
+### Issues associés (les noms seront indiqués):
+| Isssue  | Description  | Date | Nom |
+|---------|--------------|------|-----|
+| [#3](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/3) | Gestion de l'égalité | 14/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+| [#5](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/5) | Gestion du dernier round | 16/11/2021 |  [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#6](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/6) | Mise à jour du système de recherche du gagnant | 14/11/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#8](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/6) | Gestion de la fin du jeu à 8 quartiers posés | 16/11/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
+| [#22](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/22) | Refactor de la classe d’initialisation | 27/11/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
+| [#29](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/29) | Refactor de la classe d’initialisation | 03/12/2021 |  [BONNET Kilian](https://github.com/KilianBonnet) |
 
 # Fonctionnement de l’équipe
 
