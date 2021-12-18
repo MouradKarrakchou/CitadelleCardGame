@@ -17,8 +17,8 @@ import fr.unice.polytech.citadelle.game_character.Merchant;
 import fr.unice.polytech.citadelle.game_character.Thief;
 import fr.unice.polytech.citadelle.game_character.Warlord;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.RushBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
 
 /**
  * The Initializer class initialize all objects needed during the game
@@ -55,8 +55,6 @@ public class Initializer {
 	
 	/**
 	 * Reset a given hash of characters using a given list of characters.
-	 * @param hashOfCharacters The hash of characters to reset.
-	 * @param listOfAllCharacters The list containing all the characters.
 	 */
 	public static void initTheHashOfViewCharacters(LinkedHashMap<Player, Optional<Character>> hashOfViewCharacters,
 											ArrayList<Player> listOfAllPlayers) {
@@ -102,10 +100,10 @@ public class Initializer {
 		
 		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
 			Player newPlayer = new Player("Robot " + i);
-			listOfBehaviour.add(new NormalBot(newPlayer, board));
+			listOfBehaviour.add(new Investor(newPlayer, board));
 		}
 		Player newPlayer = new Player("RobotRusher");
-		listOfBehaviour.add(new RushBot(newPlayer, board));
+		listOfBehaviour.add(new Rusher(newPlayer, board));
 		
 		return listOfBehaviour;
 

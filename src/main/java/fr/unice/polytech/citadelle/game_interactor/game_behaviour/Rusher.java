@@ -10,11 +10,11 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
-public class RushBot extends Behaviour {
+public class Rusher extends Behaviour {
 
 	private static final int MAX_VALUES_OF_CARDS = 3;
 
-	public RushBot(Player player, Board board) {
+	public Rusher(Player player, Board board) {
 		super(player, board);
 	}
 

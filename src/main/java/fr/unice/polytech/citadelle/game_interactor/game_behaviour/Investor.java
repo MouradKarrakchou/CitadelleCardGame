@@ -9,9 +9,9 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
-public class NormalBot extends Behaviour {
+public class Investor extends Behaviour {
 
-	public NormalBot(Player player, Board board) {
+	public Investor(Player player, Board board) {
 		super(player, board);
 	}
 
