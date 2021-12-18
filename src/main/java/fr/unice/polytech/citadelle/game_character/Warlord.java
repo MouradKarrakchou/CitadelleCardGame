@@ -9,12 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 /**
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  * You receive one gold for each military (red) district in your city.
  * You may destroy one district of your choice by paying a number of gold equal to one less than the cost of the district.
  * Thus, you may destroy a cost one district for free, a cost two district for one gold, or a cost six district for five gold, etc.
  * You may destroy one of your own districts.
  * You may not, however, destroy a district in a city that is already completed by having eight districts (or seven districts when the Bell Tower is in play).
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Warlord extends Character {
 
