@@ -4,11 +4,36 @@
 * [BONNET Kilian](https://github.com/KilianBonnet)
 * [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou)
 * [IMAMI Ayoub](https://github.com/AyoubIMAMI)
+<br>
+<br>
 
 # L’architecture
+Afin de mieux comprendre comment notre projet fonctionne nous allons dans un premier temps faire une description rapide de chaque package du projet.  
 
+## Package [game_interacor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor) 
+Ce package correspond à ce qu’on pourrait grossièrement appeler “le bot”. La classe la plus importante dans ce package est la classe [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Behaviour.java), c’est un peu comme le cerveau du “bot”, il va réfléchi, prendre les décisions et demander à la classe [Executor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Executor.java) de réaliser une action sur la partie, comme prendre de l’or, piocher une carte, ou construire un district. Afin de prendre sa décision la classe [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Behaviour.java) va utiliser un [CityManager](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/CityManagement.java) qui permet d’analyse la ville pour savoir si oui ou non on pourra par la suite construire tel ou tel bâtiment.
+
+## Package [game](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game) 
+Ce package contient tous les objets de la partie, le deck qui contient toutes les cartes districts _([DeckDistrict](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/DeckDistrict.java))_, le deck qui contient les 8 characters _([DeckCharacter](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/DeckCharacter.java))_, et la liste des joueurs présents dans la partie _([Player](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Player.java))_. Toutes ces informations sont rassemblées dans la classe [Board](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Board.java).
+
+## Package [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) 
+Ce package est le cœur mécanique de notre projet. Le chef d’orchestre est le [Controller](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/Controller.java), il va dans un premier temps demander à l’Initialiser _([Initializer](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/Initializer.java))_ d’instancier les éléments nécessaire pour créer une partie, ensuite le [Controller](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/Controller.java) va demander au [Round Manager](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/RoundManager.java) de lancer la partie, et une fois la partie terminée, le [Controller](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/Controller.java) demande au [Referee](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/Referee.java) de déterminer quel joueur à remporter la partie en se basant sur la ville de chaque joueur _([City](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine/City.java))_. Le [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) contient aussi les classes Character qui en fonction de leurs pouvoir font réaliser des actions sur la partie.
+
+## Package [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor)
+
+## Package [output](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/output)
+Ce package contient une seule classe qui est la classe [PrintCitadels](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/output/PrintCitadels.java) qui est chargé d'afficher le déroulement de la partie dans la console.
+
+<br>
+
+Maintenant que l’on en sait un peu plus sur les différents éléments présent dans notre projet, nous allons pouvoir voir comment ils communiquent les uns avec les autres afin de jouer une partie de citadelle.
+
+<br>
+<br>
 
 # Informations utiles
+<br>
+<br>
 
 # Répartition du travail
 Afin d’assurer une robustesse dans le code, les différentes fonctionnalités, méthodes et classes ont un ou plusieurs tests associés. Ainsi, lorsque sera évoqué l’auteur d’une fonctionnalité, méthode ou classe cela implique aussi que ce dernier ait travaillé sur les tests associés. L'architecture du projet nous a permis de scinder ce dernier plusieurs blocs de code assez distinct. Au fur et à mesure du temps, chacun a pu se spécialiser dans une partie du code.
@@ -90,7 +115,7 @@ Les éléments permettant les interactions avec le jeu se situent dans le packag
 | [#40](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Implémentation de la stratégie et de la prédiction | 14/12/2021 |  [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
 | [#47](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/47) | Façon intelligente d'uiliser le sort du Voleur | 17/12/2021 |  [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
 | [#49](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/19) | Façon intelligente d'uiliser le sort du Magicien | 17/12/2021 | [COLLET Philippe](https://github.com/collet) |
-| [#50](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/50) | Façon intelligente d'uiliser le sort du Condottiere | 17/12/2021 [BONNET Kilian](https://github.com/KilianBonnet) |
+| [#50](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/50) | Façon intelligente d'uiliser le sort du Condottiere | 17/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
 | [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 | [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 
@@ -106,5 +131,28 @@ L’affichage du jeu permet de véhiculer rapidement les informations essentiell
 
 
 # Fonctionnement de l’équipe
+Globalement, nous n'avons jamais programmé, ou très peu lors des réunions du mercredi. Nous vérifiions plutôt l’avancement du projet et s’il y avait des choses à changer, enlever ou améliorer. Puis, nous écrivions la nouvelle Milestone et les issues sur lesquelles nous nous étions mis d’accord pendant la semaine de travail précédant la réunion du mercredi. Parfois, nous nous divisions le travail, deux membres du groupe écrivaient les issues pendant que les deux autres réfléchissaient à des améliorations.
+
+<br>
+Nous avons divisé notre Kanban en 4 parties: To do, In progress, Tests, Done. Au début, toutes les issues sont dans “To do”. Chacun choisissait une issue et la déplaçait donc dans “In progress” en faisant des commits au fur et à mesure que l’issue avançait. Puis, une fois l’implémentation faite, la personne chargée de l’issue la déplace dans “Tests” puis effectue les tests sur cette partie du programme. Une fois la nouvelle fonctionnalité testée, elle est déplacée dans dans “Done” et alors seulement nous pouvions close l’issue.
+
+<br>
+Pendant la semaine, tous les membres étaient conscients du travail à faire et chacun travaillait et gérait son temps comme bon lui semblait. Nous nous posions souvent des question entre nous pour connaître l’avis de chacun, obtenir de l’aide ou une information.
+
 
 # Avancement du projet
+## Règles métiers du jeux Citadelle 
+L’ensemble des personnages sont implementés avec leurs sorts. Les quartiers ont leurs couleurs et nous avons implementés les sorts spéciaux du Donjon, du Dracoport, de l'Université, de l'Ecole de Magie, de la Cour des miracles et de la Bibliothèque. Il nous manque donc les sorts des autres quartiers qui ont des sorts spéciaux.
+
+<br>
+Tout les quartiers sont bien mit dans un deck qui est mélangé en début de partie. Les règles de l’ordre de choix des personnages a aussi été respecté ainsi que l’ordre de jeu de chacun des personnages.
+
+## Bots
+Nous avons 3 types de bots qui reposent sur un systeme de phase de jeu. Il y a 3 phases de jeux, début de partie, fin de partie et dernier tour, commun à tous les bots et reposant sur le nombre de bâtiments posés dans la ville de chaque joueurs.
+
+* Le premier bot tente d’accumuler le plus de points possible en cherchant a poser les bâtiments les plus chères. 
+* Le deuxième bot tente de poser les bâtiments avec les plus petits coûts pour essayer d’obtenir le bonus le plus rapidement possible.
+* Le troisième essaye de viser des joueurs en particulier et de prédire le personnages qu’ils ont choisit pour pouvoir les attaquer avec ses sorts. 
+* _Certains mécanismes sont commun aux 3 bots comme le fait de ne pas piocher un quartier que l’on a déjà dans sa main ou que l’on a déjà construit._
+
+Ainsi, ce qu’il nous resterait à faire est de créer un superBot qui utiliserait les stratégies de nos 3 bots déjà existant ce qui est implementable grâce à l’architecture que nous avons. Nous pourrions aussi ajouter de nouvelle stratégie spéciales pour essayer de profiter le plus possible du sort spécial d’un personnage. Nous n’avons pas ajouté le fait de prendre en compte les personnages piochés (lors de la première partie du tour de jeu) avant nous ou après nous pour ensuite avoir une information plus précise sur les roles possibles de chacun.

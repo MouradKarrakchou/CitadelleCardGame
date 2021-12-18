@@ -119,23 +119,23 @@ public class Strategy {
 
     }
 
-    private Player findThePlayerWithMostGolds() {
+    public Player findThePlayerWithMostGolds() {
         ArrayList<Player> listOfPlayer= board.getListOfPlayer();
         //In this list we got the Assassin (if there is one) and he can't steal from him
         ArrayList<Player> listOfPlayerToNotTarget=board.getListOfPlayerWhoPlayed();
         int k=0;
-        //We want to find the player with the PredictedScore the closest to the score of our Player
+        //We want to find the Player with the most golds
         int mostGoldsThatAPlayerHas=listOfPlayer.get(k).getGolds();
         Player playerWithMostGold=listOfPlayer.get(k);
 
         for (Player playerComparing : listOfPlayer) {
-            if (playerWithMostGold.equals(this.player) || listOfPlayerToNotTarget.contains(player)){
+            if (playerWithMostGold.equals(this.player) || listOfPlayerToNotTarget.contains(playerWithMostGold)){
                 playerWithMostGold = playerComparing;
                 mostGoldsThatAPlayerHas = player.getGolds();
             }
             else if (!playerComparing.equals(this.player)&& !listOfPlayerToNotTarget.contains(player)){
                 int goldOfPlayerComparing = playerComparing.getGolds();
-                if (mostGoldsThatAPlayerHas > goldOfPlayerComparing) {
+                if (mostGoldsThatAPlayerHas < goldOfPlayerComparing) {
                     playerWithMostGold = playerComparing;
                     mostGoldsThatAPlayerHas = player.getGolds();}
             }
