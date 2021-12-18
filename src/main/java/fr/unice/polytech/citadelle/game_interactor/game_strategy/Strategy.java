@@ -28,13 +28,6 @@ public class Strategy {
         this.player=player;
     }
 
-    public Strategy(int numberOfCharacter,Board board,Player player, Predict predict){
-        predict=new Predict(board, player);
-        this.numberOfCharacter=numberOfCharacter;
-        this.board=board;
-        this.player=player;
-        this.predict = predict;
-    }
 
     public int randomInt(int scope) {
         Random random = new Random();

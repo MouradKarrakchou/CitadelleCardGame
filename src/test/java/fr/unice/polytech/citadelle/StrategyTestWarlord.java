@@ -63,7 +63,7 @@ public class StrategyTestWarlord {
         peter.buildDistrict(green06); // Predicted score of bob will be 6.
 
         gameBoard.getListOfPlayer().addAll(listOfPlayers);
-        Strategy bobStrategy = new Strategy(8, gameBoard, bob, predict);
+        Strategy bobStrategy = new Strategy(8, gameBoard, bob);
 
         // Bob is 2nd on the predicted leaderboard.
         // Bob will try to destroy a peter's district, first on the predicted leaderboard.
@@ -83,7 +83,7 @@ public class StrategyTestWarlord {
         peter.buildDistrict(green06); // Predicted score of bob will be 6.
 
         gameBoard.getListOfPlayer().addAll(listOfPlayers);
-        Strategy bobStrategy = new Strategy(8, gameBoard, peter, predict);
+        Strategy bobStrategy = new Strategy(8, gameBoard, peter);
 
         // peter is first on the predicted leaderboard.
         // peter will try to destroy a bob's district, second on the predicted leaderboard.
@@ -96,7 +96,7 @@ public class StrategyTestWarlord {
         bob.buildDistrict(harbor);
         bob.buildDistrict(church);
         bob.buildDistrict(dragonGate);
-        Strategy aliceStrategy = new Strategy(8, gameBoard, alice, predict);
+        Strategy aliceStrategy = new Strategy(8, gameBoard, alice);
 
         alice.setGolds(4);
         assertNull(aliceStrategy.chooseDistrictToDestroy(bob));
