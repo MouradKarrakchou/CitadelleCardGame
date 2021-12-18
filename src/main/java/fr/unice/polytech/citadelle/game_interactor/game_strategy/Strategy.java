@@ -18,14 +18,14 @@ public class Strategy {
     Predict predict;
     int numberOfCharacter;
     public Strategy(int numberOfCharacter,Board board,Player player){
-        predict=new Predict(board);
+        predict=new Predict(board, player);
         this.numberOfCharacter=numberOfCharacter;
         this.board=board;
         this.player=player;
     }
 
     public Strategy(int numberOfCharacter,Board board,Player player, Predict predict){
-        predict=new Predict(board);
+        predict=new Predict(board, player);
         this.numberOfCharacter=numberOfCharacter;
         this.board=board;
         this.player=player;
