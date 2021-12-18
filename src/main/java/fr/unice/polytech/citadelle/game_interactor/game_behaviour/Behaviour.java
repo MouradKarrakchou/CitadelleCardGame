@@ -134,7 +134,7 @@ public class Behaviour {
 	}
 
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
+		return (strategy.chooseCharacterForMagicianAdvanced());
 	}
 
 	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
@@ -272,8 +272,7 @@ public class Behaviour {
 	public ArrayList<District> chooseMagicianAction() {
 		// return an empty array if he wants to swap Cards with another Character
 		// return the position of the Cards that he wants to swap
-		return (strategy.chooseMagicianActionForRandom());
-		// (for now he always chooses to steal from another Character)
+		return (strategy.chooseMagicianActionAdvanced());
 	}
 
 	public District chooseDistrictToDestroy(Player playerToDestroy) {
