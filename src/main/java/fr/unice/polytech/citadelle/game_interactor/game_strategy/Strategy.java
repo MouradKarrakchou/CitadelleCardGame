@@ -13,6 +13,11 @@ import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
+/**
+ * Strategies on the choice of Character and on targets
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Strategy {
     Player player;
     Board board;
