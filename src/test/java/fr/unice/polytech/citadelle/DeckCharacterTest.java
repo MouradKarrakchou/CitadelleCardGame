@@ -30,8 +30,8 @@ public class DeckCharacterTest {
 
     private DeckCharacter deckOfCharacters;
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void calculateNbCardToBurnTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
         assertEquals(2, deckOfCharacters.calculateNbCardToBurn());
@@ -49,8 +49,8 @@ public class DeckCharacterTest {
         assertEquals(0, deckOfCharacters.calculateNbCardToBurn());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void burnCharacters4PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
 
@@ -89,8 +89,8 @@ public class DeckCharacterTest {
         assertEquals(6, deckOfCharacters.getDeckCharacter().size());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void burnCharacters5PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_5_PLAYERS);
 
@@ -129,8 +129,8 @@ public class DeckCharacterTest {
         assertEquals(7, deckOfCharacters.getDeckCharacter().size());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void burnCharacters6PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_6_PLAYERS);
 
@@ -168,8 +168,8 @@ public class DeckCharacterTest {
         assertEquals(8, deckOfCharacters.getDeckCharacter().size());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void hideTheLastCard() {
         deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
 
@@ -196,8 +196,8 @@ public class DeckCharacterTest {
         assertEquals(theAssassin, deckOfCharacters.getHiddenCard());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void deckStartRound4PlayersTest() {
         deckOfCharacters = new DeckCharacter(GAME_OF_4_PLAYERS);
 

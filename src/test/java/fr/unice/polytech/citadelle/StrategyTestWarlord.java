@@ -9,6 +9,7 @@ import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -50,8 +51,9 @@ public class StrategyTestWarlord {
         alice = new Player("Alice");
         peter = new Player("Peter");
     }
-
-    @Test
+    
+    @RepeatedTest(100)
+    //@Test
     public void choosePlayerForWarlordAdvancedTest(){
         ArrayList<Player> listOfPlayers = new ArrayList<>();
         listOfPlayers.add(bob);
@@ -71,7 +73,8 @@ public class StrategyTestWarlord {
         assertEquals(peter, selectPlayerForWarlord);
     }
 
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void choosePlayerForWarlordFirstOnLeaderboardTest(){
         ArrayList<Player> listOfPlayers = new ArrayList<>();
         listOfPlayers.add(bob);
@@ -91,7 +94,8 @@ public class StrategyTestWarlord {
         assertEquals(bob, selectPlayerForWarlord);
     }
 
-    @Test
+    @RepeatedTest(100)
+    //@Test
     public void chooseDistrictToDestroyTest(){
         bob.buildDistrict(harbor);
         bob.buildDistrict(church);

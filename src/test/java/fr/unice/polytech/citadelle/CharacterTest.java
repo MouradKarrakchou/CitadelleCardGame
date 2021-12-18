@@ -120,7 +120,7 @@ public class CharacterTest {
 
     }
 
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void assassinatePlayer(){
         //initialize
@@ -139,7 +139,7 @@ public class CharacterTest {
         assertEquals(true,botArchitecte.getPlayer().getCharacter().getCharacterisAlive());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void testKingPlayFirst(){
         //initialize
         listOfBehaviour.add(botKing);
@@ -149,7 +149,7 @@ public class CharacterTest {
         assertEquals(true,botKing.getBehaviourIsKing());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void testKingEarnsMoney(){
         //initialize
         listOfBehaviour.add(botKing);
@@ -164,7 +164,7 @@ public class CharacterTest {
         assertEquals(4,botKing.getPlayer().getGolds());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void testThiefStealsGolds(){
         //initialize
         listOfBehaviour.add(botThief);
@@ -182,7 +182,7 @@ public class CharacterTest {
         assertEquals(7,botThief.getPlayer().getGolds());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void testMerchantEarnsMoney(){
 
@@ -196,7 +196,7 @@ public class CharacterTest {
         assertEquals(5,botMerchant.getPlayer().getGolds());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void testBishopEarnsMoney(){
 
@@ -210,7 +210,7 @@ public class CharacterTest {
         assertEquals(5,botBishop.getPlayer().getGolds());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void testArchitectTakes2Cards(){
         //We verify that the Value of behaviourIsArchitect becomes true
@@ -218,7 +218,7 @@ public class CharacterTest {
         assertEquals(2, botArchitecte.getPlayer().getDistrictCards().size());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void testMagicianSwapWithAnotherCharacter(){
         ArrayList<District> cardsToSwap=new ArrayList<>();
@@ -231,7 +231,7 @@ public class CharacterTest {
         assertEquals("MerchantDistrict",botMagician.getPlayer().getDistrictCards().get(0).getName());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void testMagicianSwapWithTheDeck(){
         ArrayList<District> cardsToSwap=new ArrayList<>();
@@ -248,7 +248,7 @@ public class CharacterTest {
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
     }
     
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     @Test
     void testWarlordDestroyDistrict(){
         Player player=new Player("playerDistrictToDestroy");

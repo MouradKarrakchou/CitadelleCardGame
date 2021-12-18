@@ -33,8 +33,8 @@ public class PlayerTest {
     }
 
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void buildDistrictTest(){
         player.golds = 4;
 

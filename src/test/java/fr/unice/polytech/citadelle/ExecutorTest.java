@@ -28,8 +28,8 @@ public class ExecutorTest {
 		executor = spy(new Executor(player));
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void takeCardTest() {
 		District aDistrict = new District("aDistrict", 2, "colorTest", "familyTest");
 		player.getDistrictCards().clear();
@@ -40,8 +40,8 @@ public class ExecutorTest {
 		assertEquals(player.getDistrictCards().get(0), aDistrict);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void buildDistrictTest() {
 		District aDistrict = new District("aDistrict", 2, "colorTest", "familyTest");
 		player.getCity().getBuiltDistrict().clear();
@@ -53,8 +53,8 @@ public class ExecutorTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aDistrict);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void takeGoldTest() {
 		player.setGolds(0);
 		
@@ -63,8 +63,8 @@ public class ExecutorTest {
 		assertEquals(player.getGolds(), 2);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void putCardBackInDeckTest() {
 		District aDistrict = new District("aDistrict", 2, "colorTest", "familyTest");
 		int sizeBefore = deckDistrict.getSize();
@@ -73,8 +73,8 @@ public class ExecutorTest {
 		assertEquals(deckDistrict.getSize(), sizeBefore+1);
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void pickCardsTest() {
 		ArrayList<District> pickedCards = new ArrayList<District>();
 		District aDistrict = new District("aDistrict", 2, "colorTest", "familyTest");

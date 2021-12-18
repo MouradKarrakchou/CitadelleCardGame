@@ -48,7 +48,7 @@ public class PredictTest {
 
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void targetableCharactersForPredictWhoIsPlayerTest() {
 
         ArrayList<Character> untargetableCharacter = new ArrayList<>();
@@ -65,13 +65,13 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void allCharactersTest() {
         assertEquals(allCharacters, predict.allCharacters());
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeArchitectTest() {
         Player player = new Player("Player");
         player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
@@ -84,7 +84,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeArchitectTest() {
         Player player = new Player("Player");
         player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
@@ -100,7 +100,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeBishopTest() {
         Player player = new Player("Player");
         player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
@@ -116,7 +116,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeBishopTest() {
         Player player = new Player("Player");
         player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
@@ -133,7 +133,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeKingTest() {
         Player player = new Player("Player");
         player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
@@ -146,7 +146,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeKingTest() {
         Player player = new Player("Player");
         player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
@@ -160,7 +160,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeMerchantTest() {
         Player player = new Player("Player");
         player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
@@ -173,7 +173,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeMerchantTest() {
         Player player = new Player("Player");
         player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
@@ -187,7 +187,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeThiefTest() {
         Player player = new Player("Player");
         player.setGolds(3);
@@ -198,7 +198,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeThiefTest() {
         Player player = new Player("Player");
         player.setGolds(3);
@@ -210,7 +210,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeMagicianTest() {
         Player player = new Player("Player");
         player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
@@ -222,7 +222,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeMagicianTest() {
         Player player = new Player("Player");
         player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
@@ -235,7 +235,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void canBeWarlordTest() {
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
@@ -256,7 +256,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void cannotBeWarlordTest() {
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
@@ -278,7 +278,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void listGetCharacterTest() {
         assertEquals(new Assassin(), predict.listGetCharacter(Initializer.ASSASSIN_INDEX));
         assertEquals(new Architect(), predict.listGetCharacter(Initializer.ARCHITECT_INDEX));
@@ -291,7 +291,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void playersForPredictWhoIsPlayerTest() {
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
@@ -306,7 +306,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerArchitectTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -345,7 +345,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerBishopTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -382,7 +382,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerKingTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -418,7 +418,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerMerchantTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -454,7 +454,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerThiefTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -491,7 +491,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerMagicianTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -525,7 +525,7 @@ public class PredictTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void predictWhoIsPlayerWarlordTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
@@ -561,7 +561,7 @@ public class PredictTest {
 
     @RepeatedTest(1)
     //Test the las return of the predictWhoIsPlayer method
-    @Test
+    //@Test
     void predictWhoIsPlayerNoWorthyCharacterTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
