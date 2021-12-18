@@ -27,8 +27,8 @@ public class ColorDistrictTest {
 
     Board board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Haunted City built before the last round
     void isThereHauntedCityJokerInCityTest() {
         Player player = new Player("Player");
@@ -44,8 +44,8 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Haunted City built on the last round
     void isThereHauntedCityJokerInCityTest2() {
         Player player = new Player("Player");
@@ -60,8 +60,8 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //No Haunted City in the city
     void isThereHauntedCityJokerInCityTest3() {
         Player player = new Player("Player");
@@ -75,8 +75,8 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Haunted City in the city but no other Purple
     void isThereHauntedCityJokerInCityTest4() {
         Player player = new Player("Player");
@@ -90,8 +90,8 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Test if the Haunted City spell does its job
     void hauntedCitySpellTest() {
         ArrayList<String> colorsInCity = new ArrayList<>();
@@ -122,8 +122,8 @@ public class ColorDistrictTest {
         assertEquals("Yellow", player.getCity().getBuiltDistrict().get(2).getColor());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Test if the School of Magic spell does its job
     void schoolOfMagicSpellTest() {
         Player player = new Player("Player");
@@ -163,8 +163,8 @@ public class ColorDistrictTest {
         assertEquals(4,player.getGolds());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Test on play() method from Behavior with King
     void playKTest() {
         Character character = new King();
@@ -179,8 +179,8 @@ public class ColorDistrictTest {
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Test on play() method from Behavior with Bishop
     void playBTest() {
         Character character = new Bishop();
@@ -195,8 +195,8 @@ public class ColorDistrictTest {
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Test on play() method from Behavior with Merchant
     void playMTest() {
         Character character = new Merchant();
@@ -213,8 +213,8 @@ public class ColorDistrictTest {
         //So one gold from the beginning of the turn plus one gold from the spell of the district
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     //Test on play() method from Behavior with Warlord
     void playWTest() {
         board = Initializer.createBoard(Initializer.createListOfAllCharacter());

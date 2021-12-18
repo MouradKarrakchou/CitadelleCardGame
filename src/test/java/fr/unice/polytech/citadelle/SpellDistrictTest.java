@@ -36,8 +36,8 @@ public class SpellDistrictTest {
         initializer.initDeckDistrict(deckDistrict);
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void librarySpellNormalBotTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
@@ -48,8 +48,8 @@ public class SpellDistrictTest {
         verify(investor, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
     
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void noLibrarySpellNormalBotTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
@@ -58,8 +58,8 @@ public class SpellDistrictTest {
         verify(investor, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
     
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void librarySpellRushBotNormalBehaviorTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
@@ -70,8 +70,8 @@ public class SpellDistrictTest {
         verify(rushBot, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void noLibrarySpellRushBotNormalBehaviorTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
@@ -80,8 +80,8 @@ public class SpellDistrictTest {
         verify(rushBot, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void librarySpellRushBotEndGameBehaviorTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
@@ -92,8 +92,8 @@ public class SpellDistrictTest {
         verify(rushBot, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
 
-    @RepeatedTest(1)
-    @Test
+    @RepeatedTest(100)
+    //@Test
     void noLibrarySpellRushBotEndGameBehaviorTest() {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));

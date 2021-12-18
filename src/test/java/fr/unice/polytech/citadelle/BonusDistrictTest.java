@@ -25,21 +25,21 @@ public class BonusDistrictTest {
     Board board = new Board(listOfPlayer,new ArrayList<>(), deckDistrict, deckCharacter);
     Referee referee = new Referee(board);
 
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void dragonGateBonusTest() {
         executor.buildDistrict(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
         referee.updatePlayerWithCityScore(player);
         assertEquals(8, player.getScore());
     }
 
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void universityBonusTest() {
         executor.buildDistrict(new University("University", 6,"Purple","Prestige"));
         referee.updatePlayerWithCityScore(player);
         assertEquals(8, player.getScore());
     }
 
-    @RepeatedTest(1)
+    @RepeatedTest(100)
     void bothBonusTest() {
         executor.buildDistrict(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
         executor.buildDistrict(new University("University", 6,"Purple","Prestige"));
