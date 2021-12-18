@@ -219,7 +219,12 @@ public class ColorDistrictTest {
     void playWTest() {
         board = Initializer.createBoard(Initializer.createListOfAllCharacter());
         Character character = new Warlord();
-        Behaviour behavior = spy(new Behaviour(new Player("testPlayer"), board));
+
+        Player alice = new Player("alice");
+
+        board.getListOfPlayer().add(alice);
+
+        Behaviour behavior = spy(new Behaviour(alice, board));
 
         behavior.getPlayer().setRole(character);
 
