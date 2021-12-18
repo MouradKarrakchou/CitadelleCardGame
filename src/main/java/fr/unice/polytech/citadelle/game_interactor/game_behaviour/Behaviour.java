@@ -154,7 +154,7 @@ public class Behaviour {
 	 * @return The player to destroy a district.
 	 */
 	public Player selectPlayerForWarlord() {
-		return(strategy.choosePlayerForWarlordAdvanced());
+		return(strategy.choosePlayerForWarlordRandom());
 	}
 
 	/**
@@ -179,9 +179,6 @@ public class Behaviour {
 	 */
 	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
-	}
-	public ArrayList<District> chooseMagicianAction() {
-		return (strategy.chooseMagicianActionForRandom());
 	}
 
 	/**
@@ -345,7 +342,7 @@ public class Behaviour {
 	 * 			Not empty -> The Array of card to swap with the deck of district of the board.
 	 */
 	public ArrayList<District> chooseMagicianAction() {
-		return (strategy.chooseMagicianActionAdvanced());
+		return (strategy.chooseMagicianActionForRandom());
 	}
 
 	/**
