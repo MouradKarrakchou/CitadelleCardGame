@@ -35,7 +35,7 @@ public class ExecutorTest {
 		player.getDistrictCards().clear();
 
 		assertEquals(player.getDistrictCards().size(), 0);
-		executor.takeCard(aDistrict, deckDistrict);
+		executor.takeCard(aDistrict);
 		assertEquals(player.getDistrictCards().size(), 1);
 		assertEquals(player.getDistrictCards().get(0), aDistrict);
 	}

@@ -15,8 +15,11 @@ public class Executor {
 		this.player = player;
 	}
 
-
-    public void takeCard(District district, DeckDistrict deckDistrict) {
+	/**
+	 * Allow the bot to pick a card.
+	 * @param district The district to add to the player hand.
+	 */
+    public void takeCard(District district) {
 		PrintCitadels.printAddCardToTheDeck(player,district);
 		player.addDistrict(district);
 		//deckDistrict.removeDistrict(district);
