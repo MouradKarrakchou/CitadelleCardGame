@@ -45,9 +45,9 @@ public class Rusher extends Behaviour {
 			}
 			if (spellDistrict.size() != 0)
 				executeSpell(spellDistrict, deckDistrict);
-
+			else{
 			District choosenDistrictCard = pickCardsInDeck();
-			takeCard(choosenDistrictCard);
+			takeCard(choosenDistrictCard);}
 
 		} else {
 			takeGold();
