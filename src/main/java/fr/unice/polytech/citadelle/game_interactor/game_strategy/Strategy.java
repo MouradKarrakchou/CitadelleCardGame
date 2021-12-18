@@ -424,7 +424,7 @@ public class Strategy {
             if(player.getCity().getBuiltDistrict().size() == 6 && listOfAssassin.size() != 0 && !player.equals(bot.getPlayer())) {
                 for(Character character : board.getDeckCharacter().getDeckCharacter()) {
                     if(character.getName().equals("Assassin")) {
-            			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+            			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                     	return counter;
                     }
                     counter++;
@@ -445,7 +445,7 @@ public class Strategy {
         if(bot.getPlayer().getDistrictCardsSize() >= 3 && bot.getPlayer().getGolds() >= 6 && listOfArchitect.size() != 0) {
             for(Character character : board.getDeckCharacter().getDeckCharacter()) {
                 if(character.getName().equals("Architect")){
-        			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+        			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                 	return counter;
                 }
                 counter++;
@@ -466,7 +466,7 @@ public class Strategy {
             if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && listOfMagician.size() != 0 && !player.equals(bot.getPlayer())) {
                 for(Character character : board.getDeckCharacter().getDeckCharacter()) {
                     if(character.getName().equals("Magician")){
-            			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+            			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                     	return counter;
                     }
                     counter++;
@@ -488,7 +488,7 @@ public class Strategy {
             if(player.getGolds() >= 5 && listOfThief.size() != 0 && !player.equals(bot.getPlayer())) {
                 for(Character character : board.getDeckCharacter().getDeckCharacter()) {
                     if(character.getName().equals("Thief")){
-            			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+            			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                     	return counter;
                     }
                     counter++;
@@ -507,7 +507,7 @@ public class Strategy {
             String nameOfCharacterChosen = listOfAllCharacters.get(index).getName();
             for (Character character : board.getDeckCharacter().getDeckCharacter()) {
                 if (character.getName().equals(nameOfCharacterChosen)){
-        			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+        			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                 	return counter;
                 }
                 counter++;
@@ -527,7 +527,7 @@ public class Strategy {
         if(bot.getPlayer().getCity().getBuiltDistrict().size() >= 6 && listOfBishop.size() != 0) {
             for(Character character : board.getDeckCharacter().getDeckCharacter()) {
                 if(character.getName().equals("Bishop")){
-        			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+        			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                 	return counter;
                 }
                 counter++;
@@ -548,7 +548,7 @@ public class Strategy {
             if(player.getCity().getBuiltDistrict().size() == 7 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
                 for(Character character : board.getDeckCharacter().getDeckCharacter()) {
                     if(character.getName().equals("Warlord")){
-            			PrintCitadels.printChooseCharacterExplaination(player, character, board.getListOfCharacter());
+            			PrintCitadels.printChooseCharacterExplaination(this.player, character, board.getListOfCharacter());
                     	return counter;
                     }
                     counter++;
