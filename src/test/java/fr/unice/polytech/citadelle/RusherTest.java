@@ -33,8 +33,8 @@ public class RusherTest {
 		rusher = spy(new Rusher(player, board));
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
 		rusher = spy(new Rusher(player, board));
@@ -47,8 +47,8 @@ public class RusherTest {
 		verify(rusher, times(1)).takeCard(any());
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
@@ -57,8 +57,8 @@ public class RusherTest {
 		verify(rusher, times(0)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourTooExpansivesDistrictsTest() {
 		int tooExpansiveValue = 4;
 		ArrayList<District> districtsCards = player.getDistrictCards();
@@ -69,8 +69,8 @@ public class RusherTest {
 		verify(rusher, times(0)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourABuildableDistrictTest() {
 		int cheapValue = 3;
 
@@ -87,8 +87,8 @@ public class RusherTest {
 	}
 
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void endGameBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
@@ -97,8 +97,8 @@ public class RusherTest {
 		verify(rusher, times(0)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void endGameBehaviourCanBuildNewDistrictWithFuturGoldDistrictsTest() {
 		int tooExpansiveValueForNow = 3;
 
@@ -113,8 +113,8 @@ public class RusherTest {
 		verify(rusher, times(1)).takeGold();
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void ifPossibleBuildACheapDistrictOneCheapTest() {
 		District aCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 2, "colorTest", "familyTest");
 		District aOtherBuildableDistrict = new District("aOtherBuildableDistrict", 5, "colorTest", "familyTest");
@@ -131,8 +131,8 @@ public class RusherTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aCheaperBuildableDistrict);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void ifPossibleBuildACheapDistrictTwoCheapTest() {
 		District aCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 1, "colorTest", "familyTest");
 		District aOtherCheaperBuildableDistrict = new District("aOtherBuildableDistrict", 2, "colorTest", "familyTest");
@@ -149,8 +149,8 @@ public class RusherTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aCheaperBuildableDistrict);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void ifPossibleBuildACheapDistrictZeroCheapTest() {
 		District aNotCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 10, "colorTest", "familyTest");
 		District aOtherNotCheaperBuildableDistrict = new District("aOtherBuildableDistrict", 5, "colorTest", "familyTest");
@@ -166,8 +166,8 @@ public class RusherTest {
 		assertEquals(player.getCity().getSizeOfCity(), 0);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void ifPossibleBuildACheapDistrict2CheapEqualityTest() {
 		District aCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 2, "colorTest", "familyTest");
 		District aOtherCheaperBuildableDistrict = new District("aOtherBuildableDistrict", 2, "colorTest", "familyTest");
@@ -184,8 +184,8 @@ public class RusherTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aCheaperBuildableDistrict);
 	}
 
-	
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void chooseBetweenTwoCardsSecondCardChosenTest() {
 		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
@@ -194,8 +194,9 @@ public class RusherTest {
 	
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
-
-	@Test
+	
+	@RepeatedTest(100)
+	//@Test
 	public void chooseBetweenTwoCardsFirstChosenTest() {
 		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
@@ -204,8 +205,9 @@ public class RusherTest {
 
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
-
-	@Test
+	
+	@RepeatedTest(100)
+	//@Test
 	public void testGetCheaperDistrict(){
 		ArrayList<District> districtWeCanBuild=new ArrayList<>();
 		districtWeCanBuild.add(new District("expensiveDistrict",2," "," "));

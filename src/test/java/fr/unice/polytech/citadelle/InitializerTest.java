@@ -39,8 +39,8 @@ public class InitializerTest {
 
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void initHashOfCharacterTest() {
 		listOfAllCharacters.add(new Character("test0", 0));
 		listOfAllCharacters.add(new Character("test1", 1));
@@ -57,16 +57,16 @@ public class InitializerTest {
 		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void initListOfAllCharacterTest() {
 		ArrayList<Character> listOfAllCharactersSpy = spy(listOfAllCharacters);
 		listOfAllCharactersSpy = init.createListOfAllCharacter();
 		assertEquals(listOfAllCharactersSpy.size(), 8);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void initListOfBehaviourTest() {
     	Board board = new Board();
 		ArrayList<Behaviour> listOfBehaviourSpy = spy(listOfBehaviour);
@@ -77,8 +77,8 @@ public class InitializerTest {
 
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void fillHashOfCharacterTest() {
     	Board board = new Board();
 		LinkedHashMap<Character, Optional<Behaviour>> hashOfCharactersSpy = spy(hashOfCharacters);
@@ -86,8 +86,8 @@ public class InitializerTest {
 		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void initTheHashOfViewCharactersTest() {
 		ArrayList<Player> listOfPlayer = new ArrayList<>();
 		for(int i = 0 ; i < 5 ; i++)

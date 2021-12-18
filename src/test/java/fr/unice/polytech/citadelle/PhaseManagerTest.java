@@ -29,8 +29,8 @@ public class PhaseManagerTest {
 		phaseManager = new PhaseManager(player, board);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void analyseGameLastTurnTest() {
 		Player playerEndCity = new Player("playerEndCity");
 		ArrayList<Player> listOfPlayer = board.getListOfPlayer();
@@ -46,8 +46,8 @@ public class PhaseManagerTest {
 		assertEquals(PhaseManager.LAST_TURN_PHASE,phaseManager.analyseGame());	
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void analyseGameEndGameTest() {
 		City city = player.getCity();
 		city.getBuiltDistrict().clear();
@@ -57,8 +57,8 @@ public class PhaseManagerTest {
 
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void analyseGameMidGameTest() {
 		City city = player.getCity();
 		city.getBuiltDistrict().clear();

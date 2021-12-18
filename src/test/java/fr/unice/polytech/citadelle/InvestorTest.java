@@ -34,8 +34,8 @@ public class InvestorTest {
 		investor = spy(new Investor(player, board));
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
 		investor = spy(new Investor(player, board));
@@ -49,8 +49,8 @@ public class InvestorTest {
 		verify(investor, times(0)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
@@ -59,8 +59,8 @@ public class InvestorTest {
 		verify(investor, times(0)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourCanBuildTworMoreGoldTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
@@ -74,8 +74,8 @@ public class InvestorTest {
 		verify(investor, times(1)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void normalBehaviourABuildableDistrictTest() {
 		int cheapValue = 3;
 
@@ -92,8 +92,8 @@ public class InvestorTest {
 	}
 
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void endGameBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
@@ -102,8 +102,8 @@ public class InvestorTest {
 		verify(investor, times(0)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void endGameBehaviourCanBuildNewDistrictWithFuturGoldDistrictsTest() {
 		int tooExpansiveValueForNow = 3;
 
@@ -118,8 +118,8 @@ public class InvestorTest {
 		verify(investor, times(1)).takeGold();
 	}
 
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void chooseBetweenTwoCardsTest() {
 		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
@@ -130,8 +130,8 @@ public class InvestorTest {
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void pickCardsInDeckTwoCardsTest() {
 		ArrayList<District> districtsCards = new ArrayList<District>();
 		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
@@ -147,8 +147,8 @@ public class InvestorTest {
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void pickCardsInDeckOneCardsTest() {
 		ArrayList<District> districtsCards = new ArrayList<District>();
 		ArrayList<District> afterPickDistrictsCards = new ArrayList<District>();
@@ -168,8 +168,8 @@ public class InvestorTest {
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
 	
-	@RepeatedTest(1)
-	@Test
+	@RepeatedTest(100)
+	//@Test
 	public void pickCardsInDeckZeroCardsTest() {
 		ArrayList<District> districtsCards = new ArrayList<District>();
 		ArrayList<District> afterPickDistrictsCards = new ArrayList<District>();
