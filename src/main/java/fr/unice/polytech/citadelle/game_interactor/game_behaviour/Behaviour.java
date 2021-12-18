@@ -357,4 +357,10 @@ public class Behaviour {
 	public void putDistrictBackInDeck(District district) {
 		board.putDistrictBackInDeck(district);
 	}
+
+	public Board getBoard() {
+		return board;
+	}
+	
+	
 }

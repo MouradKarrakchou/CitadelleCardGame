@@ -34,7 +34,7 @@ public class Rusher extends Behaviour {
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
-		if (cheapersDistrictsBuildable.size() == 0 && board.getDeckDistrict().getSize() > 0) {
+		if (cheapersDistrictsBuildable.size() == 0 && board.getDeckDistrict().getSize() > 2) {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
 				if (district.getName().equals("Library"))
