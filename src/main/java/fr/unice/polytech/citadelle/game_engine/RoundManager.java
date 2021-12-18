@@ -104,7 +104,7 @@ public class RoundManager {
 		if (board.getRoundNumber() == 0)
 			playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
 		else
-			playerOfBehaviour.chooseCharacterCard(bot.chooseCharacterWithStrategy());
+			playerOfBehaviour.chooseCharacterCard(bot.chooseCharacterWithStrategy(bot));
 
 		Initializer.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
 		PrintCitadels.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());

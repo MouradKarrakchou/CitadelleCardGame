@@ -368,7 +368,7 @@ public class Strategy {
     	return predict.predictWhoIsPlayer(player,listOfCharacterToNotKill);
     }
 
-    public Character chooseCharacter() {
+    public Character chooseCharacter(Behaviour bot) {
         int counter;
 
         //Choice of Assassin
@@ -428,7 +428,7 @@ public class Strategy {
 
         //Choice of King or Merchant (if they are both equality worth, King is chosen)
         counter = 0;
-        int index=isThereAFamily(bot);
+        int index = isThereAFamily(bot);
         if (index!=-1) {
             String nameOfCharacterChosen = listOfAllCharacters.get(index).getName();
             for (Character character : board.getDeckCharacter().getDeckCharacter()) {
