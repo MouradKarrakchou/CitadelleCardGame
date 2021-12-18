@@ -178,7 +178,7 @@ public class PrintCitadels {
 
 	public static void botIsDead(Player player) {
 		String output = "[?] " + player.getName() + " was the " + player.getCharacter()
-				+ ". He has been killed he will not play this turn";
+				+ ". He has been killed, he will not play this turn";
 		System.out.println("\t"+colorize(output, RED_TEXT()));
 	}
 
@@ -262,7 +262,7 @@ public class PrintCitadels {
 
 	public static void printPutCardBackToTheDeck(Player player, District district) {
 		String coloredOutput2 = colorize(district.toString(), getDistrictColor(district));
-		System.out.println("\t"+player.getName() + " putBack the card " + coloredOutput2);
+		System.out.println("\t"+player.getName() + " put back the card " + coloredOutput2);
 	}
 
 	public static void printMerchantEarnedStartRoundMoney() {
@@ -277,20 +277,20 @@ public class PrintCitadels {
     public static void printBurned(Character character) {
 		String output = "\t- The character " + character.getName() + " has been ";
 		String output2 = "burned";
-		String output3 = ". (players can see it but can't pick it)";
+		String output3 = ". (players can see it but cannot pick it)";
 		System.out.println(output + colorize(output2, BRIGHT_YELLOW_TEXT()) + output3);
     }
 
 	public static void printAssassinAdvancedChoice(Player playerWithClosestScore, int predictedScore, int scoreDiffenreceWithClosestScore) {
 		System.out.println("STRATEGY:");
-		System.out.println(colorize("The bot tries to find who is the player that currently has the score the closest to his own score.",ITALIC()));
-		System.out.println(colorize("He predicts thats his own score is "+predictedScore+" points.",ITALIC()));
-		System.out.println(colorize("After predicting the score of all the players he thinks that "+playerWithClosestScore.getName()+" has the score the closet to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.",ITALIC()));
+		System.out.println(colorize("The bot tries to find who is the player that currently has the closest score to his own score.",ITALIC()));
+		System.out.println(colorize("He predicts that his own score is "+predictedScore+" points.",ITALIC()));
+		System.out.println(colorize("After predicting the score of all the players he thinks that "+playerWithClosestScore.getName()+" has the closet score to his score with a difference of "+scoreDiffenreceWithClosestScore+" points.",ITALIC()));
 	}
 	public static void printThiefAdvancedChoice(Player playerWithMostGold) {
 		System.out.println("STRATEGY:");
-		System.out.println(colorize("The Bot wants to steal from the player with most golds.",ITALIC()));
-		System.out.println(colorize("He analysed the board and sew that "+playerWithMostGold.getName()+" has the mostGolds.",ITALIC()));
+		System.out.println(colorize("The bot wants to steal from the player with most golds.",ITALIC()));
+		System.out.println(colorize("He analysed the board and saw that "+playerWithMostGold.getName()+" has the most golds.",ITALIC()));
 	}
 
 	public static void printWarlordAdvancedChoice(Player playerToDestroy, boolean playerToDestroyHasCompletedCity, boolean playerToDestroyIsBishop, District destroyedDistrict){
@@ -300,10 +300,10 @@ public class PrintCitadels {
 		if (playerToDestroyHasCompletedCity){
 			System.out.println(colorize("However, " + playerToDestroy.getName() + " has completed his city.",ITALIC()));
 		} else if (playerToDestroyIsBishop) {
-			System.out.println(colorize("However, " + playerToDestroy.getName() + " is the bishop, player Warlord prefer cancel his spell.", ITALIC()));
+			System.out.println(colorize("However, " + playerToDestroy.getName() + " is the Bishop, player Warlord cannot attack him.", ITALIC()));
 		} else {
 			if (destroyedDistrict == null)
-				System.out.println(colorize("Warlord strategy algorithm didn't find it interesting to destroy a building.",ITALIC()));
+				System.out.println(colorize("Warlord strategy algorithm did not find it interesting to destroy a building.",ITALIC()));
 			else if (destroyedDistrict.getColor().equals("Purple"))
 				System.out.println(colorize("Warlord strategy algorithm find it interesting to destroy a purple district.",ITALIC()));
 			else
@@ -316,12 +316,12 @@ public class PrintCitadels {
 	public static void printHidCharacter(Character hidCharacter) {
 		String output = "\t- The character " + hidCharacter.getName() + " has been ";
 		String output2 = "hiddenly burned";
-		String output3 = ". (players can't see an pick it except for the last player.)";
+		String output3 = ". (players cannot see and pick it except for the last player.)";
 		System.out.println(output + colorize(output2, YELLOW_TEXT()) + output3);
 	}
 
 	public static void warlordDontUseSpell(Player player) {
-		String output = "\t[!] The "+ player.getName()+" chooses to not use his Warlord spell.";
+		String output = "\t[!] The "+ player.getName()+" chooses not to use his Warlord spell.";
 		System.out.println(colorize(output, MAGENTA_TEXT()));
 	}
 
@@ -333,26 +333,26 @@ public class PrintCitadels {
 	public static void printResultOfPrediction() {}
 	
 	public static void printPlayerHasAlreadyRevealCharacter(Player currentPlayer, Player playerTarget, Character characterTarget) {
-		String output = "\t[!] The "+ currentPlayer.getName()+" wants to use his spell on "+playerTarget.getName()+". He doesn't need to predict his Character because "+playerTarget.getName()+" has already reveal that he was "+characterTarget;
+		String output = "\t[!] The "+ currentPlayer.getName()+" wants to use his spell on "+playerTarget.getName()+". He does not need to predict his Character because "+playerTarget.getName()+" has already revealed that he was "+characterTarget;
 		System.out.println(output);
 	}
 
 
     public static void printMagicianAdvancedChoice(Player playerWithMostDistrictGames, Player player) {
 		System.out.println(colorize(" The"+player.getName()+" wants to steal from the player with most district.",ITALIC()));
-		System.out.println(colorize("He analysed the board and sew that "+playerWithMostDistrictGames.getName()+" has the most districts.",ITALIC()));
+		System.out.println(colorize("He analysed the board and saw that "+playerWithMostDistrictGames.getName()+" has the most districts.",ITALIC()));
     }
 
 	public static void playerHasTwoTimesMoreHisCards(Player player) {
 		System.out.println("STRATEGY:");
-		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the board",ITALIC()));
-		System.out.println(colorize("He analysed the board and sew that there is a player that has two times more district then him he will try to swap hands.",ITALIC()));
+		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the deck",ITALIC()));
+		System.out.println(colorize("He analysed the board and saw that there is a player that has two times more district than him. He will try to swap hands.",ITALIC()));
 	}
 
 	public static void playerSwapWithDeck(Player player) {
 		System.out.println("STRATEGY:");
-		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the board",ITALIC()));
-		System.out.println(colorize("He analysed the board and sew that no player has two times more district then him.He will change some cards with the deck.",ITALIC()));
+		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the deck",ITALIC()));
+		System.out.println(colorize("He analysed the board and saw that no player has two times more district then him. He will change some cards with the deck.",ITALIC()));
 	}
 
 	public static void pritCardsToBeSwapped(Player player, ArrayList<District> listDistrictToSwap) {
@@ -366,13 +366,13 @@ public class PrintCitadels {
 	}
 	
 	public static void printPredictionExplaination(Player currentPlayer, Player targetPlayer, Character characterOfTargetPlayer, ArrayList<Character> listOfCharacter){
-		String firstPartOutput = "Prediction: "+currentPlayer.getName()+" predict that "+targetPlayer.getName()+" is "+characterOfTargetPlayer.getName()+" because ";
+		String firstPartOutput = "Prediction: "+currentPlayer.getName()+" predicts that "+targetPlayer.getName()+" is "+characterOfTargetPlayer.getName()+" because ";
 		String finalOutput = firstPartOutput+ initHashPrediction(listOfCharacter).get(characterOfTargetPlayer);
 		System.out.println(colorize(finalOutput,ITALIC()));
 	}
 	
 	public static void printChooseCharacterExplaination(Player currentPlayer, Character chooseTargetPlayer, ArrayList<Character> listOfCharacter){
-		String firstPartOutput = "\tExplanation: "+currentPlayer.getName()+" choose the character "+chooseTargetPlayer.getName()+" because ";
+		String firstPartOutput = "\tExplanation: "+currentPlayer.getName()+" chooses the character "+chooseTargetPlayer.getName()+" because ";
 		String finalOutput = firstPartOutput+ initHashPrediction(listOfCharacter).get(chooseTargetPlayer);
 		System.out.println(colorize(finalOutput,ITALIC()));
 	}
@@ -382,7 +382,7 @@ public class PrintCitadels {
 		prediction.put(listOfCharacter.get(Initializer.ASSASSIN_INDEX), "someone is close to finish the game (has 6 districts)");
 		prediction.put(listOfCharacter.get(Initializer.THIEF_INDEX), "he does not have a lot of golds");
 		prediction.put(listOfCharacter.get(Initializer.MAGICIAN_INDEX), "he does not have a lot of district cards");
-		prediction.put(listOfCharacter.get(Initializer.KING_INDEX), "he has 3 nobility");
+		prediction.put(listOfCharacter.get(Initializer.KING_INDEX), "he has 3 Nobility");
 		prediction.put(listOfCharacter.get(Initializer.BISHOP_INDEX), "he has 6 or more districts built in his city");
 		prediction.put(listOfCharacter.get(Initializer.MERCHANT_INDEX), "he has 3 or more Trade and Handicrafts districts built in his city");
 		prediction.put(listOfCharacter.get(Initializer.ARCHITECT_INDEX), "he does not have a lot of golds");
@@ -391,6 +391,6 @@ public class PrintCitadels {
 	}
 
 	public static void ExplanationChooseCardButNotFound(Player currentPlayer) {
-		System.out.println(colorize("\tExplanation: "+currentPlayer.getName()+" takes a card at random because none is more advantageous than another",ITALIC()));		
+		System.out.println(colorize("\tExplanation: "+currentPlayer.getName()+" takes any possible card because none is more advantageous than another",ITALIC()));
 	}
 }
