@@ -6,6 +6,12 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+/**
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * Announce the title of a character from whom you wish to steal.
+ * When the player who has that character is called upon to take his turn, you first take all of his gold.
+ * You may not steal from the Assassin or the Assassin's target.
+ */
 public class Thief extends Character {
 
     public Thief(){
