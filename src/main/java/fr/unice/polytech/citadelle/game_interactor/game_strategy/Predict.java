@@ -23,35 +23,53 @@ public class Predict {
 	// Methode qui predit ce que le player a.
 	public Character predictWhoIsPlayer(Player targetPlayer, ArrayList<Character> listOfUntargetableCharacter) {
 		Optional<Character> potentialCharacterOfTargetPlayer = checkAlreadyReveal(targetPlayer);
-		if(potentialCharacterOfTargetPlayer.isPresent()) {
+		if (potentialCharacterOfTargetPlayer.isPresent()) {
 			Character targetCharacter = potentialCharacterOfTargetPlayer.get();
-			if(!listOfUntargetableCharacter.contains(targetCharacter))
+			if (!listOfUntargetableCharacter.contains(targetCharacter))
 				return targetCharacter;
 		}
 
 		if (canBeArchitect(targetPlayer, listOfUntargetableCharacter)) {
 			Character targetCharacter = listGetCharacter(Initializer.ARCHITECT_INDEX);
-			PrintCitadels.printChooseCharacterExplaination(targetCharacter, board.getListOfCharacter());
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer, targetCharacter, board.getListOfCharacter());
 			return targetCharacter;
 		}
 
-		if (canBeBishop(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.BISHOP_INDEX);
+		if (canBeBishop(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.BISHOP_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer, targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
-		if (canBeKing(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.KING_INDEX);
+		if (canBeKing(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.KING_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer,targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
-		if (canBeMerchant(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.MERCHANT_INDEX);
+		if (canBeMerchant(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.MERCHANT_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer,targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
-		if (canBeThief(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.THIEF_INDEX);
+		if (canBeThief(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.THIEF_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer,targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
-		if (canBeMagician(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.MAGICIAN_INDEX);
+		if (canBeMagician(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.MAGICIAN_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer,targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
-		if (canBeWarlord(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.WARLORD_INDEX);
+		if (canBeWarlord(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.WARLORD_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(currentPlayer,targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
 		return targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter).get(0);
 	}
@@ -62,21 +80,21 @@ public class Predict {
 			Character targetCharacter = potentialCharacterOfTargetPlayer.get();
 			PrintCitadels.printPlayerHasAlreadyRevealCharacter(currentPlayer, targetPlayer, targetCharacter);
 			return Optional.of(targetCharacter);
-		}
-		else
+		} else
 			return Optional.empty();
 	}
 
 	public ArrayList<Character> allCharacters() {
 		ArrayList<Character> listOfAllCharacter = new ArrayList<>();
 
-		for(int i = 0; i < 8; i++)
+		for (int i = 0; i < 8; i++)
 			listOfAllCharacter.add(listGetCharacter(i));
 
 		return listOfAllCharacter;
 	}
 
-	public ArrayList<Character> targetableCharactersForPredictWhoIsPlayer(ArrayList<Character> listOfUntargetableCharacter) {
+	public ArrayList<Character> targetableCharactersForPredictWhoIsPlayer(
+			ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = allCharacters();
 
 		for (Character character : listOfUntargetableCharacter)
@@ -115,7 +133,8 @@ public class Predict {
 		ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
 		int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
 
-		return (handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.ARCHITECT_INDEX)));
+		return (handOfPlayer.size() >= 3 && goldsOfPlayer >= 6
+				&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.ARCHITECT_INDEX)));
 	}
 
 	// Is the Bishop interesting for this player? It can be if he has 6 or more
@@ -125,7 +144,8 @@ public class Predict {
 				listOfUntargetableCharacter);
 		ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
 
-		return (cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.BISHOP_INDEX)));
+		return (cityOfPlayer.size() >= 6
+				&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.BISHOP_INDEX)));
 	}
 
 	// Is the King interesting for this player? It can be if he has 3 nobility
@@ -177,7 +197,8 @@ public class Predict {
 				listOfUntargetableCharacter);
 		ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
 
-		return (handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.MAGICIAN_INDEX)));
+		return (handOfPlayer.size() <= 2
+				&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.MAGICIAN_INDEX)));
 	}
 
 	// Is the Warlord interesting for this player? It can be if someone is close to
@@ -188,7 +209,8 @@ public class Predict {
 		ArrayList<Player> listOfPlayers = playersForPredictWhoIsPlayer(player);
 
 		for (Player otherPlayer : listOfPlayers)
-			if (otherPlayer.getCity().getBuiltDistrict().size() == 7 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.WARLORD_INDEX)))
+			if (otherPlayer.getCity().getBuiltDistrict().size() == 7
+					&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.WARLORD_INDEX)))
 				return true;
 
 		return false;
