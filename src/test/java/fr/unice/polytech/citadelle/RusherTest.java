@@ -9,18 +9,17 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.RushBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
 
-public class RushBotTest {
+public class RusherTest {
 	Player player;
-	RushBot rusher;
+	Rusher rusher;
 	DeckDistrict deckDistrict;
 	Board board;
 
@@ -30,13 +29,13 @@ public class RushBotTest {
 		deckDistrict.initialise();
 		player = new Player("Player1");
 		board = new Board(null,new ArrayList<>(),deckDistrict , null);
-		rusher = spy(new RushBot(player, board));
+		rusher = spy(new Rusher(player, board));
 	}
 
 	@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
-		rusher = spy(new RushBot(player, board));
+		rusher = spy(new Rusher(player, board));
 
 		player.getDistrictCards().clear();
 

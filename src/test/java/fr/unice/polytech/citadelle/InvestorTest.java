@@ -8,22 +8,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
 
-public class NormalBotTest {
+public class InvestorTest {
 	Player player;
-	NormalBot investor;
+	Investor investor;
 	DeckDistrict deckDistrict;
 	Board board;
 
@@ -33,13 +30,13 @@ public class NormalBotTest {
 		deckDistrict.initialise();
 		player = new Player("Player");
     	board = new Board(null,new ArrayList<>(),deckDistrict , null);
-		investor = spy(new NormalBot(player, board));
+		investor = spy(new Investor(player, board));
 	}
 
 	@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
-		investor = spy(new NormalBot(player, board));
+		investor = spy(new Investor(player, board));
 
 		player.getDistrictCards().clear();
 

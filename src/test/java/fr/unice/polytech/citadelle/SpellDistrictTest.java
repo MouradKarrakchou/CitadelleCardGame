@@ -7,8 +7,8 @@ import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.game.purple_districts.Library;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.RushBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,8 +27,8 @@ public class SpellDistrictTest {
     Player player = new Player("Player");
     Executor executor = new Executor(player);
     Board board = new Board(null,new ArrayList<>(),deckDistrict , null);
-    NormalBot normalBot = spy(new NormalBot(player, board));
-    RushBot rushBot = spy(new RushBot(player, board));
+    Investor investor = spy(new Investor(player, board));
+    Rusher rushBot = spy(new Rusher(player, board));
 
     @BeforeEach
     void beforeEach() {
@@ -42,8 +42,8 @@ public class SpellDistrictTest {
 
         executor.buildDistrict(new Library("Library", 6,"Purple","Prestige"));
 
-        normalBot.normalBehaviour();
-        verify(normalBot, times(1)).executeSpell(spellDistricts, deckDistrict);
+        investor.normalBehaviour();
+        verify(investor, times(1)).executeSpell(spellDistricts, deckDistrict);
     }
     
     @Test
@@ -51,8 +51,8 @@ public class SpellDistrictTest {
         ArrayList<SpellDistrict> spellDistricts = new ArrayList<>();
         spellDistricts.add(new SpellDistrict("Library", 6, "Purple", "Prestige"));
 
-        normalBot.normalBehaviour();
-        verify(normalBot, times(0)).executeSpell(spellDistricts, deckDistrict);
+        investor.normalBehaviour();
+        verify(investor, times(0)).executeSpell(spellDistricts, deckDistrict);
     }
     
     @Test

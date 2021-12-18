@@ -21,7 +21,7 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Architect;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
 
 public class BehaviourTest {
 	Player playerTest;
@@ -216,7 +216,7 @@ public class BehaviourTest {
         
         Board aBoard = new Board(new ArrayList<Player>(),new ArrayList<Character>(), theDeckDistrict, new DeckCharacter());
 
-        NormalBot aaaaaaa = spy(new NormalBot(new Player("players"), aBoard));
+        Investor aaaaaaa = spy(new Investor(new Player("players"), aBoard));
         aaaaaaa.getPlayer().addDistrict(districtA);
         aaaaaaa.getPlayer().addDistrict(districtB);
 
