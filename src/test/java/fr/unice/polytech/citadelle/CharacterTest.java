@@ -210,10 +210,10 @@ public class CharacterTest {
     }
     @Test
     void testMagicianSwapWithAnotherCharacter(){
-        ArrayList<Integer> positionOfCardsToSwap=new ArrayList<>();
+        ArrayList<District> cardsToSwap=new ArrayList<>();
         botMerchant.getPlayer().getDistrictCards().add(new District("MerchantDistrict",0," "," "));
         botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict",0," "," "));
-        when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
+        when(botMagician.chooseMagicianAction()).thenReturn(cardsToSwap);
         when(botMagician.selectCharacterForSpell(hashOfCharacters)).thenReturn(merchant);
         magician.spellOfTurn(botMagician,hashOfCharacters);
         assertEquals("MagicianDistrict",botMerchant.getPlayer().getDistrictCards().get(0).getName());
@@ -221,12 +221,13 @@ public class CharacterTest {
     }
     @Test
     void testMagicianSwapWithTheDeck(){
-        ArrayList<Integer> positionOfCardsToSwap=new ArrayList<>();
-        positionOfCardsToSwap.add(2);
+        ArrayList<District> cardsToSwap=new ArrayList<>();
+        District districtToSwap=new District("MagicianDistrict2",0," "," ");
         botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict0",0," "," "));
         botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict1",0," "," "));
-        botMagician.getPlayer().getDistrictCards().add(new District("MagicianDistrict2",0," "," "));
-        when(botMagician.chooseMagicianAction()).thenReturn(positionOfCardsToSwap);
+        botMagician.getPlayer().getDistrictCards().add(districtToSwap);
+        cardsToSwap.add(districtToSwap);
+        when(botMagician.chooseMagicianAction()).thenReturn(cardsToSwap);
         when(botMagician.pickCard()).thenReturn(new District("MagicianDistrict3",0," "," "));
         magician.spellOfTurn(botMagician,hashOfCharacters);
         assertEquals("MagicianDistrict0",botMagician.getPlayer().getDistrictCards().get(0).getName());

@@ -109,13 +109,18 @@ public class Board {
 
     }
 
-
 	public ArrayList<City> getListOfCity() {
 		return listOfPlayer.stream().
 				map(player -> player.getCity()).
 				collect(Collectors.toCollection(ArrayList::new));
 	}
-    
 
+
+    public Character findDeadCharacter() {
+        for (int k=0;k<listOfCharacter.size();k++){
+            if (!listOfCharacter.get(k).isCharacterIsAlive()) return listOfCharacter.get(k);
+        }
+        return null;
+    }
 }
 
