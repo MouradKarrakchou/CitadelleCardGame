@@ -56,7 +56,6 @@ public class DeckDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void initializerTestName(){
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
@@ -66,7 +65,6 @@ public class DeckDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void initializerTestQuantity(){
         for (int i = 0; i < deckDistrictReal.size(); i++) {
             int j = i;
@@ -79,7 +77,6 @@ public class DeckDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test 
      void initializerTestValue(){
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
