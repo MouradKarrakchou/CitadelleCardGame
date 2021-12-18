@@ -110,30 +110,6 @@ public class RoundManager {
 		PrintCitadels.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-
-	public int isThereAFamily(Behaviour bot) {
-		Player playerOfBehaviour = bot.getPlayer();
-		ArrayList<District> districtsInACity;
-		ArrayList<String> nameOfFamilies = new ArrayList<>();
-
-		nameOfFamilies.add("Nobility");
-		nameOfFamilies.add("Trade and Handicrafts");
-
-		for (String familyName : nameOfFamilies) {
-			districtsInACity = playerOfBehaviour.getCity().getBuiltDistrict();
-
-			ArrayList<District> districtFilter = districtsInACity.stream()
-					.filter(district -> district.getNameOfFamily().equals(familyName))
-					.collect(Collectors.toCollection(ArrayList::new));
-
-			if (familyName.equals("Nobility") && districtFilter.size() == 3)
-				return Initializer.KING_INDEX;
-			else if (familyName.equals("Trade and Handicrafts") && districtFilter.size() >= 3)
-				return Initializer.MERCHANT_INDEX;
-		}
-		return (-1);
-	}
-
 	/**
 	 * According to the Citadels rule, RoundManager will ask a character to play.
 	 * If a player own a called character, associated behaviour will play for the player.
