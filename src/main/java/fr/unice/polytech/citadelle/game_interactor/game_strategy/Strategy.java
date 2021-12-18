@@ -38,7 +38,7 @@ public class Strategy {
     public Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
-        while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || !randomCharacter.isCharacterIsAlive()) {
+        while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || !randomCharacter.getCharacterisAlive()) {
             randomCharacter=list.get(randomInt(numberOfCharacter));
         }
         return randomCharacter;

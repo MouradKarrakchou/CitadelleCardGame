@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+/**
+ * The magician have 2 options:
+ * Exchange his entire hand of cards (not the cards in your city) with the hand of another player (this applies even if you have no cards in your hand, in which case you simply take the other player's cards).
+ * Place any number of cards from your hand facedown at the bottom of the District Deck, and then draw an equal number of cards from the top of the District Deck.
+ */
 public class Magician extends Character {
     public Magician(){
         super("Magician", 3);
@@ -23,12 +28,13 @@ public class Magician extends Character {
         deckDistrict1.addAll(deckDistrict2copy);
         deckDistrict2.addAll(deckDistrict1copy);
     }
-    public ArrayList<District> swapCardsWithDeck(Behaviour bot, ArrayList<District> positionOfCardsToBeSwaped){
+    public ArrayList<District> swapCardsWithDeck(Behaviour bot, ArrayList<District> cardsToBeSwaped){
         ArrayList<District> districtDeleted=new ArrayList<>();
-        for (District district : positionOfCardsToBeSwaped) {
+        for (District district : cardsToBeSwaped) {
             ArrayList<District> districtCards = bot.getPlayer().getDistrictCards();
             districtDeleted.add(district);
             districtCards.remove(district);
+            bot.putDistrictBackInDeck(district);
         }
         return districtDeleted;
     }

@@ -9,6 +9,7 @@ import java.util.Optional;
 /**
  * Assassin can kill one character per round. The player having the character being killed will be not
  * able to play the round.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Assassin extends Character{
     public Assassin(){

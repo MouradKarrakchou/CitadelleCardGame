@@ -181,7 +181,7 @@ public class Behaviour {
 	}
 
 	public void takeCard(District districtCard) {
-		executor.takeCard(districtCard, board.getDeckDistrict());
+		executor.takeCard(districtCard);
 	}
 
 	/**
@@ -283,4 +283,7 @@ public class Behaviour {
 		return (strategy.chooseDistrictToDestroy(playerToDestroy));
 	}
 
+	public void putDistrictBackInDeck(District district) {
+		board.putDistrictBackInDeck(district);
+	}
 }
