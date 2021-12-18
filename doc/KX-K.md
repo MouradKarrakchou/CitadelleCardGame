@@ -321,7 +321,7 @@ Parfois créer des méthode trop longue que par la suite nous devions découper.
 A la fin du projet nous commencions à nous améliorer sur ces deux problèmes et c’est quelque chose sur laquelle on souhaite continuer de s’améliorer.
 Il arrivait aussi que les push ne soient pas effectués assez fréquemment créant des conflits sur les merges assez compliquées à gérer. 
 
-## keep doing
+## Keep doing
 Primordial pour s’assurer de la robustesse d’un code, les tests ont souvent été espacés d’un certain temps par apport à l’ajout d’une nouvelle fonctionnalité. C’est après un période de refactor que l'efficacité des tests se sont démarqués. Les tests sont et doivent continuer d’être envoyés en même temps que l’ajout d’une nouvelle fonctionnalité. 
 
 Le créneau horaire réservé pour le projet (le mercredi après-midi) fut consacré à la mise en commun de l'avancement du projet en cours, de la prochaine milestone, des prochaines issues ainsi que de l'affectation des tâches. Avoir eu la possibilité de se rencontrer afin de discuter autour de ces différents sujets fut un élément moteur au bon déroulement du projet.
