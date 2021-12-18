@@ -26,6 +26,27 @@ public class PredictTest {
     ArrayList<Character> allCharacters = board.getListOfCharacter();
     Strategy strategy;
 
+
+
+    Behaviour botArchitecte;
+    Behaviour botBishop;
+    Behaviour botMagician;
+    Behaviour botAssassin;
+    Behaviour botKing;
+    Behaviour botThief;
+    Behaviour botMerchant;
+    Behaviour botWarlord;
+    Architect architect;
+    Bishop bishop;
+    Magician magician;
+    Assassin assassin;
+    King king;
+    Thief thief;
+    Merchant merchant;
+    Warlord warlord;
+
+
+
     @RepeatedTest(100)
     @Test
     void targetableCharactersForPredictWhoIsPlayerTest() {
@@ -284,28 +305,9 @@ public class PredictTest {
         assertEquals(players, predict.playersForPredictWhoIsPlayer(player1));
     }
 
-    /*
+    @RepeatedTest(100)
     @Test
-    void chooseCharacterForAssassinAdvancedWhenTargetHasAlreadyRevealCharacter() {
-        strategy = new Strategy(8, board, botAssassin.getPlayer());
-
-        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
-
-        listOfPlayerForHash.add(botArchitecte.getPlayer());
-        listOfPlayerForHash.add(botAssassin.getPlayer());
-
-        board.setListOfPlayer(listOfPlayerForHash);
-        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
-        board.revealCharacter(botArchitecte.getPlayer(), architect);
-
-        Character CharacterOfTheTarget = strategy.chooseCharacterForAssassinAdvanced();
-        assertEquals(architect, CharacterOfTheTarget);
-    }*/
-
-    /*
-    //@RepeatedTest(100)
-    @Test
-    void predictWhoIsPlayerTest() {
+    void predictWhoIsPlayerArchitectTest() {
         Player player = new Player("Player");
         Player player2 = new Player("Player2");
 
@@ -330,17 +332,266 @@ public class PredictTest {
         player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
         player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
 
-        board.getListOfPlayer().add(player);
-        board.getListOfPlayer().add(player2);
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
 
-        //player.setGolds(3); Thief
+        board.setListOfPlayer(listOfPlayers);
 
-        //player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts")); Magician
-        //player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts")); Magician
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
 
         assertEquals(new Architect(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
-    }*/
+    }
 
+    @RepeatedTest(100)
+    @Test
+    void predictWhoIsPlayerBishopTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
 
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new Bishop(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void predictWhoIsPlayerKingTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new King(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void predictWhoIsPlayerMerchantTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new Merchant(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void predictWhoIsPlayerThiefTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player.setGolds(3);
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new Thief(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void predictWhoIsPlayerMagicianTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player.setGolds(4);
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new Magician(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void predictWhoIsPlayerWarlordTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player.setGolds(4);
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new Warlord(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    //Test the las return of the predictWhoIsPlayer method
+    @Test
+    void predictWhoIsPlayerNoWorthyCharacterTest() {
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player.setGolds(4);
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Player> listOfPlayers = new ArrayList<>();
+        listOfPlayers.add(player);
+        listOfPlayers.add(player2);
+
+        board.setListOfPlayer(listOfPlayers);
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+
+        assertEquals(new Assassin(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }
 
 }
