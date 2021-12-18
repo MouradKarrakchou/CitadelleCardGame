@@ -87,4 +87,12 @@ public class DeckDistrictTest {
                               .forEach(districtToTest -> assertEquals(districtReal.getValue(), districtToTest.getValue()));
         }
     }
+    @RepeatedTest(1)
+    void putBackCardInDeck(){
+        deck.getDeckDistrict().clear();
+        deck.addDistrict(new District("district",1,null,null));
+        deck.addDistrict(new District("district",1,null,null));
+        deck.addDistrictAtTheEnd(new District("districtAtTheEnd",1,null,null));
+        assertEquals(deck.getDeckDistrict().get(2).getName(),"districtAtTheEnd");
+    }
 }
