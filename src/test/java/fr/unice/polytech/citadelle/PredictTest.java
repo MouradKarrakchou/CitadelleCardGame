@@ -204,7 +204,7 @@ public class PredictTest {
         player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
 
         ArrayList<Character> untargetable = new ArrayList<>();
-        untargetable.add(new Merchant());
+        untargetable.add(new Magician());
 
         assertEquals(false, predict.canBeMagician(player, untargetable));
     }
@@ -214,33 +214,40 @@ public class PredictTest {
     void canBeWarlordTest() {
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        board.getListOfPlayer().add(player1);
+        board.getListOfPlayer().add(player2);
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
         assertEquals(true, predict.canBeWarlord(player1, untargetable));
     }
 
+    @RepeatedTest(100)
     @Test
     void cannotBeWarlordTest() {
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        board.getListOfPlayer().add(player1);
+        board.getListOfPlayer().add(player2);
 
         ArrayList<Character> untargetable = new ArrayList<>();
-        untargetable.add(new Merchant());
+        untargetable.add(new Warlord());
 
         assertEquals(false, predict.canBeWarlord(player1, untargetable));
     }
