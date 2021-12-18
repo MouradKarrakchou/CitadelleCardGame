@@ -303,14 +303,14 @@ L'outil en ligne permet de structurer les points à discuter :
 * keep doing: quelque chose qui marche bien et qu'il faut continuer à faire
 Maintenant que les bases sont posée, voici ce qui a découlé de cette rétrospective 
 
-### Less of:
+## Less of
 Commenter des lignes, des méthodes dans les codes et ne jamais supprimer ces commentaires, ce qui fait qu’on accumule une grande quantité de ligne inutile qui polluent nos classes
 
 L’un des problèmes que nous avons rencontré a été la façon d’aborder les refractors. En effet, nous avons eu 2 majeurs refractors et quelques refractors mineurs.Bien que nous pensons que nous les avons bien menés et que les résultats finaux furent très satisfaisant, ils ont défois prit un temps conséquent qu’on aurait pu réduire en prévoyant un peu plus les changements à venir. 
 De plus, en fin de séance, nous perdions en efficacité nous obligeant ainsi souvent à finir bien plus tard les séances de mercredi.
 Certaines méthodes furent aussi victime d'over engineering. Nous avons travaillé sur celà et vers là fin nous n’avions presque plus ce problème. Ce projet nous a donc aidé à nous améliorer sur ce point.
 
-### Stop doing:
+## Stop doing
 Continuer de travailler alors qu'on est trop fatigué pour réfléchir correctement
 Changer plus tard ce qu'on pourrait changer tout de suite
 Push pas assez fréquent
@@ -321,7 +321,7 @@ Parfois créer des méthode trop longue que par la suite nous devions découper.
 A la fin du projet nous commencions à nous améliorer sur ces deux problèmes et c’est quelque chose sur laquelle on souhaite continuer de s’améliorer.
 Il arrivait aussi que les push ne soient pas effectués assez fréquemment créant des conflits sur les merges assez compliquées à gérer. 
 
-### keep doing:
+## keep doing
 Primordial pour s’assurer de la robustesse d’un code, les tests ont souvent été espacés d’un certain temps par apport à l’ajout d’une nouvelle fonctionnalité. C’est après un période de refactor que l'efficacité des tests se sont démarqués. Les tests sont et doivent continuer d’être envoyés en même temps que l’ajout d’une nouvelle fonctionnalité. 
 
 Le créneau horaire réservé pour le projet (le mercredi après-midi) fut consacré à la mise en commun de l'avancement du projet en cours, de la prochaine milestone, des prochaines issues ainsi que de l'affectation des tâches. Avoir eu la possibilité de se rencontrer afin de discuter autour de ces différents sujets fut un élément moteur au bon déroulement du projet.
@@ -337,7 +337,7 @@ Les pauses furent essentielles car elles permettaient de rythmer le travail.
 Le refractor nous a permis de restructurer le projet quand cela été nécessaire ainsi nous pouvions garder une architecture claire et que chacun des membres du projet puisse bien comprendre le fonctionnement de chaque partie du projet. Cela nous permettait d'implémenter beaucoup plus facilement des nouvelles fonctionnalités.
 
 
-### More of:
+## More of
 Chacun soit en mesure de modifier une partie du projet
 Communication (Discord server: channels)
 Ne pas hésiter à partager ses idées
@@ -350,7 +350,7 @@ De plus quand un de nous à une idée il n’hésite pas à en faire part aux au
 Enfin, lorsqu’un de nous à un bug ou un problème sur le code les autres viennent l’aider, il faut continuer à s’entraider
 
 
-### Start doing
+## Start doing
 Bien que la javadoc permette d'analyser la structure d'une application Java et de fournir aux développeurs une description détaillée d’une méthode ou d’une classe,  nous n’avons pas le temps de la réaliser à chaque méthode et classe implémentée. Après cette rétrospection, nous avons convenu que la javadoc doit être implémentée dès lors qu’une nouvelle méthode ou classe est écrite.
 
 L’organisation du projet a conduit le groupe à scinder la structure du code en trois grandes parties : les character, les districts et l’interaction avec le jeu. Cette structure permet aux membres du groupe de se spécialiser dans une certaine partie du projet au dépens d’autres parties. Afin de fournir un code de meilleure qualité et d’une meilleure lisibilité, nous avons convenu que tous les membres du groupe sortent de leurs zones de confort afin d’apporter un point de vue nouveau - avec plus de recul - sur les différentes partie du projet n’ayant pas été commencée par ce membre du groupe. 
