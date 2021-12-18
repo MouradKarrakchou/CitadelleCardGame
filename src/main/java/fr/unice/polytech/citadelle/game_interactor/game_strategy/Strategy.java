@@ -69,7 +69,7 @@ public class Strategy {
     public Player choosePlayerForWarlordRandom() {
         List<Player> list = board.getListOfPlayer();
         Player randomPlayer=list.get(randomInt(board.getListOfPlayer().size()));
-        while (randomPlayer.getName().equals("Warlord")) {
+        while (randomPlayer.getName().equals("Warlord") && randomPlayer.getName().equals("Bishop")) {
             randomPlayer=list.get(randomInt(numberOfCharacter));
         }
         return randomPlayer;
@@ -214,6 +214,27 @@ public class Strategy {
         }
         return interestScore;
     }
+
+    /**
+     * For a given player, will return a random player district to destroy.
+     * @return The district to return.
+     */
+    public District chooseDistrictToDestroyRandom(Player playerToDestroy){
+        int playerToDestroyCitySize = playerToDestroy.getCity().getSizeOfCity();
+        int playerGolds = player.getGolds();
+
+        // Warlord can't destroy a completed city.
+        if (playerToDestroyCitySize >= 8)
+            return null;
+
+        for(int k=0; k<playerToDestroy.getCity().getSizeOfCity(); k++){
+            District currentDistrictCheck = playerToDestroy.getCity().getBuiltDistrict().get(k);
+            if (currentDistrictCheck.getValue() - 1 <= playerGolds && !currentDistrictCheck.getName().equals("Keep"))
+                return (playerToDestroy.getCity().getBuiltDistrict().get(k));
+        }
+        return null;
+    }
+
 
     /**
      * For a given player, will analyze player city to choose a district to destroy.
@@ -410,6 +431,7 @@ public class Strategy {
         index = chooseWarlord(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
+        PrintCitadels.ExplanationChooseCardButNotFound(this.player);
         return board.getDeckCharacter().getDeckCharacter().remove(0);
     }
 
