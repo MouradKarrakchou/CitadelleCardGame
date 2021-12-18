@@ -161,7 +161,7 @@ public class Behaviour {
 	 * According to the Magician strategy, will try to choose the suitable Character to use Magician spell.
 	 * @return The Character to swap card with.
 	 */
-	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
@@ -169,7 +169,7 @@ public class Behaviour {
 	 * According to the Assassin strategy, will try to choose the suitable Character to use Assassin spell.
 	 * @return The Character to kill.
 	 */
-	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
 	}
 
@@ -177,7 +177,7 @@ public class Behaviour {
 	 * According to the Thief strategy, will try to choose the suitable Character to use Thief spell.
 	 * @return The Character to use Thief spell.
 	 */
-	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
 
