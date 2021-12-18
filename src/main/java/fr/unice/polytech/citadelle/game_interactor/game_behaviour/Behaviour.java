@@ -134,15 +134,15 @@ public class Behaviour {
 	}
 
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForMagicianAdvanced());
+		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
 	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForAssassinAdvanced());
+		return (strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
 	}
 
 	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForThiefAdvanced());
+		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
 
 	public void ifPossibleBuildADistrict() {
@@ -181,7 +181,7 @@ public class Behaviour {
 	}
 
 	public void takeCard(District districtCard) {
-		executor.takeCard(districtCard, board.getDeckDistrict());
+		executor.takeCard(districtCard);
 	}
 
 	/**
@@ -283,4 +283,7 @@ public class Behaviour {
 		return (strategy.chooseDistrictToDestroy(playerToDestroy));
 	}
 
+	public void putDistrictBackInDeck(District district) {
+		board.putDistrictBackInDeck(district);
+	}
 }

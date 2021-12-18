@@ -1,8 +1,5 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.game.purple_districts.Graveyard;
-import fr.unice.polytech.citadelle.game.purple_districts.Observatory;
-import fr.unice.polytech.citadelle.game.purple_districts.Smithy;
 import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 
@@ -17,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,7 +22,6 @@ import java.util.Optional;
 import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.City;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Board;
@@ -34,7 +29,6 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
-import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 public class RoundManagerTest {
@@ -280,9 +274,9 @@ public class RoundManagerTest {
 		listOfAllBehaviour.add(behaviour);
 		player.getCharacter().setCharacterIsAlive(false);
 		RoundManager roundManager = new RoundManager(listOfAllCharacter, listOfAllBehaviour, hashOfCharacter, board);
-		assertFalse(player.getCharacter().isCharacterIsAlive());
+		assertFalse(player.getCharacter().getCharacterisAlive());
 		roundManager.reviveAll();
-		assertTrue(player.getCharacter().isCharacterIsAlive());
+		assertTrue(player.getCharacter().getCharacterisAlive());
 	}
 
 	@RepeatedTest(1)

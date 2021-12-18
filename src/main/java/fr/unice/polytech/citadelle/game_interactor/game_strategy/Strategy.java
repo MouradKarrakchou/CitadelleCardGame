@@ -38,7 +38,7 @@ public class Strategy {
     public Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
-        while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || !randomCharacter.isCharacterIsAlive()) {
+        while (randomCharacter.getName().equals("Assassin") || randomCharacter.getName().equals("Thief") || !randomCharacter.getCharacterisAlive()) {
             randomCharacter=list.get(randomInt(numberOfCharacter));
         }
         return randomCharacter;
@@ -122,7 +122,7 @@ public class Strategy {
         return(predict.predictWhoIsPlayer(playerWithMostCards,listOfCharacterToNotSteal));
     }
 
-    private Player findThePlayerWithMostCards() {
+    public Player findThePlayerWithMostCards() {
         ArrayList<Player> listOfPlayer= board.getListOfPlayer();
         //We want to find the Player with the most cards
         int mostDistrictCardsThatAPlayerHas=listOfPlayer.get(0).getDistrictCardsSize();
@@ -177,8 +177,8 @@ public class Strategy {
 
         for (Player playerComparing : listOfPlayer) {
             if (playerWithClosestScore.equals(this.player))
-                scoreDiffenreceWithClosestScore=abs(playerPredictScore(playerComparing)-predictedScore);
-                playerWithClosestScore=playerComparing;
+            {scoreDiffenreceWithClosestScore=abs(playerPredictScore(playerComparing)-predictedScore);
+                playerWithClosestScore=playerComparing;}
             if (!playerComparing.equals(this.player)){
                 int scoreDifference = abs(playerPredictScore(playerComparing) - predictedScore);
                 if (scoreDiffenreceWithClosestScore > scoreDifference) {
@@ -273,7 +273,7 @@ public class Strategy {
             return(cardsToBeSwapped);}
     }
 
-    private ArrayList<District> cardToBeSwapped() {
+    public ArrayList<District> cardToBeSwapped() {
         ArrayList<District> listDistrictToSwap=new ArrayList<>();
         ArrayList<District> listDistrict=player.getDistrictCards();
         for (District districtToCheck : listDistrict){
@@ -288,16 +288,16 @@ public class Strategy {
     }
 
     private boolean shouldBeSwapped(District districtToCheck) {
-        if (player.getCity().getBuiltDistrict().contains(districtToCheck))
+        if (player.getCity().getBuiltDistrict().stream().map(district -> district.getName()).toList().contains(districtToCheck.getName()))
             return(true);
         else
             return false;
     }
 
-    private boolean isThereAPlayerWithTwoTimesHisDistricts() {
+    public boolean isThereAPlayerWithTwoTimesHisDistricts() {
         ArrayList <Player> listOfPlayer=board.getListOfPlayer();
         for (Player playerComparing : listOfPlayer) {
-            if (!playerComparing.equals(this.player) && playerComparing.getDistrictCardsSize()>2*this.player.getDistrictCardsSize())
+            if (!playerComparing.equals(this.player) && playerComparing.getDistrictCardsSize()>=2*this.player.getDistrictCardsSize())
             return(true);
             }
         return(false);
@@ -413,7 +413,7 @@ public class Strategy {
         return board.getDeckCharacter().getDeckCharacter().remove(0);
     }
 
-    int chooseAssassin(Behaviour bot) {
+    public int chooseAssassin(Behaviour bot) {
         //Choice of Assassin
         ArrayList<Character> listOfAssassin = board.getDeckCharacter().getDeckCharacter().stream()
                 .filter(character -> character.getName().equals("Assassin"))
@@ -432,7 +432,7 @@ public class Strategy {
         return -1;
     }
 
-    int chooseArchitect(Behaviour bot) {
+    public int chooseArchitect(Behaviour bot) {
         //Choice of Architect
         ArrayList<Character> listOfArchitect = board.getDeckCharacter().getDeckCharacter().stream()
                 .filter(character -> character.getName().equals("Architect"))
@@ -449,7 +449,7 @@ public class Strategy {
         return -1;
     }
 
-    int chooseMagician(Behaviour bot) {
+    public int chooseMagician(Behaviour bot) {
         //Choice of Magician
         ArrayList<Character> listOfMagician = board.getDeckCharacter().getDeckCharacter().stream()
                 .filter(character -> character.getName().equals("Magician"))
@@ -468,7 +468,7 @@ public class Strategy {
         return -1;
     }
 
-    int chooseThief(Behaviour bot) {
+    public int chooseThief(Behaviour bot) {
         //Choice of Thief
         ArrayList<Character> listOfThief = board.getDeckCharacter().getDeckCharacter().stream()
                 .filter(character -> character.getName().equals("Thief"))
@@ -487,7 +487,7 @@ public class Strategy {
         return -1;
     }
 
-    int chooseKingOrMerchant(Behaviour bot) {
+    public int chooseKingOrMerchant(Behaviour bot) {
         //Choice of King or Merchant (if they are both equality worth, King is chosen)
         int counter = 0;
         int index = isThereAFamily(bot);
@@ -503,7 +503,7 @@ public class Strategy {
         return -1;
     }
 
-    int chooseBishop(Behaviour bot) {
+    public int chooseBishop(Behaviour bot) {
         //Choice of Bishop
         ArrayList<Character> listOfBishop = board.getDeckCharacter().getDeckCharacter().stream()
                 .filter(character -> character.getName().equals("Bishop"))
@@ -520,7 +520,7 @@ public class Strategy {
         return -1;
     }
 
-    int chooseWarlord(Behaviour bot) {
+    public int chooseWarlord(Behaviour bot) {
         //Choice of Warlord (Last one because his spell has not been implemented yet)
         ArrayList<Character> listOfWarlord = board.getDeckCharacter().getDeckCharacter().stream()
                 .filter(character -> character.getName().equals("Warlord"))

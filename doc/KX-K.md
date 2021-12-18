@@ -191,7 +191,7 @@ La gestion du jeu est un élément qui s’est vu séparé du jeu suite à un re
 | [#29](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/29) | Refactor de la classe d’initialisation | 03/12/2021 |  [BONNET Kilian](https://github.com/KilianBonnet) |
 
 ## La gestion des interactions du jeu
-Les éléments permettant les interactions avec le jeu se situent dans le package [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor). Ces interactions _(gérées par [l’executor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Executor.java))_ sont décidées en fonction du comportement associé à un joueur. Cette implémentation fut en grande partie menée par [LE BIHAN Léo](https://github.com/LeBihanLeo). Vers le début de ce mois de décembre, l’ajout de stratégies a été décidé et est en cours d’implémentation afin d’ajouter aux différents bots des stratégies plus ou moins complexes basées sur une analyse plus poussée des différents paramètres du jeu (joueurs, personnages, bâtiments construits, … ).
+Les éléments permettant les interactions avec le jeu se situent dans le package [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor). Ces interactions _(gérées par [l’executor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Executor.java))_ sont décidées en fonction du comportement associé à un joueur. Cette implémentation fut en grande partie menée par [LE BIHAN Léo](https://github.com/LeBihanLeo). Vers le début de ce mois de décembre, l’ajout de stratégies a été décidé et est en cours d’implémentation afin d’ajouter aux différents bots des stratégies plus ou moins complexes basées sur une analyse plus poussée des différents paramètres du jeu (joueurs, personnages, bâtiments construits, …).
 
 ### Issues associés (les noms seront indiqués):
 | Isssue  | Description  | Date | Nom |
@@ -210,15 +210,14 @@ Les éléments permettant les interactions avec le jeu se situent dans le packag
 | [#54](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/40) | Changement de la façon de choisir un personnage | 16/12/2021 | [IMAMI Ayoub](https://github.com/AyoubIMAMI) |
 
 ## La gestion de l’affichage du jeu
-L’affichage du jeu permet de véhiculer rapidement les informations essentielles du jeu afin de pouvoir comprendre facilement l’état d’avancement de la partie. Cette implémentation a été en partie réalisée par [Kilian Bonnet](https://github.com/KilianBonnet) | en s’appuyant sur la librairie [JColor](https://github.com/dialex/JColor) conçue par [Diogo Nunes](https://github.com/dialex).
+L’affichage du jeu permet de véhiculer rapidement les informations essentielles du jeu afin de pouvoir comprendre facilement l’état d’avancement de la partie. Cette implémentation a été en partie réalisée par [Kilian Bonnet](https://github.com/KilianBonnet) en s’appuyant sur la librairie [JColor](https://github.com/dialex/JColor) conçue par [Diogo Nunes](https://github.com/dialex).
 
 ### Issues associés (les noms seront indiqués):
 | Isssue  | Description  | Date | Nom |
 |---------|--------------|------|-----|
 | [#18](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/18) | Couleurs sur les logs | 26/11/2021 | [BONNET Kilian](https://github.com/KilianBonnet) |
 | [#38](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/38) | Amélioration des logs | 07/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet)  & [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou) |
-| [#45](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/45) | Amélioration de la visibilité des logs | 14/12/2021 | [BONNET Kilian](https://github.com/KilianBonnet) | [LE BIHAN Léo](https://github.com/LeBihanLeo) |
-
+| [#45](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues/45) | Amélioration de la visibilité des logs | 14/12/2021 | [LE BIHAN Léo](https://github.com/LeBihanLeo) 
 
 # Fonctionnement de l’équipe
 Globalement, nous n'avons jamais programmé, ou très peu lors des réunions du mercredi. Nous vérifiions plutôt l’avancement du projet et s’il y avait des choses à changer, enlever ou améliorer. Puis, nous écrivions la nouvelle [Milestone](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/milestones) et les [issues](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues?q=) sur lesquelles nous nous étions mis d’accord pendant la semaine de travail précédant la réunion du mercredi. Parfois, nous nous divisions le travail, deux membres du groupe écrivaient les [issues](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues?q=) pendant que les deux autres réfléchissaient à des améliorations.

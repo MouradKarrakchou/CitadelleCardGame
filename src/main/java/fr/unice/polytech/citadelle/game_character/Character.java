@@ -19,15 +19,14 @@ public class Character {
     	this.name = name;    	
     	this.value = value;    	
     }
-    
-    public String getName() {
-        return name;
-    }
 
-    public int getValue() {
-        return value;
-    }
 
+    /**
+     * The method return the number of gold generated from his family district.
+     * @param bot
+     * @param familyOfTheDistrict
+     * @return the number of golds earned
+     */
     public int collectGold(Behaviour bot, String familyOfTheDistrict){
         int goldEarned = bot.getPlayer().getCity().getBuiltDistrict().stream()
                 .filter(district -> district.getNameOfFamily().equals(familyOfTheDistrict))
@@ -37,16 +36,40 @@ public class Character {
         return(goldEarned);
     }
 
+    /**
+     * The spell of the Character
+     * @param bot
+     * @param hashOfCharacters
+     */
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){}
+
+    /**
+     * print the spell of District family golds
+     * @param bot
+     * @param nameOfTheCharacter
+     * @param nameOfTheFamilyDistrict
+     */
+    protected void spellOfTurnDistrictFamily(Behaviour bot,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
+        int moneyEarned = collectGold(bot,nameOfTheFamilyDistrict);
+        if (moneyEarned>0)
+            PrintCitadels.printCharacterEarnedMoney(moneyEarned,nameOfTheCharacter,nameOfTheFamilyDistrict);
+        else
+            PrintCitadels.printCharacterEarnedNoMoney(nameOfTheCharacter,nameOfTheFamilyDistrict);
+    }
 
     public  void setCharacterIsAlive(boolean characterIsAlive) {
         this.characterIsAlive = characterIsAlive;
     }
-
-    public boolean isCharacterIsAlive() {
+    public boolean getCharacterisAlive() {
         return characterIsAlive;
     }
+    public String getName() {
+        return name;
+    }
 
+    public int getValue() {
+        return value;
+    }
     @Override
     public boolean equals(Object obj) {
     	if(!(obj instanceof Character))
@@ -61,12 +84,4 @@ public class Character {
         return name;
     }
 
-
-    protected void spellOfTurnDistrictFamily(Behaviour bot,String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
-        int moneyEarned = collectGold(bot,nameOfTheFamilyDistrict);
-        if (moneyEarned>0)
-            PrintCitadels.printCharacterEarnedMoney(moneyEarned,nameOfTheCharacter,nameOfTheFamilyDistrict);
-        else
-            PrintCitadels.printCharacterEarnedNoMoney(nameOfTheCharacter,nameOfTheFamilyDistrict);
-    }
 }
