@@ -105,13 +105,6 @@ public class Board {
     	}
     	return listOfPlayerWhoHasAlreadyPlayed;
     }
-    
-    public ArrayList<String> getListOfPlayerWhoHasAlreadyPlayedStringVersion(){
-    	return getListOfPlayerWhoHasAlreadyPlayed().stream().
-    												map(character -> character.getName())
-    												.collect(Collectors.toCollection(ArrayList::new));
-
-    }
 
 	public ArrayList<City> getListOfCity() {
 		return listOfPlayer.stream().
