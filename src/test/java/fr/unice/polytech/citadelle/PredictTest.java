@@ -6,8 +6,10 @@ import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.Graveyard;
 import fr.unice.polytech.citadelle.game.purple_districts.Observatory;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
+import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.Predict;
 
+import fr.unice.polytech.citadelle.game_interactor.Strategy;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,7 @@ public class PredictTest {
     Board board = new Board(new ArrayList<>(), Initializer.createListOfAllCharacter(), new DeckDistrict(), new DeckCharacter());
     Predict predict = new Predict(board);
     ArrayList<Character> allCharacters = board.getListOfCharacter();
+    Strategy strategy;
 
     @RepeatedTest(100)
     @Test
@@ -281,11 +284,62 @@ public class PredictTest {
         assertEquals(players, predict.playersForPredictWhoIsPlayer(player1));
     }
 
-    @RepeatedTest(100)
+    /*
+    @Test
+    void chooseCharacterForAssassinAdvancedWhenTargetHasAlreadyRevealCharacter() {
+        strategy = new Strategy(8, board, botAssassin.getPlayer());
+
+        ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
+
+        listOfPlayerForHash.add(botArchitecte.getPlayer());
+        listOfPlayerForHash.add(botAssassin.getPlayer());
+
+        board.setListOfPlayer(listOfPlayerForHash);
+        Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
+        board.revealCharacter(botArchitecte.getPlayer(), architect);
+
+        Character CharacterOfTheTarget = strategy.chooseCharacterForAssassinAdvanced();
+        assertEquals(architect, CharacterOfTheTarget);
+    }*/
+
+    /*
+    //@RepeatedTest(100)
     @Test
     void predictWhoIsPlayerTest() {
-        
-    }
+        Player player = new Player("Player");
+        Player player2 = new Player("Player2");
+
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        player.setGolds(6);
+
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        board.getListOfPlayer().add(player);
+        board.getListOfPlayer().add(player2);
+
+        //player.setGolds(3); Thief
+
+        //player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts")); Magician
+        //player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts")); Magician
+
+        assertEquals(new Architect(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
+    }*/
 
 
 
