@@ -60,6 +60,7 @@ public class PrintCitadels {
 	public static void chooseRole(Player player, Character role) {
 		System.out.println("\t- The robot " + player.getName() + " choose the character " + role.getName() + " "
 				+ role.getValue());
+		dropALine();
 	}
 
 	public static void chooseDistrict(Player player, District district) {
@@ -359,14 +360,14 @@ public class PrintCitadels {
 		System.out.println(colorize("He consider that all his cards are good, he will not do his spell.",ITALIC()));
 	}
 	
-	public static void printPredictionExplaination(Player targetPlayer, Character characterOfTargetPlayer, ArrayList<Character> listOfCharacter){
-		String firstPartOutput = "Prediction: The bot predict that "+targetPlayer.getName()+" is "+characterOfTargetPlayer.getName()+" because ";
+	public static void printPredictionExplaination(Player currentPlayer, Player targetPlayer, Character characterOfTargetPlayer, ArrayList<Character> listOfCharacter){
+		String firstPartOutput = "Prediction: "+currentPlayer.getName()+" predict that "+targetPlayer.getName()+" is "+characterOfTargetPlayer.getName()+" because ";
 		String finalOutput = firstPartOutput+ initHashPrediction(listOfCharacter).get(characterOfTargetPlayer);
 		System.out.println(colorize(finalOutput,ITALIC()));
 	}
 	
-	public static void printChooseCharacterExplaination( Character chooseTargetPlayer, ArrayList<Character> listOfCharacter){
-		String firstPartOutput = "Explanation: The bot choose the character "+chooseTargetPlayer.getName()+" because ";
+	public static void printChooseCharacterExplaination(Player currentPlayer, Character chooseTargetPlayer, ArrayList<Character> listOfCharacter){
+		String firstPartOutput = "\tExplanation: "+currentPlayer.getName()+" choose the character "+chooseTargetPlayer.getName()+" because ";
 		String finalOutput = firstPartOutput+ initHashPrediction(listOfCharacter).get(chooseTargetPlayer);
 		System.out.println(colorize(finalOutput,ITALIC()));
 	}
