@@ -211,8 +211,38 @@ public class PredictTest {
 
     @RepeatedTest(100)
     @Test
-    void Test() {
+    void canBeWarlordTest() {
+        Player player1 = new Player("Player1");
+        Player player2 = new Player("Player2");
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
 
+        ArrayList<Character> untargetable = new ArrayList<>();
+
+        assertEquals(true, predict.canBeArchitect(player1, untargetable));
+    }
+
+    @Test
+    void cannotBeWarlordTest() {
+        Player player1 = new Player("Player1");
+        Player player2 = new Player("Player2");
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player2.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new Merchant());
+
+        assertEquals(false, predict.canBeArchitect(player1, untargetable));
     }
 
 
