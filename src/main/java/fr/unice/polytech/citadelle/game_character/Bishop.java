@@ -8,6 +8,7 @@ import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 /**
  * Bishop districts cannot be destroyed by Warlord.
  * Each religious districts bring one gold to the Bishop.
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Bishop extends Character {
     public Bishop(){

@@ -28,6 +28,12 @@ public class Character {
         return value;
     }
 
+    /**
+     *
+     * @param bot
+     * @param familyOfTheDistrict
+     * @return goldEarned
+     */
     public int collectGold(Behaviour bot, String familyOfTheDistrict){
         int goldEarned = bot.getPlayer().getCity().getBuiltDistrict().stream()
                 .filter(district -> district.getNameOfFamily().equals(familyOfTheDistrict))
