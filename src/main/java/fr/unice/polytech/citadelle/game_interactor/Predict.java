@@ -62,7 +62,7 @@ public class Predict {
 			return Optional.empty();
 	}
 
-	ArrayList<Character> allCharacters() {
+	public ArrayList<Character> allCharacters() {
 		ArrayList<Character> listOfAllCharacter = new ArrayList<>();
 
 		for(int i = 0; i < 8; i++)
@@ -97,14 +97,14 @@ public class Predict {
 
 	// Return the players other than the one who is targeted
 	private ArrayList<Player> playersForPredictWhoIsPlayer(Player player) {
-		ArrayList<Player> listOfPlayers =(ArrayList<Player>) board.getListOfPlayer().clone();
+		ArrayList<Player> listOfPlayers = (ArrayList<Player>) board.getListOfPlayer().clone();
 		listOfPlayers.remove(player);
 		return listOfPlayers;
 	}
 
 	// Is the Architect interesting for this player? It can be if he does not have a
 	// lot of golds
-	private boolean canBeArchitect(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeArchitect(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);

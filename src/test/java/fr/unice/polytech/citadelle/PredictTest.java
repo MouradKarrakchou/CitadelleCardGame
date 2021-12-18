@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class PredictTest {
 
     Board board = new Board(new ArrayList<>(), Initializer.createListOfAllCharacter(), new DeckDistrict(), new DeckCharacter());
-
     Predict predict = new Predict(board);
     ArrayList<Character> allCharacters = board.getListOfCharacter();
 
@@ -36,5 +35,32 @@ public class PredictTest {
 
         assertEquals(listToReturn, predict.targetableCharactersForPredictWhoIsPlayer(untargetableCharacter));
     }
+
+    @RepeatedTest(100)
+    @Test
+    void allCharactersTest() {
+        assertEquals(allCharacters, predict.allCharacters());
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void canBeArchitectTest() {
+        Player player = new Player("Player");
+        player.addDistrict(new District("Name1", 1, "Color", "NameF"));
+        player.addDistrict(new District("Name2", 1, "Color", "NameF"));
+        player.addDistrict(new District("Name3", 1, "Color", "NameF"));
+
+        player.setGolds(6);
+
+        assertEquals(true, predict.canBeArchitect(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void Test() {
+
+    }
+
+
 
 }
