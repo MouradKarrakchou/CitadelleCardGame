@@ -41,7 +41,6 @@ public class BehaviourTest {
 	}
 
 	@RepeatedTest(1)
-	@Test
 	public void selectTheHigherDistrictTest() {
 		ArrayList<District> pickedDistricts = new ArrayList<District>();
 
@@ -55,7 +54,6 @@ public class BehaviourTest {
 	}
 
 	@RepeatedTest(1)
-	@Test
 	public void ifPossibleBuildADistrictCouldBuildTest() {
 		District aDistrict = new District("districtTest", 2, "colorTest", "familyTest");
 
@@ -72,7 +70,6 @@ public class BehaviourTest {
 	
 
 	@RepeatedTest(1)
-	@Test
 	public void chooseToKeepOrNotPickedCardskeepAllTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
 		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
@@ -95,7 +92,6 @@ public class BehaviourTest {
 	}
 
 	@RepeatedTest(1)
-	@Test
 	public void chooseToKeepOrNotPickedCardsKeepFirstBecause2ndInHandCardTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
 		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
@@ -122,7 +118,6 @@ public class BehaviourTest {
 	}
 
 	@RepeatedTest(1)
-	@Test
 	public void chooseToKeepOrNotPickedCardsKeepFirstBecause2ndInCityCardTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
 		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
@@ -149,7 +144,6 @@ public class BehaviourTest {
 	}
 
 	@RepeatedTest(1)
-	@Test
 	public void chooseToKeepOrNotPickedCardsNoKeepTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
 		ArrayList<District> keepedDistrictCards = new ArrayList<District>();
@@ -176,7 +170,6 @@ public class BehaviourTest {
 	} 
 	
 	@RepeatedTest(1)
-	@Test
 	public void takeGoldTest() {
 		playerTest.setGolds(0);
 		assertEquals(playerTest.getGolds(), 0);
@@ -185,7 +178,6 @@ public class BehaviourTest {
 	}
 	
 	@RepeatedTest(1)
-	@Test
 	public void takeCardTest() {
 		District choosenCard = deckDistrict.getDeckDistrict().get(0);
 		playerTest.getDistrictCards().clear();;
@@ -196,7 +188,6 @@ public class BehaviourTest {
 	}
 	
 	@RepeatedTest(1)
-	@Test
 	public void architectBuilds3Districts(){
 		Behaviour botArchitect=new Behaviour(new Player("playerArchitect"),board);
 		botArchitect.getPlayer().setRole(new Architect());
@@ -214,7 +205,6 @@ public class BehaviourTest {
 	}
 	
 	@RepeatedTest(1)
-	@Test
     public void pickCardsInDeckTest() {
 		System.out.println("-------aaaaaaaaaaaaa------");
 		DeckDistrict theDeckDistrict = new DeckDistrict();

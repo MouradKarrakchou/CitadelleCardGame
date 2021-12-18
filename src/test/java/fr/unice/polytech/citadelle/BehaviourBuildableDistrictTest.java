@@ -38,7 +38,6 @@ public class BehaviourBuildableDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     //With 2 golds
     void districtWeHaveEnoughMoneyToBuildWith2GoldsTest(){
         ArrayList<District> districts = new ArrayList<>();
@@ -49,7 +48,6 @@ public class BehaviourBuildableDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     //With 5 golds
     void districtWeHaveEnoughMoneyToBuildWith5goldsTest(){
         player01.golds = 5;
@@ -66,7 +64,6 @@ public class BehaviourBuildableDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     //With 6 golds
     void districtWeHaveEnoughMoneyToBuildWith6goldsTest(){
         player01.golds = 6;
@@ -84,7 +81,6 @@ public class BehaviourBuildableDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void isAlreadyBuiltTest(){
         player01.getCity().builtDistrict.add(new District("Haunted City", 2,"empty","empty"));
         assertTrue(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Haunted City"));
@@ -93,13 +89,11 @@ public class BehaviourBuildableDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void isAlreadyBuiltEmptyTest(){
         assertFalse(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Prison"));
     }
 
     @RepeatedTest(1)
-    @Test
     void districtWeCanBuildTest(){
         player01.golds = 4;
 
@@ -120,7 +114,6 @@ public class BehaviourBuildableDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void zeroDistrictWeCanBuildTest(){
     	player01.golds = 4;
 

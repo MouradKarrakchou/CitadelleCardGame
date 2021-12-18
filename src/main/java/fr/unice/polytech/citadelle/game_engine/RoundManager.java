@@ -11,7 +11,6 @@ import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
-
 /**
  * The RoundManager manage the rounds inside a Game
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
@@ -41,7 +40,6 @@ public class RoundManager {
 
 	/**
 	 * Run a round while the game is not finished.
-	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
 	 * @return The game leaderBoard.
 	 */
 	public ArrayList<Behaviour> runRounds() {
@@ -110,7 +108,6 @@ public class RoundManager {
 	/**
 	 * According to the Citadels rule, RoundManager will ask a character to play.
 	 * If a player own a called character, associated behaviour will play for the player.
-	 * @param phaseManager Class used to analyze the Game to deduct a particular phase.
 	 * @return The game leaderBoard (modified if a player complete its city).
 	 */
 	public ArrayList<Behaviour> askEachCharacterToPlay() {

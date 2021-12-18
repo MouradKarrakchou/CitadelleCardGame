@@ -14,7 +14,7 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 /**
- * @author leolb
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  *
  */
 public class Board {

@@ -6,6 +6,10 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+/**
+ * 
+ *  @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Merchant extends Character {
     public Merchant(){
         super("Merchant", 6);

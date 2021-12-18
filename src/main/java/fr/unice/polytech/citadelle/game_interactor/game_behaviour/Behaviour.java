@@ -71,9 +71,14 @@ public class Behaviour {
 		return pickedDistricts.get(1);
 	}
 
+	/**
+	 * Play a round for the player given in class parameter.
+	 * @param hashOfCharacters The hashmap associating a Character to a behaviour.
+	 * @return The character of the player.
+	 */
 	public Character play(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		executeSpellOfCharacter(this, hashOfCharacters);
-		executeSpellOfPurpleDistricts(this.getPlayer());
+		executeSpellOfCharacter(hashOfCharacters);
+		executeSpellOfPurpleDistricts();
 
 
 		switch (phaseManager.analyseGame()) {
@@ -86,13 +91,19 @@ public class Behaviour {
 		return player.getCharacter();
 	}
 
-	
 
-	private void executeSpellOfCharacter(Behaviour behaviour,LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	/**
+	 * Execute the spell of the player given in class parameter.
+	 * @param hashOfCharacters The hashmap associating a Character to a behaviour.
+	 */
+	private void executeSpellOfCharacter(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		getPlayer().getCharacter().spellOfTurn(this, hashOfCharacters);
 	}
-	
-	private void executeSpellOfPurpleDistricts(Player player2) {
+
+	/**
+	 * Execute the spell of the purple districts.
+	 */
+	private void executeSpellOfPurpleDistricts() {
 		this.getPlayer().getCity().getBuiltDistrict().stream().
 													filter(district -> district.getName().equals("School of Magic")).
 													forEach(district -> {
@@ -101,6 +112,10 @@ public class Behaviour {
 													});
 	}
 
+	/**
+	 * Called once when the player has the Architect character. Allow the player having the Architect to
+	 * build two districts.
+	 */
 	public void buildArchitect() {
 		if (player.getCharacter().getName().equals("Architect")) {
 			ifPossibleBuildADistrict();
@@ -117,6 +132,11 @@ public class Behaviour {
 	public void lastTurnBehaviour() {
 	};
 
+	/**
+	 * Select a character to use spell according to the player current character.
+	 * @param hashOfCharacters The associated hash of character & bot.
+	 * @return The character to use spell on.
+	 */
 	public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		int i = randomInt(numberOfCharacter - 1);
 		Character character = (Character) hashOfCharacters.keySet().toArray()[i];
@@ -129,22 +149,42 @@ public class Behaviour {
 		return (character);
 	}
 
+	/**
+	 * According to the Warlord strategy, will try to choose the suitable Player to use Warlord spell.
+	 * @return The player to destroy a district.
+	 */
 	public Player selectPlayerForWarlord() {
 		return(strategy.choosePlayerForWarlordAdvanced());
 	}
 
+	/**
+	 * According to the Magician strategy, will try to choose the suitable Character to use Magician spell.
+	 * @return The Character to swap card with.
+	 */
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
+	/**
+	 * According to the Assassin strategy, will try to choose the suitable Character to use Assassin spell.
+	 * @return The Character to kill.
+	 */
 	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
 	}
 
+	/**
+	 * According to the Thief strategy, will try to choose the suitable Character to use Thief spell.
+	 * @return The Character to use Thief spell.
+	 */
 	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
 
+	/**
+	 * According to the given class parameters, will check if the associated player can build a district.
+	 * If it is possible bot will build a district.
+	 */
 	public void ifPossibleBuildADistrict() {
 		ArrayList<HauntedCity> hauntedCityArrayList = new ArrayList<>();
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
@@ -160,13 +200,19 @@ public class Behaviour {
 		}
 	}
 
+	/**
+	 * Pick two card fot the player.
+	 * @return The two picked cards.
+	 */
 	public ArrayList<District> pick2CardsIntoTheDeck() {
 		return executor.pickCards(board.getDeckDistrict());
 	}
 
-	/*
+	/**
 	 * For the two cards chosen look if they are present in the city or the hand, if
-	 * yes we discard the card
+	 * yes we discard the card.
+	 * @param pickedDistrictCards The Array of picked card to proceed.
+	 * @return The district cards not present in the city or the hand og the player.
 	 */
 	public ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District> pickedDistrictCards) {
 		ArrayList<District> removeDistrictCards = new ArrayList<District>();
@@ -207,13 +253,16 @@ public class Behaviour {
 
 	/**
 	 * Pick a districtCard into the deck.
-	 * 
 	 * @return a pickCardAction, that will be print with the printer
 	 */
 	public District pickCard() {
 		return (executor.pickCard(board.getDeckDistrict()));
 	}
 
+	/**
+	 * Algorithm to pick the suitable District card from the deck.
+	 * @return The district to choose.
+	 */
 	public District pickCardsInDeck() {
 		ArrayList<District> pickedCards;
 		ArrayList<District> possibleCards;
@@ -233,6 +282,11 @@ public class Behaviour {
 		return choosenDistrictCard;
 	}
 
+	/**
+	 * Remove a given district from the array of two given cards.
+	 * @param pickedCards The Array of yhe two picked cards.
+	 * @param district The district to remove from the array.
+	 */
 	void removeOtherCard(ArrayList<District> pickedCards, District district) {
 		if (pickedCards.get(0) == district)
 			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(0));
@@ -240,6 +294,11 @@ public class Behaviour {
 			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(1));
 	}
 
+	/**
+	 * Choose the best character according to the bot strategy.
+	 * @param bot The bot that control the player.
+	 * @return The preferred Character.
+	 */
 	public Character chooseCharacterWithStrategy(Behaviour bot) {
 		return strategy.chooseCharacter(bot);
 	}
@@ -253,6 +312,10 @@ public class Behaviour {
 		return (random.nextInt(scope));
 	}
 
+	/**
+	 * Reviving a player.
+	 * @param characterIsAlive The player to revive.
+	 */
 	public void setCharacterIsAlive(Boolean characterIsAlive) {
 		player.getCharacter().setCharacterIsAlive(characterIsAlive);
 	}
@@ -273,12 +336,20 @@ public class Behaviour {
 		return executor;
 	}
 
+	/**
+	 * return the position of the Cards that he wants to swap
+	 * @return Empty -> The magician choose to swap its cards with another player.
+	 * 			Not empty -> The Array of card to swap with the deck of district of the board.
+	 */
 	public ArrayList<District> chooseMagicianAction() {
-		// return an empty array if he wants to swap Cards with another Character
-		// return the position of the Cards that he wants to swap
 		return (strategy.chooseMagicianActionAdvanced());
 	}
 
+	/**
+	 *(Warlord) Choose a District to destroy for a given player district.
+	 * @param playerToDestroy The player to check the city.
+	 * @return The district to destroy.
+	 */
 	public District chooseDistrictToDestroy(Player playerToDestroy) {
 		return (strategy.chooseDistrictToDestroy(playerToDestroy));
 	}

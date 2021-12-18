@@ -56,7 +56,6 @@ public class DeckDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void initializerTestName(){
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
@@ -66,7 +65,6 @@ public class DeckDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void initializerTestQuantity(){
         for (int i = 0; i < deckDistrictReal.size(); i++) {
             int j = i;
@@ -79,12 +77,19 @@ public class DeckDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test 
      void initializerTestValue(){
         for (District districtReal : deckDistrictReal) {
             deckDistrictToTest.stream()
                               .filter(districtToTest -> districtToTest.getName().equals(districtReal.getName()))
                               .forEach(districtToTest -> assertEquals(districtReal.getValue(), districtToTest.getValue()));
         }
+    }
+    @RepeatedTest(1)
+    void putBackCardInDeck(){
+        deck.getDeckDistrict().clear();
+        deck.addDistrict(new District("district",1,null,null));
+        deck.addDistrict(new District("district",1,null,null));
+        deck.addDistrictAtTheEnd(new District("districtAtTheEnd",1,null,null));
+        assertEquals(deck.getDeckDistrict().get(2).getName(),"districtAtTheEnd");
     }
 }

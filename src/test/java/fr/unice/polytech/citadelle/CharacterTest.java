@@ -140,7 +140,6 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
     void testKingPlayFirst(){
         //initialize
         listOfBehaviour.add(botKing);
@@ -151,7 +150,6 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
     void testKingEarnsMoney(){
         //initialize
         listOfBehaviour.add(botKing);
@@ -167,7 +165,6 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
     void testThiefStealsGolds(){
         //initialize
         listOfBehaviour.add(botThief);
