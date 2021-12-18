@@ -80,6 +80,7 @@ public class RoundManagerTest {
 	
 	}
 		
+	@RepeatedTest(1)
 	@Test
 	public void getTheListOfCityTest() {
 		Player p1 = new Player("p1");
@@ -100,6 +101,7 @@ public class RoundManagerTest {
 	}
 	
 		
+	@RepeatedTest(1)
 	@Test
 	public void actionsOfTheBehaviourTest() {
 		Character c = new Character("testCharacter", 0);
@@ -110,12 +112,14 @@ public class RoundManagerTest {
 	}
 	
 	
+	@RepeatedTest(1)
 	@Test
 	public void setupCharactersTest() {
 		roundMan.setupCharacters();
 		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any());
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void askEachCharacterToPlayTest() {
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
@@ -146,6 +150,7 @@ public class RoundManagerTest {
 	
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void orderTurnByKing(){
 		//creation of Behaviour
@@ -178,6 +183,7 @@ public class RoundManagerTest {
 		assertEquals(botMagician,botOrdered.get(3));
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void updateLeaderboardTest() {
 		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
@@ -189,6 +195,7 @@ public class RoundManagerTest {
 
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterAssassinTest() {
 		Player player1 = new Player("Player1");
@@ -213,6 +220,7 @@ public class RoundManagerTest {
 		assertEquals(assassin, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterArchitectTest() {
 		Player player1 = new Player("Player1");
@@ -231,6 +239,7 @@ public class RoundManagerTest {
 		assertEquals(architect, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterMagicianTest() {
 		Player player1 = new Player("Player1");
@@ -254,6 +263,7 @@ public class RoundManagerTest {
 		assertEquals(magician, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterThiefTest() {
 		Player player1 = new Player("Player1");
@@ -273,6 +283,7 @@ public class RoundManagerTest {
 		assertEquals(thief, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterKingTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
@@ -289,6 +300,7 @@ public class RoundManagerTest {
 		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterMerchantTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
@@ -305,6 +317,7 @@ public class RoundManagerTest {
 		assertEquals(merchant, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterKingVsMerchantTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
@@ -324,6 +337,7 @@ public class RoundManagerTest {
 		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterBishopTest() {
 		DeckCharacter deckCharacter = new DeckCharacter();
@@ -346,6 +360,7 @@ public class RoundManagerTest {
 		assertEquals(bishop, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseCharacterWarlordTest() {
 		Player player1 = new Player("Player1");
@@ -374,6 +389,7 @@ public class RoundManagerTest {
 		assertEquals(warlord, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	//Test the last return of the chooseCharacter method from RoundManager
 	//which return the first character (Assassin) by default
@@ -387,7 +403,7 @@ public class RoundManagerTest {
 		assertEquals(assassin, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
-
+	@RepeatedTest(1)
 	@Test
 	public void cityVerificationNoCompleteCityTest() {
 		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
@@ -399,6 +415,7 @@ public class RoundManagerTest {
 		assertEquals(leaderboard.size(), 0);
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void cityVerificationHeCompleteCityTest() {
 		ArrayList<Behaviour> leaderboard = new 	ArrayList<>();
@@ -413,6 +430,7 @@ public class RoundManagerTest {
 		assertEquals(leaderboard.size(), 1);
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void isThereAFamilyTestNobility(){
 		Player bob = new Player("bob");
@@ -428,6 +446,7 @@ public class RoundManagerTest {
 		assertEquals(Initializer.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void isThereAFamilyTestTradeAndHandicrafts(){
 		Player alice = new Player("alice");
@@ -443,6 +462,7 @@ public class RoundManagerTest {
 		assertEquals(Initializer.MERCHANT_INDEX, roundMan.isThereAFamily(aliceBehaviour));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void isThereAFamilyTestNothing(){
 
@@ -459,6 +479,7 @@ public class RoundManagerTest {
 		assertTrue(roundMan.isThereAFamily(fredBehaviour) == -1);
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void testFindKing(){
 		listOfAllBehaviour.get(0).getPlayer().setRole(new Magician());
@@ -470,6 +491,7 @@ public class RoundManagerTest {
 		assertEquals(2,roundMan.findKing(listOfAllBehaviour));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void testUpdateListOfBehaviour(){
 		ArrayList<Behaviour> listOfAllBehaviourCopy = new ArrayList<>();
@@ -507,6 +529,7 @@ public class RoundManagerTest {
 		assertEquals(roundMan.getListOfBehaviour().get(1),listOfAllBehaviour.get(3));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void reviveAllTest() {
 		ArrayList<Behaviour> listOfAllBehaviour=new ArrayList<>();
@@ -521,6 +544,7 @@ public class RoundManagerTest {
 		assertTrue(player.getCharacter().isCharacterIsAlive());
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void checkIfUpdateViewCharacterInBoardWorkTest() {
 		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();
@@ -537,6 +561,7 @@ public class RoundManagerTest {
 		assertEquals(Optional.of(testCharacter), board.gethashOfViewCharacters().get(player));
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void getListOfPlayerWhoHasAlreadyPlayedTest() {
 		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();

@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.Player;
@@ -32,6 +33,7 @@ public class PlayerTest {
     }
 
 
+    @RepeatedTest(1)
     @Test
     void buildDistrictTest(){
         player.golds = 4;

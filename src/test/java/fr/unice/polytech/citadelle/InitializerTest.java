@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -38,6 +39,7 @@ public class InitializerTest {
 
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void initHashOfCharacterTest() {
 		listOfAllCharacters.add(new Character("test0", 0));
@@ -55,6 +57,7 @@ public class InitializerTest {
 		verify(hashOfCharactersSpy, times(8)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void initListOfAllCharacterTest() {
 		ArrayList<Character> listOfAllCharactersSpy = spy(listOfAllCharacters);
@@ -62,6 +65,7 @@ public class InitializerTest {
 		assertEquals(listOfAllCharactersSpy.size(), 8);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void initListOfBehaviourTest() {
     	Board board = new Board();
@@ -73,6 +77,7 @@ public class InitializerTest {
 
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void fillHashOfCharacterTest() {
     	Board board = new Board();
@@ -81,6 +86,7 @@ public class InitializerTest {
 		verify(hashOfCharactersSpy, times(1)).put(Mockito.any(Character.class), Mockito.any(Optional.class));
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void initTheHashOfViewCharactersTest() {
 		ArrayList<Player> listOfPlayer = new ArrayList<>();
