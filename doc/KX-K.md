@@ -131,7 +131,7 @@ L’affichage du jeu permet de véhiculer rapidement les informations essentiell
 
 
 # Fonctionnement de l’équipe
-Globalement, nous n'avons jamais programmé, ou très peu lors des réunions du mercredi. Nous vérifiions plutôt l’avancement du projet et s’il y avait des choses à changer, enlever ou améliorer. Puis, nous écrivions la nouvelle Milestone et les issues sur lesquelles nous nous étions mis d’accord pendant la semaine de travail précédant la réunion du mercredi. Parfois, nous nous divisions le travail, deux membres du groupe écrivaient les issues pendant que les deux autres réfléchissaient à des améliorations.
+Globalement, nous n'avons jamais programmé, ou très peu lors des réunions du mercredi. Nous vérifiions plutôt l’avancement du projet et s’il y avait des choses à changer, enlever ou améliorer. Puis, nous écrivions la nouvelle [Milestone](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/milestones) et les [issues](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues?q=) sur lesquelles nous nous étions mis d’accord pendant la semaine de travail précédant la réunion du mercredi. Parfois, nous nous divisions le travail, deux membres du groupe écrivaient les [issues](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/issues?q=) pendant que les deux autres réfléchissaient à des améliorations.
 
 <br>
 Nous avons divisé notre Kanban en 4 parties: To do, In progress, Tests, Done. Au début, toutes les issues sont dans “To do”. Chacun choisissait une issue et la déplaçait donc dans “In progress” en faisant des commits au fur et à mesure que l’issue avançait. Puis, une fois l’implémentation faite, la personne chargée de l’issue la déplace dans “Tests” puis effectue les tests sur cette partie du programme. Une fois la nouvelle fonctionnalité testée, elle est déplacée dans dans “Done” et alors seulement nous pouvions close l’issue.
@@ -139,20 +139,62 @@ Nous avons divisé notre Kanban en 4 parties: To do, In progress, Tests, Done. A
 <br>
 Pendant la semaine, tous les membres étaient conscients du travail à faire et chacun travaillait et gérait son temps comme bon lui semblait. Nous nous posions souvent des question entre nous pour connaître l’avis de chacun, obtenir de l’aide ou une information.
 
+<br>
+<br>
 
 # Avancement du projet
 ## Règles métiers du jeux Citadelle 
-L’ensemble des personnages sont implementés avec leurs sorts. Les quartiers ont leurs couleurs et nous avons implementés les sorts spéciaux du Donjon, du Dracoport, de l'Université, de l'Ecole de Magie, de la Cour des miracles et de la Bibliothèque. Il nous manque donc les sorts des autres quartiers qui ont des sorts spéciaux.
+### Fait
+L’ensemble des personnages sont implementés avec leurs sorts. Les quartiers ont leurs couleurs et leur valeurs, nous avons aussi implementés les sorts spéciaux du Donjon, du Dracoport, de l'Université, de l'Ecole de Magie, de la Cour des miracles et de la Bibliothèque.
 
-<br>
 Tout les quartiers sont bien mit dans un deck qui est mélangé en début de partie. Les règles de l’ordre de choix des personnages a aussi été respecté ainsi que l’ordre de jeu de chacun des personnages.
 
+<br>
+
+### A faire
+Il nous manque ainsi l'implémentation de certains quartiers qui ont des sorts spéciaux.
+
+<br>
+
 ## Bots
+### Fait
 Nous avons 3 types de bots qui reposent sur un systeme de phase de jeu. Il y a 3 phases de jeux, début de partie, fin de partie et dernier tour, commun à tous les bots et reposant sur le nombre de bâtiments posés dans la ville de chaque joueurs.
 
-* Le premier bot tente d’accumuler le plus de points possible en cherchant a poser les bâtiments les plus chères. 
-* Le deuxième bot tente de poser les bâtiments avec les plus petits coûts pour essayer d’obtenir le bonus le plus rapidement possible.
-* Le troisième essaye de viser des joueurs en particulier et de prédire le personnages qu’ils ont choisit pour pouvoir les attaquer avec ses sorts. 
+* Le premier bot _(investor)_ tente d’accumuler le plus de points possible en cherchant a poser les bâtiments les plus chères. 
+* Le deuxième bot _(rusher)_  tente de poser les bâtiments avec les plus petits coûts pour essayer d’obtenir le bonus le plus rapidement possible.
+* Le troisième bot _(strategator)_  essaye de viser des joueurs en particulier et de prédire le personnages qu’ils ont choisit pour pouvoir les attaquer avec ses sorts. Le reste de ses choix sont fait de la même manière que le premier bot.
 * _Certains mécanismes sont commun aux 3 bots comme le fait de ne pas piocher un quartier que l’on a déjà dans sa main ou que l’on a déjà construit._
 
+<br>
+
+### A faire
 Ainsi, ce qu’il nous resterait à faire est de créer un superBot qui utiliserait les stratégies de nos 3 bots déjà existant ce qui est implementable grâce à l’architecture que nous avons. Nous pourrions aussi ajouter de nouvelle stratégie spéciales pour essayer de profiter le plus possible du sort spécial d’un personnage. Nous n’avons pas ajouté le fait de prendre en compte les personnages piochés (lors de la première partie du tour de jeu) avant nous ou après nous pour ensuite avoir une information plus précise sur les roles possibles de chacun.
+
+<br>
+<br>
+
+# Rétrospective du code
+Après 6 semaines de développement le projet est à une version stable, la dernière version du projet corespond à la [Milestone 6](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/milestone/6). Après plusieurs refractors nous avons acquis une base assez stable mais nous avons identifié certains points d'amélioration.
+
+## Points négatifs et comment les améliorer
+Notre classe [PrinterCitadels](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/output/PrintCitadels.java) est une classe ou toutes ses méthodes sont accessibles de manière static. Afin de régler ce problème nous avons imaginé une nouvelle classe dans le package [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor) qui aurait pour tâche de "récolter” toutes les actions réalisées par le bot, les characters et les districts spéciaux. Cette classe renverrait une ArrayList<String> que l’on remonterait au [Round Manager](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_engine/RoundManager.java) à la fin du tours du [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/Behaviour.java), puis le [Round Manager](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game_engine/RoundManager.java) demanderait à [PrintCitadels](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/output/PrintCitadels.java) d’afficher le contenu de l’ArrayList.
+  
+  
+Les responsabilités des classes [Character](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Character.java) ne sont pas très claires. Nous avons créé la classe [Character](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Character.java) et ses sous-classes sans réfléchir assez à comment les intégrer de manière optimale dans notre projet. Nous avions décidé que les Characters iraient dans le package [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) car ils ont un impact sur le déroulement de la partie en son cours _(par exemple l'Assassin qui va empêcher un joueur de jouer ou bien le Roi qui va choisir sa carte Character en premier au prochain tour)_. Nous avions aussi décidé que c’était l’entité [Player](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Player.java) qui possédait un  [Character](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Character.java). Si nous mettons ça bout à bout on remarque qu’un élément du [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) contient un élément du [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor), qui contient un élément du [game](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game), qui contient lui même un élément du [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine).
+  
+<img src="https://user-images.githubusercontent.com/90778036/146634067-b46d0923-f5d6-4541-820e-58082f6ab4e4.png" width="512">
+  
+Malheureusement nous ne sommes pas encore parvenu à trouver une solution optimale à ce problème. Afin que la classe [Player](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Player.java) ne possède plus un élément de [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine), nous avons opté pour la solution ci-dessous.
+
+<img src="https://user-images.githubusercontent.com/90778036/146634222-f26d8a56-cc33-4925-91f1-41e25c229524.png" width="512">
+  
+Nous avons aussi commencé à imaginer une nouvelle classe dans le [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) qui va communiquer avec les character pour réaliser les modification nécessaire sur le [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine), de manière à ce que ne soit plus directement les Character qui réalisent ces modifications.
+
+<br>
+  
+## Points positifs
+Concernant le [game_interacor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor), la manière dont nous avons choisi de découper les bots nous laisse maintenant la liberté de créer des nouveaux bot avec un comportement différent des précédents sans toucher au reste du code. Pour créer un nouveau bot nous avons juste à lui assigner différentes stratégies de jeu.
+  
+Le [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) est bien découpé et les responsabilités sont bien répartis entre les classes du [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine).
+  
+Nous avons su couper les districts violet en 3 catégories, [BonusDistrict](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/BonusDistrict.java), [SpellDistrict](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/SpellDistrict.java) et [ColorDistrict](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/ColorDistrict.java). Pour l'instant seul les [BonusDistrict](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/BonusDistrict.java) et les [ColorDistrict](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/ColorDistrict.java) sont implémentés et si nous avions à en ajouter, nous n'aurions pas non plus à modifier le reste du code : simplement à créer une nouvelle classe en rapport avec le nouveau district que l'on souhaite implémenter.
