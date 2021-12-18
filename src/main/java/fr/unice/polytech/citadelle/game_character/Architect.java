@@ -18,6 +18,11 @@ public class Architect extends Character {
         super("Architect", 7);
     }
 
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         //Giving 2 Cards to the Player with Architect character

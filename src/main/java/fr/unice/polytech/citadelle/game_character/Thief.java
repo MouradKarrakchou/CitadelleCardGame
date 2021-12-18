@@ -19,6 +19,11 @@ public class Thief extends Character {
         super("Thief", 2);
     }
 
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         Character characterToSteal= bot.selectCharacterForSpell(hashOfCharacters);

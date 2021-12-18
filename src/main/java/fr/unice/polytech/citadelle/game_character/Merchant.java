@@ -15,7 +15,12 @@ public class Merchant extends Character {
     public Merchant(){
         super("Merchant", 6);
     }
-    
+
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         bot.getPlayer().setGolds(bot.getPlayer().getGolds()+1);

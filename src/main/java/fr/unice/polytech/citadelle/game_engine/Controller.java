@@ -13,6 +13,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
  * The controller coordinates all classes in the project
+ *
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  *
  */

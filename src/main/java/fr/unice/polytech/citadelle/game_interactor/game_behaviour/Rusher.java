@@ -28,6 +28,9 @@ public class Rusher extends Behaviour {
 		spellDistrict.get(0).librarySpell(player, deckDistrict);
 	}
 
+	/**
+	 * Build the cheapest districts
+	 */
 	@Override
 	public void normalBehaviour() {
 		DeckDistrict deckDistrict = board.getDeckDistrict();
@@ -52,6 +55,9 @@ public class Rusher extends Behaviour {
 		ifPossibleBuildACheapDistrict();
 	}
 
+	/**
+	 * Build also expensive districts
+	 */
 	@Override
 	public void endGameBehaviour() {
 		PrintCitadels.printPhase("Endgame", player);
@@ -82,6 +88,9 @@ public class Rusher extends Behaviour {
 		normalBehaviour();
 	}
 
+	/**
+	 * Build a district if it is possible
+	 */
 	public void ifPossibleBuildACheapDistrict() {
 		ArrayList<District> districtWeCanBuild = cityMan.listOfDistrictBuildable();
 		if (!districtWeCanBuild.isEmpty()) {
@@ -107,6 +116,12 @@ public class Rusher extends Behaviour {
 
 	}
 
+	/**
+	 * Choose between 2 cards
+	 * @param firstDistrict
+	 * @param secondDistrict
+	 * @return the chosen card
+	 */
 	@Override
 	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict) {
 		DeckDistrict deckDistrict = board.getDeckDistrict();

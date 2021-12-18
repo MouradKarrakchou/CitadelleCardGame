@@ -54,6 +54,12 @@ public class Magician extends Character {
         }
         return districtDeleted;
     }
+
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         ArrayList<District> magicianAction=bot.chooseMagicianAction();

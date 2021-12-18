@@ -31,7 +31,9 @@ public class Investor extends Behaviour {
 		spellDistrict.get(0).librarySpell(player, deckDistrict);
 	}
 
-
+	/**
+	 * Build districts when possible and foresee if it will be possible to build with 2 more golds
+	 */
 	@Override
 	public void normalBehaviour() {
 		DeckDistrict deckDistrict = board.getDeckDistrict();
@@ -52,6 +54,7 @@ public class Investor extends Behaviour {
 		}
 		ifPossibleBuildADistrict();
 	}
+
 	@Override
 	public void endGameBehaviour() {
 		PrintCitadels.printPhase("Endgame", player);
@@ -64,6 +67,12 @@ public class Investor extends Behaviour {
 		normalBehaviour();
 	}
 
+	/**
+	 * Choose between 2 cards
+	 * @param firstDistrict
+	 * @param secondDistrict
+	 * @return the chosen card
+	 */
 	@Override
 	public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict) {
 		DeckDistrict deckDistrict = board.getDeckDistrict();

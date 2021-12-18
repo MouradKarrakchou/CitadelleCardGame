@@ -17,6 +17,11 @@ public class King extends Character {
         super("King", 4 );
     }
 
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         PrintCitadels.printKingSpell(bot.getPlayer());

@@ -32,6 +32,9 @@ public class Strategator extends Behaviour{
         spellDistrict.get(0).librarySpell(player, deckDistrict);
     }
 
+    /**
+     * Build expensive districts
+     */
     @Override
     public void normalBehaviour() {
         DeckDistrict deckDistrict = board.getDeckDistrict();
@@ -65,6 +68,12 @@ public class Strategator extends Behaviour{
         normalBehaviour();
     }
 
+    /**
+     * Choose between 2 cards
+     * @param firstDistrict
+     * @param secondDistrict
+     * @return the chosen card
+     */
     @Override
     public District chooseBetweenTwoCards(District firstDistrict, District secondDistrict) {
         DeckDistrict deckDistrict = board.getDeckDistrict();

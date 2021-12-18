@@ -16,6 +16,11 @@ public class Bishop extends Character {
         super("Bishop", 5);
     }
 
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         super.spellOfTurnDistrictFamily(bot,"Bishop","Religion");
