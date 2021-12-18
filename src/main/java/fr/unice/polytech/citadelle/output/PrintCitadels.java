@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle.output;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import com.diogonunes.jcolor.Attribute;
 
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.Character;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
@@ -355,5 +357,30 @@ public class PrintCitadels {
 	public static void printNoCardsToBeSwapped(Player player) {
 		System.out.println(colorize("He chooses what cards he will swap by finding cards that he already built.",ITALIC()));
 		System.out.println(colorize("He consider that all his cards are good, he will not do his spell.",ITALIC()));
+	}
+	
+	public static void printPredictionExplaination(Player targetPlayer, Character characterOfTargetPlayer, ArrayList<Character> listOfCharacter){
+		String firstPartOutput = "Prediction: The bot predict that "+targetPlayer.getName()+" is "+characterOfTargetPlayer.getName()+" because ";
+		String finalOutput = firstPartOutput+ initHashPrediction(listOfCharacter).get(characterOfTargetPlayer);
+		System.out.println(colorize(finalOutput,ITALIC()));
+	}
+	
+	public static void printChooseCharacterExplaination( Character chooseTargetPlayer, ArrayList<Character> listOfCharacter){
+		String firstPartOutput = "Explanation: The bot choose the character "+chooseTargetPlayer.getName()+" because ";
+		String finalOutput = firstPartOutput+ initHashPrediction(listOfCharacter).get(chooseTargetPlayer);
+		System.out.println(colorize(finalOutput,ITALIC()));
+	}
+	
+	private static HashMap<Character, String> initHashPrediction(ArrayList<Character> listOfCharacter){
+		HashMap<Character, String> prediction = new HashMap<Character, String>();
+		prediction.put(listOfCharacter.get(Initializer.ASSASSIN_INDEX), "someone is close to finish the game (has 6 districts)");
+		prediction.put(listOfCharacter.get(Initializer.THIEF_INDEX), "he does not have a lot of golds");
+		prediction.put(listOfCharacter.get(Initializer.MAGICIAN_INDEX), "he does not have a lot of district cards");
+		prediction.put(listOfCharacter.get(Initializer.KING_INDEX), "he has 3 nobility");
+		prediction.put(listOfCharacter.get(Initializer.BISHOP_INDEX), "he has 6 or more districts built in his city");
+		prediction.put(listOfCharacter.get(Initializer.MERCHANT_INDEX), "he has 3 or more Trade and Handicrafts districts built in his city");
+		prediction.put(listOfCharacter.get(Initializer.ARCHITECT_INDEX), "he does not have a lot of golds");
+		prediction.put(listOfCharacter.get(Initializer.WARLORD_INDEX), "someone is close to finish the game (has 7 districts)");
+		return prediction;
 	}
 }

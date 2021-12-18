@@ -29,8 +29,11 @@ public class Predict {
 				return targetCharacter;
 		}
 
-		if (canBeArchitect(targetPlayer, listOfUntargetableCharacter))
-			return listGetCharacter(Initializer.ARCHITECT_INDEX);
+		if (canBeArchitect(targetPlayer, listOfUntargetableCharacter)) {
+			Character targetCharacter = listGetCharacter(Initializer.ARCHITECT_INDEX);
+			PrintCitadels.printChooseCharacterExplaination(targetCharacter, board.getListOfCharacter());
+			return targetCharacter;
+		}
 
 		if (canBeBishop(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.BISHOP_INDEX);
