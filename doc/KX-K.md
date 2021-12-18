@@ -1,9 +1,10 @@
 # Rapport du projet Citadelle (groupe K)
 ## Auteurs 
-* [LE BIHAN Léo](https://github.com/LeBihanLeo)
 * [BONNET Kilian](https://github.com/KilianBonnet)
-* [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou)
 * [IMAMI Ayoub](https://github.com/AyoubIMAMI)
+* [KARRAKCHOU Mourad](https://github.com/MouradKarrakchou)
+* [LE BIHAN Léo](https://github.com/LeBihanLeo)
+
 <br>
 <br>
 
