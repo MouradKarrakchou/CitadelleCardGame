@@ -17,6 +17,11 @@ public class Assassin extends Character{
         super("Assassin", 1);
     }
 
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         Character characterToDie= bot.selectCharacterForSpell(hashOfCharacters);
