@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  *A character is a class that gives the player special abilities.
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Character {

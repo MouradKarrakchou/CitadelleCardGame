@@ -23,6 +23,7 @@ import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Strategator;
 
 /**
  * The Initializer class initialize all objects needed during the game
+ *
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Initializer {

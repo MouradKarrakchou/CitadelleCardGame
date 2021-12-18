@@ -34,7 +34,10 @@ public class Strategy {
         return (random.nextInt(scope));
     }
 
-
+    /**
+     * Randomly choose a player (self-excluded) to use Thief spell.
+     * @return The chosen character.
+     */
     public Character chooseCharacterForThiefRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
@@ -44,7 +47,10 @@ public class Strategy {
         return randomCharacter;
     }
 
-
+    /**
+     * Randomly choose a player (self-excluded) to use Assassin spell.
+     * @return The chosen character.
+     */
     public Character chooseCharacterForAssassinRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(8));
@@ -54,6 +60,10 @@ public class Strategy {
         return(randomCharacter);
     }
 
+    /**
+     * Randomly choose a player (self-excluded) to use Magician spell.
+     * @return The chosen character.
+     */
     public Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         List<Character> list = hashOfCharacters.keySet().stream().toList();
         Character randomCharacter=list.get(randomInt(numberOfCharacter));
@@ -96,6 +106,10 @@ public class Strategy {
         return playerToDestroy;
     }
 
+    /**
+     * (Assassin) A smarter way to find the charter to attack.
+     * @return The character to use Assassin spell on.
+     */
     public Character chooseCharacterForAssassinAdvanced(){
         ArrayList<Character> listOfCharacterToNotKill=new ArrayList<>();
         listOfCharacterToNotKill.add(board.getListOfCharacter().get(Initializer.ASSASSIN_INDEX));
@@ -106,6 +120,11 @@ public class Strategy {
         return getAPrediction(playerWithClosestScore, listOfCharacterToNotKill);
 
     }
+
+    /**
+     * (Thief) A smarter way to find the charter to attack.
+     * @return The character to use Thief spell on.
+     */
     public Character chooseCharacterForThiefAdvanced(){
         ArrayList<Character> listOfCharacterToNotSteal=new ArrayList<>();
         listOfCharacterToNotSteal.add(board.getListOfCharacter().get(Initializer.ASSASSIN_INDEX));
@@ -116,12 +135,21 @@ public class Strategy {
         Player playerWithMostGolds=findThePlayerWithMostGolds();
         return(predict.predictWhoIsPlayer(playerWithMostGolds,listOfCharacterToNotSteal));
     }
+
+    /**
+     * (Magician) A smarter way to find the charter to attack.
+     * @return The character to use Magician spell on.
+     */
     public Character chooseCharacterForMagicianAdvanced(){
         ArrayList<Character> listOfCharacterToNotSteal=new ArrayList<>();
         Player playerWithMostCards=findThePlayerWithMostCards();
         return(predict.predictWhoIsPlayer(playerWithMostCards,listOfCharacterToNotSteal));
     }
 
+    /**
+     * Will try to guess which player has the most cards.
+     * @return The player with the most cards.
+     */
     public Player findThePlayerWithMostCards() {
         ArrayList<Player> listOfPlayer= board.getListOfPlayer();
         //We want to find the Player with the most cards
@@ -144,6 +172,10 @@ public class Strategy {
         return (playerWithMostDistrictGames);
     }
 
+    /**
+     * Will try to guess which player has the most gold.
+     * @return The player with the most gold.
+     */
     public Player findThePlayerWithMostGolds() {
         ArrayList<Player> listOfPlayer= board.getListOfPlayer();
         //In this list we got the Assassin (if there is one) and he can't steal from him
@@ -168,6 +200,10 @@ public class Strategy {
         return (playerWithMostGold);
     }
 
+    /**
+     * Find the player with the closest guessed score from the player given in class parameter.
+     * @return The player with the closest score.
+     */
     public Player findThePlayerWithClosestScoreAssassin(){
         int predictedScore=playerPredictScore(player);
         ArrayList<Player> listOfPlayer=board.getListOfPlayer();
@@ -235,7 +271,6 @@ public class Strategy {
         return null;
     }
 
-
     /**
      * For a given player, will analyze player city to choose a district to destroy.
      * @param playerToDestroy The player to proceed.
@@ -278,11 +313,20 @@ public class Strategy {
         return districtToDestroy;
     }
 
-
+    /**
+     * A primitive action for the Magician.
+     * @return An empty Array -> The Magician will always swap with a player.
+     */
     public ArrayList<District> chooseMagicianActionForRandom() {
         return(new ArrayList());
     }
 
+    /**
+     * (Magician) A smarter way to use the magician spell.
+     * @return The Array of Magician action :
+     *          -> Empty : Swap the card with a player.
+     *          -> Not empty : Swap the given card with the deck.
+     */
     public ArrayList<District> chooseMagicianActionAdvanced() {
         if (isThereAPlayerWithTwoTimesHisDistricts()){
             PrintCitadels.playerHasTwoTimesMoreHisCards(player);
@@ -294,6 +338,10 @@ public class Strategy {
             return(cardsToBeSwapped);}
     }
 
+    /**
+     * (Magician) Create an array of district card to be swapped.
+     * @return The array of district cards to be swapped.
+     */
     public ArrayList<District> cardToBeSwapped() {
         ArrayList<District> listDistrictToSwap=new ArrayList<>();
         ArrayList<District> listDistrict=player.getDistrictCards();
@@ -308,13 +356,22 @@ public class Strategy {
         return (listDistrictToSwap);
     }
 
+    /**
+     * If a District already in the player city, the player should swap this district card.
+     * @param districtToCheck The district to check
+     * @return true/false The given card should be swapped.
+     */
     private boolean shouldBeSwapped(District districtToCheck) {
-        if (player.getCity().getBuiltDistrict().stream().map(district -> district.getName()).toList().contains(districtToCheck.getName()))
-            return(true);
-        else
-            return false;
+        return player.getCity().getBuiltDistrict().stream()
+                .map(District::getName)
+                .toList()
+                .contains(districtToCheck.getName());
     }
 
+    /**
+     * Check for each player if a player has more than twice the time of district that the current player calling this method.
+     * @return true/false There is a player having twice the time of district than the player.
+     */
     public boolean isThereAPlayerWithTwoTimesHisDistricts() {
         ArrayList <Player> listOfPlayer=board.getListOfPlayer();
         for (Player playerComparing : listOfPlayer) {
@@ -338,6 +395,11 @@ public class Strategy {
         return sum;
     }
 
+    /**
+     * Algorithm used to guess the score of the player using the accessible parameters for a player.
+     * @param player The player to guess the score.
+     * @return The guessed score.
+     */
     public int playerPredictScore(Player player) {
         // City Score processing.
         int scoreToPredict = cityDistrictScore(player);
@@ -370,10 +432,15 @@ public class Strategy {
                 case "Purple" -> hasPurple = true;
             }
         }
-
         return (hasBlue && hasRed && hasGreen && hasYellow && hasPurple);
     }
 
+    /**
+     * Count the number of districts having a colour.
+     * @param player The player city to check the colour of the districts.
+     * @param colour The colour to check.
+     * @return The number of built district having a given colour.
+     */
     public int countNumberOfDistrictWithColor(Player player, String colour){
         ArrayList<District> playerCity = player.getCity().getBuiltDistrict();
         int count = 0;
@@ -398,6 +465,12 @@ public class Strategy {
         return null;
     }
 
+    /**
+     * For a given player, bot will try to guess which character should the player has been taken.
+     * @param player The player to guess.
+     * @param listOfCharacterToNotKill The list of character that can not be taken.
+     * @return The guessed character picked by the player.
+     */
     public Character getAPrediction(Player player, ArrayList<Character> listOfCharacterToNotKill){
     	return predict.predictWhoIsPlayer(player,listOfCharacterToNotKill);
     }
@@ -435,6 +508,11 @@ public class Strategy {
         return board.getDeckCharacter().getDeckCharacter().remove(0);
     }
 
+    /**
+     * Return the index of the Assassin if the bot choose to take the Assassin according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Assassin, -1 if the bot don't choose the Assassin.
+     */
     public int chooseAssassin(Behaviour bot) {
         //Choice of Assassin
         ArrayList<Character> listOfAssassin = board.getDeckCharacter().getDeckCharacter().stream()
@@ -457,6 +535,11 @@ public class Strategy {
         return -1;
     }
 
+    /**
+     * Return the index of the Architect if the bot choose to take the Architect according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Architect, -1 if the bot don't choose the Architect.
+     */
     public int chooseArchitect(Behaviour bot) {
         //Choice of Architect
         ArrayList<Character> listOfArchitect = board.getDeckCharacter().getDeckCharacter().stream()
@@ -477,6 +560,11 @@ public class Strategy {
         return -1;
     }
 
+    /**
+     * Return the index of the Magician if the bot choose to take the Magician according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Magician, -1 if the bot don't choose the Magician.
+     */
     public int chooseMagician(Behaviour bot) {
         //Choice of Magician
         ArrayList<Character> listOfMagician = board.getDeckCharacter().getDeckCharacter().stream()
@@ -499,6 +587,11 @@ public class Strategy {
         return -1;
     }
 
+    /**
+     * Return the index of the Thief if the bot choose to take the Thief according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Thief, -1 if the bot don't choose the Thief.
+     */
     public int chooseThief(Behaviour bot) {
         //Choice of Thief
         ArrayList<Character> listOfThief = board.getDeckCharacter().getDeckCharacter().stream()
@@ -521,6 +614,11 @@ public class Strategy {
         return -1;
     }
 
+    /**
+     * Return the index of the Merchant if the bot choose to take the Merchant according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Merchant, -1 if the bot don't choose the Merchant.
+     */
     public int chooseKingOrMerchant(Behaviour bot) {
         //Choice of King or Merchant (if they are both equality worth, King is chosen)
         int counter = 0;
@@ -539,6 +637,11 @@ public class Strategy {
         return -1;
     }
 
+    /**
+     * Return the index of the Bishop if the bot choose to take the Bishop according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Bishop, -1 if the bot don't choose the Bishop.
+     */
     public int chooseBishop(Behaviour bot) {
         //Choice of Bishop
         ArrayList<Character> listOfBishop = board.getDeckCharacter().getDeckCharacter().stream()
@@ -559,6 +662,11 @@ public class Strategy {
         return -1;
     }
 
+    /**
+     * Return the index of the Warlord if the bot choose to take the Warlord according to its strategy.
+     * @param bot The bot to proceed
+     * @return The index value of the Warlord, -1 if the bot don't choose the Warlord.
+     */
     public int chooseWarlord(Behaviour bot) {
         //Choice of Warlord (Last one because his spell has not been implemented yet)
         ArrayList<Character> listOfWarlord = board.getDeckCharacter().getDeckCharacter().stream()

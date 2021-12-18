@@ -5,6 +5,8 @@ import fr.unice.polytech.citadelle.game.District;
 
 /**
  * Keep is a purple District which has a spell
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Keep extends District {
 

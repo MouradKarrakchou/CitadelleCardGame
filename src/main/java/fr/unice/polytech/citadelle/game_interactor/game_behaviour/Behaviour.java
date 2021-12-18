@@ -124,13 +124,13 @@ public class Behaviour {
 	}
 
 	public void normalBehaviour() {
-	};
+	}
 
 	public void endGameBehaviour() {
-	};
+	}
 
 	public void lastTurnBehaviour() {
-	};
+	}
 
 	/**
 	 * Select a character to use spell according to the player current character.

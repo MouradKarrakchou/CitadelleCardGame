@@ -8,6 +8,7 @@ import java.util.Random;
 
 /**
  * A DeckDistrict is composed of all the district cards in the game.
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class DeckDistrict {

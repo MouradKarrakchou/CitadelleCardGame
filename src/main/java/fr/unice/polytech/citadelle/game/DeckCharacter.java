@@ -11,6 +11,7 @@ import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAY
 
 /**
  * A DeckCharacter is composed of all the character cards in the game.
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class DeckCharacter {

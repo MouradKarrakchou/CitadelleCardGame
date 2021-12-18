@@ -10,6 +10,12 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+/**
+ * Rusher act by focusing cheap districts to finish first
+ * and get the +4 bonus of the first one who finish
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Rusher extends Behaviour {
 
 	private static final int MAX_VALUES_OF_CARDS = 3;

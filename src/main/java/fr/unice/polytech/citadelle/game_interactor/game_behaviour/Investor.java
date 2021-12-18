@@ -9,12 +9,24 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+/**
+ * Investor act by focusing expensive districts
+ * to score a maximum of points
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Investor extends Behaviour {
 
 	public Investor(Player player, Board board) {
 		super(player, board);
 	}
 
+	/**
+	 * Execute the spell of the Library which is keeping both card
+	 * picked instead of choosing one and putting back the other
+	 * @param spellDistrict
+	 * @param deckDistrict
+	 */
 	public void executeSpell(ArrayList<SpellDistrict> spellDistrict, DeckDistrict deckDistrict) {
 		spellDistrict.get(0).librarySpell(player, deckDistrict);
 	}

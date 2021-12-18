@@ -11,6 +11,13 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Predict allows to try to predict the character of other players
+ * by evaluating the situation of each player if the character
+ * has not been revealed yet
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Predict {
 	Board board;
 	Player currentPlayer;
@@ -20,7 +27,12 @@ public class Predict {
 		this.currentPlayer = player;
 	}
 
-	// Methode qui predit ce que le player a.
+	/**
+	 * Predict which character the player might have
+	 * @param targetPlayer
+	 * @param listOfUntargetableCharacter ex: the thief cannot steal from the Assassin, or we cannot focus a dead character
+	 * @return the character the player might have
+	 */
 	public Character predictWhoIsPlayer(Player targetPlayer, ArrayList<Character> listOfUntargetableCharacter) {
 		Optional<Character> potentialCharacterOfTargetPlayer = checkAlreadyReveal(targetPlayer);
 		if (potentialCharacterOfTargetPlayer.isPresent()) {
@@ -74,6 +86,11 @@ public class Predict {
 		return targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter).get(0);
 	}
 
+	/**
+	 * Check if the character has already been revealed
+	 * @param targetPlayer
+	 * @return an Optional of Character if it has been revealed or an empty if it has not
+	 */
 	private Optional<Character> checkAlreadyReveal(Player targetPlayer) {
 		Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(targetPlayer);
 		if (potentialCharacterOfTargetPlayer.isPresent()) {
@@ -84,6 +101,10 @@ public class Predict {
 			return Optional.empty();
 	}
 
+	/**
+	 * Get a copy of listOfCharacter that we can modify
+	 * @return the copy of listOfCharacter
+	 */
 	public ArrayList<Character> allCharacters() {
 		ArrayList<Character> listOfAllCharacter = new ArrayList<>();
 
@@ -93,6 +114,11 @@ public class Predict {
 		return listOfAllCharacter;
 	}
 
+	/**
+	 * Find only the characters we can target with a spell
+	 * @param listOfUntargetableCharacter
+	 * @return the list of characters we can target
+	 */
 	public ArrayList<Character> targetableCharactersForPredictWhoIsPlayer(
 			ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = allCharacters();
@@ -125,6 +151,12 @@ public class Predict {
 		return listOfPlayers;
 	}
 
+	/**
+	 * Check if the player can potentially be the Architect
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if he can be the Architect
+	 */
 	// Is the Architect interesting for this player? It can be if he does not have a
 	// lot of golds
 	public boolean canBeArchitect(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -137,6 +169,12 @@ public class Predict {
 				&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.ARCHITECT_INDEX)));
 	}
 
+	/**
+	 * Check if the player can potentially be the Bishop
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if he can be the Bishop
+	 */
 	// Is the Bishop interesting for this player? It can be if he has 6 or more
 	// districts built in his city
 	public boolean canBeBishop(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -148,6 +186,12 @@ public class Predict {
 				&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.BISHOP_INDEX)));
 	}
 
+	/**
+	 * Check if the player can potentially be the King
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if it can be the King
+	 */
 	// Is the King interesting for this player? It can be if he has 3 nobility
 	// districts built in his city
 	public boolean canBeKing(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -164,6 +208,12 @@ public class Predict {
 		return (counter == 3 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.KING_INDEX)));
 	}
 
+	/**
+	 * Check if the player can potentially be the Merchant
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if he can be the Merchant
+	 */
 	// Is the Merchant interesting for this player? It can be if he has 3 or more
 	// Trade and Handicrafts districts built in his city
 	public boolean canBeMerchant(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -180,6 +230,12 @@ public class Predict {
 		return (counter >= 3 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.MERCHANT_INDEX)));
 	}
 
+	/**
+	 * Check if the player can potentially be the Thief
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if he can be the Thief
+	 */
 	// Is the Thief interesting for this player? It can be if he does not have a lot
 	// of golds
 	public boolean canBeThief(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -190,6 +246,12 @@ public class Predict {
 		return (goldsOfPlayer <= 3 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.THIEF_INDEX)));
 	}
 
+	/**
+	 * Check if the player can potentially be the Magician
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if he can be the Magician
+	 */
 	// Is the Magician interesting for this player? It can be if he does not have a
 	// lot of district cards
 	public boolean canBeMagician(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -201,6 +263,12 @@ public class Predict {
 				&& listOfTargetableCharacter.contains(listGetCharacter(Initializer.MAGICIAN_INDEX)));
 	}
 
+	/**
+	 * Check if the player can potentially be the Warlord
+	 * @param player
+	 * @param listOfUntargetableCharacter
+	 * @return if he can be the Warlord
+	 */
 	// Is the Warlord interesting for this player? It can be if someone is close to
 	// finish the game (has 7 districts)
 	public boolean canBeWarlord(Player player, ArrayList<Character> listOfUntargetableCharacter) {
@@ -216,6 +284,11 @@ public class Predict {
 		return false;
 	}
 
+	/**
+	 * Get a character in function of index
+	 * @param indexOfCharacter
+	 * @return the character corresponding to the index
+	 */
 	public Character listGetCharacter(int indexOfCharacter) {
 		ArrayList<Character> listOfCharacter = board.getListOfCharacter();
 

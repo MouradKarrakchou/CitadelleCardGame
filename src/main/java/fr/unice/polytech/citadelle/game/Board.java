@@ -11,11 +11,8 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 
 /**
  * A Board represents an instance of the Citadel game with all the cards (districts and character) and players that go with.
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
- */
-/**
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Board {
     private int roundNumber = 0;

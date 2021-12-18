@@ -10,8 +10,11 @@ import java.util.Optional;
 
 /**
  * The magician have 2 options:
- * Exchange his entire hand of cards (not the cards in your city) with the hand of another player (this applies even if you have no cards in your hand, in which case you simply take the other player's cards).
- * Place any number of cards from your hand facedown at the bottom of the District Deck, and then draw an equal number of cards from the top of the District Deck.
+ * Exchange his entire hand of cards (not the cards in your city) with the hand of another player
+ * (this applies even if you have no cards in your hand, in which case you simply take the other player's cards).
+ * Place any number of cards from your hand facedown at the bottom of the District Deck,
+ * and then draw an equal number of cards from the top of the District Deck.
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Magician extends Character {
