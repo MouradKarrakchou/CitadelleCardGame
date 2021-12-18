@@ -74,7 +74,7 @@ public class PredictTest {
         assertEquals(false, predict.canBeArchitect(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    //@RepeatedTest(100)
     @Test
     void canBeBishopTest() {
         Player player = new Player("Player");
@@ -87,7 +87,7 @@ public class PredictTest {
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
-        assertEquals(true, predict.canBeArchitect(player, untargetable));
+        assertEquals(true, predict.canBeBishop(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -104,7 +104,7 @@ public class PredictTest {
         ArrayList<Character> untargetable = new ArrayList<>();
         untargetable.add(new Bishop());
 
-        assertEquals(false, predict.canBeArchitect(player, untargetable));
+        assertEquals(false, predict.canBeBishop(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -117,7 +117,7 @@ public class PredictTest {
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
-        assertEquals(true, predict.canBeArchitect(player, untargetable));
+        assertEquals(true, predict.canBeKing(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -131,7 +131,7 @@ public class PredictTest {
         ArrayList<Character> untargetable = new ArrayList<>();
         untargetable.add(new King());
 
-        assertEquals(false, predict.canBeArchitect(player, untargetable));
+        assertEquals(false, predict.canBeKing(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -144,7 +144,7 @@ public class PredictTest {
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
-        assertEquals(true, predict.canBeArchitect(player, untargetable));
+        assertEquals(true, predict.canBeMerchant(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -158,7 +158,7 @@ public class PredictTest {
         ArrayList<Character> untargetable = new ArrayList<>();
         untargetable.add(new Merchant());
 
-        assertEquals(false, predict.canBeArchitect(player, untargetable));
+        assertEquals(false, predict.canBeMerchant(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -169,7 +169,7 @@ public class PredictTest {
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
-        assertEquals(true, predict.canBeArchitect(player, untargetable));
+        assertEquals(true, predict.canBeThief(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -181,7 +181,7 @@ public class PredictTest {
         ArrayList<Character> untargetable = new ArrayList<>();
         untargetable.add(new Thief());
 
-        assertEquals(false, predict.canBeArchitect(player, untargetable));
+        assertEquals(false, predict.canBeThief(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -193,7 +193,7 @@ public class PredictTest {
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
-        assertEquals(true, predict.canBeArchitect(player, untargetable));
+        assertEquals(true, predict.canBeMagician(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -206,7 +206,7 @@ public class PredictTest {
         ArrayList<Character> untargetable = new ArrayList<>();
         untargetable.add(new Merchant());
 
-        assertEquals(false, predict.canBeArchitect(player, untargetable));
+        assertEquals(false, predict.canBeMagician(player, untargetable));
     }
 
     @RepeatedTest(100)
@@ -224,7 +224,7 @@ public class PredictTest {
 
         ArrayList<Character> untargetable = new ArrayList<>();
 
-        assertEquals(true, predict.canBeArchitect(player1, untargetable));
+        assertEquals(true, predict.canBeWarlord(player1, untargetable));
     }
 
     @Test
@@ -242,9 +242,7 @@ public class PredictTest {
         ArrayList<Character> untargetable = new ArrayList<>();
         untargetable.add(new Merchant());
 
-        assertEquals(false, predict.canBeArchitect(player1, untargetable));
+        assertEquals(false, predict.canBeWarlord(player1, untargetable));
     }
-
-
 
 }

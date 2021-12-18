@@ -115,7 +115,7 @@ public class Predict {
 
 	// Is the Bishop interesting for this player? It can be if he has 6 or more
 	// districts built in his city
-	private boolean canBeBishop(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeBishop(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
@@ -125,7 +125,7 @@ public class Predict {
 
 	// Is the King interesting for this player? It can be if he has 3 nobility
 	// districts built in his city
-	private boolean canBeKing(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeKing(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
@@ -141,7 +141,7 @@ public class Predict {
 
 	// Is the Merchant interesting for this player? It can be if he has 3 or more
 	// Trade and Handicrafts districts built in his city
-	private boolean canBeMerchant(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeMerchant(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
@@ -157,7 +157,7 @@ public class Predict {
 
 	// Is the Thief interesting for this player? It can be if he does not have a lot
 	// of golds
-	private boolean canBeThief(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeThief(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
@@ -167,7 +167,7 @@ public class Predict {
 
 	// Is the Magician interesting for this player? It can be if he does not have a
 	// lot of district cards
-	private boolean canBeMagician(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeMagician(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
@@ -177,7 +177,7 @@ public class Predict {
 
 	// Is the Warlord interesting for this player? It can be if someone is close to
 	// finish the game (has 7 districts)
-	private boolean canBeWarlord(Player player, ArrayList<Character> listOfUntargetableCharacter) {
+	public boolean canBeWarlord(Player player, ArrayList<Character> listOfUntargetableCharacter) {
 		ArrayList<Character> listOfTargetableCharacter = targetableCharactersForPredictWhoIsPlayer(
 				listOfUntargetableCharacter);
 		ArrayList<Player> listOfPlayers = playersForPredictWhoIsPlayer(player);
