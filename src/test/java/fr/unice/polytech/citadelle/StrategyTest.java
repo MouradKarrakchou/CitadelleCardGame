@@ -5,9 +5,9 @@ import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.Referee;
-import fr.unice.polytech.citadelle.game_interactor.Predict;
-import fr.unice.polytech.citadelle.game_interactor.Strategy;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;

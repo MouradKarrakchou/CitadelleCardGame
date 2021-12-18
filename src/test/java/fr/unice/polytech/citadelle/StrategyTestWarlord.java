@@ -5,8 +5,9 @@ import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
-import fr.unice.polytech.citadelle.game_interactor.Predict;
-import fr.unice.polytech.citadelle.game_interactor.Strategy;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

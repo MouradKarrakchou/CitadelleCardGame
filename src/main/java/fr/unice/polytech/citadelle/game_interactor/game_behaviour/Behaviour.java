@@ -9,7 +9,7 @@ import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.CityManagement;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
 import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
-import fr.unice.polytech.citadelle.game_interactor.Strategy;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
 /**
  * A Behaviour realize all the action of a player.
