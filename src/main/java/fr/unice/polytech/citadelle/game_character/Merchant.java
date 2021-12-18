@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 /**
- * 
+ *  You receive one gold for each trade (green) district in your city. After you take an action, you receive one additional gold.
  *  @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Merchant extends Character {

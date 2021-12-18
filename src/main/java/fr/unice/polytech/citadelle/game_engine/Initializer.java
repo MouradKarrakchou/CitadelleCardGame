@@ -19,6 +19,7 @@ import fr.unice.polytech.citadelle.game_character.Warlord;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Strategator;
 
 /**
  * The Initializer class initialize all objects needed during the game
@@ -34,7 +35,10 @@ public class Initializer {
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
 
-	public final static int NUMBER_OF_PLAYER = 4;
+	public final static int NUMBER_OF_PLAYER = 6;
+	private static final int NUMBER_OF_INVESTOR =2;
+	private static final int NUMBER_OF_RUSHER = 2;
+	private static final int NUMBER_OF_STRATEGATOR = 2;
 
 	/**
 	 * Reset a given hash of characters using a given list of characters.
@@ -98,12 +102,18 @@ public class Initializer {
 	public static ArrayList<Behaviour> createListOfBehaviour(Board board){
 		ArrayList<Behaviour> listOfBehaviour = new ArrayList<>();
 		
-		for (int i = 1; i < NUMBER_OF_PLAYER; i++) {
-			Player newPlayer = new Player("Robot " + i);
+		for (int i = 1; i < NUMBER_OF_INVESTOR+1; i++) {
+			Player newPlayer = new Player("RobotInvestor " + i);
 			listOfBehaviour.add(new Investor(newPlayer, board));
 		}
-		Player newPlayer = new Player("RobotRusher");
-		listOfBehaviour.add(new Rusher(newPlayer, board));
+		for (int i = 1; i < NUMBER_OF_RUSHER+1; i++) {
+			Player newPlayer = new Player("RobotRusher " + i);
+			listOfBehaviour.add(new Rusher(newPlayer, board));
+		}
+		for (int i = 1; i < NUMBER_OF_STRATEGATOR+1; i++) {
+			Player newPlayer = new Player("RobotStrategator " + i);
+			listOfBehaviour.add(new Strategator(newPlayer, board));
+		}
 		
 		return listOfBehaviour;
 

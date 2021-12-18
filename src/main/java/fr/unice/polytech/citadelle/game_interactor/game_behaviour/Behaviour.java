@@ -133,16 +133,19 @@ public class Behaviour {
 		return(strategy.choosePlayerForWarlordAdvanced());
 	}
 
-	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
-	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
 	}
 
-	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
+	public Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
 		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
+	}
+	public ArrayList<District> chooseMagicianAction() {
+		return (strategy.chooseMagicianActionForRandom());
 	}
 
 	public void ifPossibleBuildADistrict() {
@@ -273,11 +276,6 @@ public class Behaviour {
 		return executor;
 	}
 
-	public ArrayList<District> chooseMagicianAction() {
-		// return an empty array if he wants to swap Cards with another Character
-		// return the position of the Cards that he wants to swap
-		return (strategy.chooseMagicianActionAdvanced());
-	}
 
 	public District chooseDistrictToDestroy(Player playerToDestroy) {
 		return (strategy.chooseDistrictToDestroy(playerToDestroy));
