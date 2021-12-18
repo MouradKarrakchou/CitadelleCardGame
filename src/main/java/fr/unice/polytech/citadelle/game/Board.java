@@ -36,7 +36,11 @@ public class Board {
 
     public Board() {}
 
-	public ArrayList<Player> getListOfPlayer(){
+    public void putDistrictBackInDeck(District district) {
+        deckDistrict.addDistrictAtTheEnd(district);
+    }
+
+    public ArrayList<Player> getListOfPlayer(){
         return listOfPlayer;
     }
 

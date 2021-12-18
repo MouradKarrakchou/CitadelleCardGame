@@ -132,4 +132,12 @@ public class DeckDistrict {
         int randomValue = random.nextInt(deckDistrict.size());
         return deckDistrict.remove(randomValue);
     }
+
+    /**
+     * add the district at the end of the deck
+     * @param district
+     */
+    public void addDistrictAtTheEnd(District district) {
+        deckDistrict.add(deckDistrict.size(),district);
+    }
 }
