@@ -38,7 +38,7 @@ public class Investor extends Behaviour {
 	public void normalBehaviour() {
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		int goldOfPlayer = player.getGolds();
-		if (goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer + 2).size() > 0) {
+		if (goldOfPlayer == 0 || cityMan.districtWeHaveEnoughMoneyToBuild(goldOfPlayer + 2).size() > 0 || board.getDeckDistrict().getSize()==0) {
 			takeGold();
 		}
 		else {
