@@ -220,7 +220,7 @@ public class Strategy {
      * @param playerToDestroy The player to proceed.
      * @return The district to destroy (can be null if the spell is not used).
      */
-    public District chooseDistrictToDestroy(Player playerToDestroy) {
+    public District chooseDistrictToDestroyAdvanced(Player playerToDestroy) {
         //Flags
         boolean playerToDestroyHasCompletedCity = false;
         boolean playerToDestroyIsBishop = false;

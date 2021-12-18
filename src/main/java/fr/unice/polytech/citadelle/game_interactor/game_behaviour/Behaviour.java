@@ -351,7 +351,7 @@ public class Behaviour {
 	 * @return The district to destroy.
 	 */
 	public District chooseDistrictToDestroy(Player playerToDestroy) {
-		return (strategy.chooseDistrictToDestroy(playerToDestroy));
+		return (strategy.chooseDistrictToDestroyAdvanced(playerToDestroy));
 	}
 
 	public void putDistrictBackInDeck(District district) {

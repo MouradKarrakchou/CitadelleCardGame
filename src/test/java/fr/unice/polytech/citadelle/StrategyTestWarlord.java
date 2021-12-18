@@ -99,12 +99,12 @@ public class StrategyTestWarlord {
         Strategy aliceStrategy = new Strategy(8, gameBoard, alice);
 
         alice.setGolds(4);
-        assertNull(aliceStrategy.chooseDistrictToDestroy(bob));
+        assertNull(aliceStrategy.chooseDistrictToDestroyAdvanced(bob));
 
         alice.setGolds(5);
-        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
+        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroyAdvanced(bob));
 
         alice.setGolds(6);
-        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroy(bob));
+        assertEquals(dragonGate, aliceStrategy.chooseDistrictToDestroyAdvanced(bob));
     }
 }

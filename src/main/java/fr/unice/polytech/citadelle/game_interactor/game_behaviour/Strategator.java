@@ -85,4 +85,8 @@ public class Strategator extends Behaviour{
     public ArrayList<District> chooseMagicianAction() {
         return (strategy.chooseMagicianActionAdvanced());
     }
+    @Override
+    public District chooseDistrictToDestroy(Player playerToDestroy) {
+        return (strategy.chooseDistrictToDestroyAdvanced(playerToDestroy));
+    }
 }
