@@ -22,14 +22,14 @@ public class Strategy {
     private final ArrayList<Character> listOfAllCharacters = Initializer.createListOfAllCharacter();
     
     public Strategy(int numberOfCharacter,Board board,Player player){
-        predict=new Predict(board);
+        predict=new Predict(board, player);
         this.numberOfCharacter=numberOfCharacter;
         this.board=board;
         this.player=player;
     }
 
     public Strategy(int numberOfCharacter,Board board,Player player, Predict predict){
-        predict=new Predict(board);
+        predict=new Predict(board, player);
         this.numberOfCharacter=numberOfCharacter;
         this.board=board;
         this.player=player;
@@ -147,7 +147,7 @@ public class Strategy {
                     mostDistrictCardsThatAPlayerHas = playerComparing.getDistrictCardsSize();}
             }
         }
-        /**PrintCitadels.printMagicianAdvancedChoice(playerWithMostDistrictGames);*/
+        PrintCitadels.printMagicianAdvancedChoice(playerWithMostDistrictGames,player);
         return (playerWithMostDistrictGames);
     }
 
@@ -270,17 +270,38 @@ public class Strategy {
     }
 
     public ArrayList<District> chooseMagicianActionAdvanced() {
-        if (isThereAPlayerWithTwoTimesHis()){
+        if (isThereAPlayerWithTwoTimesHisDistricts()){
+            PrintCitadels.playerHasTwoTimesMoreHisCards(player);
             return (new ArrayList<>());
         }
-        else return(CardToBeSwapped());
+        else{
+            PrintCitadels.playerSwapWithDeck(player);
+            ArrayList<District> cardsToBeSwapped=cardToBeSwapped();
+            return(cardsToBeSwapped);}
     }
 
-    private ArrayList<District> CardToBeSwapped() {
-        return null;
+    private ArrayList<District> cardToBeSwapped() {
+        ArrayList<District> listDistrictToSwap=new ArrayList<>();
+        ArrayList<District> listDistrict=player.getDistrictCards();
+        for (District districtToCheck : listDistrict){
+            if (shouldBeSwapped(districtToCheck)) listDistrictToSwap.add(districtToCheck);
+        }
+        if (listDistrictToSwap.size()==0)
+        {PrintCitadels.printNoCardsToBeSwapped(player);
+            return(null);}
+        else
+            PrintCitadels.pritCardsToBeSwapped(player,listDistrictToSwap);
+        return (listDistrictToSwap);
     }
 
-    private boolean isThereAPlayerWithTwoTimesHis() {
+    private boolean shouldBeSwapped(District districtToCheck) {
+        if (player.getCity().getBuiltDistrict().contains(districtToCheck))
+            return(true);
+        else
+            return false;
+    }
+
+    private boolean isThereAPlayerWithTwoTimesHisDistricts() {
         ArrayList <Player> listOfPlayer=board.getListOfPlayer();
         for (Player playerComparing : listOfPlayer) {
             if (!playerComparing.equals(this.player) && playerComparing.getDistrictCardsSize()>2*this.player.getDistrictCardsSize())

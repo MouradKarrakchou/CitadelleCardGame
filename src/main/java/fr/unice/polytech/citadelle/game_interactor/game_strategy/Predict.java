@@ -13,49 +13,51 @@ import java.util.Optional;
 
 public class Predict {
 	Board board;
+	Player currentPlayer;
 
-	public Predict(Board board) {
+	public Predict(Board board, Player player) {
 		this.board = board;
+		this.currentPlayer = player;
 	}
 
 	// Methode qui predit ce que le player a.
-	public Character predictWhoIsPlayer(Player player, ArrayList<Character> listOfUntargetableCharacter) {
-		Optional<Character> potentialCharacterOfTargetPlayer = checkAlreadyReveal(player);
-		//vérifier que l'on puisse renvoyer bien utiliser le sort sur ce character
+	public Character predictWhoIsPlayer(Player targetPlayer, ArrayList<Character> listOfUntargetableCharacter) {
+		Optional<Character> potentialCharacterOfTargetPlayer = checkAlreadyReveal(targetPlayer);
 		if(potentialCharacterOfTargetPlayer.isPresent()) {
 			Character targetCharacter = potentialCharacterOfTargetPlayer.get();
-			return targetCharacter;
+			if(!listOfUntargetableCharacter.contains(targetCharacter))
+				return targetCharacter;
 		}
 
-		if (canBeArchitect(player, listOfUntargetableCharacter))
+		if (canBeArchitect(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.ARCHITECT_INDEX);
 
-		if (canBeBishop(player, listOfUntargetableCharacter))
+		if (canBeBishop(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.BISHOP_INDEX);
 
-		if (canBeKing(player, listOfUntargetableCharacter))
+		if (canBeKing(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.KING_INDEX);
 
-		if (canBeMerchant(player, listOfUntargetableCharacter))
+		if (canBeMerchant(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.MERCHANT_INDEX);
 
-		if (canBeThief(player, listOfUntargetableCharacter))
+		if (canBeThief(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.THIEF_INDEX);
 
-		if (canBeMagician(player, listOfUntargetableCharacter))
+		if (canBeMagician(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.MAGICIAN_INDEX);
 
-		if (canBeWarlord(player, listOfUntargetableCharacter))
+		if (canBeWarlord(targetPlayer, listOfUntargetableCharacter))
 			return listGetCharacter(Initializer.WARLORD_INDEX);
 
 		return targetableCharactersForPredictWhoIsPlayer(listOfUntargetableCharacter).get(0);
 	}
 
-	private Optional<Character> checkAlreadyReveal(Player player) {
-		Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(player);
+	private Optional<Character> checkAlreadyReveal(Player targetPlayer) {
+		Optional<Character> potentialCharacterOfTargetPlayer = board.gethashOfViewCharacters().get(targetPlayer);
 		if (potentialCharacterOfTargetPlayer.isPresent()) {
 			Character targetCharacter = potentialCharacterOfTargetPlayer.get();
-			PrintCitadels.printPlayerHasAlreadyRevealCharacter(player, player, targetCharacter);
+			PrintCitadels.printPlayerHasAlreadyRevealCharacter(currentPlayer, targetPlayer, targetCharacter);
 			return Optional.of(targetCharacter);
 		}
 		else

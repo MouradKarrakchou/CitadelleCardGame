@@ -35,8 +35,9 @@ public class Magician extends Character {
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         ArrayList<District> magicianAction=bot.chooseMagicianAction();
+        if (magicianAction == null) return;
         //If the magicianAction is empty then we have to exchange with another character
-        if (magicianAction.size()==0){
+        else if (magicianAction.size() == 0){
             Character characterToSwapWith=bot.selectCharacterForSpell(hashOfCharacters);
             Optional<Behaviour> botForSwap=hashOfCharacters.get(characterToSwapWith);
             if (botForSwap.isPresent()){

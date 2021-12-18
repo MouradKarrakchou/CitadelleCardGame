@@ -77,6 +77,51 @@ Un [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-p
 <br>
 
 # Informations utiles
+## Liens
+* La version d'octobre 2021 du [sujet](https://unice-my.sharepoint.com/:w:/g/personal/philippe_collet_unice_fr/EQzIs63_prFMqXwo3vkNopIBAK8EIf8rAeHw0J5bjtag4g?e=FEOTxZ) du projet de Citadelles.
+* Afin de découvrir le jeu nous avons regardé [cette vidéo](https://videoregles.net/videoregle/citadelles).
+
+**Pour avoir une idée précise des des règles et des subtilités du jeu Citadelle à implémenter, nous avons utilisés les ressources suivantes:**
+* http://jeuxstrategie.free.fr/Citadelles_complet.php
+* https://www.regledujeu.fr/citadelles/
+
+## Diagramme de classe
+### [game_behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/game_behaviour)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719785383923792/game_behaviour_diagrams.svg" width="512">
+
+### [game_character](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_character)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719785723666442/game_character_diagrams.svg" width="1024">
+
+### [game](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719786562547773/game_diagrams.svg" width="1024">
+
+### [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719787430739998/game_engine_diagrams.svg" width="1024">
+
+### [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719788139581480/game_interactor.svg" width="1024">
+
+### [game_strategy](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/game_strategy)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719788932317204/game_strategy_diagrams.svg" width="1024">
+
+### [output](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/output)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719789267873802/output_diagrams.svg" width="512">
+
+### [purple_districts](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game/purple_districts)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719789565644820/purple_districts_diagrams.svg" width="1024">
+
+### [citadelle](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719790459043900/fr.unice.polytech.citadelle_diagrams.svg" width="1024">
+
 <br>
 <br>
 
@@ -247,4 +292,67 @@ Le [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22
 
 # Retrospective sur le déroulement du projet
 
-  
+Après 6 semaines de travail sur le projet Citadelles, nous avons réalisé une réunion afin de faire un point sur comment s'est déroulé le projet, ce qui s'est bien passé comme ce qui s'est mal passé ou aurait pu être mieux fait. Afin de faire cette rétrospective nous avons utilisé l'outil :
+https://www.funretrospectives.com/starfish/
+
+L'outil en ligne permet de structurer les points à discuter :
+* less of: quelque chose qu'on a fait dans l'équipe mais qu'il faudrait diminuer même si cela apporte du positif
+* more of: quelque chose qu'on a fait dans l'équipe et qu'il faudrait accentuer car cela apporterait plus de positif
+* stop doing : quelque chose qui n'amène rien de positif, aucune valeur à l'équipe (et qu'on va arrêter de faire)
+* start doing : quelque chose que vous aimeriez faire dans l'équipe
+* keep doing: quelque chose qui marche bien et qu'il faut continuer à faire
+Maintenant que les bases sont posée, voici ce qui a découlé de cette rétrospective 
+
+## Less of
+Commenter des lignes, des méthodes dans les codes et ne jamais supprimer ces commentaires, ce qui fait qu’on accumule une grande quantité de ligne inutile qui polluent nos classes
+
+L’un des problèmes que nous avons rencontré a été la façon d’aborder les refractors. En effet, nous avons eu 2 majeurs refractors et quelques refractors mineurs.Bien que nous pensons que nous les avons bien menés et que les résultats finaux furent très satisfaisant, ils ont défois prit un temps conséquent qu’on aurait pu réduire en prévoyant un peu plus les changements à venir. 
+De plus, en fin de séance, nous perdions en efficacité nous obligeant ainsi souvent à finir bien plus tard les séances de mercredi.
+Certaines méthodes furent aussi victime d'over engineering. Nous avons travaillé sur celà et vers là fin nous n’avions presque plus ce problème. Ce projet nous a donc aidé à nous améliorer sur ce point.
+
+## Stop doing
+Continuer de travailler alors qu'on est trop fatigué pour réfléchir correctement
+Changer plus tard ce qu'on pourrait changer tout de suite
+Push pas assez fréquent
+
+Les mauvaises habitudes qu’on avait, étaient:
+Ne pas changer immédiatement les méthodes qui fonctionnait mais n’était pas très bien faites immédiatement après s’en être rendu compte 
+Parfois créer des méthode trop longue que par la suite nous devions découper. 
+A la fin du projet nous commencions à nous améliorer sur ces deux problèmes et c’est quelque chose sur laquelle on souhaite continuer de s’améliorer.
+Il arrivait aussi que les push ne soient pas effectués assez fréquemment créant des conflits sur les merges assez compliquées à gérer. 
+
+## Keep doing
+Primordial pour s’assurer de la robustesse d’un code, les tests ont souvent été espacés d’un certain temps par apport à l’ajout d’une nouvelle fonctionnalité. C’est après un période de refactor que l'efficacité des tests se sont démarqués. Les tests sont et doivent continuer d’être envoyés en même temps que l’ajout d’une nouvelle fonctionnalité. 
+
+Le créneau horaire réservé pour le projet (le mercredi après-midi) fut consacré à la mise en commun de l'avancement du projet en cours, de la prochaine milestone, des prochaines issues ainsi que de l'affectation des tâches. Avoir eu la possibilité de se rencontrer afin de discuter autour de ces différents sujets fut un élément moteur au bon déroulement du projet.
+
+C’est aussi durant cette période de mise en commun que nous nous sommes aperçus de l’efficacité des explications au tableau. Un schéma concis et clair s’est avéré très efficace afin de véhiculer ses idées. 
+
+C’est en travaillant sur le projet que les idées de nouvelles implémentations, de modification sur le code et d’amélioration sur le code émergent. Dès lors, les issues de la milestone suivante furent en partie pensées et écrites avant le jour réservé au projet. 
+
+Le rythme de travail a été trouvé au fur et à mesure du projet. Ce rythme a été maintenu tout au long du projet afin de conserver un rythme de travail cadence.
+
+Les pauses furent essentielles car elles permettaient de rythmer le travail.
+
+Le refractor nous a permis de restructurer le projet quand cela été nécessaire ainsi nous pouvions garder une architecture claire et que chacun des membres du projet puisse bien comprendre le fonctionnement de chaque partie du projet. Cela nous permettait d'implémenter beaucoup plus facilement des nouvelles fonctionnalités.
+
+
+## More of
+Chacun soit en mesure de modifier une partie du projet
+Communication (Discord server: channels)
+Ne pas hésiter à partager ses idées
+L'entraide sur les problèmes/les bugs
+
+Au fur et à mesure que  le projet a évolué, chacun s'est perfectionné dans une partie du code et malheureusement durant un moment chacun avançait la partie qu’il connaissait.
+Par la suite afin de faire évoluer le projet nous sommes passé par un refractor et à ce moment nous avons pu repartir sur de meilleures bases où tout le monde savait à peu près comment fonctionnait telle ou telle partie du code.
+A la fin du projet nous avions au moins une réunion par semaine (voir plus) pour avancer ensemble le projet. Continuer à se retrouver pour parler du projet en dehors des cours est quelque chose d’important qu’il faudrait qu’on fasse plus.
+De plus quand un de nous à une idée il n’hésite pas à en faire part aux autres, et c’est quelque chose de très bien qu’il faut continuer à faire.
+Enfin, lorsqu’un de nous à un bug ou un problème sur le code les autres viennent l’aider, il faut continuer à s’entraider
+
+
+## Start doing
+Bien que la javadoc permette d'analyser la structure d'une application Java et de fournir aux développeurs une description détaillée d’une méthode ou d’une classe,  nous n’avons pas le temps de la réaliser à chaque méthode et classe implémentée. Après cette rétrospection, nous avons convenu que la javadoc doit être implémentée dès lors qu’une nouvelle méthode ou classe est écrite.
+
+L’organisation du projet a conduit le groupe à scinder la structure du code en trois grandes parties : les character, les districts et l’interaction avec le jeu. Cette structure permet aux membres du groupe de se spécialiser dans une certaine partie du projet au dépens d’autres parties. Afin de fournir un code de meilleure qualité et d’une meilleure lisibilité, nous avons convenu que tous les membres du groupe sortent de leurs zones de confort afin d’apporter un point de vue nouveau - avec plus de recul - sur les différentes partie du projet n’ayant pas été commencée par ce membre du groupe. 
+
+

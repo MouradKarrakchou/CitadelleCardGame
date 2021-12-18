@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.Board;
@@ -32,6 +33,7 @@ public class RusherTest {
 		rusher = spy(new Rusher(player, board));
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
@@ -45,6 +47,7 @@ public class RusherTest {
 		verify(rusher, times(1)).takeCard(any());
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
@@ -54,6 +57,7 @@ public class RusherTest {
 		verify(rusher, times(0)).takeGold();
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void normalBehaviourTooExpansivesDistrictsTest() {
 		int tooExpansiveValue = 4;
@@ -65,6 +69,7 @@ public class RusherTest {
 		verify(rusher, times(0)).takeGold();
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void normalBehaviourABuildableDistrictTest() {
 		int cheapValue = 3;
@@ -81,8 +86,8 @@ public class RusherTest {
 		verify(rusher, times(1)).takeGold();
 	}
 
-	// ---
 
+	@RepeatedTest(1)
 	@Test
 	public void endGameBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
@@ -92,6 +97,7 @@ public class RusherTest {
 		verify(rusher, times(0)).takeGold();
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void endGameBehaviourCanBuildNewDistrictWithFuturGoldDistrictsTest() {
 		int tooExpansiveValueForNow = 3;
@@ -107,6 +113,7 @@ public class RusherTest {
 		verify(rusher, times(1)).takeGold();
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void ifPossibleBuildACheapDistrictOneCheapTest() {
 		District aCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 2, "colorTest", "familyTest");
@@ -124,6 +131,7 @@ public class RusherTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aCheaperBuildableDistrict);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void ifPossibleBuildACheapDistrictTwoCheapTest() {
 		District aCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 1, "colorTest", "familyTest");
@@ -141,6 +149,7 @@ public class RusherTest {
 		assertEquals(player.getCity().getBuiltDistrict().get(0), aCheaperBuildableDistrict);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void ifPossibleBuildACheapDistrictZeroCheapTest() {
 		District aNotCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 10, "colorTest", "familyTest");
@@ -157,6 +166,7 @@ public class RusherTest {
 		assertEquals(player.getCity().getSizeOfCity(), 0);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void ifPossibleBuildACheapDistrict2CheapEqualityTest() {
 		District aCheaperBuildableDistrict = new District("aCheaperBuildableDistrict", 2, "colorTest", "familyTest");

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.Board;
@@ -28,6 +29,7 @@ public class PhaseManagerTest {
 		phaseManager = new PhaseManager(player, board);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void analyseGameLastTurnTest() {
 		Player playerEndCity = new Player("playerEndCity");
@@ -44,6 +46,7 @@ public class PhaseManagerTest {
 		assertEquals(PhaseManager.LAST_TURN_PHASE,phaseManager.analyseGame());	
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void analyseGameEndGameTest() {
 		City city = player.getCity();
@@ -54,6 +57,7 @@ public class PhaseManagerTest {
 
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void analyseGameMidGameTest() {
 		City city = player.getCity();

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static org.mockito.Mockito.*;
 import org.mockito.Mockito;
-
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class ColorDistrictTest {
 
     Board board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
 
+    @RepeatedTest(1)
     @Test
     //Haunted City built before the last round
     void isThereHauntedCityJokerInCityTest() {
@@ -43,6 +44,7 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
+    @RepeatedTest(1)
     @Test
     //Haunted City built on the last round
     void isThereHauntedCityJokerInCityTest2() {
@@ -58,6 +60,7 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
+    @RepeatedTest(1)
     @Test
     //No Haunted City in the city
     void isThereHauntedCityJokerInCityTest3() {
@@ -72,6 +75,7 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
+    @RepeatedTest(1)
     @Test
     //Haunted City in the city but no other Purple
     void isThereHauntedCityJokerInCityTest4() {
@@ -86,7 +90,7 @@ public class ColorDistrictTest {
         assertEquals(hauntedCityArrayList, referee.isThereHauntedCityJokerInCity(player));
     }
 
-
+    @RepeatedTest(1)
     @Test
     //Test if the Haunted City spell does its job
     void hauntedCitySpellTest() {
@@ -118,6 +122,7 @@ public class ColorDistrictTest {
         assertEquals("Yellow", player.getCity().getBuiltDistrict().get(2).getColor());
     }
 
+    @RepeatedTest(1)
     @Test
     //Test if the School of Magic spell does its job
     void schoolOfMagicSpellTest() {
@@ -158,6 +163,7 @@ public class ColorDistrictTest {
         assertEquals(4,player.getGolds());
     }
 
+    @RepeatedTest(1)
     @Test
     //Test on play() method from Behavior with King
     void playKTest() {
@@ -173,6 +179,7 @@ public class ColorDistrictTest {
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
+    @RepeatedTest(1)
     @Test
     //Test on play() method from Behavior with Bishop
     void playBTest() {
@@ -188,6 +195,7 @@ public class ColorDistrictTest {
         assertEquals(1, behavior.getPlayer().getGolds());
     }
 
+    @RepeatedTest(1)
     @Test
     //Test on play() method from Behavior with Merchant
     void playMTest() {
@@ -205,6 +213,7 @@ public class ColorDistrictTest {
         //So one gold from the beginning of the turn plus one gold from the spell of the district
     }
 
+    @RepeatedTest(1)
     @Test
     //Test on play() method from Behavior with Warlord
     void playWTest() {

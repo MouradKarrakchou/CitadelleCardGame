@@ -45,7 +45,7 @@ public class StrategyTestWarlord {
 
 
         gameBoard = Initializer.createBoard(Initializer.createListOfAllCharacter());
-        predict = new Predict(gameBoard);
+        predict = new Predict(gameBoard, new Player("testPlayer"));
         bob = new Player("Bob");
         alice = new Player("Alice");
         peter = new Player("Peter");

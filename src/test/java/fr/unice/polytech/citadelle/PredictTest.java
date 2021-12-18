@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class PredictTest {
 
     Board board = new Board(new ArrayList<>(), Initializer.createListOfAllCharacter(), new DeckDistrict(), new DeckCharacter());
-    Predict predict = new Predict(board);
+    Predict predict = new Predict(board, new Player("testPlayer"));
     ArrayList<Character> allCharacters = board.getListOfCharacter();
     Strategy strategy;
 
@@ -47,7 +47,7 @@ public class PredictTest {
 
 
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void targetableCharactersForPredictWhoIsPlayerTest() {
 
@@ -64,13 +64,13 @@ public class PredictTest {
         assertEquals(listToReturn, predict.targetableCharactersForPredictWhoIsPlayer(untargetableCharacter));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void allCharactersTest() {
         assertEquals(allCharacters, predict.allCharacters());
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeArchitectTest() {
         Player player = new Player("Player");
@@ -83,7 +83,7 @@ public class PredictTest {
         assertTrue(predict.canBeArchitect(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeArchitectTest() {
         Player player = new Player("Player");
@@ -99,7 +99,7 @@ public class PredictTest {
         assertFalse(predict.canBeArchitect(player, untargetable));
     }
 
-    //@RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeBishopTest() {
         Player player = new Player("Player");
@@ -115,7 +115,7 @@ public class PredictTest {
         assertTrue(predict.canBeBishop(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeBishopTest() {
         Player player = new Player("Player");
@@ -132,7 +132,7 @@ public class PredictTest {
         assertFalse(predict.canBeBishop(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeKingTest() {
         Player player = new Player("Player");
@@ -145,7 +145,7 @@ public class PredictTest {
         assertTrue(predict.canBeKing(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeKingTest() {
         Player player = new Player("Player");
@@ -159,7 +159,7 @@ public class PredictTest {
         assertFalse(predict.canBeKing(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeMerchantTest() {
         Player player = new Player("Player");
@@ -172,7 +172,7 @@ public class PredictTest {
         assertTrue(predict.canBeMerchant(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeMerchantTest() {
         Player player = new Player("Player");
@@ -186,7 +186,7 @@ public class PredictTest {
         assertFalse(predict.canBeMerchant(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeThiefTest() {
         Player player = new Player("Player");
@@ -197,7 +197,7 @@ public class PredictTest {
         assertTrue(predict.canBeThief(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeThiefTest() {
         Player player = new Player("Player");
@@ -209,7 +209,7 @@ public class PredictTest {
         assertFalse(predict.canBeThief(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeMagicianTest() {
         Player player = new Player("Player");
@@ -221,7 +221,7 @@ public class PredictTest {
         assertTrue(predict.canBeMagician(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeMagicianTest() {
         Player player = new Player("Player");
@@ -234,7 +234,7 @@ public class PredictTest {
         assertFalse(predict.canBeMagician(player, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void canBeWarlordTest() {
         Player player1 = new Player("Player1");
@@ -255,7 +255,7 @@ public class PredictTest {
         assertTrue(predict.canBeWarlord(player1, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void cannotBeWarlordTest() {
         Player player1 = new Player("Player1");
@@ -277,7 +277,7 @@ public class PredictTest {
         assertFalse(predict.canBeWarlord(player1, untargetable));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void listGetCharacterTest() {
         assertEquals(new Assassin(), predict.listGetCharacter(Initializer.ASSASSIN_INDEX));
@@ -290,7 +290,7 @@ public class PredictTest {
         assertEquals(new Warlord(), predict.listGetCharacter(Initializer.WARLORD_INDEX));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void playersForPredictWhoIsPlayerTest() {
         Player player1 = new Player("Player1");
@@ -305,7 +305,7 @@ public class PredictTest {
         assertEquals(players, predict.playersForPredictWhoIsPlayer(player1));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerArchitectTest() {
         Player player = new Player("Player");
@@ -344,7 +344,7 @@ public class PredictTest {
         assertEquals(new Architect(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerBishopTest() {
         Player player = new Player("Player");
@@ -381,7 +381,7 @@ public class PredictTest {
         assertEquals(new Bishop(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerKingTest() {
         Player player = new Player("Player");
@@ -417,7 +417,7 @@ public class PredictTest {
         assertEquals(new King(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerMerchantTest() {
         Player player = new Player("Player");
@@ -453,7 +453,7 @@ public class PredictTest {
         assertEquals(new Merchant(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerThiefTest() {
         Player player = new Player("Player");
@@ -490,7 +490,7 @@ public class PredictTest {
         assertEquals(new Thief(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerMagicianTest() {
         Player player = new Player("Player");
@@ -524,7 +524,7 @@ public class PredictTest {
         assertEquals(new Magician(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     @Test
     void predictWhoIsPlayerWarlordTest() {
         Player player = new Player("Player");
@@ -559,7 +559,7 @@ public class PredictTest {
         assertEquals(new Warlord(), predict.predictWhoIsPlayer(player, new ArrayList<>()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //Test the las return of the predictWhoIsPlayer method
     @Test
     void predictWhoIsPlayerNoWorthyCharacterTest() {

@@ -330,4 +330,30 @@ public class PrintCitadels {
 	}
 
 
+    public static void printMagicianAdvancedChoice(Player playerWithMostDistrictGames, Player player) {
+		System.out.println(colorize(" The"+player.getName()+" wants to steal from the player with most district.",ITALIC()));
+		System.out.println(colorize("He analysed the board and sew that "+playerWithMostDistrictGames.getName()+" has the most districts.",ITALIC()));
+    }
+
+	public static void playerHasTwoTimesMoreHisCards(Player player) {
+		System.out.println("STRATEGY:");
+		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the board",ITALIC()));
+		System.out.println(colorize("He analysed the board and sew that there is a player that has two times more district then him he will try to swap hands.",ITALIC()));
+	}
+
+	public static void playerSwapWithDeck(Player player) {
+		System.out.println("STRATEGY:");
+		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the board",ITALIC()));
+		System.out.println(colorize("He analysed the board and sew that no player has two times more district then him.He will change some cards with the deck.",ITALIC()));
+	}
+
+	public static void pritCardsToBeSwapped(Player player, ArrayList<District> listDistrictToSwap) {
+		String output1=""+listDistrictToSwap.stream().map(district->colorize(district.getName()+" ("+district.getValue()+")",getDistrictColor(district))).collect(Collectors.toList());
+		System.out.println(colorize("He chooses what cards he will swap by finding cards that he already built.",ITALIC()));
+		System.out.println(colorize("he swaps:"+output1,ITALIC()));
+	}
+	public static void printNoCardsToBeSwapped(Player player) {
+		System.out.println(colorize("He chooses what cards he will swap by finding cards that he already built.",ITALIC()));
+		System.out.println(colorize("He consider that all his cards are good, he will not do his spell.",ITALIC()));
+	}
 }
