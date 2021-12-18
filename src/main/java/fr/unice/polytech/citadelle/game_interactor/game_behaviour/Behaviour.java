@@ -181,7 +181,7 @@ public class Behaviour {
 	}
 
 	public void takeCard(District districtCard) {
-		executor.takeCard(districtCard, board.getDeckDistrict());
+		executor.takeCard(districtCard);
 	}
 
 	/**
