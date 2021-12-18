@@ -84,7 +84,7 @@ Un [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-p
 * http://jeuxstrategie.free.fr/Citadelles_complet.php
 * https://www.regledujeu.fr/citadelles/
 
-**Lien vers la [documentation du projet](https://lebihanleo.github.io/Citadelle_Equipe_K_Javadoc/)**:
+**Lien vers la [documentation du projet](https://lebihanleo.github.io/Citadelle_Equipe_K_Javadoc/)**
 
 <br>
 <br>
