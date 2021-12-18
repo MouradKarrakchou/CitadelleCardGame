@@ -63,7 +63,7 @@ public class Rusher extends Behaviour {
 		PrintCitadels.printPhase("Endgame", player);
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
-		if (futurBuildableDistrict.size() > 0 && board.getDeckDistrict().getSize() < 2) {// s'il peut poser un bat en prenant les deux gold
+		if (futurBuildableDistrict.size() > 0 || board.getDeckDistrict().getSize() < 2) {// s'il peut poser un bat en prenant les deux gold
 			takeGold();
 		} else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
