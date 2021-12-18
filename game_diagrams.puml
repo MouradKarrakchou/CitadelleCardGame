@@ -1,0 +1,185 @@
+@startuml
+class fr.unice.polytech.citadelle.game.Board {
+- int roundNumber
+- ArrayList<Player> listOfPlayer
+- ArrayList<Player> listOfPlayerWhoPlayed
+- DeckDistrict deckDistrict
+- DeckCharacter deckCharacter
+- ArrayList<Character> listOfCharacter
+- LinkedHashMap<Player,Optional<Character>> hashOfViewCharacters
++ <<Create>> Board(ArrayList<Player>,ArrayList<Character>,DeckDistrict,DeckCharacter)
++ <<Create>> Board()
++ ArrayList<Player> getListOfPlayer()
++ DeckDistrict getDeckDistrict()
++ DeckCharacter getDeckCharacter()
++ void setListOfPlayer(ArrayList<Player>)
++ void incrementRoundNumber()
++ int getRoundNumber()
++ ArrayList<Character> getListOfCharacter()
++ ArrayList<Player> getListOfPlayerWhoPlayed()
++ LinkedHashMap<Player,Optional<Character>> gethashOfViewCharacters()
++ void resetListOfPlayerWhoPlayed()
++ void revealCharacter(Player,Character)
++ ArrayList<Character> getListOfPlayerWhoHasAlreadyPlayed()
++ ArrayList<String> getListOfPlayerWhoHasAlreadyPlayedStringVersion()
++ ArrayList<City> getListOfCity()
++ Character findDeadCharacter()
+}
+class fr.unice.polytech.citadelle.game.purple_districts.Graveyard {
++ <<Create>> Graveyard(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.ColorDistrict {
++ <<Create>> ColorDistrict(String,int,String,String)
++ void hauntedCitySpell(Player)
++ void schoolOfMagicSpell(Player)
+}
+class fr.unice.polytech.citadelle.game.Player {
+- String name
+- Character character
+- ArrayList<District> districtCards
+- City city
+- int score
+- int rank
++ int golds
++ <<Create>> Player(String)
++ void addDistrict(District)
++ void chooseCharacterCard(Character)
++ void buildDistrict(District)
++ void updateScore(int)
++ boolean hasDistrict(District)
++ int getDistrictCardsSize()
++ int getGolds()
++ ArrayList<District> getDistrictCards()
++ Character getCharacter()
++ int getCharacterValue()
++ String getName()
++ int getScore()
++ int getRank()
++ void addGold()
++ void addOneGold()
++ void setRank(int)
++ void setRole(Character)
++ String toString()
++ int compareTo(Player)
++ void setGolds(int)
++ City getCity()
++ int stealGoldOfThePlayer(Player)
+}
+class fr.unice.polytech.citadelle.game.SpellDistrict {
++ <<Create>> SpellDistrict(String,int,String,String)
++ void librarySpell(Player,DeckDistrict)
+}
+class fr.unice.polytech.citadelle.game.DeckCharacter {
+- ArrayList<Character> deckOfCharacters
+- ArrayList<Character> burnedAndVisibleCharacters
+- Character hiddenCard
+- int nbPlayers
++ <<Create>> DeckCharacter()
++ <<Create>> DeckCharacter(int)
++ Character chooseRandomCharacter()
++ ArrayList<Character> getDeckCharacter()
++ Character getHiddenCard()
++ ArrayList<Character> getBurnedAndVisibleCharacters()
++ int getSize()
++ void shuffleDeck()
++ int calculateNbCardToBurn()
++ void burnCharacters()
++ Character removeKingFromDeck()
++ void checkAndUpdateDeckForLastPlayer()
++ boolean canPickTheHiddenCard()
++ void hideCard()
++ void deckStartRound()
+}
+class fr.unice.polytech.citadelle.game.purple_districts.Laboratory {
++ <<Create>> Laboratory(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.purple_districts.Library {
++ <<Create>> Library(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.purple_districts.Smithy {
++ <<Create>> Smithy(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.purple_districts.Observatory {
++ <<Create>> Observatory(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.purple_districts.HauntedCity {
+- int roundBuilt
++ <<Create>> HauntedCity(String,int,String,String,Integer)
++ int getRoundBuilt()
++ void setRoundBuilt(Integer)
+}
+class fr.unice.polytech.citadelle.game.District {
+- String name
+- int value
+- String color
+- String nameOfFamily
++ <<Create>> District(String,int,String,String)
++ String getName()
++ int getValue()
++ boolean equals(Object)
++ boolean isA(String)
++ String getColor()
++ String getNameOfFamily()
++ void setColor(String)
++ String toString()
++ int compareTo(District)
+}
+class fr.unice.polytech.citadelle.game.DeckDistrict {
+- ArrayList<District> deckDistrict
++ <<Create>> DeckDistrict()
++ void initialise()
+- void oneCard()
+- void doubleCards()
+- void tripleCards()
+- void quadraCards()
+- void pentaCards()
++ int getSize()
++ ArrayList<District> getDeckDistrict()
++ void addDistrict(District)
++ void removeDistrict(District)
++ District blindPick()
+}
+class fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic {
++ <<Create>> SchoolOfMagic(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.City {
++ ArrayList<District> builtDistrict
+- int cityComplete
++ <<Create>> City()
++ int getSizeOfCity()
++ void buildDistrict(District)
++ boolean isComplete()
++ ArrayList<District> getBuiltDistrict()
++ String toString()
+}
+class fr.unice.polytech.citadelle.game.purple_districts.Keep {
++ <<Create>> Keep(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.purple_districts.DragonGate {
++ <<Create>> DragonGate(String,int,String,String)
+}
+class fr.unice.polytech.citadelle.game.BonusDistrict {
++ <<Create>> BonusDistrict(String,int,String,String)
++ void bonusDistrict(Player)
+}
+class fr.unice.polytech.citadelle.game.purple_districts.University {
++ <<Create>> University(String,int,String,String)
+}
+
+
+fr.unice.polytech.citadelle.game.SpellDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.Graveyard
+fr.unice.polytech.citadelle.game.District <|-- fr.unice.polytech.citadelle.game.ColorDistrict
+fr.unice.polytech.citadelle.game.Comparable <|.. fr.unice.polytech.citadelle.game.Player
+fr.unice.polytech.citadelle.game.District <|-- fr.unice.polytech.citadelle.game.SpellDistrict
+fr.unice.polytech.citadelle.game.SpellDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.Laboratory
+fr.unice.polytech.citadelle.game.SpellDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.Library
+fr.unice.polytech.citadelle.game.SpellDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.Smithy
+fr.unice.polytech.citadelle.game.SpellDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.Observatory
+fr.unice.polytech.citadelle.game.ColorDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.HauntedCity
+fr.unice.polytech.citadelle.game.Comparable <|.. fr.unice.polytech.citadelle.game.District
+fr.unice.polytech.citadelle.game.ColorDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic
+fr.unice.polytech.citadelle.game.District <|-- fr.unice.polytech.citadelle.game.purple_districts.Keep
+fr.unice.polytech.citadelle.game.BonusDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.DragonGate
+fr.unice.polytech.citadelle.game.District <|-- fr.unice.polytech.citadelle.game.BonusDistrict
+fr.unice.polytech.citadelle.game.BonusDistrict <|-- fr.unice.polytech.citadelle.game.purple_districts.University
+@enduml

@@ -1,0 +1,73 @@
+@startuml
+class fr.unice.polytech.citadelle.game_engine.Controller {
+- RoundManager roundManager
+- Referee referee
++ <<Create>> Controller()
++ void initGame()
++ void runGame()
++ void end(ArrayList<Behaviour>)
+}
+class fr.unice.polytech.citadelle.game_engine.Referee {
++ {static} int BONUS_FIRST
++ {static} int BONUS_END
+- Board board
++ <<Create>> Referee(Board)
++ void updatePlayerWithCityScore(Player)
++ void addBonusForPlayers(ArrayList<Behaviour>)
++ int cityDistrictScore(Player)
++ boolean hasFiveDistrictColors(Player)
++ void getWinner()
+- ArrayList<BonusDistrict> isThereBonusDistrictInCity(Player)
+- void activateBonus(Player,ArrayList<BonusDistrict>)
++ ArrayList<HauntedCity> isThereHauntedCityJokerInCity(Player)
++ void activateHauntedCityJoker(Player,ArrayList<HauntedCity>)
++ boolean CityIsComplete(Player)
+}
+class fr.unice.polytech.citadelle.game_engine.RoundManager {
+- ArrayList<Behaviour> listOfBehaviour
+- ArrayList<Character> listOfAllCharacters
+- LinkedHashMap<Character,Optional<Behaviour>> hashOfCharacters
+- Board board
+- Referee referee
++ <<Create>> RoundManager(ArrayList<Character>,ArrayList<Behaviour>,LinkedHashMap<Character,Optional<Behaviour>>,Board)
++ ArrayList<Behaviour> runRounds()
++ ArrayList<City> getTheListOfCity(ArrayList<Player>)
++ void setupCharacters()
++ void chooseACharacterCard(Behaviour,DeckCharacter)
++ Character chooseCharacter(Behaviour,DeckCharacter)
++ int isThereAFamily(Behaviour)
++ ArrayList<Behaviour> askEachCharacterToPlay()
++ void actionOfBehaviour(Behaviour)
++ void cityVerification(Behaviour,ArrayList<Behaviour>)
++ void updateLeaderboard(Behaviour,ArrayList<Behaviour>)
++ void updateListOfBehaviour()
++ int findKing(ArrayList<Behaviour>)
++ ArrayList<Behaviour> orderListOfPlayer(ArrayList<Behaviour>,int)
++ void reviveAll()
++ ArrayList<Player> getListOfPlayers()
++ ArrayList<Behaviour> getListOfBehaviour()
++ ArrayList<Character> getListOfAllCharacters()
++ LinkedHashMap<Character,Optional<Behaviour>> getHashOfCharacters()
++ Board getBoard()
+}
+class fr.unice.polytech.citadelle.game_engine.Initializer {
++ {static} int ASSASSIN_INDEX
++ {static} int THIEF_INDEX
++ {static} int MAGICIAN_INDEX
++ {static} int KING_INDEX
++ {static} int BISHOP_INDEX
++ {static} int MERCHANT_INDEX
++ {static} int ARCHITECT_INDEX
++ {static} int WARLORD_INDEX
++ {static} int NUMBER_OF_PLAYER
++ {static} void resetHashOfCharacter(LinkedHashMap<Character,Optional<Behaviour>>,ArrayList<Character>)
++ {static} void initTheHashOfViewCharacters(LinkedHashMap<Player,Optional<Character>>,ArrayList<Player>)
++ {static} ArrayList<Character> createListOfAllCharacter()
++ {static} ArrayList<Behaviour> createListOfBehaviour(Board)
++ {static} Board createBoard(ArrayList<Character>)
++ {static} void fillHashOfCharacter(HashMap<Character,Optional<Behaviour>>,Character,Behaviour)
++ {static} void initDeckDistrict(DeckDistrict)
++ {static} void initDeckCharacter(DeckCharacter,ArrayList<Character>)
++ {static} void initPlayerCards(Board)
+}
+@enduml

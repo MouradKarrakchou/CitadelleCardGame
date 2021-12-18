@@ -1,0 +1,62 @@
+@startuml
+class fr.unice.polytech.citadelle.game_character.Merchant {
++ <<Create>> Merchant()
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.Assassin {
++ <<Create>> Assassin()
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.Magician {
++ <<Create>> Magician()
++ void swapCardsWithBot(Behaviour,Behaviour)
++ ArrayList<District> swapCardsWithDeck(Behaviour,ArrayList<District>)
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.Warlord {
++ <<Create>> Warlord()
+- void destroyDistrict(Player,District,Player)
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.Bishop {
++ <<Create>> Bishop()
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.Character {
+- String name
+- int value
+- boolean characterIsAlive
++ <<Create>> Character(String,int)
++ String getName()
++ int getValue()
++ int collectGold(Behaviour,String)
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
++ void setCharacterIsAlive(boolean)
++ boolean isCharacterIsAlive()
++ boolean equals(Object)
++ String toString()
+# void spellOfTurnDistrictFamily(Behaviour,String,String)
+}
+class fr.unice.polytech.citadelle.game_character.Thief {
++ <<Create>> Thief()
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.Architect {
++ <<Create>> Architect()
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+class fr.unice.polytech.citadelle.game_character.King {
++ <<Create>> King()
++ void spellOfTurn(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+}
+
+
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Merchant
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Assassin
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Magician
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Warlord
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Bishop
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Thief
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.Architect
+fr.unice.polytech.citadelle.game_character.Character <|-- fr.unice.polytech.citadelle.game_character.King
+@enduml

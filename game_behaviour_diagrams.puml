@@ -1,0 +1,72 @@
+@startuml
+class fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor {
++ <<Create>> Investor(Player,Board)
++ void executeSpell(ArrayList<SpellDistrict>,DeckDistrict)
++ void normalBehaviour()
++ void endGameBehaviour()
++ void lastTurnBehaviour()
++ District chooseBetweenTwoCards(District,District)
+}
+class fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour {
+# Player player
+# int numberOfCharacter
+~ Strategy strategy
+~ CityManagement cityMan
+~ Executor executor
+~ PhaseManager phaseManager
+~ Board board
+# {static} int ZERO_CARD
+# {static} int ONE_CARD
+# {static} int TWO_CARD
++ <<Create>> Behaviour(Player,Board)
++ District selectTheHigherDistrict(ArrayList<District>)
++ District selectTheLowerDistrict(ArrayList<District>)
++ Character play(LinkedHashMap<Character,Optional<Behaviour>>)
+- void executeSpellOfCharacter(Behaviour,LinkedHashMap<Character,Optional<Behaviour>>)
+- void executeSpellOfPurpleDistricts(Player)
++ void buildArchitect()
++ void normalBehaviour()
++ void endGameBehaviour()
++ void lastTurnBehaviour()
++ Character selectCharacterForSpell(LinkedHashMap<Character,Optional<Behaviour>>)
++ Player selectPlayerForWarlord()
+- Character chooseCharacterForMagician(LinkedHashMap<Character,Optional<Behaviour>>)
+- Character chooseCharacterForAssassin(LinkedHashMap<Character,Optional<Behaviour>>)
+- Character chooseCharacterForThief(LinkedHashMap<Character,Optional<Behaviour>>)
++ void ifPossibleBuildADistrict()
++ ArrayList<District> pick2CardsIntoTheDeck()
++ ArrayList<District> chooseToKeepOrNotPickedCards(ArrayList<District>)
++ void takeCard(District)
++ void takeGold()
++ void addDistrict(District)
++ void buildDistrict(District)
++ District pickCard()
++ District pickCardsInDeck()
+~ void removeOtherCard(ArrayList<District>,District)
++ District chooseBetweenTwoCards(District,District)
++ int randomInt(int)
++ void setCharacterIsAlive(Boolean)
++ Player getPlayer()
++ Boolean getBehaviourIsKing()
++ CityManagement getCityManager()
++ Executor getExecutor()
++ ArrayList<District> chooseMagicianAction()
++ District chooseDistrictToDestroy(Player)
+}
+class fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher {
+- {static} int MAX_VALUES_OF_CARDS
++ <<Create>> Rusher(Player,Board)
++ void executeSpell(ArrayList<SpellDistrict>,DeckDistrict)
++ void normalBehaviour()
++ void endGameBehaviour()
++ void lastTurnBehaviour()
++ void ifPossibleBuildACheapDistrict()
++ District getCheaperDistrict(ArrayList<District>)
+- ArrayList<District> getAllCheapersDistricts(ArrayList<District>)
++ District chooseBetweenTwoCards(District,District)
+}
+
+
+fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour <|-- fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor
+fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour <|-- fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher
+@enduml
