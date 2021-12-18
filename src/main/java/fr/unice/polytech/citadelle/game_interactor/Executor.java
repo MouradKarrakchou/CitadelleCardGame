@@ -24,27 +24,49 @@ public class Executor {
 		player.addDistrict(district);
 		//deckDistrict.removeDistrict(district);
 	}
-	
+
+	/**
+	 * Allow the bot to build a city on the city of the player he controls.
+	 * @param district The district to build.
+	 */
 	public void buildDistrict(District district){
 		player.buildDistrict(district);
 		PrintCitadels.printBuildDistrict(player, district);
 		PrintCitadels.printBoardOfPlayer(player);
 	}
-	
+
+	/**
+	 * Allow the bot take gold for the player he controls.
+	 */
 	public void takeGold() {
 		player.addGold();
 		PrintCitadels.printTakeGold(player);
 	}
-	
+
+	/**
+	 * Allow the bot to put back a card to the deck of district for the player he controls.
+	 * @param deckDistrict The current deck of district of the game.
+	 * @param districtCard The district cart to put back in the deck of district.
+	 */
 	public void putCardBackInDeck(DeckDistrict deckDistrict, District districtCard) {
 		PrintCitadels.printPutCardBackToTheDeck(player,districtCard);
 		deckDistrict.addDistrict(districtCard);
 	}
 
+	/**
+	 * Choose a card on a given deck of districts.
+	 * @param deckDistrict The current deck of district of the game.
+	 * @return The card picked from the deck of district.
+	 */
 	public District pickCard(DeckDistrict deckDistrict) {
 		return pickBlindDistrict(deckDistrict);
 	}
 
+	/**
+	 * Choose two cards on a given deck of districts.
+	 * @param deckDistrict The current deck of district of the game.
+	 * @return The array of picked district cards.
+	 */
 	public ArrayList<District> pickCards(DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = new ArrayList<>();
 				pickedCards.add(pickBlindDistrict(deckDistrict));
@@ -63,6 +85,10 @@ public class Executor {
         return selectedDistrict;
     }
 
+	/**
+	 * Allow the bot to add a district card to the district of the player the bot controls.
+	 * @param district The district card to add to the player's hand.
+	 */
 	public void addDistrict(District district) {
 		player.getDistrictCards().add(district);
 	}
