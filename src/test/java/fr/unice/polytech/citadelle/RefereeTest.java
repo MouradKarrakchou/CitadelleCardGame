@@ -55,7 +55,7 @@ public class RefereeTest {
 
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     void cityScoreCalculate01(){
         bob.buildDistrict(green01); // District value is 1
@@ -68,7 +68,7 @@ public class RefereeTest {
         assertEquals((1 + 6 + 4 + 5), bob.getScore());
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     void cityScoreCalculate02(){
         bob.buildDistrict(green01); // District value is 1
@@ -84,7 +84,7 @@ public class RefereeTest {
                 bob.getScore());
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     void playerHasOnlyFiveDifferentDistrictColor(){
         bob.buildDistrict(green01);
@@ -96,7 +96,7 @@ public class RefereeTest {
         assertTrue(referee.hasFiveDistrictColors(bob));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     void playerHasOnlyFourDifferentDistrictColor(){
         bob.buildDistrict(green01);
@@ -110,7 +110,7 @@ public class RefereeTest {
         assertFalse(referee.hasFiveDistrictColors(bob));
     }
     
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
 	public void addBonusForPlayersTest() {
     	Board board = new Board();

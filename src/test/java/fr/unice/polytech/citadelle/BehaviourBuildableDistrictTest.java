@@ -37,7 +37,7 @@ public class BehaviourBuildableDistrictTest {
         player01.getCity().builtDistrict.clear();   
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //With 2 golds
     void districtWeHaveEnoughMoneyToBuildWith2GoldsTest(){
         ArrayList<District> districts = new ArrayList<>();
@@ -47,7 +47,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //With 5 golds
     void districtWeHaveEnoughMoneyToBuildWith5goldsTest(){
         player01.golds = 5;
@@ -63,7 +63,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //With 6 golds
     void districtWeHaveEnoughMoneyToBuildWith6goldsTest(){
         player01.golds = 6;
@@ -80,7 +80,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     void isAlreadyBuiltTest(){
         player01.getCity().builtDistrict.add(new District("Haunted City", 2,"empty","empty"));
         assertTrue(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Haunted City"));
@@ -88,12 +88,12 @@ public class BehaviourBuildableDistrictTest {
 
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     void isAlreadyBuiltEmptyTest(){
         assertFalse(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Prison"));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     void districtWeCanBuildTest(){
         player01.golds = 4;
 
@@ -113,7 +113,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeCanBuild(districtCheapEnough));
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     void zeroDistrictWeCanBuildTest(){
     	player01.golds = 4;
 

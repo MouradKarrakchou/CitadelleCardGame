@@ -52,7 +52,7 @@ public class StrategyTestWarlord {
         peter = new Player("Peter");
     }
     
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     public void choosePlayerForWarlordAdvancedTest(){
         ArrayList<Player> listOfPlayers = new ArrayList<>();
@@ -73,7 +73,7 @@ public class StrategyTestWarlord {
         assertEquals(peter, selectPlayerForWarlord);
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     public void choosePlayerForWarlordFirstOnLeaderboardTest(){
         ArrayList<Player> listOfPlayers = new ArrayList<>();
@@ -94,7 +94,7 @@ public class StrategyTestWarlord {
         assertEquals(bob, selectPlayerForWarlord);
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1)
     //@Test
     public void chooseDistrictToDestroyTest(){
         bob.buildDistrict(harbor);

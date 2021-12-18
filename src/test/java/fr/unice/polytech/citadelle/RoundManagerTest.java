@@ -74,7 +74,7 @@ public class RoundManagerTest {
 
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void getTheListOfCityTest() {
 		Player p1 = new Player("p1");
@@ -94,7 +94,7 @@ public class RoundManagerTest {
 		assertEquals(roundMan.getTheListOfCity(listOfPlayer), listOfCity);
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void actionsOfTheBehaviourTest() {
 		Character c = new Character("testCharacter", 0);
@@ -104,14 +104,14 @@ public class RoundManagerTest {
 		verify(bot, times(1)).play(Mockito.any());
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void setupCharactersTest() {
 		roundMan.setupCharacters();
 		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any());
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void askEachCharacterToPlayTest() {
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
@@ -142,7 +142,7 @@ public class RoundManagerTest {
 
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void orderTurnByKing(){
 		//creation of Behaviour
@@ -175,7 +175,7 @@ public class RoundManagerTest {
 		assertEquals(botMagician,botOrdered.get(3));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void updateLeaderboardTest() {
 		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
@@ -187,7 +187,7 @@ public class RoundManagerTest {
 
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void cityVerificationNoCompleteCityTest() {
 		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
@@ -199,7 +199,7 @@ public class RoundManagerTest {
 		assertEquals(leaderboard.size(), 0);
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void cityVerificationHeCompleteCityTest() {
 		ArrayList<Behaviour> leaderboard = new 	ArrayList<>();
@@ -214,7 +214,7 @@ public class RoundManagerTest {
 		assertEquals(leaderboard.size(), 1);
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void testFindKing(){
 		listOfAllBehaviour.get(0).getPlayer().setRole(new Magician());
@@ -226,7 +226,7 @@ public class RoundManagerTest {
 		assertEquals(2,roundMan.findKing(listOfAllBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void testUpdateListOfBehaviour(){
 		ArrayList<Behaviour> listOfAllBehaviourCopy = new ArrayList<>();
@@ -264,7 +264,7 @@ public class RoundManagerTest {
 		assertEquals(roundMan.getListOfBehaviour().get(1),listOfAllBehaviour.get(3));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void reviveAllTest() {
 		ArrayList<Behaviour> listOfAllBehaviour=new ArrayList<>();
@@ -279,7 +279,7 @@ public class RoundManagerTest {
 		assertTrue(player.getCharacter().getCharacterisAlive());
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void checkIfUpdateViewCharacterInBoardWorkTest() {
 		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();
@@ -296,7 +296,7 @@ public class RoundManagerTest {
 		assertEquals(Optional.of(testCharacter), board.gethashOfViewCharacters().get(player));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void getListOfPlayerWhoHasAlreadyPlayedTest() {
 		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();

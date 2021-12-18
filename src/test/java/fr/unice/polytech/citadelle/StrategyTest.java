@@ -134,7 +134,7 @@ public class StrategyTest {
 
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	void chooseCharacterForThiefRandom() {
 
 		Strategy strategy = new Strategy(8, null, botThief.getPlayer());
@@ -144,21 +144,21 @@ public class StrategyTest {
 		assertEquals(true, characterChoosen.getCharacterisAlive());
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	void chooseCharacterForAssassinRandom() {
 		Strategy strategy = new Strategy(8, null, botAssassin.getPlayer());
 		Character characterChoosen = strategy.chooseCharacterForAssassinRandom(hashOfCharacters);
 		assertNotEquals("Assassin", characterChoosen);
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	void chooseCharacterForMagicianRandom() {
 		Strategy strategy = new Strategy(8, null, botMagician.getPlayer());
 		Character characterChoosen = strategy.chooseCharacterForMagicianRandom(hashOfCharacters);
 		assertNotEquals("Magician", characterChoosen);
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void playerHasOnlyFiveDifferentDistrictColor() {
 		botMagician.buildDistrict(green01);
@@ -170,7 +170,7 @@ public class StrategyTest {
 		assertTrue(strategy.hasFiveDistrictColors(botMagician.getPlayer()));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void playerHasOnlyFourDifferentDistrictColor() {
 		botMagician.buildDistrict(green01);
@@ -183,7 +183,7 @@ public class StrategyTest {
 		assertFalse(strategy.hasFiveDistrictColors(botMagician.getPlayer()));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void cityScoreCalculate01() {
 		botMagician.buildDistrict(green01); // District value is 1
@@ -194,7 +194,7 @@ public class StrategyTest {
 		assertEquals((1 + 6 + 4 + 5), strategy.playerPredictScore(botMagician.getPlayer()));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void cityScoreCalculate02() {
 		botMagician.buildDistrict(green01); // District value is 1
@@ -208,7 +208,7 @@ public class StrategyTest {
 				strategy.playerPredictScore(botMagician.getPlayer()));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterForAssassinAdvancedEgality() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());
@@ -318,7 +318,7 @@ public class StrategyTest {
 	}
 
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	void getCharacterOfPlayerTest() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());
 		ArrayList<Player> listOfPlayers = board.getListOfPlayer();
@@ -355,7 +355,7 @@ public class StrategyTest {
 		assertEquals(testCharacter3, predictCharacter.get());
 	}
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterWithMostGolds() {
 		board.getListOfPlayer().clear();
@@ -377,7 +377,7 @@ public class StrategyTest {
 		assertEquals(player3, strategy.findThePlayerWithMostGolds());
 	}
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterWithMostGolds2() {
 		//We now Try when the thief has the most golds
@@ -400,7 +400,7 @@ public class StrategyTest {
 		assertEquals(player2, strategy.findThePlayerWithMostGolds());
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterWithMostGolds3() {
 		//We now Try when the assassin has the most golds
@@ -426,7 +426,7 @@ public class StrategyTest {
 		assertEquals(player3, strategy.findThePlayerWithMostGolds());
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseAssassinTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -458,7 +458,7 @@ public class StrategyTest {
 		assertEquals(new Assassin(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterArchitectTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -483,7 +483,7 @@ public class StrategyTest {
 		assertEquals(new Architect(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterMagicianTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -514,7 +514,7 @@ public class StrategyTest {
 		assertEquals(new Magician(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterThiefTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -541,7 +541,7 @@ public class StrategyTest {
 		assertEquals(new Thief(), strategy.chooseCharacter(aBehaviour));
 	}
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterKingTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -564,7 +564,7 @@ public class StrategyTest {
 		assertEquals(new King(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterMerchantTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -587,7 +587,7 @@ public class StrategyTest {
 		assertEquals(new Merchant(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterKingVsMerchantTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -613,7 +613,7 @@ public class StrategyTest {
 		assertEquals(new King(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterBishopTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -642,7 +642,7 @@ public class StrategyTest {
 		assertEquals(new Bishop(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void chooseCharacterWarlordTest() {
 		board.getDeckCharacter().getDeckCharacter().add(architect);
@@ -675,7 +675,7 @@ public class StrategyTest {
 		assertEquals(new Warlord(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 		//Test the last return of the chooseCharacter method from RoundManager
 		//which return the first character (Assassin) by default
@@ -708,7 +708,7 @@ public class StrategyTest {
 		assertEquals(new Architect(), strategy.chooseCharacter(aBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void isThereAFamilyTestNobility(){
 		Player bob = new Player("bob");
@@ -724,7 +724,7 @@ public class StrategyTest {
 		assertEquals(Initializer.KING_INDEX, strategy.isThereAFamily(bobBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void isThereAFamilyTestTradeAndHandicrafts(){
 		Player alice = new Player("alice");
@@ -740,7 +740,7 @@ public class StrategyTest {
 		assertEquals(Initializer.MERCHANT_INDEX, strategy.isThereAFamily(aliceBehaviour));
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	public void isThereAFamilyTestNothing(){
 
@@ -757,7 +757,7 @@ public class StrategyTest {
 		assertTrue(strategy.isThereAFamily(fredBehaviour) == -1);
 	}
 
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testChooseSpellForMagicianWhenTargetOtherPlayer(){
 		botMagician.getPlayer().getDistrictCards().add(new District(null,1,null,null));
@@ -774,7 +774,7 @@ public class StrategyTest {
 		assertEquals(null,strategy.cardToBeSwapped());
 	}
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testChooseSpellForMagicianWhenTargetDeck(){
 		District districtDoble =new District("districtDoble",1,"Purple","Prestige");
@@ -798,7 +798,7 @@ public class StrategyTest {
 		assertEquals(districtDoble,strategy.cardToBeSwapped().get(0));
 	}
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testChooseSpellForMagicianWhenTargetDeck2(){
 		District districtDoble =new District("districtDoble",1,"Purple","Prestige");
@@ -824,7 +824,7 @@ public class StrategyTest {
 		assertEquals(districtDoble,strategy.cardToBeSwapped().get(0));
 	}
 	
-	@RepeatedTest(100)
+	@RepeatedTest(1)
 	//@Test
 	void testChooseTargetOfSpellMagician(){
 		botMagician.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
