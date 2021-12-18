@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.DeckDistrict;
@@ -54,6 +55,7 @@ public class DeckDistrictTest {
         deckDistrictToTest = deck.getDeckDistrict();
     }
 
+    @RepeatedTest(1)
     @Test
     void initializerTestName(){
         for (District districtReal : deckDistrictReal) {
@@ -63,6 +65,7 @@ public class DeckDistrictTest {
         }
     }
 
+    @RepeatedTest(1)
     @Test
     void initializerTestQuantity(){
         for (int i = 0; i < deckDistrictReal.size(); i++) {
@@ -75,6 +78,7 @@ public class DeckDistrictTest {
         }
     }
 
+    @RepeatedTest(1)
     @Test 
      void initializerTestValue(){
         for (District districtReal : deckDistrictReal) {

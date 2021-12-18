@@ -9,6 +9,7 @@ import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Array;
@@ -24,6 +25,7 @@ public class BonusDistrictTest {
     Board board = new Board(listOfPlayer,new ArrayList<>(), deckDistrict, deckCharacter);
     Referee referee = new Referee(board);
 
+    @RepeatedTest(1)
     @Test
     void dragonGateBonusTest() {
         executor.buildDistrict(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
@@ -31,6 +33,7 @@ public class BonusDistrictTest {
         assertEquals(8, player.getScore());
     }
 
+    @RepeatedTest(1)
     @Test
     void universityBonusTest() {
         executor.buildDistrict(new University("University", 6,"Purple","Prestige"));
@@ -38,6 +41,7 @@ public class BonusDistrictTest {
         assertEquals(8, player.getScore());
     }
 
+    @RepeatedTest(1)
     @Test
     void bothBonusTest() {
         executor.buildDistrict(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));

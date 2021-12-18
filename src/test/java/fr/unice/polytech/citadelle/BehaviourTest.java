@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -39,6 +40,7 @@ public class BehaviourTest {
 		
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void selectTheHigherDistrictTest() {
 		ArrayList<District> pickedDistricts = new ArrayList<District>();
@@ -52,6 +54,7 @@ public class BehaviourTest {
 		assertEquals(choosenDistrict, highterDistrict);
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void ifPossibleBuildADistrictCouldBuildTest() {
 		District aDistrict = new District("districtTest", 2, "colorTest", "familyTest");
@@ -68,7 +71,7 @@ public class BehaviourTest {
 	
 	
 
-
+	@RepeatedTest(1)
 	@Test
 	public void chooseToKeepOrNotPickedCardskeepAllTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
@@ -91,6 +94,7 @@ public class BehaviourTest {
 		assertEquals(keepedDistrictCards.size(), 2);
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseToKeepOrNotPickedCardsKeepFirstBecause2ndInHandCardTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
@@ -117,6 +121,7 @@ public class BehaviourTest {
 
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseToKeepOrNotPickedCardsKeepFirstBecause2ndInCityCardTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
@@ -143,6 +148,7 @@ public class BehaviourTest {
 
 	}
 
+	@RepeatedTest(1)
 	@Test
 	public void chooseToKeepOrNotPickedCardsNoKeepTest() {
 		ArrayList<District> pickedDistrictCards = new ArrayList<District>();
@@ -169,6 +175,7 @@ public class BehaviourTest {
 
 	} 
 	
+	@RepeatedTest(1)
 	@Test
 	public void takeGoldTest() {
 		playerTest.setGolds(0);
@@ -177,6 +184,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getGolds(), 2);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void takeCardTest() {
 		District choosenCard = deckDistrict.getDeckDistrict().get(0);
@@ -187,6 +195,7 @@ public class BehaviourTest {
 		assertEquals(playerTest.getDistrictCards().get(0), choosenCard);
 	}
 	
+	@RepeatedTest(1)
 	@Test
 	public void architectBuilds3Districts(){
 		Behaviour botArchitect=new Behaviour(new Player("playerArchitect"),board);
@@ -203,6 +212,8 @@ public class BehaviourTest {
 		botArchitect.buildArchitect();
 		assertEquals(2,botArchitect.getPlayer().getCity().getSizeOfCity());
 	}
+	
+	@RepeatedTest(1)
 	@Test
     public void pickCardsInDeckTest() {
 		System.out.println("-------aaaaaaaaaaaaa------");

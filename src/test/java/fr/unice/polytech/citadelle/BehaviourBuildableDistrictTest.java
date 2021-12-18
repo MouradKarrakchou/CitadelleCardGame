@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.Board;
@@ -36,6 +37,7 @@ public class BehaviourBuildableDistrictTest {
         player01.getCity().builtDistrict.clear();   
     }
 
+    @RepeatedTest(1)
     @Test
     //With 2 golds
     void districtWeHaveEnoughMoneyToBuildWith2GoldsTest(){
@@ -46,6 +48,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
+    @RepeatedTest(1)
     @Test
     //With 5 golds
     void districtWeHaveEnoughMoneyToBuildWith5goldsTest(){
@@ -62,6 +65,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
+    @RepeatedTest(1)
     @Test
     //With 6 golds
     void districtWeHaveEnoughMoneyToBuildWith6goldsTest(){
@@ -79,7 +83,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeHaveEnoughMoneyToBuild(behaviourOfPlayer01.getPlayer().getGolds()));
     }
 
-
+    @RepeatedTest(1)
     @Test
     void isAlreadyBuiltTest(){
         player01.getCity().builtDistrict.add(new District("Haunted City", 2,"empty","empty"));
@@ -88,11 +92,13 @@ public class BehaviourBuildableDistrictTest {
 
     }
 
+    @RepeatedTest(1)
     @Test
     void isAlreadyBuiltEmptyTest(){
         assertFalse(behaviourOfPlayer01.getCityManager().isAlreadyBuilt("Prison"));
     }
 
+    @RepeatedTest(1)
     @Test
     void districtWeCanBuildTest(){
         player01.golds = 4;
@@ -113,6 +119,7 @@ public class BehaviourBuildableDistrictTest {
         assertEquals(districts, behaviourOfPlayer01.getCityManager().districtWeCanBuild(districtCheapEnough));
     }
 
+    @RepeatedTest(1)
     @Test
     void zeroDistrictWeCanBuildTest(){
     	player01.golds = 4;

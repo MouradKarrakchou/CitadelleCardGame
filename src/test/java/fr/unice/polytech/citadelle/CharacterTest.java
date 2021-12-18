@@ -7,6 +7,7 @@ import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -121,6 +122,7 @@ public class CharacterTest {
 
     }
 
+    @RepeatedTest(1)
     @Test
     void assassinatePlayer(){
         //initialize
@@ -138,6 +140,8 @@ public class CharacterTest {
         //We verify that some other character is alive
         assertEquals(true,botArchitecte.getPlayer().getCharacter().isCharacterIsAlive());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testKingPlayFirst(){
         //initialize
@@ -147,6 +151,8 @@ public class CharacterTest {
         king.spellOfTurn(botKing,hashOfCharacters);
         assertEquals(true,botKing.getBehaviourIsKing());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testKingEarnsMoney(){
         //initialize
@@ -161,6 +167,8 @@ public class CharacterTest {
         king.spellOfTurn(botKing,hashOfCharacters);
         assertEquals(4,botKing.getPlayer().getGolds());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testThiefStealsGolds(){
         //initialize
@@ -178,6 +186,8 @@ public class CharacterTest {
         assertEquals(0,botMagician.getPlayer().getGolds());
         assertEquals(7,botThief.getPlayer().getGolds());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testMerchantEarnsMoney(){
 
@@ -190,6 +200,8 @@ public class CharacterTest {
         merchant.spellOfTurn(botMerchant,hashOfCharacters);
         assertEquals(5,botMerchant.getPlayer().getGolds());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testBishopEarnsMoney(){
 
@@ -202,12 +214,16 @@ public class CharacterTest {
         bishop.spellOfTurn(botBishop,hashOfCharacters);
         assertEquals(5,botBishop.getPlayer().getGolds());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testArchitectTakes2Cards(){
         //We verify that the Value of behaviourIsArchitect becomes true
         architect.spellOfTurn(botArchitecte,hashOfCharacters);
         assertEquals(2, botArchitecte.getPlayer().getDistrictCards().size());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testMagicianSwapWithAnotherCharacter(){
         ArrayList<District> cardsToSwap=new ArrayList<>();
@@ -219,6 +235,8 @@ public class CharacterTest {
         assertEquals("MagicianDistrict",botMerchant.getPlayer().getDistrictCards().get(0).getName());
         assertEquals("MerchantDistrict",botMagician.getPlayer().getDistrictCards().get(0).getName());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testMagicianSwapWithTheDeck(){
         ArrayList<District> cardsToSwap=new ArrayList<>();
@@ -234,6 +252,8 @@ public class CharacterTest {
         assertEquals("MagicianDistrict1",botMagician.getPlayer().getDistrictCards().get(1).getName());
         assertEquals("MagicianDistrict3",botMagician.getPlayer().getDistrictCards().get(2).getName());
     }
+    
+    @RepeatedTest(1)
     @Test
     void testWarlordDestroyDistrict(){
         Player player=new Player("playerDistrictToDestroy");
@@ -249,7 +269,6 @@ public class CharacterTest {
         warlord.spellOfTurn(botWarlord,hashOfCharacters);
         assertEquals(false,player.getCity().getBuiltDistrict().contains(district));
         assertEquals(1,botWarlord.getPlayer().getGolds());
-
     }
 
 
