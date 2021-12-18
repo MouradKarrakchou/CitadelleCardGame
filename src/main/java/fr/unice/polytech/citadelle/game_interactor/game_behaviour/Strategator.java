@@ -8,15 +8,27 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+/**
+ * Investor act a bit like the Investor but,
+ * he is also smart on the way to choose his own character,
+ * on how he will do his spell and try to find the
+ * best target by predicting who has what
+ */
 public class Strategator extends Behaviour{
+
     public Strategator(Player player, Board board) {
         super(player, board);
     }
 
+    /**
+     * Execute the spell of the Library which is keeping both card
+     * picked instead of choosing one and putting back the other
+     * @param spellDistrict
+     * @param deckDistrict
+     */
     public void executeSpell(ArrayList<SpellDistrict> spellDistrict, DeckDistrict deckDistrict) {
         spellDistrict.get(0).librarySpell(player, deckDistrict);
     }
-
 
     @Override
     public void normalBehaviour() {
@@ -38,6 +50,7 @@ public class Strategator extends Behaviour{
         }
         ifPossibleBuildADistrict();
     }
+
     @Override
     public void endGameBehaviour() {
         PrintCitadels.printPhase("Endgame", player);
@@ -64,6 +77,7 @@ public class Strategator extends Behaviour{
         return chosenCard;
 
     }
+
     @Override
     public Player selectPlayerForWarlord() {
         return(strategy.choosePlayerForWarlordAdvanced());
@@ -73,18 +87,22 @@ public class Strategator extends Behaviour{
     public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         return (strategy.chooseCharacterForMagicianAdvanced());
     }
+
     @Override
     public Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         return (strategy.chooseCharacterForAssassinAdvanced());
     }
+
     @Override
     public Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
         return (strategy.chooseCharacterForThiefAdvanced());
     }
+
     @Override
     public ArrayList<District> chooseMagicianAction() {
         return (strategy.chooseMagicianActionAdvanced());
     }
+
     @Override
     public District chooseDistrictToDestroy(Player playerToDestroy) {
         return (strategy.chooseDistrictToDestroyAdvanced(playerToDestroy));
