@@ -74,9 +74,9 @@ public class Executor {
 	 */
 	public ArrayList<District> pickCards(DeckDistrict deckDistrict) {
 		ArrayList<District> pickedCards = new ArrayList<>();
-				pickedCards.add(pickBlindDistrict(deckDistrict));
-				pickedCards.add(pickBlindDistrict(deckDistrict));
-				return pickedCards;
+		pickedCards.add(pickBlindDistrict(deckDistrict));
+		pickedCards.add(pickBlindDistrict(deckDistrict));
+		return pickedCards;
 	}
 
 	/**

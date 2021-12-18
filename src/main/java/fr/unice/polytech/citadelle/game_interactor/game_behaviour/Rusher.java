@@ -37,7 +37,7 @@ public class Rusher extends Behaviour {
 		ArrayList<District> buidableDistrict = cityMan.districtWeCanBuild(player.getDistrictCards());
 		ArrayList<District> cheapersDistrictsBuildable = getAllCheapersDistricts(buidableDistrict);
 
-		if (cheapersDistrictsBuildable.size() == 0 && board.getDeckDistrict().getSize() > 0) {
+		if (cheapersDistrictsBuildable.size() == 0 && board.getDeckDistrict().getSize() > 2) {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();
 			for (District district : player.getCity().getBuiltDistrict()) {
 				if (district.getName().equals("Library"))
@@ -63,7 +63,7 @@ public class Rusher extends Behaviour {
 		PrintCitadels.printPhase("Endgame", player);
 		DeckDistrict deckDistrict = board.getDeckDistrict();
 		ArrayList<District> futurBuildableDistrict = cityMan.getBuildableDistrictWithTwoMoreGold();
-		if (futurBuildableDistrict.size() > 0) {// s'il peut poser un bat en prenant les deux gold
+		if (futurBuildableDistrict.size() > 0 || board.getDeckDistrict().getSize() < 2) {// s'il peut poser un bat en prenant les deux gold
 			takeGold();
 		} else {
 			ArrayList<SpellDistrict> spellDistrict = new ArrayList<>();

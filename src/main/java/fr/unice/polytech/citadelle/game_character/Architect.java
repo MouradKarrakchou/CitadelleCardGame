@@ -27,7 +27,9 @@ public class Architect extends Character {
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         //Giving 2 Cards to the Player with Architect character
         PrintCitadels.printArchitectSpell();
-        bot.addDistrict(bot.pickCard());
-        bot.addDistrict(bot.pickCard());
+        if(bot.getBoard().getDeckDistrict().getSize() > 0)
+        	bot.addDistrict(bot.pickCard());
+        if(bot.getBoard().getDeckDistrict().getSize() > 0)
+        	bot.addDistrict(bot.pickCard());
     }
 }
