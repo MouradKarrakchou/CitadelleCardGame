@@ -104,118 +104,13 @@ public class RoundManager {
 		if (board.getRoundNumber() == 0)
 			playerOfBehaviour.chooseCharacterCard(deckCharacter.chooseRandomCharacter());
 		else
-			playerOfBehaviour.chooseCharacterCard(chooseCharacter(bot, deckCharacter));
+			playerOfBehaviour.chooseCharacterCard(bot.chooseCharacterWithStrategy());
 
 		Initializer.fillHashOfCharacter(hashOfCharacters, playerOfBehaviour.getCharacter(), bot);
 		PrintCitadels.chooseRole(playerOfBehaviour, playerOfBehaviour.getCharacter());
 	}
 
-	public Character chooseCharacter(Behaviour bot, DeckCharacter deckCharacter) {
-		int counter;
 
-		//Choice of Assassin
-		ArrayList<Character> listOfAssassin = deckCharacter.getDeckCharacter().stream()
-				.filter(character -> character.getName().equals("Assassin"))
-				.collect(Collectors.toCollection(ArrayList::new));
-		counter = 0;
-		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() == 6 && listOfAssassin.size() != 0 && !player.equals(bot.getPlayer())) {
-				for(Character character : deckCharacter.getDeckCharacter()) {
-					if(character.getName().equals("Assassin")) return deckCharacter.getDeckCharacter().remove(counter);
-					counter++;
-				}
-			}
-		}
-
-		//Choice of Architect
-		ArrayList<Character> listOfArchitect = deckCharacter.getDeckCharacter().stream()
-				.filter(character -> character.getName().equals("Architect"))
-				.collect(Collectors.toCollection(ArrayList::new));
-		counter = 0;
-
-		if(bot.getPlayer().getDistrictCardsSize() >= 3 && bot.getPlayer().getGolds() >= 6 && listOfArchitect.size() != 0) {
-			for(Character character : deckCharacter.getDeckCharacter()) {
-				if(character.getName().equals("Architect")) return deckCharacter.getDeckCharacter().remove(counter);
-				counter++;
-			}
-		}
-
-		//Choice of Magician
-		ArrayList<Character> listOfMagician = deckCharacter.getDeckCharacter().stream()
-				.filter(character -> character.getName().equals("Magician"))
-				.collect(Collectors.toCollection(ArrayList::new));
-		counter = 0;
-		for(Player player : board.getListOfPlayer()) {
-			if(bot.getPlayer().getDistrictCardsSize() < player.getDistrictCardsSize() && listOfMagician.size() != 0 && !player.equals(bot.getPlayer())) {
-				for(Character character : deckCharacter.getDeckCharacter()) {
-					if(character.getName().equals("Magician")) return deckCharacter.getDeckCharacter().remove(counter);
-					counter++;
-				}
-			}
-		}
-
-		//Choice of Thief
-		ArrayList<Character> listOfThief = deckCharacter.getDeckCharacter().stream()
-				.filter(character -> character.getName().equals("Thief"))
-				.collect(Collectors.toCollection(ArrayList::new));
-		counter = 0;
-		for(Player player : board.getListOfPlayer()) {
-			if(player.getGolds() >= 5 && listOfThief.size() != 0 && !player.equals(bot.getPlayer())) {
-				for(Character character : deckCharacter.getDeckCharacter()) {
-					if(character.getName().equals("Thief")) return deckCharacter.getDeckCharacter().remove(counter);
-					counter++;
-				}
-			}
-		}
-
-		//Choice of King or Merchant (if they are both equality worth, King is chosen)
-		counter = 0;
-		int index=isThereAFamily(bot);
-		if (index!=-1) {
-			String nameOfCharacterChosen = listOfAllCharacters.get(index).getName();
-			for (Character character : deckCharacter.getDeckCharacter()) {
-				if (character.getName().equals(nameOfCharacterChosen))
-					return deckCharacter.getDeckCharacter().remove(counter);
-				counter++;
-			}
-		}
-
-		//Choice of Bishop
-		ArrayList<Character> listOfBishop = deckCharacter.getDeckCharacter().stream()
-				.filter(character -> character.getName().equals("Bishop"))
-				.collect(Collectors.toCollection(ArrayList::new));
-		counter = 0;
-
-		if(bot.getPlayer().getCity().getBuiltDistrict().size() >= 6 && listOfBishop.size() != 0) {
-			for(Character character : deckCharacter.getDeckCharacter()) {
-				if(character.getName().equals("Bishop")) return deckCharacter.getDeckCharacter().remove(counter);
-				counter++;
-			}
-		}
-
-		//Choice of Warlord (Last one because his spell has not been implemented yet)
-		ArrayList<Character> listOfWarlord = deckCharacter.getDeckCharacter().stream()
-				.filter(character -> character.getName().equals("Warlord"))
-				.collect(Collectors.toCollection(ArrayList::new));
-		counter = 0;
-
-		for(Player player : board.getListOfPlayer()) {
-			if(player.getCity().getBuiltDistrict().size() == 7 && listOfWarlord.size() != 0 && !player.equals(bot.getPlayer())) {
-				for(Character character : deckCharacter.getDeckCharacter()) {
-					if(character.getName().equals("Warlord")) return deckCharacter.getDeckCharacter().remove(counter);
-					counter++;
-				}
-			}
-		}
-
-		return deckCharacter.getDeckCharacter().remove(0);
-	}
-
-	/**
-	 * Check if the player of the given bot has a family in its city.
-	 * @param bot The given bot to check.
-	 * @return the integer index value of the family owned by the bot. Return -1 if bot does not own any family.
-	 */
 	public int isThereAFamily(Behaviour bot) {
 		Player playerOfBehaviour = bot.getPlayer();
 		ArrayList<District> districtsInACity;

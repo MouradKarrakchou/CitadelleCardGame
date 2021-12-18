@@ -240,6 +240,10 @@ public class Behaviour {
 			executor.putCardBackInDeck(board.getDeckDistrict(), pickedCards.get(1));
 	}
 
+	chooseCharacterWithStrategy() {
+		strategy.chooseCharacter();
+	}
+
 	public District chooseBetweenTwoCards(District district, District district1) {
 		return null;
 	}
