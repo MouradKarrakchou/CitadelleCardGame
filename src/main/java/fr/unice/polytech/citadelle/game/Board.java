@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 /**
  * A Board represents an instance of the Citadel game with all the cards (districts and character) and players that go with.
@@ -119,7 +118,7 @@ public class Board {
 
     public Character findDeadCharacter() {
         for (int k=0;k<listOfCharacter.size();k++){
-            if (!listOfCharacter.get(k).isCharacterIsAlive()) return listOfCharacter.get(k);
+            if (!listOfCharacter.get(k).getCharacterisAlive()) return listOfCharacter.get(k);
         }
         return null;
     }

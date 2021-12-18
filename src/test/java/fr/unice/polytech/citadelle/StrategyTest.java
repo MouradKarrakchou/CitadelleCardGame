@@ -7,16 +7,12 @@ import fr.unice.polytech.citadelle.game.purple_districts.Smithy;
 import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
-import fr.unice.polytech.citadelle.game_engine.Referee;
-import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -145,7 +141,7 @@ public class StrategyTest {
 		Character characterChoosen = strategy.chooseCharacterForThiefRandom(hashOfCharacters);
 		assertNotEquals("Assassin", characterChoosen);
 		assertNotEquals("Thief", characterChoosen);
-		assertEquals(true, characterChoosen.isCharacterIsAlive());
+		assertEquals(true, characterChoosen.getCharacterisAlive());
 	}
 
 	@RepeatedTest(20)
