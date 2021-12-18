@@ -43,12 +43,12 @@ public class RoundManagerTest {
 	ArrayList<Player> listOfPlayerSpy;
 	Board game;
 	Referee referee;
-	
+
 	LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacter;
 	ArrayList<Character> listOfAllCharacter;
 	ArrayList<Behaviour> listOfAllBehaviour;
 	Board board;
-	
+
 
 	Initializer init;
 	@BeforeEach
@@ -57,7 +57,7 @@ public class RoundManagerTest {
 		init = new Initializer();
 		deckDistrict = new DeckDistrict();
 
-		
+
 		deckDistrict.initialise();
 
 		hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
@@ -68,18 +68,18 @@ public class RoundManagerTest {
 		Initializer.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
 		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board));
 		referee = new Referee(board);
-		
+
 		Initializer.initDeckCharacter(roundMan.getBoard().getDeckCharacter(), listOfAllCharacter);
 		Initializer.initDeckDistrict(roundMan.getBoard().getDeckDistrict());
-		
+
 		board.setListOfPlayer(roundMan.getListOfPlayers());
 
 		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour, hashOfCharacter, board));
 		//listOfPlayerSpy = spy(roundMan.getListOfPlayers());
 
-	
+
 	}
-		
+
 	@Test
 	public void getTheListOfCityTest() {
 		Player p1 = new Player("p1");
@@ -91,15 +91,15 @@ public class RoundManagerTest {
 		listOfPlayer.add(p1);
 		listOfPlayer.add(p2);
 		listOfPlayer.add(p3);
-		
+
 		listOfCity.add(p1.getCity());
 		listOfCity.add(p2.getCity());
 		listOfCity.add(p3.getCity());
-		
+
 		assertEquals(roundMan.getTheListOfCity(listOfPlayer), listOfCity);
 	}
-	
-		
+
+
 	@Test
 	public void actionsOfTheBehaviourTest() {
 		Character c = new Character("testCharacter", 0);
@@ -108,27 +108,27 @@ public class RoundManagerTest {
 		roundMan.actionOfBehaviour(bot);
 		verify(bot, times(1)).play(Mockito.any());
 	}
-	
-	
+
+
 	@Test
 	public void setupCharactersTest() {
 		roundMan.setupCharacters();
 		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any());
 	}
-	
+
 	@Test
 	public void askEachCharacterToPlayTest() {
 		LinkedHashMap<Character, Optional<Behaviour>> hashCharacter;
 		hashCharacter = roundMan.getHashOfCharacters();
-		
+
 		Character assassin = roundMan.getListOfAllCharacters().get(Initializer.ASSASSIN_INDEX);
 		Character thief = roundMan.getListOfAllCharacters().get(Initializer.THIEF_INDEX);
 		Character architect = roundMan.getListOfAllCharacters().get(Initializer.ARCHITECT_INDEX);
-		
+
 		Player p1 = new Player("test1");
 		Player p2 = new Player("test2");
 		Player p3 = new Player("test3");
-		
+
 		p1.setRole(architect);
 		p2.setRole(architect);
 		p3.setRole(architect);
@@ -138,14 +138,14 @@ public class RoundManagerTest {
 		Optional<Behaviour> behaviour3 = Optional.of(new Behaviour(p3, board));
 
 		hashCharacter.put(assassin, behaviour1);
-		hashCharacter.put(thief, behaviour2);		
-		hashCharacter.put(architect, behaviour3);		
-		
+		hashCharacter.put(thief, behaviour2);
+		hashCharacter.put(architect, behaviour3);
+
 		roundMan.askEachCharacterToPlay();
 		verify(roundMan, times(3)).actionOfBehaviour(Mockito.any());
-	
+
 	}
-	
+
 	@Test
 	public void orderTurnByKing(){
 		//creation of Behaviour
@@ -177,7 +177,7 @@ public class RoundManagerTest {
 		assertEquals(botBishop,botOrdered.get(2));
 		assertEquals(botMagician,botOrdered.get(3));
 	}
-	
+
 	@Test
 	public void updateLeaderboardTest() {
 		Behaviour aBehaviour = new Behaviour(new Player("testPlayer"), board);
@@ -188,205 +188,6 @@ public class RoundManagerTest {
 		assertEquals(leaderBoard.get(0), aBehaviour);
 
 	}
-
-	@Test
-	public void chooseCharacterAssassinTest() {
-		Player player1 = new Player("Player1");
-		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		ArrayList<Player> listOfPlayers = new ArrayList<>();
-		listOfPlayers.add(player1);
-		listOfPlayers.add(player2);
-		board.setListOfPlayer(listOfPlayers);
-
-		player2.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player2.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player2.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
-		player2.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-		player2.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
-		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
-
-		Character assassin = new Character("Assassin", Initializer.ASSASSIN_INDEX);
-
-		assertEquals(assassin, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterArchitectTest() {
-		Player player1 = new Player("Player1");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-
-		player1.addDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player1.addDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player1.addDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-
-		player1.setGolds(6);
-
-		Character architect = new Character("Architect", Initializer.ARCHITECT_INDEX);
-
-		assertEquals(architect, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterMagicianTest() {
-		Player player1 = new Player("Player1");
-		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		ArrayList<Player> listOfPlayers = new ArrayList<>();
-		listOfPlayers.add(player1);
-		listOfPlayers.add(player2);
-		board.setListOfPlayer(listOfPlayers);
-
-		player2.addDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player2.addDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player2.addDistrict(new District("Palace",5,"Yellow","Nobility"));
-		player2.addDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-		player2.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
-
-		Character magician = new Character("Magician", Initializer.MAGICIAN_INDEX);
-
-		assertEquals(magician, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterThiefTest() {
-		Player player1 = new Player("Player1");
-		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		ArrayList<Player> listOfPlayers = new ArrayList<>();
-		listOfPlayers.add(player1);
-		listOfPlayers.add(player2);
-		board.setListOfPlayer(listOfPlayers);
-
-		player2.setGolds(12);
-
-		Character thief = new Character("Thief", Initializer.THIEF_INDEX);
-
-		assertEquals(thief, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterKingTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		Player player = new Player("Player");
-		Behaviour aBehaviour = new Behaviour(player, board);
-
-		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
-
-		Character king = new Character("King", Initializer.KING_INDEX);
-
-		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterMerchantTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		Player player = new Player("Player");
-		Behaviour aBehaviour = new Behaviour(player, board);
-
-		player.buildDistrict(new District("Trading Post", 2, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new District("Harbor", 4, "Green", "Trade and Handicrafts"));
-
-		Character merchant = new Character("Merchant", Initializer.MERCHANT_INDEX);
-
-		assertEquals(merchant, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterKingVsMerchantTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		Player player = new Player("Player");
-		Behaviour aBehaviour = new Behaviour(player, board);
-
-		player.buildDistrict(new District("Trading Post", 2, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new District("Harbor", 4, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
-
-		Character king = new Character("King", Initializer.KING_INDEX);
-
-		assertEquals(king, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterBishopTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		Player player = new Player("Player");
-		Behaviour aBehaviour = new Behaviour(player, board);
-
-		board.getListOfPlayer().clear();
-		board.getListOfPlayer().add(player);
-
-		player.buildDistrict(new District("Trading Post", 2, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
-		player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
-		player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-
-		Character bishop = new Character("Bishop", Initializer.BISHOP_INDEX);
-
-		assertEquals(bishop, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	public void chooseCharacterWarlordTest() {
-		Player player1 = new Player("Player1");
-		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-		ArrayList<Player> listOfPlayers = new ArrayList<>();
-		listOfPlayers.add(player1);
-		listOfPlayers.add(player2);
-		board.setListOfPlayer(listOfPlayers);
-
-		player2.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
-		player2.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
-		player2.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
-		player2.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
-		player2.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
-		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
-		player2.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
-
-		//Remove the Assassin because he does the same thing
-		deckCharacter.getDeckCharacter().remove(0);
-
-		Character warlord = new Character("Warlord", Initializer.WARLORD_INDEX);
-
-		assertEquals(warlord, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
-	@Test
-	//Test the last return of the chooseCharacter method from RoundManager
-	//which return the first character (Assassin) by default
-	void chooseCharacterDefaultTest() {
-		Player player1 = new Player("Player1");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, listOfAllCharacter);
-
-		Character assassin = new Character("Assassin", Initializer.ASSASSIN_INDEX);
-		assertEquals(assassin, roundMan.chooseCharacter(aBehaviour, deckCharacter));
-	}
-
 
 	@Test
 	public void cityVerificationNoCompleteCityTest() {
@@ -520,7 +321,7 @@ public class RoundManagerTest {
 		roundManager.reviveAll();
 		assertTrue(player.getCharacter().isCharacterIsAlive());
 	}
-	
+
 	@Test
 	public void checkIfUpdateViewCharacterInBoardWorkTest() {
 		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();
@@ -528,7 +329,7 @@ public class RoundManagerTest {
 		Player player = new Player("testPlayer");
 		player.setRole(testCharacter);
 		Behaviour bot = spy(new Behaviour(player, board));
-		
+
 		listOfPlayerForHash.add(player);
 		board.setListOfPlayer(listOfPlayerForHash);
 		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
@@ -536,7 +337,7 @@ public class RoundManagerTest {
 		roundMan.actionOfBehaviour(bot);
 		assertEquals(Optional.of(testCharacter), board.gethashOfViewCharacters().get(player));
 	}
-	
+
 	@Test
 	public void getListOfPlayerWhoHasAlreadyPlayedTest() {
 		ArrayList<Player> listOfPlayerForHash =  new ArrayList<>();
@@ -544,14 +345,14 @@ public class RoundManagerTest {
 		Player player = new Player("testPlayer");
 		player.setRole(testCharacter);
 		Behaviour bot = spy(new Behaviour(player, board));
-		
+
 		listOfPlayerForHash.add(player);
 		board.setListOfPlayer(listOfPlayerForHash);
 		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
 		assertEquals(0, board.getListOfPlayerWhoHasAlreadyPlayed().size());
 		roundMan.actionOfBehaviour(bot);
 		assertEquals(testCharacter, board.getListOfPlayerWhoHasAlreadyPlayed().get(0));
-		
+
 	}
 
 }
