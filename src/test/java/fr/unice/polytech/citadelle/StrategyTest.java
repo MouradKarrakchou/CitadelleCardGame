@@ -303,23 +303,6 @@ public class StrategyTest {
 	}
 
 	@Test
-	void chooseCharacterForAssassinAdvancedWhenTargetHasAlreadyRevealCharacter() {
-		strategy = new Strategy(8, board, botAssassin.getPlayer());
-
-		ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
-
-		listOfPlayerForHash.add(botArchitecte.getPlayer());
-		listOfPlayerForHash.add(botAssassin.getPlayer());
-
-		board.setListOfPlayer(listOfPlayerForHash);
-		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
-		board.revealCharacter(botArchitecte.getPlayer(), architect);
-
-		Character CharacterOfTheTarget = strategy.chooseCharacterForAssassinAdvanced();
-		assertEquals(architect, CharacterOfTheTarget);
-	}
-
-	@Test
 	void chooseCharacterForAssassinAdvancedWhenTargetWhenCharacterNotReveal() {
 		strategy = spy(new Strategy(8, board, botAssassin.getPlayer()));
 		ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
