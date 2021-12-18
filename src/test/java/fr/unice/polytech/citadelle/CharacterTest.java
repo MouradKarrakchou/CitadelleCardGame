@@ -4,8 +4,6 @@ import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
-import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -135,14 +133,13 @@ public class CharacterTest {
         assassin.spellOfTurn(botAssassin,hashOfCharacters);
 
         //We verify that the Magician is dead
-        assertEquals(false,botMagician.getPlayer().getCharacter().isCharacterIsAlive());
+        assertEquals(false,botMagician.getPlayer().getCharacter().getCharacterisAlive());
 
         //We verify that some other character is alive
-        assertEquals(true,botArchitecte.getPlayer().getCharacter().isCharacterIsAlive());
+        assertEquals(true,botArchitecte.getPlayer().getCharacter().getCharacterisAlive());
     }
     
     @RepeatedTest(1)
-    @Test
     void testKingPlayFirst(){
         //initialize
         listOfBehaviour.add(botKing);
@@ -153,7 +150,6 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
     void testKingEarnsMoney(){
         //initialize
         listOfBehaviour.add(botKing);
@@ -169,7 +165,6 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
     void testThiefStealsGolds(){
         //initialize
         listOfBehaviour.add(botThief);

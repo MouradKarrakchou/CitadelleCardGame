@@ -354,4 +354,7 @@ public class Behaviour {
 		return (strategy.chooseDistrictToDestroy(playerToDestroy));
 	}
 
+	public void putDistrictBackInDeck(District district) {
+		board.putDistrictBackInDeck(district);
+	}
 }

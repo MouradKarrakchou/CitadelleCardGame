@@ -26,7 +26,6 @@ public class BonusDistrictTest {
     Referee referee = new Referee(board);
 
     @RepeatedTest(1)
-    @Test
     void dragonGateBonusTest() {
         executor.buildDistrict(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
         referee.updatePlayerWithCityScore(player);
@@ -34,7 +33,6 @@ public class BonusDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void universityBonusTest() {
         executor.buildDistrict(new University("University", 6,"Purple","Prestige"));
         referee.updatePlayerWithCityScore(player);
@@ -42,7 +40,6 @@ public class BonusDistrictTest {
     }
 
     @RepeatedTest(1)
-    @Test
     void bothBonusTest() {
         executor.buildDistrict(new DragonGate("Dragon Gate", 6,"Purple","Prestige"));
         executor.buildDistrict(new University("University", 6,"Purple","Prestige"));

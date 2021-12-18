@@ -8,11 +8,8 @@ import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.Character;
-import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
-
-import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAYER;
 
 
 /**
@@ -145,7 +142,7 @@ public class RoundManager {
 	 * @param currentBehaviour The behaviour associated to the player.
 	 */
 	public void actionOfBehaviour(Behaviour currentBehaviour) {
-		if (!currentBehaviour.getPlayer().getCharacter().isCharacterIsAlive()){
+		if (!currentBehaviour.getPlayer().getCharacter().getCharacterisAlive()){
 			PrintCitadels.botIsDead(currentBehaviour.getPlayer());
 		}
 		else {

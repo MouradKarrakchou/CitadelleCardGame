@@ -7,16 +7,12 @@ import fr.unice.polytech.citadelle.game.purple_districts.Smithy;
 import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
-import fr.unice.polytech.citadelle.game_engine.Referee;
-import fr.unice.polytech.citadelle.game_engine.RoundManager;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -145,7 +141,7 @@ public class StrategyTest {
 		Character characterChoosen = strategy.chooseCharacterForThiefRandom(hashOfCharacters);
 		assertNotEquals("Assassin", characterChoosen);
 		assertNotEquals("Thief", characterChoosen);
-		assertEquals(true, characterChoosen.isCharacterIsAlive());
+		assertEquals(true, characterChoosen.getCharacterisAlive());
 	}
 
 	@RepeatedTest(20)
@@ -420,12 +416,20 @@ public class StrategyTest {
 	}
 
 	@Test
-	public void chooseCharacterAssassinTest() {
+	public void chooseAssassinTest() {
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player1 = new Player("Player1");
 		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
 		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+
 		ArrayList<Player> listOfPlayers = new ArrayList<>();
 		listOfPlayers.add(player1);
 		listOfPlayers.add(player2);
@@ -438,17 +442,23 @@ public class StrategyTest {
 		player2.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
 		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
 
-		Character assassin = new Character("Assassin", Initializer.ASSASSIN_INDEX);
-
-		assertEquals(assassin, strategy.chooseCharacter(aBehaviour));
+		assertEquals(3, strategy.chooseAssassin(aBehaviour));
+		assertEquals(new Assassin(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterArchitectTest() {
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player1 = new Player("Player1");
-		DeckCharacter deckCharacter = new DeckCharacter();
 		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
 
 		player1.addDistrict(new District("Castle",4,"Yellow","Nobility"));
 		player1.addDistrict(new District("Manor", 3,"Yellow","Nobility"));
@@ -456,18 +466,25 @@ public class StrategyTest {
 
 		player1.setGolds(6);
 
-		Character architect = new Character("Architect", Initializer.ARCHITECT_INDEX);
-
-		assertEquals(architect, strategy.chooseCharacter(aBehaviour));
+		assertEquals(0, strategy.chooseArchitect(aBehaviour));
+		assertEquals(new Architect(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterMagicianTest() {
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player1 = new Player("Player1");
 		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
 		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+
 		ArrayList<Player> listOfPlayers = new ArrayList<>();
 		listOfPlayers.add(player1);
 		listOfPlayers.add(player2);
@@ -479,18 +496,25 @@ public class StrategyTest {
 		player2.addDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
 		player2.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
 
-		Character magician = new Character("Magician", Initializer.MAGICIAN_INDEX);
-
-		assertEquals(magician, strategy.chooseCharacter(aBehaviour));
+		assertEquals(2, strategy.chooseMagician(aBehaviour));
+		assertEquals(new Magician(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterThiefTest() {
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player1 = new Player("Player1");
 		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
 		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+
 		ArrayList<Player> listOfPlayers = new ArrayList<>();
 		listOfPlayers.add(player1);
 		listOfPlayers.add(player2);
@@ -498,15 +522,21 @@ public class StrategyTest {
 
 		player2.setGolds(12);
 
-		Character thief = new Character("Thief", Initializer.THIEF_INDEX);
-
-		assertEquals(thief, strategy.chooseCharacter(aBehaviour));
+		assertEquals(5, strategy.chooseThief(aBehaviour));
+		assertEquals(new Thief(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterKingTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player = new Player("Player");
 		Behaviour aBehaviour = new Behaviour(player, board);
 
@@ -514,15 +544,21 @@ public class StrategyTest {
 		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
 		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
 
-		Character king = new Character("King", Initializer.KING_INDEX);
-
-		assertEquals(king, strategy.chooseCharacter(aBehaviour));
+		assertEquals(4, strategy.chooseKingOrMerchant(aBehaviour));
+		assertEquals(new King(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterMerchantTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player = new Player("Player");
 		Behaviour aBehaviour = new Behaviour(player, board);
 
@@ -530,15 +566,21 @@ public class StrategyTest {
 		player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
 		player.buildDistrict(new District("Harbor", 4, "Green", "Trade and Handicrafts"));
 
-		Character merchant = new Character("Merchant", Initializer.MERCHANT_INDEX);
-
-		assertEquals(merchant, strategy.chooseCharacter(aBehaviour));
+		assertEquals(6, strategy.chooseKingOrMerchant(aBehaviour));
+		assertEquals(new Merchant(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterKingVsMerchantTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player = new Player("Player");
 		Behaviour aBehaviour = new Behaviour(player, board);
 
@@ -549,15 +591,21 @@ public class StrategyTest {
 		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
 		player.buildDistrict(new District("Palace",5,"Yellow","Nobility"));
 
-		Character king = new Character("King", Initializer.KING_INDEX);
-
-		assertEquals(king, strategy.chooseCharacter(aBehaviour));
+		assertEquals(4, strategy.chooseKingOrMerchant(aBehaviour));
+		assertEquals(new King(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterBishopTest() {
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player = new Player("Player");
 		Behaviour aBehaviour = new Behaviour(player, board);
 
@@ -571,18 +619,25 @@ public class StrategyTest {
 		player.buildDistrict(new District("Manor", 3,"Yellow","Nobility"));
 		player.buildDistrict(new Smithy("Smithy", 5,"Purple","Prestige"));
 
-		Character bishop = new Character("Bishop", Initializer.BISHOP_INDEX);
-
-		assertEquals(bishop, strategy.chooseCharacter(aBehaviour));
+		assertEquals(1, strategy.chooseBishop(aBehaviour));
+		assertEquals(new Bishop(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 	public void chooseCharacterWarlordTest() {
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
+
 		Player player1 = new Player("Player1");
 		Player player2 = new Player("Player2");
-		DeckCharacter deckCharacter = new DeckCharacter();
 		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+
 		ArrayList<Player> listOfPlayers = new ArrayList<>();
 		listOfPlayers.add(player1);
 		listOfPlayers.add(player2);
@@ -596,25 +651,40 @@ public class StrategyTest {
 		player2.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
 		player2.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
 
-		//Remove the Assassin because he does the same thing
-		deckCharacter.getDeckCharacter().remove(0);
-
-		Character warlord = new Character("Warlord", Initializer.WARLORD_INDEX);
-
-		assertEquals(warlord, strategy.chooseCharacter(aBehaviour));
+		assertEquals(7, strategy.chooseWarlord(aBehaviour));
+		assertEquals(new Warlord(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
 		//Test the last return of the chooseCharacter method from RoundManager
 		//which return the first character (Assassin) by default
 	void chooseCharacterDefaultTest() {
-		Player player1 = new Player("Player1");
-		DeckCharacter deckCharacter = new DeckCharacter();
-		Behaviour aBehaviour = new Behaviour(player1, board);
-		Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
+		board.getDeckCharacter().getDeckCharacter().add(architect);
+		board.getDeckCharacter().getDeckCharacter().add(bishop);
+		board.getDeckCharacter().getDeckCharacter().add(magician);
+		board.getDeckCharacter().getDeckCharacter().add(assassin);
+		board.getDeckCharacter().getDeckCharacter().add(king);
+		board.getDeckCharacter().getDeckCharacter().add(thief);
+		board.getDeckCharacter().getDeckCharacter().add(merchant);
+		board.getDeckCharacter().getDeckCharacter().add(warlord);
 
-		Character assassin = new Character("Assassin", Initializer.ASSASSIN_INDEX);
-		assertEquals(assassin, strategy.chooseCharacter(aBehaviour));
+		Player player1 = new Player("Player1");
+		Player player2 = new Player("Player2");
+		Behaviour aBehaviour = new Behaviour(player1, board);
+
+		ArrayList<Player> listOfPlayers = new ArrayList<>();
+		listOfPlayers.add(player1);
+		listOfPlayers.add(player2);
+		board.setListOfPlayer(listOfPlayers);
+
+		assertEquals(-1, strategy.chooseAssassin(aBehaviour));
+		assertEquals(-1, strategy.chooseArchitect(aBehaviour));
+		assertEquals(-1, strategy.chooseMagician(aBehaviour));
+		assertEquals(-1, strategy.chooseThief(aBehaviour));
+		assertEquals(-1, strategy.chooseKingOrMerchant(aBehaviour));
+		assertEquals(-1, strategy.chooseBishop(aBehaviour));
+		assertEquals(-1, strategy.chooseWarlord(aBehaviour));
+		assertEquals(new Architect(), strategy.chooseCharacter(aBehaviour));
 	}
 
 	@Test
