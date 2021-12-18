@@ -1,8 +1,8 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
-import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game_character.*;
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.Strategy;
 import fr.unice.polytech.citadelle.output.PrintCitadels;

@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle.game;
 
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.ArrayList;

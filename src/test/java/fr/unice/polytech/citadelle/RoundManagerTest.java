@@ -3,6 +3,9 @@ package fr.unice.polytech.citadelle;
 import fr.unice.polytech.citadelle.game.purple_districts.Graveyard;
 import fr.unice.polytech.citadelle.game.purple_districts.Observatory;
 import fr.unice.polytech.citadelle.game.purple_districts.Smithy;
+import fr.unice.polytech.citadelle.game_character.*;
+import fr.unice.polytech.citadelle.game_character.Character;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.RepeatedTest;
@@ -19,9 +22,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
-
-import fr.unice.polytech.citadelle.characters_class.*;
-import fr.unice.polytech.citadelle.game.Character;
 
 import org.mockito.Mockito;
 

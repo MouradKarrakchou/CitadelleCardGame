@@ -1,10 +1,10 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
-import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.Graveyard;
 import fr.unice.polytech.citadelle.game.purple_districts.Observatory;
+import fr.unice.polytech.citadelle.game_character.*;
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.Predict;

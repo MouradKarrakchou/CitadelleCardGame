@@ -3,9 +3,9 @@ package fr.unice.polytech.citadelle.game_interactor;
 import java.util.*;
 
 import fr.unice.polytech.citadelle.game.*;
-import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
+import fr.unice.polytech.citadelle.game_character.Character;
 
 /**
  * A Behaviour realize all the action of a player.

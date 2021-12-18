@@ -1,4 +1,4 @@
-package fr.unice.polytech.citadelle.game;
+package fr.unice.polytech.citadelle.game_character;
 
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;

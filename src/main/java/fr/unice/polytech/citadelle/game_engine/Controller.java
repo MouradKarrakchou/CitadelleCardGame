@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 import fr.unice.polytech.citadelle.output.PrintCitadels;

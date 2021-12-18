@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.diogonunes.jcolor.Attribute;
 
 import fr.unice.polytech.citadelle.game.*;
-import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game_character.Character;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;

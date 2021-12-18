@@ -1,13 +1,12 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
 
 import fr.unice.polytech.citadelle.game.purple_districts.SchoolOfMagic;
+import fr.unice.polytech.citadelle.game_character.*;
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.Laboratory;
-
-import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;

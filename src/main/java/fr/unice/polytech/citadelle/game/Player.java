@@ -2,6 +2,8 @@ package fr.unice.polytech.citadelle.game;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.game_character.Character;
+
 /**
  * A Player represent a person in the citadel game, with his name, city and gold.
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo

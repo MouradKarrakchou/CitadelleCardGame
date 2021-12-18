@@ -3,9 +3,9 @@ package fr.unice.polytech.citadelle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import fr.unice.polytech.citadelle.game.*;
-import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game.purple_districts.University;
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
 

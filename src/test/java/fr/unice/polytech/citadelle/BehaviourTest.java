@@ -9,8 +9,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import fr.unice.polytech.citadelle.characters_class.Architect;
-import fr.unice.polytech.citadelle.game.Character;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +18,8 @@ import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_character.Architect;
+import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.NormalBot;
 
