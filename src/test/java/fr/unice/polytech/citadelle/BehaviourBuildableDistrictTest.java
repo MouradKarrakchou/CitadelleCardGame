@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 public class BehaviourBuildableDistrictTest {
     

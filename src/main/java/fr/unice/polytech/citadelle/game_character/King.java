@@ -3,7 +3,7 @@ package fr.unice.polytech.citadelle.game_character;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class King extends Character {

@@ -7,8 +7,8 @@ import fr.unice.polytech.citadelle.game.SpellDistrict;
 import fr.unice.polytech.citadelle.game.purple_districts.Library;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
-import fr.unice.polytech.citadelle.game_interactor.NormalBot;
-import fr.unice.polytech.citadelle.game_interactor.RushBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.RushBot;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package fr.unice.polytech.citadelle.game_interactor;
+package fr.unice.polytech.citadelle.game_interactor.game_behaviour;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

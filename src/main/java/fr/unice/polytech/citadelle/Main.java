@@ -10,7 +10,5 @@ public class Main {
 				controller.initGame();
 				controller.runGame();
 			}
-			
-
 	}
 }

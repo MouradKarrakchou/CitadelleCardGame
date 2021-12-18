@@ -4,7 +4,7 @@ import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.purple_districts.DragonGate;
 import fr.unice.polytech.citadelle.game.purple_districts.HauntedCity;
 import fr.unice.polytech.citadelle.game.purple_districts.University;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 import java.util.ArrayList;
 import java.util.Collections;

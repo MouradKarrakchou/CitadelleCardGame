@@ -34,8 +34,8 @@ import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 public class RoundManagerTest {
 	RoundManager roundMan;

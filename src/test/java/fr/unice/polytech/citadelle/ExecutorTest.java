@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 
 import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game_interactor.NormalBot;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -16,6 +16,7 @@ import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
 
 public class ExecutorTest {
 	Player player;

@@ -16,9 +16,9 @@ import fr.unice.polytech.citadelle.game_character.Magician;
 import fr.unice.polytech.citadelle.game_character.Merchant;
 import fr.unice.polytech.citadelle.game_character.Thief;
 import fr.unice.polytech.citadelle.game_character.Warlord;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.NormalBot;
-import fr.unice.polytech.citadelle.game_interactor.RushBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.RushBot;
 
 /**
  * The Initializer class initialize all objects needed during the game

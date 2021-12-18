@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 /**
  * A Board represents an instance of the Citadel game with all the cards (districts and character) and players that go with.

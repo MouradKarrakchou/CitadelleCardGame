@@ -18,8 +18,8 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.NormalBot;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.NormalBot;
 
 public class NormalBotTest {
 	Player player;

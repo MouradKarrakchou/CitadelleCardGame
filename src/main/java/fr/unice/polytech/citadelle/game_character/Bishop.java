@@ -1,9 +1,9 @@
 package fr.unice.polytech.citadelle.game_character;
 
-import fr.unice.polytech.citadelle.game_interactor.Behaviour;
-
 import java.util.LinkedHashMap;
 import java.util.Optional;
+
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 
 /**
  * Bishop districts cannot be destroyed by Warlord.
