@@ -1,7 +1,6 @@
 package fr.unice.polytech.citadelle.game_interactor.game_strategy;
 
 import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
@@ -145,7 +144,7 @@ public class Strategy {
                 int numberOfDistrict = playerComparing.getDistrictCardsSize();
                 if (mostDistrictCardsThatAPlayerHas < numberOfDistrict) {
                     playerWithMostDistrictGames = playerComparing;
-                    mostDistrictCardsThatAPlayerHas = playerComparing.getDistrictCardsSize();;}
+                    mostDistrictCardsThatAPlayerHas = playerComparing.getDistrictCardsSize();}
             }
         }
         /**PrintCitadels.printMagicianAdvancedChoice(playerWithMostDistrictGames);*/
@@ -369,26 +368,21 @@ public class Strategy {
     }
 
     public Character chooseCharacter(Behaviour bot) {
-        
         //Choice of Assassin
         int index = chooseAssassin(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
-
 
         //Choice of Architect
         index = chooseArchitect(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
-
         //Choice of Magician
         index = chooseMagician(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
-
         //Choice of Thief
         index = chooseThief(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
-
 
         //Choice of King or Merchant (if they are both equality worth, King is chosen)
         index = chooseKingOrMerchant(bot);
