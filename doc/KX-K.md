@@ -1,4 +1,4 @@
-# Rapport du projet Citadelle (groupe K)
+# Rapport du projet Citadelle (Groupe K)
 ## Auteurs 
 * [BONNET Kilian](https://github.com/KilianBonnet)
 * [IMAMI Ayoub](https://github.com/AyoubIMAMI)

@@ -431,6 +431,7 @@ public class Strategy {
         index = chooseWarlord(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
+        PrintCitadels.ExplanationChooseCardButNotFound(this.player);
         return board.getDeckCharacter().getDeckCharacter().remove(0);
     }
 

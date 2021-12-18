@@ -384,4 +384,8 @@ public class PrintCitadels {
 		prediction.put(listOfCharacter.get(Initializer.WARLORD_INDEX), "someone is close to finish the game (has 7 districts)");
 		return prediction;
 	}
+
+	public static void ExplanationChooseCardButNotFound(Player currentPlayer) {
+		System.out.println(colorize("\tExplanation: "+currentPlayer.getName()+" takes a card at random because none is more advantageous than another",ITALIC()));		
+	}
 }
