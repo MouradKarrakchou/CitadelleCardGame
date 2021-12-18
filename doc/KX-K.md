@@ -77,6 +77,15 @@ Un [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-p
 <br>
 
 # Informations utiles
+* La version d'octobre 2021 du [sujet](https://unice-my.sharepoint.com/:w:/g/personal/philippe_collet_unice_fr/EQzIs63_prFMqXwo3vkNopIBAK8EIf8rAeHw0J5bjtag4g?e=FEOTxZ) du projet de Citadelles.
+* Afin de découvrir le jeu nous avons regardé [cette vidéo](https://videoregles.net/videoregle/citadelles).
+
+**Pour avoir une idée précise des des règles et des subtilités du jeu Citadelle à implémenter, nous avons utilisés les ressources suivantes:**
+* http://jeuxstrategie.free.fr/Citadelles_complet.php
+* https://www.regledujeu.fr/citadelles/
+
+**Lien vers la [documentation du projet](https://lebihanleo.github.io/Citadelle_Equipe_K_Javadoc/)**:
+
 <br>
 <br>
 
