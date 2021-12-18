@@ -125,7 +125,7 @@ public class Strategy {
         return(predict.predictWhoIsPlayer(playerWithMostCards,listOfCharacterToNotSteal));
     }
 
-    private Player findThePlayerWithMostCards() {
+    public Player findThePlayerWithMostCards() {
         ArrayList<Player> listOfPlayer= board.getListOfPlayer();
         //We want to find the Player with the most cards
         int mostDistrictCardsThatAPlayerHas=listOfPlayer.get(0).getDistrictCardsSize();
@@ -180,8 +180,8 @@ public class Strategy {
 
         for (Player playerComparing : listOfPlayer) {
             if (playerWithClosestScore.equals(this.player))
-                scoreDiffenreceWithClosestScore=abs(playerPredictScore(playerComparing)-predictedScore);
-                playerWithClosestScore=playerComparing;
+            {scoreDiffenreceWithClosestScore=abs(playerPredictScore(playerComparing)-predictedScore);
+                playerWithClosestScore=playerComparing;}
             if (!playerComparing.equals(this.player)){
                 int scoreDifference = abs(playerPredictScore(playerComparing) - predictedScore);
                 if (scoreDiffenreceWithClosestScore > scoreDifference) {
@@ -276,7 +276,7 @@ public class Strategy {
             return(cardsToBeSwapped);}
     }
 
-    private ArrayList<District> cardToBeSwapped() {
+    public ArrayList<District> cardToBeSwapped() {
         ArrayList<District> listDistrictToSwap=new ArrayList<>();
         ArrayList<District> listDistrict=player.getDistrictCards();
         for (District districtToCheck : listDistrict){
@@ -291,16 +291,16 @@ public class Strategy {
     }
 
     private boolean shouldBeSwapped(District districtToCheck) {
-        if (player.getCity().getBuiltDistrict().contains(districtToCheck))
+        if (player.getCity().getBuiltDistrict().stream().map(district -> district.getName()).toList().contains(districtToCheck.getName()))
             return(true);
         else
             return false;
     }
 
-    private boolean isThereAPlayerWithTwoTimesHisDistricts() {
+    public boolean isThereAPlayerWithTwoTimesHisDistricts() {
         ArrayList <Player> listOfPlayer=board.getListOfPlayer();
         for (Player playerComparing : listOfPlayer) {
-            if (!playerComparing.equals(this.player) && playerComparing.getDistrictCardsSize()>2*this.player.getDistrictCardsSize())
+            if (!playerComparing.equals(this.player) && playerComparing.getDistrictCardsSize()>=2*this.player.getDistrictCardsSize())
             return(true);
             }
         return(false);

@@ -134,15 +134,15 @@ public class Behaviour {
 	}
 
 	private Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForMagicianAdvanced());
+		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
 	}
 
 	private Character chooseCharacterForAssassin(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForAssassinAdvanced());
+		return (strategy.chooseCharacterForAssassinRandom(hashOfCharacters));
 	}
 
 	private Character chooseCharacterForThief(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForThiefAdvanced());
+		return (strategy.chooseCharacterForThiefRandom(hashOfCharacters));
 	}
 
 	public void ifPossibleBuildADistrict() {

@@ -234,7 +234,6 @@ public class StrategyTest {
 		// he has 2 points different
 		botMagician.buildDistrict(yellow02); // District value is 2
 
-		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
@@ -254,7 +253,6 @@ public class StrategyTest {
 		botMagician.buildDistrict(blue03); // District value is 3
 		botMagician.buildDistrict(green03); // District value is 3
 
-		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
@@ -273,7 +271,6 @@ public class StrategyTest {
 		botMagician.buildDistrict(blue03); // District value is 3
 		botMagician.buildDistrict(green03); // District value is 3
 
-		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
@@ -294,25 +291,7 @@ public class StrategyTest {
 		botMagician.buildDistrict(blue03); // District value is 3
 		botMagician.buildDistrict(green03); // District value is 3
 
-		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botMagician.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
-	}
-
-	@Test
-	void chooseCharacterForAssassinAdvancedWhenTargetHasAlreadyRevealCharacter() {
-		strategy = new Strategy(8, board, botAssassin.getPlayer());
-
-		ArrayList<Player> listOfPlayerForHash = new ArrayList<>();
-
-		listOfPlayerForHash.add(botArchitecte.getPlayer());
-		listOfPlayerForHash.add(botAssassin.getPlayer());
-
-		board.setListOfPlayer(listOfPlayerForHash);
-		Initializer.initTheHashOfViewCharacters(board.gethashOfViewCharacters(), listOfPlayerForHash);
-		board.revealCharacter(botArchitecte.getPlayer(), architect);
-
-		Character CharacterOfTheTarget = strategy.chooseCharacterForAssassinAdvanced();
-		assertEquals(architect, CharacterOfTheTarget);
 	}
 
 	@Test
@@ -408,7 +387,7 @@ public class StrategyTest {
 	}
 
 	@Test
-	void testchooseCharacterWithMostGolds3() {
+	void testChooseCharacterWithMostGolds3() {
 		//We now Try when the assassin has the most golds
 		board.getListOfPlayer().clear();
 		Player player1=new Player("p1");
@@ -432,4 +411,81 @@ public class StrategyTest {
 		assertEquals(player3, strategy.findThePlayerWithMostGolds());
 	}
 
+	@Test
+	void testChooseSpellForMagicianWhenTargetOtherPlayer(){
+		botMagician.getPlayer().getDistrictCards().add(new District(null,1,null,null));
+		botArchitecte.getPlayer().getDistrictCards().add(new District(null,1,null,null));
+		botArchitecte.getPlayer().getDistrictCards().add(new District(null,1,null,null));
+
+
+		strategy=new Strategy(8,board,botMagician.getPlayer());
+
+		assertEquals(botArchitecte.getPlayer(),strategy.findThePlayerWithMostCards());
+		assertEquals(0,strategy.chooseMagicianActionAdvanced().size());
+		assertEquals(true,strategy.isThereAPlayerWithTwoTimesHisDistricts());
+
+		assertEquals(null,strategy.cardToBeSwapped());
+	}
+	@Test
+	void testChooseSpellForMagicianWhenTargetDeck(){
+		District districtDoble =new District("districtDoble",1,"Purple","Prestige");
+		botMagician.buildDistrict(new District("districtDoble",1,"Purple","Prestige"));
+		botMagician.getPlayer().getDistrictCards().add(districtDoble);
+		botMagician.getPlayer().getDistrictCards().add(new District("districtOther",1,"Purple","Prestige"));
+
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+
+
+		strategy=new Strategy(8,board,botMagician.getPlayer());
+
+		assertEquals(botArchitecte.getPlayer(),strategy.findThePlayerWithMostCards());
+
+		assertEquals(districtDoble,strategy.chooseMagicianActionAdvanced().get(0));
+
+		assertEquals(false,strategy.isThereAPlayerWithTwoTimesHisDistricts());
+
+		assertEquals(districtDoble,strategy.cardToBeSwapped().get(0));
+	}
+	@Test
+	void testChooseSpellForMagicianWhenTargetDeck2(){
+		District districtDoble =new District("districtDoble",1,"Purple","Prestige");
+		District districtOtherDoble =new District("otherDistrictDoble",1,"Purple","Prestige");
+		botMagician.buildDistrict(new District("districtDoble",1,"Purple","Prestige"));
+		botMagician.buildDistrict(new District("otherDistrictDoble",1,"Purple","Prestige"));
+		botMagician.getPlayer().getDistrictCards().add(districtDoble);
+		botMagician.getPlayer().getDistrictCards().add(districtOtherDoble);
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+
+
+		strategy=new Strategy(8,board,botMagician.getPlayer());
+
+		assertEquals(botArchitecte.getPlayer(),strategy.findThePlayerWithMostCards());
+
+		assertEquals(districtDoble,strategy.chooseMagicianActionAdvanced().get(0));
+		assertEquals(districtOtherDoble,strategy.chooseMagicianActionAdvanced().get(1));
+
+		assertEquals(false,strategy.isThereAPlayerWithTwoTimesHisDistricts());
+
+		assertEquals(districtDoble,strategy.cardToBeSwapped().get(0));
+	}
+	@Test
+	void testChooseTargetOfSpellMagician(){
+		botMagician.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botWarlord.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+		botWarlord.getPlayer().getDistrictCards().add(new District("randomDistrict",1,"Purple","Prestige"));
+
+
+		strategy=new Strategy(8,board,botMagician.getPlayer());
+
+		assertEquals(botArchitecte.getPlayer(),strategy.findThePlayerWithMostCards());
+		assertEquals(true,strategy.isThereAPlayerWithTwoTimesHisDistricts());
+
+	}
 }
