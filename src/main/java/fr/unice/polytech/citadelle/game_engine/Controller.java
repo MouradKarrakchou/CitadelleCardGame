@@ -22,6 +22,8 @@ public class Controller {
 
 	/**
 	 * Controller constructor, setting-up the printer class, the Initializer class and the PhaseManager class
+	 *
+	 * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
 	 */
 	public Controller() {}
 

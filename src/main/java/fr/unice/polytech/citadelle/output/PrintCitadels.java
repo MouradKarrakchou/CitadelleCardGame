@@ -14,6 +14,11 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
 
+/**
+ * Prints the log
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class PrintCitadels {
 
 	public static void startCitadelles() {

@@ -13,6 +13,8 @@ import java.util.Optional;
  * he is also smart on the way to choose his own character,
  * on how he will do his spell and try to find the
  * best target by predicting who has what
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Strategator extends Behaviour{
 

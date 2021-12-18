@@ -15,6 +15,8 @@ import java.util.Optional;
  * Predict allows to try to predict the character of other players
  * by evaluating the situation of each player if the character
  * has not been revealed yet
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Predict {
 	Board board;

@@ -4,6 +4,8 @@ import fr.unice.polytech.citadelle.game.SpellDistrict;
 
 /**
  * Laboratory is a purple District which has a spell
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Laboratory  extends SpellDistrict {
 

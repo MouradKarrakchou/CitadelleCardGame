@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+/**
+ * Check the results, give the scores and the ranks
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Referee {
 	public static final int BONUS_FIRST = 4;
 	public static final int BONUS_END = 2;

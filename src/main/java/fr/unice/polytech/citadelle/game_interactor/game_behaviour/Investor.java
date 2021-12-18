@@ -12,6 +12,8 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 /**
  * Investor act by focusing expensive districts
  * to score a maximum of points
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Investor extends Behaviour {
 

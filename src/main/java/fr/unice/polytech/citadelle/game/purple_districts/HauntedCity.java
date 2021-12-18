@@ -4,6 +4,8 @@ import fr.unice.polytech.citadelle.game.ColorDistrict;
 
 /**
  * HauntedCity is a purple District which has a spell
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class HauntedCity extends ColorDistrict {
     private int roundBuilt;

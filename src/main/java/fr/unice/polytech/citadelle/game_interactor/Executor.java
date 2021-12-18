@@ -7,6 +7,11 @@ import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+/**
+ * Execute the actions asked by the behaviour
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class Executor {
 	Player player;
 

@@ -8,6 +8,8 @@ import fr.unice.polytech.citadelle.game.Player;
 
 /**
  * CityManagement class is used to allow a Behaviour to communicate with the given player's city.
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class CityManagement {
 	Player player;

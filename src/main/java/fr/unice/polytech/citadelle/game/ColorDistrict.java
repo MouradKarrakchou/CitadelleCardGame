@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Some purple Districts can change their own color
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class ColorDistrict extends District {
     public ColorDistrict(String name, int value, String color, String nameOfFamily) {

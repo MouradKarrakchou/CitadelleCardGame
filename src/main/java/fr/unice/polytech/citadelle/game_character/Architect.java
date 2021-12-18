@@ -9,6 +9,7 @@ import java.util.Optional;
 /**
  * The architect automatically draws two cards.
  * In addition of the tour collection (cards or coins), the architect can build up to 3 districts in one round.
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Architect extends Character {

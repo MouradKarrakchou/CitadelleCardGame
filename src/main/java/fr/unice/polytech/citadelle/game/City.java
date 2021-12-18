@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  *A city is composed of all the districts that the player has chosen to build.
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class City {

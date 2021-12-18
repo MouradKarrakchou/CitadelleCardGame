@@ -2,6 +2,8 @@ package fr.unice.polytech.citadelle.game;
 
 /**
  * Some purple Districts which act like a bonus
+ *
+ * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class BonusDistrict extends District {
     public BonusDistrict(String name, int value, String color, String nameOfFamily) {

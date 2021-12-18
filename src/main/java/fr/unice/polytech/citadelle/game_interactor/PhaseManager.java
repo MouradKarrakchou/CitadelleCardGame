@@ -8,6 +8,7 @@ import fr.unice.polytech.citadelle.game.Player;
 
 /**
  * The PhaseManager analyze the Game to deduct a particular phase
+ *
  * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class PhaseManager {
