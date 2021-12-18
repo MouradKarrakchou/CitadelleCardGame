@@ -189,7 +189,7 @@ public class Predict {
 		return false;
 	}
 
-	Character listGetCharacter(int indexOfCharacter) {
+	public Character listGetCharacter(int indexOfCharacter) {
 		ArrayList<Character> listOfCharacter = board.getListOfCharacter();
 
 		return listOfCharacter.get(indexOfCharacter);

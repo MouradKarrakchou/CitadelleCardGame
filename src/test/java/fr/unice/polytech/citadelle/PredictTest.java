@@ -252,4 +252,17 @@ public class PredictTest {
         assertEquals(false, predict.canBeWarlord(player1, untargetable));
     }
 
+    @RepeatedTest(100)
+    @Test
+    void listGetCharacterTest() {
+        assertEquals(new Assassin(), predict.listGetCharacter(Initializer.ASSASSIN_INDEX));
+        assertEquals(new Architect(), predict.listGetCharacter(Initializer.ARCHITECT_INDEX));
+        assertEquals(new Bishop(), predict.listGetCharacter(Initializer.BISHOP_INDEX));
+        assertEquals(new King(), predict.listGetCharacter(Initializer.KING_INDEX));
+        assertEquals(new Magician(), predict.listGetCharacter(Initializer.MAGICIAN_INDEX));
+        assertEquals(new Merchant(), predict.listGetCharacter(Initializer.MERCHANT_INDEX));
+        assertEquals(new Thief(), predict.listGetCharacter(Initializer.THIEF_INDEX));
+        assertEquals(new Warlord(), predict.listGetCharacter(Initializer.WARLORD_INDEX));
+    }
+
 }
