@@ -184,7 +184,7 @@ Les responsabilités des classes [Character](https://github.com/pns-si3-projects
   
 <img src="https://user-images.githubusercontent.com/90778036/146634067-b46d0923-f5d6-4541-820e-58082f6ab4e4.png" width="512">
   
-Malheureusement nous ne sommes pas encore parvenu à trouver une solution optimale à ce problème. Afin que la classe [Player](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Player.java) ne possède plus un élément de [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine), nous avons opté pour la solution ci-dessous.
+Malheureusement nous ne sommes pas encore parvenu à trouver une solution optimale à ce problème. Afin que la classe [Player](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/blob/master/src/main/java/fr/unice/polytech/citadelle/game/Player.java) ne possède plus un élément de [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine), nous avons opté pour la solution suivante :
 
 <img src="https://user-images.githubusercontent.com/90778036/146634222-f26d8a56-cc33-4925-91f1-41e25c229524.png" width="512">
   
