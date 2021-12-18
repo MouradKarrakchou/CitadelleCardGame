@@ -265,10 +265,10 @@ public class Behaviour {
 		return executor;
 	}
 
-	public ArrayList<Integer> chooseMagicianAction() {
+	public ArrayList<District> chooseMagicianAction() {
 		// return an empty array if he wants to swap Cards with another Character
 		// return the position of the Cards that he wants to swap
-		return (strategy.chooseMagicianAction());
+		return (strategy.chooseMagicianActionForRandom());
 		// (for now he always chooses to steal from another Character)
 	}
 

@@ -24,18 +24,18 @@ public class Magician extends Character {
         deckDistrict1.addAll(deckDistrict2copy);
         deckDistrict2.addAll(deckDistrict1copy);
     }
-    public ArrayList<District> swapCardsWithDeck(Behaviour bot, ArrayList<Integer> positionOfCardsToBeSwaped){
+    public ArrayList<District> swapCardsWithDeck(Behaviour bot, ArrayList<District> positionOfCardsToBeSwaped){
         ArrayList<District> districtDeleted=new ArrayList<>();
-        for (Integer integer : positionOfCardsToBeSwaped) {
+        for (District district : positionOfCardsToBeSwaped) {
             ArrayList<District> districtCards = bot.getPlayer().getDistrictCards();
-            districtDeleted.add(districtCards.get(integer));
-            bot.getPlayer().getDistrictCards().remove(integer.intValue());
+            districtDeleted.add(district);
+            districtCards.remove(district);
         }
         return districtDeleted;
     }
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-        ArrayList<Integer> magicianAction=bot.chooseMagicianAction();
+        ArrayList<District> magicianAction=bot.chooseMagicianAction();
         //If the magicianAction is empty then we have to exchange with another character
         if (magicianAction.size()==0){
             Character characterToSwapWith=bot.selectCharacterForSpell(hashOfCharacters);

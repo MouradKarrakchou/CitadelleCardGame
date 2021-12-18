@@ -112,21 +112,47 @@ public class Strategy {
         ArrayList<Character> listOfCharacterToNotSteal=new ArrayList<>();
         listOfCharacterToNotSteal.add(board.getListOfCharacter().get(Initializer.ASSASSIN_INDEX));
         listOfCharacterToNotSteal.add(board.getListOfCharacter().get(Initializer.THIEF_INDEX));
+        Character deadCharacter=board.findDeadCharacter();
+        if (deadCharacter!=null) listOfCharacterToNotSteal.add(deadCharacter);
         listOfCharacterToNotSteal.addAll(board.getListOfPlayerWhoHasAlreadyPlayed());
         Player playerWithMostGolds=findThePlayerWithMostGolds();
         return(predict.predictWhoIsPlayer(playerWithMostGolds,listOfCharacterToNotSteal));
+    }
+    public Character chooseCharacterForMagicianAdvanced(){
+        ArrayList<Character> listOfCharacterToNotSteal=new ArrayList<>();
+        Player playerWithMostCards=findThePlayerWithMostCards();
+        return(predict.predictWhoIsPlayer(playerWithMostCards,listOfCharacterToNotSteal));
+    }
 
+    private Player findThePlayerWithMostCards() {
+        ArrayList<Player> listOfPlayer= board.getListOfPlayer();
+        //We want to find the Player with the most cards
+        int mostDistrictCardsThatAPlayerHas=listOfPlayer.get(0).getDistrictCardsSize();
+        Player playerWithMostDistrictGames=listOfPlayer.get(0);
 
+        for (Player playerComparing : listOfPlayer) {
+            if (playerWithMostDistrictGames.equals(this.player)){
+                playerWithMostDistrictGames = playerComparing;
+                mostDistrictCardsThatAPlayerHas = playerComparing.getDistrictCardsSize();
+            }
+            else if (!playerComparing.equals(this.player)){
+                int numberOfDistrict = playerComparing.getDistrictCardsSize();
+                if (mostDistrictCardsThatAPlayerHas < numberOfDistrict) {
+                    playerWithMostDistrictGames = playerComparing;
+                    mostDistrictCardsThatAPlayerHas = playerComparing.getDistrictCardsSize();;}
+            }
+        }
+        /**PrintCitadels.printMagicianAdvancedChoice(playerWithMostDistrictGames);*/
+        return (playerWithMostDistrictGames);
     }
 
     public Player findThePlayerWithMostGolds() {
         ArrayList<Player> listOfPlayer= board.getListOfPlayer();
         //In this list we got the Assassin (if there is one) and he can't steal from him
         ArrayList<Player> listOfPlayerToNotTarget=board.getListOfPlayerWhoPlayed();
-        int k=0;
         //We want to find the Player with the most golds
-        int mostGoldsThatAPlayerHas=listOfPlayer.get(k).getGolds();
-        Player playerWithMostGold=listOfPlayer.get(k);
+        int mostGoldsThatAPlayerHas=listOfPlayer.get(0).getGolds();
+        Player playerWithMostGold=listOfPlayer.get(0);
 
         for (Player playerComparing : listOfPlayer) {
             if (playerWithMostGold.equals(this.player) || listOfPlayerToNotTarget.contains(playerWithMostGold)){
@@ -147,17 +173,14 @@ public class Strategy {
     public Player findThePlayerWithClosestScoreAssassin(){
         int predictedScore=playerPredictScore(player);
         ArrayList<Player> listOfPlayer=board.getListOfPlayer();
-        int k=0;
         //We want to find the player with the PredictedScore the closest to the score of our Player
-        int scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(k))-predictedScore);
-        Player playerWithClosestScore=listOfPlayer.get(k);
-        while (playerWithClosestScore.equals(this.player)){
-            scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(k))-predictedScore);
-            playerWithClosestScore=listOfPlayer.get(k);
-            k++;
-        }
+        int scoreDiffenreceWithClosestScore=abs(playerPredictScore(listOfPlayer.get(0))-predictedScore);
+        Player playerWithClosestScore=listOfPlayer.get(0);
 
         for (Player playerComparing : listOfPlayer) {
+            if (playerWithClosestScore.equals(this.player))
+                scoreDiffenreceWithClosestScore=abs(playerPredictScore(playerComparing)-predictedScore);
+                playerWithClosestScore=playerComparing;
             if (!playerComparing.equals(this.player)){
                 int scoreDifference = abs(playerPredictScore(playerComparing) - predictedScore);
                 if (scoreDiffenreceWithClosestScore > scoreDifference) {
@@ -237,8 +260,28 @@ public class Strategy {
     }
 
 
-    public ArrayList<Integer> chooseMagicianAction() {
+    public ArrayList<District> chooseMagicianActionForRandom() {
         return(new ArrayList());
+    }
+
+    public ArrayList<District> chooseMagicianActionAdvanced() {
+        if (isThereAPlayerWithTwoTimesHis()){
+            return (new ArrayList<>());
+        }
+        else return(CardToBeSwapped());
+    }
+
+    private ArrayList<District> CardToBeSwapped() {
+        return null;
+    }
+
+    private boolean isThereAPlayerWithTwoTimesHis() {
+        ArrayList <Player> listOfPlayer=board.getListOfPlayer();
+        for (Player playerComparing : listOfPlayer) {
+            if (!playerComparing.equals(this.player) && playerComparing.getDistrictCardsSize()>2*this.player.getDistrictCardsSize())
+            return(true);
+            }
+        return(false);
     }
 
     /**
