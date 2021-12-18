@@ -110,7 +110,7 @@ public class Predict {
 		ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
 		int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
 
-		return (handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains(Initializer.ARCHITECT_INDEX));
+		return (handOfPlayer.size() >= 3 && goldsOfPlayer >= 6 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.ARCHITECT_INDEX)));
 	}
 
 	// Is the Bishop interesting for this player? It can be if he has 6 or more
@@ -120,7 +120,7 @@ public class Predict {
 				listOfUntargetableCharacter);
 		ArrayList<District> cityOfPlayer = cityForPredictWhoIsPlayer(player);
 
-		return (cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains(Initializer.BISHOP_INDEX));
+		return (cityOfPlayer.size() >= 6 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.BISHOP_INDEX)));
 	}
 
 	// Is the King interesting for this player? It can be if he has 3 nobility
@@ -136,7 +136,7 @@ public class Predict {
 				counter++;
 		}
 
-		return (counter == 3 && listOfTargetableCharacter.contains(Initializer.KING_INDEX));
+		return (counter == 3 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.KING_INDEX)));
 	}
 
 	// Is the Merchant interesting for this player? It can be if he has 3 or more
@@ -152,7 +152,7 @@ public class Predict {
 				counter++;
 		}
 
-		return (counter >= 3 && listOfTargetableCharacter.contains(Initializer.MERCHANT_INDEX));
+		return (counter >= 3 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.MERCHANT_INDEX)));
 	}
 
 	// Is the Thief interesting for this player? It can be if he does not have a lot
@@ -162,7 +162,7 @@ public class Predict {
 				listOfUntargetableCharacter);
 		int goldsOfPlayer = goldsForPredictWhoIsPlayer(player);
 
-		return (goldsOfPlayer <= 3 && listOfTargetableCharacter.contains(Initializer.THIEF_INDEX));
+		return (goldsOfPlayer <= 3 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.THIEF_INDEX)));
 	}
 
 	// Is the Magician interesting for this player? It can be if he does not have a
@@ -172,7 +172,7 @@ public class Predict {
 				listOfUntargetableCharacter);
 		ArrayList<District> handOfPlayer = handForPredictWhoIsPlayer(player);
 
-		return (handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains(Initializer.MAGICIAN_INDEX));
+		return (handOfPlayer.size() <= 2 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.MAGICIAN_INDEX)));
 	}
 
 	// Is the Warlord interesting for this player? It can be if someone is close to
@@ -183,7 +183,7 @@ public class Predict {
 		ArrayList<Player> listOfPlayers = playersForPredictWhoIsPlayer(player);
 
 		for (Player otherPlayer : listOfPlayers)
-			if (otherPlayer.getCity().getBuiltDistrict().size() == 7 && listOfTargetableCharacter.contains(Initializer.WARLORD_INDEX))
+			if (otherPlayer.getCity().getBuiltDistrict().size() == 7 && listOfTargetableCharacter.contains(listGetCharacter(Initializer.WARLORD_INDEX)))
 				return true;
 
 		return false;

@@ -2,6 +2,8 @@ package fr.unice.polytech.citadelle;
 
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
+import fr.unice.polytech.citadelle.game.purple_districts.Graveyard;
+import fr.unice.polytech.citadelle.game.purple_districts.Observatory;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.Predict;
 import org.junit.jupiter.api.RepeatedTest;
@@ -46,9 +48,9 @@ public class PredictTest {
     @Test
     void canBeArchitectTest() {
         Player player = new Player("Player");
-        player.addDistrict(new District("Name1", 1, "Color", "NameF"));
-        player.addDistrict(new District("Name2", 1, "Color", "NameF"));
-        player.addDistrict(new District("Name3", 1, "Color", "NameF"));
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
 
         player.setGolds(6);
 
