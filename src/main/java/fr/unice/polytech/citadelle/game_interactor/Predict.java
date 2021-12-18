@@ -96,7 +96,7 @@ public class Predict {
 	}
 
 	// Return the players other than the one who is targeted
-	private ArrayList<Player> playersForPredictWhoIsPlayer(Player player) {
+	public ArrayList<Player> playersForPredictWhoIsPlayer(Player player) {
 		ArrayList<Player> listOfPlayers = (ArrayList<Player>) board.getListOfPlayer().clone();
 		listOfPlayers.remove(player);
 		return listOfPlayers;
