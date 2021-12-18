@@ -232,7 +232,7 @@ Nous avons aussi commencé à imaginer une nouvelle classe dans le [game_engine]
 <br>
   
 ## Points positifs
-Concernant le [game_interacor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor), la manière dont nous avons choisi de découper les bots nous laisse maintenant la liberté de créer des nouveaux bot avec un comportement différent des précédents sans toucher au reste du code. Pour créer un nouveau bot nous avons juste à lui assigner différentes stratégies de jeu.
+Concernant le [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor), la manière dont nous avons choisi de découper les bots nous laisse maintenant la liberté de créer des nouveaux bot avec un comportement différent des précédents sans toucher au reste du code. Pour créer un nouveau bot nous avons juste à lui assigner différentes stratégies de jeu.
   
 Le [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine) est bien découpé et les responsabilités sont bien répartis entre les classes du [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine).
   
