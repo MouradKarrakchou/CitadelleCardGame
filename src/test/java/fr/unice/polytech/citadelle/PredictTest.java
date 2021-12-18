@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle;
 
+import fr.unice.polytech.citadelle.characters_class.*;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game.Character;
 import fr.unice.polytech.citadelle.game.purple_districts.Graveyard;
@@ -55,6 +56,157 @@ public class PredictTest {
         player.setGolds(6);
 
         assertEquals(true, predict.canBeArchitect(player, new ArrayList<>()));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void cannotBeArchitectTest() {
+        Player player = new Player("Player");
+        player.addDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.addDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.addDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        player.setGolds(6);
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new Architect());
+
+        assertEquals(false, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void canBeBishopTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
+        player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+
+        assertEquals(true, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void cannotBeBishopTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
+        player.buildDistrict(new Observatory("Observatory", 5,"Purple","Prestige"));
+        player.buildDistrict(new Graveyard("Graveyard", 5,"Purple","Prestige"));
+        player.buildDistrict(new District("Battlefield",3,"Red","Soldiery"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new Bishop());
+
+        assertEquals(false, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void canBeKingTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+
+        assertEquals(true, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void cannotBeKingTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+        player.buildDistrict(new District("Castle",4,"Yellow","Nobility"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new King());
+
+        assertEquals(false, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void canBeMerchantTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+
+        assertEquals(true, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void cannotBeMerchantTest() {
+        Player player = new Player("Player");
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.buildDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new Merchant());
+
+        assertEquals(false, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void canBeThiefTest() {
+        Player player = new Player("Player");
+        player.setGolds(3);
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+
+        assertEquals(true, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void cannotBeThiefTest() {
+        Player player = new Player("Player");
+        player.setGolds(3);
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new Thief());
+
+        assertEquals(false, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void canBeMagicianTest() {
+        Player player = new Player("Player");
+        player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+
+        assertEquals(true, predict.canBeArchitect(player, untargetable));
+    }
+
+    @RepeatedTest(100)
+    @Test
+    void cannotBeMagicianTest() {
+        Player player = new Player("Player");
+        player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+        player.addDistrict(new District("Docks", 3, "Green", "Trade and Handicrafts"));
+
+        ArrayList<Character> untargetable = new ArrayList<>();
+        untargetable.add(new Merchant());
+
+        assertEquals(false, predict.canBeArchitect(player, untargetable));
     }
 
     @RepeatedTest(100)
