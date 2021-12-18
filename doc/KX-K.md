@@ -77,6 +77,7 @@ Un [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-p
 <br>
 
 # Informations utiles
+## Liens
 * La version d'octobre 2021 du [sujet](https://unice-my.sharepoint.com/:w:/g/personal/philippe_collet_unice_fr/EQzIs63_prFMqXwo3vkNopIBAK8EIf8rAeHw0J5bjtag4g?e=FEOTxZ) du projet de Citadelles.
 * Afin de découvrir le jeu nous avons regardé [cette vidéo](https://videoregles.net/videoregle/citadelles).
 
@@ -84,7 +85,42 @@ Un [Behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-p
 * http://jeuxstrategie.free.fr/Citadelles_complet.php
 * https://www.regledujeu.fr/citadelles/
 
-**Lien vers la [documentation du projet](https://lebihanleo.github.io/Citadelle_Equipe_K_Javadoc/)**
+## Diagramme de classe
+### [game_behaviour](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/game_behaviour)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719785383923792/game_behaviour_diagrams.svg" width="512">
+
+### [game_character](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_character)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719785723666442/game_character_diagrams.svg" width="1024">
+
+### [game](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719786562547773/game_diagrams.svg" width="1024">
+
+### [game_engine](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_engine)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719787430739998/game_engine_diagrams.svg" width="1024">
+
+### [game_interactor](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719788139581480/game_interactor.svg" width="1024">
+
+### [game_strategy](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game_interactor/game_strategy)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719788932317204/game_strategy_diagrams.svg" width="1024">
+
+### [output](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/output)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719789267873802/output_diagrams.svg" width="512">
+
+### [purple_districts](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle/game/purple_districts)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719789565644820/purple_districts_diagrams.svg" width="1024">
+
+### [citadelle](https://github.com/pns-si3-projects/projet2-ps5-21-22-ps5-21-22-projet2-k/tree/master/src/main/java/fr/unice/polytech/citadelle)
+
+<img src="https://cdn.discordapp.com/attachments/429627668724449291/921719790459043900/fr.unice.polytech.citadelle_diagrams.svg" width="1024">
 
 <br>
 <br>
