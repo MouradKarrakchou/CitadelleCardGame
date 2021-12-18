@@ -27,6 +27,12 @@ public class Warlord extends Character {
         playerToDestroy.getCity().getBuiltDistrict().remove(districtToDestroy);
         walordPlayer.setGolds(walordPlayer.getGolds()-(districtToDestroy.getValue()-1));
     }
+
+    /**
+     * Execute the spell
+     * @param bot
+     * @param hashOfCharacters
+     */
     @Override
     public void spellOfTurn(Behaviour bot, LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
         super.spellOfTurnDistrictFamily(bot,"Warlord","Soldiery");
