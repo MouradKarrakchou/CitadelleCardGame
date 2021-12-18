@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 public class Thief extends Character {
+
     public Thief(){
         super("Thief", 2);
     }
