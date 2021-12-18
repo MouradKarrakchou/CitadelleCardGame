@@ -633,4 +633,50 @@ public class StrategyTest {
 		assertEquals(assassin, roundMan.chooseCharacter(aBehaviour, deckCharacter));
 	}
 
+	@Test
+	public void isThereAFamilyTestNobility(){
+		Player bob = new Player("bob");
+		Behaviour bobBehaviour = new Behaviour(bob, board);
+		bob.buildDistrict(new District("Nobility district 01", 3, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Nobility district 02", 1, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Nobility district 03", 6, "notImportant", "Nobility"));
+		bob.buildDistrict(new District("Other district 01", 1, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 02", 2, "notImportant", "otherFamily"));
+		bob.buildDistrict(new District("Other district 03", 4, "notImportant", "otherFamily"));
+
+		assertEquals(6, bob.getCity().getSizeOfCity());
+		assertEquals(Initializer.KING_INDEX, roundMan.isThereAFamily(bobBehaviour));
+	}
+
+	@Test
+	public void isThereAFamilyTestTradeAndHandicrafts(){
+		Player alice = new Player("alice");
+		Behaviour aliceBehaviour = new Behaviour(alice, board);
+		alice.buildDistrict(new District("Trade and Handicrafts district 01", 3, "notImportant", "Trade and Handicrafts"));
+		alice.buildDistrict(new District("Trade and Handicrafts district 02", 1, "notImportant", "Trade and Handicrafts"));
+		alice.buildDistrict(new District("Trade and Handicrafts district 03", 6, "notImportant", "Trade and Handicrafts"));
+		alice.buildDistrict(new District("Nobility district 01", 1, "notImportant", "Nobility"));
+		alice.buildDistrict(new District("Nobility district 02", 2, "notImportant", "Nobility"));
+		alice.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+
+		assertEquals(6, alice.getCity().getSizeOfCity());
+		assertEquals(Initializer.MERCHANT_INDEX, roundMan.isThereAFamily(aliceBehaviour));
+	}
+
+	@Test
+	public void isThereAFamilyTestNothing(){
+
+		Player fred = new Player("fred");
+		Behaviour fredBehaviour = new Behaviour(fred, board);
+		fred.buildDistrict(new District("Trade and Handicrafts district 01", 3, "notImportant", "Trade and Handicrafts"));
+		fred.buildDistrict(new District("Trade and Handicrafts district 02", 1, "notImportant", "Trade and Handicrafts"));
+		fred.buildDistrict(new District("Other district 01", 4, "notImportant", "otherFamily"));
+		fred.buildDistrict(new District("Nobility district 01", 1, "notImportant", "Nobility"));
+		fred.buildDistrict(new District("Nobility district 02", 2, "notImportant", "Nobility"));
+		fred.buildDistrict(new District("Other district 02", 2, "notImportant", "otherFamily"));
+
+		assertEquals(6, fred.getCity().getSizeOfCity());
+		assertTrue(roundMan.isThereAFamily(fredBehaviour) == -1);
+	}
+
 }
