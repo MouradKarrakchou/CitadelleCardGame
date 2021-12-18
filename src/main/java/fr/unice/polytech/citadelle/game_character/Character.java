@@ -60,9 +60,11 @@ public class Character {
     public  void setCharacterIsAlive(boolean characterIsAlive) {
         this.characterIsAlive = characterIsAlive;
     }
+
     public boolean getCharacterisAlive() {
         return characterIsAlive;
     }
+
     public String getName() {
         return name;
     }
@@ -70,6 +72,7 @@ public class Character {
     public int getValue() {
         return value;
     }
+
     @Override
     public boolean equals(Object obj) {
     	if(!(obj instanceof Character))

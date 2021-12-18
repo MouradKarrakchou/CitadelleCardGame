@@ -9,9 +9,11 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 public class Warlord extends Character {
+
     public Warlord(){
         super("Warlord", 8);
     }
+    
     private void destroyDistrict(Player playerToDestroy, District districtToDestroy,Player walordPlayer) {
         playerToDestroy.getCity().getBuiltDistrict().remove(districtToDestroy);
         walordPlayer.setGolds(walordPlayer.getGolds()-(districtToDestroy.getValue()-1));
