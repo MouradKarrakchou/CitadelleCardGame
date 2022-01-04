@@ -14,17 +14,21 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 public class Main {
 
 
-	public static void main(String... args) {
+	public static void main(String... args) throws Exception {
 		// Running a game
 		PrintCitadels.activateLevelInfo();
 		Controller controller = new Controller();
 		controller.initGame();
 
-		controller.runGame();
+		ArrayList<Player> leaderboard = controller.runGame();
 
 		// Running 1000 game and displaying bot win ratio
 		Statisticator stats = new Statisticator();
 		stats.runAThousandGames();
+
+		//Writing in the CSV file
+		CsvManager csv = new CsvManager(leaderboard);
+		csv.write();
 	}
 
 }

@@ -1,6 +1,8 @@
 package fr.unice.polytech.citadelle;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import au.com.bytecode.opencsv.CSVWriter;
@@ -14,14 +16,34 @@ public class CsvManager {
         this.leaderboard = leaderboard;
     }
 
-    void write() throws Exception {
-        String csv = "results.csv";
+    void existingFile() throws Exception {
+        File csvFile = new File("src\\main\\resources\\save\\results.csv");
+        if(!csvFile.isFile()) createFile();
+
+        else write();
+    }
+
+    void createFile() throws Exception {
+        String csv = "src\\main\\resources\\save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
+
         //Create record
-        String [] record = "BotType,1,2,3,4,5,6,7,8,Win rate,Games played".split(",");
+        String [] record = "BotType,1,2,3,4,5,6,7".split(","); //Win rate,Games played
+
         //Write the record to file
         writer.writeNext(record);
 
+        //close the writer
+        writer.close();
+    }
+
+    void write() throws Exception {
+        String csv = "src\\main\\resources\\save\\results.csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(csv));
+        //Create record
+        String [] record = "BotType,1,2,3,4,5,6,7".split(","); //Win rate,Games played
+        //Write the record to file
+        writer.writeNext(record);
 
         String toWrite = "";
         int numberOfPlayers = leaderboard.size();
@@ -34,11 +56,18 @@ public class CsvManager {
             for(int j = 0; j < numberOfPlayers; j++) {
                 toWrite += "0,";
             }
+
+            record = toWrite.split(",");
+            writer.writeNext(record);
+            toWrite = "";
         }
-        record = toWrite.split(",");
-        writer.writeNext(record);
+
 
         //close the writer
         writer.close();
+    }
+
+    void read() throws Exception {
+
     }
 }
