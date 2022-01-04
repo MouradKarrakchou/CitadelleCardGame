@@ -1,26 +1,18 @@
 package fr.unice.polytech.citadelle;
 
 public class StatsBot {
-	private String name;
-	private int numberOfGamePlay;
-	private int numberOfGameWin;
-	private int numberOfGameLoose;
-	private double percentageOfGameWin;
-	private double percentageOfGameLoose;
+	private final String botName;
+	private int numberOfGamePlay = 0;
+	private int numberOfGameWin = 0;
 
-	public StatsBot(String name, int numberOfGamePlay,int numberOfGameWin, int numberOfGameLoose, int percentageOfGameWin, int percentageOfGameLoose) {
-		this.name = name;
-		this.numberOfGamePlay = numberOfGamePlay;
-		this.numberOfGamePlay = numberOfGameWin;
-		this.numberOfGamePlay = numberOfGameLoose;
-		this.numberOfGamePlay = percentageOfGameWin;
-		this.numberOfGamePlay = percentageOfGameLoose;
+	public StatsBot(String botName) {
+		this.botName = botName;
 	}
 
 	public String getName() {
-		return name;
+		return botName;
 	}
-	
+
 	public int getNumberOfGamePlay() {
 		return numberOfGamePlay;
 	}
@@ -29,36 +21,15 @@ public class StatsBot {
 		this.numberOfGameWin = numberOfGameWin;
 	}
 
-	public int getNumberOfGameLoose() {
-		return numberOfGameLoose;
+	public double getWinrate() {
+		return numberOfGamePlay == 0 ? 0 : (numberOfGameWin / (float) numberOfGamePlay) * 100;
 	}
 
-	public double getPercentageOfGameWin() {
-		return percentageOfGameWin;
-	}
-
-	public void setPercentageOfGameWin(double percentageOfGameWin) {
-		this.percentageOfGameWin = percentageOfGameWin;
-	}
-
-	public double getPercentageOfGameLoose() {
-		return percentageOfGameLoose;
-	}
-
-	public void setPercentageOfGameLoose(double percentageOfGameLoose) {
-		this.percentageOfGameLoose = percentageOfGameLoose;
-	}
-
-	public void IncreaseNumberOfGamePlay() {
+	public void increaseNumberOfGamePlay() {
 		this.numberOfGamePlay++;
 	}
 
-	public void IncreaseNumberOfGameWin() {
+	public void increaseNumberOfGameWin() {
 		this.numberOfGameWin++;
 	}
-	
-	public void IncreasenumberOfGameLoose() {
-		this.numberOfGameLoose++;
-	}
-
 }
