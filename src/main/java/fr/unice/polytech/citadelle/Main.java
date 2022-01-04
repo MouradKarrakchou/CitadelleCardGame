@@ -21,5 +21,7 @@ public class Main {
 		
 		controller.initGame();
 		leaderboard = controller.runGame();
+
 	}
+
 }
