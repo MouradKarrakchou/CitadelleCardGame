@@ -245,7 +245,7 @@ public class PrintCitadels {
 				"\tThe "+nameOfTheCharacter+" has " + collectGold + " "+nameOfTheFamilyDistrict+" district. (+" + stringColoredGold(collectGold) + colorize(")", BRIGHT_WHITE_TEXT()));
 	}
 	public static void printCharacterEarnedNoMoney(String nameOfTheCharacter,String nameOfTheFamilyDistrict) {
-		LOGGER.info("\tThe "+ nameOfTheCharacter+" has no "+nameOfTheFamilyDistrict+" District. (+"+stringColoredGold(0)+")");
+		LOGGER.info("\tThe "+ nameOfTheCharacter+" has no "+nameOfTheFamilyDistrict+" District. (+"+stringColoredGold(0)+ colorize(")", BRIGHT_WHITE_TEXT()));
 	}
 
 	public static Attribute getDistrictColor(District district) {
@@ -310,7 +310,7 @@ public class PrintCitadels {
 		String output = "\t- The character " + character.getName() + " has been ";
 		String output2 = "burned";
 		String output3 = ". (players can see it but cannot pick it)";
-		LOGGER.info(output + colorize(output2, BRIGHT_YELLOW_TEXT()) + output3);
+		LOGGER.info(output + colorize(output2, BRIGHT_YELLOW_TEXT()) + colorize(output3, BRIGHT_WHITE_TEXT()));
     }
 
 	public static void printAssassinAdvancedChoice(Player playerWithClosestScore, int predictedScore, int scoreDiffenreceWithClosestScore) {
