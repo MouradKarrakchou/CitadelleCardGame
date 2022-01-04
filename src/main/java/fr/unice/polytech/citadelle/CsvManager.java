@@ -52,8 +52,11 @@ public class CsvManager {
             for(int j = 0; j < i; j++) {
                 toWrite += "0,";
             }
+
             toWrite += 1 + ",";
-            for(int j = 0; j < numberOfPlayers; j++) {
+
+            //6 = maximum of possible players minus one
+            for(int j = 0; j < 6 - i; j++) {
                 toWrite += "0,";
             }
 
