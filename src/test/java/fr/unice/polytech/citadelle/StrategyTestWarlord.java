@@ -8,6 +8,7 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,8 @@ public class StrategyTestWarlord {
 
     @BeforeEach
     public void setup(){
+        PrintCitadels.activateLevelWarning();
+
         green01 = new District("greenDistrict", 1, "Green", "empty");
         green03 = new District("greenDistrict", 3, "Green", "empty");
         green06 = new District("greenDistrict", 6, "Green", "empty");

@@ -10,6 +10,7 @@ import fr.unice.polytech.citadelle.game_interactor.Executor;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,6 @@ import static org.mockito.Mockito.times;
 public class SpellDistrictTest {
 
     private final DeckDistrict deckDistrict = new DeckDistrict();
-    private final Initializer initializer = new Initializer();
 
     Player player = new Player("Player");
     Executor executor = new Executor(player);
@@ -33,7 +33,8 @@ public class SpellDistrictTest {
 
     @BeforeEach
     void beforeEach() {
-        initializer.initDeckDistrict(deckDistrict);
+        PrintCitadels.activateLevelWarning();
+        Initializer.initDeckDistrict(deckDistrict);
     }
 
     @RepeatedTest(1)

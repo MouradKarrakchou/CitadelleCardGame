@@ -10,6 +10,8 @@ import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Predict;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,10 @@ public class PredictTest {
     Merchant merchant;
     Warlord warlord;
 
-
+    @BeforeEach
+    void init() {
+        PrintCitadels.activateLevelWarning();
+    }
 
     @RepeatedTest(1)
     //@Test

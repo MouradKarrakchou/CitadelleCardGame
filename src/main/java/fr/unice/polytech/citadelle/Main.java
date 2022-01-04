@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Controller;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 /**
  * Initialize and run a Game
@@ -13,14 +14,19 @@ import fr.unice.polytech.citadelle.game_engine.Controller;
 public class Main {
 
 	public static void main(String... args) {
+		PrintCitadels.activateLevelInfo();
 		Controller controller = new Controller();
 		Statisticator statisticator = new Statisticator();
 		ArrayList<Player> leaderboard = new ArrayList<>();
 		
 		controller.initGame();
+<<<<<<< HEAD
 		leaderboard = controller.runGame();
 		
 		
 
+=======
+		controller.runGame();
+>>>>>>> 0d18627fe05cb292888d1c71f9cea92bef071ea8
 	}
 }

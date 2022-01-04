@@ -5,6 +5,8 @@ import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,11 @@ public class DeckCharacterTest {
     private Warlord theWarlord = new Warlord();
 
     private DeckCharacter deckOfCharacters;
+
+    @BeforeEach
+    void init(){
+        PrintCitadels.activateLevelWarning();
+    }
 
     @RepeatedTest(1)
     //@Test

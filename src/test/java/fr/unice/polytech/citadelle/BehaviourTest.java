@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ public class BehaviourTest {
 
 	@BeforeEach
 	public void init() {
+		PrintCitadels.activateLevelWarning();
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
     	board = new Board(new ArrayList<Player>(),new ArrayList<Character>(), deckDistrict, new DeckCharacter());
@@ -206,7 +208,6 @@ public class BehaviourTest {
 	
 	@RepeatedTest(1)
     public void pickCardsInDeckTest() {
-		System.out.println("-------aaaaaaaaaaaaa------");
 		DeckDistrict theDeckDistrict = new DeckDistrict();
 		theDeckDistrict.initialise();
         ArrayList<District> pickedCard = new ArrayList<District>();

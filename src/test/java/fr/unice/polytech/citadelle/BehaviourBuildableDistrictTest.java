@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ public class BehaviourBuildableDistrictTest {
 	
     @BeforeEach
     void beforeEach(){
+        PrintCitadels.activateLevelWarning();
     	Board board = new Board();
     	player01 = new Player("Player01");
         behaviourOfPlayer01 = new Behaviour(player01, board);

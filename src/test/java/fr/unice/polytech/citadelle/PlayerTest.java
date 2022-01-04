@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,8 @@ public class PlayerTest {
 
     @BeforeEach
     void beforeEach(){
+        PrintCitadels.activateLevelWarning();
+
         player.getDistrictCards().clear();
         player.getDistrictCards().add(new District("Haunted City", 2,"empty","empty"));
         player.getDistrictCards().add(new District("Prison", 2,"empty","empty"));

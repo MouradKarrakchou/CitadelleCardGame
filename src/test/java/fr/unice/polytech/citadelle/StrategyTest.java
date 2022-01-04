@@ -10,6 +10,7 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.Strategy;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -57,6 +58,8 @@ public class StrategyTest {
 
 	@BeforeEach
 	public void init() {
+		PrintCitadels.activateLevelWarning();
+
 		hashOfCharacters = new LinkedHashMap<>();
 		deckDistrict = new DeckDistrict();
 		board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), deckDistrict, new DeckCharacter());
