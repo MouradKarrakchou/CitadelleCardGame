@@ -27,7 +27,6 @@ public class CsvManager {
     }
 
     boolean emptyFile() throws Exception {
-        System.out.println(getNumberOfLine());
         if(getNumberOfLine() == 1) {
             append();
             return true;
@@ -92,7 +91,6 @@ public class CsvManager {
 
     int getNumberOfLine() throws Exception {
         List<String[]> allRows = read();
-        System.out.println(allRows);
         return allRows.size();
     }
 
