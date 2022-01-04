@@ -116,5 +116,12 @@ public class Board {
         }
         return null;
     }
+    public Character findCharacter(String characterName){
+        for (Character character: listOfCharacter){
+            if (character.getName().equals(characterName))
+                return(character);
+        }
+        return null;
+    }
 }
 

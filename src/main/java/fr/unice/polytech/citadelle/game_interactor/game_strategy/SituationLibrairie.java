@@ -2,6 +2,8 @@ package fr.unice.polytech.citadelle.game_interactor.game_strategy;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game_character.Character;
 
 
@@ -10,8 +12,8 @@ public class SituationLibrairie {
 
 	
 	 
-	public SituationLibrairie(ArrayList<Situation> librairieContent) {
-		this.librairieContent = librairieContent;
+	public SituationLibrairie(Board board) {
+		this.librairieContent = SituationInitializer.generateAllSituations(board);
 	}
 	
 	public ArrayList<Situation> filterByOrderOfPlay(ArrayList<Situation> listOfSituation, int orderOfPlay){

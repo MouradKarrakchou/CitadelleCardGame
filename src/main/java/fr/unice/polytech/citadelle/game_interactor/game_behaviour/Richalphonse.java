@@ -3,6 +3,7 @@ package fr.unice.polytech.citadelle.game_interactor.game_behaviour;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.game_strategy.RichalphonseStrategy;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Situation;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public class Richalphonse extends Behaviour {
     RichalphonseStrategy richStrat;
+    Situation currentBestSituation;
     
 
     public Richalphonse(Player player, Board board) {
@@ -88,7 +90,9 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Character selectCharacterForSpell(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-        return null;
+        if (currentBestSituation.getTargetCharacter().isEmpty())
+            return super.selectCharacterForSpell(hashOfCharacters);
+        return(currentBestSituation.getTargetCharacter().get());
     }
 
     /**
@@ -97,8 +101,20 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Player selectPlayerForWarlord() {
-        return null;
+        if (currentBestSituation.getTargetPlayer().isEmpty())
+            return strategy.choosePlayerForWarlordRandom();
+        return (currentBestSituation.getTargetPlayer().get());
     }
+    /**
+     * According to the Magician strategy, will try to choose the suitable Player to use Magician spell.
+     * @return The Player to swap card with.
+     */
+    public Player choosePlayerForMagicianSpell() {
+        if (currentBestSituation.getTargetPlayer().isEmpty())
+            return strategy.choosePlayerForMagicianRandom();
+        return currentBestSituation.getTargetPlayer().get();
+    }
+
     /**
      * return the position of the Cards that he wants to swap
      * @return Empty -> The magician choose to swap its cards with another player.
@@ -115,8 +131,11 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Character chooseCharacterWithStrategy(Behaviour bot) {
-    	richStrat.getBestSituation(board.getListOfPlayerWhoHasAlreadyPlayed().size()+1, board.getDeckCharacter().getDeckCharacter());
-        return null;
+    	Situation situationWeAreIn=richStrat.getBestSituation(board.getListOfPlayerWhoHasAlreadyPlayed().size()+1, board.getDeckCharacter().getDeckCharacter());
+        this.currentBestSituation=situationWeAreIn;
+        if (situationWeAreIn.getCharacterToChoose().isEmpty())
+            return board.getDeckCharacter().getDeckCharacter().remove(0);
+        return situationWeAreIn.getCharacterToChoose().get();
     }
 
 

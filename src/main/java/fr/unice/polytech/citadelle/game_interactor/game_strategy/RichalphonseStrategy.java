@@ -10,6 +10,7 @@ import java.util.function.Function;
 
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game.purple_districts.Library;
 import fr.unice.polytech.citadelle.game_character.Character;
 
 
@@ -22,15 +23,13 @@ public class RichalphonseStrategy {
     
     //---------------
     SituationLibrairie librairie;
-    Optional<Character> targetCharacter;
-    Optional<Player> targetPlayer;
+
 
 
     public RichalphonseStrategy(Board board, Player player) {
         this.board = board;
         this.currentPlayer = player;
-        targetCharacter= Optional.empty();
-        targetPlayer= Optional.empty();
+        librairie=new SituationLibrairie(board);
     }
 
     public LinkedHashMap<String,MyInterface> chooseCharacterWithStrategy() {
@@ -57,8 +56,6 @@ public class RichalphonseStrategy {
 
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
-		this.targetCharacter = bestSituation.getTargetCharacter();
-		this.targetPlayer = bestSituation.getTargetPlayer();
     	return bestSituation;
     }
     
