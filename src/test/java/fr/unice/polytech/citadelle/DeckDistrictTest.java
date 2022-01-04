@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,8 @@ public class DeckDistrictTest {
 
     @BeforeEach
     void beforeEach(){
+        PrintCitadels.activateLevelWarning();
+
         Collections.addAll(numberOfCards,3, 5, 3, 4, 3, 4, 3, 1, 3, 5, 3, 3, 2, 4, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1);
 
         Collections.addAll(nameOfDistrict,"Temple", "Tavern", "Watchtower");

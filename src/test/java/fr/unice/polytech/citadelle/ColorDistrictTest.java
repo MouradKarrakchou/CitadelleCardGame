@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static org.mockito.Mockito.*;
+
+import fr.unice.polytech.citadelle.output.PrintCitadels;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -23,9 +26,13 @@ import java.util.ArrayList;
 
 public class ColorDistrictTest {
     Referee referee = new Referee(new Board());
-
-
     Board board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
+
+    @BeforeEach
+    void init(){
+        PrintCitadels.activateLevelWarning();
+    }
+
 
     @RepeatedTest(1)
     //@Test

@@ -3,6 +3,7 @@ package fr.unice.polytech.citadelle.output;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,13 @@ import static com.diogonunes.jcolor.Attribute.*;
 public class PrintCitadels {
 	private final static Logger LOGGER = Logger.getLogger(PrintCitadels.class.getName());
 
+	public static void activateLevelInfo(){
+		LOGGER.setLevel(Level.INFO);
+	}
+
+	public static void activateLevelWarning(){
+		LOGGER.setLevel(Level.WARNING);
+	}
 
 	public static void startCitadelles() {
 		System.setProperty("java.util.logging.SimpleFormatter.format", colorize("%5$s %n", BRIGHT_WHITE_TEXT()));

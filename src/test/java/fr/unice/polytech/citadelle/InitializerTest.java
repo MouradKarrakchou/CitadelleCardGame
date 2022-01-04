@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,8 @@ public class InitializerTest {
 	
 	@BeforeEach
 	public void init() {
+		PrintCitadels.activateLevelWarning();
+
 		init = new Initializer();
 		hashOfCharacters= new LinkedHashMap<Character, Optional<Behaviour>>();
 		listOfAllCharacters= new ArrayList<Character>();

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,8 @@ public class ExecutorTest {
 
 	@BeforeEach
 	public void init() {
+		PrintCitadels.activateLevelWarning();
+
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");

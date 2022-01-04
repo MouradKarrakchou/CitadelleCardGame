@@ -4,6 +4,7 @@ import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,8 @@ public class CharacterTest {
 
     @BeforeEach
     public void init(){
+        PrintCitadels.activateLevelWarning();
+
         hashOfCharacters = new LinkedHashMap<>();
         deckDistrict=new DeckDistrict();
         listOfPlayer=new ArrayList<>();

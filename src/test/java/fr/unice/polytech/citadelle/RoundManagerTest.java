@@ -3,6 +3,7 @@ package fr.unice.polytech.citadelle;
 import fr.unice.polytech.citadelle.game_character.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.RepeatedTest;
@@ -47,6 +48,7 @@ public class RoundManagerTest {
 	Initializer init;
 	@BeforeEach
 	public void init() {
+		PrintCitadels.activateLevelWarning();
 
 		init = new Initializer();
 		deckDistrict = new DeckDistrict();

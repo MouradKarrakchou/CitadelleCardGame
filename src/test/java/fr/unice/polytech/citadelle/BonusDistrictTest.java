@@ -9,6 +9,8 @@ import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_interactor.Executor;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +26,11 @@ public class BonusDistrictTest {
     Executor executor = new Executor(player);
     Board board = new Board(listOfPlayer,new ArrayList<>(), deckDistrict, deckCharacter);
     Referee referee = new Referee(board);
+
+    @BeforeEach
+    void init(){
+        PrintCitadels.activateLevelWarning();
+    }
 
     @RepeatedTest(1)
     void dragonGateBonusTest() {

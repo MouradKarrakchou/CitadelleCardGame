@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ public class PhaseManagerTest {
 	
 	@BeforeEach
 	public void init() {
+		PrintCitadels.activateLevelWarning();
+
 	    board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
 		player = new Player("testPlayer");
 		phaseManager = new PhaseManager(player, board);
