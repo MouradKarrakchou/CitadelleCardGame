@@ -29,6 +29,7 @@ public class Main {
 		//Writing in the CSV file
 		CsvManager csv = new CsvManager(leaderboard);
 		csv.saveFile();
+		//csv.read();
 	}
 
 }
