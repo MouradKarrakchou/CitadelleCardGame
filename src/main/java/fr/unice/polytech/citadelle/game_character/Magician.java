@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle.game_character;
 
 import fr.unice.polytech.citadelle.game.District;
+import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
@@ -24,12 +25,12 @@ public class Magician extends Character {
 
     /**
      * swap cards between the two bots
-     * @param bot1
-     * @param bot2
+     * @param player1
+     * @param player2
      */
-    public void swapCardsWithBot(Behaviour bot1,Behaviour bot2) {
-        ArrayList<District> deckDistrict1=bot1.getPlayer().getDistrictCards();
-        ArrayList<District> deckDistrict2=bot2.getPlayer().getDistrictCards();
+    public void swapCardsWithBot(Player player1,Player player2) {
+        ArrayList<District> deckDistrict1=player1.getDistrictCards();
+        ArrayList<District> deckDistrict2=player2.getDistrictCards();
         ArrayList<District> deckDistrict1copy = new ArrayList<>(deckDistrict1);
         ArrayList<District> deckDistrict2copy = new ArrayList<>(deckDistrict2);
         deckDistrict1.clear();
@@ -65,15 +66,11 @@ public class Magician extends Character {
         ArrayList<District> magicianAction=bot.chooseMagicianAction();
         //If the magicianAction is null it means that the bot decided to not do his spell
         if (magicianAction == null) return;
-        //If the magicianAction is empty then we have to exchange with another character
+        //If the magicianAction is empty then we have to exchange with another player
         else if (magicianAction.size() == 0){
-            Character characterToSwapWith=bot.selectCharacterForSpell(hashOfCharacters);
-            Optional<Behaviour> botForSwap=hashOfCharacters.get(characterToSwapWith);
-            if (botForSwap.isPresent()){
-                swapCardsWithBot(bot,botForSwap.get());
-                PrintCitadels.printMagicianSpellSwapHands(characterToSwapWith);}
-            else
-                PrintCitadels.printMagicianSpellFailed(characterToSwapWith);}
+            Player playerForSwap=bot.choosePlayerForMagicianSpell();
+            swapCardsWithBot(bot.getPlayer(),playerForSwap);
+            PrintCitadels.printMagicianSpellSwapHands(playerForSwap);}
         //If the magicianAction isn't empty it's an array of Districts to be swapped
         else
             PrintCitadels.printMagicianSpellSwapCards(swapCardsWithDeck(bot,magicianAction));

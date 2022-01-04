@@ -238,19 +238,13 @@ public class PrintCitadels {
 		System.out.println(colorize(output, GREEN_TEXT()));
 	}
 
-	public static void printMagicianSpellSwapHands(Character character) {
-		String output = "\t[!] The Magician swaps hand with " + character;
+	public static void printMagicianSpellSwapHands(Player player) {
+		String output = "\t[!] The Magician swaps hand with " + player;
 		System.out.println(colorize(output, CYAN_TEXT()));
 	}
 
 	public static void printMagicianSpellSwapCards(ArrayList<District> districts) {
 		String output = "\t[!] The Magician swaps " + districts.size() + " with the deck: " + districts;
-		System.out.println(colorize(output, CYAN_TEXT()));
-	}
-
-	public static void printMagicianSpellFailed(Character characterToSwapWith) {
-		String output = "\t[!] The Magician tried to swap with " + characterToSwapWith
-				+ " but no Player has this Character.";
 		System.out.println(colorize(output, CYAN_TEXT()));
 	}
 
@@ -345,13 +339,13 @@ public class PrintCitadels {
 
 	public static void playerHasTwoTimesMoreHisCards(Player player) {
 		System.out.println("STRATEGY:");
-		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the deck",ITALIC()));
+		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Player or swap cards with the deck",ITALIC()));
 		System.out.println(colorize("He analysed the board and saw that there is a player that has two times more district than him. He will try to swap hands.",ITALIC()));
 	}
 
 	public static void playerSwapWithDeck(Player player) {
 		System.out.println("STRATEGY:");
-		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the deck",ITALIC()));
+		System.out.println(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Player or swap cards with the deck",ITALIC()));
 		System.out.println(colorize("He analysed the board and saw that no player has two times more district then him. He will change some cards with the deck.",ITALIC()));
 	}
 

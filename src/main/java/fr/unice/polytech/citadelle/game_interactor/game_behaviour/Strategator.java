@@ -95,8 +95,8 @@ public class Strategator extends Behaviour{
     }
 
     @Override
-    public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-        return (strategy.chooseCharacterForMagicianAdvanced());
+    public Player choosePlayerForMagicianSpell() {
+        return (strategy.choosePlayerForMagicianAdvanced());
     }
 
     @Override

@@ -37,9 +37,9 @@ public class Initializer {
 	public static final int WARLORD_INDEX = 7;
 
 	public final static int NUMBER_OF_PLAYER = 6;
-	private static final int NUMBER_OF_INVESTOR =2;
-	private static final int NUMBER_OF_RUSHER = 2;
-	private static final int NUMBER_OF_STRATEGATOR = 2;
+	private static final int NUMBER_OF_INVESTOR =0;
+	private static final int NUMBER_OF_RUSHER = 0;
+	private static final int NUMBER_OF_STRATEGATOR = 6;
 
 	/**
 	 * Reset a given hash of characters using a given list of characters.

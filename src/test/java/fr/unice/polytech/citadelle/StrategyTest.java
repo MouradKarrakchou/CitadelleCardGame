@@ -151,12 +151,6 @@ public class StrategyTest {
 		assertNotEquals("Assassin", characterChoosen);
 	}
 
-	@RepeatedTest(1)
-	void chooseCharacterForMagicianRandom() {
-		Strategy strategy = new Strategy(8, null, botMagician.getPlayer());
-		Character characterChoosen = strategy.chooseCharacterForMagicianRandom(hashOfCharacters);
-		assertNotEquals("Magician", characterChoosen);
-	}
 
 	@RepeatedTest(1)
 	//@Test

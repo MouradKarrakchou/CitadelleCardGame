@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.random;
 
 /**
  * Strategies on the choice of Character and on targets
@@ -67,14 +68,14 @@ public class Strategy {
 
     /**
      * Randomly choose a player (self-excluded) to use Magician spell.
-     * @return The chosen character.
+     * @return The chosen player.
      */
-    public Character chooseCharacterForMagicianRandom(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters){
-        List<Character> list = hashOfCharacters.keySet().stream().toList();
-        Character randomCharacter=list.get(randomInt(numberOfCharacter));
-        while (randomCharacter.getName().equals("Magician"))
-            randomCharacter=list.get(randomInt(numberOfCharacter));
-        return randomCharacter;
+    public Player choosePlayerForMagicianRandom(){
+        List<Player> listOfPlayer = board.getListOfPlayer();
+        Player randomPlayer=listOfPlayer.get(randomInt(listOfPlayer.size()));
+        while (randomPlayer.equals(this.player))
+            randomPlayer=listOfPlayer.get(randomInt(listOfPlayer.size()));
+        return randomPlayer;
     }
 
     /**
@@ -143,12 +144,11 @@ public class Strategy {
 
     /**
      * (Magician) A smarter way to find the charter to attack.
-     * @return The character to use Magician spell on.
+     * @return The player to use Magician spell on.
      */
-    public Character chooseCharacterForMagicianAdvanced(){
-        ArrayList<Character> listOfCharacterToNotSteal=new ArrayList<>();
+    public Player choosePlayerForMagicianAdvanced(){
         Player playerWithMostCards=findThePlayerWithMostCards();
-        return(predict.predictWhoIsPlayer(playerWithMostCards,listOfCharacterToNotSteal));
+        return(playerWithMostCards);
     }
 
     /**
