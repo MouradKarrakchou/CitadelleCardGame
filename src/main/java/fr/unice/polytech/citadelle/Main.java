@@ -20,13 +20,6 @@ public class Main {
 		ArrayList<Player> leaderboard = new ArrayList<>();
 		
 		controller.initGame();
-<<<<<<< HEAD
 		leaderboard = controller.runGame();
-		
-		
-
-=======
-		controller.runGame();
->>>>>>> 0d18627fe05cb292888d1c71f9cea92bef071ea8
 	}
 }
