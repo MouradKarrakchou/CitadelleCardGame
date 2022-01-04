@@ -156,8 +156,8 @@ public class Behaviour {
 		return(strategy.choosePlayerForWarlordRandom());
 	}
 	/**
-	 * According to the Magician strategy, will try to choose the suitable Character to use Magician spell.
-	 * @return The Character to swap card with.
+	 * According to the Magician strategy, will try to choose the suitable Player to use Magician spell.
+	 * @return The Player to swap card with.
 	 */
 	public Player choosePlayerForMagicianSpell() {
 		return strategy.choosePlayerForMagicianRandom();

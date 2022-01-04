@@ -16,10 +16,7 @@ import fr.unice.polytech.citadelle.game_character.Magician;
 import fr.unice.polytech.citadelle.game_character.Merchant;
 import fr.unice.polytech.citadelle.game_character.Thief;
 import fr.unice.polytech.citadelle.game_character.Warlord;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Strategator;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.*;
 
 /**
  * The Initializer class initialize all objects needed during the game
@@ -36,10 +33,11 @@ public class Initializer {
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
 
-	public final static int NUMBER_OF_PLAYER = 6;
-	private static final int NUMBER_OF_INVESTOR =2;
-	private static final int NUMBER_OF_RUSHER = 2;
-	private static final int NUMBER_OF_STRATEGATOR = 2;
+	public final static int NUMBER_OF_PLAYER = 4;
+	private static final int NUMBER_OF_RICHALPHONSE = 1;
+	private static final int NUMBER_OF_INVESTOR =  1;
+	private static final int NUMBER_OF_RUSHER = 1;
+	private static final int NUMBER_OF_STRATEGATOR = 1;
 
 	/**
 	 * Reset a given hash of characters using a given list of characters.
@@ -114,6 +112,10 @@ public class Initializer {
 		for (int i = 1; i < NUMBER_OF_STRATEGATOR+1; i++) {
 			Player newPlayer = new Player("RobotStrategator " + i);
 			listOfBehaviour.add(new Strategator(newPlayer, board));
+		}
+		for (int i = 1; i < NUMBER_OF_RICHALPHONSE+1; i++) {
+			Player newPlayer = new Player("RobotRichalphonse " + i);
+			listOfBehaviour.add(new Richalphonse(newPlayer, board));
 		}
 		
 		return listOfBehaviour;

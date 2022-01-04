@@ -25,7 +25,7 @@ public class Statisticator {
 		// Only read the logs with a Warning level
 		PrintCitadels.activateLevelWarning();
 
-		for(int i=0; i<100; i++){
+		for(int i=0; i<2000; i++){
 			// Run one game
 			Controller controller = new Controller();
 			controller.initGame();
