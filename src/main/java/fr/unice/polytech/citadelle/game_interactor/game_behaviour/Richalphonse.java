@@ -115,7 +115,7 @@ public class Richalphonse extends Behaviour {
     @Override
     public Character chooseCharacterWithStrategy(Behaviour bot) {
 
-        return richStrat.chooseCharacterWithStrategy();
+        return null;
     }
 
 

@@ -144,7 +144,6 @@ public class Behaviour {
 		switch (this.player.getCharacter().getName()) {
 		case "Thief" -> character = chooseCharacterForThief(hashOfCharacters);
 		case "Assassin" -> character = chooseCharacterForAssassin(hashOfCharacters);
-		case "Magician" -> character = chooseCharacterForMagician(hashOfCharacters);
 		}
 		return (character);
 	}
@@ -156,14 +155,14 @@ public class Behaviour {
 	public Player selectPlayerForWarlord() {
 		return(strategy.choosePlayerForWarlordRandom());
 	}
-
 	/**
 	 * According to the Magician strategy, will try to choose the suitable Character to use Magician spell.
 	 * @return The Character to swap card with.
 	 */
-	public Character chooseCharacterForMagician(LinkedHashMap<Character, Optional<Behaviour>> hashOfCharacters) {
-		return (strategy.chooseCharacterForMagicianRandom(hashOfCharacters));
+	public Player choosePlayerForMagicianSpell() {
+		return strategy.choosePlayerForMagicianRandom();
 	}
+
 
 	/**
 	 * According to the Assassin strategy, will try to choose the suitable Character to use Assassin spell.
@@ -361,6 +360,5 @@ public class Behaviour {
 	public Board getBoard() {
 		return board;
 	}
-	
-	
+
 }

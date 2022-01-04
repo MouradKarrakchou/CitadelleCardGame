@@ -15,7 +15,6 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
 
-
 /**
  * Prints the log
  *
@@ -144,7 +143,7 @@ public class PrintCitadels {
 
 	/*
 	 * public void winByCharacter(Player winner){ Character
-	 * winnerCharacter=winner.getCharacter(); LOGGER.info("The robot "
+	 * winnerCharacter=winner.getCharacter(); System.out.println("The robot "
 	 * +winner.getName()+" won because his role "+winnerCharacter.getName()
 	 * +" had a value of "+winnerCharacter.getValue()+" which is the highest value."
 	 * ); }
@@ -268,19 +267,13 @@ public class PrintCitadels {
 		LOGGER.info(colorize(output, GREEN_TEXT()));
 	}
 
-	public static void printMagicianSpellSwapHands(Character character) {
-		String output = "\t[!] The Magician swaps hand with " + character;
+	public static void printMagicianSpellSwapHands(Player player) {
+		String output = "\t[!] The Magician swaps hand with " + player;
 		LOGGER.info(colorize(output, CYAN_TEXT()));
 	}
 
 	public static void printMagicianSpellSwapCards(ArrayList<District> districts) {
 		String output = "\t[!] The Magician swaps " + districts.size() + " with the deck: " + districts;
-		LOGGER.info(colorize(output, CYAN_TEXT()));
-	}
-
-	public static void printMagicianSpellFailed(Character characterToSwapWith) {
-		String output = "\t[!] The Magician tried to swap with " + characterToSwapWith
-				+ " but no Player has this Character.";
 		LOGGER.info(colorize(output, CYAN_TEXT()));
 	}
 
@@ -376,13 +369,13 @@ public class PrintCitadels {
 
 	public static void playerHasTwoTimesMoreHisCards(Player player) {
 		LOGGER.info("STRATEGY:");
-		LOGGER.info(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the deck",ITALIC()));
+		LOGGER.info(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Player or swap cards with the deck",ITALIC()));
 		LOGGER.info(colorize("He analysed the board and saw that there is a player that has two times more district than him. He will try to swap hands.",ITALIC()));
 	}
 
 	public static void playerSwapWithDeck(Player player) {
 		LOGGER.info("STRATEGY:");
-		LOGGER.info(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Character or swap cards with the deck",ITALIC()));
+		LOGGER.info(colorize("The "+player.getName()+" is going to choose if he wants to steal from another Player or swap cards with the deck",ITALIC()));
 		LOGGER.info(colorize("He analysed the board and saw that no player has two times more district then him. He will change some cards with the deck.",ITALIC()));
 	}
 
