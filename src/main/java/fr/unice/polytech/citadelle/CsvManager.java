@@ -26,6 +26,16 @@ public class CsvManager {
         if(!csvFile.isFile()) createFile();
     }
 
+    boolean emptyFile() throws Exception {
+        System.out.println(getNumberOfLine());
+        if(getNumberOfLine() == 1) {
+            append();
+            return true;
+        }
+
+        return false;
+    }
+
     void createFile() throws Exception {
         String csv = "src\\main\\resources\\save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
@@ -40,14 +50,6 @@ public class CsvManager {
         writer.close();
     }
 
-    boolean emptyFile() throws Exception {
-        if(getNumberOfLine() == 1) {
-            append();
-            return true;
-        }
-
-        return false;
-    }
 
     void append() throws Exception {
         String csv = "src\\main\\resources\\save\\results.csv";
@@ -82,20 +84,15 @@ public class CsvManager {
 
     List<String[]> read() throws Exception {
         //Build reader instance
-        CSVReader reader = new CSVReader(new FileReader("src\\main\\resources\\save\\results.csv"), ',', '"', 1);
+        CSVReader reader = new CSVReader(new FileReader("src\\main\\resources\\save\\results.csv"), ',', '"', 0);
 
         //Read all rows at once
         return reader.readAll();
     }
 
-    String[] getLine(Integer index) throws Exception {
-        List<String[]> allRows = read();
-
-        return allRows.get(index);
-    }
-
     int getNumberOfLine() throws Exception {
         List<String[]> allRows = read();
+        System.out.println(allRows);
         return allRows.size();
     }
 
@@ -104,17 +101,32 @@ public class CsvManager {
 
         int rankPosition = 1;
         for(Player player : leaderboard) {
-
-                for (String[] row : allRows) {
-                    if(row[0].equals(player.getName())) {
-                        row[rankPosition] += 1;
-                    }
-                }
-
+            updateLine(player, allRows, rankPosition);
+            write(allRows);
             rankPosition++;
         }
     }
 
+    void write(List<String[]> allRows) throws Exception {
+        String csv = "src\\main\\resources\\save\\results.csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(csv));
+        for(String[] row : allRows) {
+            writer.writeNext(row);
+        }
+        writer.close();
+    }
 
+    void updateLine(Player player, List<String[]> allRows, Integer rankPosition) {
+        for (String[] row : allRows) {
+
+            if(row[0].equals(player.getName())) {
+                String rankToUpdate = row[rankPosition];
+                int updatedRank = Integer.parseInt(rankToUpdate);
+                updatedRank++;
+                row[rankPosition] = String.valueOf(updatedRank);
+            }
+
+        }
+    }
 
 }
