@@ -13,7 +13,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  */
 public class Main {
 
-	public static void main(String... args) {
+	public static void main(String... args) throws Exception {
 		PrintCitadels.activateLevelInfo();
 		Controller controller = new Controller();
 		Statisticator statisticator = new Statisticator();
@@ -21,6 +21,9 @@ public class Main {
 		
 		controller.initGame();
 		leaderboard = controller.runGame();
+
+		CsvManager csv = new CsvManager(leaderboard);
+		csv.write();
 
 	}
 
