@@ -2,6 +2,7 @@ package fr.unice.polytech.citadelle;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.game.Player;
@@ -35,7 +36,9 @@ public class Statisticator {
 		}
 
 		System.out.println();
-		System.out.println("================  Win-rate after 1000 games================");
+		System.out.println("================  Win-rate after 1000 games ================");
+
+		Collections.sort(listOfBotStats);
 		for (StatsBot statsBot : listOfBotStats)
 			System.out.println(statsBot.getName() + " : " + dfZero.format(statsBot.getWinrate()) + "%");
 	}

@@ -1,6 +1,6 @@
 package fr.unice.polytech.citadelle;
 
-public class StatsBot {
+public class StatsBot implements Comparable {
 	private final String botName;
 	private int numberOfGamePlay = 0;
 	private int numberOfGameWin = 0;
@@ -31,5 +31,10 @@ public class StatsBot {
 
 	public void increaseNumberOfGameWin() {
 		this.numberOfGameWin++;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return (int) (((StatsBot) o).getWinrate() - getWinrate());
 	}
 }
