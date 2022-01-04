@@ -16,11 +16,14 @@ public class CsvManager {
         this.leaderboard = leaderboard;
     }
 
+    void saveFile() throws Exception {
+        existingFile();
+        write();
+    }
+
     void existingFile() throws Exception {
         File csvFile = new File("src\\main\\resources\\save\\results.csv");
         if(!csvFile.isFile()) createFile();
-
-        else write();
     }
 
     void createFile() throws Exception {
@@ -28,7 +31,7 @@ public class CsvManager {
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
         //Create record
-        String [] record = "BotType,1,2,3,4,5,6,7".split(","); //Win rate,Games played
+        String [] record = "BotType,1,2,3,4,5,6,7,Win-rate,Games played".split(",");
 
         //Write the record to file
         writer.writeNext(record);
@@ -39,11 +42,8 @@ public class CsvManager {
 
     void write() throws Exception {
         String csv = "src\\main\\resources\\save\\results.csv";
-        CSVWriter writer = new CSVWriter(new FileWriter(csv));
-        //Create record
-        String [] record = "BotType,1,2,3,4,5,6,7".split(","); //Win rate,Games played
-        //Write the record to file
-        writer.writeNext(record);
+        CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
+        String [] record;
 
         String toWrite = "";
         int numberOfPlayers = leaderboard.size();
@@ -60,6 +60,8 @@ public class CsvManager {
                 toWrite += "0,";
             }
 
+            //WR GP
+
             record = toWrite.split(",");
             writer.writeNext(record);
             toWrite = "";
@@ -70,7 +72,4 @@ public class CsvManager {
         writer.close();
     }
 
-    void read() throws Exception {
-
-    }
 }
