@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class Richalphonse extends Behaviour {
     RichalphonseStrategy richStrat;
+    
 
     public Richalphonse(Player player, Board board) {
         super(player, board);
@@ -114,7 +115,7 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Character chooseCharacterWithStrategy(Behaviour bot) {
-
+    	richStrat.getBestSituation(board.getListOfPlayerWhoHasAlreadyPlayed().size()+1, board.getDeckCharacter().getDeckCharacter());
         return null;
     }
 
