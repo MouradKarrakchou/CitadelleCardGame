@@ -7,7 +7,6 @@ import java.util.function.Function;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.MyInterface;
 
 
 
@@ -32,8 +31,8 @@ public class RichalphonseStrategy {
     
     private LinkedHashMap<String, MyInterface> createStrategiesHashmap(){
     	LinkedHashMap<String, MyInterface> hashSet = new LinkedHashMap<>();
-    	MyInterface myFunction = (character, value) ->{ 
-    		value= character.getName();
+    	MyInterface myFunction = (character, name) ->{ 
+    		name= character.getName();
     		return character; 
 		};
     	hashSet.put("helloWorld", myFunction);

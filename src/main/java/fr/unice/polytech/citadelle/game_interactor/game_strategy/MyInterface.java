@@ -1,4 +1,4 @@
-package fr.unice.polytech.citadelle.game_interactor.game_behaviour;
+package fr.unice.polytech.citadelle.game_interactor.game_strategy;
 import fr.unice.polytech.citadelle.game_character.Character;
 
 

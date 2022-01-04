@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_interactor.PhaseManager;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Behaviour;
@@ -60,21 +61,24 @@ public class Controller {
 
 	/**
 	 * Method called once to start the game after game initialization.
+	 * @return 
 	 */
-	public void runGame() {
+	public ArrayList<Player> runGame() {
 		ArrayList<Behaviour> leaderBoard;
 		PrintCitadels.startCitadelles();
 		leaderBoard = roundManager.runRounds();
-		end(leaderBoard);
+		return end(leaderBoard);
 	}
 
 	/**
 	 * Method called once when the game is finished. Allows the referee to calculate the game result.
+	 * @return 
 	 */
-	public void end(ArrayList<Behaviour> leaderBoard) {
+	public ArrayList<Player> end(ArrayList<Behaviour> leaderBoard) {
 		referee.addBonusForPlayers(leaderBoard);
 		referee.getWinner();
 		PrintCitadels.printRanking(roundManager.getBoard().getListOfPlayer());
+		return roundManager.getBoard().getListOfPlayer();
 	}
 
 }

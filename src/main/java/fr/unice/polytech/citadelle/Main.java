@@ -1,5 +1,8 @@
 package fr.unice.polytech.citadelle;
 
+import java.util.ArrayList;
+
+import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_engine.Controller;
 
 /**
@@ -11,8 +14,13 @@ public class Main {
 
 	public static void main(String... args) {
 		Controller controller = new Controller();
+		Statisticator statisticator = new Statisticator();
+		ArrayList<Player> leaderboard = new ArrayList<>();
+		
 		controller.initGame();
-		controller.runGame();
+		leaderboard = controller.runGame();
+		
+		
 
 	}
 }
