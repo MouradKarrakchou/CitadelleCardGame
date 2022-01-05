@@ -43,13 +43,31 @@ public class RichalphonseStrategy {
     	searchSituation = librairie.filterByListOfCharacterPickable(searchSituation, listOfRichardCharacterPickable);
     	searchSituation = librairie.filterByPlayerCloseToWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
     	searchSituation = librairie.filterByDistanceBetweenRichardAndAPlayerCloseToWin(searchSituation, getDistanceBetweenRichardAndAPlayerCloseToWin());
+    	searchSituation = librairie.filterByIHave6Districts(searchSituation, getDoIHave6District());
 
+    	
+  
 
-    	//
+    	
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
     	return bestSituation;
     }
+    
+    
+    /**
+     * @return True if Richard has 6 districts
+     */
+	private boolean getDoIHave6District() {
+		return currentPlayer.getCity().getSizeOfCity() == 6;
+	}
+	
+	/**
+     * @return True if Richard has 7 districts
+     */
+	private boolean getDoIHave7District() {
+		return currentPlayer.getCity().getSizeOfCity() == 7;
+	}
     
     
     /**
@@ -88,7 +106,6 @@ public class RichalphonseStrategy {
 		return playerHasMostCard;
 	}
 	
-	//DistanceBetweenRichardAndAPlayerCloseToWin
 
 	/**
      * @return The player who has most District card
@@ -100,6 +117,9 @@ public class RichalphonseStrategy {
 		return indexOfPlayerCloseToWin - currentPlayerIndex;
 	}
 	
+	/**
+     * @return The index of the player in the list of Player of the board
+     */	
 	private int getIndexOfPlayer(Player player) {
 		for(int i = 0 ; i < board.getListOfPlayer().size() ; i++) 
 			if(board.getListOfPlayer().get(i).equals(currentPlayer)) 
@@ -117,6 +137,9 @@ public class RichalphonseStrategy {
 	}
 
 
+	/**
+     * @return True if a Player is close to win (7/8 Districts), False in the others cases
+     */
 	private boolean mostAdvancedPlayerPlayFirst() {
 		Player mostAdvancedPlayer = getMostAdvancedPlayer();
 		Player firstPlayerToPlay = getFirstPlayerToPlay();
@@ -125,7 +148,9 @@ public class RichalphonseStrategy {
 		return false;
 	}
 
-	
+	/**
+     * @return True if a Player is close to win (7/8 Districts), False in the others cases
+     */
 	private Player getRichestPlayer() {
 		Player richestPlayer= board.getListOfPlayer().get(0);
 		for(Player player: board.getListOfPlayer()){
