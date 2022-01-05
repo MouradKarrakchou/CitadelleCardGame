@@ -22,7 +22,10 @@ public class CsvManager {
 
     void saveFile() throws Exception {
         existingFile();
-        if(!emptyFile()) updateWinrateAverage(updateRankAll());
+        if(!emptyFile()) {
+            updateWinrateAverage(updateRankAll());
+            newChallenger();
+        }
     }
 
     void existingFile() throws Exception {
@@ -176,6 +179,50 @@ public class CsvManager {
 
         return allRows;
     }
+
+    void newChallenger() throws Exception {
+        List<String[]> allRows = read();
+        ArrayList<String> alreadyPlayed = new ArrayList<>();
+
+        for(String[] row : allRows) {
+            alreadyPlayed.add(row[0]);
+        }
+
+        int rank = 0;
+        for(Player player : leaderboard) {
+            if(!alreadyPlayed.contains(player.getName())) addTheNewChallenger(rank);
+            rank++;
+        }
+    }
+
+    void addTheNewChallenger(Integer rank) throws Exception {
+        String csv = "save\\results.csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
+        String [] record;
+
+        String toWrite = "";
+        toWrite += leaderboard.get(rank).getName() + ",";
+        for(int j = 0; j < rank; j++) {
+            toWrite += "0,";
+        }
+
+        toWrite += 1 + ",";
+
+        for(int j = 0; j < 8 - rank; j++) {
+            toWrite += "0,";
+        }
+
+        String score = leaderboard.get(rank).getScore() + ",";
+        for(int j = 0; j < 2; j++) {
+            toWrite += score;
+        }
+
+        record = toWrite.split(",");
+        writer.writeNext(record);
+        writer.close();
+        write(winrate(read()));
+    }
+
 
     ArrayList<StatsBot> getStatsBot() throws Exception {
         ArrayList<StatsBot> statsBots = new ArrayList<>();
