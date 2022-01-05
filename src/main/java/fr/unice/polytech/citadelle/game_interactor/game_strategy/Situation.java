@@ -9,51 +9,47 @@ import fr.unice.polytech.citadelle.game_character.Character;
 
 
 public class Situation implements Comparable<Situation>{
-	private Integer rang;
-	private Integer nbrDistrictBuild;
-	private ArrayList<Character> listOfCharacterPickable;
-	private ArrayList<Character> listOfCharacterNotHere;
-
-	private Character characterToChoose;
-	private Character targetCharacter;
-	private Player targetPlayer;
-	private Integer priority;
+	private int priority;
+	private Optional<Integer> rang;
+	private Optional<Integer> nbrDistrictBuild;
+	private Optional<ArrayList<Character>> listOfCharacterPickable;
+	private Optional<ArrayList<Character>> listOfCharacterNotHere;
+	 
 	
 
-	public Situation(Integer rang, Integer nbrDistrictBuild, ArrayList<Character> listOfCharacterPickable, Character characterToChoose, Integer priority) {
+	private Optional<Character> characterToChoose;
+	private Character targetCharacter;
+	private Player targetPlayer;
+	
+
+	public Situation(Optional<Integer> rang, Optional<Integer> nbrDistrictBuild, Optional<ArrayList<Character>> listOfCharacterPickable, Optional<Character> characterToChoose, int priority) {
+		this.priority = priority;
 		this.rang = rang;
 		this.nbrDistrictBuild = nbrDistrictBuild;
 		this.listOfCharacterPickable = listOfCharacterPickable;
 		this.characterToChoose = characterToChoose;
-		this.priority = priority;
+
 
 	}
 
 
 	public Optional<Integer> getRang() {
-		if (rang==null)
-			return Optional.empty();
-		return Optional.of(rang);
+		return rang;
 	}
 
 
 	public Optional<Integer> getNbrDistrictBuild() {
-		if (nbrDistrictBuild==null)
-			return Optional.empty();
-		return Optional.of(nbrDistrictBuild);
+		return nbrDistrictBuild;
 	}
 
 
 	public Optional<ArrayList<Character>> getListOfCharacterPickable() {
-		if (listOfCharacterPickable==null)
-			return Optional.empty();
-		return Optional.of(listOfCharacterPickable);
+		return listOfCharacterPickable;
 	}
 
 
 	public Optional<Character> getCharacterToChoose() {
-		if (characterToChoose==null) return(Optional.empty());
-		return Optional.of(characterToChoose);
+		return characterToChoose;
 	}
 
 
@@ -67,6 +63,10 @@ public class Situation implements Comparable<Situation>{
 		if (targetPlayer==null) return(Optional.empty());
 		return Optional.of(targetPlayer);
 	}
+	
+	public Optional<ArrayList<Character>> getListOfCharacterNotHere() {
+		return listOfCharacterNotHere;
+	}
 
 
 	@Override
@@ -74,6 +74,9 @@ public class Situation implements Comparable<Situation>{
         return other.priority-this.priority;
 
 	}
+
+
+	
 	
 	
 	

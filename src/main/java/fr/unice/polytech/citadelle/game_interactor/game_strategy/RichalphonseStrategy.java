@@ -18,9 +18,7 @@ import fr.unice.polytech.citadelle.game_character.Character;
 
 public class RichalphonseStrategy {
     Board board;
-    Player currentPlayer;
-    LinkedHashSet<MyInterface> hashOfStrategies = new LinkedHashSet<>();
-    
+    Player currentPlayer;    
     //---------------
     SituationLibrairie librairie;
 
@@ -32,22 +30,6 @@ public class RichalphonseStrategy {
         librairie=new SituationLibrairie(board);
     }
 
-    public LinkedHashMap<String,MyInterface> chooseCharacterWithStrategy() {
-        
-    	LinkedHashMap<String,MyInterface> hashmap = createStrategiesHashmap();
-    	
-    	return hashmap;
-    }
-    
-    private LinkedHashMap<String, MyInterface> createStrategiesHashmap(){
-    	LinkedHashMap<String, MyInterface> hashSet = new LinkedHashMap<>();
-    	MyInterface myFunction = (character, name) ->{ 
-    		name= character.getName();
-    		return character; 
-		};
-    	hashSet.put("helloWorld", myFunction);
-    	return hashSet;
-    }
     
     public Situation getBestSituation(int orderOfPlay, ArrayList<Character> listOfRichardCharacterPickable){
     	ArrayList<Situation> searchSituation = librairie.filterByOrderOfPlay(librairie.getLibrairieContent(), orderOfPlay);
