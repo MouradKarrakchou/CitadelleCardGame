@@ -512,7 +512,7 @@ public class Strategy {
 
         PrintCitadels.ExplanationChooseCardButNotFound(this.player);
         return board.getDeckCharacter().getDeckCharacter().remove(0);
-    }
+    } 
 
     /**
      * Return the index of the Assassin if the bot choose to take the Assassin according to its strategy.

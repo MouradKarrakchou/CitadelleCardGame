@@ -1,5 +1,6 @@
 package fr.unice.polytech.citadelle;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.spy;
 
 import java.util.ArrayList;
@@ -20,7 +21,11 @@ import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Strategator;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class filterOfsituationTest {
-	Player player;
+	Player playerRichalphonse;
+	Player playerRusher;
+	Player playerInvestor;
+	Player playerStrategator;
+
 	DeckDistrict deckDistrict;
 	Board board;
 	Richalphonse richalphonse;
@@ -35,21 +40,28 @@ public class filterOfsituationTest {
 
 		deckDistrict  = new DeckDistrict();
 		deckDistrict.initialise();
-		player = new Player("Player");
-    	board = new Board(null,new ArrayList<>(),deckDistrict , new DeckCharacter(4));
+		
+		playerRichalphonse = new Player("Player");
+		playerRusher = new Player("Player");
+		playerInvestor = new Player("playerInvestor");
+		playerStrategator = new Player("playerStrategator");
+		ArrayList<Player> listOfPlayer = new ArrayList<>();
+		listOfPlayer.add(playerRichalphonse);
+		listOfPlayer.add(playerRusher);
+		listOfPlayer.add(playerInvestor);
+		listOfPlayer.add(playerStrategator);
+
+
+    	board = new Board(listOfPlayer, Initializer.createListOfAllCharacter(), deckDistrict , new DeckCharacter(4));
     	DeckCharacter deckCharacter = board.getDeckCharacter();
     	Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
     	//----create 4 bots
-		richalphonse = spy(new Richalphonse( new Player("richalphonse"), board));
-		rusher = spy(new Rusher(new Player("rusher"), board));
-		investor = spy(new Investor(new Player("investor"), board));
-		strategator = spy(new Strategator(new Player("strategator"), board));
+		richalphonse = spy(new Richalphonse(playerRichalphonse, board));
+		rusher = spy(new Rusher(playerRusher, board));
+		investor = spy(new Investor(playerInvestor, board));
+		strategator = spy(new Strategator(playerStrategator, board));
 		//-----------------
-		ArrayList<Player> listOfPlayer = board.getListOfPlayer();
-		listOfPlayer.add(richalphonse.getPlayer());
-		listOfPlayer.add(rusher.getPlayer());
-		listOfPlayer.add(investor.getPlayer());
-		listOfPlayer.add(strategator.getPlayer());
+	
 	}
 	
 	@Test
@@ -57,6 +69,12 @@ public class filterOfsituationTest {
 		//deck: il manque Roi,Assassin,Condotière
 		ArrayList<Character> deck = board.getDeckCharacter().getDeckCharacter();
 		deck.remove(board.findCharacter("King"));
+		deck.remove(board.findCharacter("Assassin"));
+		deck.remove(board.findCharacter("Warlord"));
+		assertEquals(5, deck.size());
+		
+		Character bestCharacter = richalphonse.chooseCharacterWithStrategy(richalphonse);
+		
 	}
 	
 	
