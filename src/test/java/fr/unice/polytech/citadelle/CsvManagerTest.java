@@ -1,7 +1,6 @@
 package fr.unice.polytech.citadelle;
 
 import fr.unice.polytech.citadelle.game.Player;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,17 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CsvManagerTest {
 
+    String path = "csvTests\\results.csv";
     ArrayList<Player> aLeaderboard = new ArrayList<>();
     ArrayList<Player> anotherLeaderboard = new ArrayList<>();
     ArrayList<Player> anotherOneLeaderboard = new ArrayList<>();
-    CsvManager csvManager = new CsvManager(aLeaderboard);
+    CsvManager csvManager = new CsvManager(aLeaderboard, path);
 
     @BeforeEach
     void setUp() {
-        String path = "save\\results.csv";
-        File csvFile = new File(path);
-        csvFile.delete();
-
         aLeaderboard.add(new Player("P1"));
         aLeaderboard.add(new Player("P2"));
         aLeaderboard.add(new Player("P3"));
@@ -51,7 +47,7 @@ public class CsvManagerTest {
     void createFileTest() throws Exception {
         csvManager.createFile();
         for(int i = 0; i < 12; i++) {
-            CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
             CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\createFile.csv"), ',', '"', 0);
             assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
         }
@@ -66,7 +62,7 @@ public class CsvManagerTest {
 
         for(int j = 1; j < 6; j++) {
             for (int i = 0; i < 12; i++) {
-                CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
                 CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\append.csv"), ',', '"', 0);
                 assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
@@ -81,12 +77,12 @@ public class CsvManagerTest {
         csvManager.append();
 
         aLeaderboard = anotherLeaderboard;
-        CsvManager csvManager = new CsvManager(aLeaderboard);
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
         csvManager.write(csvManager.updateRankAll());
 
         for(int j = 1; j < 6; j++) {
             for (int i = 0; i < 12; i++) {
-                CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
                 CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\updateRankAll.csv"), ',', '"', 0);
                 assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
@@ -103,7 +99,7 @@ public class CsvManagerTest {
         aLeaderboard = anotherLeaderboard;
         score = 10;
         for(Player player : anotherLeaderboard) player.updateScore(score--);
-        CsvManager csvManager = new CsvManager(aLeaderboard);
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
         csvManager.write(csvManager.updateRankAll());
 
         csvManager.write(csvManager.winrate(csvManager.read()));
@@ -111,7 +107,7 @@ public class CsvManagerTest {
 
         for(int j = 1; j < 6; j++) {
             for (int i = 0; i < 12; i++) {
-                CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
                 CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\average.csv"), ',', '"', 0);
                 assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
@@ -128,14 +124,14 @@ public class CsvManagerTest {
         aLeaderboard = anotherLeaderboard;
         score = 10;
         for(Player player : anotherLeaderboard) player.updateScore(score--);
-        CsvManager csvManager = new CsvManager(aLeaderboard);
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
         csvManager.write(csvManager.updateRankAll());
 
         csvManager.updateWinrateAverage(csvManager.read());
 
         for(int j = 1; j < 6; j++) {
             for (int i = 0; i < 12; i++) {
-                CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
                 CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\average.csv"), ',', '"', 0);
                 assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
@@ -150,12 +146,12 @@ public class CsvManagerTest {
         csvManager.append();
 
         aLeaderboard = anotherOneLeaderboard;
-        CsvManager csvManager = new CsvManager(aLeaderboard);
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
         csvManager.newChallenger();
 
         for(int j = 1; j < 7; j++) {
             for (int i = 0; i < 12; i++) {
-                CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
                 CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\newChallenger.csv"), ',', '"', 0);
                 assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
@@ -180,7 +176,7 @@ public class CsvManagerTest {
         csvManager.createFile();
         csvManager.existingFile();
         for(int i = 0; i < 12; i++) {
-            CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
             CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\createFile.csv"), ',', '"', 0);
             assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
         }
@@ -190,7 +186,7 @@ public class CsvManagerTest {
     void existingFileFalseTest() throws Exception {
         csvManager.existingFile();
         for(int i = 0; i < 12; i++) {
-            CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
             CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\createFile.csv"), ',', '"', 0);
             assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
         }
@@ -201,7 +197,7 @@ public class CsvManagerTest {
         csvManager.saveFile();
         for(int j = 1; j < 6; j++) {
             for (int i = 0; i < 12; i++) {
-                CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
                 CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\saveFileEmpty.csv"), ',', '"', 0);
                 assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
@@ -214,7 +210,7 @@ public class CsvManagerTest {
         csvManager.append();
         csvManager.saveFile();
         for(int i = 0; i < 12; i++) {
-            CSVReader readCreatedFile = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
             CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\saveFileNotEmpty.csv"), ',', '"', 0);
             assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
         }
@@ -234,12 +230,7 @@ public class CsvManagerTest {
 
         for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getName(), csvManager.getStatsBot().get(i).getName());
         for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getWinrate(), csvManager.getStatsBot().get(i).getWinrate());
+
     }
 
-    @AfterEach
-    void clean() {
-        String path = "save\\results.csv";
-        File csvFile = new File(path);
-        csvFile.delete();
-    }
 }
