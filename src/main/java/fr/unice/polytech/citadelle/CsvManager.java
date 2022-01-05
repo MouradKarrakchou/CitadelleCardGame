@@ -26,7 +26,7 @@ public class CsvManager {
     }
 
     void existingFile() throws Exception {
-        File csvFile = new File("src\\main\\resources\\save\\results.csv");
+        File csvFile = new File("save\\results.csv");
         if(!csvFile.isFile()) createFile();
     }
 
@@ -40,7 +40,7 @@ public class CsvManager {
     }
 
     void createFile() throws Exception {
-        String csv = "src\\main\\resources\\save\\results.csv";
+        String csv = "save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
         //Create record
@@ -55,7 +55,7 @@ public class CsvManager {
 
 
     void append() throws Exception {
-        String csv = "src\\main\\resources\\save\\results.csv";
+        String csv = "save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
         String [] record;
 
@@ -93,7 +93,7 @@ public class CsvManager {
 
     List<String[]> read() throws Exception {
         //Build reader instance
-        CSVReader reader = new CSVReader(new FileReader("src\\main\\resources\\save\\results.csv"), ',', '"', 0);
+        CSVReader reader = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
 
         //Read all rows at once
         return reader.readAll();
@@ -140,7 +140,7 @@ public class CsvManager {
     }
 
     void write(List<String[]> allRows) throws Exception {
-        String csv = "src\\main\\resources\\save\\results.csv";
+        String csv = "save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
         for(String[] row : allRows) {
             writer.writeNext(row);

@@ -13,6 +13,7 @@ import fr.unice.polytech.citadelle.StatsBot;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
+import fr.unice.polytech.citadelle.game_interactor.game_strategy.Situation;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 import static com.diogonunes.jcolor.Attribute.*;
@@ -375,6 +376,9 @@ public class PrintCitadels {
 		LOGGER.info(colorize(" The"+player.getName()+" wants to steal from the player with most district.",ITALIC()));
 		LOGGER.info(colorize("He analysed the board and saw that "+playerWithMostDistrictGames.getName()+" has the most districts.",ITALIC()));
     }
+	public static void printSituation(Situation situationWeAreIn) {
+		LOGGER.info("\t"+situationWeAreIn);
+	}
 
 	public static void playerHasTwoTimesMoreHisCards(Player player) {
 		LOGGER.info("STRATEGY:");
@@ -440,4 +444,5 @@ public class PrintCitadels {
 		dropALine();
 		LOGGER.info("================  Win-rate on the 1000 last games ================");
 	}
+
 }

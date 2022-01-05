@@ -124,7 +124,7 @@ public class Richalphonse extends Behaviour {
     public Player choosePlayerForMagicianSpell() {
     	Player target;
         if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent()) {
-        	target = richStrat.getPlayerIsCloseToWin();
+        	target = richStrat.getPlayerCloseToWin();
         	if(target.equals(player))
         		target = strategy.choosePlayerForMagicianRandom();
         }
@@ -159,6 +159,7 @@ public class Richalphonse extends Behaviour {
         this.currentBestSituation=situationWeAreIn;
         if (situationWeAreIn.getCharacterToChoose().isEmpty())
             return board.getDeckCharacter().getDeckCharacter().remove(0);
+        PrintCitadels.printSituation(situationWeAreIn);
         return situationWeAreIn.getCharacterToChoose().get();
     }
 
