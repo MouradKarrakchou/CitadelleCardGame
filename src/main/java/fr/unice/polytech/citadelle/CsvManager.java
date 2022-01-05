@@ -22,7 +22,7 @@ public class CsvManager {
 
     void saveFile() throws Exception {
         existingFile();
-        if(!emptyFile()) updateWinrate(update());
+        if(!emptyFile()) updateWinrateAverage(updateRankAll());
     }
 
     void existingFile() throws Exception {
@@ -44,7 +44,7 @@ public class CsvManager {
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
         //Create record
-        String [] record = "BotType,1,2,3,4,5,6,7,Win-rate,Games played".split(",");
+        String [] record = "BotType,1,2,3,4,5,6,7,Win-rate,Games played,Total score,Average score".split(",");
 
         //Write the record to file
         writer.writeNext(record);
@@ -74,6 +74,12 @@ public class CsvManager {
                 toWrite += "0,";
             }
 
+            String score = leaderboard.get(i).getScore() + ",";
+            //For the first time, the total score and the average score are equals
+            for(int j = 0; j < 2; j++) {
+                toWrite += score;
+            }
+
             record = toWrite.split(",");
             writer.writeNext(record);
             toWrite = "";
@@ -98,20 +104,39 @@ public class CsvManager {
         return allRows.size();
     }
 
-    List<String[]> update() throws Exception {
+    List<String[]> updateRankAll() throws Exception {
         List<String[]> allRows = read();
 
         int rankPosition = 1;
         for(Player player : leaderboard) {
-            allRows = updateLine(player, allRows, rankPosition);
+            allRows = updateRankOnePlayer(player, allRows, rankPosition);
             rankPosition++;
         }
 
         return allRows;
     }
 
-    void updateWinrate(List<String[]> allRows) throws Exception {
-        write(winrate(allRows));
+    List<String[]> updateRankOnePlayer(Player player, List<String[]> allRows, Integer rankPosition) {
+        for (String[] row : allRows) {
+
+            if(row[0].equals(player.getName())) {
+                String rankToUpdate = row[rankPosition];
+                int updatedRank = Integer.parseInt(rankToUpdate);
+                updatedRank++;
+                row[rankPosition] = String.valueOf(updatedRank);
+
+                int updatedScore = Integer.valueOf(row[10]);
+                updatedScore += player.getScore();
+                row[10] = String.valueOf(updatedScore);
+            }
+
+        }
+
+        return allRows;
+    }
+
+    void updateWinrateAverage(List<String[]> allRows) throws Exception {
+        write(average(winrate(allRows)));
     }
 
     void write(List<String[]> allRows) throws Exception {
@@ -121,21 +146,6 @@ public class CsvManager {
             writer.writeNext(row);
         }
         writer.close();
-    }
-
-    List<String[]> updateLine(Player player, List<String[]> allRows, Integer rankPosition) {
-        for (String[] row : allRows) {
-
-            if(row[0].equals(player.getName())) {
-                String rankToUpdate = row[rankPosition];
-                int updatedRank = Integer.parseInt(rankToUpdate);
-                updatedRank++;
-                row[rankPosition] = String.valueOf(updatedRank);
-            }
-
-        }
-
-        return allRows;
     }
 
     List<String[]> winrate(List<String[]> allRows) throws Exception {
@@ -152,6 +162,16 @@ public class CsvManager {
             StatsBot statsBot = new StatsBot(row[0], gamesCounter, Integer.parseInt(row[1]));
 
             row[8] = String.valueOf(statsBot.getWinrate());
+        }
+
+        return allRows;
+    }
+
+    List<String[]> average(List<String[]> allRows) throws Exception {
+        int numberOfLine = getNumberOfLine();
+
+        for(String[] row : allRows.subList(1, numberOfLine)) {
+            row[11] = String.valueOf(Integer.parseInt(row[10]) / Integer.parseInt(row[9]));
         }
 
         return allRows;
