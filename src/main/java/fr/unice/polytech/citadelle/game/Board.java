@@ -17,6 +17,8 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 public class Board {
     private int roundNumber = 0;
     private ArrayList<Player> listOfPlayer;
+    private ArrayList<Player> listOfPlayerOrdered;
+
     private ArrayList<Player> listOfPlayerWhoPlayed = new ArrayList<>();
     private DeckDistrict deckDistrict;
     private DeckCharacter deckCharacter;
@@ -29,6 +31,7 @@ public class Board {
         this.deckDistrict = deckDistrict;
         this.deckCharacter = deckCharacter;
         this.listOfCharacter=listOfCharacter;
+        this.setListOfPlayerOrdered((ArrayList<Player>) listOfPlayer.clone());
     }
 
     public Board() {}
@@ -123,5 +126,13 @@ public class Board {
         }
         return null;
     }
+
+	public ArrayList<Player> getListOfPlayerOrdered() {
+		return listOfPlayerOrdered;
+	}
+
+	public void setListOfPlayerOrdered(ArrayList<Player> listOfPlayerOrdered) {
+		this.listOfPlayerOrdered = listOfPlayerOrdered;
+	}
 }
 

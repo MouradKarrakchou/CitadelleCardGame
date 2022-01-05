@@ -59,6 +59,8 @@ public class Controller {
 		Initializer.initDeckDistrict(roundManager.getBoard().getDeckDistrict());
 
 		board.setListOfPlayer(roundManager.getListOfPlayers());
+		board.setListOfPlayerOrdered((ArrayList<Player>) roundManager.getListOfPlayers().clone());
+
 
 		Initializer.initPlayerCards(roundManager.getBoard());
 	}

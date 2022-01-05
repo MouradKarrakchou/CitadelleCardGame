@@ -172,7 +172,7 @@ public class RoundManagerTest {
 		assertEquals(3,roundMan.findKing(listOfAllBehaviour));
 
 		//Verify that they are well ordered
-		ArrayList<Behaviour> botOrdered=roundMan.orderListOfPlayer(listOfAllBehaviour,3);
+		ArrayList<Behaviour> botOrdered=roundMan.orderListOfBehaviour(listOfAllBehaviour,3);
 		assertEquals(botKing,botOrdered.get(0));
 		assertEquals(botArchitecte,botOrdered.get(1));
 		assertEquals(botBishop,botOrdered.get(2));

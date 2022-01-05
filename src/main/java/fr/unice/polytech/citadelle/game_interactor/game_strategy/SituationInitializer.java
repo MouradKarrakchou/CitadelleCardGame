@@ -64,7 +64,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("Assassin");
         characterAvailable.add(characterToChoose);
         characterAvailable.add(board.findCharacter("Architect"));
-        description=new String("Situation3:Take Assassin to kill the Condotière because I got the lead ");
+        description=new String("Situation5:Take The Assassin and kill the Architect if someone is advantaged to pick architect (more then 4 golds,1 district or more,already built 5 district)");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.of(board.findCharacter("Architect")),Optional.empty(),2);
         situation.setAPlayerCouldPlayArchitect(true);
         AllSituations.add(situation);
@@ -248,7 +248,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Assassin"));
-        description=new String("Situation20: I have 7 districts, I take the Warlord to build my last district");
+        description=new String("Situation22: I have 7 districts, I take the Warlord to build my last district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),8);
         situation.setiHave7Districts(true);
         AllSituations.add(situation);
@@ -259,7 +259,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Assassin"));
-        description=new String("Situation20: I have 7 districts, I take the Bishop to build my last district");
+        description=new String("Situation21: I have 7 districts, I take the Bishop to build my last district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),8);
         situation.setiHave7Districts(true);
         AllSituations.add(situation);
@@ -271,8 +271,8 @@ public class SituationInitializer {
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Bishop"));
         description=new String("Situation23: The Player playing second have 7districts i take Assassin and target him");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Bishop")),Optional.empty(),6);
-        situation.setiHave7Districts(true);
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Warlord")),Optional.empty(),6);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(1);
         AllSituations.add(situation);
@@ -283,9 +283,9 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Warlord"));
-        description=new String("Situation23: The Player playing second have 7districts i take Assassin and target him");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Warlord")),Optional.empty(),6);
-        situation.setiHave7Districts(true);
+        description=new String("Situation24: The Player playing second have 7districts i take Assassin and target him");
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Bishop")),Optional.empty(),6);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(1);
         AllSituations.add(situation);
@@ -298,7 +298,7 @@ public class SituationInitializer {
         characterAvailable.add(board.findCharacter("Bishop"));
         description=new String("Situation25: The Player playing third have 7districts I take Walord");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),7);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(2);
         situation.setPlayOrder(1);
         AllSituations.add(situation);
@@ -312,7 +312,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Bishop"));
         description=new String("Situation26: The Player playing third have 7districts I take Assassin");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Thief")),Optional.empty(),7);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(2);
         situation.setPlayOrder(1);
         AllSituations.add(situation);
@@ -326,7 +326,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Assassin"));
         description=new String("Situation27: The Player playing third have 7districts I take Warlord");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),7);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(2);
         situation.setPlayOrder(1);
         AllSituations.add(situation);
@@ -344,7 +344,7 @@ public class SituationInitializer {
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Magician")),Optional.empty(),7);
         situation.setAPlayerHasLotOfCard(true);
         situation.setAPlayerCloseToWinHasFewCard(true);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(2);
         situation.setPlayOrder(1);
         AllSituations.add(situation);
@@ -357,7 +357,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation29: The Player playing third have 7districts I take Assassin to kill him");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Bishop")),Optional.empty(),7);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(2);
         situation.setAPlayerCloseToWinPlayFirst(false);
@@ -372,7 +372,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Assassin"));
         description=new String("Situation30: The Player playing third have 7districts I take Warlord to destroy his district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),7);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(2);
         situation.setAPlayerCloseToWinPlayFirst(false);
@@ -389,7 +389,7 @@ public class SituationInitializer {
         description=new String("Situation31: The Player playing third have 7districts I take Warlord to destroy his district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),7);
         situation.setAPlayerCloseToWinHasFewCard(false);
-        situation.setiHaveFewCard(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setiHave7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(2);
@@ -404,7 +404,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation32: The Player playing third have 7districts I take Bishop to deny him");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),7);
-        situation.setiHave7Districts(true);
+        situation.setAPlayerHas7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(2);
         AllSituations.add(situation);
@@ -444,7 +444,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("King");
         characterAvailable.add(characterToChoose);
         description=new String("Situation36: There are few Players in the game so i will pick the King to try to stay king next rounds.");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),3);
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),4);
         situation.setRichardDontPlayFirst(true);
         situation.setNumberOfPlayerLess5(true);
         AllSituations.add(situation);
@@ -454,7 +454,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("Merchant");
         characterAvailable.add(characterToChoose);
         description=new String("Situation37: I pick Merchant because i have no better choices and it gives me some golds.");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),2);
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),1);
         AllSituations.add(situation);
 
         //Situation38: I have a lot of golds i will try to take Architect to build a lot.

@@ -181,7 +181,8 @@ public class RoundManager {
 		if (indexOfKing != -1) {
 			ArrayList<Behaviour> listOfBehaviourCopy = listOfBehaviour;
 			listOfBehaviour = new ArrayList<>();
-			listOfBehaviour.addAll(orderListOfPlayer(listOfBehaviourCopy, indexOfKing));
+			listOfBehaviour.addAll(orderListOfBehaviour(listOfBehaviourCopy, indexOfKing));
+			board.setListOfPlayerOrdered(orderListOfPlayer(board.getListOfPlayerOrdered(), indexOfKing));
 		}
 	}
 
@@ -205,7 +206,7 @@ public class RoundManager {
 	 * @param positionOfKingHolder The position of the king on the player's behaviour list.
 	 * @return The ordered player's behaviour list.
 	 */
-	public ArrayList<Behaviour> orderListOfPlayer(ArrayList<Behaviour> listOfBehaviour, int positionOfKingHolder) {
+	public ArrayList<Behaviour> orderListOfBehaviour(ArrayList<Behaviour> listOfBehaviour, int positionOfKingHolder) {
 		int positionToChange = positionOfKingHolder;
 		int sizeListOfPlayer = listOfBehaviour.size();
 		ArrayList<Behaviour> listOfBehaviourNextRound = new ArrayList<>();
@@ -218,6 +219,26 @@ public class RoundManager {
 		}
 
 		return (listOfBehaviourNextRound);
+	}
+	/**
+	 * Order properly the players order according to their character card (eh. king should be playing the first)
+	 * @param listOfPlayer The list of player's behaviour.
+	 * @param positionOfKingHolder The position of the king on the player's behaviour list.
+	 * @return The ordered players list.
+	 */
+	public ArrayList<Player> orderListOfPlayer(ArrayList<Player> listOfPlayer, int positionOfKingHolder) {
+		int positionToChange = positionOfKingHolder;
+		int sizeListOfPlayer = listOfPlayer.size();
+		ArrayList<Player> listOfPlayerNextRound = new ArrayList<>();
+
+		for (int i = 0; i < sizeListOfPlayer; i++) {
+			if (positionToChange >= sizeListOfPlayer)
+				positionToChange = 0;
+			listOfPlayerNextRound.add(listOfPlayer.get(positionToChange));
+			positionToChange++;
+		}
+
+		return (listOfPlayerNextRound);
 	}
 
 	/**

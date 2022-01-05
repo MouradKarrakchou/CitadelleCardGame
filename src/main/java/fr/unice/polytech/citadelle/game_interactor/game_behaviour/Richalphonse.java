@@ -160,8 +160,12 @@ public class Richalphonse extends Behaviour {
         PrintCitadels.printSituation(situationWeAreIn);
         if (situationWeAreIn.getCharacterToChoose().isEmpty())
             return board.getDeckCharacter().getDeckCharacter().remove(0);
-        return situationWeAreIn.getCharacterToChoose().get();
+        Character characterChoosen = situationWeAreIn.getCharacterToChoose().get();
+        board.getDeckCharacter().getDeckCharacter().remove(characterChoosen);
+        return characterChoosen;
     }
 
-
+    public Situation getCurrentBestSituation() {
+        return currentBestSituation;
+    }
 }
