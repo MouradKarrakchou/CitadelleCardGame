@@ -9,7 +9,7 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 /**
  * Initialize and run a Game
  *
- * @author BONNET Killian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Main {
 
