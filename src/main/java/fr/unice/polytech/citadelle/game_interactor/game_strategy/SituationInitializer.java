@@ -15,7 +15,7 @@ public class SituationInitializer {
         AllSituations.add(new Situation(null,null,null,null,0));
         //Situation where I pick a Player the Assassin to kill the player that would want to win a lot of money
         characterAvailable=new ArrayList<>();
-        characterToChoose=board.findCharacter("Thief");
+        characterToChoose=board.findCharacter("Assassin");
         characterAvailable.add(characterToChoose);
         AllSituations.add(new Situation(null,null,characterAvailable,characterToChoose,1));
 
