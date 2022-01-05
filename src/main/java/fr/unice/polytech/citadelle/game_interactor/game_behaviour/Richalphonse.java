@@ -103,7 +103,7 @@ public class Richalphonse extends Behaviour {
     public Player selectPlayerForWarlord() {
     	Player target;
         if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent()) {
-        	target = richStrat.getPlayerIsCloseToWin();
+        	target = richStrat.getPlayerCloseToWin();
         	if(target.equals(player))
         		target = strategy.choosePlayerForWarlordRandom();
         }
@@ -157,9 +157,9 @@ public class Richalphonse extends Behaviour {
     public Character chooseCharacterWithStrategy(Behaviour bot) {
     	Situation situationWeAreIn=richStrat.getBestSituation(board.getDeckCharacter().getDeckCharacter());
         this.currentBestSituation=situationWeAreIn;
+        PrintCitadels.printSituation(situationWeAreIn);
         if (situationWeAreIn.getCharacterToChoose().isEmpty())
             return board.getDeckCharacter().getDeckCharacter().remove(0);
-        PrintCitadels.printSituation(situationWeAreIn);
         return situationWeAreIn.getCharacterToChoose().get();
     }
 
