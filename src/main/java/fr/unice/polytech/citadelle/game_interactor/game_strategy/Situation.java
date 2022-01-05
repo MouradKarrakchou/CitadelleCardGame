@@ -124,12 +124,12 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Boolean> getaPlayerCloseToWinPlayFirst() {
+	public Optional<Boolean> getAPlayerCloseToWinPlayFirst() {
 		return aPlayerCloseToWinPlayFirst;
 	}
 
 
-	public void setaPlayerCloseToWinPlayFirst(boolean aPlayerCloseToWinPlayFirst) {
+	public void setAPlayerCloseToWinPlayFirst(boolean aPlayerCloseToWinPlayFirst) {
 		this.aPlayerCloseToWinPlayFirst = Optional.of(aPlayerCloseToWinPlayFirst);
 	}
 
@@ -154,12 +154,12 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Boolean> getaPlayerCouldPlayArchitect() {
+	public Optional<Boolean> getAPlayerCouldPlayArchitect() {
 		return aPlayerCouldPlayArchitect;
 	}
 
 
-	public void setaPlayerCouldPlayArchitect(boolean aPlayerCouldPlayArchitect) {
+	public void setAPlayerCouldPlayArchitect(boolean aPlayerCouldPlayArchitect) {
 		this.aPlayerCouldPlayArchitect = Optional.of(aPlayerCouldPlayArchitect);
 	}
 
@@ -184,7 +184,7 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Boolean> getiHaveFewCard() {
+	public Optional<Boolean> getIHaveFewCard() {
 		return iHaveFewCard;
 	}
 
@@ -194,7 +194,7 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Boolean> getiHaveLotOfCard() {
+	public Optional<Boolean> getIHaveLotOfCard() {
 		return iHaveLotOfCard;
 	}
 
@@ -204,22 +204,22 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Boolean> getaPlayerHasLotOfCard() {
+	public Optional<Boolean> getAPlayerHasLotOfCard() {
 		return aPlayerHasLotOfCard;
 	}
 
 
-	public void setaPlayerHasLotOfCard(boolean aPlayerHasLotOfCard) {
+	public void setAPlayerHasLotOfCard(boolean aPlayerHasLotOfCard) {
 		this.aPlayerHasLotOfCard = Optional.of(aPlayerHasLotOfCard);
 	}
 
 
-	public Optional<Boolean> getaPlayerCloseToWinHasFewCard() {
+	public Optional<Boolean> getAPlayerCloseToWinHasFewCard() {
 		return aPlayerCloseToWinHasFewCard;
 	}
 
 
-	public void setaPlayerCloseToWinHasFewCard(boolean aPlayerCloseToWinHasFewCard) {
+	public void setAPlayerCloseToWinHasFewCard(boolean aPlayerCloseToWinHasFewCard) {
 		this.aPlayerCloseToWinHasFewCard = Optional.of(aPlayerCloseToWinHasFewCard);
 	}
 
@@ -296,12 +296,12 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Boolean> getaPlayerHas7Districts() {
+	public Optional<Boolean> getAPlayerHas7Districts() {
 		return aPlayerHas7Districts;
 	}
 
 
-	public void setaPlayerHas7Districts(boolean aPlayerHas7Districts) {
+	public void setAPlayerHas7Districts(boolean aPlayerHas7Districts) {
 		this.aPlayerHas7Districts = Optional.of(aPlayerHas7Districts);
 	}
 	
