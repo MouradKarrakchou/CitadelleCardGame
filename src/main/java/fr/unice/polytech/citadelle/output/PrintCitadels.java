@@ -377,7 +377,7 @@ public class PrintCitadels {
 		LOGGER.info(colorize("He analysed the board and saw that "+playerWithMostDistrictGames.getName()+" has the most districts.",ITALIC()));
     }
 	public static void printSituation(Situation situationWeAreIn) {
-		LOGGER.info("\t"+situationWeAreIn);
+		System.out.println("\t"+situationWeAreIn);
 	}
 
 	public static void playerHasTwoTimesMoreHisCards(Player player) {

@@ -248,7 +248,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Assassin"));
-        description=new String("Situation20: I have 7 districts, I take the Warlord to build my last district");
+        description=new String("Situation22: I have 7 districts, I take the Warlord to build my last district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),8);
         situation.setiHave7Districts(true);
         AllSituations.add(situation);
@@ -259,7 +259,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Assassin"));
-        description=new String("Situation20: I have 7 districts, I take the Bishop to build my last district");
+        description=new String("Situation21: I have 7 districts, I take the Bishop to build my last district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),8);
         situation.setiHave7Districts(true);
         AllSituations.add(situation);
@@ -283,7 +283,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         characterNotAvailable=new ArrayList<>();
         characterNotAvailable.add(board.findCharacter("Warlord"));
-        description=new String("Situation23: The Player playing second have 7districts i take Assassin and target him");
+        description=new String("Situation24: The Player playing second have 7districts i take Assassin and target him");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Warlord")),Optional.empty(),6);
         situation.setiHave7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
