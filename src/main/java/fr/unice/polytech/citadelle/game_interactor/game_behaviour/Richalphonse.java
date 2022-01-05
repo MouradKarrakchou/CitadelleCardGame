@@ -103,7 +103,7 @@ public class Richalphonse extends Behaviour {
     public Player selectPlayerForWarlord() {
     	Player target;
         if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent()) {
-        	target = richStrat.getPlayerIsCloseToWin();
+        	target = richStrat.getPlayerCloseToWin();
         	if(target.equals(player))
         		target = strategy.choosePlayerForWarlordRandom();
         }
