@@ -34,9 +34,9 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, boolean currentBestPlayerPlayFirst) {
+	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, int positionOfPotentialWinner ) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getAPlayerCloseToWinPlayFirst().isEmpty() || situation.getAPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
+								.filter(situation -> situation.getPositionOfPotentialWinner().isEmpty() || situation.getPositionOfPotentialWinner().get() == positionOfPotentialWinner)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
