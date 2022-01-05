@@ -25,7 +25,7 @@ public class Statisticator {
 		// Only read the logs with a Warning level
 		PrintCitadels.activateLevelWarning();
 
-		for(int i=0; i<2000; i++){
+		for(int i = 0; i < 1000; i++){
 			// Run one game
 			Controller controller = new Controller();
 			controller.initGame();
@@ -36,7 +36,7 @@ public class Statisticator {
 		}
 
 		System.out.println();
-		System.out.println("================  Win-rate after 1000 games ================");
+		System.out.println("================  Win-rate on 1000 games ================");
 
 		Collections.sort(listOfBotStats);
 		for (StatsBot statsBot : listOfBotStats)

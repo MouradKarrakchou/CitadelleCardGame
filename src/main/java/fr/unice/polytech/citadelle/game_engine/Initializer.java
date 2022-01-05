@@ -33,11 +33,11 @@ public class Initializer {
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
 
-	public final static int NUMBER_OF_PLAYER = 4;
+	public final static int NUMBER_OF_PLAYER = 3;
 	private static final int NUMBER_OF_RICHALPHONSE = 1;
 	private static final int NUMBER_OF_INVESTOR =  1;
 	private static final int NUMBER_OF_RUSHER = 1;
-	private static final int NUMBER_OF_STRATEGATOR = 1;
+	private static final int NUMBER_OF_STRATEGATOR = 0;
 
 	/**
 	 * Reset a given hash of characters using a given list of characters.
