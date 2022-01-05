@@ -6,6 +6,7 @@ import java.util.Collections;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 
 /**
@@ -55,6 +56,8 @@ public class RichalphonseStrategy {
     	searchSituation = librairie.filterRichardHasMoreOf6Golds(searchSituation, doRichardHasMoreOf6Golds());
    
     	Collections.sort(searchSituation);
+       // PrintCitadels.printAllSituations(searchSituation);
+
     	Situation bestSituation =  searchSituation.get(0);
     	return bestSituation;
     }
@@ -73,7 +76,7 @@ public class RichalphonseStrategy {
      * @return index of playOrder of currentPlayer
      */
     private int getRichardPlayOrder() {
-		return getIndexOfPlayer(currentPlayer);
+		return getIndexOfPlayer(currentPlayer)+1;
 	}
 
     /**
@@ -103,8 +106,8 @@ public class RichalphonseStrategy {
      * @return True if a currentPlayer don't play first
      */
     private boolean doRichardDontPlayFirst() {
-		if(board.getListOfPlayer().get(0).equals(currentPlayer)) return true;
-    	return false;
+		if(board.getListOfPlayer().get(0).equals(currentPlayer)) return false;
+    	return true;
 	}
 
 
@@ -130,7 +133,7 @@ public class RichalphonseStrategy {
      */
     private boolean doAPlayerCloseToWinHasFewCard() {
 		Player playerCloseToWin = getPlayerCloseToWin();
-		if(playerCloseToWin.getDistrictCardsSize() <3) return true;
+		if(playerCloseToWin.getDistrictCardsSize() <3 && !(playerCloseToWin.equals(currentPlayer))) return true;
 		return false;
 	}
     
@@ -140,7 +143,7 @@ public class RichalphonseStrategy {
     private boolean doAPlayerHasLotOfCard() {
 		int currentNumberOfCards = currentPlayer.getDistrictCardsSize();
     	for(Player player: board.getListOfPlayer()){
-    		if(player.getDistrictCardsSize()*2 > currentNumberOfCards) return false;
+    		if(player.getDistrictCardsSize()*2 > currentNumberOfCards && !(player.equals(currentPlayer))) return false;
     	}
 		return true;
 	}
@@ -168,8 +171,8 @@ public class RichalphonseStrategy {
      * @return True if a player in the current game has more than 5 golds
      */
 	private boolean doesExistARichPlayer() {
-		for(Player player: board.getListOfPlayer()){
-			if(player.getGolds() > 5)
+		for(Player player: board.getListOfPlayer() ){
+			if(player.getGolds() > 5 && !(player.equals(currentPlayer)))
 				return true;
 		}
 		return false;
@@ -194,7 +197,7 @@ public class RichalphonseStrategy {
     	for(Player player: board.getListOfPlayer()){
 			if(player.getGolds() > 3)
 				if(player.getDistrictCardsSize() > 1)
-					if(player.getCity().getSizeOfCity() > 5)
+					if(player.getCity().getSizeOfCity() > 5 && !(player.equals(currentPlayer)))
 						return true;
 		}
 		return false;
@@ -206,7 +209,7 @@ public class RichalphonseStrategy {
      */
 	private boolean doAPlayerInTheCurrentGameHas7Districts() {
 		for(Player player: board.getListOfPlayer()){
-			if(player.getCity().getSizeOfCity() == 7)
+			if(player.getCity().getSizeOfCity() == 7 && !(player.equals(currentPlayer)))
 				return true;
 		}
 		return false;
@@ -291,7 +294,7 @@ public class RichalphonseStrategy {
      */
 	private boolean aPlayerIsCloseToWin() {
 		for(Player player: board.getListOfPlayer())
-			if(player.getCity().getSizeOfCity() >6) return true;
+			if(player.getCity().getSizeOfCity() >6 && !(player.equals(currentPlayer))) return true;
 		return false;
 	}
 

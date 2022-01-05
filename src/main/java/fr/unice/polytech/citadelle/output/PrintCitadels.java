@@ -445,4 +445,9 @@ public class PrintCitadels {
 		LOGGER.info("================  Win-rate on the 1000 last games ================");
 	}
 
+	public static void printAllSituations(ArrayList<Situation> searchSituation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

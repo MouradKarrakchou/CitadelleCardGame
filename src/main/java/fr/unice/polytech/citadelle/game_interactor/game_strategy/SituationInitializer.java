@@ -424,7 +424,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("Thief");
         characterAvailable.add(characterToChoose);
         description=new String("Situation34: We are in the first rounds, I take Thief to win some golds");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.of(board.findCharacter("Architect")),Optional.empty(),2);
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.of(board.findCharacter("Architect")),Optional.empty(),1);
         situation.setRoundNumberLess5(true);
         AllSituations.add(situation);
 
