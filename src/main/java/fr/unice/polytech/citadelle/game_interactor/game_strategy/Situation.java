@@ -14,10 +14,11 @@ public class Situation implements Comparable<Situation>{
 	private Optional<Integer> playOrder = Optional.empty();
 	//a player different of us
 	private Optional<Boolean> aPlayerCloseToWinPlayFirst = Optional.empty();
-	//if their is not a play close to win, -1, closeToWin = 7/8 District
+	//if their is not a play close to win, -1, if closeToWin = 7/8 District
 	private Optional<Integer> distanceBetweenRichardAndAPlayerCloseToWin = Optional.empty();
 	private Optional<Boolean> iHave6Districts = Optional.empty();
 	private Optional<Boolean> iHave7Districts = Optional.empty();
+	private Optional<Boolean> aPlayerHas7Districts = Optional.empty();
 	private Optional<Boolean> aPlayerCouldPlayArchitect = Optional.empty();
 	private Optional<Boolean> RichardCouldPlayArchitect = Optional.empty();
 	//rich = 6 golds
@@ -40,7 +41,7 @@ public class Situation implements Comparable<Situation>{
 	private String description;
 	private Optional<ArrayList<Character>> listOfCharacterPickable;
 	private Optional<ArrayList<Character>> listOfCharacterNotHere;
-	//-1 if he play before 1 if play after me and  0 if nobody is close to end the game
+	//-1 if he play before 1 if play after me and  0 if nobody is close to end the game, potentialwinner = 6/8
 	private Optional<Integer> positionOfPotentialWinner;
 	private Optional<Character> characterToChoose;
 	private Optional<Character> targetCharacter;
@@ -274,6 +275,16 @@ public class Situation implements Comparable<Situation>{
 	public int compareTo(Situation other) {
         return other.priority-this.priority;
 
+	}
+
+
+	public Optional<Boolean> getaPlayerHas7Districts() {
+		return aPlayerHas7Districts;
+	}
+
+
+	public void setaPlayerHas7Districts(Optional<Boolean> aPlayerHas7Districts) {
+		this.aPlayerHas7Districts = aPlayerHas7Districts;
 	}
 	
 	
