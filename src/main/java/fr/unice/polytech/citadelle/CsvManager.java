@@ -65,12 +65,10 @@ public class CsvManager {
 
             toWrite += 1 + ",";
 
-            //6 = maximum of possible players minus one
-            for(int j = 0; j < 6 - i; j++) {
+            //8 = maximum of possible players minus one plus WR plus GP
+            for(int j = 0; j < 8 - i; j++) {
                 toWrite += "0,";
             }
-
-            //WR GP
 
             record = toWrite.split(",");
             writer.writeNext(record);
@@ -100,7 +98,7 @@ public class CsvManager {
         int rankPosition = 1;
         for(Player player : leaderboard) {
             updateLine(player, allRows, rankPosition);
-            write(allRows);
+            write(winrate());
             rankPosition++;
         }
     }
@@ -127,6 +125,24 @@ public class CsvManager {
         }
     }
 
+    List<String[]> winrate() throws Exception {
+        List<String[]> allRows = read();
+        int numberOfLine = getNumberOfLine();
+        int gamesCounter;
 
+        for(String[] row : allRows.subList(1, numberOfLine)) {
+            gamesCounter = Integer.parseInt(row[1]);
+            for(int i = 2; i < 8; i++) {
+                gamesCounter += Integer.parseInt(row[i]);
+            }
+            row[9] = String.valueOf(gamesCounter);
+
+            StatsBot statsBot = new StatsBot(row[0], gamesCounter, Integer.parseInt(row[1]));
+
+            row[8] = String.valueOf(statsBot.getWinrate());
+        }
+
+        return allRows;
+    }
 
 }
