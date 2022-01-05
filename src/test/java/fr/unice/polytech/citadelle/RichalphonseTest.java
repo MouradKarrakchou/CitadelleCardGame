@@ -33,14 +33,14 @@ public class RichalphonseTest {
 		deckDistrict.initialise();
 		player = new Player("Player");
     	board = new Board(null,new ArrayList<>(),deckDistrict , null);
-		richalphonse = spy(new richalphonse(player, board));
+		richalphonse = spy(new Richalphonse(player, board));
 	}
 
 	@RepeatedTest(1)
 	//@Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
-		richalphonse = spy(new richalphonse(player, board));
+		richalphonse = spy(new Richalphonse(player, board));
 
 		player.getDistrictCards().clear();
 

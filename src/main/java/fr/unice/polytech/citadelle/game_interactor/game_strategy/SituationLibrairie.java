@@ -20,11 +20,7 @@ public class SituationLibrairie {
 		this.board = board;
 	}
 	
-	public ArrayList<Situation> filterByOrderOfPlay(ArrayList<Situation> listOfSituation, int orderOfPlay){
-		return listOfSituation.stream().
-								filter(situation -> situation.getPlayOrder().isEmpty() || situation.getPlayOrder().get() == orderOfPlay).
-								collect(Collectors.toCollection(ArrayList::new));
-	}
+	
 	
 	public ArrayList<Situation> filterByListOfCharacterPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterPickable) {
 		return listOfSituation.stream()
@@ -38,17 +34,25 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByPlayerCloseWinPlayFirst(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
-		return listOfSituation.stream()
-								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
-								.collect(Collectors.toCollection(ArrayList::new));
-	}
-	
 	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
 		return listOfSituation.stream()
 								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
+	
+	public ArrayList<Situation> filterByOrderOfPlay(ArrayList<Situation> listOfSituation, int orderOfPlay){
+		return listOfSituation.stream().
+								filter(situation -> situation.getPlayOrder().isEmpty() || situation.getPlayOrder().get() == orderOfPlay).
+								collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public ArrayList<Situation> filterByPlayerCloseToWinPlayFirst(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	
 		
 	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
 		for(Character character : list1){

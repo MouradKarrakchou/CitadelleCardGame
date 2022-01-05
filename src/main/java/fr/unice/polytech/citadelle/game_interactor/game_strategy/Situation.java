@@ -35,7 +35,7 @@ public class Situation implements Comparable<Situation>{
 	private Optional<Boolean> RichardDontPlayFirst = Optional.empty();
 	private Optional<Boolean> RichardHasMoreOf6Golds = Optional.empty();
 	//le player Targetb is thee player who has most card
-	private Optional<Boolean> targetPlayerHasMostCard;
+	private Optional<Boolean> targetPlayerHasMostCard = Optional.empty();
 	
 
 	
@@ -45,6 +45,7 @@ public class Situation implements Comparable<Situation>{
 	private Optional<ArrayList<Character>> listOfCharacterNotHere;
 	//-1 if he play before 1 if play after me and  0 if nobody is close to end the game, potentialwinner = 6/8
 	private Optional<Integer> positionOfPotentialWinner;
+	
 	private Optional<Character> characterToChoose;
 	private Optional<Character> targetCharacter;
 	//if = 1, targetPlayer = player close to finish
@@ -86,8 +87,6 @@ public class Situation implements Comparable<Situation>{
 		return targetCharacter;
 	}
 
-
-
 	
 	public Optional<Boolean> getTargetPlayerHasMostCard() {
 		return targetPlayerHasMostCard;
@@ -112,8 +111,6 @@ public class Situation implements Comparable<Situation>{
 	public Optional<ArrayList<Character>> getListOfCharacterNotHere() {
 		return listOfCharacterNotHere;
 	}
-	
-	
 	
 	
 

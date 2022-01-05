@@ -39,8 +39,9 @@ public class RichalphonseStrategy {
      */
     public Situation getBestSituation(ArrayList<Character> listOfRichardCharacterPickable){
     	ArrayList<Situation> searchSituation = librairie.getLibrairieContent();
+    	//searchSituation = librairie.filterByListOfCharacterNotPickable(searchSituation, );
     	searchSituation = librairie.filterByListOfCharacterPickable(searchSituation, listOfRichardCharacterPickable);
-    	searchSituation = librairie.filterByPlayerCloseWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
+    	searchSituation = librairie.filterByPlayerCloseToWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
     	
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
@@ -53,23 +54,35 @@ public class RichalphonseStrategy {
      */
     private boolean calculIsAPlayerCloseWinPlayFirst() {
     	if(!aPlayerIsCloseToWin()) return false;
-    	Player mostAdvancedPlayer = getPlayerIsCloseToWin();
+    	Player playerIsCloseToWin = getPlayerIsCloseToWin();
 		Player firstPlayerToPlay = getFirstPlayerToPlay();
 
-		if(mostAdvancedPlayer.equals(firstPlayerToPlay)) return true;
+		if(playerIsCloseToWin.equals(firstPlayerToPlay)) return true;
 		return false;
     }
     
     /**
      * @return A Player close to win (7/8 Districts)
      */	
-	private Player getPlayerIsCloseToWin() {
+	public Player getPlayerIsCloseToWin() {
 		Player playerIsCloseToWin= board.getListOfPlayer().get(0);
 		for(Player player: board.getListOfPlayer()){
 			if(playerIsCloseToWin.getCity().getSizeOfCity() > 6)
 				playerIsCloseToWin = player;
 		}
 		return playerIsCloseToWin;
+	}
+	
+	/**
+     * @return The player who has most District card
+     */	
+	public Player getTargetPlayerHasMostCard() {
+		Player playerHasMostCard= board.getListOfPlayer().get(0);
+		for(Player player: board.getListOfPlayer()){
+			if(playerHasMostCard.getDistrictCards().size() < player.getDistrictCards().size())
+				playerHasMostCard = player;
+		}
+		return playerHasMostCard;
 	}
 
 
