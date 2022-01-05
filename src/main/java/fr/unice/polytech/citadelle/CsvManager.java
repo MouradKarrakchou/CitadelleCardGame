@@ -153,4 +153,16 @@ public class CsvManager {
         return allRows;
     }
 
+    ArrayList<StatsBot> getStatsBot() throws Exception {
+        ArrayList<StatsBot> statsBots = new ArrayList<>();
+        List<String[]> allRows = read();
+        int numberOfLine = getNumberOfLine();
+
+        for(String[] row : allRows.subList(1, numberOfLine)) {
+            statsBots.add(new StatsBot(row[0], Integer.parseInt(row[9]), Integer.parseInt(row[1])));
+        }
+
+        return statsBots;
+    }
+
 }
