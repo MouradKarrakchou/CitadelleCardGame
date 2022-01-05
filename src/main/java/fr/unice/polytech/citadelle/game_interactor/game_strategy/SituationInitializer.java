@@ -13,7 +13,7 @@ public class SituationInitializer {
         ArrayList<Character> characterAvailable;
         Character characterToChoose;
         //Creating default situation (if no other situation is available)
-        //AllSituations.add(new Situation(Optional.empty(),Optional.empty(),Optional.empty(),Optional.empty(),0));
+        AllSituations.add(new Situation("No Perfect Setup has benn found",Optional.empty(),Optional.empty(),Optional.empty(),Optional.empty(),Optional.empty(),Optional.empty(),0));
         //Situation where I pick a Player the Assassin to kill the player that would want to win a lot of money
         characterAvailable=new ArrayList<>();
         characterToChoose=board.findCharacter("Assassin");
