@@ -32,7 +32,7 @@ public class CsvManagerTest {
         };
 
         CsvManager csvManager = new CsvManager(leaderboard);
-        csvManager.write();
+        //csvManager.write();
 
         CSVReader reader = new CSVReader(new FileReader("src\\main\\resources\\save\\results.csv"), ',' , '"' , 0);
         int counter = 0;
