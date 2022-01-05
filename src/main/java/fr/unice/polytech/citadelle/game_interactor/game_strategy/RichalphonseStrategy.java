@@ -79,7 +79,7 @@ public class RichalphonseStrategy {
 	/**
      * @return The player who has most District card
      */	
-	 Player getTargetPlayerHasMostCard() {
+	 public Player getTargetPlayerHasMostCard() {
 		Player playerHasMostCard= board.getListOfPlayer().get(0);
 		for(Player player: board.getListOfPlayer()){
 			if(playerHasMostCard.getDistrictCards().size() < player.getDistrictCards().size())
