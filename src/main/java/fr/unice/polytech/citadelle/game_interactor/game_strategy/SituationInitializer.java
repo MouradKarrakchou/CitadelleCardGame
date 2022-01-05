@@ -66,7 +66,7 @@ public class SituationInitializer {
         characterAvailable.add(board.findCharacter("Architect"));
         description=new String("Situation3:Take Assassin to kill the Condotière because I got the lead ");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.of(board.findCharacter("Architect")),Optional.empty(),2);
-        situation.setaPlayerCouldPlayArchitect(true);
+        situation.setAPlayerCouldPlayArchitect(true);
         AllSituations.add(situation);
 
         //Situation6:Take the Architect if someone is advantaged to pick architect to deny him (more then 4 golds,1 district or more,already built 5 district)
@@ -77,7 +77,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Assassin"));
         description=new String("Situation6:Take the Architect if someone is advantaged to pick architect to deny him ");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),2);
-        situation.setaPlayerCouldPlayArchitect(true);
+        situation.setAPlayerCouldPlayArchitect(true);
         AllSituations.add(situation);
 
         //Situation7: Take the Architect if im advantaged (more then 4 golds,1 district or more,already built 5 district)
@@ -95,7 +95,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         description=new String("Situation8: Someone is close to finish the game (6 District built) we want to deny him by taking the King");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),4);
-        situation.setaPlayerHas7Districts(false);
+        situation.setAPlayerHas7Districts(false);
         AllSituations.add(situation);
 
         //Situation9: Someone is close to finish the game (6 District built) we want to deny him by taking the Assassin(because the king is already taken)
@@ -106,7 +106,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("King"));
         description=new String("Situation9: Someone is close to finish the game (6 District built) we want to deny him by taking the Assassin(because the king is already taken)");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Bishop")),Optional.empty(),4);
-        situation.setaPlayerHas7Districts(false);
+        situation.setAPlayerHas7Districts(false);
         AllSituations.add(situation);
 
         //Situation10: Someone is close to finish the game (6 District built) we want to deny him by taking the Walord(because the king and assassin are already taken)
@@ -118,7 +118,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Assassin"));
         description=new String("Situation10: Someone is close to finish the game (6 District built) we want to deny him by taking the Warlord(because the king and assassin are already taken)");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),4);
-        situation.setaPlayerHas7Districts(false);
+        situation.setAPlayerHas7Districts(false);
         AllSituations.add(situation);
 
         //Situation11: Someone is close to finish the game (6 District built) we want to deny him by taking the Bishop(because the king and assassin and Warlord are already taken)
@@ -131,7 +131,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation11: Someone is close to finish the game (6 District built) we want to deny him by taking the Bishop(because the king and assassin and Warlord are already taken)");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),4);
-        situation.setaPlayerHas7Districts(false);
+        situation.setAPlayerHas7Districts(false);
         AllSituations.add(situation);
 
 
@@ -143,8 +143,8 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("King"));
         description=new String("Situation12: The bot close to finish the game plays before me and probably took the King");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(-1),Optional.of(characterToChoose),Optional.of(board.findCharacter("King")),Optional.empty(),4);
-        situation.setaPlayerHas7Districts(false);
-        situation.setaPlayerCloseToWinPlayFirst(true);
+        situation.setAPlayerHas7Districts(false);
+        situation.setAPlayerCloseToWinPlayFirst(true);
         AllSituations.add(situation);
 
         //Situation13: The bot close to finish the game plays before me and probably took the King we take Warlord
@@ -156,8 +156,8 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Assassin"));
         description=new String("Situation13: The bot close to finish the game plays before me and probably took the King we take Warlord");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(-1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),4);
-        situation.setaPlayerHas7Districts(false);
-        situation.setaPlayerCloseToWinPlayFirst(true);
+        situation.setAPlayerHas7Districts(false);
+        situation.setAPlayerCloseToWinPlayFirst(true);
         AllSituations.add(situation);
 
         //Situation14: The bot close to finish the game plays before me and probably took the King we take Bishop
@@ -170,8 +170,8 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation14: The bot close to finish the game plays before me and probably took the King we take Bishop");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(-1),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),3);
-        situation.setaPlayerHas7Districts(false);
-        situation.setaPlayerCloseToWinPlayFirst(true);
+        situation.setAPlayerHas7Districts(false);
+        situation.setAPlayerCloseToWinPlayFirst(true);
         AllSituations.add(situation);
 
         //Situation15: The bot close to finish the game plays before me and probably took the King we take the magician to target him
@@ -184,8 +184,8 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation15: The bot close to finish the game plays before me and probably took the King we take the magician to target him ");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(-1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),4);
-        situation.setaPlayerHas7Districts(false);
-        situation.setaPlayerCloseToWinPlayFirst(true);
+        situation.setAPlayerHas7Districts(false);
+        situation.setAPlayerCloseToWinPlayFirst(true);
         AllSituations.add(situation);
 
 
@@ -342,8 +342,8 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation28: The Player playing third have 7districts I take Assassin to not let him swap his cards");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.of(board.findCharacter("Magician")),Optional.empty(),7);
-        situation.setaPlayerHasLotOfCard(true);
-        situation.setaPlayerCloseToWinHasFewCard(true);
+        situation.setAPlayerHasLotOfCard(true);
+        situation.setAPlayerCloseToWinHasFewCard(true);
         situation.setiHave7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(2);
         situation.setPlayOrder(1);
@@ -360,7 +360,7 @@ public class SituationInitializer {
         situation.setiHave7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(2);
-        situation.setaPlayerCloseToWinPlayFirst(false);
+        situation.setAPlayerCloseToWinPlayFirst(false);
         AllSituations.add(situation);
 
         //Situation30: The Player playing third have 7districts I take Warlord to destroy his district
@@ -375,7 +375,7 @@ public class SituationInitializer {
         situation.setiHave7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
         situation.setPlayOrder(2);
-        situation.setaPlayerCloseToWinPlayFirst(false);
+        situation.setAPlayerCloseToWinPlayFirst(false);
         AllSituations.add(situation);
 
 
@@ -388,7 +388,7 @@ public class SituationInitializer {
         characterNotAvailable.add(board.findCharacter("Warlord"));
         description=new String("Situation31: The Player playing third have 7districts I take Warlord to destroy his district");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.of(characterNotAvailable),Optional.of(1),Optional.of(characterToChoose),Optional.empty(),Optional.of(true),7);
-        situation.setaPlayerCloseToWinHasFewCard(false);
+        situation.setAPlayerCloseToWinHasFewCard(false);
         situation.setiHaveFewCard(true);
         situation.setiHave7Districts(true);
         situation.setDistanceBetweenRichardAndAPlayerCloseToWin(1);
@@ -434,7 +434,7 @@ public class SituationInitializer {
         characterAvailable.add(characterToChoose);
         description=new String("Situation35: I have not much Cards i should take Magician");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.of(board.findCharacter("Architect")),Optional.empty(),3);
-        situation.setaPlayerHasLotOfCard(true);
+        situation.setAPlayerHasLotOfCard(true);
         situation.setiHaveFewCard(true);
         situation.setTargetPlayerHasMostCard(Optional.of(true));
         AllSituations.add(situation);
