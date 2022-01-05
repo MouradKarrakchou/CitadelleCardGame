@@ -220,6 +220,22 @@ public class CsvManagerTest {
     }
 
     @Test
+    void getStatsBotTest() throws Exception {
+        csvManager.createFile();
+        csvManager.append();
+
+        ArrayList<StatsBot> statsBots = new ArrayList<>();
+        statsBots.add(new StatsBot("P1", 1, 1, 0));
+        statsBots.add(new StatsBot("P2", 1, 0, 0));
+        statsBots.add(new StatsBot("P3", 1, 0, 0));
+        statsBots.add(new StatsBot("P4", 1, 0, 0));
+        statsBots.add(new StatsBot("P5", 1, 0, 0));
+
+        for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getName(), csvManager.getStatsBot().get(i).getName());
+        for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getWinrate(), csvManager.getStatsBot().get(i).getWinrate());
+    }
+
+    @Test
     void clean() {
         String path = "save\\results.csv";
         File csvFile = new File(path);
