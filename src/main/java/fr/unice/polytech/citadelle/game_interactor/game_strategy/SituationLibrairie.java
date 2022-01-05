@@ -38,12 +38,11 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	/*public ArrayList<Situation> filterByBestPlayerPlayFirst(ArrayList<Situation> listOfSituation) {
-		boolean bestPlayerPlayFirst = mostAdvancedPlayerPlayFirst();
+	public ArrayList<Situation> filterByBestPlayerPlayFirst(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.g().isEmpty() || situation.getBestPlayerPlayFirst().get() == bestPlayerPlayFirst)
+								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
-	}*/
+	}
 		
 	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
 		for(Character character : list1){
@@ -85,6 +84,8 @@ public class SituationLibrairie {
 	private Player getFirstPlayerToPlay() {
 		return board.getListOfPlayerWhoPlayed().get(0);
 	}
+	
+	
 	
 	
 	private Player getMostAdvancedPlayer() {
