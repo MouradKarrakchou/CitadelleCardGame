@@ -5,20 +5,29 @@ public class StatsBot implements Comparable {
 	private int numberOfGamePlay = 0;
 	private int numberOfGameWin = 0;
 
+	/**
+	 * Initialize a new StatsBot with no game played.
+	 * @param botName The name of the bot.
+	 */
 	public StatsBot(String botName) {
 		this.botName = botName;
 	}
 
+	/**
+	 * Initialize a StatsBot with a name, and its current statistics.
+	 * If the bot never play a game, please refer to the other StatsBot constructor.
+	 * @param botName The name of the bot
+	 * @param numberOfGamePlay The number of game played by the bot.
+	 * @param numberOfGameWin The number of game won by the bot.
+	 */
+	public StatsBot(String botName, int numberOfGamePlay, int numberOfGameWin) {
+		this.botName = botName;
+		this.numberOfGamePlay = numberOfGamePlay;
+		this.numberOfGameWin = numberOfGameWin;
+	}
+
 	public String getName() {
 		return botName;
-	}
-
-	public int getNumberOfGamePlay() {
-		return numberOfGamePlay;
-	}
-
-	public void setNumberOfGameWin(int numberOfGameWin) {
-		this.numberOfGameWin = numberOfGameWin;
 	}
 
 	public double getWinrate() {
@@ -35,6 +44,6 @@ public class StatsBot implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		return (int) (((StatsBot) o).getWinrate() - getWinrate());
+		return (int) (((StatsBot) o).getWinrate() * 100 - getWinrate() * 100);
 	}
 }
