@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CsvManagerTest {
 
-    /*
+/*
     @Test
     //On one game (overwrite)
     void saveRank() throws Exception {
@@ -25,15 +25,15 @@ public class CsvManagerTest {
         leaderboard.add(new Player("Player3"));
 
         String [] realLeaderboard = {
-                "[BotType, 1, 2, 3, 4, 5, 6, 7]",
-                "[Player2, 1, 0, 0, 0, 0, 0, 0]",
-                "[Player4, 0, 1, 0, 0, 0, 0, 0]",
-                "[Player1, 0, 0, 1, 0, 0, 0, 0]",
-                "[Player3, 0, 0, 0, 1, 0, 0, 0]"
+                "[BotType, 1, 2, 3, 4, 5, 6, 7, Win-rate, Games played]",
+                "[Player2, 1, 0, 0, 0, 0, 0, 0, 100.0, 1]",
+                "[Player4, 0, 1, 0, 0, 0, 0, 0, 0.0, 1]",
+                "[Player1, 0, 0, 1, 0, 0, 0, 0, 0.0, 1]",
+                "[Player3, 0, 0, 0, 1, 0, 0, 0, 0.0, 1]"
         };
 
         CsvManager csvManager = new CsvManager(leaderboard);
-        //csvManager.write();
+        csvManager.append();
 
         CSVReader reader = new CSVReader(new FileReader("src\\main\\resources\\save\\results.csv"), ',' , '"' , 0);
         int counter = 0;

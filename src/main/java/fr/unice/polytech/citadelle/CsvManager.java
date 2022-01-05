@@ -18,7 +18,7 @@ public class CsvManager {
 
     void saveFile() throws Exception {
         existingFile();
-        if(!emptyFile()) update();
+        if(!emptyFile()) updateWinrate(update());
     }
 
     void existingFile() throws Exception {
@@ -77,6 +77,8 @@ public class CsvManager {
 
         //close the writer
         writer.close();
+
+        write(winrate(read()));
     }
 
     List<String[]> read() throws Exception {
@@ -92,15 +94,20 @@ public class CsvManager {
         return allRows.size();
     }
 
-    void update() throws Exception {
+    List<String[]> update() throws Exception {
         List<String[]> allRows = read();
 
         int rankPosition = 1;
         for(Player player : leaderboard) {
-            updateLine(player, allRows, rankPosition);
-            write(winrate());
+            allRows = updateLine(player, allRows, rankPosition);
             rankPosition++;
         }
+
+        return allRows;
+    }
+
+    void updateWinrate(List<String[]> allRows) throws Exception {
+        write(winrate(allRows));
     }
 
     void write(List<String[]> allRows) throws Exception {
@@ -112,7 +119,7 @@ public class CsvManager {
         writer.close();
     }
 
-    void updateLine(Player player, List<String[]> allRows, Integer rankPosition) {
+    List<String[]> updateLine(Player player, List<String[]> allRows, Integer rankPosition) {
         for (String[] row : allRows) {
 
             if(row[0].equals(player.getName())) {
@@ -123,10 +130,11 @@ public class CsvManager {
             }
 
         }
+
+        return allRows;
     }
 
-    List<String[]> winrate() throws Exception {
-        List<String[]> allRows = read();
+    List<String[]> winrate(List<String[]> allRows) throws Exception {
         int numberOfLine = getNumberOfLine();
         int gamesCounter;
 
