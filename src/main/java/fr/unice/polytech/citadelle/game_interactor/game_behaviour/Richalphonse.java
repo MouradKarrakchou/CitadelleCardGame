@@ -101,18 +101,18 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Player selectPlayerForWarlord() {
-        if (currentBestSituation.getTargetPlayer().isEmpty())
+        if (currentBestSituation.getTargetPlayerCloseToFinish().isEmpty())
             return strategy.choosePlayerForWarlordRandom();
-        return (currentBestSituation.getTargetPlayer().get());
+        return (currentBestSituation.getTargetPlayerCloseToFinish().get());
     }
     /**
      * According to the Magician strategy, will try to choose the suitable Player to use Magician spell.
      * @return The Player to swap card with.
      */
     public Player choosePlayerForMagicianSpell() {
-        if (currentBestSituation.getTargetPlayer().isEmpty())
+        if (currentBestSituation.getTargetPlayerCloseToFinish().isEmpty())
             return strategy.choosePlayerForMagicianRandom();
-        return currentBestSituation.getTargetPlayer().get();
+        return currentBestSituation.getTargetPlayerCloseToFinish().get();
     }
 
     /**

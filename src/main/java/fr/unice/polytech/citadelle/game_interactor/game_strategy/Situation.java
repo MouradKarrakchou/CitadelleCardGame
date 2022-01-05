@@ -34,7 +34,9 @@ public class Situation implements Comparable<Situation>{
 	private Optional<Boolean> numberOfPlayerLess5 = Optional.empty();
 	private Optional<Boolean> RichardDontPlayFirst = Optional.empty();
 	private Optional<Boolean> RichardHasMoreOf6Golds = Optional.empty();
-
+	//le player Targetb is thee player who has most card
+	private Optional<Boolean> targetPlayerHasMostCard;
+	
 
 	
 	//--------------------CONSTRUCTEUR
@@ -45,14 +47,15 @@ public class Situation implements Comparable<Situation>{
 	private Optional<Integer> positionOfPotentialWinner;
 	private Optional<Character> characterToChoose;
 	private Optional<Character> targetCharacter;
-	private Optional<Player> targetPlayer;
+	//if = 1, targetPlayer = player close to finish
+	private Optional<Boolean> targetPlayerCloseToFinish;
 	private int priority;
 
 
 
 	
 
-	public Situation(String description, Optional<ArrayList<Character>> listOfCharacterPickable, Optional<ArrayList<Character>> listOfCharacterNotHere, Optional<Integer> positionOfPotentialWinner, Optional<Character> characterToChoose, Optional<Character> targetCharacter, Optional<Player> targetPlayer ,int priority) {
+	public Situation(String description, Optional<ArrayList<Character>> listOfCharacterPickable, Optional<ArrayList<Character>> listOfCharacterNotHere, Optional<Integer> positionOfPotentialWinner, Optional<Character> characterToChoose, Optional<Character> targetCharacter, Optional<Boolean> targetPlayerCloseToFinish ,int priority) {
 		this.description = description;
 		this.priority = priority;
 		this.listOfCharacterPickable = listOfCharacterPickable;
@@ -60,7 +63,7 @@ public class Situation implements Comparable<Situation>{
 		this.positionOfPotentialWinner =positionOfPotentialWinner;
 		this.characterToChoose = characterToChoose;
 		this.targetCharacter = targetCharacter;
-		this.targetPlayer = targetPlayer;
+		this.targetPlayerCloseToFinish = targetPlayerCloseToFinish;
 		this.priority = priority;
 	}
 
@@ -84,10 +87,28 @@ public class Situation implements Comparable<Situation>{
 	}
 
 
-	public Optional<Player> getTargetPlayer() {
-		return targetPlayer;
-	}
+
 	
+	public Optional<Boolean> getTargetPlayerHasMostCard() {
+		return targetPlayerHasMostCard;
+	}
+
+
+	public void setTargetPlayerHasMostCard(Optional<Boolean> targetPlayerHasMostCard) {
+		this.targetPlayerHasMostCard = targetPlayerHasMostCard;
+	}
+
+
+	public Optional<Boolean> getTargetPlayerCloseToFinish() {
+		return targetPlayerCloseToFinish;
+	}
+
+
+	public void setTargetPlayerCloseToFinish(Optional<Boolean> targetPlayerCloseToFinish) {
+		this.targetPlayerCloseToFinish = targetPlayerCloseToFinish;
+	}
+
+
 	public Optional<ArrayList<Character>> getListOfCharacterNotHere() {
 		return listOfCharacterNotHere;
 	}
