@@ -36,7 +36,7 @@ public class SituationLibrairie {
 	
 	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, boolean currentBestPlayerPlayFirst) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
+								.filter(situation -> situation.getAPlayerCloseToWinPlayFirst().isEmpty() || situation.getAPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
@@ -48,7 +48,7 @@ public class SituationLibrairie {
 	
 	public ArrayList<Situation> filterByPlayerCloseToWinPlayFirst(ArrayList<Situation> listOfSituation, boolean currentBestPlayerPlayFirst) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
+								.filter(situation -> situation.getAPlayerCloseToWinPlayFirst().isEmpty() || situation.getAPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
@@ -78,7 +78,7 @@ public class SituationLibrairie {
 	
 	public ArrayList<Situation> filterByAPlayerCouldPlayArchitect(ArrayList<Situation> listOfSituation, boolean aPlayerInTheCurrentGameCouldPlayArchitect) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getaPlayerCouldPlayArchitect().isEmpty() || situation.getaPlayerCouldPlayArchitect().get() == aPlayerInTheCurrentGameCouldPlayArchitect)
+								.filter(situation -> situation.getAPlayerCouldPlayArchitect().isEmpty() || situation.getAPlayerCouldPlayArchitect().get() == aPlayerInTheCurrentGameCouldPlayArchitect)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
@@ -100,18 +100,47 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 
-	public ArrayList<Situation> filterByIHaveLotOfCard(ArrayList<Situation> listOfSituation, boolean doesRichardHasAFewCard) {
+	public ArrayList<Situation> filterByIHaveLotOfCard(ArrayList<Situation> listOfSituation, boolean doesRichardHasALotOfCard) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getIHaveLotOfCard().isEmpty() || situation.getIHaveLotOfCard().get() == doesRichardHasAFewCard)
+								.filter(situation -> situation.getIHaveLotOfCard().isEmpty() || situation.getIHaveLotOfCard().get() == doesRichardHasALotOfCard)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByAPlayerHasLotOfCard(ArrayList<Situation> listOfSituation, boolean doesRichardHasAFewCard) {
+	public ArrayList<Situation> filterByAPlayerHasLotOfCard(ArrayList<Situation> listOfSituation, boolean aPlayerInTheCurrentGameHasALotOfCard) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getAPlayerHasLotOfCard().isEmpty() || situation.getAPlayerHasLotOfCard().get() == doesRichardHasAFewCard)
+								.filter(situation -> situation.getAPlayerHasLotOfCard().isEmpty() || situation.getAPlayerHasLotOfCard().get() == aPlayerInTheCurrentGameHasALotOfCard)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
+	public ArrayList<Situation> filterByAPlayerCloseToWinHasFewCard(ArrayList<Situation> listOfSituation, boolean aPlayerInTheGameIsCloseToWinAndHasFewCard) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getAPlayerCloseToWinHasFewCard().isEmpty() || situation.getAPlayerCloseToWinHasFewCard().get() == aPlayerInTheGameIsCloseToWinAndHasFewCard)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public ArrayList<Situation> filterByRoundNumberLess5(ArrayList<Situation> listOfSituation, boolean currentRoundNumberIsLess5) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getRoundNumberLess5().isEmpty() || situation.getRoundNumberLess5().get() == currentRoundNumberIsLess5)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public ArrayList<Situation> filterByNumberOfPlayerLess5(ArrayList<Situation> listOfSituation, boolean currentNumberOfTotalPlayerIsLess5) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getNumberOfPlayerLess5().isEmpty() || situation.getNumberOfPlayerLess5().get() == currentNumberOfTotalPlayerIsLess5)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public ArrayList<Situation> filterByRichardDontPlayFirst(ArrayList<Situation> listOfSituation, boolean richardDontPlayFirst) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getRichardDontPlayFirst().isEmpty() || situation.getRichardDontPlayFirst().get() == richardDontPlayFirst)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public ArrayList<Situation> filterRichardHasMoreOf6Golds(ArrayList<Situation> listOfSituation, boolean richardHasMoreOf6Golds) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getRichardHasMoreOf6Golds().isEmpty() || situation.getRichardHasMoreOf6Golds().get() == richardHasMoreOf6Golds)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
 		
 	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
 		for(Character character : list1){
