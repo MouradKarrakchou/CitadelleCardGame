@@ -444,7 +444,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("King");
         characterAvailable.add(characterToChoose);
         description=new String("Situation36: There are few Players in the game so i will pick the King to try to stay king next rounds.");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),3);
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),4);
         situation.setRichardDontPlayFirst(true);
         situation.setNumberOfPlayerLess5(true);
         AllSituations.add(situation);
@@ -454,7 +454,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("Merchant");
         characterAvailable.add(characterToChoose);
         description=new String("Situation37: I pick Merchant because i have no better choices and it gives me some golds.");
-        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),2);
+        situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.empty(),Optional.empty(),1);
         AllSituations.add(situation);
 
         //Situation38: I have a lot of golds i will try to take Architect to build a lot.

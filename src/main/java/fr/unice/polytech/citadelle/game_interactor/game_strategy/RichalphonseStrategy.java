@@ -35,7 +35,7 @@ public class RichalphonseStrategy {
     public Situation getBestSituation(ArrayList<Character> listOfRichardCharacterPickable){
     	ArrayList<Situation> searchSituation = librairie.getLibrairieContent();
     	searchSituation = librairie.filterByListOfCharacterPickable(searchSituation, listOfRichardCharacterPickable);
-    	searchSituation = librairie.filterByListOfCharacterNotPickable(searchSituation, getNonPickableCharacter());
+    	searchSituation = librairie.filterByListOfCharacterNotPickable(searchSituation, listOfRichardCharacterPickable);
     	searchSituation = librairie.filterByPositionOfPotentialWinner(searchSituation, getPositionOfPotentialWinner());
     	searchSituation = librairie.filterByOrderOfPlay(searchSituation, getRichardPlayOrder());
     	searchSituation = librairie.filterByPlayerCloseToWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
@@ -115,7 +115,7 @@ public class RichalphonseStrategy {
      * @return True if the number of player is les than 5
      */
     private boolean isNumberOfPlayerLess5() {
-		if(board.getListOfPlayer().size() < 5) return true;
+		if(board.getListOfPlayer().size() <= 5) return true;
 		return false;
 	}
     
