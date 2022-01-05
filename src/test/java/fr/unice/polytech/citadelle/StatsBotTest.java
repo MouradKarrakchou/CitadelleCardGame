@@ -15,22 +15,22 @@ public class StatsBotTest {
     @Test
     void winrateTest(){
         // Bob has 0 game played and 0 game won
-        StatsBot newStatsBot = new StatsBot("bob", 0, 0);
+        StatsBot newStatsBot = new StatsBot("bob", 0, 0, -1);
         assertEquals(0, newStatsBot.getWinrate());
     }
 
     @Test
     void compareTest(){
-        StatsBot bobStats = new StatsBot("bob", 1000, 999);
-        StatsBot aliceStats = new StatsBot("bob", 1000, 998);
+        StatsBot bobStats = new StatsBot("bob", 1000, 999, -1);
+        StatsBot aliceStats = new StatsBot("bob", 1000, 998, -1);
         assertTrue(bobStats.compareTo(aliceStats) < 0);
 
-        bobStats = new StatsBot("bob", 1000, 998);
-        aliceStats = new StatsBot("bob", 1000, 999);
+        bobStats = new StatsBot("bob", 1000, 998, -1);
+        aliceStats = new StatsBot("bob", 1000, 999, -1);
         assertTrue(bobStats.compareTo(aliceStats) > 0);
 
-        bobStats = new StatsBot("bob", 1000, 998);
-        aliceStats = new StatsBot("bob", 1000, 998);
+        bobStats = new StatsBot("bob", 1000, 998, -1);
+        aliceStats = new StatsBot("bob", 1000, 998, -1);
         assertEquals(0, bobStats.compareTo(aliceStats));
     }
 }

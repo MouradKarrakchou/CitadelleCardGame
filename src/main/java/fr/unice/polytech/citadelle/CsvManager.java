@@ -159,7 +159,7 @@ public class CsvManager {
             }
             row[9] = String.valueOf(gamesCounter);
 
-            StatsBot statsBot = new StatsBot(row[0], gamesCounter, Integer.parseInt(row[1]));
+            StatsBot statsBot = new StatsBot(row[0], gamesCounter, Integer.parseInt(row[1]), Integer.parseInt(row[11]));
 
             row[8] = String.valueOf(statsBot.getWinrate());
         }
@@ -183,7 +183,7 @@ public class CsvManager {
         int numberOfLine = getNumberOfLine();
 
         for(String[] row : allRows.subList(1, numberOfLine)) {
-            statsBots.add(new StatsBot(row[0], Integer.parseInt(row[9]), Integer.parseInt(row[1])));
+            statsBots.add(new StatsBot(row[0], Integer.parseInt(row[9]), Integer.parseInt(row[1]), Integer.parseInt(row[11])));
         }
 
         return statsBots;

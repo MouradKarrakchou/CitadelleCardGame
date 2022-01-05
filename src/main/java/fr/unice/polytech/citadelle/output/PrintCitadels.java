@@ -429,7 +429,7 @@ public class PrintCitadels {
 
     public static void startCSV() {
 		dropALine();
-		LOGGER.info("================ Reading CSV ================");
+		LOGGER.info("================ Total win-rate (reading CSV file) ================");
     }
 
 	public static void printStat(StatsBot statsBot) {
@@ -438,6 +438,6 @@ public class PrintCitadels {
 
 	public static void start1000games() {
 		dropALine();
-		LOGGER.info("================  Win-rate on 1000 games ================");
+		LOGGER.info("================  Win-rate on the 1000 last games ================");
 	}
 }
