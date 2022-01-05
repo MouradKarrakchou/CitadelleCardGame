@@ -34,9 +34,9 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
+	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, boolean currentBestPlayerPlayFirst) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
+								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
@@ -46,9 +46,15 @@ public class SituationLibrairie {
 								collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByPlayerCloseToWinPlayFirst(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
+	public ArrayList<Situation> filterByPlayerCloseToWinPlayFirst(ArrayList<Situation> listOfSituation, boolean currentBestPlayerPlayFirst) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
+								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == currentBestPlayerPlayFirst)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public ArrayList<Situation> filterByDistanceBetweenRichardAndAPlayerCloseToWin(ArrayList<Situation> listOfSituation, int currentDdistanceBetweenRichardAndAPlayerCloseToWin) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getDistanceBetweenRichardAndAPlayerCloseToWin().isEmpty() || situation.getDistanceBetweenRichardAndAPlayerCloseToWin().get() == currentDdistanceBetweenRichardAndAPlayerCloseToWin)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
