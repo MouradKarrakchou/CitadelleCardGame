@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
 
 
@@ -21,7 +22,7 @@ public class SituationLibrairie {
 	
 	public ArrayList<Situation> filterByOrderOfPlay(ArrayList<Situation> listOfSituation, int orderOfPlay){
 		return listOfSituation.stream().
-								filter(situation -> situation.getRang().isEmpty() || situation.getRang().get() == orderOfPlay).
+								filter(situation -> situation.getPlayOrder().isEmpty() || situation.getPlayOrder().get() == orderOfPlay).
 								collect(Collectors.toCollection(ArrayList::new));
 	}
 	
@@ -36,6 +37,13 @@ public class SituationLibrairie {
 								.filter(situation -> situation.getListOfCharacterNotHere().isEmpty() || doNotContain(listOfRichardCharacterNotPickable, listOfRichardCharacterNotPickable))
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
+	
+	/*public ArrayList<Situation> filterByBestPlayerPlayFirst(ArrayList<Situation> listOfSituation) {
+		boolean bestPlayerPlayFirst = mostAdvancedPlayerPlayFirst();
+		return listOfSituation.stream()
+								.filter(situation -> situation.g().isEmpty() || situation.getBestPlayerPlayFirst().get() == bestPlayerPlayFirst)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}*/
 		
 	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
 		for(Character character : list1){
@@ -53,6 +61,39 @@ public class SituationLibrairie {
 	private boolean librairyEmpty() {
 		if(librairieContent.size() == 0) return true;
 		return false;
+	}
+	
+	private boolean mostAdvancedPlayerPlayFirst() {
+		Player mostAdvancedPlayer = getMostAdvancedPlayer();
+		Player firstPlayerToPlay = getFirstPlayerToPlay();
+
+		if(mostAdvancedPlayer.equals(firstPlayerToPlay)) return true;
+		return false;
+	}
+
+	
+	private Player getRichestPlayer() {
+		Player richestPlayer= board.getListOfPlayer().get(0);
+		for(Player player: board.getListOfPlayer()){
+			if(richestPlayer.getGolds() < player.getGolds())
+				richestPlayer = player;
+		}
+		return richestPlayer;
+	}
+	
+	
+	private Player getFirstPlayerToPlay() {
+		return board.getListOfPlayerWhoPlayed().get(0);
+	}
+	
+	
+	private Player getMostAdvancedPlayer() {
+		Player mostAdvancedPlayer= board.getListOfPlayer().get(0);
+		for(Player player: board.getListOfPlayer()){
+			if(mostAdvancedPlayer.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
+				mostAdvancedPlayer = player;
+		}
+		return mostAdvancedPlayer;	
 	}
 	
 	
