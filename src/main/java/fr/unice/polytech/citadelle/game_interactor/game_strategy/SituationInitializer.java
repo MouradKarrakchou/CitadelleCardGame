@@ -64,7 +64,7 @@ public class SituationInitializer {
         characterToChoose=board.findCharacter("Assassin");
         characterAvailable.add(characterToChoose);
         characterAvailable.add(board.findCharacter("Architect"));
-        description=new String("Situation3:Take Assassin to kill the Condotière because I got the lead ");
+        description=new String("Situation5:Take The Assassin and kill the Architect if someone is advantaged to pick architect (more then 4 golds,1 district or more,already built 5 district)");
         situation=new Situation(description,Optional.of(characterAvailable),Optional.empty(),Optional.empty(),Optional.of(characterToChoose),Optional.of(board.findCharacter("Architect")),Optional.empty(),2);
         situation.setAPlayerCouldPlayArchitect(true);
         AllSituations.add(situation);
