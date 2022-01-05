@@ -273,6 +273,9 @@ public class Situation implements Comparable<Situation>{
 		this.positionOfPotentialWinner = Optional.of(positionOfPotentialWinner);
 	}
 
+	public void setDistanceBetweenRichardAndAPlayerCloseToWin(Integer distanceBetweenRichardAndAPlayerCloseToWin) {
+		this.distanceBetweenRichardAndAPlayerCloseToWin = Optional.of(distanceBetweenRichardAndAPlayerCloseToWin);
+	}
 
 	public Optional<Integer> getDistanceBetweenRichardAndAPlayerCloseToWin() {
 		return distanceBetweenRichardAndAPlayerCloseToWin;

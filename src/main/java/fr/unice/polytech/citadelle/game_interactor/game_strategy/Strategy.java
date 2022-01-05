@@ -481,13 +481,15 @@ public class Strategy {
     }
 
     public Character chooseCharacter(Behaviour bot) {
-        //Choice of Assassin
-        int index = chooseAssassin(bot);
-        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
         //Choice of Architect
-        index = chooseArchitect(bot);
+        int index = chooseArchitect(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
+
+        //Choice of Assassin
+        index = chooseAssassin(bot);
+        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
+
 
         //Choice of Magician
         index = chooseMagician(bot);
