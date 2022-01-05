@@ -31,7 +31,7 @@ public class Main {
 
 		// Reading CSV file
 		PrintCitadels.activateLevelInfo();
-		CsvManager csv = new CsvManager();
+		CsvManager csv = new CsvManager("save\\results.csv");
 		csv.printCSV();
 
 		//Battlefield (where the best bot is against the best bot)

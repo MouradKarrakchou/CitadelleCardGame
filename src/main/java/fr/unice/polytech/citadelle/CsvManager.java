@@ -24,13 +24,20 @@ public class CsvManager {
      * The leaderboard is used to know which player needs to have his stats updated
      *
      * @param leaderboard results board of the players
+     * @param path the path of the csv file
      */
     CsvManager (ArrayList<Player> leaderboard, String path) {
         this.leaderboard = leaderboard;
         this.path = path;
     }
 
-    CsvManager(){}
+    /**
+     * Initialize a CsvManager
+     * @param path the path of the csv file
+     */
+    CsvManager(String path){
+        this.path = path;
+    }
 
     /**
      * Main method of this class.
@@ -144,7 +151,6 @@ public class CsvManager {
      */
     List<String[]> read() throws Exception {
         //Build reader instance
-        System.out.println(path);
         CSVReader reader = new CSVReader(new FileReader(path), ',', '"', 0);
 
         //Read all rows at once
