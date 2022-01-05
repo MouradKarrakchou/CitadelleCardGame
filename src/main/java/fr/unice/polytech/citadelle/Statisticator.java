@@ -1,6 +1,5 @@
 package fr.unice.polytech.citadelle;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
@@ -10,7 +9,6 @@ import fr.unice.polytech.citadelle.game_engine.Controller;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class Statisticator {
-	private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 	private final ArrayList<StatsBot> listOfBotStats;
 	
 	public Statisticator() {
@@ -40,7 +38,7 @@ public class Statisticator {
 
 		Collections.sort(listOfBotStats);
 		for (StatsBot statsBot : listOfBotStats)
-			System.out.println(statsBot.getName() + " : " + dfZero.format(statsBot.getWinrate()) + "%");
+			System.out.println(statsBot.getName() + " : " + statsBot.getWinrate() + "%");
 	}
 
 	/**

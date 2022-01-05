@@ -1,9 +1,12 @@
 package fr.unice.polytech.citadelle;
 
+import java.text.DecimalFormat;
+
 public class StatsBot implements Comparable {
+	private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 	private final String botName;
-	private int numberOfGamePlayed = 0;
-	private int numberOfGameWon = 0;
+	public int numberOfGamePlayed = 0;
+	public int numberOfGameWon = 0;
 
 	/**
 	 * Initialize a new StatsBot with no game played.
@@ -31,7 +34,8 @@ public class StatsBot implements Comparable {
 	}
 
 	public double getWinrate() {
-		return numberOfGamePlayed == 0 ? 0 : (numberOfGameWon / (float) numberOfGamePlayed) * 100;
+		return numberOfGamePlayed == 0 ?
+				0 : Double.parseDouble(dfZero.format((numberOfGameWon / (float) numberOfGamePlayed) * 100));
 	}
 
 	public void increaseNumberOfGamePlay() {
