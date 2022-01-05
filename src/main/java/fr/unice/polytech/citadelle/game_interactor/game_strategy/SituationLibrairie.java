@@ -58,6 +58,13 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
+	public ArrayList<Situation> filterByIHave6Districts(ArrayList<Situation> listOfSituation, boolean RichardHas6Districts) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getiHave6Districts().isEmpty() || situation.getiHave6Districts().get() == RichardHas6Districts)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	
 	
 		
 	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
