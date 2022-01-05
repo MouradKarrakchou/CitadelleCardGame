@@ -3,7 +3,6 @@ package fr.unice.polytech.citadelle;
 import java.text.DecimalFormat;
 
 public class StatsBot implements Comparable {
-	private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 	private final String botName;
 	public int numberOfGamePlayed = 0;
 	public int numberOfGameWon = 0;
@@ -33,9 +32,13 @@ public class StatsBot implements Comparable {
 		return botName;
 	}
 
-	public double getWinrate() {
-		return numberOfGamePlayed == 0 ?
-				0 : Double.parseDouble(dfZero.format((numberOfGameWon / (float) numberOfGamePlayed) * 100));
+	public float getWinrate() {
+		if (numberOfGamePlayed == 0)
+			return 0;
+
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
+		return Float.parseFloat(df.format(numberOfGameWon / (float) numberOfGamePlayed * 100));
 	}
 
 	public void increaseNumberOfGamePlay() {
