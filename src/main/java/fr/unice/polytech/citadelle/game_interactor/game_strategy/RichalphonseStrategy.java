@@ -14,12 +14,6 @@ import fr.unice.polytech.citadelle.game.purple_districts.Library;
 import fr.unice.polytech.citadelle.game_character.Character;
 
 
-
-
-/**
- * @author leolb
- *
- */
 /**
  * @author leolb
  *
@@ -39,11 +33,14 @@ public class RichalphonseStrategy {
     }
 
     
-    public Situation getBestSituation(int orderOfPlay, ArrayList<Character> listOfRichardCharacterPickable){
-    	ArrayList<Situation> searchSituation = librairie.filterByOrderOfPlay(librairie.getLibrairieContent(), orderOfPlay);
-    	searchSituation = librairie.filterByOrderOfPlay(searchSituation, orderOfPlay);
+    /**
+     * @param listOfRichardCharacterPickable
+     * @return the best Situation according to actual game
+     */
+    public Situation getBestSituation(ArrayList<Character> listOfRichardCharacterPickable){
+    	ArrayList<Situation> searchSituation = librairie.getLibrairieContent();
     	searchSituation = librairie.filterByListOfCharacterPickable(searchSituation, listOfRichardCharacterPickable);
-    	searchSituation = librairie.filterByPlayerCloseWinPlayFirst(searchSituation, calculPlayerCloseWinPlayFirst());
+    	searchSituation = librairie.filterByPlayerCloseWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
     	
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
@@ -51,7 +48,10 @@ public class RichalphonseStrategy {
     }
     
     
-    private boolean calculPlayerCloseWinPlayFirst() {
+    /**
+     * @return True if a Player is close to win (7/8 Districts) and he is the first player to play, False in the others cases
+     */
+    private boolean calculIsAPlayerCloseWinPlayFirst() {
     	if(!aPlayerIsCloseToWin()) return false;
     	Player mostAdvancedPlayer = getPlayerIsCloseToWin();
 		Player firstPlayerToPlay = getFirstPlayerToPlay();
@@ -60,7 +60,9 @@ public class RichalphonseStrategy {
 		return false;
     }
     
-    	
+    /**
+     * @return A Player close to win (7/8 Districts)
+     */	
 	private Player getPlayerIsCloseToWin() {
 		Player playerIsCloseToWin= board.getListOfPlayer().get(0);
 		for(Player player: board.getListOfPlayer()){
@@ -71,6 +73,9 @@ public class RichalphonseStrategy {
 	}
 
 
+	/**
+     * @return True if a Player is close to win (7/8 Districts), False in the others cases
+     */
 	private boolean aPlayerIsCloseToWin() {
 		for(Player player: board.getListOfPlayer())
 			if(player.getCity().getSizeOfCity() >6) return true;
@@ -96,7 +101,9 @@ public class RichalphonseStrategy {
 		return richestPlayer;
 	}
 	
-	
+	/**
+     * @return The first Player who can choose his Character card
+     */
 	private Player getFirstPlayerToPlay() {
 		if(board.getListOfPlayerWhoPlayed().size()==0) return currentPlayer;
 		return board.getListOfPlayerWhoPlayed().get(0);
@@ -116,7 +123,9 @@ public class RichalphonseStrategy {
 	}
 
 	
-	
+	/**
+     * @return The most advanced Player of the game
+     */
 	private Player getMostAdvancedPlayer() {
 		Player mostAdvancedPlayer= board.getListOfPlayer().get(0);
 		for(Player player: board.getListOfPlayer()){

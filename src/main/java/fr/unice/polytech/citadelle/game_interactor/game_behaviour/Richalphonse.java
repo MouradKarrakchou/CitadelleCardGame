@@ -101,18 +101,18 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Player selectPlayerForWarlord() {
-        if (currentBestSituation.getTargetPlayer().isEmpty())
+        if (currentBestSituation.getTargetPlayerCloseToFinish().isEmpty())
             return strategy.choosePlayerForWarlordRandom();
-        return (currentBestSituation.getTargetPlayer().get());
+        return (currentBestSituation.getTargetPlayerCloseToFinish().get());
     }
     /**
      * According to the Magician strategy, will try to choose the suitable Player to use Magician spell.
      * @return The Player to swap card with.
      */
     public Player choosePlayerForMagicianSpell() {
-        if (currentBestSituation.getTargetPlayer().isEmpty())
+        if (currentBestSituation.getTargetPlayerCloseToFinish().isEmpty())
             return strategy.choosePlayerForMagicianRandom();
-        return currentBestSituation.getTargetPlayer().get();
+        return currentBestSituation.getTargetPlayerCloseToFinish().get();
     }
 
     /**
@@ -131,7 +131,7 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Character chooseCharacterWithStrategy(Behaviour bot) {
-    	Situation situationWeAreIn=richStrat.getBestSituation(board.getListOfPlayerWhoHasAlreadyPlayed().size()+1, board.getDeckCharacter().getDeckCharacter());
+    	Situation situationWeAreIn=richStrat.getBestSituation(board.getDeckCharacter().getDeckCharacter());
         this.currentBestSituation=situationWeAreIn;
         if (situationWeAreIn.getCharacterToChoose().isEmpty())
             return board.getDeckCharacter().getDeckCharacter().remove(0);
