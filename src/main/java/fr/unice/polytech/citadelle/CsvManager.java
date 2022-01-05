@@ -125,7 +125,7 @@ public class CsvManager {
                 updatedRank++;
                 row[rankPosition] = String.valueOf(updatedRank);
 
-                int updatedScore = Integer.valueOf(row[10]);
+                int updatedScore = Integer.parseInt(row[10]);
                 updatedScore += player.getScore();
                 row[10] = String.valueOf(updatedScore);
             }
