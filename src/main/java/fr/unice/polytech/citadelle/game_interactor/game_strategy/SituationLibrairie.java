@@ -9,11 +9,14 @@ import fr.unice.polytech.citadelle.game_character.Character;
 
 public class SituationLibrairie {
 	private ArrayList<Situation> librairieContent;
+	private Board board;
 
-	
+	//SituationInitializer.generateAllSituations(board);
+
 	 
 	public SituationLibrairie(Board board) {
-		this.librairieContent = SituationInitializer.generateAllSituations(board);
+		this.librairieContent = new  ArrayList<Situation>();
+		this.board = board;
 	}
 	
 	public ArrayList<Situation> filterByOrderOfPlay(ArrayList<Situation> listOfSituation, int orderOfPlay){
@@ -43,7 +46,13 @@ public class SituationLibrairie {
 
 
 	public ArrayList<Situation> getLibrairieContent() {
+		if(librairyEmpty()) this.librairieContent = SituationInitializer.generateAllSituations(board);
 		return librairieContent;
+	}
+	
+	private boolean librairyEmpty() {
+		if(librairieContent.size() == 0) return true;
+		return false;
 	}
 	
 	
