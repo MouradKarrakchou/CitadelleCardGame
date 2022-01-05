@@ -34,10 +34,9 @@ public class RichalphonseStrategy {
     public Situation getBestSituation(ArrayList<Character> listOfRichardCharacterPickable){
     	ArrayList<Situation> searchSituation = librairie.getLibrairieContent();
     	searchSituation = librairie.filterByListOfCharacterPickable(searchSituation, listOfRichardCharacterPickable);
-    	//searchSituation = librairie.filterByListOfCharacterNotPickable(searchSituation, );
+    	searchSituation = librairie.filterByListOfCharacterNotPickable(searchSituation, getNonPickableCharacter());
     	searchSituation = librairie.filterByPositionOfPotentialWinner(searchSituation, getPositionOfPotentialWinner());
     	searchSituation = librairie.filterByOrderOfPlay(searchSituation, getRichardPlayOrder());
-
     	searchSituation = librairie.filterByPlayerCloseToWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
     	searchSituation = librairie.filterByDistanceBetweenRichardAndAPlayerCloseToWin(searchSituation, getDistanceBetweenRichardAndAPlayerCloseToWin());
     	searchSituation = librairie.filterByIHave6Districts(searchSituation, getDoIHave6District());
@@ -54,16 +53,23 @@ public class RichalphonseStrategy {
     	searchSituation = librairie.filterByNumberOfPlayerLess5(searchSituation, isNumberOfPlayerLess5());
     	searchSituation = librairie.filterByRichardDontPlayFirst(searchSituation, doRichardDontPlayFirst());
     	searchSituation = librairie.filterRichardHasMoreOf6Golds(searchSituation, doRichardHasMoreOf6Golds());
-
-    	
-
-    	
-    	
+   
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
     	return bestSituation;
     }
-    /**
+    
+    private ArrayList<Character> getNonPickableCharacter() {
+    	ArrayList<Character> nonPickable = new ArrayList<>();
+    	for(Character character: board.getListOfCharacter()){
+    		if(!(board.getDeckCharacter()).getDeckCharacter().contains(character))
+    			nonPickable.add(character);
+    	}
+		return nonPickable;
+	}
+
+
+	/**
      * @return index of playOrder of currentPlayer
      */
     private int getRichardPlayOrder() {
@@ -71,11 +77,16 @@ public class RichalphonseStrategy {
 	}
 
     /**
-     * @return index of playOrder of tge most advanced player of the galme
+     * @return index of playOrder of the most advanced player of the galme
      */
 	private int getPositionOfPotentialWinner() {
-		Player potentialWinner = getPotentialWinner();
-		return getIndexOfPlayer(potentialWinner);
+		if(!aPlayerIsCloseToWin()) return 0;
+		int indexPotentialWinner = getIndexOfPlayer(getPlayerCloseToWin());
+		int indexCurrentPlayer = getIndexOfPlayer(currentPlayer);
+
+		if(indexPotentialWinner - indexCurrentPlayer < 0) return -1;
+		if(indexPotentialWinner - indexCurrentPlayer > 0) return 1;
+		return 0;
 	}
 
 
