@@ -20,21 +20,18 @@ public class SituationLibrairie {
 	}
 	
 	public ArrayList<Situation> filterByOrderOfPlay(ArrayList<Situation> listOfSituation, int orderOfPlay){
-		if(librairyEmpty())SituationInitializer.generateAllSituations(board);
 		return listOfSituation.stream().
 								filter(situation -> situation.getRang().isEmpty() || situation.getRang().get() == orderOfPlay).
 								collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	public ArrayList<Situation> filterByListOfCharacterPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterPickable) {
-		if(librairyEmpty())SituationInitializer.generateAllSituations(board);
 		return listOfSituation.stream()
 								.filter(situation ->situation.getListOfCharacterPickable().isEmpty() || listOfRichardCharacterPickable.containsAll(situation.getListOfCharacterPickable().get())										)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	public ArrayList<Situation> filterByListOfCharacterNotPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterNotPickable) {
-		if(librairyEmpty())SituationInitializer.generateAllSituations(board);
 		return listOfSituation.stream()
 								.filter(situation -> situation.getListOfCharacterPickable().isEmpty() || doNotContain(listOfRichardCharacterNotPickable, listOfRichardCharacterNotPickable))
 								.collect(Collectors.toCollection(ArrayList::new));
@@ -49,6 +46,7 @@ public class SituationLibrairie {
 
 
 	public ArrayList<Situation> getLibrairieContent() {
+		if(librairyEmpty()) this.librairieContent = SituationInitializer.generateAllSituations(board);
 		return librairieContent;
 	}
 	

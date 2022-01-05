@@ -109,7 +109,6 @@ public class RoundManagerTest {
 	@RepeatedTest(1)
 	//@Test
 	public void setupCharactersTest() {
-		board = Initializer.createBoard(listOfAllCharacter);
 		roundMan.setupCharacters();
 		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any());
 	}
