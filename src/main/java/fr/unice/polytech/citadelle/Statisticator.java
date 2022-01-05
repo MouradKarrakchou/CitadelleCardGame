@@ -18,15 +18,19 @@ public class Statisticator {
 	/**
 	 * Run a Thousand game.
 	 * Save the stats of the 1000 game on the listOfBotStats.
+	 * @param numberOfRichalphonse Number of Richalphonse bot
+	 * @param numberOfInvestor Number of Investor bot
+	 * @param numberOfRusher Number of Rusher bot
+	 * @param numberOfStrategator Number of Strategator bot
 	 */
-	public void runAThousandGames() throws Exception {
+	public void runAThousandGames(int numberOfRichalphonse, int numberOfInvestor, int numberOfRusher, int numberOfStrategator) throws Exception {
 		// Only read the logs with a Warning level
 		PrintCitadels.activateLevelWarning();
 
 		for(int i = 0; i < 1000; i++){
 			// Run one game
 			Controller controller = new Controller();
-			controller.initGame();
+			controller.initGame(numberOfRichalphonse, numberOfInvestor, numberOfRusher, numberOfStrategator);
 			ArrayList<Player> leaderboard = controller.runGame();
 
 			// Update all bots stats with the game leaderboards

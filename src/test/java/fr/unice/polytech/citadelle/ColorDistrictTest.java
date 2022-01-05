@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class ColorDistrictTest {
     Referee referee = new Referee(new Board());
-    Board board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
+    Board board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter(4));
 
     @BeforeEach
     void init(){
@@ -224,7 +224,7 @@ public class ColorDistrictTest {
     //@Test
     //Test on play() method from Behavior with Warlord
     void playWTest() {
-        board = Initializer.createBoard(Initializer.createListOfAllCharacter());
+        board = Initializer.createBoard(Initializer.createListOfAllCharacter(), 4);
         Character character = new Warlord();
 
         Player alice = new Player("alice");

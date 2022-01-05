@@ -17,14 +17,14 @@ import fr.unice.polytech.citadelle.game_engine.Initializer;
 public class Board {
     private int roundNumber = 0;
     private ArrayList<Player> listOfPlayer;
-    private ArrayList<Player> listOfPlayerWhoPlayed=new ArrayList<>();
+    private ArrayList<Player> listOfPlayerWhoPlayed = new ArrayList<>();
     private DeckDistrict deckDistrict;
     private DeckCharacter deckCharacter;
     private ArrayList<Character> listOfCharacter;
 	private final LinkedHashMap<Player, Optional<Character>> hashOfViewCharacters = new LinkedHashMap<>();
 
 
-    public Board( ArrayList<Player> listOfPlayer,ArrayList<Character>listOfCharacter, DeckDistrict deckDistrict, DeckCharacter deckCharacter) {
+    public Board(ArrayList<Player> listOfPlayer,ArrayList<Character>listOfCharacter, DeckDistrict deckDistrict, DeckCharacter deckCharacter) {
         this.listOfPlayer = listOfPlayer;
         this.deckDistrict = deckDistrict;
         this.deckCharacter = deckCharacter;

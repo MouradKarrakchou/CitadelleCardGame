@@ -12,7 +12,6 @@ import java.util.Optional;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import fr.unice.polytech.citadelle.game.Board;
@@ -28,10 +27,20 @@ public class InitializerTest {
 	ArrayList<Behaviour> listOfBehaviour; 
 	ArrayList<Player> listOfPlayer;
 
+	int numberOfRichalphonse;
+	int numberOfInvestor;
+	int numberOfRusher;
+	int numberOfStrategator;
+
 	
 	@BeforeEach
 	public void init() {
 		PrintCitadels.activateLevelWarning();
+
+		numberOfRichalphonse = 1;
+		numberOfInvestor = 1;
+		numberOfRusher = 1;
+		numberOfStrategator = 1;
 
 		init = new Initializer();
 		hashOfCharacters= new LinkedHashMap<Character, Optional<Behaviour>>();
@@ -75,8 +84,8 @@ public class InitializerTest {
 		ArrayList<Behaviour> listOfBehaviourSpy = spy(listOfBehaviour);
 		ArrayList<Player> listOfPlayerSpy = spy(listOfPlayer); 
 		
-		listOfBehaviourSpy = init.createListOfBehaviour(board);
-		assertEquals(listOfBehaviourSpy.size(), Initializer.NUMBER_OF_PLAYER);
+		listOfBehaviourSpy = init.createListOfBehaviour(board, numberOfRichalphonse, numberOfInvestor, numberOfRusher, numberOfStrategator);
+		assertEquals(listOfBehaviourSpy.size(), 4);
 
 	}
 	

@@ -62,7 +62,7 @@ public class StrategyTest {
 
 		hashOfCharacters = new LinkedHashMap<>();
 		deckDistrict = new DeckDistrict();
-		board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), deckDistrict, new DeckCharacter());
+		board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), deckDistrict, new DeckCharacter(4));
 		board.getDeckDistrict().initialise();
 
 		// creation of Behaviour

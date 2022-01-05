@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class PredictTest {
 
-    Board board = new Board(new ArrayList<>(), Initializer.createListOfAllCharacter(), new DeckDistrict(), new DeckCharacter());
+    Board board = new Board(new ArrayList<>(), Initializer.createListOfAllCharacter(), new DeckDistrict(), new DeckCharacter(4));
     Predict predict = new Predict(board, new Player("testPlayer"));
     ArrayList<Character> allCharacters = board.getListOfCharacter();
     Strategy strategy;

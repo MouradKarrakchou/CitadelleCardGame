@@ -48,7 +48,7 @@ public class StrategyTestWarlord {
         dragonGate = new DragonGate("Dragon Gate", 6,"Purple","Prestige");
 
 
-        gameBoard = Initializer.createBoard(Initializer.createListOfAllCharacter());
+        gameBoard = Initializer.createBoard(Initializer.createListOfAllCharacter(), 4);
         predict = new Predict(gameBoard, new Player("testPlayer"));
         bob = new Player("Bob");
         alice = new Player("Alice");

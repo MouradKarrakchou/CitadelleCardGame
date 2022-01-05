@@ -12,23 +12,30 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Main {
-
+	private static final int NUMBER_OF_RICHALPHONSE = 1;
+	private static final int NUMBER_OF_INVESTOR =  1;
+	private static final int NUMBER_OF_RUSHER = 2;
+	private static final int NUMBER_OF_STRATEGATOR = 1;
 
 	public static void main(String... args) throws Exception {
 		// Running a game
 		PrintCitadels.activateLevelInfo();
 		Controller controller = new Controller();
-		controller.initGame();
+		controller.initGame(NUMBER_OF_RICHALPHONSE, NUMBER_OF_INVESTOR, NUMBER_OF_RUSHER, NUMBER_OF_STRATEGATOR);
 
 		ArrayList<Player> leaderboard = controller.runGame();
 
 		// Running 1000 game and displaying bot win ratio
 		Statisticator stats = new Statisticator();
-		stats.runAThousandGames();
+		stats.runAThousandGames(NUMBER_OF_RICHALPHONSE, NUMBER_OF_INVESTOR, NUMBER_OF_RUSHER, NUMBER_OF_STRATEGATOR);
 
 		// Reading CSV file
 		PrintCitadels.activateLevelInfo();
 		CsvManager csv = new CsvManager();
 		csv.printCSV();
+
+		//Battlefield (where the best bot is against the best bot)
+		Battlefieldator battlefield = new Battlefieldator(csv);
+		System.out.println(battlefield.getBestBotName());
 	}
 }

@@ -36,7 +36,7 @@ public class BehaviourTest {
 		PrintCitadels.activateLevelWarning();
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
-    	board = new Board(new ArrayList<Player>(),new ArrayList<Character>(), deckDistrict, new DeckCharacter());
+    	board = new Board(new ArrayList<Player>(),new ArrayList<Character>(), deckDistrict, new DeckCharacter(4));
 		playerTest = new Player("playerTest");
 		bea = new Behaviour(playerTest, board);
 		
@@ -216,7 +216,7 @@ public class BehaviourTest {
         pickedCard.add(districtA);
         pickedCard.add(districtB);
         
-        Board aBoard = new Board(new ArrayList<Player>(),new ArrayList<Character>(), theDeckDistrict, new DeckCharacter());
+        Board aBoard = new Board(new ArrayList<Player>(),new ArrayList<Character>(), theDeckDistrict, new DeckCharacter(4));
 
         Investor aaaaaaa = spy(new Investor(new Player("players"), aBoard));
         aaaaaaa.getPlayer().addDistrict(districtA);

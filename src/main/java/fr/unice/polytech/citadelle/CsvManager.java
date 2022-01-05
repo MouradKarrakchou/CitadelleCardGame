@@ -177,7 +177,7 @@ public class CsvManager {
         return allRows;
     }
 
-    ArrayList<StatsBot> getStatsBot() throws Exception {
+    public ArrayList<StatsBot> getStatsBot() throws Exception {
         ArrayList<StatsBot> statsBots = new ArrayList<>();
         List<String[]> allRows = read();
         int numberOfLine = getNumberOfLine();
