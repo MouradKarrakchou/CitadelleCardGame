@@ -43,6 +43,12 @@ public class SituationLibrairie {
 								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
+	
+	public ArrayList<Situation> filterByPositionOfPotentialWinner(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
+		return listOfSituation.stream()
+								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
+								.collect(Collectors.toCollection(ArrayList::new));
+	}
 		
 	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
 		for(Character character : list1){

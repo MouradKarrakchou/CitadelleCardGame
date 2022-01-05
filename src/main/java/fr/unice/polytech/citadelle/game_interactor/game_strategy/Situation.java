@@ -12,7 +12,7 @@ public class Situation implements Comparable<Situation>{
 	
 	//--------------------Setter
 	private Optional<Integer> playOrder = Optional.empty();
-	//a player different of us
+	//a player different of us // A DEFINIR CB DE BAT OU SI POUR LE PLUS AVANCE DE LA PARTIE
 	private Optional<Boolean> aPlayerCloseToWinPlayFirst = Optional.empty();
 	//if their is not a play close to win, -1, if closeToWin = 7/8 District
 	private Optional<Integer> distanceBetweenRichardAndAPlayerCloseToWin = Optional.empty();

@@ -16,6 +16,14 @@ import fr.unice.polytech.citadelle.game_character.Character;
 
 
 
+/**
+ * @author leolb
+ *
+ */
+/**
+ * @author leolb
+ *
+ */
 public class RichalphonseStrategy {
     Board board;
     Player currentPlayer;    
@@ -73,7 +81,7 @@ public class RichalphonseStrategy {
 	private boolean mostAdvancedPlayerPlayFirst() {
 		Player mostAdvancedPlayer = getMostAdvancedPlayer();
 		Player firstPlayerToPlay = getFirstPlayerToPlay();
-
+		if(firstPlayerToPlay.equals(currentPlayer)) return false;
 		if(mostAdvancedPlayer.equals(firstPlayerToPlay)) return true;
 		return false;
 	}
@@ -90,10 +98,23 @@ public class RichalphonseStrategy {
 	
 	
 	private Player getFirstPlayerToPlay() {
+		if(board.getListOfPlayerWhoPlayed().size()==0) return currentPlayer;
 		return board.getListOfPlayerWhoPlayed().get(0);
 	}
 	
 	
+	/**
+	 * @return a player that has 6 or more district, and this player has the biggest city of all the player
+	 */
+	private Player getPotentialWinner() {
+		Player potentialWinner= board.getListOfPlayer().get(0);
+		for(Player player: board.getListOfPlayer()){
+			if(player.getCity().getSizeOfCity() > 6 && potentialWinner.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
+				potentialWinner = player;
+		}
+		return potentialWinner;	
+	}
+
 	
 	
 	private Player getMostAdvancedPlayer() {
