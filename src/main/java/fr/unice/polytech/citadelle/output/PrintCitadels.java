@@ -445,4 +445,11 @@ public class PrintCitadels {
 		LOGGER.info("================  Win-rate on the 1000 last games ================");
 	}
 
+	public static void printBattlefield(ArrayList<Player> listOfPlayer) {
+		dropALine();
+		LOGGER.info("================  Best bot against itself ================");
+		listOfPlayer.forEach(player -> LOGGER.info("[" + player.getRank() + "] " + player.getName()
+				+ " with a score of " + player.getScore() + " (" +stringColoredGold(player.getGolds())+ colorize(")", BRIGHT_WHITE_TEXT())));
+	}
+
 }
