@@ -19,7 +19,7 @@ public class Statisticator {
 	 * Run a Thousand game.
 	 * Save the stats of the 1000 game on the listOfBotStats.
 	 */
-	public void runAThousandGames() {
+	public void runAThousandGames() throws Exception {
 		// Only read the logs with a Warning level
 		PrintCitadels.activateLevelWarning();
 
@@ -31,6 +31,10 @@ public class Statisticator {
 
 			// Update all bots stats with the game leaderboards
 			updateBotStats(leaderboard);
+
+			//Writing in the CSV file
+			CsvManager csv = new CsvManager(leaderboard);
+			csv.saveFile();
 		}
 
 		System.out.println();

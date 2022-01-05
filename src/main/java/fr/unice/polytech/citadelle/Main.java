@@ -25,10 +25,6 @@ public class Main {
 		// Running 1000 game and displaying bot win ratio
 		Statisticator stats = new Statisticator();
 		stats.runAThousandGames();
-
-		//Writing in the CSV file
-		CsvManager csv = new CsvManager(leaderboard);
-		csv.saveFile();
 	}
 
 }
