@@ -180,6 +180,7 @@ public class CsvManager {
         return allRows;
     }
 
+<<<<<<< HEAD
     void newChallenger() throws Exception {
         List<String[]> allRows = read();
         ArrayList<String> alreadyPlayed = new ArrayList<>();
@@ -225,6 +226,9 @@ public class CsvManager {
 
 
     ArrayList<StatsBot> getStatsBot() throws Exception {
+=======
+    public ArrayList<StatsBot> getStatsBot() throws Exception {
+>>>>>>> d73b063988214454f108fa0440395e26956d3a83
         ArrayList<StatsBot> statsBots = new ArrayList<>();
         List<String[]> allRows = read();
         int numberOfLine = getNumberOfLine();

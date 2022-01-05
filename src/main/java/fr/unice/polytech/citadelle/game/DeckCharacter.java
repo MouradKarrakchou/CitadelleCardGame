@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import static fr.unice.polytech.citadelle.game_engine.Initializer.NUMBER_OF_PLAYER;
-
 /**
  * A DeckCharacter is composed of all the character cards in the game.
  *
@@ -19,12 +17,6 @@ public class DeckCharacter {
     private final ArrayList<Character> burnedAndVisibleCharacters;
     private Character hiddenCard;
     private final int nbPlayers;
-
-    public DeckCharacter(){
-        deckOfCharacters = new ArrayList<>();
-        burnedAndVisibleCharacters = new ArrayList<>();
-        nbPlayers = NUMBER_OF_PLAYER;
-    }
 
     /**
      * Custom constructor used on the test class to set different values for the number of players.

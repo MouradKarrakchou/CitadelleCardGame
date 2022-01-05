@@ -33,12 +33,6 @@ public class Initializer {
 	public static final int ARCHITECT_INDEX = 6;
 	public static final int WARLORD_INDEX = 7;
 
-	public final static int NUMBER_OF_PLAYER = 4;
-	private static final int NUMBER_OF_RICHALPHONSE = 1;
-	private static final int NUMBER_OF_INVESTOR =  1;
-	private static final int NUMBER_OF_RUSHER = 1;
-	private static final int NUMBER_OF_STRATEGATOR = 1;
-
 	/**
 	 * Reset a given hash of characters using a given list of characters.
 	 * @param hashOfCharacters The hash of characters to reset.
@@ -96,38 +90,41 @@ public class Initializer {
 	/**
 	 * Initialize 4 players with a certain behavior.
 	 * @param board The board to add the new player behaviours.
+	 * @param nbRichalphonse Number of Richalphonse bot
+	 * @param nbInvestor Number of Investor bot
+	 * @param nbRusher Number of Rusher bot
+	 * @param nbStrategator Number of Strategator bot
 	 * @return The list of behaviours.
 	 */
-	public static ArrayList<Behaviour> createListOfBehaviour(Board board){
+	public static ArrayList<Behaviour> createListOfBehaviour(Board board, int nbRichalphonse, int nbInvestor, int nbRusher, int nbStrategator){
 		ArrayList<Behaviour> listOfBehaviour = new ArrayList<>();
 		
-		for (int i = 1; i < NUMBER_OF_INVESTOR+1; i++) {
+		for (int i = 1; i < nbInvestor + 1; i++) {
 			Player newPlayer = new Player("RobotInvestor " + i);
 			listOfBehaviour.add(new Investor(newPlayer, board));
 		}
-		for (int i = 1; i < NUMBER_OF_RUSHER+1; i++) {
+		for (int i = 1; i < nbRusher + 1; i++) {
 			Player newPlayer = new Player("RobotRusher " + i);
 			listOfBehaviour.add(new Rusher(newPlayer, board));
 		}
-		for (int i = 1; i < NUMBER_OF_STRATEGATOR+1; i++) {
+		for (int i = 1; i < nbStrategator + 1; i++) {
 			Player newPlayer = new Player("RobotStrategator " + i);
 			listOfBehaviour.add(new Strategator(newPlayer, board));
 		}
-		for (int i = 1; i < NUMBER_OF_RICHALPHONSE+1; i++) {
+		for (int i = 1; i < nbRichalphonse + 1; i++) {
 			Player newPlayer = new Player("RobotRichalphonse " + i);
 			listOfBehaviour.add(new Richalphonse(newPlayer, board));
 		}
 		Collections.shuffle(listOfBehaviour);
 		return listOfBehaviour;
-
 	}
 
 	/**
 	 * Create a new empty Board.
 	 * @return The new empty Board object created.
 	 */
-	public static Board createBoard(ArrayList<Character> listOfAllCharacter){
-		return new Board(new ArrayList<>(),listOfAllCharacter, new DeckDistrict(), new DeckCharacter());
+	public static Board createBoard(ArrayList<Character> listOfAllCharacter, int nbPlayer){
+		return new Board(new ArrayList<>(),listOfAllCharacter, new DeckDistrict(), new DeckCharacter(nbPlayer));
 	}
 
 	/**

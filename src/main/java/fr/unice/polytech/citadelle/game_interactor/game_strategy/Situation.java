@@ -307,7 +307,10 @@ public class Situation implements Comparable<Situation>{
 	public void setAPlayerHas7Districts(boolean aPlayerHas7Districts) {
 		this.aPlayerHas7Districts = Optional.of(aPlayerHas7Districts);
 	}
-	
-	
+
+	@Override
+	public String toString(){
+		return description;
+	}
 	
 }

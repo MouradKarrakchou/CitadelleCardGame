@@ -27,7 +27,7 @@ public class PhaseManagerTest {
 	public void init() {
 		PrintCitadels.activateLevelWarning();
 
-	    board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter());
+	    board = new Board(new ArrayList<Player>(), new ArrayList<Character>(), new DeckDistrict(), new DeckCharacter(4));
 		player = new Player("testPlayer");
 		phaseManager = new PhaseManager(player, board);
 	}

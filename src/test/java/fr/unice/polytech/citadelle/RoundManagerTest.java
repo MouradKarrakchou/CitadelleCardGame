@@ -5,7 +5,6 @@ import fr.unice.polytech.citadelle.game_character.Character;
 
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.RepeatedTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,22 +43,25 @@ public class RoundManagerTest {
 	ArrayList<Behaviour> listOfAllBehaviour;
 	Board board;
 
+	private final int numberOfRichalphonse = 1;
+	private final int numberOfInvestor = 1;
+	private final int numberOfRusher = 1;
+	private final int numberOfStrategator = 1;
+	private final int nbPlayer = 4;
+
 
 	Initializer init;
 	@BeforeEach
 	public void init() {
 		PrintCitadels.activateLevelWarning();
 
-		init = new Initializer();
 		deckDistrict = new DeckDistrict();
-
-
 		deckDistrict.initialise();
 
 		hashOfCharacter = new LinkedHashMap<Character, Optional<Behaviour>>();
 		listOfAllCharacter = Initializer.createListOfAllCharacter();
-		board = Initializer.createBoard(listOfAllCharacter);
-		listOfAllBehaviour = Initializer.createListOfBehaviour(board);
+		board = Initializer.createBoard(listOfAllCharacter, numberOfRichalphonse + numberOfInvestor + numberOfRusher + numberOfStrategator);
+		listOfAllBehaviour = Initializer.createListOfBehaviour(board, numberOfRichalphonse, numberOfInvestor, numberOfRusher, numberOfStrategator);
 		Initializer.initDeckCharacter(board.getDeckCharacter(), listOfAllCharacter);
 		Initializer.resetHashOfCharacter(hashOfCharacter, listOfAllCharacter);
 		roundMan = spy(new RoundManager(listOfAllCharacter, listOfAllBehaviour,hashOfCharacter, board));
@@ -110,7 +112,7 @@ public class RoundManagerTest {
 	//@Test
 	public void setupCharactersTest() {
 		roundMan.setupCharacters();
-		verify(roundMan, times(Initializer.NUMBER_OF_PLAYER)).chooseACharacterCard(Mockito.any(), Mockito.any());
+		verify(roundMan, times(nbPlayer)).chooseACharacterCard(Mockito.any(), Mockito.any());
 	}
 
 	@RepeatedTest(1)

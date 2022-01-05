@@ -48,7 +48,7 @@ public class CharacterTest {
         hashOfCharacters = new LinkedHashMap<>();
         deckDistrict=new DeckDistrict();
         listOfPlayer=new ArrayList<>();
-        board = new Board(listOfPlayer,new ArrayList<Character>(),deckDistrict,new DeckCharacter());
+        board = new Board(listOfPlayer,new ArrayList<Character>(),deckDistrict,new DeckCharacter(4));
         board.getDeckDistrict().initialise();
 
         
