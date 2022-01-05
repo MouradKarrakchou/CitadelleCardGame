@@ -61,6 +61,10 @@ public class StatsBot implements Comparable {
 
 	@Override
 	public String toString() {
-		return colorize(botName, BRIGHT_WHITE_TEXT()) + ": " + colorize(getWinrate() +"%, ", GREEN_TEXT(), BOLD()) + numberOfGamePlayed + " games played.";
+		return colorize(botName + ": ", BRIGHT_WHITE_TEXT())
+				+ colorize(getWinrate() +"%", GREEN_TEXT(), BOLD())
+				+ colorize(", ", BRIGHT_WHITE_TEXT())
+				+ numberOfGamePlayed
+				+ " games played.";
 	}
 }

@@ -25,6 +25,10 @@ public class Main {
 		// Running 1000 game and displaying bot win ratio
 		Statisticator stats = new Statisticator();
 		stats.runAThousandGames();
-	}
 
+		// Reading CSV file
+		PrintCitadels.activateLevelInfo();
+		CsvManager csv = new CsvManager();
+		csv.printCSV();
+	}
 }

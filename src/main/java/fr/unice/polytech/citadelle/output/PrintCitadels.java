@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import com.diogonunes.jcolor.Attribute;
 
+import fr.unice.polytech.citadelle.StatsBot;
 import fr.unice.polytech.citadelle.game.*;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
@@ -424,5 +425,19 @@ public class PrintCitadels {
 
 	public static void ExplanationChooseCardButNotFound(Player currentPlayer) {
 		LOGGER.info(colorize("\tExplanation: "+currentPlayer.getName()+" takes any possible card because none is more advantageous than another",ITALIC()));
+	}
+
+    public static void startCSV() {
+		dropALine();
+		LOGGER.info("================ Reading CSV ================");
+    }
+
+	public static void printStat(StatsBot statsBot) {
+		LOGGER.info(statsBot.toString());
+	}
+
+	public static void start1000games() {
+		dropALine();
+		LOGGER.info("================  Win-rate on 1000 games ================");
 	}
 }

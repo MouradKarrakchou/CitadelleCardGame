@@ -2,11 +2,13 @@ package fr.unice.polytech.citadelle;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class CsvManager {
 
@@ -15,6 +17,8 @@ public class CsvManager {
     CsvManager (ArrayList<Player> leaderboard) {
         this.leaderboard = leaderboard;
     }
+
+    CsvManager(){}
 
     void saveFile() throws Exception {
         existingFile();
@@ -165,4 +169,12 @@ public class CsvManager {
         return statsBots;
     }
 
+    public void printCSV() throws Exception {
+        PrintCitadels.startCSV();
+        ArrayList<StatsBot> botStatsList = getStatsBot();
+
+        Collections.sort(botStatsList);
+        for (StatsBot statsBot : botStatsList)
+            PrintCitadels.printStat(statsBot);
+    }
 }

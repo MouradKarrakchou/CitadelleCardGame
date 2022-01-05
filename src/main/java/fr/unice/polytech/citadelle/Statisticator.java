@@ -36,13 +36,12 @@ public class Statisticator {
 			CsvManager csv = new CsvManager(leaderboard);
 			csv.saveFile();
 		}
-
-		System.out.println();
-		System.out.println("================  Win-rate on 1000 games ================");
+		PrintCitadels.activateLevelInfo();
+		PrintCitadels.start1000games();
 
 		Collections.sort(listOfBotStats);
 		for (StatsBot statsBot : listOfBotStats)
-			System.out.println(statsBot);
+			PrintCitadels.printStat(statsBot);
 	}
 
 	/**
