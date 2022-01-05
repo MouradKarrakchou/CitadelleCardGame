@@ -1,6 +1,11 @@
 package fr.unice.polytech.citadelle;
 
+import com.diogonunes.jcolor.Attribute;
+
 import java.text.DecimalFormat;
+
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.*;
 
 public class StatsBot implements Comparable {
 	private final String botName;
@@ -52,5 +57,10 @@ public class StatsBot implements Comparable {
 	@Override
 	public int compareTo(Object o) {
 		return (int) (((StatsBot) o).getWinrate() * 100 - getWinrate() * 100);
+	}
+
+	@Override
+	public String toString() {
+		return colorize(botName, BRIGHT_WHITE_TEXT()) + ": " + colorize(getWinrate() +"%, ", GREEN_TEXT(), BOLD()) + numberOfGamePlayed + " games played.";
 	}
 }

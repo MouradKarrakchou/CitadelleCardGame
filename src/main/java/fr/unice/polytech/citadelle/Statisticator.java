@@ -38,7 +38,7 @@ public class Statisticator {
 
 		Collections.sort(listOfBotStats);
 		for (StatsBot statsBot : listOfBotStats)
-			System.out.println(statsBot.getName() + " : " + statsBot.getWinrate() + "%");
+			System.out.println(statsBot);
 	}
 
 	/**
