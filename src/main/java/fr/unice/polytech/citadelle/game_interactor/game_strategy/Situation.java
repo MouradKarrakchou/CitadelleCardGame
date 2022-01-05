@@ -71,7 +71,7 @@ public class Situation implements Comparable<Situation>{
 
 	@Override
 	public int compareTo(Situation other) {
-        return this.priority - other.priority;
+        return other.priority-this.priority;
 
 	}
 	
