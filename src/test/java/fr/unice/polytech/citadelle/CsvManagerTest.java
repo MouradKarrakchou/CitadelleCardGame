@@ -1,6 +1,7 @@
 package fr.unice.polytech.citadelle;
 
 import fr.unice.polytech.citadelle.game.Player;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class CsvManagerTest {
     CsvManager csvManager = new CsvManager(aLeaderboard);
 
     @BeforeEach
-    void initialization() {
+    void setUp() {
         String path = "save\\results.csv";
         File csvFile = new File(path);
         csvFile.delete();
@@ -235,7 +236,7 @@ public class CsvManagerTest {
         for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getWinrate(), csvManager.getStatsBot().get(i).getWinrate());
     }
 
-    @Test
+    @AfterEach
     void clean() {
         String path = "save\\results.csv";
         File csvFile = new File(path);
