@@ -156,7 +156,7 @@ public class Richalphonse extends Behaviour {
     @Override
     public Character chooseCharacterWithStrategy(Behaviour bot) {
     	Situation situationWeAreIn=richStrat.getBestSituation(board.getDeckCharacter().getDeckCharacter());
-        this.currentBestSituation=situationWeAreIn;
+        this.currentBestSituation=situationWeAreIn;  
         PrintCitadels.printSituation(situationWeAreIn);
         if (situationWeAreIn.getCharacterToChoose().isEmpty())
             return board.getDeckCharacter().getDeckCharacter().remove(0);

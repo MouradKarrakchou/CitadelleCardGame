@@ -452,4 +452,9 @@ public class PrintCitadels {
 				+ " with a score of " + player.getScore() + " (" +stringColoredGold(player.getGolds())+ colorize(")", BRIGHT_WHITE_TEXT())));
 	}
 
+	public static void printAllSituations(ArrayList<Situation> searchSituation) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
