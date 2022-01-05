@@ -182,10 +182,7 @@ public class RoundManager {
 			ArrayList<Behaviour> listOfBehaviourCopy = listOfBehaviour;
 			listOfBehaviour = new ArrayList<>();
 			listOfBehaviour.addAll(orderListOfBehaviour(listOfBehaviourCopy, indexOfKing));
-			//ArrayList<Player> listOfPlayerCopy = new ArrayList<>();
-			//listOfPlayerCopy.addAll(board.getListOfPlayer());
-			//board.getListOfPlayer().clear();
-			//board.getListOfPlayer().addAll(orderListOfPlayer(listOfPlayerCopy, indexOfKing));
+			board.setListOfPlayerOrdered(orderListOfPlayer(board.getListOfPlayerOrdered(), indexOfKing));
 		}
 	}
 

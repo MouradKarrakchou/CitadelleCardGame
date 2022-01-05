@@ -24,13 +24,13 @@ public class SituationLibrairie {
 	
 	public ArrayList<Situation> filterByListOfCharacterPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterPickable) {
 		return listOfSituation.stream()
-								.filter(situation ->situation.getListOfCharacterPickable().isEmpty() || listOfRichardCharacterPickable.containsAll(situation.getListOfCharacterPickable().get())										)
+								.filter(situation ->situation.getListOfCharacterPickable().isEmpty() || listOfRichardCharacterPickable.containsAll(situation.getListOfCharacterPickable().get()))
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
 	public ArrayList<Situation> filterByListOfCharacterNotPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterPickable) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getListOfCharacterNotHere().isEmpty() || doNotContain(situation.getListOfCharacterNotHere().get(), listOfRichardCharacterPickable))
+								.filter(situation ->situation.getListOfCharacterNotHere().isEmpty() || doNotContain(situation.getListOfCharacterNotHere().get(), listOfRichardCharacterPickable))
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
@@ -142,9 +142,9 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 		
-	private boolean doNotContain(ArrayList<Character> list1, ArrayList<Character> list2) {
-		for(Character character : list1){
-			if(list2.contains(character)) return false;
+	private boolean doNotContain(ArrayList<Character> situation, ArrayList<Character> richardCardAvailable) {
+		for(Character characterBan : situation){
+			if(richardCardAvailable.contains(characterBan)) return false;
 		}
 		return true;
 	}

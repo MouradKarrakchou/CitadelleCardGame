@@ -8,9 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.unice.polytech.citadelle.game.Board;
+import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
+import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Richalphonse;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Rusher;
@@ -34,7 +36,9 @@ public class filterOfsituationTest {
 		deckDistrict  = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");
-    	board = new Board(null,new ArrayList<>(),deckDistrict , null);
+    	board = new Board(null,new ArrayList<>(),deckDistrict , new DeckCharacter(4));
+    	DeckCharacter deckCharacter = board.getDeckCharacter();
+    	Initializer.initDeckCharacter(deckCharacter, board.getListOfCharacter());
     	//----create 4 bots
 		richalphonse = spy(new Richalphonse( new Player("richalphonse"), board));
 		rusher = spy(new Rusher(new Player("rusher"), board));
@@ -43,11 +47,16 @@ public class filterOfsituationTest {
 		//-----------------
 		ArrayList<Player> listOfPlayer = board.getListOfPlayer();
 		listOfPlayer.add(richalphonse.getPlayer());
+		listOfPlayer.add(rusher.getPlayer());
+		listOfPlayer.add(investor.getPlayer());
+		listOfPlayer.add(strategator.getPlayer());
 	}
 	
 	@Test
-	public void filterByListOfCharacterPickableTest() {
-		
+	public void filterByListOfCharacterNotPickableTest() {
+		//deck: il manque Roi,Assassin,Condotière
+		ArrayList<Character> deck = board.getDeckCharacter().getDeckCharacter();
+		deck.remove(board.findCharacter("King"));
 	}
 	
 	

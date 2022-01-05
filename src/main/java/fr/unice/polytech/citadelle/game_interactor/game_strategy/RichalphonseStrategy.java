@@ -62,7 +62,15 @@ public class RichalphonseStrategy {
     	return bestSituation;
     }
     
-    private ArrayList<Character> getNonPickableCharacter() {
+    private ArrayList<Character> getListOfRichardCharacterNotPickable() {
+    	ArrayList<Character> notPickable = new ArrayList<>();
+    	notPickable.add(board.getDeckCharacter().getHiddenCard());
+    	notPickable.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
+		return notPickable;
+	}
+
+
+	private ArrayList<Character> getNonPickableCharacter() {
     	ArrayList<Character> nonPickable = new ArrayList<>();
     	for(Character character: board.getListOfCharacter()){
     		if(!(board.getDeckCharacter()).getDeckCharacter().contains(character))
@@ -106,7 +114,7 @@ public class RichalphonseStrategy {
      * @return True if a currentPlayer don't play first
      */
     private boolean doRichardDontPlayFirst() {
-		if(board.getListOfPlayer().get(0).equals(currentPlayer)) return false;
+		if(board.getListOfPlayerOrdered().get(0).equals(currentPlayer)) return false;
     	return true;
 	}
 
@@ -115,7 +123,7 @@ public class RichalphonseStrategy {
      * @return True if the number of player is les than 5
      */
     private boolean isNumberOfPlayerLess5() {
-		if(board.getListOfPlayer().size() <= 5) return true;
+		if(board.getListOfPlayerOrdered().size() <= 5) return true;
 		return false;
 	}
     
@@ -142,7 +150,7 @@ public class RichalphonseStrategy {
      */
     private boolean doAPlayerHasLotOfCard() {
 		int currentNumberOfCards = currentPlayer.getDistrictCardsSize();
-    	for(Player player: board.getListOfPlayer()){
+    	for(Player player: board.getListOfPlayerOrdered()){
     		if(player.getDistrictCardsSize()*2 > currentNumberOfCards && !(player.equals(currentPlayer))) return false;
     	}
 		return true;
@@ -153,7 +161,7 @@ public class RichalphonseStrategy {
      */
     private boolean doIHaveLotOfCard() {
 		int currentNumberOfCards = currentPlayer.getDistrictCardsSize();
-    	for(Player player: board.getListOfPlayer()){
+    	for(Player player: board.getListOfPlayerOrdered()){
     		if(player.getDistrictCardsSize()*2 > currentNumberOfCards) return false;
     	}
 		return true;
@@ -171,7 +179,7 @@ public class RichalphonseStrategy {
      * @return True if a player in the current game has more than 5 golds
      */
 	private boolean doesExistARichPlayer() {
-		for(Player player: board.getListOfPlayer() ){
+		for(Player player: board.getListOfPlayerOrdered() ){
 			if(player.getGolds() > 5 && !(player.equals(currentPlayer)))
 				return true;
 		}
@@ -194,7 +202,7 @@ public class RichalphonseStrategy {
      * @return True if do a player in the current game  has a nice config to take Architect
      */
     private boolean doesAPlayerInTheCurrentGameCouldPlayArchitect() {
-    	for(Player player: board.getListOfPlayer()){
+    	for(Player player: board.getListOfPlayerOrdered()){
 			if(player.getGolds() > 3)
 				if(player.getDistrictCardsSize() > 1)
 					if(player.getCity().getSizeOfCity() > 5 && !(player.equals(currentPlayer)))
@@ -208,7 +216,7 @@ public class RichalphonseStrategy {
      * @return True if do a player in the current game has 7 Districts
      */
 	private boolean doAPlayerInTheCurrentGameHas7Districts() {
-		for(Player player: board.getListOfPlayer()){
+		for(Player player: board.getListOfPlayerOrdered()){
 			if(player.getCity().getSizeOfCity() == 7 && !(player.equals(currentPlayer)))
 				return true;
 		}
@@ -248,8 +256,8 @@ public class RichalphonseStrategy {
      * @return A Player close to win (7/8 Districts)
      */	
 	public Player getPlayerCloseToWin() {
-		Player playerIsCloseToWin= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
+		Player playerIsCloseToWin= board.getListOfPlayerOrdered().get(0);
+		for(Player player: board.getListOfPlayerOrdered()){
 			if(playerIsCloseToWin.getCity().getSizeOfCity() > 6)
 				playerIsCloseToWin = player;
 		}
@@ -260,8 +268,8 @@ public class RichalphonseStrategy {
      * @return The player who has most District card
      */	
 	 public Player getTargetPlayerHasMostCard() {
-		Player playerHasMostCard= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
+		Player playerHasMostCard= board.getListOfPlayerOrdered().get(0);
+		for(Player player: board.getListOfPlayerOrdered()){
 			if(playerHasMostCard.getDistrictCardsSize() < player.getDistrictCardsSize())
 				playerHasMostCard = player;
 		}
@@ -283,8 +291,8 @@ public class RichalphonseStrategy {
      * @return The index of the player in the list of Player of the board
      */	
 	private int getIndexOfPlayer(Player player) {
-		for(int i = 0 ; i < board.getListOfPlayer().size() ; i++) 
-			if(board.getListOfPlayer().get(i).equals(currentPlayer)) 
+		for(int i = 0 ; i < board.getListOfPlayerOrdered().size() ; i++) 
+			if(board.getListOfPlayerOrdered().get(i).equals(currentPlayer)) 
 				return i;
 		return -1;
 	}
@@ -293,7 +301,7 @@ public class RichalphonseStrategy {
      * @return True if a Player is close to win (7/8 Districts), False in the others cases
      */
 	private boolean aPlayerIsCloseToWin() {
-		for(Player player: board.getListOfPlayer())
+		for(Player player: board.getListOfPlayerOrdered())
 			if(player.getCity().getSizeOfCity() >6 && !(player.equals(currentPlayer))) return true;
 		return false;
 	}
@@ -314,8 +322,8 @@ public class RichalphonseStrategy {
      * @return True if a Player is close to win (7/8 Districts), False in the others cases
      */
 	private Player getRichestPlayer() {
-		Player richestPlayer= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
+		Player richestPlayer= board.getListOfPlayerOrdered().get(0);
+		for(Player player: board.getListOfPlayerOrdered()){
 			if(richestPlayer.getGolds() < player.getGolds())
 				richestPlayer = player;
 		}
@@ -335,8 +343,8 @@ public class RichalphonseStrategy {
 	 * @return a player that has 6 or more district, and this player has the biggest city of all the player
 	 */
 	private Player getPotentialWinner() {
-		Player potentialWinner= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
+		Player potentialWinner= board.getListOfPlayerOrdered().get(0);
+		for(Player player: board.getListOfPlayerOrdered()){
 			if(player.getCity().getSizeOfCity() > 6 && potentialWinner.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
 				potentialWinner = player;
 		}
@@ -348,8 +356,8 @@ public class RichalphonseStrategy {
      * @return The most advanced Player of the game
      */
 	private Player getMostAdvancedPlayer() {
-		Player mostAdvancedPlayer= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
+		Player mostAdvancedPlayer= board.getListOfPlayerOrdered().get(0);
+		for(Player player: board.getListOfPlayerOrdered()){
 			if(mostAdvancedPlayer.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
 				mostAdvancedPlayer = player;
 		}
