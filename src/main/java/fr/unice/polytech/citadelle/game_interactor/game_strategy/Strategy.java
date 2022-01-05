@@ -481,34 +481,33 @@ public class Strategy {
     }
 
     public Character chooseCharacter(Behaviour bot) {
-
+        int index;
         //Choice of Architect
-        int index = chooseArchitect(bot);
-        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
-
-        //Choice of Assassin
-        index = chooseAssassin(bot);
-        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
-
-
-        //Choice of Magician
-        index = chooseMagician(bot);
-        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
-
-        //Choice of Thief
-        index = chooseThief(bot);
+        index = chooseArchitect(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
         //Choice of King or Merchant (if they are both equality worth, King is chosen)
         index = chooseKingOrMerchant(bot);
         if (index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
-        //Choice of Bishop
-        index = chooseBishop(bot);
+        //Choice of Thief
+        index = chooseThief(bot);
+        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
+
+        //Choice of Assassin
+        index = chooseAssassin(bot);
+        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
+
+        //Choice of Magician
+        index = chooseMagician(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
         //Choice of Warlord (Last one because his spell has not been implemented yet)
         index = chooseWarlord(bot);
+        if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
+
+        //Choice of Bishop
+        index = chooseBishop(bot);
         if(index != -1) return board.getDeckCharacter().getDeckCharacter().remove(index);
 
         PrintCitadels.ExplanationChooseCardButNotFound(this.player);

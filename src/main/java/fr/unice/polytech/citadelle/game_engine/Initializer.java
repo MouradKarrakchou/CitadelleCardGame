@@ -117,7 +117,7 @@ public class Initializer {
 			Player newPlayer = new Player("RobotRichalphonse " + i);
 			listOfBehaviour.add(new Richalphonse(newPlayer, board));
 		}
-		
+		Collections.shuffle(listOfBehaviour);
 		return listOfBehaviour;
 
 	}

@@ -44,6 +44,7 @@ public class RichalphonseStrategy {
     	searchSituation = librairie.filterByPlayerCloseToWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
     	searchSituation = librairie.filterByDistanceBetweenRichardAndAPlayerCloseToWin(searchSituation, getDistanceBetweenRichardAndAPlayerCloseToWin());
     	searchSituation = librairie.filterByIHave6Districts(searchSituation, getDoIHave6District());
+    	searchSituation = librairie.filterByIHave7Districts(searchSituation, getDoIHave7District());
 
     	
   
