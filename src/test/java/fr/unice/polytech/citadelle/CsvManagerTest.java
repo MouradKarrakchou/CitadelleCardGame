@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CsvManagerTest {
 
+    /*
     @Test
     //On one game (overwrite)
     void saveRank() throws Exception {
@@ -44,5 +45,5 @@ public class CsvManagerTest {
             }
         }
 
-    }
+    }*/
 }
