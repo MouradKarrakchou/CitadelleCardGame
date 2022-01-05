@@ -101,24 +101,43 @@ public class Richalphonse extends Behaviour {
      */
     @Override
     public Player selectPlayerForWarlord() {
-        if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent())
-        	return richStrat.getPlayerIsCloseToWin();
-        if (currentBestSituation.getTargetPlayerHasMostCard().isPresent())
-        	return richStrat.getTargetPlayerHasMostCard();
-        return strategy.choosePlayerForWarlordRandom();
-        
+    	Player target;
+        if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent()) {
+        	target = richStrat.getPlayerIsCloseToWin();
+        	if(target.equals(player))
+        		target = strategy.choosePlayerForWarlordRandom();
+        }
+        else if (currentBestSituation.getTargetPlayerHasMostCard().isPresent()) {
+        	target = richStrat.getTargetPlayerHasMostCard();
+        	if(target.equals(player))
+        		target = strategy.choosePlayerForWarlordRandom();
+        }
+        else
+        	target = strategy.choosePlayerForWarlordRandom();
+
+        return target;
     }
     /**
      * According to the Magician strategy, will try to choose the suitable Player to use Magician spell.
      * @return The Player to swap card with.
      */
     public Player choosePlayerForMagicianSpell() {
-    	if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent())
-        	return richStrat.getPlayerIsCloseToWin();
-        if (currentBestSituation.getTargetPlayerHasMostCard().isPresent())
-        	return richStrat.getTargetPlayerHasMostCard();
-        return strategy.choosePlayerForMagicianRandom();
-    }
+    	Player target;
+        if (currentBestSituation.getTargetPlayerCloseToFinish().isPresent()) {
+        	target = richStrat.getPlayerIsCloseToWin();
+        	if(target.equals(player))
+        		target = strategy.choosePlayerForMagicianRandom();
+        }
+        else if (currentBestSituation.getTargetPlayerHasMostCard().isPresent()) {
+        	target = richStrat.getTargetPlayerHasMostCard();
+        	if(target.equals(player))
+        		target = strategy.choosePlayerForMagicianRandom();
+        }
+        else
+        	target = strategy.choosePlayerForMagicianRandom();
+
+        return target;     
+      }
 
     /**
      * return the position of the Cards that he wants to swap

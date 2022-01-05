@@ -42,7 +42,10 @@ public class RichalphonseStrategy {
     	//searchSituation = librairie.filterByListOfCharacterNotPickable(searchSituation, );
     	searchSituation = librairie.filterByListOfCharacterPickable(searchSituation, listOfRichardCharacterPickable);
     	searchSituation = librairie.filterByPlayerCloseToWinPlayFirst(searchSituation, calculIsAPlayerCloseWinPlayFirst());
-    	
+    	searchSituation = librairie.filterByDistanceBetweenRichardAndAPlayerCloseToWin(searchSituation, getDistanceBetweenRichardAndAPlayerCloseToWin());
+
+
+    	//
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
     	return bestSituation;
@@ -76,7 +79,7 @@ public class RichalphonseStrategy {
 	/**
      * @return The player who has most District card
      */	
-	public Player getTargetPlayerHasMostCard() {
+	 public Player getTargetPlayerHasMostCard() {
 		Player playerHasMostCard= board.getListOfPlayer().get(0);
 		for(Player player: board.getListOfPlayer()){
 			if(playerHasMostCard.getDistrictCards().size() < player.getDistrictCards().size())
@@ -84,7 +87,25 @@ public class RichalphonseStrategy {
 		}
 		return playerHasMostCard;
 	}
+	
+	//DistanceBetweenRichardAndAPlayerCloseToWin
 
+	/**
+     * @return The player who has most District card
+     */	
+	private int getDistanceBetweenRichardAndAPlayerCloseToWin() {
+		Player playerCloseToWin= getPlayerIsCloseToWin();		
+		int indexOfPlayerCloseToWin = getIndexOfPlayer(playerCloseToWin);
+		int currentPlayerIndex = getIndexOfPlayer(currentPlayer);
+		return indexOfPlayerCloseToWin - currentPlayerIndex;
+	}
+	
+	private int getIndexOfPlayer(Player player) {
+		for(int i = 0 ; i < board.getListOfPlayer().size() ; i++) 
+			if(board.getListOfPlayer().get(i).equals(currentPlayer)) 
+				return i;
+		return -1;
+	}
 
 	/**
      * @return True if a Player is close to win (7/8 Districts), False in the others cases

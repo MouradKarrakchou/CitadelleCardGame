@@ -11,6 +11,7 @@ public class StatsBot implements Comparable {
 	private final String botName;
 	public int numberOfGamePlayed = 0;
 	public int numberOfGameWon = 0;
+	public int averageScore = -1;
 
 	/**
 	 * Initialize a new StatsBot with no game played.
@@ -27,10 +28,11 @@ public class StatsBot implements Comparable {
 	 * @param numberOfGamePlayed The number of game played by the bot.
 	 * @param numberOfGameWon The number of game won by the bot.
 	 */
-	public StatsBot(String botName, int numberOfGamePlayed, int numberOfGameWon) {
+	public StatsBot(String botName, int numberOfGamePlayed, int numberOfGameWon, int averageScore) {
 		this.botName = botName;
 		this.numberOfGamePlayed = numberOfGamePlayed;
 		this.numberOfGameWon = numberOfGameWon;
+		this.averageScore = averageScore;
 	}
 
 	public String getName() {
@@ -61,10 +63,16 @@ public class StatsBot implements Comparable {
 
 	@Override
 	public String toString() {
-		return colorize(botName + ": ", BRIGHT_WHITE_TEXT())
-				+ colorize(getWinrate() +"%", GREEN_TEXT(), BOLD())
-				+ colorize(", ", BRIGHT_WHITE_TEXT())
-				+ numberOfGamePlayed
-				+ " games played.";
+		String output = colorize(botName + ": ", BRIGHT_WHITE_TEXT())
+				+ colorize(getWinrate() +"%", GREEN_TEXT(), BOLD());
+
+
+		if (averageScore != -1)
+			output += colorize(", ", BRIGHT_WHITE_TEXT())
+			 		+ numberOfGamePlayed
+					+ " games played"
+					+ colorize(" (average score: " + averageScore + ")", BRIGHT_WHITE_TEXT());
+
+		return output;
 	}
 }
