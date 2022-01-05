@@ -38,7 +38,7 @@ public class StatsBot implements Comparable {
 
 		DecimalFormat df = new DecimalFormat();
 		df.setMaximumFractionDigits(2);
-		return Float.parseFloat(df.format(numberOfGameWon / (float) numberOfGamePlayed * 100));
+		return Float.parseFloat(df.format(numberOfGameWon / (float) numberOfGamePlayed * 100).replace(",", "."));
 	}
 
 	public void increaseNumberOfGamePlay() {
