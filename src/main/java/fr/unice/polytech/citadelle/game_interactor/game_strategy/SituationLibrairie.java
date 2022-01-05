@@ -38,7 +38,7 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByBestPlayerPlayFirst(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
+	public ArrayList<Situation> filterByPlayerCloseWinPlayFirst(ArrayList<Situation> listOfSituation, boolean bestPlayerPlayFirst) {
 		return listOfSituation.stream()
 								.filter(situation -> situation.getaPlayerCloseToWinPlayFirst().isEmpty() || situation.getaPlayerCloseToWinPlayFirst().get() == bestPlayerPlayFirst)
 								.collect(Collectors.toCollection(ArrayList::new));
@@ -60,41 +60,6 @@ public class SituationLibrairie {
 	private boolean librairyEmpty() {
 		if(librairieContent.size() == 0) return true;
 		return false;
-	}
-	
-	private boolean mostAdvancedPlayerPlayFirst() {
-		Player mostAdvancedPlayer = getMostAdvancedPlayer();
-		Player firstPlayerToPlay = getFirstPlayerToPlay();
-
-		if(mostAdvancedPlayer.equals(firstPlayerToPlay)) return true;
-		return false;
-	}
-
-	
-	private Player getRichestPlayer() {
-		Player richestPlayer= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
-			if(richestPlayer.getGolds() < player.getGolds())
-				richestPlayer = player;
-		}
-		return richestPlayer;
-	}
-	
-	
-	private Player getFirstPlayerToPlay() {
-		return board.getListOfPlayerWhoPlayed().get(0);
-	}
-	
-	
-	
-	
-	private Player getMostAdvancedPlayer() {
-		Player mostAdvancedPlayer= board.getListOfPlayer().get(0);
-		for(Player player: board.getListOfPlayer()){
-			if(mostAdvancedPlayer.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
-				mostAdvancedPlayer = player;
-		}
-		return mostAdvancedPlayer;	
 	}
 	
 	
