@@ -165,5 +165,7 @@ public class Richalphonse extends Behaviour {
         return characterChoosen;
     }
 
-
+    public Situation getCurrentBestSituation() {
+        return currentBestSituation;
+    }
 }

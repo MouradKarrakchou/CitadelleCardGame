@@ -4,14 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.spy;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
+import fr.unice.polytech.citadelle.game.*;
+import fr.unice.polytech.citadelle.game_character.Assassin;
+import fr.unice.polytech.citadelle.game_character.Bishop;
+import fr.unice.polytech.citadelle.game_character.Warlord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.unice.polytech.citadelle.game.Board;
-import fr.unice.polytech.citadelle.game.DeckCharacter;
-import fr.unice.polytech.citadelle.game.DeckDistrict;
-import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
@@ -72,9 +73,32 @@ public class filterOfsituationTest {
 		deck.remove(board.findCharacter("Assassin"));
 		deck.remove(board.findCharacter("Warlord"));
 		assertEquals(5, deck.size());
-		
+
 		Character bestCharacter = richalphonse.chooseCharacterWithStrategy(richalphonse);
 		
+	}
+
+	@Test
+	public void testSituation25() {
+		//Situation25: The Player playing third have 7districts I take Walord
+		board.getDeckCharacter().getDeckCharacter().clear();
+		board.getDeckCharacter().getDeckCharacter().add(new Assassin());
+		board.getDeckCharacter().getDeckCharacter().add(new Bishop());
+		board.getDeckCharacter().getDeckCharacter().add(new Warlord());
+		Player playerWithTheLead=new Player("playerLeading");
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		playerWithTheLead.getCity().buildDistrict(new District("house",3,"red","Family"));
+		board.getListOfPlayerOrdered().clear();
+		board.getListOfPlayerOrdered().add(richalphonse.getPlayer());
+		board.getListOfPlayerOrdered().add(new Player("test"));
+		board.getListOfPlayerOrdered().add(playerWithTheLead);
+		Character bestCharacter = richalphonse.chooseCharacterWithStrategy(richalphonse);
+		assertEquals(richalphonse.getCurrentBestSituation().toString(),"Situation25: The Player playing third have 7districts I take Walord");
 	}
 	
 	
