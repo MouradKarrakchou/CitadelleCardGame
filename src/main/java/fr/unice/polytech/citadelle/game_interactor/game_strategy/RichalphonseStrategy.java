@@ -45,15 +45,39 @@ public class RichalphonseStrategy {
     	searchSituation = librairie.filterByDistanceBetweenRichardAndAPlayerCloseToWin(searchSituation, getDistanceBetweenRichardAndAPlayerCloseToWin());
     	searchSituation = librairie.filterByIHave6Districts(searchSituation, getDoIHave6District());
     	searchSituation = librairie.filterByIHave7Districts(searchSituation, getDoIHave7District());
-
-    	
-  
-
+    	searchSituation = librairie.filterByAPlayerHas7Districts(searchSituation, doAPlayerInTheCurrentGameHas7Districts());
+    	searchSituation = librairie.filterByAPlayerCouldPlayArchitect(searchSituation, doesAPlayerInTheCurrentGameCouldPlayArchitect());
     	
     	Collections.sort(searchSituation);
     	Situation bestSituation =  searchSituation.get(0);
     	return bestSituation;
     }
+    
+    /**
+     * @return True if do a player in the current game has 7 Districts
+     */
+    private boolean doesAPlayerInTheCurrentGameCouldPlayArchitect() {
+    	for(Player player: board.getListOfPlayer()){
+			if(player.getGolds() > 3)
+				if(player.getDistrictCards().size() > 1)
+					if(player.getCity().getSizeOfCity() > 5)
+						return true;
+		}
+		return false;
+	}
+
+
+	/**
+     * @return True if do a player in the current game has 7 Districts
+     */
+	private boolean doAPlayerInTheCurrentGameHas7Districts() {
+		for(Player player: board.getListOfPlayer()){
+			if(player.getCity().getSizeOfCity() == 7)
+				return true;
+		}
+		return false;
+	}
+    
     
     
     /**
