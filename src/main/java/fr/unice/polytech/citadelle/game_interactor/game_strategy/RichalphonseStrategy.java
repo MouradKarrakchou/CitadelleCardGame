@@ -115,7 +115,7 @@ public class RichalphonseStrategy {
      * @return True if the number of player is les than 5
      */
     private boolean isNumberOfPlayerLess5() {
-		if(board.getListOfPlayer().size() < 5) return true;
+		if(board.getListOfPlayer().size() <= 5) return true;
 		return false;
 	}
     
