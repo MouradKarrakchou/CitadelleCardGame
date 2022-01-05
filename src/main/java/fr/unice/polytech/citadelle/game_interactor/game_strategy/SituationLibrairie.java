@@ -28,9 +28,9 @@ public class SituationLibrairie {
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
-	public ArrayList<Situation> filterByListOfCharacterNotPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterNotPickable) {
+	public ArrayList<Situation> filterByListOfCharacterNotPickable(ArrayList<Situation> listOfSituation, ArrayList<Character> listOfRichardCharacterPickable) {
 		return listOfSituation.stream()
-								.filter(situation -> situation.getListOfCharacterNotHere().isEmpty() || doNotContain(situation.getListOfCharacterNotHere().get(), listOfRichardCharacterNotPickable))
+								.filter(situation -> situation.getListOfCharacterNotHere().isEmpty() || doNotContain(situation.getListOfCharacterNotHere().get(), listOfRichardCharacterPickable))
 								.collect(Collectors.toCollection(ArrayList::new));
 	}
 	
