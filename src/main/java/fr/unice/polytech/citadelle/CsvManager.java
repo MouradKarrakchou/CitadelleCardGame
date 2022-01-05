@@ -10,26 +10,59 @@ import au.com.bytecode.opencsv.CSVWriter;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
+/**
+ * Manage the content of the csv file (writing, reading, updating)
+ *
+ * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
+ */
 public class CsvManager {
 
     ArrayList<Player> leaderboard;
 
+    /**
+     * The leaderboard is used to know which player needs to have his stats updated
+     *
+     * @param leaderboard results board of the players
+     */
     CsvManager (ArrayList<Player> leaderboard) {
         this.leaderboard = leaderboard;
     }
 
     CsvManager(){}
 
+    /**
+     * Main method of this class.
+     * It checks:
+     * -If the csv file exists
+     * -If the file already has some stats
+     * -If there is a new player who has never had his stats recorded yet
+     *
+     * @throws Exception exception
+     */
     void saveFile() throws Exception {
         existingFile();
-        if(!emptyFile()) updateWinrateAverage(updateRankAll());
+        if(!emptyFile()) {
+            updateWinrateAverage(updateRankAll());
+            newChallenger();
+        }
     }
 
+    /**
+     * Check if the csv file exist or not
+     *
+     * @throws Exception exception
+     */
     void existingFile() throws Exception {
         File csvFile = new File("save\\results.csv");
         if(!csvFile.isFile()) createFile();
     }
 
+    /**
+     * Check if the csv file already has some stats
+     *
+     * @return a boolean
+     * @throws Exception exception
+     */
     boolean emptyFile() throws Exception {
         if(getNumberOfLine() == 1) {
             append();
@@ -39,6 +72,11 @@ public class CsvManager {
         return false;
     }
 
+    /**
+     * Creates and initializes the fields of the csv file
+     *
+     * @throws Exception exception
+     */
     void createFile() throws Exception {
         String csv = "save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
@@ -54,6 +92,11 @@ public class CsvManager {
     }
 
 
+    /**
+     * If the csv file is has no stats yet, add the firsts stats
+     *
+     * @throws Exception exception
+     */
     void append() throws Exception {
         String csv = "save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
@@ -91,6 +134,12 @@ public class CsvManager {
         write(winrate(read()));
     }
 
+    /**
+     * Reads the csv file content and returns it
+     *
+     * @return List of the csv file content
+     * @throws Exception exception
+     */
     List<String[]> read() throws Exception {
         //Build reader instance
         CSVReader reader = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
@@ -99,11 +148,23 @@ public class CsvManager {
         return reader.readAll();
     }
 
+    /**
+     * Gives the number of lines of the csv file (first line which is the fields include)
+     *
+     * @return number of lines of the csv file
+     * @throws Exception exception
+     */
     int getNumberOfLine() throws Exception {
         List<String[]> allRows = read();
         return allRows.size();
     }
 
+    /**
+     * Updates the rank of every player who just played
+     *
+     * @return the updated csv file
+     * @throws Exception exception
+     */
     List<String[]> updateRankAll() throws Exception {
         List<String[]> allRows = read();
 
@@ -116,6 +177,14 @@ public class CsvManager {
         return allRows;
     }
 
+    /**
+     * Updates the rank of a given player
+     *
+     * @param player player who will have his rank updated
+     * @param allRows content of csv file
+     * @param rankPosition position of the player in the leaderboard
+     * @return the updated csv file
+     */
     List<String[]> updateRankOnePlayer(Player player, List<String[]> allRows, Integer rankPosition) {
         for (String[] row : allRows) {
 
@@ -135,10 +204,22 @@ public class CsvManager {
         return allRows;
     }
 
+    /**
+     * Updates the win-rate and the average score of the players who just played
+     *
+     * @param allRows content of the csv file
+     * @throws Exception exception
+     */
     void updateWinrateAverage(List<String[]> allRows) throws Exception {
         write(average(winrate(allRows)));
     }
 
+    /**
+     * Writes on the csv file
+     *
+     * @param allRows content of the csv file
+     * @throws Exception exception
+     */
     void write(List<String[]> allRows) throws Exception {
         String csv = "save\\results.csv";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
@@ -148,6 +229,13 @@ public class CsvManager {
         writer.close();
     }
 
+    /**
+     * Calculates the win-rate of each player
+     *
+     * @param allRows content of the csv file
+     * @return the updated csv file
+     * @throws Exception exception
+     */
     List<String[]> winrate(List<String[]> allRows) throws Exception {
         int numberOfLine = getNumberOfLine();
         int gamesCounter;
@@ -167,6 +255,13 @@ public class CsvManager {
         return allRows;
     }
 
+    /**
+     * Calculates the average score of each player
+     *
+     * @param allRows content of the csv file
+     * @return the updated csv file
+     * @throws Exception exception
+     */
     List<String[]> average(List<String[]> allRows) throws Exception {
         int numberOfLine = getNumberOfLine();
 
@@ -177,6 +272,66 @@ public class CsvManager {
         return allRows;
     }
 
+    /**
+     * Checks if there is a new player who has never had his stats recorded yet
+     *
+     * @throws Exception exception
+     */
+    void newChallenger() throws Exception {
+        List<String[]> allRows = read();
+        ArrayList<String> alreadyPlayed = new ArrayList<>();
+
+        for(String[] row : allRows) {
+            alreadyPlayed.add(row[0]);
+        }
+
+        int rank = 0;
+        for(Player player : leaderboard) {
+            if(!alreadyPlayed.contains(player.getName())) addTheNewChallenger(rank);
+            rank++;
+        }
+    }
+
+    /**
+     * Adds the new player who has never had his stats recorded yet
+     *
+     * @param rank rank of the new player in the leaderboard
+     * @throws Exception exception
+     */
+    void addTheNewChallenger(Integer rank) throws Exception {
+        String csv = "save\\results.csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
+        String [] record;
+
+        String toWrite = "";
+        toWrite += leaderboard.get(rank).getName() + ",";
+        for(int j = 0; j < rank; j++) {
+            toWrite += "0,";
+        }
+
+        toWrite += 1 + ",";
+
+        for(int j = 0; j < 8 - rank; j++) {
+            toWrite += "0,";
+        }
+
+        String score = leaderboard.get(rank).getScore() + ",";
+        for(int j = 0; j < 2; j++) {
+            toWrite += score;
+        }
+
+        record = toWrite.split(",");
+        writer.writeNext(record);
+        writer.close();
+        write(winrate(read()));
+    }
+
+    /**
+     *Converts the csv file into an arrayList of stats
+     *
+     * @return an arrayList of stats
+     * @throws Exception exception
+     */
     public ArrayList<StatsBot> getStatsBot() throws Exception {
         ArrayList<StatsBot> statsBots = new ArrayList<>();
         List<String[]> allRows = read();
@@ -189,6 +344,11 @@ public class CsvManager {
         return statsBots;
     }
 
+    /**
+     * Displays the content of the csv file
+     *
+     * @throws Exception exception
+     */
     public void printCSV() throws Exception {
         PrintCitadels.startCSV();
         ArrayList<StatsBot> botStatsList = getStatsBot();
