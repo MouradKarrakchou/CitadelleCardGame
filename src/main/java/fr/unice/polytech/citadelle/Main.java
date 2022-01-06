@@ -16,10 +16,15 @@ public class Main {
 	private static final int NUMBER_OF_INVESTOR =  1;
 	private static final int NUMBER_OF_RUSHER = 1;
 	private static final int NUMBER_OF_STRATEGATOR = 1;
+	private static final boolean ENABLE_LOG = true;
 
 	public static void main(String... args) throws Exception {
 		// Running a game
-		PrintCitadels.activateLevelWarning();
+		if (ENABLE_LOG)
+			PrintCitadels.activateLevelInfo();
+		else
+			PrintCitadels.activateLevelWarning();
+
 		Controller controller = new Controller();
 		controller.initGame(NUMBER_OF_RICHALPHONSE, NUMBER_OF_INVESTOR, NUMBER_OF_RUSHER, NUMBER_OF_STRATEGATOR);
 
