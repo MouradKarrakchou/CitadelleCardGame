@@ -222,6 +222,7 @@ public class StrategyTest {
 		assertEquals(botMagician.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterForAssassinAdvancedWhenBothGotLessPoints() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());
@@ -240,6 +241,7 @@ public class StrategyTest {
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterForAssassinAdvancedWhenBothGotMorePoints() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());
@@ -260,6 +262,7 @@ public class StrategyTest {
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterForAssassinAdvancedWhenOneGotMoreAndOtherGotLess1() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());
@@ -278,7 +281,8 @@ public class StrategyTest {
 		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
-
+	
+	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterForAssassinAdvancedWhenOneGotMoreAndOtherGotLess2() {
 		strategy = new Strategy(8, board, botAssassin.getPlayer());
@@ -300,6 +304,7 @@ public class StrategyTest {
 		assertEquals(botMagician.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
 	}
 
+	@RepeatedTest(1)
 	//@Test
 	void chooseCharacterForAssassinAdvancedWhenTargetWhenCharacterNotReveal() {
 		strategy = spy(new Strategy(8, board, botAssassin.getPlayer()));
