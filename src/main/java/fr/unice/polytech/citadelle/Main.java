@@ -12,14 +12,14 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
  * @author BONNET Kilian, IMAMI Ayoub, KARRAKCHOU Mourad, LE BIHAN Léo
  */
 public class Main {
-	private static final int NUMBER_OF_RICHALPHONSE = 3;
-	private static final int NUMBER_OF_INVESTOR =  0;
-	private static final int NUMBER_OF_RUSHER = 0;
+	private static final int NUMBER_OF_RICHALPHONSE = 1;
+	private static final int NUMBER_OF_INVESTOR =  1;
+	private static final int NUMBER_OF_RUSHER = 1;
 	private static final int NUMBER_OF_STRATEGATOR = 1;
 
 	public static void main(String... args) throws Exception {
 		// Running a game
-		PrintCitadels.activateLevelInfo();
+		PrintCitadels.activateLevelWarning();
 		Controller controller = new Controller();
 		controller.initGame(NUMBER_OF_RICHALPHONSE, NUMBER_OF_INVESTOR, NUMBER_OF_RUSHER, NUMBER_OF_STRATEGATOR);
 
