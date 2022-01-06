@@ -1,6 +1,5 @@
 package fr.unice.polytech.citadelle;
 
-import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 import org.junit.jupiter.api.BeforeEach;

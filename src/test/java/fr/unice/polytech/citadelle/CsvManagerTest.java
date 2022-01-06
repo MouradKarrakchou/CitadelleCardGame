@@ -1,49 +1,236 @@
 package fr.unice.polytech.citadelle;
 
 import fr.unice.polytech.citadelle.game.Player;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileReader;
-import java.util.Arrays;
 import au.com.bytecode.opencsv.CSVReader;
 
 import java.util.ArrayList;
+import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CsvManagerTest {
 
-/*
+    String path = "csvTests\\results.csv";
+    ArrayList<Player> aLeaderboard = new ArrayList<>();
+    ArrayList<Player> anotherLeaderboard = new ArrayList<>();
+    ArrayList<Player> anotherOneLeaderboard = new ArrayList<>();
+    CsvManager csvManager = new CsvManager(aLeaderboard, path);
+
+    @BeforeEach
+    void setUp() {
+        aLeaderboard.add(new Player("P1"));
+        aLeaderboard.add(new Player("P2"));
+        aLeaderboard.add(new Player("P3"));
+        aLeaderboard.add(new Player("P4"));
+        aLeaderboard.add(new Player("P5"));
+
+        anotherLeaderboard.add(new Player("P4"));
+        anotherLeaderboard.add(new Player("P1"));
+        anotherLeaderboard.add(new Player("P5"));
+        anotherLeaderboard.add(new Player("P3"));
+        anotherLeaderboard.add(new Player("P2"));
+
+        anotherOneLeaderboard.add(new Player("P1"));
+        anotherOneLeaderboard.add(new Player("P2"));
+        anotherOneLeaderboard.add(new Player("P3"));
+        anotherOneLeaderboard.add(new Player("P4"));
+        anotherOneLeaderboard.add(new Player("P5"));
+        anotherOneLeaderboard.add(new Player("P6"));
+    }
+
     @Test
-    //On one game (overwrite)
-    void saveRank() throws Exception {
-        ArrayList<Player> leaderboard = new ArrayList<>();
-        leaderboard.add(new Player("Player2"));
-        leaderboard.add(new Player("Player4"));
-        leaderboard.add(new Player("Player1"));
-        leaderboard.add(new Player("Player3"));
+    void createFileTest() throws Exception {
+        csvManager.createFile();
+        for(int i = 0; i < 12; i++) {
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+            CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\createFile.csv"), ',', '"', 0);
+            assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
+        }
+    }
 
-        String [] realLeaderboard = {
-                "[BotType, 1, 2, 3, 4, 5, 6, 7, Win-rate, Games played]",
-                "[Player2, 1, 0, 0, 0, 0, 0, 0, 100.0, 1]",
-                "[Player4, 0, 1, 0, 0, 0, 0, 0, 0.0, 1]",
-                "[Player1, 0, 0, 1, 0, 0, 0, 0, 0.0, 1]",
-                "[Player3, 0, 0, 0, 1, 0, 0, 0, 0.0, 1]"
-        };
-
-        CsvManager csvManager = new CsvManager(leaderboard);
+    @Test
+    void appendTest() throws Exception {
+        int score = 10;
+        for(Player player : aLeaderboard) player.updateScore(score--);
+        csvManager.createFile();
         csvManager.append();
 
-        CSVReader reader = new CSVReader(new FileReader("src\\main\\resources\\save\\results.csv"), ',' , '"' , 0);
-        int counter = 0;
-        String[] nextLine;
-        while ((nextLine = reader.readNext()) != null) {
-            if (nextLine != null) {
-                assertEquals(realLeaderboard[counter],Arrays.toString(nextLine));
-                counter++;
+        for(int j = 1; j < 6; j++) {
+            for (int i = 0; i < 12; i++) {
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+                CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\append.csv"), ',', '"', 0);
+                assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
             }
         }
+    }
 
-    }*/
+    @Test
+    void updateRankAllTest() throws Exception {
+        int score = 10;
+        for(Player player : aLeaderboard) player.updateScore(score--);
+        csvManager.createFile();
+        csvManager.append();
+
+        aLeaderboard = anotherLeaderboard;
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
+        csvManager.write(csvManager.updateRankAll());
+
+        for(int j = 1; j < 6; j++) {
+            for (int i = 0; i < 12; i++) {
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+                CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\updateRankAll.csv"), ',', '"', 0);
+                assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
+            }
+        }
+    }
+
+    @Test
+    void averageTest() throws Exception {
+        int score = 10;
+        for(Player player : aLeaderboard) player.updateScore(score--);
+        csvManager.createFile();
+        csvManager.append();
+
+        aLeaderboard = anotherLeaderboard;
+        score = 10;
+        for(Player player : anotherLeaderboard) player.updateScore(score--);
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
+        csvManager.write(csvManager.updateRankAll());
+
+        csvManager.write(csvManager.winrate(csvManager.read()));
+        csvManager.write(csvManager.average(csvManager.read()));
+
+        for(int j = 1; j < 6; j++) {
+            for (int i = 0; i < 12; i++) {
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+                CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\average.csv"), ',', '"', 0);
+                assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
+            }
+        }
+    }
+
+    @Test
+    void updateWinrateAverageTest() throws Exception {
+        int score = 10;
+        for(Player player : aLeaderboard) player.updateScore(score--);
+        csvManager.createFile();
+        csvManager.append();
+
+        aLeaderboard = anotherLeaderboard;
+        score = 10;
+        for(Player player : anotherLeaderboard) player.updateScore(score--);
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
+        csvManager.write(csvManager.updateRankAll());
+
+        csvManager.updateWinrateAverage(csvManager.read());
+
+        for(int j = 1; j < 6; j++) {
+            for (int i = 0; i < 12; i++) {
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+                CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\average.csv"), ',', '"', 0);
+                assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
+            }
+        }
+    }
+
+    @Test
+    void newChallengerTest() throws Exception {
+        int score = 10;
+        for(Player player : aLeaderboard) player.updateScore(score--);
+        csvManager.createFile();
+        csvManager.append();
+
+        aLeaderboard = anotherOneLeaderboard;
+        CsvManager csvManager = new CsvManager(aLeaderboard, path);
+        csvManager.newChallenger();
+
+        for(int j = 1; j < 7; j++) {
+            for (int i = 0; i < 12; i++) {
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+                CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\newChallenger.csv"), ',', '"', 0);
+                assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
+            }
+        }
+    }
+
+    @Test
+    void emptyFileTrueTest() throws Exception {
+        csvManager.createFile();
+        assertTrue(csvManager.emptyFile());
+    }
+
+    @Test
+    void emptyFileFalseTest() throws Exception {
+        csvManager.createFile();
+        csvManager.append();
+        assertFalse(csvManager.emptyFile());
+    }
+
+    @Test
+    void existingFileTrueTest() throws Exception {
+        csvManager.createFile();
+        csvManager.existingFile();
+        for(int i = 0; i < 12; i++) {
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+            CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\createFile.csv"), ',', '"', 0);
+            assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
+        }
+    }
+
+    @Test
+    void existingFileFalseTest() throws Exception {
+        csvManager.existingFile();
+        for(int i = 0; i < 12; i++) {
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+            CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\createFile.csv"), ',', '"', 0);
+            assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
+        }
+    }
+
+    @Test
+    void saveFileEmptyTest() throws Exception {
+        csvManager.saveFile();
+        for(int j = 1; j < 6; j++) {
+            for (int i = 0; i < 12; i++) {
+                CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+                CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\saveFileEmpty.csv"), ',', '"', 0);
+                assertEquals(readFileTest.readAll().get(j)[i], readCreatedFile.readAll().get(j)[i]);
+            }
+        }
+    }
+
+    @Test
+    void saveFileNotEmptyTest() throws Exception {
+        csvManager.createFile();
+        csvManager.append();
+        csvManager.saveFile();
+        for(int i = 0; i < 12; i++) {
+            CSVReader readCreatedFile = new CSVReader(new FileReader(path), ',', '"', 0);
+            CSVReader readFileTest = new CSVReader(new FileReader("csvTests\\saveFileNotEmpty.csv"), ',', '"', 0);
+            assertEquals(readFileTest.readAll().get(0)[i], readCreatedFile.readAll().get(0)[i]);
+        }
+    }
+
+    @Test
+    void getStatsBotTest() throws Exception {
+        csvManager.createFile();
+        csvManager.append();
+
+        ArrayList<StatsBot> statsBots = new ArrayList<>();
+        statsBots.add(new StatsBot("P1", 1, 1, 0));
+        statsBots.add(new StatsBot("P2", 1, 0, 0));
+        statsBots.add(new StatsBot("P3", 1, 0, 0));
+        statsBots.add(new StatsBot("P4", 1, 0, 0));
+        statsBots.add(new StatsBot("P5", 1, 0, 0));
+
+        for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getName(), csvManager.getStatsBot().get(i).getName());
+        for(int i = 0; i < 5; i++) assertEquals(statsBots.get(i).getWinrate(), csvManager.getStatsBot().get(i).getWinrate());
+
+    }
+
 }

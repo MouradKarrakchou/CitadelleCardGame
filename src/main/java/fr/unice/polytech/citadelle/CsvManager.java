@@ -18,17 +18,26 @@ import fr.unice.polytech.citadelle.output.PrintCitadels;
 public class CsvManager {
 
     ArrayList<Player> leaderboard;
+    String path;
 
     /**
      * The leaderboard is used to know which player needs to have his stats updated
      *
      * @param leaderboard results board of the players
+     * @param path the path of the csv file
      */
-    CsvManager (ArrayList<Player> leaderboard) {
+    CsvManager (ArrayList<Player> leaderboard, String path) {
         this.leaderboard = leaderboard;
+        this.path = path;
     }
 
-    CsvManager(){}
+    /**
+     * Initialize a CsvManager
+     * @param path the path of the csv file
+     */
+    CsvManager(String path){
+        this.path = path;
+    }
 
     /**
      * Main method of this class.
@@ -53,7 +62,7 @@ public class CsvManager {
      * @throws Exception exception
      */
     void existingFile() throws Exception {
-        File csvFile = new File("save\\results.csv");
+        File csvFile = new File(path);
         if(!csvFile.isFile()) createFile();
     }
 
@@ -78,7 +87,7 @@ public class CsvManager {
      * @throws Exception exception
      */
     void createFile() throws Exception {
-        String csv = "save\\results.csv";
+        String csv = path;
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
 
         //Create record
@@ -98,7 +107,7 @@ public class CsvManager {
      * @throws Exception exception
      */
     void append() throws Exception {
-        String csv = "save\\results.csv";
+        String csv = path;
         CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
         String [] record;
 
@@ -142,7 +151,7 @@ public class CsvManager {
      */
     List<String[]> read() throws Exception {
         //Build reader instance
-        CSVReader reader = new CSVReader(new FileReader("save\\results.csv"), ',', '"', 0);
+        CSVReader reader = new CSVReader(new FileReader(path), ',', '"', 0);
 
         //Read all rows at once
         return reader.readAll();
@@ -221,7 +230,7 @@ public class CsvManager {
      * @throws Exception exception
      */
     void write(List<String[]> allRows) throws Exception {
-        String csv = "save\\results.csv";
+        String csv = path;
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
         for(String[] row : allRows) {
             writer.writeNext(row);
@@ -299,7 +308,7 @@ public class CsvManager {
      * @throws Exception exception
      */
     void addTheNewChallenger(Integer rank) throws Exception {
-        String csv = "save\\results.csv";
+        String csv = path;
         CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
         String [] record;
 

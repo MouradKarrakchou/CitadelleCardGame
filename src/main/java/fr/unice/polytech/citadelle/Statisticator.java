@@ -37,7 +37,8 @@ public class Statisticator {
 			updateBotStats(leaderboard);
 
 			//Writing in the CSV file
-			CsvManager csv = new CsvManager(leaderboard);
+			String path = "save\\results.csv";
+			CsvManager csv = new CsvManager(leaderboard, path);
 			csv.saveFile();
 		}
 		PrintCitadels.activateLevelInfo();
