@@ -26,6 +26,7 @@ import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.Player;
+import fr.unice.polytech.citadelle.game_engine.Controller;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
 import fr.unice.polytech.citadelle.game_engine.Referee;
 import fr.unice.polytech.citadelle.game_engine.RoundManager;
@@ -43,10 +44,10 @@ public class RoundManagerTest {
 	ArrayList<Behaviour> listOfAllBehaviour;
 	Board board;
 
-	private final int numberOfRichalphonse = 1;
+	private final int numberOfRichalphonse = 0;
 	private final int numberOfInvestor = 1;
 	private final int numberOfRusher = 1;
-	private final int numberOfStrategator = 1;
+	private final int numberOfStrategator = 2;
 	private final int nbPlayer = 4;
 
 
