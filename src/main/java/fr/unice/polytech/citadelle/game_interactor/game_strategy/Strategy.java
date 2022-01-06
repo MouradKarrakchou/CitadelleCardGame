@@ -147,8 +147,7 @@ public class Strategy {
      * @return The player to use Magician spell on.
      */
     public Player choosePlayerForMagicianAdvanced(){
-        Player playerWithMostCards=findThePlayerWithMostCards();
-        return(playerWithMostCards);
+        return(findThePlayerWithMostCards());
     }
 
     /**

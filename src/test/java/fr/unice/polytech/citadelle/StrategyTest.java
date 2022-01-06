@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -115,11 +116,19 @@ public class StrategyTest {
 		board.getListOfPlayer().add(botArchitecte.getPlayer());
 		board.getListOfPlayer().add(botWarlord.getPlayer());
 		// creation of the hashOfCharacter
+		board.gethashOfViewCharacters().put(botBishop.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botAssassin.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botThief.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botMagician.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botKing.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botMerchant.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botArchitecte.getPlayer(),Optional.empty());
+		board.gethashOfViewCharacters().put(botWarlord.getPlayer(),Optional.empty());
+		hashOfCharacters.put(bishop, Optional.of(botBishop));
 		hashOfCharacters.put(assassin, Optional.of(botAssassin));
 		hashOfCharacters.put(thief, Optional.of(botThief));
 		hashOfCharacters.put(magician, Optional.of(botMagician));
 		hashOfCharacters.put(king, Optional.of(botKing));
-		hashOfCharacters.put(bishop, Optional.of(botBishop));
 		hashOfCharacters.put(merchant, Optional.of(botMerchant));
 		hashOfCharacters.put(architect, Optional.of(botArchitecte));
 		hashOfCharacters.put(warlord, Optional.of(botWarlord));
@@ -201,8 +210,7 @@ public class StrategyTest {
 		botMagician.buildDistrict(purple04); // District value is 4
 		botMagician.buildDistrict(red05); // District value is 5
 
-		assertEquals((1 + 6 + 2 + 3 + 4 + 5 + bonusForFiveDistrict),
-				strategy.playerPredictScore(botMagician.getPlayer()));
+		assertEquals((1 + 6 + 2 + 3 + 4 + 5 + bonusForFiveDistrict), strategy.playerPredictScore(botMagician.getPlayer()));
 	}
 
 	@RepeatedTest(1)
@@ -220,6 +228,8 @@ public class StrategyTest {
 		botBishop.buildDistrict(blue03); // District value is 3
 
 		assertEquals(botMagician.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
+		assertEquals(thief,strategy.chooseCharacterForAssassinAdvanced());
+
 	}
 
 	@RepeatedTest(1)
@@ -231,14 +241,19 @@ public class StrategyTest {
 		botAssassin.buildDistrict(green06); // District value is 6
 
 		// he has 2 points different
-		botBishop.buildDistrict(yellow02); // District value is 2
-		botBishop.buildDistrict(blue03); // District value is 3
+		botArchitecte.buildDistrict(yellow02); // District value is 2
+		botArchitecte.buildDistrict(blue03); // District value is 3
 
 		// he has 2 points different
 		botMagician.buildDistrict(yellow02); // District value is 2
 
 		strategy.findThePlayerWithClosestScoreAssassin();
-		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
+		assertEquals(botArchitecte.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
+		botArchitecte.getPlayer().getDistrictCards().add(new District("",1,"red","noble"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("",1,"red","noble"));
+		botArchitecte.getPlayer().getDistrictCards().add(new District("",1,"red","noble"));
+		botArchitecte.getPlayer().setGolds(6);
+		assertEquals(architect,strategy.chooseCharacterForAssassinAdvanced());
 	}
 
 	@RepeatedTest(1)
@@ -259,7 +274,9 @@ public class StrategyTest {
 		botMagician.buildDistrict(green03); // District value is 3
 
 		strategy.findThePlayerWithClosestScoreAssassin();
+
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
+		assertEquals(thief,strategy.chooseCharacterForAssassinAdvanced());
 	}
 
 	@RepeatedTest(1)
@@ -280,6 +297,7 @@ public class StrategyTest {
 
 		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botBishop.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
+		assertEquals(thief,strategy.chooseCharacterForAssassinAdvanced());
 	}
 	
 	@RepeatedTest(1)
@@ -302,6 +320,8 @@ public class StrategyTest {
 
 		strategy.findThePlayerWithClosestScoreAssassin();
 		assertEquals(botMagician.getPlayer(), strategy.findThePlayerWithClosestScoreAssassin());
+		assertEquals(thief,strategy.chooseCharacterForAssassinAdvanced());
+
 	}
 
 	@RepeatedTest(1)
@@ -316,6 +336,8 @@ public class StrategyTest {
 		
 		strategy.chooseCharacterForAssassinAdvanced();
 		verify(strategy, times(1)).getAPrediction(any(), any());
+		assertEquals(thief,strategy.chooseCharacterForAssassinAdvanced());
+
 
 	}
 
@@ -360,23 +382,18 @@ public class StrategyTest {
 	@RepeatedTest(1)
 	//@Test
 	void testchooseCharacterWithMostGolds() {
-		board.getListOfPlayer().clear();
-		Player player1=new Player("p1");
-		player1.setRole(new Thief());
-		Player player2=new Player("p2");
-		player2.setRole(new Magician());
-		Player player3=new Player("p3");
-		player3.setRole(new Merchant());
 
-		board.getListOfPlayer().add(player1);
-		board.getListOfPlayer().add(player2);
-		board.getListOfPlayer().add(player3);
-		strategy = new Strategy(8, board, player1);
-		player1.setGolds(3);
-		player2.setGolds(4);
-		player3.setGolds(5);
-		strategy.findThePlayerWithMostGolds();
-		assertEquals(player3, strategy.findThePlayerWithMostGolds());
+
+		board.getListOfPlayer().add(botThief.getPlayer());
+		board.getListOfPlayer().add(botMerchant.getPlayer());
+		board.getListOfPlayer().add(botMagician.getPlayer());
+		strategy = new Strategy(8, board, botThief.getPlayer());
+		botThief.getPlayer().setGolds(3);
+		botMerchant.getPlayer().setGolds(4);
+		botMagician.getPlayer().setGolds(5);
+		assertEquals(botMagician.getPlayer(), strategy.findThePlayerWithMostGolds());
+		assertEquals(magician,strategy.chooseCharacterForThiefAdvanced());
+
 	}
 	
 	@RepeatedTest(1)
@@ -384,22 +401,17 @@ public class StrategyTest {
 	void testchooseCharacterWithMostGolds2() {
 		//We now Try when the thief has the most golds
 		board.getListOfPlayer().clear();
-		Player player1=new Player("p1");
-		player1.setRole(new Thief());
-		Player player2=new Player("p2");
-		player2.setRole(new Magician());
-		Player player3=new Player("p3");
-		player3.setRole(new Merchant());
+		board.getListOfPlayer().add(botThief.getPlayer());
+		board.getListOfPlayer().add(botMerchant.getPlayer());
+		board.getListOfPlayer().add(botMagician.getPlayer());
 
-		board.getListOfPlayer().add(player1);
-		board.getListOfPlayer().add(player2);
-		board.getListOfPlayer().add(player3);
-		strategy = new Strategy(8, board, player1);
-		player1.setGolds(5);
-		player2.setGolds(4);
-		player3.setGolds(3);
+		strategy = new Strategy(8, board, botThief.getPlayer());
+		botThief.getPlayer().setGolds(5);
+		botMerchant.getPlayer().setGolds(4);
+		botMagician.getPlayer().setGolds(3);
 		strategy.findThePlayerWithMostGolds();
-		assertEquals(player2, strategy.findThePlayerWithMostGolds());
+		assertEquals(botMerchant.getPlayer(), strategy.findThePlayerWithMostGolds());
+		assertEquals(magician,strategy.chooseCharacterForThiefAdvanced());
 	}
 
 	@RepeatedTest(1)
