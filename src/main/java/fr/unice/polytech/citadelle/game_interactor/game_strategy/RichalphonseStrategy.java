@@ -62,22 +62,6 @@ public class RichalphonseStrategy {
     	return bestSituation;
     }
     
-    private ArrayList<Character> getListOfRichardCharacterNotPickable() {
-    	ArrayList<Character> notPickable = new ArrayList<>();
-    	notPickable.add(board.getDeckCharacter().getHiddenCard());
-    	notPickable.addAll(board.getDeckCharacter().getBurnedAndVisibleCharacters());
-		return notPickable;
-	}
-
-
-	private ArrayList<Character> getNonPickableCharacter() {
-    	ArrayList<Character> nonPickable = new ArrayList<>();
-    	for(Character character: board.getListOfCharacter()){
-    		if(!(board.getDeckCharacter()).getDeckCharacter().contains(character))
-    			nonPickable.add(character);
-    	}
-		return nonPickable;
-	}
 
 
 	/**
@@ -307,14 +291,7 @@ public class RichalphonseStrategy {
 		return -1;
 	}
 
-	/**
-     * @return True if a Player is close to win (7/8 Districts), False in the others cases
-     */
-	private boolean aPlayerIsCloseToWin() {
-		for(Player player: board.getListOfPlayerOrdered())
-			if(player.getCity().getSizeOfCity() >6 && !(player.equals(currentPlayer))) return true;
-		return false;
-	}
+
 
 	/**
 	 * @return True if a Player is close to win (6 or 7/8 Districts), False in the others cases
@@ -326,28 +303,6 @@ public class RichalphonseStrategy {
 	}
 
 
-	/**
-     * @return True if a Player is close to win (7/8 Districts), False in the others cases
-     */
-	private boolean mostAdvancedPlayerPlayFirst() {
-		Player mostAdvancedPlayer = getMostAdvancedPlayer();
-		Player firstPlayerToPlay = getFirstPlayerToPlay();
-		if(firstPlayerToPlay.equals(currentPlayer)) return false;
-		if(mostAdvancedPlayer.equals(firstPlayerToPlay)) return true;
-		return false;
-	}
-
-	/**
-     * @return True if a Player is close to win (7/8 Districts), False in the others cases
-     */
-	private Player getRichestPlayer() {
-		Player richestPlayer= board.getListOfPlayerOrdered().get(0);
-		for(Player player: board.getListOfPlayerOrdered()){
-			if(richestPlayer.getGolds() < player.getGolds())
-				richestPlayer = player;
-		}
-		return richestPlayer;
-	}
 	
 	/**
      * @return The first Player who can choose his Character card
@@ -355,33 +310,6 @@ public class RichalphonseStrategy {
 	private Player getFirstPlayerToPlay() {
 		return board.getListOfPlayerOrdered().get(0);
 	}
-	
-	
-	/**
-	 * @return a player that has 6 or more district, and this player has the biggest city of all the player
-	 */
-	private Player getPotentialWinner() {
-		Player potentialWinner= board.getListOfPlayerOrdered().get(0);
-		for(Player player: board.getListOfPlayerOrdered()){
-			if(player.getCity().getSizeOfCity() > 6 && potentialWinner.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
-				potentialWinner = player;
-		}
-		return potentialWinner;	
-	}
-
-	
-	/**
-     * @return The most advanced Player of the game
-     */
-	private Player getMostAdvancedPlayer() {
-		Player mostAdvancedPlayer= board.getListOfPlayerOrdered().get(0);
-		for(Player player: board.getListOfPlayerOrdered()){
-			if(mostAdvancedPlayer.getCity().getSizeOfCity() < player.getCity().getSizeOfCity())
-				mostAdvancedPlayer = player;
-		}
-		return mostAdvancedPlayer;	
-	}
-	
 	
     
 }
