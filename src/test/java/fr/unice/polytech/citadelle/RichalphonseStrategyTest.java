@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckCharacter;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
+import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
 import fr.unice.polytech.citadelle.game_character.Character;
 import fr.unice.polytech.citadelle.game_engine.Initializer;
@@ -32,17 +33,23 @@ public class RichalphonseStrategyTest {
 	}
 	
 	@Test
-	public void getListOfRichardCharacterNotPickableTest() {
-		/*ArrayList<Character> deckCharacterList = board.getDeckCharacter().getDeckCharacter();
-		ArrayList<Character> notPickable = new ArrayList<>();
+	public void getTargetPlayerHasMostCardTest() {
+		Player other = new Player("Other");
+		other.getDistrictCards().add(new District("test", 0, "test", "test"));
+		other.getDistrictCards().add(new District("test", 1, "test", "test"));
+		other.getDistrictCards().add(new District("test", 2, "test", "test"));
+		other.getDistrictCards().add(new District("test", 3, "test", "test"));
+		other.getDistrictCards().add(new District("test", 4, "test", "test"));
+		other.getDistrictCards().add(new District("test", 5, "test", "test"));
+		other.getDistrictCards().add(new District("test", 6, "test", "test"));
+		other.getDistrictCards().add(new District("test", 7, "test", "test"));
+		other.getDistrictCards().add(new District("test", 8, "test", "test"));
+		player.getDistrictCards().clear();
+		board.getListOfPlayerOrdered().add(other);
+		board.getListOfPlayerOrdered().add(player);
 
-		int indexOfKing = 3;
-		Character king = deckCharacterList.get(indexOfKing);
-		notPickable.add(king);
-		deckCharacterList.remove(board.findCharacter("king"));
-		ArrayList<Character> res = richalphStrat.();
-		assertEquals(notPickable.size(), res.size());
-		assertEquals(notPickable.get(0), res.get(0));*/
+		Player res = richalphStrat.getTargetPlayerHasMostCard();
+		assertEquals(res, other);
 
 	}
 	

@@ -124,7 +124,7 @@ public class CharacterTest {
     }
 
     @RepeatedTest(1)
-    @Test
+    //@Test
     void assassinatePlayer(){
         //initialize
         botAssassin = mock(Behaviour.class);
@@ -186,7 +186,7 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
+    //@Test
     void testMerchantEarnsMoney(){
 
         //The merchant win 4 gold with his district and 1 gold at the start of his turn
@@ -200,7 +200,7 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
+    //@Test
     void testBishopEarnsMoney(){
 
         //The bishop win 4 gold with his district and 1 gold at the start of his turn
@@ -214,7 +214,7 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
+    //@Test
     void testArchitectTakes2Cards(){
         //We verify that the Value of behaviourIsArchitect becomes true
         architect.spellOfTurn(botArchitecte,hashOfCharacters);
@@ -222,7 +222,7 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
+    //@Test
     void testMagicianSwapWithAnotherCharacter(){
         ArrayList<District> cardsToSwap=new ArrayList<>();
         botMerchant.getPlayer().getDistrictCards().add(new District("MerchantDistrict",0," "," "));
@@ -235,7 +235,7 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
+    //@Test
     void testMagicianSwapWithTheDeck(){
         ArrayList<District> cardsToSwap=new ArrayList<>();
         District districtToSwap=new District("MagicianDistrict2",0," "," ");
@@ -252,7 +252,7 @@ public class CharacterTest {
     }
     
     @RepeatedTest(1)
-    @Test
+    //@Test
     void testWarlordDestroyDistrict(){
         Player player=new Player("playerDistrictToDestroy");
         player.setGolds(4);
