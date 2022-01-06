@@ -32,7 +32,7 @@ public class RichalphonseTest {
 		deckDistrict  = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player");
-    	board = new Board(null,new ArrayList<>(),deckDistrict , null);
+    	board = new Board(new ArrayList<>(),new ArrayList<>(),deckDistrict , null);
 		richalphonse = spy(new Richalphonse(player, board));
 	}
 

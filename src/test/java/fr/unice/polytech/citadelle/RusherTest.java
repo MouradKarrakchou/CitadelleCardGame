@@ -32,7 +32,7 @@ public class RusherTest {
 		deckDistrict = new DeckDistrict();
 		deckDistrict.initialise();
 		player = new Player("Player1");
-		board = new Board(null,new ArrayList<>(),deckDistrict , null);
+		board = new Board(new ArrayList<>(),new ArrayList<>(),deckDistrict , null);
 		rusher = spy(new Rusher(player, board));
 	}
 
