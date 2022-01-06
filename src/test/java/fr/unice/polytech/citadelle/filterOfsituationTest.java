@@ -133,13 +133,12 @@ public class filterOfsituationTest {
 		board.getListOfPlayerOrdered().add(playerWithTheLead);
 		Character bestCharacter = richalphonse.chooseCharacterWithStrategy(richalphonse);
 		richalphonse.getCurrentBestSituation().toString();
+		assertEquals(richalphonse.getCurrentBestSituation().toString(),"Situation29: The Player playing third have 7districts I take Assassin to kill him");
+
 	}
 
 	@Test
 	public void testSituation9() {
-
-
-		//Situation29: The Player playing third have 7districts I take Walord
 		board.getDeckCharacter().getDeckCharacter().clear();
 		board.getDeckCharacter().getDeckCharacter().add(new Assassin());
 		Player playerWithTheLead=new Player("playerLeading");
@@ -155,6 +154,7 @@ public class filterOfsituationTest {
 		board.getListOfPlayerOrdered().add(playerWithTheLead);
 		Character bestCharacter = richalphonse.chooseCharacterWithStrategy(richalphonse);
 		richalphonse.getCurrentBestSituation().toString();
+		assertEquals(richalphonse.getCurrentBestSituation().toString(),"Situation9: Someone is close to finish the game (6 District built) we want to deny him by taking the Assassin(because the king is already taken)");
 	}
 	@Test
 	public void testSituation12() {
@@ -171,7 +171,6 @@ public class filterOfsituationTest {
         situation.setAPlayerCloseToWinPlayFirst(true);
         AllSituations.add(situation);*/
 
-		//Situation29: The Player playing third have 7districts I take Walord
 		board.getDeckCharacter().getDeckCharacter().clear();
 		board.getDeckCharacter().getDeckCharacter().add(new Assassin());
 		Player playerWithTheLead=new Player("playerLeading");
@@ -186,6 +185,7 @@ public class filterOfsituationTest {
 		board.getListOfPlayerOrdered().add(richalphonse.getPlayer());
 		Character bestCharacter = richalphonse.chooseCharacterWithStrategy(richalphonse);
 		richalphonse.getCurrentBestSituation().toString();
+		assertEquals(richalphonse.getCurrentBestSituation().toString(),"Situation12: The bot close to finish the game plays before me and probably took the King");
 	}
 
 
