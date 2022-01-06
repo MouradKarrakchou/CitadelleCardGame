@@ -151,14 +151,6 @@ public class PrintCitadels {
 		LOGGER.info(colorize(output, YELLOW_TEXT()));
 	}
 
-	/*
-	 * public void winByCharacter(Player winner){ Character
-	 * winnerCharacter=winner.getCharacter(); System.out.println("The robot "
-	 * +winner.getName()+" won because his role "+winnerCharacter.getName()
-	 * +" had a value of "+winnerCharacter.getValue()+" which is the highest value."
-	 * ); }
-	 */
-
 	public static void printTakeGold(Player player) {
 		String coloredOutput = colorize("[+] ", GREEN_TEXT());
 
@@ -377,7 +369,7 @@ public class PrintCitadels {
 		LOGGER.info(colorize("He analysed the board and saw that "+playerWithMostDistrictGames.getName()+" has the most districts.",ITALIC()));
     }
 	public static void printSituation(Situation situationWeAreIn) {
-		System.out.println("\t"+situationWeAreIn);
+		LOGGER.info("\t"+situationWeAreIn);
 	}
 
 	public static void playerHasTwoTimesMoreHisCards(Player player) {

@@ -92,7 +92,7 @@ public class RichalphonseStrategy {
      */
 	private int getPositionOfPotentialWinner() {
 		if(!aPlayerIsCloseToWinForSixAndSeven()) return 0;
-		int indexPotentialWinner = getIndexOfPlayer(getPlayerCloseToWin());
+		int indexPotentialWinner = getIndexOfPlayer(getPlayerCloseToWinBySixOrMore());
 		int indexCurrentPlayer = getIndexOfPlayer(currentPlayer);
 
 		if(indexPotentialWinner - indexCurrentPlayer < 0) return -1;
@@ -146,14 +146,13 @@ public class RichalphonseStrategy {
 	}
     
     /**
-     * @return True if a player in the current game has twice more Districts cards than other bots
+     * @return True if a player in the current game has more then 5cards
      */
     private boolean doAPlayerHasLotOfCard() {
-		int currentNumberOfCards = currentPlayer.getDistrictCardsSize();
     	for(Player player: board.getListOfPlayerOrdered()){
-    		if(player.getDistrictCardsSize()*2 > currentNumberOfCards && !(player.equals(currentPlayer))) return false;
+    		if(player.getDistrictCardsSize() > 4) return true;
     	}
-		return true;
+		return false;
 	}
     
     /**
@@ -193,7 +192,6 @@ public class RichalphonseStrategy {
     private boolean doRichardCouldPlayArchitect() {
     	if(currentPlayer.getGolds() > 3)
 				if(currentPlayer.getDistrictCardsSize() > 1)
-					if(currentPlayer.getCity().getSizeOfCity() > 5)
 						return true;
 		return false;
 	}
@@ -244,12 +242,12 @@ public class RichalphonseStrategy {
      * @return True if a Player is close to win (7/8 Districts) and he is the first player to play, False in the others cases
      */
     private boolean calculIsAPlayerCloseWinPlayFirst() {
-    	if(!aPlayerIsCloseToWin()) return false;
+    	if(!aPlayerIsCloseToWinForSixAndSeven()) return false;
     	Player playerIsCloseToWin = getPlayerCloseToWin();
 		Player firstPlayerToPlay = getFirstPlayerToPlay();
 
-		if(playerIsCloseToWin.equals(firstPlayerToPlay)) return true;
-		return false;
+		return playerIsCloseToWin.equals(firstPlayerToPlay);
+
     }
     
     /**
@@ -259,6 +257,18 @@ public class RichalphonseStrategy {
 		Player playerIsCloseToWin= board.getListOfPlayerOrdered().get(0);
 		for(Player player: board.getListOfPlayerOrdered()){
 			if(player.getCity().getSizeOfCity() > 6)
+				playerIsCloseToWin = player;
+		}
+		return playerIsCloseToWin;
+	}
+
+	/**
+	 * @return A Player close to win (6 or 7 /8 Districts)
+	 */
+	public Player getPlayerCloseToWinBySixOrMore() {
+		Player playerIsCloseToWin= board.getListOfPlayerOrdered().get(0);
+		for(Player player: board.getListOfPlayerOrdered()){
+			if(player.getCity().getSizeOfCity() > 5)
 				playerIsCloseToWin = player;
 		}
 		return playerIsCloseToWin;
@@ -305,8 +315,9 @@ public class RichalphonseStrategy {
 			if(player.getCity().getSizeOfCity() >6 && !(player.equals(currentPlayer))) return true;
 		return false;
 	}
+
 	/**
-	 * @return True if a Player is close to win (7/8 Districts), False in the others cases
+	 * @return True if a Player is close to win (6 or 7/8 Districts), False in the others cases
 	 */
 	private boolean aPlayerIsCloseToWinForSixAndSeven() {
 		for(Player player: board.getListOfPlayerOrdered())
@@ -342,8 +353,7 @@ public class RichalphonseStrategy {
      * @return The first Player who can choose his Character card
      */
 	private Player getFirstPlayerToPlay() {
-		if(board.getListOfPlayerWhoPlayed().size()==0) return currentPlayer;
-		return board.getListOfPlayerWhoPlayed().get(0);
+		return board.getListOfPlayerOrdered().get(0);
 	}
 	
 	
