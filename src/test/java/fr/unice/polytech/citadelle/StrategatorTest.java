@@ -16,13 +16,12 @@ import fr.unice.polytech.citadelle.game.Board;
 import fr.unice.polytech.citadelle.game.DeckDistrict;
 import fr.unice.polytech.citadelle.game.District;
 import fr.unice.polytech.citadelle.game.Player;
-import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Investor;
+import fr.unice.polytech.citadelle.game_interactor.game_behaviour.Strategator;
 import fr.unice.polytech.citadelle.output.PrintCitadels;
 
 public class StrategatorTest {
-/*
 	Player player;
-	Investor investor;
+	Strategator strategator;
 	DeckDistrict deckDistrict;
 	Board board;
 
@@ -34,22 +33,22 @@ public class StrategatorTest {
 		deckDistrict.initialise();
 		player = new Player("Player");
 		board = new Board(new ArrayList<>(), new ArrayList<>(), deckDistrict, null);
-		investor = spy(new Investor(player, board));
+		strategator = spy(new Strategator(player, board));
 	}
 
 	@RepeatedTest(1)
 	// @Test
 	public void normalBehaviourNoCardButGoldTest() {
 		player = new Player("Player1");
-		investor = spy(new Investor(player, board));
+		strategator = spy(new Strategator(player, board));
 
 		player.getDistrictCards().clear();
 
 		player.setGolds(15);
 
-		investor.normalBehaviour();
-		verify(investor, times(1)).takeCard(Mockito.any());
-		verify(investor, times(0)).takeGold();
+		strategator.normalBehaviour();
+		verify(strategator, times(1)).takeCard(Mockito.any());
+		verify(strategator, times(0)).takeGold();
 	}
 
 	@RepeatedTest(1)
@@ -57,9 +56,9 @@ public class StrategatorTest {
 	public void normalBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
-		investor.normalBehaviour();
-		verify(investor, times(1)).takeCard(Mockito.any());
-		verify(investor, times(0)).takeGold();
+		strategator.normalBehaviour();
+		verify(strategator, times(1)).takeCard(Mockito.any());
+		verify(strategator, times(0)).takeGold();
 	}
 
 	@RepeatedTest(1)
@@ -72,9 +71,9 @@ public class StrategatorTest {
 		District aDistrict = new District("aDistrict", 4, "testColor", "testFamily");
 		districtsCards.add(aDistrict);
 
-		investor.normalBehaviour();
-		verify(investor, times(0)).takeCard(Mockito.any());
-		verify(investor, times(1)).takeGold();
+		strategator.normalBehaviour();
+		verify(strategator, times(0)).takeCard(Mockito.any());
+		verify(strategator, times(1)).takeGold();
 	}
 
 	@RepeatedTest(1)
@@ -90,8 +89,8 @@ public class StrategatorTest {
 		District newCheapDistrict = new District("testDistrict", cheapValue, "testColor", "testFamily");
 		districtsCards.add(newCheapDistrict);
 
-		investor.normalBehaviour();
-		verify(investor, times(1)).takeGold();
+		strategator.normalBehaviour();
+		verify(strategator, times(1)).takeGold();
 	}
 
 	@RepeatedTest(1)
@@ -99,9 +98,9 @@ public class StrategatorTest {
 	public void endGameBehaviourNoCardTest() {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
-		investor.endGameBehaviour();
-		verify(investor, times(1)).takeCard(Mockito.any());
-		verify(investor, times(0)).takeGold();
+		strategator.endGameBehaviour();
+		verify(strategator, times(1)).takeCard(Mockito.any());
+		verify(strategator, times(0)).takeGold();
 	}
 
 	@RepeatedTest(1)
@@ -112,12 +111,12 @@ public class StrategatorTest {
 		ArrayList<District> districtsCards = player.getDistrictCards();
 		districtsCards.clear();
 		player.getCity().getBuiltDistrict().clear();
-		investor.getPlayer().setGolds(1);
+		strategator.getPlayer().setGolds(1);
 
 		districtsCards.add(new District("testDistrict", tooExpansiveValueForNow, "testColor", "testFamily"));
 
-		investor.endGameBehaviour();
-		verify(investor, times(1)).takeGold();
+		strategator.endGameBehaviour();
+		verify(strategator, times(1)).takeGold();
 	}
 
 	@RepeatedTest(1)
@@ -126,7 +125,7 @@ public class StrategatorTest {
 		District aDistrictExpansive = new District("aDistrictExpansive", 5, "testColor", "testFamily");
 		District aDistrictCheap = new District("aDistrictCheap", 1, "testColor", "testFamily");
 
-		District choosenDistrict = investor.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap);
+		District choosenDistrict = strategator.chooseBetweenTwoCards(aDistrictExpansive, aDistrictCheap);
 
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
@@ -140,11 +139,11 @@ public class StrategatorTest {
 		districtsCards.add(aDistrictCheap);
 		districtsCards.add(aDistrictExpansive);
 
-		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
-		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
-		when(investor.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(districtsCards);
+		when(strategator.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
+		when(strategator.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
+		when(strategator.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(districtsCards);
 
-		District choosenDistrict = investor.pickCardsInDeck();
+		District choosenDistrict = strategator.pickCardsInDeck();
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
 
@@ -161,10 +160,10 @@ public class StrategatorTest {
 
 		afterPickDistrictsCards.add(aDistrictCheap);
 
-		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
-		when(investor.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(afterPickDistrictsCards);
+		when(strategator.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
+		when(strategator.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(afterPickDistrictsCards);
 
-		District choosenDistrict = investor.pickCardsInDeck();
+		District choosenDistrict = strategator.pickCardsInDeck();
 		assertEquals(choosenDistrict, aDistrictCheap);
 	}
 
@@ -179,11 +178,11 @@ public class StrategatorTest {
 		districtsCards.add(aDistrictCheap);
 		districtsCards.add(aDistrictExpansive);
 
-		when(investor.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
-		when(investor.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(afterPickDistrictsCards);
+		when(strategator.pick2CardsIntoTheDeck()).thenReturn(districtsCards);
+		when(strategator.chooseToKeepOrNotPickedCards(districtsCards)).thenReturn(afterPickDistrictsCards);
 
-		District choosenDistrict = investor.pickCardsInDeck();
+		District choosenDistrict = strategator.pickCardsInDeck();
 		assertEquals(choosenDistrict, aDistrictExpansive);
 	}
-*/
+
 }
