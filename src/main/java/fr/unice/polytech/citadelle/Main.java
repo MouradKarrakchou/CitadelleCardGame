@@ -16,7 +16,7 @@ public class Main {
 	private static final int NUMBER_OF_INVESTOR =  1;
 	private static final int NUMBER_OF_RUSHER = 1;
 	private static final int NUMBER_OF_STRATEGATOR = 1;
-	private static final boolean ENABLE_LOG = true;
+	private static final boolean ENABLE_LOG = false;
 
 	public static void main(String... args) throws Exception {
 		// Running a game
