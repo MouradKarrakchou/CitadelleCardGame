@@ -34,14 +34,14 @@ public class Main {
 		Statisticator stats = new Statisticator();
 		stats.runAThousandGames(NUMBER_OF_RICHALPHONSE, NUMBER_OF_INVESTOR, NUMBER_OF_RUSHER, NUMBER_OF_STRATEGATOR);
 
-		// Reading CSV file
-		PrintCitadels.activateLevelInfo();
-		CsvManager csv = new CsvManager("save\\results.csv");
-		csv.printCSV();
-
 		//Battlefield (where the best bot is against the best bot)
+		CsvManager csv = new CsvManager("save\\results.csv");
 		Battlefieldator battlefield = new Battlefieldator(csv);
 		battlefield.runTheBattle();
 		battlefield.runTheSecondBattle();
+
+		// Reading CSV file
+		PrintCitadels.activateLevelInfo();
+		csv.printCSV();
 	}
 }
