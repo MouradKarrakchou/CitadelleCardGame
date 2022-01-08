@@ -14,8 +14,28 @@ Projet Citadelle en lien avec le cours d'introduction sur le developpement logic
 
 ------------------------------------
 ## Résumé des fonctionnalités sur tout le jeu
-### Ce qui a été fait
-### Ce qui n'a pas été fait
+Fonctionnalités réalisés sur tout le jeu :
+Ce qui a été fait:
+-Les 8 personnages ainsi que leur sorts
+-Tous les bâtiments ainsi que leur couleur / famille
+-Les sorts de 6 bâtiments violet sur 10:
+    -Cour des miracles
+    -Bibliothèque
+    -Ecole de Magie
+    -Université
+    -Dracoport
+    -Donjon
+-La facon dont les cartes sont brulées en fonction du nombre de joueurs.
+-Départager à l'aide des roles en cas d'égalité de point.
+-Gestion du dernier tour de jeu avec un joueur qui pose son huitième batiment.
+-Comptabilisation du score avec les bonus de fin de partie.
++toute les règles de bases(commencer avec 4cartes,2golds/Piocher golds ou carte ...)
+Ce qui n'a pas été fait:
+-Les sorts de 4 bâtiments violets:
+	-Laboratoire
+	-Manufacture
+	-Observatoire
+	-Cimetière
 ## Résumé des fonctionnalités pour les logs
 1. Remplacement de tout les sysout par des logs au niveau INFO, ce qui nous permet d'afficher ou non certains log en jouant avec les niveaux du logger
 2. Ajout de 2 nouvelles classes pour les 1000 games:
