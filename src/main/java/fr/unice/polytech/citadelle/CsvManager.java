@@ -338,7 +338,7 @@ public class CsvManager {
     /**
      *Converts the csv file into an arrayList of stats
      *
-     * @return an arrayList of stats
+     * @return an arrayList of the Bot stats
      * @throws Exception exception
      */
     public ArrayList<StatsBot> getStatsBot() throws Exception {
