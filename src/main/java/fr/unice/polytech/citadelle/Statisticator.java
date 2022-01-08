@@ -79,6 +79,7 @@ public class Statisticator {
 			}
 
 			currentBotStats.increaseNumberOfGamePlay();
+			currentBotStats.increaseTotalScore(leaderboard.get(i).getScore());
 			if (i == 0)
 				currentBotStats.increaseNumberOfGameWin();
 		}

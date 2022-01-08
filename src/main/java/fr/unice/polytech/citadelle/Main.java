@@ -42,5 +42,6 @@ public class Main {
 		//Battlefield (where the best bot is against the best bot)
 		Battlefieldator battlefield = new Battlefieldator(csv);
 		battlefield.runTheBattle();
+		battlefield.runTheSecondBattle();
 	}
 }

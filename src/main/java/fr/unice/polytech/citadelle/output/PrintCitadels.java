@@ -2,7 +2,6 @@ package fr.unice.polytech.citadelle.output;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -435,18 +434,30 @@ public class PrintCitadels {
 	public static void start1000games() {
 		dropALine();
 		LOGGER.info("================  Win-rate on the 1000 last games ================");
+		LOGGER.info("\t  botName\t  | "
+				+ colorize("  nbWin  ", GREEN_TEXT())
+				+ colorize(" | ", BRIGHT_WHITE_TEXT())
+				+ colorize("  nbLose  ", RED_TEXT())
+				+ colorize(" | average score", BRIGHT_WHITE_TEXT()));
 	}
 
-	public static void printBattlefield(ArrayList<Player> listOfPlayer) {
+	public static void printBattlefield(ArrayList<Player> listOfPlayer, String bestBotName) {
 		dropALine();
-		LOGGER.info("================  Best bot against itself ================");
+		LOGGER.info("================  Best bot against itself (" +  bestBotName + ") ================");
 		listOfPlayer.forEach(player -> LOGGER.info("[" + player.getRank() + "] " + player.getName()
 				+ " with a score of " + player.getScore() + " (" +stringColoredGold(player.getGolds())+ colorize(")", BRIGHT_WHITE_TEXT())));
 	}
+
 
 	public static void printAllSituations(ArrayList<Situation> searchSituation) {
 		// TODO Auto-generated method stub
 
 	}
 
+	public static void printBattlefieldSecondBattle(ArrayList<Player> leaderboard, String bestBotName, String secondBestBotName) {
+		dropALine();
+		LOGGER.info("================  Best bot against the second bot (" + bestBotName + " vs " + secondBestBotName + ") ================");
+		leaderboard.forEach(player -> LOGGER.info("[" + player.getRank() + "] " + player.getName()
+				+ " with a score of " + player.getScore() + " (" +stringColoredGold(player.getGolds())+ colorize(")", BRIGHT_WHITE_TEXT())));
+	}
 }
