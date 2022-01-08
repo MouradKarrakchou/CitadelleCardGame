@@ -15,7 +15,7 @@ Projet Citadelle en lien avec le cours d'introduction sur le developpement logic
 ------------------------------------
 ## Résumé des fonctionnalités sur tout le jeu
 ### Ce qui a été fait:
-* Les 8 personnages ainsi que leur sorts
+- Les 8 personnages ainsi que leur sorts
 * Tous les bâtiments ainsi que leur couleur / famille
 * Les sorts de 6 bâtiments violet sur 10:
 	* Cour des miracles
@@ -36,8 +36,8 @@ Projet Citadelle en lien avec le cours d'introduction sur le developpement logic
 	* Observatoire
 	* Cimetière
 ## Résumé des fonctionnalités pour les logs
-1. Remplacement de tout les sysout par des logs au niveau INFO, ce qui nous permet d'afficher ou non certains log en jouant avec les niveaux du logger
-2. Ajout de 2 nouvelles classes pour les 1000 games:
+* Remplacement de tout les sysout par des logs au niveau INFO, ce qui nous permet d'afficher ou non certains log en jouant avec les niveaux du logger
+* Ajout de 2 nouvelles classes pour les 1000 games:
   * StatsBot qui gères les stats d'un bot
   * Statisticator fait tourner les 1000 games et affiche les stats à la fin.
 ## Résumé des fonctionnalités pour les statistiques en CSV
