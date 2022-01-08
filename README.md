@@ -59,7 +59,11 @@ Afin de répondre à la problématique nous avons décidé de réaliser une banq
 3. Nous avons créer une classe SituationLibrairie qui stocke toute des Situation. La SituationLibrairie est remplis par la classe SituationInitializer. De plus la classe possède des méthodes de filtrer afin de renvoyer une liste Situation en fonction de certain critère
 4. La dernière classe créé est la classe RichalphonseStrategy qui a pour role de faire l'intermédiaire entre la librairie de Situation et le bot Richalphonse. Richalphonse demande à RichalphonseStrategy quel est la meilleur Situation pour le tour actuel, RichalphonseStrategy calcul certaines informations (ex: nombre de carte de certains joueur, or Districts posé etc...) et fait une recherche filtrée dans la librairie pour récupérer la meilleur Situation possible.
 ### Ajout des stratégie
+Afin d'ajouter une nouvelle stratégie au bot Richalphonse, il suffit d'ajouter une nouvelle entrée dans la classe SituationInitializer, créer une nouvelle Situation en fonction des paramètre qui nous interesse.
 ## Richalphonse VS Strategator
 ### Résultat
+Strategator: 36% de winrate <br>
+Richalphonse: 25% de winrate <br>
 ### Analyse
+La stratégie de Richalphonse est basée à 100% sur les conseils du sit TricTrac. D'après les statistique, notre bot nommé Strategator a un meilleur winrate que le bot Richalphonse. Cela peut s'expliquer par le fait que le bot Richalphonse suppose que chaque bot faire le meilleur choix à chaque tour, cependant le meilleur choix pour Richalphonse n'est pas le même que pour Strategator, donc une partie du gameplay de Richalphonse ne fonctionne pas contre nos bot.
 
