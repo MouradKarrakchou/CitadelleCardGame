@@ -28,7 +28,7 @@ Projet Citadelle en lien avec le cours d'introduction sur le developpement logic
 * Départager à l'aide des roles en cas d'égalité de point.
 * Gestion du dernier tour de jeu avec un joueur qui pose son huitième batiment.
 * Comptabilisation du score avec les bonus de fin de partie.
-* Ainsi que toute les règles de bases(commencer avec 4 cartes et 2 golds, piocher des golds ou carte ...)
+* Ainsi que toute les règles de bases (commencer avec 4 cartes et 2 golds, piocher des golds ou carte ...)
 ### Ce qui n'a pas été fait:
 * Les sorts de 4 bâtiments violets:
 	* Laboratoire
