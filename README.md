@@ -42,7 +42,15 @@ Ce qui n'a pas été fait:
   * StatsBot qui gères les stats d'un bot
   * Statisticator fait tourner les 1000 games et affiche les stats à la fin.
 ## Résumé des fonctionnalités pour les statistiques en CSV
-* AYOUB A TOI DE JOUER
+  * Sur la première ligne du fichier csv, on a les champs suivant : Le nom du Bot (nom qui indique son type / sa stratégie), le rang de 1 à 7 (7 colonnes car il ya 7 joueurs au maximum), le win-rate, le nombre de parties joués, le score total et le score moyen. Les lignes suivantes sont les informations concernant les bots qui ont joués.
+Si un Bot joue pour la première fois, ses statisques sont ajoutés au fichier csv. Dès qu'un Bot qui a déjà joué joue encore une fois, ses statistiques sont mis à jour.
+
+  * Le nombre total de parties joués nous permet de calculer 2 choses:
+-le win-rate, avec le nombre de fois qu'un Bot est arrivé premier
+-le score moyen, avec le score total cumulé de toutes les parties
+
+  * On récupère ensuite le nombre de victoire sur un certain nombre de parties joués, le win-rate ainsi que le score moyen dans le fichier csv pour les afficher.
+
 ## Résumé des fonctionnalités pour le bot spécifique demandé
 ### Problématique
 Comment ajouter un très grand nombre de stratégie sur un état du jeu précis sans créer de répétition en ayant un code un peu malin?
