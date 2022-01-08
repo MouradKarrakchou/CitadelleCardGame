@@ -30,6 +30,24 @@ public class RichalphonseStrategyTest {
 		Initializer.initDeckCharacter(deckCharacter, Initializer.createListOfAllCharacter());
 		board = new Board(new ArrayList<>(),new ArrayList<>(),deckDistrict , deckCharacter);
 		richalphStrat = new RichalphonseStrategy(board, player);
+		Player player1= new Player("player1");
+		board.getListOfPlayerOrdered().add(player1);
+		Player player2= new Player("player2");
+		board.getListOfPlayerOrdered().add(player2);
+		Player player3= new Player("player3");
+		board.getListOfPlayerOrdered().add(player3);
+		Player player4= new Player("player4");
+		board.getListOfPlayerOrdered().add(player4);
+		Player player5= new Player("player5");
+		board.getListOfPlayerOrdered().add(player5);
+		Player player6= new Player("player6");
+		board.getListOfPlayerOrdered().add(player6);
+		Player player7= new Player("player7");
+		board.getListOfPlayerOrdered().add(player7);
+		Player player8= new Player("player8");
+		board.getListOfPlayerOrdered().add(player8);
+
+
 	}
 	
 	@Test
@@ -50,8 +68,9 @@ public class RichalphonseStrategyTest {
 
 		Player res = richalphStrat.getTargetPlayerHasMostCard();
 		assertEquals(res, other);
-
 	}
+	@Test
+
 	
 	
 }
