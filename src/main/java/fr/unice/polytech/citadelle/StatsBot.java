@@ -81,7 +81,7 @@ public class StatsBot implements Comparable {
 				, BRIGHT_WHITE_TEXT());
 
 		if (averageScore != -1)
-			output += colorize("" + numberOfGamePlayed, BRIGHT_WHITE_TEXT());
+			output += colorize("" + averageScore, BRIGHT_WHITE_TEXT());
 		else
 			output += colorize( "" + (score/1000), BRIGHT_WHITE_TEXT());
 
