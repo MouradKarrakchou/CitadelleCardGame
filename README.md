@@ -65,5 +65,5 @@ Afin d'ajouter une nouvelle stratégie au bot Richalphonse, il suffit d'ajouter 
 Strategator: 36% de winrate <br>
 Richalphonse: 25% de winrate <br>
 ### Analyse
-La stratégie de Richalphonse est basée à 100% sur les conseils du sit TricTrac. D'après les statistique, notre bot nommé Strategator a un meilleur winrate que le bot Richalphonse. Cela peut s'expliquer par le fait que le bot Richalphonse suppose que chaque bot faire le meilleur choix à chaque tour, cependant le meilleur choix pour Richalphonse n'est pas le même que pour Strategator, donc une partie du gameplay de Richalphonse ne fonctionne pas contre nos bot.
+La stratégie de Richalphonse est basée à 100% sur les conseils du site TricTrac. D'après les statistiques, notre bot nommé Strategator a un meilleur winrate que le bot Richalphonse. Cela peut s'expliquer par le fait que le bot Richalphonse suppose que chaque bot va faire le meilleur choix à chaque tour, cependant le meilleur choix pour Richalphonse n'est pas le même que pour Strategator, donc une partie du gameplay de Richalphonse ne fonctionne pas contre nos bots.
 
