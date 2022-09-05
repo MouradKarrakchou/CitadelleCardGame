@@ -1,5 +1,5 @@
 # La Citadelle
-Projet Citadelle en lien avec le cours d'introduction sur le developpement logiciel.
+Projet Citadelle en lien avec le cours de developpement logiciel.
 
 ## Authors
 - Leo Le Bihan
