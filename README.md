@@ -64,7 +64,7 @@ La stratégie de Richalphonse est basée à 100% sur les conseils du site TricTr
 
 
 ------------------------------------
-# English version:
+# English recap version:
 ## Rules: 
 https://en.wikipedia.org/wiki/Citadels_(card_game)
 
