@@ -68,11 +68,22 @@ La stratégie de Richalphonse est basée à 100% sur les conseils du site TricTr
 ## Rules: 
 https://en.wikipedia.org/wiki/Citadels_(card_game)
 
-## Features:
+## Explanation of how the program proceed:
 
-###Bots:
-1.Richalphonse a random bot who follows the rules.
-2.
+At the start of each round each Bot has to make a decision on the card he decides to take. Each bot has it own strategy using ideas like trying to predict what the other players chose or what he needs based on his cards,his money and the state of the game.
+
+Example:
+![My Image](StartOfTheRound.PNG)
+
+After that each one of the bot will select what they do with the round again based on the other player, themselves and the state of the game.
+
+![My Image](ActualRound.PNG)
+
+There is also a way to launch a 1000games at the same time. It also features a Total win-rate for all the games played so far that are written in a CSV file.
+
+![My Image](Stats.PNG)
+
+
 
 
 
