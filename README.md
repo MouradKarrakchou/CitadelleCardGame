@@ -7,11 +7,6 @@ Projet Citadelle en lien avec le cours de developpement logiciel.
 - Mourad Karrakchou
 - Kilian Bonnet
 
-# Execution
-## Maven Commands
-- `mvn clean package`
-- `mvn exec : java`
-
 ------------------------------------
 ## Résumé des fonctionnalités sur tout le jeu
 ### Ce qui a été fait:
