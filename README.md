@@ -1,4 +1,4 @@
-# La Citadelle
+# La Citadelle (english recap at the bottom)
 Projet Citadelle en lien avec le cours de developpement logiciel.
 
 ## Authors
@@ -61,4 +61,18 @@ Strategator: 36% de winrate <br>
 Richalphonse: 25% de winrate <br>
 ### Analyse
 La stratégie de Richalphonse est basée à 100% sur les conseils du site TricTrac. D'après les statistiques, notre bot nommé Strategator a un meilleur winrate que le bot Richalphonse. Cela peut s'expliquer par le fait que le bot Richalphonse suppose que chaque bot va faire le meilleur choix à chaque tour, cependant le meilleur choix pour Richalphonse n'est pas le même que pour Strategator, donc une partie du gameplay de Richalphonse ne fonctionne pas contre nos bots.
+
+
+------------------------------------
+# English version:
+## Rules: 
+https://en.wikipedia.org/wiki/Citadels_(card_game)
+
+## Features:
+
+###Bots:
+1.Richalphonse a random bot who follows the rules.
+2.
+
+
 
