@@ -17,7 +17,6 @@ https://en.wikipedia.org/wiki/Citadels_(card_game)
 
 At the beginning of each round, each bot has to make a decision on a card to pick. Each bot has its own strategy that may be based on the other players’ choices, what cards to pick for his hand, how much money he has left, or the general state of the game.
 
-Example:
 ![My Image](StartOfTheRound.PNG)
 
 Afterwards, each bot will have another choice to make during the round. Again, this choice will be based on the other players, themselves and the state of the game.
