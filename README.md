@@ -7,6 +7,28 @@ Projet Citadelle en lien avec le cours de developpement logiciel.
 - Mourad Karrakchou
 - Kilian Bonnet
 
+
+------------------------------------
+# English recap version:
+## Rules: 
+https://en.wikipedia.org/wiki/Citadels_(card_game)
+
+## Explanation of how the program proceed:
+
+At the beginning of each round, each bot has to make a decision on a card to pick. Each bot has its own strategy that may be based on the other players’ choices, what cards to pick for his hand, how much money he has left, or the general state of the game.
+
+Example:
+![My Image](StartOfTheRound.PNG)
+
+Afterwards, each bot will have another choice to make during the round. Again, this choice will be based on the other players, themselves and the state of the game.
+
+![My Image](ActualRound.PNG)
+
+There is an option to launch a 1000 games at the same time. It also features a total win-loss rate for all the games played so far, the output is written in a CSV file.
+
+![My Image](Stats.PNG)
+
+
 ------------------------------------
 ## Résumé des fonctionnalités sur tout le jeu
 ### Ce qui a été fait:
@@ -62,26 +84,6 @@ Richalphonse: 25% de winrate <br>
 ### Analyse
 La stratégie de Richalphonse est basée à 100% sur les conseils du site TricTrac. D'après les statistiques, notre bot nommé Strategator a un meilleur winrate que le bot Richalphonse. Cela peut s'expliquer par le fait que le bot Richalphonse suppose que chaque bot va faire le meilleur choix à chaque tour, cependant le meilleur choix pour Richalphonse n'est pas le même que pour Strategator, donc une partie du gameplay de Richalphonse ne fonctionne pas contre nos bots.
 
-
-------------------------------------
-# English recap version:
-## Rules: 
-https://en.wikipedia.org/wiki/Citadels_(card_game)
-
-## Explanation of how the program proceed:
-
-At the start of each round each bot has to make a decision on the card he decides to take. Each bot has it own strategy using ideas like trying to predict what the other players chose or what he needs based on his cards,his money and the state of the game.
-
-Example:
-![My Image](StartOfTheRound.PNG)
-
-After that each one of the bot will select what they do with the round again based on the other players, themselves and the state of the game.
-
-![My Image](ActualRound.PNG)
-
-There is also a way to launch a 1000games at the same time. It also features a total win-rate for all the games played so far that are written in a CSV file.
-
-![My Image](Stats.PNG)
 
 
 
