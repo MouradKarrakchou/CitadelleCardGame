@@ -1,4 +1,4 @@
-# La Citadelle (english recap at the bottom)
+# La Citadelle
 Projet Citadelle en lien avec le cours de developpement logiciel.
 
 ## Authors
